@@ -7,48 +7,69 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
   <style>
     :root { font-family: system-ui, Segoe UI, Roboto, sans-serif; color: #1a1a1a; background: #f4f5f7; }
-    body { margin: 0; padding: 1rem 1.25rem 2rem; max-width: 1200px; margin-inline: auto; }
+    body { margin: 0; padding: 1rem 1.25rem 2rem; max-width: 1280px; margin-inline: auto; }
     h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
     .sub { color: #555; font-size: 0.9rem; margin-bottom: 1rem; }
+    h3.chart-title { font-size: 0.95rem; margin: 0 0 0.35rem; font-weight: 600; }
     .card { background: #fff; border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
     label { display: block; font-size: 0.78rem; font-weight: 600; color: #444; margin-top: 0.5rem; }
     input, select, textarea { width: 100%; max-width: 100%; box-sizing: border-box; padding: 0.35rem 0.45rem; margin-top: 0.15rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.9rem; }
     textarea { font-family: ui-monospace, Consolas, monospace; font-size: 0.8rem; min-height: 5rem; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    @media (max-width: 800px) { .row { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .row { grid-template-columns: 1fr; } }
     button { background: #1e5a96; color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-size: 0.95rem; cursor: pointer; margin-top: 0.75rem; }
     button:hover { background: #164a7a; }
     button.secondary { background: #444; }
     .metrics { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.5rem 0; }
     .metric { background: #eef3f8; padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.85rem; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 0.5rem; }
-    th, td { border: 1px solid #ddd; padding: 0.25rem 0.35rem; text-align: right; }
-    th:first-child, td:first-child { text-align: left; }
-    th { background: #f0f0f0; }
     .warn { background: #fff8e6; border: 1px solid #e6c200; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1rem; }
-    #chartWrap { position: relative; height: 360px; margin-top: 0.75rem; }
+    .chartWrap { position: relative; height: 440px; margin-top: 0.35rem; }
     .grid2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem 0.75rem; }
     h2 { font-size: 1rem; margin: 0 0 0.5rem; }
   </style>
 </head>
 <body>
   <h1>Retirement simulator</h1>
-  <p class="sub">Runs entirely in your browser — no Python install. Save this HTML file, double-click to open. Charts need a one-time internet load (Chart.js CDN). Not tax or investment advice.</p>
+  <p class="sub">Runs in your browser. Charts load Chart.js from a CDN once. Not tax or investment advice.</p>
 
   <div class="warn" id="cdnWarn" hidden>If charts do not appear, connect to the internet once so Chart.js can load, then refresh.</div>
 
   <div class="card">
+    <h2>Simulation mode</h2>
+    <label for="simMode">Model</label>
+    <select id="simMode">
+      <option value="portfolio">Portfolio (CSV + two scenarios)</option>
+      <option value="advanced">Advanced hump (tiered spend / college / backdoor / conversions)</option>
+    </select>
+  </div>
+
+  <div class="card" id="advancedOpts" hidden>
+    <h2>Advanced model</h2>
+    <p class="sub">Same logic as Python <code>run_advanced_simulation</code>: ages 45–85, fixed starting balances, SS base $84k at 67 (62→70%, 67→100%, else→124%). Charts: stacked bars (TaxFree, PreTax, Brokerage, annual SS) + lines for tax and total expenses (right axis).</p>
+    <div class="row">
+      <div>
+        <label for="advSsA">Scenario A — SS claiming age</label>
+        <input type="number" id="advSsA" value="62" min="60" max="75" step="1" />
+      </div>
+      <div>
+        <label for="advSsB">Scenario B — SS claiming age</label>
+        <input type="number" id="advSsB" value="70" min="60" max="75" step="1" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="portfolioCsvCard">
     <h2>Portfolio CSV</h2>
-    <p class="sub" style="margin:0 0 0.5rem">Default columns: <strong>Account Name</strong>, <strong>Current Value</strong>. Or paste CSV below.</p>
+    <p class="sub" style="margin:0 0 0.5rem">Columns: <strong>Account Name</strong>, <strong>Current Value</strong>.</p>
     <label><input type="file" id="fileCsv" accept=".csv,text/csv" /></label>
-    <label>Paste CSV (optional — overrides file)</label>
-    <textarea id="pasteCsv" placeholder="Account Name,Current Value&#10;Traditional IRA,100000"></textarea>
-    <label>Overrides JSON (optional)</label>
+    <label>Paste CSV (optional)</label>
+    <textarea id="pasteCsv" placeholder="Account Name,Current Value"></textarea>
+    <label>Overrides JSON</label>
     <textarea id="overridesJson">{}</textarea>
     <button type="button" class="secondary" id="btnSample">Load bundled sample CSV</button>
   </div>
 
-  <div class="row">
+  <div class="row" id="rowScenarios">
     <div class="card" id="panelA">
       <h2>Scenario A</h2>
       <div class="grid2" data-scenario="a"></div>
@@ -67,11 +88,21 @@
   </div>
 
   <div class="card" id="resultsCard" hidden>
-    <h2>Comparison</h2>
-    <div id="chartWrap"><canvas id="chart"></canvas></div>
+    <h2>Charts — stacked assets + tax &amp; expenses (lines)</h2>
+    <p class="sub" style="margin-top:0">Bar stack (left axis): TaxFree (Roth), Pre-Tax (IRA), Brokerage, SS annual. Lines (right axis): modeled tax, spending + college.</p>
+    <div class="row">
+      <div>
+        <h3 class="chart-title" id="chartTitleA"></h3>
+        <div class="chartWrap"><canvas id="chartA"></canvas></div>
+      </div>
+      <div>
+        <h3 class="chart-title" id="chartTitleB"></h3>
+        <div class="chartWrap"><canvas id="chartB"></canvas></div>
+      </div>
+    </div>
     <h2 style="margin-top:1rem">Legacy (heuristic)</h2>
     <div class="row" id="legacyRow"></div>
-    <h2 style="margin-top:1rem">Final year (A / B)</h2>
+    <h2 style="margin-top:1rem">Final year</h2>
     <div class="row" id="finalTables"></div>
   </div>
 
@@ -88,6 +119,15 @@
     'Joint Brokerage,120000\n' +
     'John HSA,25000\n';
 
+  var COLORS = {
+    taxFree: '#1a237e',
+    preTax: '#e65100',
+    brokerage: '#1b5e20',
+    ss: '#90caf9',
+    taxLine: '#c62828',
+    expensesLine: '#6a1b9a'
+  };
+
   var SINGLE_UPPERS = [11925, 48475, 103350, 197300, 250525, 626350];
   var RATES = [0.10, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
   var MARRIED_UPPERS = [23850, 96950, 206700, 394600, 501050, 751600];
@@ -101,6 +141,15 @@
   var PRE = ['rollover ira', 'traditional ira', '401k', '403b', 'sep ira', 'simple ira', '457'];
   var FREE = ['roth ira', 'roth 401', 'roth 403', 'hsa'];
   var TAX = ['brokerage', 'individual', 'joint', 'taxable', 'cash management'];
+
+  var chartA = null;
+  var chartB = null;
+
+  function moneyTick(v) {
+    if (v >= 1e6) return '$' + (v / 1e6).toFixed(1) + 'M';
+    if (v >= 1e3) return '$' + (v / 1e3).toFixed(0) + 'k';
+    return '$' + Math.round(v);
+  }
 
   function norm(s) {
     return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
@@ -140,9 +189,8 @@
       var i, c, inq = false;
       for (i = 0; i < line.length; i++) {
         c = line[i];
-        if (c === '"') {
-          inq = !inq;
-        } else if ((c === ',' && !inq) || c === '\n') {
+        if (c === '"') inq = !inq;
+        else if ((c === ',' && !inq)) {
           out.push(cur.trim());
           cur = '';
         } else cur += c;
@@ -232,8 +280,7 @@
   }
 
   function inflationFactor(sc, age) {
-    var years = Math.max(0, age - sc.current_age);
-    return Math.pow(1 + sc.inflation_rate, years);
+    return Math.pow(1 + sc.inflation_rate, Math.max(0, age - sc.current_age));
   }
 
   function spendForAge(sc, age, factor) {
@@ -370,23 +417,177 @@
 
       rows.push({
         age: age,
+        spend: spend,
+        college: college,
+        expenses: spend + college,
+        social_security: ss,
         balance_tax_free: bRoth,
-        tax_total: taxTotal,
         balance_pre_tax: bPre,
         balance_taxable: bTax,
+        tax_total: taxTotal,
         total_wealth: bPre + bRoth + bTax
       });
     }
     return rows;
   }
 
-  function legacy(sc, last) {
+  /** Advanced hump model (matches Python advanced_custom_sim). */
+  function runAdvancedSimulation(ssAge) {
+    var deferred = 1801381;
+    var taxable = 2126632;
+    var roth = 183861;
+    var growth = 0.065;
+    var inflation = 0.03;
+    var startAge = 45;
+    var history = [];
+    var baseSs = 84000;
+    var ssBenefit = ssAge === 62 ? baseSs * 0.7 : (ssAge === 67 ? baseSs : baseSs * 1.24);
+    var yr, currentAge, infFactor, spend, college, ssCash, netCashNeeded, taxPaid, backdoorAmt, bd, convRoom, actualConv, taxableConvAmt, taxableDrain, deficit, legacyVal;
+
+    for (yr = 0; yr < 41; yr++) {
+      currentAge = startAge + yr;
+      infFactor = Math.pow(1 + inflation, yr);
+
+      spend = currentAge < 55 ? 140000 * infFactor : 100000 * infFactor;
+      college = 0;
+      if (currentAge >= 51 && currentAge <= 54) college += 150000 * infFactor;
+      if (currentAge >= 55 && currentAge <= 58) college += 75000 * infFactor;
+
+      ssCash = currentAge >= ssAge ? ssBenefit * infFactor : 0;
+      netCashNeeded = (spend + college) - ssCash;
+
+      taxPaid = 0;
+      if (currentAge >= 51) {
+        backdoorAmt = 16000 * infFactor;
+        bd = Math.min(taxable, backdoorAmt);
+        taxable -= bd;
+        roth += bd;
+
+        convRoom = Math.max(0, 123000 * infFactor - (currentAge >= ssAge ? ssBenefit * infFactor : 0));
+        actualConv = Math.min(deferred, convRoom);
+        taxableConvAmt = Math.max(0, actualConv - 50000 * infFactor);
+        taxPaid = taxableConvAmt * 0.12;
+
+        deferred -= actualConv;
+        roth += actualConv;
+      }
+
+      taxableDrain = netCashNeeded + taxPaid;
+      if (taxable >= taxableDrain) taxable -= taxableDrain;
+      else {
+        deficit = taxableDrain - taxable;
+        taxable = 0;
+        deferred = Math.max(0, deferred - deficit / 0.78);
+      }
+
+      taxable *= 1 + growth;
+      deferred *= 1 + growth;
+      roth *= 1 + growth;
+
+      legacyVal = taxable + deferred * 0.78 + roth;
+      history.push({
+        Age: currentAge,
+        Roth: roth,
+        IRA: deferred,
+        Brokerage: taxable,
+        Legacy: legacyVal,
+        spend: spend,
+        college: college,
+        expenses: spend + college,
+        tax_paid: taxPaid,
+        ss_annual: ssCash
+      });
+    }
+    return history;
+  }
+
+  function mapAdvancedToChartRows(h) {
+    return h.map(function (r) {
+      return {
+        age: r.Age,
+        balance_tax_free: r.Roth,
+        balance_pre_tax: r.IRA,
+        balance_taxable: r.Brokerage,
+        tax_total: r.tax_paid,
+        spend: r.spend,
+        college: r.college,
+        expenses: r.expenses,
+        social_security: r.ss_annual
+      };
+    });
+  }
+
+  function legacyPortfolio(sc, last) {
     var r = sc.heir_effective_tax_rate;
     return {
       taxable_step_up_value: last.balance_taxable,
       pre_tax_after_heir_income_tax: last.balance_pre_tax * (1 - r),
       roth_tax_free_to_heirs: last.balance_tax_free
     };
+  }
+
+  function legacyAdvanced(last) {
+    return {
+      taxable_step_up_value: last.balance_taxable,
+      pre_tax_after_heir_income_tax: last.balance_pre_tax * 0.78,
+      roth_tax_free_to_heirs: last.balance_tax_free,
+      note: 'Pre-tax shown at 0.78× per model legacy band'
+    };
+  }
+
+  function destroyCharts() {
+    if (chartA) { chartA.destroy(); chartA = null; }
+    if (chartB) { chartB.destroy(); chartB = null; }
+  }
+
+  function buildStackedMixedChart(canvas, rows, title) {
+    var labels = rows.map(function (r) { return r.age; });
+    var taxFree = rows.map(function (r) { return r.balance_tax_free; });
+    var preTax = rows.map(function (r) { return r.balance_pre_tax; });
+    var brokerage = rows.map(function (r) { return r.balance_taxable; });
+    var ssAnnual = rows.map(function (r) { return r.social_security || 0; });
+    var tax = rows.map(function (r) { return r.tax_total; });
+    var expenses = rows.map(function (r) { return r.expenses != null ? r.expenses : (r.spend + r.college); });
+
+    return new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          { type: 'bar', label: 'TaxFree (Roth)', data: taxFree, backgroundColor: COLORS.taxFree, stack: 'assets', order: 2, yAxisID: 'y' },
+          { type: 'bar', label: 'PreTax (IRA)', data: preTax, backgroundColor: COLORS.preTax, stack: 'assets', order: 2, yAxisID: 'y' },
+          { type: 'bar', label: 'Brokerage', data: brokerage, backgroundColor: COLORS.brokerage, stack: 'assets', order: 2, yAxisID: 'y' },
+          { type: 'bar', label: 'SS (annual)', data: ssAnnual, backgroundColor: COLORS.ss, stack: 'assets', order: 2, yAxisID: 'y' },
+          { type: 'line', label: 'Tax', data: tax, borderColor: COLORS.taxLine, backgroundColor: COLORS.taxLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 },
+          { type: 'line', label: 'Expenses', data: expenses, borderColor: COLORS.expensesLine, backgroundColor: COLORS.expensesLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          title: { display: true, text: title },
+          legend: { position: 'right' }
+        },
+        scales: {
+          x: { stacked: true, title: { display: true, text: 'Age' } },
+          y: {
+            stacked: true,
+            position: 'left',
+            title: { display: true, text: 'Stacked: TaxFree + PreTax + Brokerage + SS (annual)' },
+            ticks: { callback: moneyTick }
+          },
+          y1: {
+            stacked: false,
+            position: 'right',
+            title: { display: true, text: 'Lines: tax & total expenses' },
+            grid: { drawOnChartArea: false },
+            ticks: { callback: moneyTick }
+          }
+        }
+      }
+    });
   }
 
   var DEFAULTS = {
@@ -555,28 +756,42 @@
   buildScenarioPanel(panelA, 'a', DEFAULTS);
   buildScenarioPanel(panelB, 'b', DEFAULTS_B);
 
-  var chartInstance = null;
+  function syncModeUi() {
+    var mode = document.getElementById('simMode').value;
+    var adv = mode === 'advanced';
+    document.getElementById('advancedOpts').hidden = !adv;
+    document.getElementById('portfolioCsvCard').hidden = adv;
+    document.getElementById('rowScenarios').style.display = adv ? 'none' : '';
+  }
+
+  document.getElementById('simMode').onchange = syncModeUi;
+  syncModeUi();
 
   document.getElementById('btnSample').onclick = function () {
     document.getElementById('pasteCsv').value = SAMPLE_CSV;
   };
 
   document.getElementById('btnRun').onclick = function () {
-    var text = document.getElementById('pasteCsv').value.trim();
     var fileEl = document.getElementById('fileCsv');
-    if (!text && fileEl.files && fileEl.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function () {
-        document.getElementById('pasteCsv').value = reader.result;
-        runInner();
-      };
-      reader.readAsText(fileEl.files[0], 'UTF-8');
-      return;
+    var mode = document.getElementById('simMode').value;
+    if (mode === 'portfolio') {
+      var text = document.getElementById('pasteCsv').value.trim();
+      if (!text && fileEl.files && fileEl.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById('pasteCsv').value = reader.result;
+          runPortfolio();
+        };
+        reader.readAsText(fileEl.files[0], 'UTF-8');
+        return;
+      }
+      runPortfolio();
+    } else {
+      runAdvanced();
     }
-    runInner();
   };
 
-  function runInner() {
+  function runPortfolio() {
     var text = document.getElementById('pasteCsv').value.trim();
     if (!text) text = SAMPLE_CSV;
     var overrides = {};
@@ -594,8 +809,7 @@
       return;
     }
     document.getElementById('balancesCard').hidden = false;
-    var m = document.getElementById('metrics');
-    m.innerHTML =
+    document.getElementById('metrics').innerHTML =
       '<span class="metric">Pre-Tax: $' + bal.pre_tax.toLocaleString(undefined, { maximumFractionDigits: 0 }) + '</span>' +
       '<span class="metric">Tax-Free: $' + bal.tax_free.toLocaleString(undefined, { maximumFractionDigits: 0 }) + '</span>' +
       '<span class="metric">Taxable: $' + bal.taxable.toLocaleString(undefined, { maximumFractionDigits: 0 }) + '</span>' +
@@ -605,39 +819,43 @@
     var sb = readScenario('b');
     var dfA = simulate(sa, bal);
     var dfB = simulate(sb, bal);
+    finishChartsAndTables(dfA, dfB, sa, sb, true);
+  }
 
+  function runAdvanced() {
+    document.getElementById('balancesCard').hidden = false;
+    document.getElementById('metrics').innerHTML =
+      '<span class="metric">Pre-Tax (IRA): $1,801,381</span>' +
+      '<span class="metric">Brokerage: $2,126,632</span>' +
+      '<span class="metric">Roth: $183,861</span>' +
+      '<span class="metric">(Advanced model constants)</span>';
+
+    var ssA = parseInt(document.getElementById('advSsA').value, 10) || 62;
+    var ssB = parseInt(document.getElementById('advSsB').value, 10) || 70;
+    var hA = mapAdvancedToChartRows(runAdvancedSimulation(ssA));
+    var hB = mapAdvancedToChartRows(runAdvancedSimulation(ssB));
+    var fakeSa = { name: 'Advanced — SS age ' + ssA, heir_effective_tax_rate: 0.22 };
+    var fakeSb = { name: 'Advanced — SS age ' + ssB, heir_effective_tax_rate: 0.22 };
+    finishChartsAndTables(hA, hB, fakeSa, fakeSb, false);
+  }
+
+  function finishChartsAndTables(dfA, dfB, sa, sb, isPortfolio) {
     if (typeof Chart === 'undefined') {
       document.getElementById('cdnWarn').hidden = false;
-    } else {
-      document.getElementById('cdnWarn').hidden = true;
-      var ctx = document.getElementById('chart');
-      var labels = dfA.map(function (r) { return r.age; });
-      if (chartInstance) chartInstance.destroy();
-      chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [
-            { label: sa.name + ' tax-free', data: dfA.map(function (r) { return r.balance_tax_free; }), borderColor: '#1e5a96', tension: 0.1 },
-            { label: sb.name + ' tax-free', data: dfB.map(function (r) { return r.balance_tax_free; }), borderColor: '#2a9d8f', tension: 0.1 },
-            { label: sa.name + ' tax', data: dfA.map(function (r) { return r.tax_total; }), borderColor: '#e76f51', borderDash: [4, 4], tension: 0.1 },
-            { label: sb.name + ' tax', data: dfB.map(function (r) { return r.tax_total; }), borderColor: '#9b59b6', borderDash: [4, 4], tension: 0.1 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: { mode: 'index', intersect: false },
-          plugins: { title: { display: true, text: 'Tax-free (Roth) balance and annual tax' } },
-          scales: { y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'k'; } } } }
-        }
-      });
+      return;
     }
+    document.getElementById('cdnWarn').hidden = true;
+
+    document.getElementById('chartTitleA').textContent = sa.name;
+    document.getElementById('chartTitleB').textContent = sb.name;
+    destroyCharts();
+    chartA = buildStackedMixedChart(document.getElementById('chartA'), dfA, sa.name);
+    chartB = buildStackedMixedChart(document.getElementById('chartB'), dfB, sb.name);
 
     var lastA = dfA[dfA.length - 1];
     var lastB = dfB[dfB.length - 1];
-    var la = legacy(sa, lastA);
-    var lb = legacy(sb, lastB);
+    var la = isPortfolio ? legacyPortfolio(sa, lastA) : legacyAdvanced(lastA);
+    var lb = isPortfolio ? legacyPortfolio(sb, lastB) : legacyAdvanced(lastB);
     document.getElementById('legacyRow').innerHTML =
       '<div><strong>' + sa.name + '</strong><pre style="font-size:0.75rem;overflow:auto">' + JSON.stringify(la, null, 2) + '</pre></div>' +
       '<div><strong>' + sb.name + '</strong><pre style="font-size:0.75rem;overflow:auto">' + JSON.stringify(lb, null, 2) + '</pre></div>';
