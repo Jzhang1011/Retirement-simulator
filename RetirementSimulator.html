@@ -47,7 +47,7 @@
 
   <div class="card" id="advancedOpts" hidden>
     <h2>Advanced model</h2>
-    <p class="sub">Same logic as Python <code>run_advanced_simulation</code>: ages 45–85, fixed starting balances, SS base $84k at 67 (62→70%, 67→100%, else→124%). Charts: stacked bars (TaxFree, PreTax, Brokerage, annual SS) + lines for tax and total expenses (right axis).</p>
+    <p class="sub">Matches Python <code>advanced_custom_sim</code>: ages 45–50 at $220k/yr spend (pre-transition), 51–54 at $140k + college, 55+ at $100k + youngest college to 58. From 51: <strong>$16k/yr backdoor</strong> and <strong>~$120k/yr Roth conversion target</strong> (reduced when SS is on); first <strong>$50k</strong> of conversion shielded (STR / cost seg); 12% on remainder. SS base $84k at 67 (62→70%, 67→100%, else→124%). Chart lines include conversion &amp; backdoor when using Advanced.</p>
     <div class="row">
       <div>
         <label for="advSsA">Scenario A — SS claiming age</label>
@@ -62,9 +62,14 @@
 
   <div class="card" id="portfolioCsvCard">
     <h2>Portfolio CSV</h2>
-    <p class="sub" style="margin:0 0 0.5rem">Columns: <strong>Account Name</strong>, <strong>Current Value</strong>.</p>
-    <label><input type="file" id="fileCsv" accept=".csv,text/csv" /></label>
-    <label>Paste CSV (optional)</label>
+    <p class="sub" style="margin:0 0 0.5rem">Columns: <strong>Account Name</strong>, <strong>Current Value</strong>. If you pick a file below, <strong>Run simulation</strong> uses that file first (the paste box is only used when no file is selected).</p>
+    <label for="fileCsv">Choose CSV file</label>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:0.25rem">
+      <input type="file" id="fileCsv" accept=".csv,text/csv" style="max-width:min(100%,320px)" />
+      <button type="button" class="secondary" id="btnUseFile">Load file into editor</button>
+    </div>
+    <p class="sub" id="fileCsvStatus" style="margin-top:0.35rem;font-size:0.8rem;color:#333"></p>
+    <label>Paste or edit CSV</label>
     <textarea id="pasteCsv" placeholder="Account Name,Current Value"></textarea>
     <label>Overrides JSON</label>
     <textarea id="overridesJson">{}</textarea>
@@ -126,8 +131,18 @@
     brokerage: '#1b5e20',
     ss: '#90caf9',
     taxLine: '#c62828',
-    expensesLine: '#6a1b9a'
+    expensesLine: '#6a1b9a',
+    convLine: '#f9a825',
+    backdoorLine: '#00838f'
   };
+
+  var ADV_PRE51_SPEND = 220000;
+  var ADV_SPEND_51_54 = 140000;
+  var ADV_SPEND_55_PLUS = 100000;
+  var ADV_BACKDOOR = 16000;
+  var ADV_CONV_TARGET = 120000;
+  var ADV_STR_OFFSET = 50000;
+  var ADV_SS_REDUCES_CONV = 0.5;
 
   var SINGLE_UPPERS = [11925, 48475, 103350, 197300, 250525, 626350];
   var RATES = [0.10, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
@@ -443,13 +458,17 @@
     var history = [];
     var baseSs = 84000;
     var ssBenefit = ssAge === 62 ? baseSs * 0.7 : (ssAge === 67 ? baseSs : baseSs * 1.24);
-    var yr, currentAge, infFactor, spend, college, ssCash, netCashNeeded, taxPaid, backdoorAmt, bd, convRoom, actualConv, taxableConvAmt, taxableDrain, deficit, legacyVal;
+    var yr, currentAge, infFactor, spend, college, ssCash, netCashNeeded, taxPaid, backdoorAmt, bd, convNominal, convTarget, actualConv, taxableConvAmt, taxableDrain, deficit, legacyVal;
+    var backdoorDone = 0;
 
     for (yr = 0; yr < 41; yr++) {
       currentAge = startAge + yr;
       infFactor = Math.pow(1 + inflation, yr);
 
-      spend = currentAge < 55 ? 140000 * infFactor : 100000 * infFactor;
+      if (currentAge < 51) spend = ADV_PRE51_SPEND * infFactor;
+      else if (currentAge <= 54) spend = ADV_SPEND_51_54 * infFactor;
+      else spend = ADV_SPEND_55_PLUS * infFactor;
+
       college = 0;
       if (currentAge >= 51 && currentAge <= 54) college += 150000 * infFactor;
       if (currentAge >= 55 && currentAge <= 58) college += 75000 * infFactor;
@@ -458,15 +477,26 @@
       netCashNeeded = (spend + college) - ssCash;
 
       taxPaid = 0;
+      backdoorDone = 0;
+      convTarget = 0;
+      actualConv = 0;
+
       if (currentAge >= 51) {
-        backdoorAmt = 16000 * infFactor;
+        backdoorAmt = ADV_BACKDOOR * infFactor;
         bd = Math.min(taxable, backdoorAmt);
+        backdoorDone = bd;
         taxable -= bd;
         roth += bd;
 
-        convRoom = Math.max(0, 123000 * infFactor - (currentAge >= ssAge ? ssBenefit * infFactor : 0));
-        actualConv = Math.min(deferred, convRoom);
-        taxableConvAmt = Math.max(0, actualConv - 50000 * infFactor);
+        convNominal = ADV_CONV_TARGET * infFactor;
+        if (currentAge >= ssAge && ssCash > 0) {
+          convTarget = Math.max(0, convNominal - ADV_SS_REDUCES_CONV * ssCash);
+        } else {
+          convTarget = convNominal;
+        }
+
+        actualConv = Math.min(deferred, convTarget);
+        taxableConvAmt = Math.max(0, actualConv - ADV_STR_OFFSET * infFactor);
         taxPaid = taxableConvAmt * 0.12;
 
         deferred -= actualConv;
@@ -496,7 +526,10 @@
         college: college,
         expenses: spend + college,
         tax_paid: taxPaid,
-        ss_annual: ssCash
+        ss_annual: ssCash,
+        backdoor_roth: backdoorDone,
+        roth_conversion_target: convTarget,
+        roth_conversion: actualConv
       });
     }
     return history;
@@ -513,7 +546,10 @@
         spend: r.spend,
         college: r.college,
         expenses: r.expenses,
-        social_security: r.ss_annual
+        social_security: r.ss_annual,
+        roth_conversion: r.roth_conversion,
+        roth_conversion_target: r.roth_conversion_target,
+        backdoor_roth: r.backdoor_roth
       };
     });
   }
@@ -549,20 +585,36 @@
     var ssAnnual = rows.map(function (r) { return r.social_security || 0; });
     var tax = rows.map(function (r) { return r.tax_total; });
     var expenses = rows.map(function (r) { return r.expenses != null ? r.expenses : (r.spend + r.college); });
+    var hasFlow = rows.length && rows[0].roth_conversion !== undefined && rows[0].roth_conversion !== null;
+    var conv = hasFlow ? rows.map(function (r) { return r.roth_conversion || 0; }) : null;
+    var convTgt = hasFlow ? rows.map(function (r) { return r.roth_conversion_target || 0; }) : null;
+    var bd = hasFlow ? rows.map(function (r) { return r.backdoor_roth || 0; }) : null;
+
+    var datasets = [
+      { type: 'bar', label: 'TaxFree (Roth)', data: taxFree, backgroundColor: COLORS.taxFree, stack: 'assets', order: 2, yAxisID: 'y' },
+      { type: 'bar', label: 'PreTax (IRA)', data: preTax, backgroundColor: COLORS.preTax, stack: 'assets', order: 2, yAxisID: 'y' },
+      { type: 'bar', label: 'Brokerage', data: brokerage, backgroundColor: COLORS.brokerage, stack: 'assets', order: 2, yAxisID: 'y' },
+      { type: 'bar', label: 'SS (annual)', data: ssAnnual, backgroundColor: COLORS.ss, stack: 'assets', order: 2, yAxisID: 'y' },
+      { type: 'line', label: 'Tax', data: tax, borderColor: COLORS.taxLine, backgroundColor: COLORS.taxLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 },
+      { type: 'line', label: 'Expenses', data: expenses, borderColor: COLORS.expensesLine, backgroundColor: COLORS.expensesLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 }
+    ];
+    if (hasFlow) {
+      datasets.push({
+        type: 'line', label: 'Roth conversion ($)', data: conv, borderColor: COLORS.convLine, borderWidth: 2, borderDash: [6, 3],
+        fill: false, tension: 0.12, yAxisID: 'y1', order: 0
+      });
+      datasets.push({
+        type: 'line', label: 'Conv. target ($)', data: convTgt, borderColor: '#fbc02d', borderWidth: 1.5, borderDash: [2, 2],
+        fill: false, tension: 0.12, yAxisID: 'y1', order: 0
+      });
+      datasets.push({
+        type: 'line', label: 'Backdoor ($)', data: bd, borderColor: COLORS.backdoorLine, borderWidth: 2, fill: false, tension: 0.12, yAxisID: 'y1', order: 0
+      });
+    }
 
     return new Chart(canvas, {
       type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          { type: 'bar', label: 'TaxFree (Roth)', data: taxFree, backgroundColor: COLORS.taxFree, stack: 'assets', order: 2, yAxisID: 'y' },
-          { type: 'bar', label: 'PreTax (IRA)', data: preTax, backgroundColor: COLORS.preTax, stack: 'assets', order: 2, yAxisID: 'y' },
-          { type: 'bar', label: 'Brokerage', data: brokerage, backgroundColor: COLORS.brokerage, stack: 'assets', order: 2, yAxisID: 'y' },
-          { type: 'bar', label: 'SS (annual)', data: ssAnnual, backgroundColor: COLORS.ss, stack: 'assets', order: 2, yAxisID: 'y' },
-          { type: 'line', label: 'Tax', data: tax, borderColor: COLORS.taxLine, backgroundColor: COLORS.taxLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 },
-          { type: 'line', label: 'Expenses', data: expenses, borderColor: COLORS.expensesLine, backgroundColor: COLORS.expensesLine, borderWidth: 2, fill: false, tension: 0.15, yAxisID: 'y1', order: 1 }
-        ]
-      },
+      data: { labels: labels, datasets: datasets },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -582,7 +634,7 @@
           y1: {
             stacked: false,
             position: 'right',
-            title: { display: true, text: 'Lines: tax & total expenses' },
+            title: { display: true, text: hasFlow ? 'Flows: tax, expenses, conv., backdoor' : 'Flows: tax & expenses' },
             grid: { drawOnChartArea: false },
             ticks: { callback: moneyTick }
           }
@@ -774,6 +826,8 @@
       modeEl.value = 'portfolio';
       syncModeUi();
     }
+    document.getElementById('fileCsv').value = '';
+    setFileStatus('');
     var ta = document.getElementById('pasteCsv');
     ta.value = SAMPLE_CSV;
     ta.focus();
@@ -782,18 +836,58 @@
     } catch (e) { /* ignore */ }
   });
 
+  function setFileStatus(msg) {
+    var el = document.getElementById('fileCsvStatus');
+    if (el) el.textContent = msg || '';
+  }
+
+  function readSelectedCsvFile(callback) {
+    var fileEl = document.getElementById('fileCsv');
+    var f = fileEl.files && fileEl.files[0];
+    if (!f) {
+      callback(null, 'No file selected.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      callback(String(reader.result || ''), null);
+    };
+    reader.onerror = function () {
+      callback(null, 'Could not read that file.');
+    };
+    reader.readAsText(f, 'UTF-8');
+  }
+
+  document.getElementById('fileCsv').addEventListener('change', function () {
+    var f = this.files && this.files[0];
+    setFileStatus(f ? 'Selected: ' + f.name + ' — click “Load file into editor” or “Run simulation” to use it.' : '');
+  });
+
+  document.getElementById('btnUseFile').addEventListener('click', function () {
+    readSelectedCsvFile(function (text, err) {
+      if (err) {
+        alert(err);
+        return;
+      }
+      if (text == null) return;
+      document.getElementById('pasteCsv').value = text;
+      setFileStatus('Loaded into editor. Run simulation when ready.');
+    });
+  });
+
   document.getElementById('btnRun').onclick = function () {
     var fileEl = document.getElementById('fileCsv');
     var mode = document.getElementById('simMode').value;
     if (mode === 'portfolio') {
-      var text = document.getElementById('pasteCsv').value.trim();
-      if (!text && fileEl.files && fileEl.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function () {
-          document.getElementById('pasteCsv').value = reader.result;
+      if (fileEl.files && fileEl.files[0]) {
+        readSelectedCsvFile(function (text, err) {
+          if (err) {
+            alert(err);
+            return;
+          }
+          document.getElementById('pasteCsv').value = text;
           runPortfolio();
-        };
-        reader.readAsText(fileEl.files[0], 'UTF-8');
+        });
         return;
       }
       runPortfolio();
