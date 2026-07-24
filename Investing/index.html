@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="WealthLanding Investment Research Hub — monitor active theses, opportunities, risks, and decision points.">
   <title>Investment Research Hub | WealthLanding</title>
+  <!-- WealthLanding Investing Platform v1.0 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
@@ -698,7 +699,7 @@ const CONFIG = {
 
 const state = { theses: [], filter: 'all' };
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-const pretty = value => String(value ?? '').replaceAll('_',' ').replace(/\w/g,c=>c.toUpperCase());
+const pretty = value => String(value ?? '').replaceAll('_',' ').replace(/\b\w/g, c => c.toUpperCase());
 const dateLabel = value => value ? new Intl.DateTimeFormat('en-US',{year:'numeric',month:'short',day:'numeric'}).format(new Date(value+'T00:00:00')) : 'Date unavailable';
 const statusStyle = status => ({strengthening:['bg-emerald-50 text-emerald-700','bg-emerald-500'],intact:['bg-blue-50 text-blue-700','bg-blue-500'],weakening:['bg-amber-50 text-amber-700','bg-amber-500'],invalidated:['bg-rose-50 text-rose-700','bg-rose-500']}[status] || ['bg-slate-100 text-slate-700','bg-slate-400']);
 const convictionWeight = c => ({high:3,medium:2,low:1}[c]||0);
@@ -711,7 +712,8 @@ async function loadHub() {
     const files = Array.isArray(manifest) ? manifest : manifest.theses;
     if (!Array.isArray(files) || files.length === 0) throw new Error('Manifest contains no thesis files.');
     const results = await Promise.allSettled(files.map(async entry => {
-      const url = typeof entry === 'string' ? entry : entry.file;
+      const rawUrl = typeof entry === 'string' ? entry : entry.file;
+      const url = rawUrl.includes('/') ? rawUrl : `./data/${rawUrl}`;
       const r = await fetch(url, {cache:'no-store'});
       if (!r.ok) throw new Error(`${url} returned ${r.status}`);
       return r.json();
