@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-07-24",
+  "theses": [
+    "./data/latest/jpy.json"
+  ]
+}
