@@ -845,14 +845,36 @@
           </div>
 
           <details class="cascading-subdrawer" open>
-            <summary class="cascading-summary"><span>🏥 Healthcare Subsidies & State Taxes</span><span>▼</span></summary>
+            <summary class="cascading-summary"><span>📍 Post-Retirement Location & State Tax</span><span>▼</span></summary>
+            <div class="cascading-content">
+              <div class="field">
+                <label>Post-Retirement Region</label>
+                <select id="postRetireRegion">
+                  <option value="us" selected>Inside United States</option>
+                  <option value="overseas">Outside U.S. / Overseas</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Post-Retirement U.S. Residence State</label>
+                <select id="postRetireState"></select>
+              </div>
+              <div class="field">
+                <label>Relocation / Move Age</label>
+                <input id="locationMoveAge" type="number" value="60">
+              </div>
+              <div class="field">
+                <label>State Income Tax Rate % (Auto-synced or Custom)</label>
+                <input id="stateTaxRate" type="number" step="0.01" value="5.75">
+              </div>
+            </div>
+          </details>
+
+          <details class="cascading-subdrawer">
+            <summary class="cascading-summary"><span>🏥 Healthcare Subsidies & Tax Limits</span><span>▼</span></summary>
             <div class="cascading-content">
               <div class="switch-row"><span>Preserve ACA Subsidies (U.S.)</span><input id="preserveAca" type="checkbox" checked></div>
               <div class="switch-row"><span>Avoid IRMAA Surcharges (U.S.)</span><input id="avoidIrmaa" type="checkbox" checked></div>
-              <div class="switch-row"><span>Move to 0% State Tax Location</span><input id="moveTaxFreeState" type="checkbox"></div>
-              <div class="field"><label>Tax-Free Move Age</label><input id="moveTaxFreeAge" type="number" value="60"></div>
               <div class="field"><label>Top Federal Bracket Target</label><select id="bracketTarget"><option value="12">12%</option><option value="22">22%</option><option value="24" selected>24%</option><option value="32">32%</option><option value="35">35%</option><option value="none">No bracket cap</option></select></div>
-              <div class="field"><label>State Income Tax Rate %</label><input id="stateTaxRate" type="number" step="0.01" value="5.75"></div>
             </div>
           </details>
 
@@ -999,8 +1021,8 @@
 
   <script>
     const FED=[{r:.10,u:24800},{r:.12,u:100800},{r:.22,u:211400},{r:.24,u:403550},{r:.32,u:512450},{r:.35,u:768700},{r:.37,u:Infinity}],LTCG=[{r:0,u:98900},{r:.15,u:613700},{r:.20,u:Infinity}],STD=32200,NIIT=250000,ACA={5:193400};
-    const STATE_TAX_RATES={"AL":0.05,"AK":0,"AZ":0.025,"AR":0.039,"CA":0.123,"CO":0.044,"FL":0,"GA":0.0539,"NY":0.109,"TX":0,"VA":0.0575,"WA":0};
-    const STATE_NAMES={"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","FL":"Florida","GA":"Georgia","NY":"New York","TX":"Texas","VA":"Virginia","WA":"Washington"};
+    const STATE_TAX_RATES={"AL":0.05,"AK":0,"AZ":0.025,"AR":0.039,"CA":0.123,"CO":0.044,"FL":0,"GA":0.0539,"NY":0.109,"TX":0,"VA":0.0575,"WA":0,"TAX_FREE":0};
+    const STATE_NAMES={"AL":"Alabama","AK":"Alaska (0%)","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","FL":"Florida (0%)","GA":"Georgia","NY":"New York","TX":"Texas (0%)","VA":"Virginia","WA":"Washington (0%)"};
     const RMD={73:26.5,74:25.5,75:24.6,76:23.7,77:22.9,78:22.0,79:21.1,80:20.2,81:19.4,82:18.5,83:17.7,84:16.8,85:16.0};
 
     let mainChart, rothAdditionsChart, ssChart, milestoneMiniChart, expenseChart;
@@ -1020,6 +1042,53 @@
     function taxableSS(ss,non){let p=non+.5*ss;if(p<=32000)return 0;if(p<=44000)return Math.min(.5*ss,.5*(p-32000));return Math.min(.85*ss,.85*(p-44000)+Math.min(6000,.5*ss))}
     function ssFactor(start,fra=67){start=Math.max(62,Math.min(70,start||fra));let m=Math.round((start-fra)*12);if(m<0){let e=-m;return 1-Math.min(36,e)*(5/9/100)-Math.max(0,e-36)*(5/12/100)}return 1+Math.min(36,m)*(2/3/100)}
     function ssAnnual(age,start,monthly,infl,cur){return age<start?0:monthly*ssFactor(start)*12*Math.pow(1+infl,age-cur)}
+
+    function rowTax(base,conv,rmd,gain,i,stateApplies){
+      let ssTax=taxableSS(base.ss,base.nonSS+conv+rmd);
+      let ord=base.nonSS+ssTax+conv+rmd;
+      let gains=gain;
+      let invest=base.cashInt+gain;
+      let ft=fedTax(ord,gains,invest);
+      let st=stateApplies?Math.max(0,ord+gains)*(i.stateRate||0):0;
+      return{...ft,state:st,total:ft.federal+st,ssTax,ord};
+    }
+
+    function pickConversion(base,i,pretaxAvail,rmd,stateApplies,age,overrideMode,ss){
+      let obj=overrideMode?.objective||i.objective;
+      let preset=overrideMode?.strategyPreset||i.strategyPreset;
+
+      if(obj==='min_tax'&&!overrideMode?.forceConversion){
+        if(age<73&&pretaxAvail<500000)return 0;
+      }
+
+      let brCap=topBracket(i.bracket);
+      let ssTaxVal=taxableSS(ss!==undefined?ss:base.ss,base.nonSS+rmd);
+      let ordBase=base.nonSS+ssTaxVal+rmd;
+      let brRoom=Math.max(0,brCap-Math.max(0,ordBase-STD));
+
+      let acaRoom=Infinity;
+      if(preset==='us'||(preset==='custom'&&i.preserveAca)){
+        if(age<65&&age>=i.ret){
+          let acaCeil=ACA[5]||193400;
+          acaRoom=Math.max(0,acaCeil-(base.nonSS+base.ss));
+        }
+      }
+
+      let irmaaRoom=Infinity;
+      if(preset==='us'||(preset==='custom'&&i.avoidIrmaa)){
+        if(age>=63){
+          irmaaRoom=Math.max(0,218000-(ordBase));
+        }
+      }
+
+      if(preset==='abroad'){
+        acaRoom=Infinity;
+        irmaaRoom=Infinity;
+      }
+
+      let limit=Math.min(pretaxAvail,brRoom,acaRoom,irmaaRoom);
+      return Math.round(Math.max(0,limit)/1000)*1000;
+    }
 
     function loadPreviousPageProfile() {
       try {
@@ -1068,11 +1137,16 @@
       let targetBr = '24';
       let moveTaxFree = false;
       let moveTaxFreeAgeVal = n('retireAge');
+      let postRegion = v('postRetireRegion','us');
+      let postState = v('postRetireState','SAME');
 
       if (preset === 'taxfree_state') {
         moveTaxFree = true;
+        postRegion = 'us';
+        postState = 'TAX_FREE';
         moveTaxFreeAgeVal = n('retireAge');
       } else if (preset === 'abroad') {
+        postRegion = 'overseas';
         presAca = false;
         avIrmaa = false;
         targetBr = '32';
@@ -1081,20 +1155,20 @@
         ptIncome = n('partTimeIncome');
         presAca = b('preserveAca');
         avIrmaa = b('avoidIrmaa');
-        moveTaxFree = b('moveTaxFreeState');
-        moveTaxFreeAgeVal = n('moveTaxFreeAge');
+        moveTaxFreeAgeVal = n('locationMoveAge');
         targetBr = v('bracketTarget','24');
       }
 
       return {
         objective: v('planningObjective','max_roth'),
         strategyPreset: preset,
+        postRetireRegion: postRegion,
+        postRetireState: postState,
+        moveTaxFreeAge: moveTaxFreeAgeVal,
         preReturnPct: preReturn,
         postReturnPct: postReturn,
         preserveAca: presAca,
         avoidIrmaa: avIrmaa,
-        moveTaxFreeState: moveTaxFree,
-        moveTaxFreeAge: moveTaxFreeAgeVal,
         cur: n('currentAge'),
         ret: n('retireAge'),
         brokerage: n('brokerage'),
@@ -1122,53 +1196,11 @@
         w2: 220000,
         cashYield: n('cashYieldPct')/100,
         residenceState: v('residenceState','VA'),
-        stateRate: preset === 'abroad' ? 0 : n('stateTaxRate')/100,
+        stateRate: n('stateTaxRate')/100,
         bracket: targetBr,
         ssMonthly: 4000,
         ssStartChoice: v('ssClaimAgeSelect', '67')
       }
-    }
-
-    function rowTax(base,conv,rmd,gain,i,stateApplies){
-      let ssTax=taxableSS(base.ss,base.nonSS+conv+rmd),ord=base.nonSS+ssTax+conv+rmd,gains=gain,invest=base.cashInt+gain,ft=fedTax(ord,gains,invest),st=stateApplies?Math.max(0,ord+gains)*i.stateRate:0;
-      return{...ft,state:st,total:ft.federal+st,ord,gains,ssTax}
-    }
-
-    function pickConversion(base,i,pretaxAvail,rmd,stateApplies,age,overrideMode,overrideSS){
-      let obj = overrideMode?.objective || i.objective;
-      let preset = overrideMode?.strategyPreset || i.strategyPreset;
-
-      if(obj==='min_tax' && !overrideMode?.forceConversion) {
-        if(age < 73 && pretaxAvail < 500000) return 0; 
-      }
-
-      let brCap = topBracket(i.bracket);
-      let ssTaxVal = taxableSS(overrideSS !== undefined ? overrideSS : base.ss, base.nonSS + rmd);
-      let ordBase = base.nonSS + ssTaxVal + rmd;
-      let brRoom = Math.max(0, brCap - Math.max(0, ordBase - STD));
-
-      let acaRoom = Infinity;
-      if (preset === 'us' || preset === 'taxfree_state' || (preset === 'custom' && i.preserveAca)) {
-        if (age < 65 && age >= i.ret) {
-          let acaCeil = ACA[5];
-          acaRoom = Math.max(0, acaCeil - (base.nonSS + base.ss));
-        }
-      }
-
-      let irmaaRoom = Infinity;
-      if (preset === 'us' || preset === 'taxfree_state' || (preset === 'custom' && i.avoidIrmaa)) {
-        if (age >= 63) {
-          irmaaRoom = Math.max(0, 218000 - ordBase);
-        }
-      }
-
-      if (preset === 'abroad') {
-        acaRoom = Infinity;
-        irmaaRoom = Infinity;
-      }
-
-      let cap = Math.min(pretaxAvail, brRoom, acaRoom, irmaaRoom);
-      return Math.round(Math.max(0, cap)/1000)*1000;
     }
 
     function project(opt={}){
@@ -1189,21 +1221,39 @@
         let ss = (ssClaimChoice === 'none' || ssClaimChoice === 'N/A') ? 0 : ssAnnual(age, Number(ssClaimChoice), i.ssMonthly, i.infl, i.cur);
         let nonSS=taxW2+i1099+cashInt;
 
-        // Base living expenses
+        // Determine active location and state tax rate dynamically
+        let isPostMove = age >= i.moveTaxFreeAge;
+        let isOverseas = (i.postRetireRegion === 'overseas' && isPostMove) || i.strategyPreset === 'abroad';
+        let stOn = true;
+        let effectiveStateRate = i.stateRate;
+
+        if (isOverseas) {
+          stOn = false;
+          effectiveStateRate = 0;
+        } else if (isPostMove) {
+          if (i.postRetireState === 'TAX_FREE' || i.strategyPreset === 'taxfree_state') {
+            stOn = false;
+            effectiveStateRate = 0;
+          } else if (i.postRetireState !== 'SAME') {
+            effectiveStateRate = STATE_TAX_RATES[i.postRetireState] ?? i.stateRate;
+            stOn = effectiveStateRate > 0;
+          }
+        }
+
+        // Active iteration with effectiveStateRate override
+        let iRow = { ...i, stateRate: effectiveStateRate };
+
         let livingSpend = (ret ? i.spend : i.preSpend) * Math.pow(1 + i.infl, y);
         
-        // College spending (when child in college age 18-21)
         let collegeSpend = 0;
         if (i.childCount > 0 && age >= 52 && age < 56) collegeSpend += (i.college / 4);
         if (i.childCount > 1 && age >= 55 && age < 59) collegeSpend += (i.college / 4);
 
-        // Long-term care spending
         let ltcSpend = 0;
         if ((i.strategyPreset === 'custom' || opt.enableLtc) && age >= i.ltcS && age <= i.ltcE) {
           ltcSpend = i.ltcCost * Math.pow(1 + i.infl, y);
         }
 
-        // Mortgage spending (Fixed rate nominal - does not inflate)
         let mortgageSpend = 0;
         if (i.strategyPreset === 'custom' && age <= i.mortgageEnd) {
           mortgageSpend = i.mortgageAnnual;
@@ -1214,16 +1264,6 @@
         pretaxG-=rmd;
         
         let base={nonSS,cashInt,ss};
-        
-        // State tax applicability
-        let stOn = true;
-        if (i.strategyPreset === 'abroad') {
-          stOn = false;
-        } else if (i.strategyPreset === 'taxfree_state' && age >= i.moveTaxFreeAge) {
-          stOn = false;
-        } else if (i.strategyPreset === 'custom' && i.moveTaxFreeState && age >= i.moveTaxFreeAge) {
-          stOn = false;
-        }
 
         let conv = 0;
         if (opt.noConversions) {
@@ -1231,7 +1271,7 @@
         } else if (opt.fixedConversions && opt.fixedConversions[age - i.cur] !== undefined) {
           conv = Math.min(pretaxG, opt.fixedConversions[age - i.cur]);
         } else {
-          conv = ret ? Math.min(pretaxG, pickConversion(base, i, pretaxG, rmd, stOn, age, opt.overrideMode, ss)) : 0;
+          conv = ret ? Math.min(pretaxG, pickConversion(base, iRow, pretaxG, rmd, stOn, age, opt.overrideMode, ss)) : 0;
         }
         pretaxG-=conv;
 
@@ -1241,12 +1281,10 @@
 
         let brokerG=broker*(1+rate) + (!ret ? i.savings*0.4 : 0);
         let cashG=cash,rothG=roth*(1+rate)+conv+rothContrib,gain=0;
-        let tx=rowTax(base,conv,rmd,gain,i,stOn);
-        let irm = (age>=65 && (i.strategyPreset === 'us' || i.avoidIrmaa)) ? {annual: (tx.magi > 218000 ? 1500 : 0)} : {annual:0};
+        let tx=rowTax(base,conv,rmd,gain,iRow,stOn);
+        let irm = (age>=65 && !isOverseas && (i.strategyPreset === 'us' || i.avoidIrmaa)) ? {annual: (tx.magi > 218000 ? 1500 : 0)} : {annual:0};
 
-        // Automatic baseline Medicare expense when residing in the U.S. at age 65+
-        let isUS = (i.strategyPreset === 'us' || i.strategyPreset === 'taxfree_state' || (i.strategyPreset === 'custom' && !i.moveTaxFreeState));
-        let baseMedicare = (age >= 65 && isUS) ? 6000 * Math.pow(1 + i.infl, y) : 0;
+        let baseMedicare = (age >= 65 && !isOverseas) ? 6000 * Math.pow(1 + i.infl, y) : 0;
 
         let totalMedical = baseMedicare + irm.annual + ltcSpend;
         let spend = livingSpend + collegeSpend + totalMedical + mortgageSpend;
@@ -1285,7 +1323,7 @@
             rem -= rUsed;
           }
 
-          tx=rowTax(base,conv,rmd,gain,i,stOn);
+          tx=rowTax(base,conv,rmd,gain,iRow,stOn);
         }
 
         pretax=Math.max(0,pretaxG); broker=Math.max(0,brokerG); cash=Math.max(0,cashG); roth=Math.max(0,rothG);
@@ -1666,16 +1704,35 @@
     }
 
     function populateStateSelector(){
-      let sel=document.getElementById('residenceState');if(!sel)return;sel.innerHTML='';
+      let sel=document.getElementById('residenceState');
+      let postSel=document.getElementById('postRetireState');
+      if(sel) sel.innerHTML='';
+      if(postSel) postSel.innerHTML='';
+
+      let sameOpt=document.createElement('option');
+      sameOpt.value='SAME';
+      sameOpt.textContent='Same as Current State';
+      if(postSel) postSel.appendChild(sameOpt);
+
+      let taxFreeOpt=document.createElement('option');
+      taxFreeOpt.value='TAX_FREE';
+      taxFreeOpt.textContent='0% Tax-Free State (FL, TX, NV, WA, etc.)';
+      if(postSel) postSel.appendChild(taxFreeOpt);
+
       for(const code of Object.keys(STATE_NAMES).sort((a,b)=>STATE_NAMES[a].localeCompare(STATE_NAMES[b]))){
-        let opt=document.createElement('option');opt.value=code;opt.textContent=STATE_NAMES[code];if(code==='VA')opt.selected=true;sel.appendChild(opt);
+        if (code === 'TAX_FREE') continue;
+        if (sel) {
+          let opt=document.createElement('option');opt.value=code;opt.textContent=STATE_NAMES[code];if(code==='VA')opt.selected=true;sel.appendChild(opt);
+        }
+        if (postSel) {
+          let opt2=document.createElement('option');opt2.value=code;opt2.textContent=STATE_NAMES[code];postSel.appendChild(opt2);
+        }
       }
     }
 
-    function setObjectiveEnum(val, btnElement) {
-      document.querySelectorAll('.goal-btn').forEach(x => x.classList.remove('active'));
-      btnElement.classList.add('active');
-      document.getElementById('planningObjective').value = val;
+    function syncStateRate(){
+      let code=v('residenceState','VA'),rate=STATE_TAX_RATES[code]??0.0575;
+      if(document.getElementById('stateTaxRate')) document.getElementById('stateTaxRate').value=(rate*100).toFixed(2);
       render();
     }
 
