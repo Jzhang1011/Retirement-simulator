@@ -1,0 +1,14 @@
+
+Odyssey Exploration (Odyssey.html)
+  └─► Saves shortlisted lifestyles to `RetirementOdysseySelection`
+
+Preference Discovery (retirement-preference-discovery.html)
+  └─► Saves priorities & non-negotiables to `RetirementDiscoverySelection`
+
+Retirement Feasibility Engine (financial-feasibility-audit.html)
+  └─► Saves committed choice, locations & budget to `WealthLandingSelectedRoadmap`
+
+U.S. Retirement City Matcher (UScitymatcher.html)
+  └─► Reads `WealthLandingSelectedRoadmap`
+  └─► Preloads Path, Overseas Base & Target Budget into Section 2 Header
+  └─► Updates `WealthLandingSelectedRoadmap` with chosen U.S. city when saved
