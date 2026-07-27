@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JMJJ5CJR4');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preference Discovery | WealthLanding</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Serif) & Plus Jakarta Sans (Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --navy: #0B132B;
+            --navy-light: #1E293B;
+            --mint: #02B17D;
+            --mint-dark: #019367;
+            --bg: #FAFAFB;
+            --card: #FFFFFF;
+            --border: #E2E8F0;
+            --text: #1E293B;
+            --muted: #64748B;
+            --blue: #2563EB;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--navy-light);
+        }
+
+        .font-serif-title {
+            font-family: var(--font-serif);
+        }
+
+        /* Global Header */
+        .global-header {
+            background-color: #0B132B; 
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 2.25rem;
+            border-bottom: 1px solid #1E293B;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative; 
+            z-index: 1001;      
+        }
+
+        .top-nav-links {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center;
+            gap: 1.25rem;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-nav-links a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .top-nav-links a:hover, .top-nav-links a.active {
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.45rem; 
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
+
+        .logo span {
+            color: #02B17D; 
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px; 
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            color: white;
+            padding: 0.65rem 1.25rem 0.65rem 3rem; 
+            border-radius: 8px;
+            font-size: 0.9rem; 
+        }
+
+        .mega-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;                     
+            transform: translateX(-50%) translateY(12px); 
+            width: 95vw;                   
+            max-width: 1240px; 
+            background: white;
+            border: 1px solid var(--border); 
+            border-radius: 1rem;
+            box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
+            padding: 3.25rem; 
+            display: grid !important;      
+            grid-template-columns: 1.1fr 2.9fr; 
+            gap: 3.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            z-index: 2000; 
+            box-sizing: border-box;
+        }
+
+        .dropdown-trigger:hover .mega-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-trigger {
+            position: static;
+        }
+
+        .links-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem 1.75rem; 
+        }
+
+        .dropdown-column h4 {
+            color: var(--navy); 
+            font-size: 1.215rem; 
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .dropdown-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem; 
+        }
+
+        .dropdown-column ul a {
+            color: var(--muted) !important; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+            padding: 0;
+        }
+
+        .dropdown-column ul a:hover {
+            color: #02B17D !important; 
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Toast animation */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-toast {
+            animation: slideUpFade 0.3s ease-out forwards;
+        }
+
+        .step-pill-active {
+            background-color: #0B132B;
+            color: #FFFFFF;
+            border-color: #0B132B;
+        }
+
+        .step-pill-inactive {
+            background-color: #FFFFFF;
+            color: #64748B;
+            border-color: #E2E8F0;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-12">
+
+  <header class="global-header">
+    <a href="/" class="logo">Wealth<span>Landing</span></a>
+    
+    <nav aria-label="Global Main Directory">
+      <ul class="top-nav-links">
+        <li class="dropdown-trigger">
+          <a href="#" class="active font-bold text-white">Overview <span class="text-[12px] opacity-70">▼</span></a>
+          <div class="mega-dropdown">
+            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
+              <div class="space-y-3">
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">Overview</h2>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">Your primary workspace baseline dashboard.</p>
+              </div>
+            </div>
+            <div class="links-matrix text-left">
+              <div class="dropdown-column">
+                <h4>🚀 Start Here</h4>
+                <ul>
+                  <li><a href="#">Financial Diagnostic</a></li>
+                  <li><a href="#">Wealth Score Tracker</a></li>
+                  <li><a href="/">Personal Dashboard</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-column">
+                <h4>🌟 Popular Journeys</h4>
+                <ul>
+                  <li><a href="#">Build My First Million</a></li>
+                  <li><a href="#">Retirement Odyssey Hub</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-column">
+                <h4>⏱️ Progress Framework</h4>
+                <ul>
+                  <li><a href="#">Retirement Master Plan</a></li>
+                  <li><a href="#">Retirement Transition Plan</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="dropdown-trigger">
+          <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
+          <div class="mega-dropdown">
+            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
+              <div class="space-y-3">
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">Design Your Life</h2>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">Map your life transition and compare retirement pathways.</p>
+              </div>
+            </div>
+            <div class="links-matrix text-left">
+              <div class="dropdown-column">
+                <h4>🗺️ Retirement Planning</h4>
+                <ul>
+                  <li><a href="Odyssey.html">Odyssey Experience</a></li>
+                  <li><a href="#">Preference Discovery</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="search-container">
+      <form action="https://www.google.com/search" method="get" target="_blank">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10">🔍</span>
+        <input type="hidden" name="sitesearch" value="wealthlanding.com">
+        <input type="search" name="q" class="search-input" placeholder="Search systems, tools..." aria-label="Search WealthLanding">
+      </form>
+    </div>
+  </header>
+
+  <main class="max-w-[1450px] mx-auto px-4 md:px-12 py-8">
+
+    <!-- PAGE HERO HEADER -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-2">
+            <span>Stage 2: Preference & Constraint Discovery</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-serif-title font-bold text-[#0B132B]">Discover What Matters & What Works</h1>
+        <p class="text-slate-600 max-w-2xl mx-auto text-xs md:text-sm mt-2 leading-relaxed">
+            Separate what attracts you from what can realistically work. Rank your priorities, clarify your non-negotiables, and test your trade-off limits.
+        </p>
+    </div>
+
+    <!-- SHORTLIST SIGNAL HANDOFF BANNER -->
+    <div id="odysseyHandoffBanner" class="bg-slate-900 text-white rounded-2xl p-4 md:p-6 mb-8 border border-slate-800 shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <!-- Filled via JS from localStorage -->
+    </div>
+
+    <!-- WORKFLOW NAVIGATION STEPPER -->
+    <div class="flex items-center justify-center gap-2 md:gap-4 mb-8 overflow-x-auto pb-2 no-scrollbar">
+        <button id="stepBtn1" onclick="switchStep(1)" class="step-pill-active px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm">
+            <span class="bg-emerald-500 text-slate-950 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black">1</span>
+            <span>Section 1: What Matters Most</span>
+        </button>
+        <span class="text-slate-300 font-bold">→</span>
+        <button id="stepBtn2" onclick="switchStep(2)" class="step-pill-inactive px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm">
+            <span class="bg-slate-200 text-slate-700 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black">2</span>
+            <span>Section 2: Hard Constraints</span>
+        </button>
+        <span class="text-slate-300 font-bold">→</span>
+        <button id="stepBtn3" onclick="switchStep(3)" class="step-pill-inactive px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm">
+            <span class="bg-slate-200 text-slate-700 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black">3</span>
+            <span>Section 3: Compromises</span>
+        </button>
+        <span class="text-slate-300 font-bold">→</span>
+        <button id="stepBtn4" onclick="switchStep(4)" class="step-pill-inactive px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm">
+            <span class="bg-emerald-100 text-emerald-900 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black">4</span>
+            <span>Shortlist Synthesis</span>
+        </button>
+    </div>
+
+    <!-- DISCOVERY WORKSPACE CONTAINER -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT 7 COLUMNS: GUIDED CONVERSATION FORM SECTIONS -->
+        <div class="lg:col-span-7 space-y-6">
+
+            <!-- SECTION 1: WHAT MATTERS MOST (PRIORITIES & VALUES) -->
+            <section id="discoverySection1" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Section 1 of 3</span>
+                    <h2 class="text-xl font-serif-title font-bold text-[#0B132B]">What Matters Most to You?</h2>
+                    <p class="text-xs text-slate-500 mt-1">Select and weigh the key drivers of your retirement satisfaction.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-xs font-bold text-slate-700 uppercase tracking-wider">Select your top 3 primary motivators:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="priorityPillsContainer">
+                        <!-- Populated by JS with priority cards -->
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Primary Retirement Objective</label>
+                        <select id="disc_primaryObjective" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500 shadow-sm">
+                            <option value="family_focus" selected>Family Proximity & Multi-Generational Connection</option>
+                            <option value="tax_wealth">Tax Optimization & Net Worth Preservation</option>
+                            <option value="travel_adventure">Global Adventure, Culture & Travel</option>
+                            <option value="healthcare_safety">Healthcare Security & Medical Peace of Mind</option>
+                            <option value="lifestyle_freedom">Maximum Daily Freedom & Low Cost Living</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button onclick="switchStep(2)" class="bg-[#0B132B] hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-sm">
+                            <span>Next: Hard Constraints →</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: HARD CONSTRAINTS (NON-NEGOTIABLES) -->
+            <section id="discoverySection2" class="hidden bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Section 2 of 3</span>
+                    <h2 class="text-xl font-serif-title font-bold text-[#0B132B]">What Are Your Hard Constraints?</h2>
+                    <p class="text-xs text-slate-500 mt-1">Clarify absolute non-negotiables that eliminate impractical options.</p>
+                </div>
+
+                <div class="space-y-5">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Children & Heirs Location</label>
+                        <select id="disc_childrenLocation" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="Same State">Same State / Metropolitan Area</option>
+                            <option value="Different US State" selected>Different U.S. State</option>
+                            <option value="Outside US">Outside United States</option>
+                            <option value="No Children">No Children / Independent Heirs</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Must Stay in Domestic US?</label>
+                            <select id="disc_mustStayUS" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                                <option value="Yes_Strict" selected>Yes — Strict domestic US living only</option>
+                                <option value="Prefer_US">Prefer US — Open to short travel</option>
+                                <option value="Open_Overseas">No — Fully open to living overseas</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Citizenship & Residency</label>
+                            <select id="disc_citizenship" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                                <option value="US_Only" selected>U.S. Citizenship Only</option>
+                                <option value="US_EU_Dual">Dual US / EU Passport Holder</option>
+                                <option value="Other_Sovereign">Other Sovereign Passport / Residency</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">U.S. Medicare Reliance</label>
+                            <select id="disc_medicareDepend" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                                <option value="Critical" selected>Critical — Must rely on U.S. Medicare at 65+</option>
+                                <option value="Moderate">Moderate — Medicare backstop with private global health</option>
+                                <option value="Self_Insure">Low — Open to foreign private healthcare</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Maximum Relocation Chapters</label>
+                            <select id="disc_maxMoves" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                                <option value="0">0 Moves — Stay put permanently</option>
+                                <option value="1" selected>1 Move — Single long-term relocation</option>
+                                <option value="2+">2+ Moves — Multi-chapter phase evolution</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Asset Bracket</label>
+                        <select id="disc_assetTier" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="Core">Core Portfolio ($250k – $1M)</option>
+                            <option value="HNW" selected>High Net Worth ($1M – $5M)</option>
+                            <option value="Ultra">Ultra High Net Worth ($5M+)</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="switchStep(1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition">
+                            ← Back
+                        </button>
+                        <button onclick="switchStep(3)" class="bg-[#0B132B] hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-sm">
+                            <span>Next: Compromises →</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: WHAT CAN YOU COMPROMISE ON? (NEGOTIABLES) -->
+            <section id="discoverySection3" class="hidden bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Section 3 of 3</span>
+                    <h2 class="text-xl font-serif-title font-bold text-[#0B132B]">What Can You Compromise On?</h2>
+                    <p class="text-xs text-slate-500 mt-1">Define trade-offs you are willing to accept in exchange for high-value benefits.</p>
+                </div>
+
+                <div class="space-y-5">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">How important is physical closeness to children/grandchildren?</label>
+                        <select id="disc_compKidsDistance" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="Critical">Critical — Must be within 45 min drive</option>
+                            <option value="Important" selected>Important — Same state or short flight</option>
+                            <option value="NiceToHave">Nice to have — Flights and regular visits are fine</option>
+                            <option value="Independent">Not critical — Independent lifestyles with holiday visits</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Willingness to live overseas during active retirement years?</label>
+                        <select id="disc_compOverseas" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="Never" selected>Never — Will not consider living outside the US</option>
+                            <option value="Temporary_Chapter">Temporary Chapter — Willing for 5–10 active years then return</option>
+                            <option value="Permanent">Permanent — Fully willing to live abroad indefinitely</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tax Complexity vs. Tax Savings Trade-off</label>
+                        <select id="disc_compTaxComplexity" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="KeepSimple" selected>Keep simple — Minimal reporting, even if taxes are slightly higher</option>
+                            <option value="Moderate">Moderate — Willing to manage multi-state rules for $10k+ savings</option>
+                            <option value="MaxOptimize">Max Optimize — Willing to navigate complex structures for max wealth</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Healthcare Network Familiarity vs. Cost Arbitrage</label>
+                        <select id="disc_compHealthModel" onchange="updateDiscoveryEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 outline-none focus:border-blue-500">
+                            <option value="US_Known" selected>Prefer U.S. hospitals & primary care physicians</option>
+                            <option value="Hybrid">Hybrid — U.S. for complex care, overseas for routine/wellness</option>
+                            <option value="International">Fully open to accredited international clinical care</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="switchStep(2)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-semibold text-xs transition">
+                            ← Back
+                        </button>
+                        <button onclick="switchStep(4)" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-md">
+                            <span>View Shortlist Synthesis →</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: SHORTLIST SYNTHESIS SUMMARY -->
+            <section id="discoverySection4" class="hidden bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Section 4 of 3 (Synthesis)</span>
+                    <h2 class="text-xl font-serif-title font-bold text-[#0B132B]">Your Viable Shortlist Synthesis</h2>
+                    <p class="text-xs text-slate-500 mt-1">Here is how candidate lifestyles rank after evaluating your values against your hard constraints.</p>
+                </div>
+
+                <div id="synthesisDetailBox" class="space-y-4">
+                    <!-- Dynamic details rendered by JS -->
+                </div>
+
+                <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <button onclick="switchStep(1)" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs transition">
+                        Edit Preferences
+                    </button>
+                    <button onclick="proceedToFeasibility()" class="w-full sm:w-auto bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition shadow-md whitespace-nowrap">
+                        <span>Proceed to Financial Feasibility Audit →</span>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- RIGHT 5 COLUMNS: LIVE DISCOVERY EVALUATION PANEL -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <div class="bg-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-xl sticky top-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <span class="text-[10px] uppercase font-black text-emerald-400 tracking-widest">Real-Time Evaluation</span>
+                        <h3 class="text-lg font-serif-title font-bold text-white">Preference Matrix</h3>
+                    </div>
+                    <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Live Engine</span>
+                </div>
+
+                <!-- CATEGORY BUCKETS -->
+                <div class="space-y-5">
+                    
+                    <!-- BUCKET 1: BEST FIT -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
+                            <span>⭐ Best Fit Lifestyles</span>
+                            <span id="bestFitCount" class="text-slate-400 font-normal">(0)</span>
+                        </div>
+                        <div id="bestFitContainer" class="space-y-2">
+                            <!-- Rendered Dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- BUCKET 2: VIABLE WITH COMPROMISES -->
+                    <div class="pt-3 border-t border-slate-800">
+                        <div class="flex items-center justify-between text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">
+                            <span>⚖️ Viable with Compromises</span>
+                            <span id="viableCount" class="text-slate-400 font-normal">(0)</span>
+                        </div>
+                        <div id="viableContainer" class="space-y-2">
+                            <!-- Rendered Dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- BUCKET 3: NOT PRACTICAL -->
+                    <div class="pt-3 border-t border-slate-800">
+                        <div class="flex items-center justify-between text-xs font-bold text-rose-400 uppercase tracking-wider mb-2">
+                            <span>⚠️ Not Currently Practical</span>
+                            <span id="impracticalCount" class="text-slate-400 font-normal">(0)</span>
+                        </div>
+                        <div id="impracticalContainer" class="space-y-2">
+                            <!-- Rendered Dynamically -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CORE SUMMARY CALLOUT -->
+                <div class="mt-6 pt-4 border-t border-slate-800 bg-slate-800/50 p-3.5 rounded-xl text-xs text-slate-300 leading-relaxed">
+                    <strong class="text-white block mb-0.5">Methodology Notice:</strong>
+                    Odyssey candidates are matched against your non-negotiable hard constraints (Children, Medicare, Domestic US limits) and negotiable preferences.
+                </div>
+
+                <div class="mt-4">
+                    <button onclick="proceedToFeasibility()" class="w-full bg-[#02B17D] hover:bg-[#019367] text-white p-3 rounded-xl font-bold text-xs tracking-wide transition shadow-md flex items-center justify-center gap-2">
+                        <span>Proceed to Financial Feasibility Audit →</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="mt-12 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm">
+        <div class="text-left">
+            <h3 class="text-base font-bold text-slate-900 mb-1">Preferences Discovered. Next: Test Your Financial Feasibility.</h3>
+            <p class="text-xs text-slate-600 font-medium">
+                Now that you know what aligns with your values and constraints, stress-test these options against your savings, income, and withdrawal math.
+            </p>
+        </div>
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+            <a href="Odyssey.html" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-3 rounded-xl text-xs font-semibold transition text-center whitespace-nowrap">
+                ← Back to Odyssey
+            </a>
+            <button onclick="proceedToFeasibility()" class="w-full sm:w-auto bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md whitespace-nowrap">
+                <span>Proceed to Financial Feasibility →</span>
+            </button>
+        </div>
+    </footer>
+
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden">
+      <div class="bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md animate-toast">
+          <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold">✓</div>
+          <div>
+              <h4 id="toastTitle" class="text-sm font-bold text-white">Discovery Profile Saved</h4>
+              <p id="toastMessage" class="text-xs text-slate-300 mt-0.5">Preferences updated for feasibility analysis.</p>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    // State store
+    const discoveryState = {
+        currentStep: 1,
+        odysseyData: null,
+        selectedPriorities: new Set(["Family", "Healthcare", "Taxes"]),
+        blueprints: [
+            { id: "home_base", name: "Home Base", tags: ["Family", "Domestic", "Stability"], requiresUS: true, maxMoves: 0, kidProximity: "Critical" },
+            { id: "global_expat", name: "Global Expat", tags: ["Travel", "Tax Optimization", "Culture"], requiresUS: false, maxMoves: 1, kidProximity: "Independent" },
+            { id: "explore_then_return", name: "Explore Then Return", tags: ["Travel", "Family", "Medicare"], requiresUS: false, maxMoves: 2, kidProximity: "Important" },
+            { id: "strategic_us_move", name: "Strategic U.S. Move", tags: ["Taxes", "Healthcare", "Domestic"], requiresUS: true, maxMoves: 1, kidProximity: "Important" },
+            { id: "phase_optimizer", name: "Phase Optimizer", tags: ["Flexibility", "Tax Optimization", "Multi-stage"], requiresUS: false, maxMoves: 2, kidProximity: "Important" }
+        ]
+    };
+
+    const priorityOptions = [
+        { id: "Family", label: "Family & Grandchildren", icon: "👨‍👩‍👧‍👦" },
+        { id: "Healthcare", label: "Healthcare Security", icon: "🏥" },
+        { id: "Taxes", label: "Tax Bracket Minimization", icon: "🛡️" },
+        { id: "Travel", label: "Travel & Exploration", icon: "✈️" },
+        { id: "Cost", label: "Cost of Living Arbitrage", icon: "💵" },
+        { id: "Climate", label: "Warm Climate & Outdoors", icon: "☀️" },
+        { id: "Culture", label: "Arts, Food & Culture", icon: "🎨" },
+        { id: "Legacy", label: "Estate & Generational Wealth", icon: "🏰" }
+    ];
+
+    function loadOdysseyHandoff() {
+        let payload = null;
+        try {
+            const raw = localStorage.getItem("RetirementOdysseySelection");
+            if (raw) payload = JSON.parse(raw);
+        } catch (e) {
+            console.warn("Could not parse RetirementOdysseySelection:", e);
+        }
+
+        const banner = document.getElementById("odysseyHandoffBanner");
+        if (payload && payload.shortlistedLifestyles && payload.shortlistedLifestyles.length > 0) {
+            discoveryState.odysseyData = payload;
+            banner.innerHTML = `
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded uppercase">Odyssey Signal Received</span>
+                        <span class="text-xs font-bold text-emerald-400">Shortlisted ${payload.shortlistedLifestyles.length} Lifestyles</span>
+                    </div>
+                    <p class="text-xs text-slate-300">
+                        You shortlisted <strong>${payload.shortlistedLifestyles.join(", ")}</strong> in Odyssey exploration. Now test them against your hard constraints below.
+                    </p>
+                </div>
+                <a href="Odyssey.html" class="text-xs text-slate-300 hover:text-white underline font-semibold whitespace-nowrap">Change Odyssey Selection</a>
+            `;
+        } else {
+            banner.innerHTML = `
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase">Direct Discovery Mode</span>
+                        <span class="text-xs font-bold text-slate-200">No Odyssey Shortlist Found</span>
+                    </div>
+                    <p class="text-xs text-slate-300">
+                        Evaluating all five retirement lifestyles against your preferences and constraints.
+                    </p>
+                </div>
+                <a href="Odyssey.html" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold underline whitespace-nowrap">Explore Odyssey Lifestyles →</a>
+            `;
+        }
+    }
+
+    function renderPriorityPills() {
+        const container = document.getElementById("priorityPillsContainer");
+        container.innerHTML = "";
+
+        priorityOptions.forEach(opt => {
+            const isSelected = discoveryState.selectedPriorities.has(opt.id);
+            const pill = document.createElement("button");
+            pill.type = "button";
+            pill.onclick = () => togglePriority(opt.id);
+            pill.className = `p-3 rounded-xl border text-left transition flex items-center justify-between ${
+                isSelected 
+                    ? "bg-slate-900 text-white border-slate-900 shadow-sm" 
+                    : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
+            }`;
+            pill.innerHTML = `
+                <span class="text-xs font-bold flex items-center gap-2">
+                    <span>${opt.icon}</span>
+                    <span>${opt.label}</span>
+                </span>
+                <span class="text-xs font-bold">${isSelected ? "✓" : "+"}</span>
+            `;
+            container.appendChild(pill);
+        });
+    }
+
+    function togglePriority(id) {
+        if (discoveryState.selectedPriorities.has(id)) {
+            discoveryState.selectedPriorities.delete(id);
+        } else {
+            if (discoveryState.selectedPriorities.size >= 3) {
+                showToast("Selection Limit", "You can pick up to 3 core motivators.");
+                return;
+            }
+            discoveryState.selectedPriorities.add(id);
+        }
+        renderPriorityPills();
+        updateDiscoveryEngine();
+    }
+
+    function switchStep(stepNum) {
+        discoveryState.currentStep = stepNum;
+
+        [1, 2, 3, 4].forEach(s => {
+            const sec = document.getElementById(`discoverySection${s}`);
+            const btn = document.getElementById(`stepBtn${s}`);
+            if (s === stepNum) {
+                sec.classList.remove("hidden");
+                btn.className = "step-pill-active px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm";
+            } else {
+                sec.classList.add("hidden");
+                btn.className = "step-pill-inactive px-4 py-2.5 rounded-xl border text-xs font-bold transition flex items-center gap-2 whitespace-nowrap shadow-sm";
+            }
+        });
+
+        window.scrollTo({ top: 200, behavior: "smooth" });
+    }
+
+    function getSafeValue(id, fallback) {
+        const el = document.getElementById(id);
+        return el ? el.value : fallback;
+    }
+
+    function updateDiscoveryEngine() {
+        const inputs = {
+            mustStayUS: getSafeValue("disc_mustStayUS", "Yes_Strict"),
+            medicareDepend: getSafeValue("disc_medicareDepend", "Critical"),
+            childrenLocation: getSafeValue("disc_childrenLocation", "Different US State"),
+            compOverseas: getSafeValue("disc_compOverseas", "Never"),
+            compKidsDistance: getSafeValue("disc_compKidsDistance", "Important"),
+            compTaxComplexity: getSafeValue("disc_compTaxComplexity", "KeepSimple")
+        };
+
+        let bestFit = [];
+        let viable = [];
+        let impractical = [];
+
+        discoveryState.blueprints.forEach(bp => {
+            let hardFailures = [];
+            let compromiseNotes = [];
+
+            // Hard constraint check 1: Domestic US strictly required
+            if (inputs.mustStayUS === "Yes_Strict" && bp.id === "global_expat") {
+                hardFailures.push("Conflicts with strict Domestic U.S. living constraint");
+            }
+
+            // Hard constraint check 2: Overseas tolerance = Never
+            if (inputs.compOverseas === "Never" && bp.id === "global_expat") {
+                hardFailures.push("Requires overseas living, which you marked as 'Never'");
+            }
+
+            // Hard constraint check 3: Medicare dependence = Critical
+            if (inputs.medicareDepend === "Critical" && bp.id === "global_expat") {
+                hardFailures.push("U.S. Medicare does not cover overseas living");
+            }
+
+            // Compromise check: Family distance vs Explore Then Return
+            if (inputs.compKidsDistance === "Critical" && bp.id === "explore_then_return") {
+                compromiseNotes.push("Requires being away from children during active early retirement years");
+            }
+
+            // Categorize
+            if (hardFailures.length > 0) {
+                impractical.push({ ...bp, reasons: hardFailures });
+            } else if (compromiseNotes.length > 0 || (inputs.mustStayUS === "Prefer_US" && !bp.requiresUS)) {
+                viable.push({ ...bp, reasons: compromiseNotes.length > 0 ? compromiseNotes : ["Requires balancing overseas chapters with U.S. return"] });
+            } else {
+                bestFit.push({ ...bp, reasons: ["Passes all hard constraints and matches primary values"] });
+            }
+        });
+
+        // Render Bucket Containers
+        renderBucket("bestFitContainer", bestFit, "emerald");
+        renderBucket("viableContainer", viable, "amber");
+        renderBucket("impracticalContainer", impractical, "rose");
+
+        document.getElementById("bestFitCount").innerText = `(${bestFit.length})`;
+        document.getElementById("viableCount").innerText = `(${viable.length})`;
+        document.getElementById("impracticalCount").innerText = `(${impractical.length})`;
+
+        // Render Section 4 Detail Synthesis
+        renderSynthesisDetail(bestFit, viable, impractical);
+    }
+
+    function renderBucket(containerId, list, colorClass) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        if (list.length === 0) {
+            container.innerHTML = `<p class="text-xs text-slate-500 italic p-2">None in this category based on current filters.</p>`;
+            return;
+        }
+
+        list.forEach(item => {
+            const card = document.createElement("div");
+            card.className = `p-3 rounded-xl border bg-slate-800/80 border-slate-700 text-xs text-slate-200`;
+            card.innerHTML = `
+                <div class="flex justify-between items-center font-bold text-white mb-1">
+                    <span>${item.name}</span>
+                    <span class="text-[10px] text-${colorClass}-400 font-mono">Matched</span>
+                </div>
+                <p class="text-[11px] text-slate-400 leading-tight">${item.reasons[0] || 'Fully aligned'}</p>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSynthesisDetail(bestFit, viable, impractical) {
+        const box = document.getElementById("synthesisDetailBox");
+        box.innerHTML = `
+            <div class="space-y-4">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                    <h3 class="text-xs font-bold text-emerald-900 uppercase tracking-wider mb-2">⭐ Best Fit Candidates (${bestFit.length})</h3>
+                    <ul class="space-y-1.5 text-xs text-emerald-800">
+                        ${bestFit.map(b => `<li class="flex items-center gap-2"><span class="font-bold">✓ ${b.name}:</span> <span>${b.reasons.join("; ")}</span></li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    <h3 class="text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">⚖️ Viable with Compromises (${viable.length})</h3>
+                    <ul class="space-y-1.5 text-xs text-amber-800">
+                        ${viable.map(b => `<li class="flex items-center gap-2"><span class="font-bold">⚡ ${b.name}:</span> <span>${b.reasons.join("; ")}</span></li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="bg-rose-50 border border-rose-200 rounded-xl p-4">
+                    <h3 class="text-xs font-bold text-rose-900 uppercase tracking-wider mb-2">⚠️ Not Practical (${impractical.length})</h3>
+                    <ul class="space-y-1.5 text-xs text-rose-800">
+                        ${impractical.map(b => `<li class="flex items-center gap-2"><span class="font-bold">✕ ${b.name}:</span> <span>${b.reasons.join("; ")}</span></li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    function proceedToFeasibility() {
+        const discoveryPayload = {
+            selectedPriorities: Array.from(discoveryState.selectedPriorities),
+            primaryObjective: getSafeValue("disc_primaryObjective", "family_focus"),
+            constraints: {
+                childrenLocation: getSafeValue("disc_childrenLocation", "Different US State"),
+                mustStayUS: getSafeValue("disc_mustStayUS", "Yes_Strict"),
+                medicareDepend: getSafeValue("disc_medicareDepend", "Critical"),
+                assetTier: getSafeValue("disc_assetTier", "HNW")
+            },
+            updatedAt: new Date().toISOString()
+        };
+
+        try {
+            localStorage.setItem("RetirementDiscoverySelection", JSON.stringify(discoveryPayload));
+        } catch (e) {
+            console.warn("Could not save to LocalStorage:", e);
+        }
+
+        showToast("Profile Saved", "Navigating to Financial Feasibility Audit...");
+
+        setTimeout(() => {
+            try {
+                const currentHref = window.location ? window.location.href : "";
+                if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
+                    window.location.href = "financial-feasibility-audit.html";
+                } else {
+                    console.log("Preview environment detected; navigation simulated. Saved discovery payload:", discoveryPayload);
+                }
+            } catch (err) {
+                console.warn("Location navigation error caught safely:", err);
+            }
+        }, 500);
+    }
+
+    function showToast(title, message) {
+        const toast = document.getElementById("toastNotification");
+        document.getElementById("toastTitle").innerText = title;
+        document.getElementById("toastMessage").innerText = message;
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+            toast.classList.add("hidden");
+        }, 3500);
+    }
+
+    window.onload = function() {
+        loadOdysseyHandoff();
+        renderPriorityPills();
+        updateDiscoveryEngine();
+    };
+  </script>
+</body>
+</html>
