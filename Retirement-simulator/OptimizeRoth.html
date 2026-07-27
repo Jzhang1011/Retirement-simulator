@@ -186,6 +186,11 @@
     }
 
     .header-greeting {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
       margin-bottom: 1.75rem;
     }
 
@@ -201,6 +206,29 @@
       color: var(--muted);
       margin: 0;
       font-size: 0.98rem;
+    }
+
+    .toggle-group {
+      display: inline-flex;
+      background: #e2e8f0;
+      border-radius: 0.6rem;
+      padding: 0.25rem;
+    }
+    .toggle-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #64748b;
+      border: none;
+      background: transparent;
+      border-radius: 0.45rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: #fff;
+      color: #0f172a;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
     .overview-grid {
@@ -379,10 +407,11 @@
 
     .wizard-card .input-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
     }
-    @media(max-width: 768px){ .wizard-card .input-grid { grid-template-columns: 1fr; } }
+    @media(max-width: 900px){ .wizard-card .input-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 600px){ .wizard-card .input-grid { grid-template-columns: 1fr; } }
 
     .step-title { 
       font-size: 0.8rem; 
@@ -419,8 +448,9 @@
     }
 
     .strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .strategy-grid.step4 { grid-template-columns: repeat(3, 1fr); }
-    @media(max-width: 768px){ .strategy-grid, .strategy-grid.step4 { grid-template-columns: 1fr; } }
+    .strategy-grid.step4 { grid-template-columns: repeat(4, 1fr); }
+    @media(max-width: 1024px){ .strategy-grid.step4 { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 640px){ .strategy-grid, .strategy-grid.step4 { grid-template-columns: 1fr; } }
 
     .field label {
       display: block; 
@@ -503,45 +533,70 @@
 
     .cascading-summary {
       padding: 0.9rem 1.1rem;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--text);
-      background: #f1f5f9;
       cursor: pointer;
       list-style: none;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      user-select: none;
     }
 
-    .cascading-content {
-      padding: 1.1rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    @media(max-width: 640px) { .cascading-content { grid-template-columns: 1fr; } }
+    .chart-wrap { height: 380px; padding: 0.5rem 0.25rem 0; position: relative; }
+    .svg-chart { width: 100%; height: 100%; position: relative; }
 
-    .lock-notice {
-      font-size: 0.8rem;
-      color: #0369a1;
-      background: #e0f2fe;
-      padding: 0.75rem 1rem;
-      border-radius: 0.6rem;
-      margin-bottom: 0.5rem;
+    /* Interactive Chart Hover & Tooltip Styling */
+    .chart-seg {
+      cursor: pointer;
+      transition: opacity 0.15s ease, filter 0.15s ease;
     }
-
-    .chart-wrap { height: 380px; padding: 0.5rem 0.25rem 0; }
-    .svg-chart { width: 100%; height: 100%; }
+    .chart-seg:hover {
+      opacity: 0.82;
+      filter: brightness(1.15);
+    }
+    .chart-tooltip-box {
+      position: absolute;
+      pointer-events: none;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 0.55rem 0.85rem;
+      border-radius: 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+      display: none;
+      white-space: nowrap;
+      transform: translate(-50%, -115%);
+      transition: opacity 0.1s ease;
+      border: 1px solid #334155;
+    }
 
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th, td { text-align: left; padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
-    th { color: var(--muted); font-weight: 700; position: sticky; top: 0; background: #fff; }
+    th { color: var(--muted); font-weight: 700; position: sticky; top: 0; background: #fff; z-index: 10; }
 
     .table-wrap {
       max-height: 420px; 
       overflow: auto; 
       border-radius: 0.8rem; 
       border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .constraint {
+      display: inline-block; 
+      border: 1px solid var(--border); 
+      border-radius: 999px; 
+      padding: 0.25rem 0.6rem; 
+      white-space: nowrap; 
+      font-size: 0.75rem;
+      background-color: #f8fafc;
+      font-weight: 600;
+      color: #334155;
     }
 
     .router-box { 
@@ -553,6 +608,8 @@
       justify-content: space-between; 
       align-items: center; 
       gap: 1.5rem; 
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
     }
     @media(max-width: 800px) { .router-box { flex-direction: column; text-align: center; } }
 
@@ -561,10 +618,17 @@
       color: white; 
       font-size: 0.9rem; 
       font-weight: 700; 
-      padding: 0.8rem 1.6rem; 
+      padding: 0.85rem 1.6rem; 
       border: none; 
       border-radius: 0.75rem; 
       cursor: pointer; 
+      transition: background 0.15s ease, transform 0.1s ease;
+      white-space: nowrap;
+    }
+
+    .btn-router:hover {
+      background: #059669;
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -600,8 +664,14 @@
     </div>
 
     <div class="header-greeting">
-      <h1>Retirement Strategy Dashboard</h1>
-      <p>Simulate tax-optimized Roth conversion windows, healthcare preservation, and investment returns.</p>
+      <div>
+        <h1>Retirement Strategy Dashboard</h1>
+        <p>Simulate tax-optimized Roth conversion windows, healthcare preservation, and state-level tax arbitrage.</p>
+      </div>
+      <div class="toggle-group">
+        <button id="btn-future" class="toggle-btn active" onclick="setCurrencyMode('future')">Future Dollars</button>
+        <button id="btn-present" class="toggle-btn" onclick="setCurrencyMode('present')">Today's Dollars</button>
+      </div>
     </div>
 
     <div class="overview-grid">
@@ -613,7 +683,7 @@
             <span>Current Net Worth</span>
             <span style="font-size: 1.1rem; color: var(--emerald);">➔</span>
           </div>
-          <div class="big-number" id="cardCurrentNetWorth">$1,725,000</div>
+          <div class="big-number" id="cardCurrentNetWorth">$0</div>
           <span class="pill-badge">↑ Baseline Assets</span>
           
           <div class="asset-spark-bar" id="assetSparkBar">
@@ -642,7 +712,7 @@
             </div>
           </div>
           <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.35;">
-            Your money survives through retirement (Age 85+) in <b>98 out of 100</b> simulated market scenarios.
+            Your money survives through retirement (Age 85+) in <b><span id="txtSuccessCount">98</span> out of 100</b> simulated market scenarios.
           </div>
         </div>
       </div>
@@ -696,6 +766,15 @@
           <div class="field"><label>Current Age</label><input id="currentAge" type="number" value="52"></div>
           <div class="field"><label>Retirement Age</label><input id="retireAge" type="number" value="60"></div>
           <div class="field"><label>Residence State for Income Tax</label><select id="residenceState"></select></div>
+          <div class="field">
+            <label>Social Security Start Age</label>
+            <select id="ssClaimAgeSelect">
+              <option value="62">Age 62 (Early)</option>
+              <option value="67" selected>Age 67 (FRA)</option>
+              <option value="70">Age 70 (Delayed Max)</option>
+              <option value="none">N/A (No Social Security)</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -710,7 +789,17 @@
       </div>
 
       <div class="wizard-card">
-        <div class="step-title">Step 3 · Primary Goal</div>
+        <div class="step-title">Step 3 · Investment Return & Inflation</div>
+        <div class="input-grid">
+          <div class="field"><label>Pre-Retirement Return Rate %</label><input id="preRetireReturnPct" type="number" step="0.1" value="7.0"></div>
+          <div class="field"><label>Post-Retirement Return Rate %</label><input id="postRetireReturnPct" type="number" step="0.1" value="5.0"></div>
+          <div class="field"><label>General Inflation %</label><input id="inflation" type="number" step="0.1" value="3.0"></div>
+          <div class="field"><label>Cash Interest Yield %</label><input id="cashYieldPct" type="number" step="0.1" value="2.0"></div>
+        </div>
+      </div>
+
+      <div class="wizard-card">
+        <div class="step-title">Step 4 · Primary Goal</div>
         <div class="strategy-grid">
           <button class="goal-btn active" id="btn-goal-maxroth" onclick="setObjectiveEnum('max_roth', this)">
             Maximize Roth Inheritance
@@ -724,11 +813,15 @@
       </div>
 
       <div class="wizard-card">
-        <div class="step-title">Step 4 · Strategy</div>
+        <div class="step-title">Step 5 · Strategy</div>
         <div class="strategy-grid step4">
           <button class="strategy-btn active" id="btn-strat-us" onclick="setStrategyPreset('us', this)">
-            🇺🇸 Stay in U.S.
+            🇺🇸 Stay in Current State
             <span>Respect U.S. Fed/State tax brackets and subsidies.</span>
+          </button>
+          <button class="strategy-btn" id="btn-strat-taxfree" onclick="setStrategyPreset('taxfree_state', this)">
+            🏖️ Move to Tax-Free State
+            <span>0% state tax rate starting at retirement age.</span>
           </button>
           <button class="strategy-btn" id="btn-strat-abroad" onclick="setStrategyPreset('abroad', this)">
             🌎 Overseas Bridge Window
@@ -748,26 +841,35 @@
         <div class="drawer-content">
           
           <div class="lock-notice" id="lockNoticeText">
-            ℹ Preset active: Standard preset rules are currently handling return rates, healthcare, and contributions. Switch Step 4 to <b>Advanced Custom</b> to override.
+            ℹ Preset active: Standard preset rules are currently handling return rates, state taxes, healthcare, and contributions. Switch Step 5 to <b>Advanced Custom</b> to override.
           </div>
 
           <details class="cascading-subdrawer" open>
-            <summary class="cascading-summary"><span>📈 Investment Return & Inflation Rates</span><span>▼</span></summary>
+            <summary class="cascading-summary"><span>🏥 Healthcare Subsidies & State Taxes</span><span>▼</span></summary>
             <div class="cascading-content">
-              <div class="field"><label>Pre-Retirement Return Rate %</label><input id="preRetireReturnPct" type="number" step="0.1" value="7.0"></div>
-              <div class="field"><label>Post-Retirement Return Rate %</label><input id="postRetireReturnPct" type="number" step="0.1" value="5.0"></div>
-              <div class="field"><label>General Inflation %</label><input id="inflation" type="number" step="0.1" value="3.0"></div>
-              <div class="field"><label>Cash Interest Yield %</label><input id="cashYieldPct" type="number" step="0.1" value="2.0"></div>
+              <div class="switch-row"><span>Preserve ACA Subsidies (U.S.)</span><input id="preserveAca" type="checkbox" checked></div>
+              <div class="switch-row"><span>Avoid IRMAA Surcharges (U.S.)</span><input id="avoidIrmaa" type="checkbox" checked></div>
+              <div class="switch-row"><span>Move to 0% State Tax Location</span><input id="moveTaxFreeState" type="checkbox"></div>
+              <div class="field"><label>Tax-Free Move Age</label><input id="moveTaxFreeAge" type="number" value="60"></div>
+              <div class="field"><label>Top Federal Bracket Target</label><select id="bracketTarget"><option value="12">12%</option><option value="22">22%</option><option value="24" selected>24%</option><option value="32">32%</option><option value="35">35%</option><option value="none">No bracket cap</option></select></div>
+              <div class="field"><label>State Income Tax Rate %</label><input id="stateTaxRate" type="number" step="0.01" value="5.75"></div>
             </div>
           </details>
 
           <details class="cascading-subdrawer">
-            <summary class="cascading-summary"><span>🏥 Healthcare Subsidies & Tax Brackets</span><span>▼</span></summary>
+            <summary class="cascading-summary"><span>💼 Long-Term Care & Extra Medical Spending</span><span>▼</span></summary>
             <div class="cascading-content">
-              <div class="switch-row"><span>Preserve ACA Subsidies (U.S.)</span><input id="preserveAca" type="checkbox" checked></div>
-              <div class="switch-row"><span>Avoid IRMAA Surcharges (U.S.)</span><input id="avoidIrmaa" type="checkbox" checked></div>
-              <div class="field"><label>Top Federal Bracket Target</label><select id="bracketTarget"><option value="12">12%</option><option value="22">22%</option><option value="24" selected>24%</option><option value="32">32%</option><option value="35">35%</option><option value="none">No bracket cap</option></select></div>
-              <div class="field"><label>State Income Tax Rate %</label><input id="stateTaxRate" type="number" step="0.01" value="5.75"></div>
+              <div class="field"><label>Annual Nursing / LTC Cost</label><input id="ltcAnnualCost" type="number" value="60000"></div>
+              <div class="field"><label>LTC Care Start Age</label><input id="ltcStartAge" type="number" value="80"></div>
+              <div class="field"><label>LTC Care End Age</label><input id="ltcEndAge" type="number" value="85"></div>
+            </div>
+          </details>
+          
+          <details class="cascading-subdrawer">
+            <summary class="cascading-summary"><span>🏡 Housing & Debt</span><span>▼</span></summary>
+            <div class="cascading-content">
+              <div class="field"><label>Annual Mortgage Payment</label><input id="mortgageAnnual" type="number" value="24000"></div>
+              <div class="field"><label>Mortgage End Age</label><input id="mortgageEndAge" type="number" value="65"></div>
             </div>
           </details>
 
@@ -798,7 +900,7 @@
       </details>
 
       <select id="planningObjective" style="display:none;"><option value="max_roth" selected>max_roth</option><option value="min_tax">min_tax</option></select>
-      <select id="strategyPreset" style="display:none;"><option value="us" selected>us</option><option value="abroad">abroad</option><option value="custom">custom</option></select>
+      <select id="strategyPreset" style="display:none;"><option value="us" selected>us</option><option value="taxfree_state">taxfree_state</option><option value="abroad">abroad</option><option value="custom">custom</option></select>
 
       <div class="card">
         <div class="card-head">
@@ -806,9 +908,21 @@
         </div>
         <div class="card-body">
           <div id="ssInsightCallout" style="font-size: 0.88rem; color: #1e293b; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.85rem 1.1rem; margin-bottom: 1rem;">
-            💡 <b>Key Takeaway:</b> Claiming early at 62 provides immediate income starting at Age 62. Claiming at 67 (FRA) reaches breakeven with Age 62 at <b>Age 76</b>, while delaying to Age 70 reaches breakeven at <b>Age 79</b> and yields higher overall cumulative income by Age 85.
+            💡 <b>Key Takeaway:</b> Claiming early at 62 provides immediate income starting at Age 62. Claiming at 67 (FRA) reaches breakeven with Age 62 at <b>Age 76</b>, while delaying to Age 70 reaches breakeven at <b>Age 79</b>.
           </div>
           <div class="chart-wrap"><div id="ssChart" class="svg-chart"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Annual Outflow & Expense Breakdown (Spending, Tuition, Healthcare & Taxes)</h3>
+        </div>
+        <div class="card-body">
+          <div id="expenseCalloutText" style="font-size: 0.85rem; color: #475569; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">
+            📊 Displays annual cash outflows year-by-year across living costs, college tuition, medical/LTC, federal tax, state tax, and fixed mortgages.
+          </div>
+          <div class="chart-wrap"><div id="expenseChart" class="svg-chart"></div></div>
         </div>
       </div>
 
@@ -823,7 +937,12 @@
         <div class="card-head">
           <h3>Annual Roth Additions by Age (Contributions vs. Conversions)</h3>
         </div>
-        <div class="card-body"><div class="chart-wrap"><div id="rothAdditionsChart" class="svg-chart"></div></div></div>
+        <div class="card-body">
+          <div id="rothOptimizationBanner" style="font-size: 0.85rem; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 0.75rem; padding: 0.75rem 1rem; margin-bottom: 1rem;">
+            🎯 <b>Conversion Optimization Logic:</b> Engine fills taxable ordinary income up to your active target federal tax bracket ceiling while strictly respecting ACA subsidy thresholds and Medicare IRMAA limits.
+          </div>
+          <div class="chart-wrap"><div id="rothAdditionsChart" class="svg-chart"></div></div>
+        </div>
       </div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
@@ -851,22 +970,24 @@
 
       <div class="card">
         <div class="card-head"><h3>Year-by-Year Roth Roadmap</h3></div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Age</th><th>Mode</th><th>W-2</th><th>SS Taxable</th><th>Conversion</th><th>Fed Tax</th><th>State Tax</th><th>Total Tax</th><th>Bracket</th></tr>
-            </thead>
-            <tbody id="roadmapBody"></tbody>
-          </table>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Age</th><th>Mode</th><th>W-2</th><th>SS Taxable</th><th>Conversion</th><th>Fed Tax</th><th>State Tax</th><th>Total Tax</th><th>Bracket</th></tr>
+              </thead>
+              <tbody id="roadmapBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <div class="router-box">
         <div>
-          <h4 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: white;">Next Decision: Where Should You Execute This Strategy?</h4>
-          <p style="margin:0; font-size: 0.85rem; color: #94a3b8;">Explore location matchers or healthcare tools to further optimize conversion windows.</p>
+          <h4 style="margin: 0 0 0.3rem 0; font-size: 1.15rem; font-weight: 800; color: white;">Next Decision: Where Should You Execute This Strategy?</h4>
+          <p style="margin:0; font-size: 0.88rem; color: #94a3b8;">Explore location matchers or healthcare tools to further optimize conversion windows.</p>
         </div>
-        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <button class="btn-router" onclick="goToUSMatcher()">U.S. Cities</button>
           <button class="btn-router" onclick="goToOverseasMatcher()">Overseas</button>
           <button class="btn-router" style="background:#2563eb;" onclick="goToHealthcareTool()">65+ Healthcare</button>
@@ -882,7 +1003,9 @@
     const STATE_NAMES={"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","FL":"Florida","GA":"Georgia","NY":"New York","TX":"Texas","VA":"Virginia","WA":"Washington"};
     const RMD={73:26.5,74:25.5,75:24.6,76:23.7,77:22.9,78:22.0,79:21.1,80:20.2,81:19.4,82:18.5,83:17.7,84:16.8,85:16.0};
 
-    let mainChart, rothAdditionsChart, ssChart, milestoneMiniChart;
+    let mainChart, rothAdditionsChart, ssChart, milestoneMiniChart, expenseChart;
+    let currencyMode = 'future'; // Display state: 'future' or 'present'
+
     const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}),compact=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1});
 
     function n(id){return Number((document.getElementById(id)||{}).value||0)}
@@ -906,10 +1029,15 @@
           const identity = profile.identity || {};
           const finances = profile.finances || {};
           const goals = profile.goals || {};
+          const income = profile.income || {};
 
           if (identity.currentAge) document.getElementById('currentAge').value = identity.currentAge;
           if (identity.targetRetirementAge) document.getElementById('retireAge').value = identity.targetRetirementAge;
           if (identity.currentState) document.getElementById('residenceState').value = identity.currentState;
+
+          if (income.socialSecurityIncome === 0) {
+            document.getElementById('ssClaimAgeSelect').value = 'none';
+          }
 
           if (finances.traditionalBalance !== undefined) document.getElementById('pretax').value = finances.traditionalBalance;
           if (finances.rothBalance !== undefined) document.getElementById('roth').value = finances.rothBalance;
@@ -931,25 +1059,30 @@
     function inputs(){
       let preset = v('strategyPreset','us');
       
-      let preReturn = 0.07;
-      let postReturn = 0.05;
+      let preReturn = n('preRetireReturnPct')/100;
+      let postReturn = n('postRetireReturnPct')/100;
       let ptEnabled = false;
       let ptIncome = 0;
       let presAca = true;
       let avIrmaa = true;
       let targetBr = '24';
+      let moveTaxFree = false;
+      let moveTaxFreeAgeVal = n('retireAge');
 
-      if (preset === 'abroad') {
+      if (preset === 'taxfree_state') {
+        moveTaxFree = true;
+        moveTaxFreeAgeVal = n('retireAge');
+      } else if (preset === 'abroad') {
         presAca = false;
         avIrmaa = false;
         targetBr = '32';
       } else if (preset === 'custom') {
-        preReturn = n('preRetireReturnPct')/100;
-        postReturn = n('postRetireReturnPct')/100;
         ptEnabled = b('partTimeEnabled');
         ptIncome = n('partTimeIncome');
         presAca = b('preserveAca');
         avIrmaa = b('avoidIrmaa');
+        moveTaxFree = b('moveTaxFreeState');
+        moveTaxFreeAgeVal = n('moveTaxFreeAge');
         targetBr = v('bracketTarget','24');
       }
 
@@ -960,6 +1093,8 @@
         postReturnPct: postReturn,
         preserveAca: presAca,
         avoidIrmaa: avIrmaa,
+        moveTaxFreeState: moveTaxFree,
+        moveTaxFreeAge: moveTaxFreeAgeVal,
         cur: n('currentAge'),
         ret: n('retireAge'),
         brokerage: n('brokerage'),
@@ -971,6 +1106,11 @@
         spend: n('annualSpend'),
         college: n('collegeCostPerChild'),
         childCount: n('childCount'),
+        ltcCost: n('ltcAnnualCost'),
+        ltcS: n('ltcStartAge'),
+        ltcE: n('ltcEndAge'),
+        mortgageAnnual: n('mortgageAnnual'),
+        mortgageEnd: n('mortgageEndAge'),
         infl: n('inflation')/100,
         bd: n('annualBackdoorPerAdult'),
         mega: n('annualMegaBackdoor'),
@@ -984,7 +1124,8 @@
         residenceState: v('residenceState','VA'),
         stateRate: preset === 'abroad' ? 0 : n('stateTaxRate')/100,
         bracket: targetBr,
-        ssMonthly: 4000
+        ssMonthly: 4000,
+        ssStartChoice: v('ssClaimAgeSelect', '67')
       }
     }
 
@@ -1007,7 +1148,7 @@
       let brRoom = Math.max(0, brCap - Math.max(0, ordBase - STD));
 
       let acaRoom = Infinity;
-      if (preset === 'us' || (preset === 'custom' && i.preserveAca)) {
+      if (preset === 'us' || preset === 'taxfree_state' || (preset === 'custom' && i.preserveAca)) {
         if (age < 65 && age >= i.ret) {
           let acaCeil = ACA[5];
           acaRoom = Math.max(0, acaCeil - (base.nonSS + base.ss));
@@ -1015,7 +1156,7 @@
       }
 
       let irmaaRoom = Infinity;
-      if (preset === 'us' || (preset === 'custom' && i.avoidIrmaa)) {
+      if (preset === 'us' || preset === 'taxfree_state' || (preset === 'custom' && i.avoidIrmaa)) {
         if (age >= 63) {
           irmaaRoom = Math.max(0, 218000 - ordBase);
         }
@@ -1033,7 +1174,7 @@
     function project(opt={}){
       let i={...inputs(),...(opt.input||{})};
       let pretax=i.pretax,broker=i.brokerage,cash=i.cash,roth=i.roth,rows=[];
-      let ssClaimAge = opt.ssStartAge || 67;
+      let ssClaimChoice = opt.ssStartAge !== undefined ? opt.ssStartAge : i.ssStartChoice;
 
       for(let age=i.cur;age<=85;age++){
         let y=age-i.cur;
@@ -1045,16 +1186,44 @@
         let taxW2=Math.max(0,w2-49000);
         let i1099=(i.ptOn && age>=i.ptS && age<=i.ptE) ? i.pt : 0;
         let cashInt=cash*i.cashYield;
-        let ss=ssAnnual(age,ssClaimAge,i.ssMonthly,i.infl,i.cur);
+        let ss = (ssClaimChoice === 'none' || ssClaimChoice === 'N/A') ? 0 : ssAnnual(age, Number(ssClaimChoice), i.ssMonthly, i.infl, i.cur);
         let nonSS=taxW2+i1099+cashInt;
 
-        let spend = (ret ? i.spend : i.preSpend) * Math.pow(1 + i.infl, y);
+        // Base living expenses
+        let livingSpend = (ret ? i.spend : i.preSpend) * Math.pow(1 + i.infl, y);
+        
+        // College spending (when child in college age 18-21)
+        let collegeSpend = 0;
+        if (i.childCount > 0 && age >= 52 && age < 56) collegeSpend += (i.college / 4);
+        if (i.childCount > 1 && age >= 55 && age < 59) collegeSpend += (i.college / 4);
+
+        // Long-term care spending
+        let ltcSpend = 0;
+        if ((i.strategyPreset === 'custom' || opt.enableLtc) && age >= i.ltcS && age <= i.ltcE) {
+          ltcSpend = i.ltcCost * Math.pow(1 + i.infl, y);
+        }
+
+        // Mortgage spending (Fixed rate nominal - does not inflate)
+        let mortgageSpend = 0;
+        if (i.strategyPreset === 'custom' && age <= i.mortgageEnd) {
+          mortgageSpend = i.mortgageAnnual;
+        }
+
         let pretaxG=pretax*(1+rate) + (!ret ? i.savings*0.6 : 0);
         let rmd=age>=73?Math.min(pretaxG,pretaxG/(RMD[Math.min(85,age)]||16)):0;
         pretaxG-=rmd;
         
         let base={nonSS,cashInt,ss};
-        let stOn = (i.strategyPreset === 'us' || (i.strategyPreset === 'custom' && i.stateRate > 0));
+        
+        // State tax applicability
+        let stOn = true;
+        if (i.strategyPreset === 'abroad') {
+          stOn = false;
+        } else if (i.strategyPreset === 'taxfree_state' && age >= i.moveTaxFreeAge) {
+          stOn = false;
+        } else if (i.strategyPreset === 'custom' && i.moveTaxFreeState && age >= i.moveTaxFreeAge) {
+          stOn = false;
+        }
 
         let conv = 0;
         if (opt.noConversions) {
@@ -1075,8 +1244,14 @@
         let tx=rowTax(base,conv,rmd,gain,i,stOn);
         let irm = (age>=65 && (i.strategyPreset === 'us' || i.avoidIrmaa)) ? {annual: (tx.magi > 218000 ? 1500 : 0)} : {annual:0};
 
+        // Automatic baseline Medicare expense when residing in the U.S. at age 65+
+        let isUS = (i.strategyPreset === 'us' || i.strategyPreset === 'taxfree_state' || (i.strategyPreset === 'custom' && !i.moveTaxFreeState));
+        let baseMedicare = (age >= 65 && isUS) ? 6000 * Math.pow(1 + i.infl, y) : 0;
+
+        let totalMedical = baseMedicare + irm.annual + ltcSpend;
+        let spend = livingSpend + collegeSpend + totalMedical + mortgageSpend;
         let inflows=taxW2+i1099+cashInt+ss+rmd;
-        let uses=spend+tx.total+irm.annual;
+        let uses=spend+tx.total;
         let net=inflows-uses;
 
         if(net>=0) {
@@ -1114,9 +1289,53 @@
         }
 
         pretax=Math.max(0,pretaxG); broker=Math.max(0,brokerG); cash=Math.max(0,cashG); roth=Math.max(0,rothG);
-        rows.push({age,taxW2,i1099,ss,conv,rothContrib,rothAdd:conv+rothContrib,rmd,fed:tx.federal,state:tx.state,totalTax:tx.total,spend,pretax,roth,broker,cash,liquid:broker+cash,afterTax:broker+cash+roth+pretax*0.76,totalWealth:pretax+roth+broker+cash});
+        rows.push({
+          age,taxW2,i1099,ss,conv,rothContrib,rothAdd:conv+rothContrib,rmd,
+          livingSpend,collegeSpend,ltcSpend,totalMedical,mortgageSpend,
+          fed:tx.federal,ordinaryTax:tx.ordinaryTax,ltcgTax:tx.ltcgTax,niit:tx.niit,
+          state:tx.state,totalTax:tx.total,spend,pretax,roth,broker,cash,liquid:broker+cash,
+          afterTax:broker+cash+roth+pretax*0.76,totalWealth:pretax+roth+broker+cash
+        });
       }
       return rows;
+    }
+
+    // Helper to map rows to discounted values depending on global currencyMode
+    function discountRows(rows, i) {
+      if (currencyMode === 'future') return rows;
+      return rows.map(r => {
+        let df = Math.pow(1 + i.infl, r.age - i.cur);
+        let d = val => val / df;
+        return {
+          ...r,
+          taxW2: d(r.taxW2),
+          i1099: d(r.i1099),
+          ss: d(r.ss),
+          conv: d(r.conv),
+          rothContrib: d(r.rothContrib),
+          rothAdd: d(r.rothAdd),
+          rmd: d(r.rmd),
+          livingSpend: d(r.livingSpend),
+          collegeSpend: d(r.collegeSpend),
+          ltcSpend: d(r.ltcSpend),
+          totalMedical: d(r.totalMedical),
+          mortgageSpend: d(r.mortgageSpend),
+          fed: d(r.fed),
+          ordinaryTax: d(r.ordinaryTax),
+          ltcgTax: d(r.ltcgTax),
+          niit: d(r.niit),
+          state: d(r.state),
+          totalTax: d(r.totalTax),
+          spend: d(r.spend),
+          pretax: d(r.pretax),
+          roth: d(r.roth),
+          broker: d(r.broker),
+          cash: d(r.cash),
+          liquid: d(r.liquid),
+          afterTax: d(r.afterTax),
+          totalWealth: d(r.totalWealth)
+        };
+      });
     }
 
     function Chart(el,config){
@@ -1171,6 +1390,14 @@
           ds.forEach(d => {
             let pts = d.data.map((v, idx) => `${ml + step * idx + step / 2},${y(v)}`).join(' ');
             svg += `<polyline fill="none" stroke="${d.backgroundColor}" stroke-width="3.5" points="${pts}"/>`;
+            
+            // Render interactive hover nodes along line charts
+            d.data.forEach((v, idx) => {
+              let cx = ml + step * idx + step / 2;
+              let cy = y(v);
+              let valFormatted = fmt.format(v);
+              svg += `<circle cx="${cx}" cy="${cy}" r="5" fill="${d.backgroundColor}" stroke="#ffffff" stroke-width="2" class="chart-seg" data-label="${d.label}" data-age="${labels[idx]}" data-val="${valFormatted}" data-color="${d.backgroundColor}"><title>${d.label} (Age ${labels[idx]}): ${valFormatted}</title></circle>`;
+            });
           });
 
           let labelStep = Math.ceil(labels.length / 10);
@@ -1186,9 +1413,11 @@
             let cx=ml+step*i+step/2, posBase=0;
             for(const d of ds){
               let val=Number((d.data||[])[i]||0), color=d.backgroundColor||'#2563eb';
-              if(val>=0){
+              if(val>0){
                 let y1=y(posBase+val), y0=y(posBase);
-                svg+=`<rect x="${cx-barW/2}" y="${y1}" width="${barW}" height="${Math.max(0,y0-y1)}" fill="${color}"/>`;
+                let barH = Math.max(1, y0 - y1);
+                let valFormatted = fmt.format(val);
+                svg+=`<rect x="${cx-barW/2}" y="${y1}" width="${barW}" height="${barH}" fill="${color}" class="chart-seg" data-label="${d.label}" data-age="${labels[i]}" data-val="${valFormatted}" data-color="${color}"><title>${d.label} (Age ${labels[i]}): ${valFormatted}</title></rect>`;
                 posBase+=val;
               }
             }
@@ -1201,6 +1430,38 @@
           svg+=`<rect x="${lx}" y="${ly+j*20-9}" width="11" height="11" fill="${d.backgroundColor}" rx="2"/><text x="${lx+18}" y="${ly+j*20}" font-size="12" fill="#334155">${d.label}</text>`;
         });
         svg+='</svg>'; el.innerHTML=svg;
+
+        // Attach floating interactive hover tooltip box
+        let tooltip = el.parentElement.querySelector('.chart-tooltip-box');
+        if (!tooltip) {
+          tooltip = document.createElement('div');
+          tooltip.className = 'chart-tooltip-box';
+          el.parentElement.appendChild(tooltip);
+        }
+
+        el.onmousemove = function(e) {
+          let seg = e.target.closest('.chart-seg');
+          if (seg) {
+            let containerRect = el.parentElement.getBoundingClientRect();
+            let x = e.clientX - containerRect.left;
+            let y = e.clientY - containerRect.top;
+            let label = seg.getAttribute('data-label');
+            let age = seg.getAttribute('data-age');
+            let val = seg.getAttribute('data-val');
+            let color = seg.getAttribute('data-color') || '#2563eb';
+
+            tooltip.innerHTML = `<div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};"></span><span style="font-weight:700;color:#fff;">${label}</span></div><div style="margin-top:3px;font-size:0.75rem;color:#cbd5e1;">Age ${age}: <span style="color:#10b981;font-weight:800;">${val}</span></div>`;
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+            tooltip.style.display = 'block';
+          } else {
+            tooltip.style.display = 'none';
+          }
+        };
+
+        el.onmouseleave = function() {
+          if (tooltip) tooltip.style.display = 'none';
+        };
       };
       this.render();
     }
@@ -1230,6 +1491,12 @@
 
       let labels = [];
       for (let age = 62; age <= 85; age++) labels.push(age);
+      
+      if (currencyMode === 'present') {
+        d62 = d62.map((v, idx) => v / Math.pow(1 + i.infl, labels[idx] - i.cur));
+        d67 = d67.map((v, idx) => v / Math.pow(1 + i.infl, labels[idx] - i.cur));
+        d70 = d70.map((v, idx) => v / Math.pow(1 + i.infl, labels[idx] - i.cur));
+      }
 
       let el = document.getElementById('ssChart');
       if (!el) return;
@@ -1247,7 +1514,7 @@
       let finalGain70 = d70[d70.length - 1] - d62[d62.length - 1];
 
       if (calloutEl) {
-        calloutEl.innerHTML = `💡 <b>Key Takeaway:</b> Claiming early at 62 provides immediate income starting at Age 62. Claiming at 67 (FRA) reaches breakeven with Age 62 at <b>Age ${breakevenAge67}</b>, while delaying to Age 70 reaches breakeven at <b>Age ${breakevenAge70}</b> and yields an extra <b>${fmt.format(finalGain70)}</b> in compounded SS income by Age 85.`;
+        calloutEl.innerHTML = `💡 <b>Key Takeaway:</b> Claiming early at 62 provides immediate income starting at Age 62. Claiming at 67 (FRA) reaches breakeven with Age 62 at <b>Age ${breakevenAge67}</b>, while delaying to Age 70 reaches breakeven at <b>Age ${breakevenAge70}</b> and yields an extra <b>${fmt.format(finalGain70)}</b> in accumulated value by Age 85.`;
       }
 
       ssChart = new Chart(el, {
@@ -1263,15 +1530,15 @@
       });
     }
 
-    function renderMilestoneMiniChart(rows, retAge) {
+    function renderMilestoneMiniChart(dispRows, retAge) {
       let el = document.getElementById('milestoneMiniChart');
       if (!el) return;
       if (milestoneMiniChart) milestoneMiniChart.destroy();
 
-      let curRow = rows[0];
-      let retRow = rows.find(r => r.age === retAge) || rows[Math.floor(rows.length/2)];
-      let rmdRow = rows.find(r => r.age === 73) || rows[Math.floor(rows.length*0.7)];
-      let termRow = rows[rows.length-1];
+      let curRow = dispRows[0];
+      let retRow = dispRows.find(r => r.age === retAge) || dispRows[Math.floor(dispRows.length/2)];
+      let rmdRow = dispRows.find(r => r.age === 73) || dispRows[Math.floor(dispRows.length*0.7)];
+      let termRow = dispRows[dispRows.length-1];
 
       let msData = [
         { label: `Age ${curRow.age}`, val: curRow.afterTax },
@@ -1291,12 +1558,43 @@
         let x = ml + step * idx + (step - barW) / 2;
         let y = mt + (plotH - barH);
         let color = idx === 3 ? '#10b981' : (idx === 1 ? '#2563eb' : '#94a3b8');
+        let valFormatted = fmt.format(d.val);
 
-        svg += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${color}" rx="4"/>`;
+        svg += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${color}" rx="4" class="chart-seg" data-label="After-tax Net Worth" data-age="${d.label}" data-val="${valFormatted}" data-color="${color}"><title>${d.label}: ${valFormatted}</title></rect>`;
         svg += `<text x="${x + barW/2}" y="${H - 8}" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b">${d.label}</text>`;
       });
       svg += `</svg>`;
       el.innerHTML = svg;
+
+      let tooltip = el.parentElement.querySelector('.chart-tooltip-box');
+      if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'chart-tooltip-box';
+        el.parentElement.appendChild(tooltip);
+      }
+
+      el.onmousemove = function(e) {
+        let seg = e.target.closest('.chart-seg');
+        if (seg) {
+          let containerRect = el.parentElement.getBoundingClientRect();
+          let x = e.clientX - containerRect.left;
+          let y = e.clientY - containerRect.top;
+          let age = seg.getAttribute('data-age');
+          let val = seg.getAttribute('data-val');
+          let color = seg.getAttribute('data-color') || '#2563eb';
+
+          tooltip.innerHTML = `<div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};"></span><span style="font-weight:700;color:#fff;">${age}</span></div><div style="margin-top:3px;font-size:0.75rem;color:#cbd5e1;">Net Worth: <span style="color:#10b981;font-weight:800;">${val}</span></div>`;
+          tooltip.style.left = x + 'px';
+          tooltip.style.top = y + 'px';
+          tooltip.style.display = 'block';
+        } else {
+          tooltip.style.display = 'none';
+        }
+      };
+
+      el.onmouseleave = function() {
+        if (tooltip) tooltip.style.display = 'none';
+      };
     }
 
     function runMonteCarlo() {
@@ -1307,10 +1605,19 @@
       let i = inputs();
       let results = [];
 
+      // Use a deterministic pseudo-random seed so Monte Carlo runs remain completely 
+      // consistent and stable when toggling between Future and Today's Dollars.
+      let seed = 42;
+      function pseudoRandom() {
+        let x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+      }
+
       for (let r = 0; r < runs; r++) {
-        let randReturn = (i.postReturnPct - 0.03) + Math.random() * 0.06;
+        let randReturn = (i.postReturnPct - 0.03) + pseudoRandom() * 0.06;
         let res = project({ returnOverride: randReturn });
-        results.push(res[res.length - 1].afterTax);
+        let dr = discountRows(res, i);
+        results.push(dr[dr.length - 1].afterTax);
       }
 
       results.sort((a, b) => a - b);
@@ -1320,6 +1627,10 @@
 
       let successRate = Math.round((results.filter(x => x > 0).length / runs) * 100);
       document.getElementById('cardSuccessRate').textContent = successRate + '%';
+      
+      let countText = Math.max(0, Math.min(100, successRate));
+      let successCountEl = document.getElementById('txtSuccessCount');
+      if (successCountEl) successCountEl.textContent = countText;
 
       mcEl.innerHTML = `
         <b>Plan Resilience Test (300 Market Simulations)</b><br>
@@ -1338,14 +1649,16 @@
 
       let cases=[
         ['Current Selected Path', {}],
+        ['Move to Tax-Free State', { overrideMode: { strategyPreset: 'taxfree_state', objective: 'max_roth' } }],
         ['Aggressive Overseas', { overrideMode: { strategyPreset: 'abroad', objective: 'max_roth', forceConversion: true } }],
         ['No Conversions (U.S.)', { noConversions: true }]
       ];
 
       for(const [name, opt] of cases){
         let r = project(opt);
-        let t = r[r.length-1];
-        let tax = r.reduce((s,x)=>s+x.totalTax,0);
+        let dr = discountRows(r, i);
+        let t = dr[dr.length-1];
+        let tax = dr.reduce((s,x)=>s+x.totalTax,0);
         let tr = document.createElement('tr');
         tr.innerHTML=`<td><b>${name}</b></td><td>${fmt.format(t.roth)}</td><td>${fmt.format(t.afterTax)}</td><td>${fmt.format(tax)}</td>`;
         tb.appendChild(tr);
@@ -1385,26 +1698,38 @@
       render();
     }
 
-    function render(){
-      let i=inputs(), rows=project(), term=rows[rows.length-1];
-      let noConvRows = project({ noConversions: true });
-      let noConvTerm = noConvRows[noConvRows.length-1];
+    function setCurrencyMode(mode) {
+      currencyMode = mode;
+      document.getElementById('btn-future').classList.toggle('active', mode === 'future');
+      document.getElementById('btn-present').classList.toggle('active', mode === 'present');
+      render();
+    }
 
-      let noConvLifetimeTax = noConvRows.reduce((s,r)=>s+r.totalTax,0);
-      let currentLifetimeTax = rows.reduce((s,r)=>s+r.totalTax,0);
+    function render(){
+      let i=inputs();
+      let rows=project(); 
+      let dispRows=discountRows(rows, i);
+      let term=dispRows[dispRows.length-1];
+      
+      let noConvRows = project({ noConversions: true });
+      let dispNoConvRows = discountRows(noConvRows, i);
+      let noConvTerm = dispNoConvRows[dispNoConvRows.length-1];
+
+      let noConvLifetimeTax = dispNoConvRows.reduce((s,r)=>s+r.totalTax,0);
+      let currentLifetimeTax = dispRows.reduce((s,r)=>s+r.totalTax,0);
 
       let calculatedTaxSaved = Math.max(0, noConvLifetimeTax - currentLifetimeTax);
       let calculatedEstateGain = Math.max(0, term.afterTax - noConvTerm.afterTax);
-      let calculatedPretaxReduction = Math.max(0, i.pretax - term.pretax);
+      let calculatedPretaxReduction = Math.max(0, dispRows[0].pretax - term.pretax);
 
-      let currentNetWorth = i.pretax + i.roth + i.brokerage + i.cash;
+      let currentNetWorth = dispRows[0].pretax + dispRows[0].roth + dispRows[0].broker + dispRows[0].cash;
       document.getElementById('cardCurrentNetWorth').textContent = fmt.format(currentNetWorth);
       document.getElementById('lblRetireAge').textContent = i.ret;
       
       if (currentNetWorth > 0) {
-        let ptPct = Math.round((i.pretax / currentNetWorth) * 100);
-        let roPct = Math.round((i.roth / currentNetWorth) * 100);
-        let brPct = Math.round((i.brokerage / currentNetWorth) * 100);
+        let ptPct = Math.round((dispRows[0].pretax / currentNetWorth) * 100);
+        let roPct = Math.round((dispRows[0].roth / currentNetWorth) * 100);
+        let brPct = Math.round((dispRows[0].broker / currentNetWorth) * 100);
         let caPct = Math.max(0, 100 - ptPct - roPct - brPct);
 
         document.getElementById('assetSparkBar').innerHTML = `
@@ -1419,7 +1744,7 @@
         `;
       }
 
-      let retRow = rows.find(r => r.age === i.ret) || term;
+      let retRow = dispRows.find(r => r.age === i.ret) || term;
       document.getElementById('cardRetireWorth').textContent = fmt.format(retRow.afterTax);
       document.getElementById('cardLongevityWorth').textContent = fmt.format(term.afterTax);
 
@@ -1427,46 +1752,76 @@
       document.getElementById('cardEstateGain').textContent=fmt.format(calculatedEstateGain);
       document.getElementById('cardPretaxReduction').textContent=fmt.format(calculatedPretaxReduction);
 
-      let wealthiestRow = [...rows].sort((a,b) => b.afterTax - a.afterTax)[0];
+      let wealthiestRow = [...dispRows].sort((a,b) => b.afterTax - a.afterTax)[0];
       document.getElementById('dynamicInsightText').textContent = `Your wealthiest projected year occurs at age ${wealthiestRow.age} with ${fmt.format(wealthiestRow.afterTax)} in net after-tax capital.`;
 
       let tb=document.getElementById('roadmapBody'); tb.innerHTML='';
-      for(const r of rows){
+      for(const r of dispRows){
         let tr=document.createElement('tr');
-        tr.innerHTML=`<td>${r.age}</td><td><span class="constraint">${i.strategyPreset==='abroad'?'Abroad':'U.S.'}</span></td><td>${fmt.format(r.taxW2)}</td><td>${fmt.format(r.ss)}</td><td>${fmt.format(r.conv)}</td><td>${fmt.format(r.fed)}</td><td>${fmt.format(r.state)}</td><td>${fmt.format(r.totalTax)}</td><td>${bracket(r.fed)}</td>`;
+        let modeLabel = i.strategyPreset==='abroad' ? 'Abroad' : (i.strategyPreset==='taxfree_state' ? '0% State' : 'U.S.');
+        tr.innerHTML=`<td>${r.age}</td><td><span class="constraint">${modeLabel}</span></td><td>${fmt.format(r.taxW2)}</td><td>${fmt.format(r.ss)}</td><td>${fmt.format(r.conv)}</td><td>${fmt.format(r.fed)}</td><td>${fmt.format(r.state)}</td><td>${fmt.format(r.totalTax)}</td><td>${bracket(r.fed)}</td>`;
         tb.appendChild(tr);
       }
 
       if(mainChart) mainChart.destroy();
       if(rothAdditionsChart) rothAdditionsChart.destroy();
+      if(expenseChart) expenseChart.destroy();
 
-      let labels = rows.map(r => r.age);
+      let labels = dispRows.map(r => r.age);
       mainChart = new Chart(document.getElementById('mainChart'), {
         type: 'bar',
         data: {
           labels,
           datasets: [
-            { label: 'Pre-tax', data: rows.map(r => r.pretax), backgroundColor: '#ea580c' },
-            { label: 'Roth', data: rows.map(r => r.roth), backgroundColor: '#2563eb' },
-            { label: 'Brokerage', data: rows.map(r => r.broker), backgroundColor: '#10b981' },
-            { label: 'Cash', data: rows.map(r => r.cash), backgroundColor: '#f59e0b' }
+            { label: 'Pre-tax', data: dispRows.map(r => r.pretax), backgroundColor: '#ea580c' },
+            { label: 'Roth', data: dispRows.map(r => r.roth), backgroundColor: '#2563eb' },
+            { label: 'Brokerage', data: dispRows.map(r => r.broker), backgroundColor: '#10b981' },
+            { label: 'Cash', data: dispRows.map(r => r.cash), backgroundColor: '#f59e0b' },
+            { label: 'Annual SS Income', data: dispRows.map(r => r.ss), backgroundColor: '#8b5cf6' }
           ]
         }
       });
+
+      // Annual Expense Breakdown Chart
+      let expenseDatasets = [
+        { label: 'Living Expenses', data: dispRows.map(r => r.livingSpend), backgroundColor: '#3b82f6' },
+        { label: 'College Tuition', data: dispRows.map(r => r.collegeSpend), backgroundColor: '#f59e0b' },
+        { label: 'Healthcare & Nursing', data: dispRows.map(r => r.totalMedical), backgroundColor: '#000000' },
+        { label: 'Federal Income Tax', data: dispRows.map(r => r.fed), backgroundColor: '#ea580c' },
+        { label: 'State Income Tax', data: dispRows.map(r => r.state), backgroundColor: '#02b17d' }
+      ];
+
+      // Add Mortgage if in custom mode
+      if (i.strategyPreset === 'custom') {
+        expenseDatasets.splice(2, 0, { label: 'Mortgage', data: dispRows.map(r => r.mortgageSpend), backgroundColor: '#64748b' });
+      }
+
+      expenseChart = new Chart(document.getElementById('expenseChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: expenseDatasets
+        }
+      });
+
+      let targetCapText = i.strategyPreset === 'abroad' ? '32% Top Bracket (No ACA/Medicare Limits)' : `${i.bracket}% Federal Bracket (ACA & IRMAA Protected)`;
+      document.getElementById('rothOptimizationBanner').innerHTML = `
+        🎯 <b>Conversion Optimization Logic:</b> Converting up to <b>${targetCapText}</b>. Total modeled conversion volume: <b>${fmt.format(dispRows.reduce((s,r)=>s+r.conv,0))}</b> across retirement transition years.
+      `;
 
       rothAdditionsChart = new Chart(document.getElementById('rothAdditionsChart'), {
         type: 'bar',
         data: {
           labels,
           datasets: [
-            { label: 'Contributions (Backdoor/Mega)', data: rows.map(r => r.rothContrib), backgroundColor: '#2563eb' },
-            { label: 'Conversions', data: rows.map(r => r.conv), backgroundColor: '#10b981' }
+            { label: 'Contributions (Backdoor/Mega)', data: dispRows.map(r => r.rothContrib), backgroundColor: '#2563eb' },
+            { label: 'Conversions', data: dispRows.map(r => r.conv), backgroundColor: '#10b981' }
           ]
         }
       });
 
       renderSSChart();
-      renderMilestoneMiniChart(rows, i.ret);
+      renderMilestoneMiniChart(dispRows, i.ret);
       renderSensitivity(i);
       runMonteCarlo();
     }
