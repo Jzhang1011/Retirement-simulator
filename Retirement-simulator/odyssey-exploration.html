@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9JMJJ5CJR4');
-  </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JMJJ5CJR4');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Odyssey Experience | WealthLanding</title>
@@ -17,8 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-      <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         :root {
             --navy: #0B132B;
@@ -34,195 +33,142 @@
             --font-serif: 'Playfair Display', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
-/* GLOBAL HEADER POSITIONING AND HIGH STACKING INDEX Context */
-    .global-header {
-      background-color: #0B132B; 
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.85rem 2.25rem;
-      border-bottom: 1px solid #1E293B;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative; 
-      z-index: 1001;      
-    }
 
-    /* FORCED LIST ITEM ROW PACKING TO PREVENT VERTICAL STACKING BLOCKS */
-    .top-nav-links {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center;
-      gap: 1.25rem;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+        /* GLOBAL HEADER POSITIONING */
+        .global-header {
+          background-color: #0B132B; 
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.85rem 2.25rem;
+          border-bottom: 1px solid #1E293B;
+          width: 100%;
+          box-sizing: border-box;
+          position: relative; 
+          z-index: 1001;      
+        }
 
-    .top-nav-links a {
-      color: #94A3B8;
-      text-decoration: none;
-      font-size: 0.95rem; 
-      font-weight: 500;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
+        .top-nav-links {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center;
+          gap: 1.25rem;
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
 
-    .top-nav-links a:hover, .top-nav-links a.active {
-      color: white;
-    }
+        .top-nav-links a {
+          color: #94A3B8;
+          text-decoration: none;
+          font-size: 0.95rem; 
+          font-weight: 500;
+          transition: color 0.2s;
+          white-space: nowrap;
+        }
 
-    .logo {
-      font-size: 1.45rem; 
-      font-weight: 800;
-      color: white;
-      text-decoration: none;
-      letter-spacing: -0.04em;
-    }
+        .top-nav-links a:hover, .top-nav-links a.active {
+          color: white;
+        }
 
-    .logo span {
-      color: #02B17D; 
-    }
+        .logo {
+          font-size: 1.45rem; 
+          font-weight: 800;
+          color: white;
+          text-decoration: none;
+          letter-spacing: -0.04em;
+        }
 
-    .search-container {
-      position: relative;
-      max-width: 400px; 
-      width: 100%;
-    }
+        .logo span {
+          color: #02B17D; 
+        }
 
-    .search-input {
-      width: 100%;
-      background-color: #1E293B;
-      border: 1px solid #334155;
-      color: white;
-      padding: 0.65rem 1.25rem 0.65rem 3rem; 
-      border-radius: 8px;
-      font-size: 0.9rem; 
-    }
+        .search-container {
+          position: relative;
+          max-width: 400px; 
+          width: 100%;
+        }
 
-    /* CORRECT HORIZONTAL TOP NAV FLEX MATRIX */
-    .topnav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #0f172a;
-      display: flex;
-      align-items: center;
-      padding: 0 38px;
-      height: 70px; 
-      box-shadow: 0 2px 8px rgba(0,0,0,.18);
-    }
-    
-    .topnav-links {
-      display: flex;
-      flex-direction: row;
-      gap: 4px;
-      align-items: center;
-      width: 100%;
-      position: relative;
-    }
-    
-    .topnav-link {
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 18.9px; 
-      font-weight: 555;
-      padding: 8px 18px;
-      border-radius: 8px;
-      transition: background .15s, color .15s;
-      white-space: nowrap;
-    }
-    
-    .topnav-link:hover {
-      background: rgba(255,255,255,.08);
-      color: #fff;
-    }
-    
-    .topnav-link.active {
-      background: rgba(96,165,250,.15);
-      color: #60a5fa;
-    }
-    
-    .topnav-divider {
-      width: 1px;
-      height: 32px; 
-      background: rgba(255,255,255,.1);
-      margin: 0 10px;
-    }
+        .search-input {
+          width: 100%;
+          background-color: #1E293B;
+          border: 1px solid #334155;
+          color: white;
+          padding: 0.65rem 1.25rem 0.65rem 3rem; 
+          border-radius: 8px;
+          font-size: 0.9rem; 
+        }
 
-    /* VIEWPONT-CENTERED FLUID MEGA DROPDOWN BOX */
-    .mega-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 50%;                     
-      transform: translateX(-50%) translateY(12px); 
-      width: 95vw;                   
-      max-width: 1240px; 
-      background: white;
-      border: 1px solid var(--border); 
-      border-radius: 1rem;
-      box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
-      padding: 3.25rem; 
-      display: grid !important;      
-      grid-template-columns: 1.1fr 2.9fr; 
-      gap: 3.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-      z-index: 2000; 
-      box-sizing: border-box;
-    }
+        /* MEGA DROPDOWN BOX */
+        .mega-dropdown {
+          position: absolute;
+          top: 100%;
+          left: 50%;                     
+          transform: translateX(-50%) translateY(12px); 
+          width: 95vw;                   
+          max-width: 1240px; 
+          background: white;
+          border: 1px solid var(--border); 
+          border-radius: 1rem;
+          box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
+          padding: 3.25rem; 
+          display: grid !important;      
+          grid-template-columns: 1.1fr 2.9fr; 
+          gap: 3.5rem;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+          z-index: 2000; 
+          box-sizing: border-box;
+        }
 
-    /* Keep centering properties intact on hover triggers */
-    .dropdown-trigger:hover .mega-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-  
-    /* RIGHT COLUMN LINKS SUB-GRID */
-    .links-matrix {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem 1.75rem; 
-    }
+        .dropdown-trigger:hover .mega-dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+        }
+      
+        .links-matrix {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2.5rem 1.75rem; 
+        }
 
-    .dropdown-column h4 {
-      color: var(--navy); 
-      font-size: 1.215rem; 
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 1.15rem;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-    }
+        .dropdown-column h4 {
+          color: var(--navy); 
+          font-size: 1.215rem; 
+          font-weight: 700;
+          margin-top: 0;
+          margin-bottom: 1.15rem;
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+        }
 
-    .dropdown-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem; 
-    }
+        .dropdown-column ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem; 
+        }
 
-    .dropdown-column ul a {
-      color: var(--muted) !important; 
-      font-size: 0.95rem; 
-      font-weight: 500;
-      padding: 0;
-    }
+        .dropdown-column ul a {
+          color: var(--muted) !important; 
+          font-size: 0.95rem; 
+          font-weight: 500;
+          padding: 0;
+        }
 
-    .dropdown-column ul a:hover {
-      color: #02B17D !important; 
-    }
+        .dropdown-column ul a:hover {
+          color: #02B17D !important; 
+        }
 
-    /* Let dropdown anchor align to .global-header container for perfect center horizontal align */
-    .dropdown-trigger {
-      position: static;
-    }
+        .dropdown-trigger {
+          position: static;
+        }
 
         body {
             font-family: var(--font-sans);
@@ -234,13 +180,11 @@
             font-family: var(--font-serif);
         }
 
-        /* Active highlight for selected path card matching the screenshot */
         .scen-card-active {
             border: 2px solid var(--blue) !important;
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08) !important;
         }
 
-        /* Hide scrollbars but preserve functionality */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -248,11 +192,19 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Toast animation */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-toast {
+            animation: slideUpFade 0.3s ease-out forwards;
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen">
 
-  <!-- Top Global Directory Header -->
   <header class="global-header">
     <a href="/" class="logo">Wealth<span>Landing</span></a>
     
@@ -271,7 +223,7 @@
                 </p>
               </div>
               <div class="pt-8">
-                <a href="#" onclick="goToStep(1)" class="text-slate-900 font-bold text-sm inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors group">
+                <a href="#" class="text-slate-900 font-bold text-sm inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors group">
                   Start Diagnostic Tool <span class="transition-transform group-hover:translate-x-1">→</span>
                 </a>
                 <p class="text-xs text-slate-400 mt-1">Review onboarding scores and map your baseline variables.</p>
@@ -281,8 +233,8 @@
               <div class="dropdown-column">
                 <h4>🚀 Start Here</h4>
                 <ul>
-                  <li><a href="#" onclick="goToStep(1)">Financial Diagnostic</a></li>
-                  <li><a href="#" onclick="goToStep(3)">Wealth Score Tracker</a></li>
+                  <li><a href="#">Financial Diagnostic</a></li>
+                  <li><a href="#">Wealth Score Tracker</a></li>
                   <li><a href="/">Personal Dashboard</a></li>
                   <li><a href="#">My Custom Roadmap</a></li>
                 </ul>
@@ -301,7 +253,7 @@
                 <ul>
                   <li><a href="#">Latest Estimators</a></li>
                   <li><a href="#">Core Strategic Guides</a></li>
-                  <li><a href="Retirement_Master_Plan.html">Retirement Master Plan</a></li>
+                  <li><a href="#">Retirement Master Plan</a></li>
                   <li><a href="#">Retirement Transition Plan</a></li>
                 </ul>
               </div>
@@ -384,7 +336,7 @@
                   <li><a href="#">Index Investing & ETFs</a></li>
                   <li><a href="#">Portfolio Optimization</a></li>
                   <li><a href="#">Modern Portfolio Design</a></li>
-                  <li><a href="OptimizeRoth.html">Roth Conversions & Tax-Loss</a></li>
+                  <li><a href="#">Roth Conversions & Tax-Loss</a></li>
                 </ul>
               </div>
               <div class="dropdown-column">
@@ -399,7 +351,7 @@
               <div class="dropdown-column">
                 <h4>⚙️ Interactive Tools</h4>
                 <ul>
-                  <li><a href="OptimizeRoth.html">Retirement Strategy Engine</a></li>
+                  <li><a href="#">Retirement Strategy Engine</a></li>
                   <li><a href="#">Advanced Portfolio Simulator</a></li>
                   <li><a href="#">Real Estate Income Analyzer</a></li>
                   <li><a href="#">Withdrawal Sequencing Modeler</a></li>
@@ -431,7 +383,7 @@
               <div class="dropdown-column">
                 <h4>🏥 Health & Insurance</h4>
                 <ul>
-                  <li><a href="cost_for_65+.html">Medicare Optimization</a></li>
+                  <li><a href="#">Medicare Optimization</a></li>
                   <li><a href="#">Global Medical Coverage</a></li>
                   <li><a href="#">ACA Subsidy Bridge Math</a></li>
                   <li><a href="#">Umbrella & Disability Policies</a></li>
@@ -451,7 +403,7 @@
                 <ul>
                   <li><a href="#">Sequence of Returns Risks</a></li>
                   <li><a href="#">Inflation Protection Plans</a></li>
-                  <li><a href="cost_for_65+.html">Interactive Healthcare Planner</a></li>
+                  <li><a href="#">Interactive Healthcare Planner</a></li>
                   <li><a href="#">LTC Surcharge Analyzer</a></li>
                 </ul>
               </div>
@@ -481,16 +433,16 @@
               <div class="dropdown-column">
                 <h4>🗺️ Retirement Planning</h4>
                 <ul>
-                  <li><a href="RetirementHub.html">Retirement Blueprint Map</a></li>
-                  <li><a href="Retirement_Master_Plan.html">The Master Plan Module</a></li>
+                  <li><a href="#">Retirement Blueprint Map</a></li>
+                  <li><a href="#">The Master Plan Module</a></li>
                   <li><a href="#">Transition Workspace</a></li>
                 </ul>
               </div>
               <div class="dropdown-column">
                 <h4>✈️ Location Arbitrage</h4>
                 <ul>
-                  <li><a href="UScitymatcher.html">US City Matcher Tool</a></li>
-                  <li><a href="RetiringOverseas.html">Overseas Matcher Tool</a></li>
+                  <li><a href="#">US City Matcher Tool</a></li>
+                  <li><a href="#">Overseas Matcher Tool</a></li>
                   <li><a href="#">Geographic Cost Indexes</a></li>
                   <li><a href="#">Digital Nomad Infrastructure</a></li>
                 </ul> 
@@ -599,7 +551,7 @@
                 <ul>
                   <li><a href="#">Vetted Case Studies</a></li>
                   <li><a href="#">Systematic Research Papers</a></li>
-                  <li><a href="CelebratingRetirement.html">Real Client Journeys</a></li>
+                  <li><a href="#">Real Client Journeys</a></li>
                 </ul>
               </div>
             </div>
@@ -618,140 +570,152 @@
     </div>
   </header>
 
-    <!-- SLIDE-OUT INTAKE CONTROLS -->
+    <!-- SIMPLIFIED LIGHTWEIGHT PREVIEW SIDEBAR (DRAMATICALLY REDUCED CONTROL) -->
     <div id="intakeSidebar" class="fixed top-0 left-0 h-full w-[325px] bg-white border-r border-slate-200 shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
         <div class="p-6 h-full flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                     <h3 class="text-lg font-extrabold text-[#0B132B] flex items-center gap-2">
                         <svg class="w-5 h-5 text-[#02B17D]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                        Adjust Core Filters
+                        Story Preview Filters
                     </h3>
                     <button onclick="toggleIntakeSidebar()" class="text-slate-400 hover:text-slate-600 transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
 
-                <div class="space-y-4 overflow-y-auto max-h-[calc(100vh-200px)] pr-1 no-scrollbar">
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 mb-6">
+                    <p class="text-xs text-blue-900 leading-relaxed font-medium">
+                        <strong>Preview Mode:</strong> These simple toggles adjust story highlights on this page. All detailed preferences, rankings, and hard constraints are evaluated next in <strong>Preference Discovery</strong>.
+                    </p>
+                </div>
+
+                <!-- ONLY TWO CONTROLS REMAIN -->
+                <div class="space-y-6">
                     <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Citizenship</label>
-                        <select id="wl_citizenship" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="US" selected>US</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="China">China</option>
-                            <option value="Singapore">Singapore</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Family nearby?</label>
+                        <select id="wl_familyNearby" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm font-semibold outline-none focus:border-blue-500 shadow-sm">
+                            <option value="Yes" selected>Yes — Keep family close</option>
+                            <option value="No">No — Open to distance / travel</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Existing Residency Rights</label>
-                        <select id="wl_residencyRights" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="None" selected>None</option>
-                            <option value="EU Passport">EU Passport</option>
-                            <option value="Taiwan APRC">Taiwan APRC</option>
-                            <option value="Taiwan Gold Card">Taiwan Gold Card</option>
-                            <option value="Australian PR">Australian PR</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Where Do Heirs / Children Live?</label>
-                        <select id="wl_childrenLocation" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="Same State">Same State</option>
-                            <option value="Different US State" selected>Different US State</option>
-                            <option value="Outside US">Outside US</option>
-                            <option value="No Children">No Children</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ages 50-65 Priorities</label>
-                        <select id="wl_stage1Priority" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="Tax Optimization" selected>Tax Optimization</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Cost of Living">Cost of Living</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Family">Family</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ages 65-78 Priorities</label>
-                        <select id="wl_stage2Priority" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="Lifestyle" selected>Lifestyle</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Family">Family</option>
-                            <option value="Inheritance">Inheritance</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ages 78+ Priorities</label>
-                        <select id="wl_stage3Priority" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="Family Proximity" selected>Family Proximity</option>
-                            <option value="Long-Term Care">Long-Term Care</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Inheritance">Inheritance</option>
-                            <option value="Independence">Independence</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Asset Tier</label>
-                        <select id="mp_assetTier" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-sm font-semibold outline-none focus:border-blue-500">
-                            <option value="Core">Core Wealth ($250k–$1M)</option>
-                            <option value="HNW" selected>High Net Worth ($1M–$5M)</option>
-                            <option value="Ultra">Ultra High Net Worth ($5M+)</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Stay in US?</label>
+                        <select id="wl_stayInUS" onchange="runSimulationEngine()" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm font-semibold outline-none focus:border-blue-500 shadow-sm">
+                            <option value="Yes" selected>Yes — Domestic US living</option>
+                            <option value="No">No — Open to overseas living</option>
                         </select>
                     </div>
                 </div>
             </div>
             
-            <button onclick="toggleIntakeSidebar()" class="w-full bg-slate-900 text-white p-3 rounded-lg font-bold text-sm tracking-wide hover:bg-slate-800 transition">
-                Apply & Save Profiles
-            </button>
+            <div>
+                <button onclick="toggleIntakeSidebar()" class="w-full bg-slate-900 text-white p-3.5 rounded-xl font-bold text-sm tracking-wide hover:bg-slate-800 transition shadow-md">
+                    Apply Preview Filters
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- MAIN BODY CONTAINER -->
     <main class="max-w-[1550px] mx-auto px-4 md:px-12 py-10">
 
-        <!-- HEADER CALLOUT TITLE -->
-        <div class="text-center mb-10">
+        <div class="text-center mb-8">
             <span class="text-xs uppercase font-extrabold tracking-widest text-[#019367]">THE ODYSSEY EXPERIENCE</span>
-            <h1 class="text-4xl md:text-5xl font-serif-title font-semibold text-[#0B132B] mt-2 mb-3">Five Ways to Live Your Retirement</h1>
-            <p class="text-slate-500 max-w-2xl mx-auto text-sm md:text-base">Different paths. Different priorities. Discover the retirement life that fits you.</p>
+            <h1 class="text-4xl md:text-5xl font-serif-title font-semibold text-[#0B132B] mt-2 mb-3">Explore Five Ways to Live Your Retirement</h1>
+            <p class="text-slate-600 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                Odyssey is an open lifestyle exploration tool, not a final recommendation. Understand what appeals to you before validating real constraints and financial feasibility.
+            </p>
         </div>
 
-        <!-- STICKY CONTROL FLOATER -->
+        <!-- REFRAMED JOURNEY WORKFLOW BANNER -->
+        <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-2xl p-6 md:p-8 mb-10 shadow-lg border border-slate-800">
+            <div class="max-w-4xl mx-auto text-center mb-6">
+                <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                    Exploration Methodology
+                </div>
+                <h2 class="text-xl md:text-2xl font-serif-title font-semibold">Separate "What Do I Want?" From "What Works?"</h2>
+                <p class="text-slate-300 text-xs md:text-sm mt-1">Explore candidates first, then clarify preferences and constraints in Preference Discovery.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
+                <!-- Step 1 -->
+                <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-xl text-center relative flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-xs font-extrabold text-emerald-400 mb-1">01</span>
+                        <h3 class="text-xs font-bold text-white mb-1">Explore Lifestyles</h3>
+                        <p class="text-[11px] text-slate-400 leading-tight">Review 5 distinct retirement structures.</p>
+                    </div>
+                    <span class="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-slate-600 font-bold z-10">→</span>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-xl text-center relative flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-xs font-extrabold text-emerald-400 mb-1">02</span>
+                        <h3 class="text-xs font-bold text-white mb-1">Benefits & Sacrifices</h3>
+                        <p class="text-[11px] text-slate-400 leading-tight">Weigh trade-offs, health, and location math.</p>
+                    </div>
+                    <span class="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-slate-600 font-bold z-10">→</span>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-xl text-center relative flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-xs font-extrabold text-emerald-400 mb-1">03</span>
+                        <h3 class="text-xs font-bold text-white mb-1">Compare Options</h3>
+                        <p class="text-[11px] text-slate-400 leading-tight">Side-by-side comparison matrix.</p>
+                    </div>
+                    <span class="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-slate-600 font-bold z-10">→</span>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-xl text-center relative flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-xs font-extrabold text-emerald-400 mb-1">04</span>
+                        <h3 class="text-xs font-bold text-white mb-1">Add to Shortlist</h3>
+                        <p class="text-[11px] text-slate-400 leading-tight">Keep appealing lives for discovery phase.</p>
+                    </div>
+                    <span class="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-slate-600 font-bold z-10">→</span>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-emerald-950/40 border border-emerald-500/40 p-3.5 rounded-xl text-center flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-xs font-extrabold text-emerald-400 mb-1">05</span>
+                        <h3 class="text-xs font-bold text-emerald-300 mb-1">Preference Discovery</h3>
+                        <p class="text-[11px] text-slate-300 leading-tight">Match shortlist against real constraints.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <button onclick="toggleIntakeSidebar()" class="flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-400 text-slate-800 font-bold px-4 py-2.5 rounded-xl shadow-sm text-sm transition">
                 <svg class="w-4 h-4 text-[#02B17D]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                Configure Constraints & Inputs
+                Preview Filters
             </button>
             <div id="liveConstraintBadges" class="flex flex-wrap items-center gap-2 text-xs font-bold text-slate-500">
                 <!-- Filled Dynamically -->
             </div>
         </div>
 
-        <!-- THE 5-CARDS GRID (HORIZONTAL LAYOUT MATCHING SCREENSHOT) -->
         <section id="scenariosCardGrid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10 items-stretch">
             <!-- Rendered Dynamically via JS Engine -->
         </section>
 
-        <!-- DETAILED PATH WORKSPACE SECTION -->
+        <!-- DETAILED LIFESTYLE WORKSPACE SECTION -->
         <section id="pathWorkspaceSection" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm mb-12">
             <!-- Populated dynamically based on selected card state -->
         </section>
 
-        <!-- LEDGER COMPARISON VIEW (Positioned below the Workspace Experience) -->
+        <!-- LEDGER COMPARISON VIEW -->
         <section id="comparisonLedgerPanel" class="hidden bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm mb-12">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                 <div>
-                    <h3 class="text-lg font-bold text-[#0B132B]">Journey Comparison Ledger</h3>
-                    <p class="text-xs text-slate-500">Compare structural risk, dynamic outcomes, and support indices side-by-side</p>
+                    <h3 class="text-lg font-bold text-[#0B132B]">Lifestyle Comparison Ledger</h3>
+                    <p class="text-xs text-slate-500">Compare tax efficiency, healthcare security, family proximity, and flexibility side-by-side</p>
                 </div>
                 <button onclick="toggleLedger()" class="text-slate-400 hover:text-slate-600 font-bold text-sm">
                     Close Ledger
@@ -761,13 +725,13 @@
                 <table class="w-full text-left border-collapse text-sm">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 font-bold uppercase text-xs">
-                            <th class="p-4">Retirement Path</th>
-                            <th class="p-4">Tax Efficiency</th>
+                            <th class="p-4">Lifestyle</th>
+                            <th class="p-4">Tax Arbitrage</th>
                             <th class="p-4">Healthcare Security</th>
                             <th class="p-4">Family Integration</th>
-                            <th class="p-4">Lifestyle Flexibility</th>
-                            <th class="p-4">Estate Preservation</th>
-                            <th class="p-4">Complexity</th>
+                            <th class="p-4">Lifestyle Freedom</th>
+                            <th class="p-4">Operational Complexity</th>
+                            <th class="p-4">Shortlist Action</th>
                         </tr>
                     </thead>
                     <tbody id="comparisonLedgerBody" class="divide-y divide-slate-100">
@@ -777,282 +741,249 @@
             </div>
         </section>
 
-        <!-- FOOTER STICKY ACTION BAR -->
-        <footer class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
-            <div class="flex items-center gap-2.5">
-                <div class="bg-emerald-50 text-[#02B17D] p-2 h-fit rounded-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                </div>
-                <p class="text-xs md:text-sm font-semibold text-slate-600">Explore each path to see how your retirement could look.</p>
+        <footer class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col lg:flex-row justify-between items-center gap-6 shadow-sm">
+            <div class="max-w-2xl text-left">
+                <h3 class="text-base font-bold text-slate-900 mb-1">You’ve seen five possible retirement lives.</h3>
+                <p class="text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
+                    Now separate what attracts you from what can realistically work given your family, healthcare, location, and financial constraints.
+                </p>
             </div>
-            <button onclick="toggleLedger()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2 transition shadow-sm">
-                <span>Compare All Paths</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
-            </button>
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+                <button onclick="toggleLedger()" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-3 rounded-xl text-sm font-semibold transition text-center whitespace-nowrap">
+                    Compare All Five
+                </button>
+                <button onclick="continueToPreferenceDiscovery()" class="w-full sm:w-auto bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition shadow-md whitespace-nowrap">
+                    <span>Continue to Preference Discovery →</span>
+                </button>
+            </div>
         </footer>
 
     </main>
 
+    <!-- TOAST NOTIFICATION FOR SHORTLIST UPDATES -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden">
+        <div class="bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md animate-toast">
+            <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold">✓</div>
+            <div>
+                <h4 id="toastTitle" class="text-sm font-bold text-white">Shortlist Updated</h4>
+                <p id="toastMessage" class="text-xs text-slate-300 mt-0.5">Selection updated in your local workspace.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Core state object to track current simulator values
         const appState = {
-            activePathId: "phase_optimizer" // Default active detail focus matching the screenshot
+            activePathId: "explore_then_return", // Default focused lifestyle
+            shortlistedIds: new Set(["explore_then_return"]) // Default shortlisted set
         };
 
-        // Defensive parameter extractor to prevent potential 'Cannot read properties of null' type errors
         function getSafeValue(elementId, fallback) {
             const el = document.getElementById(elementId);
             return el ? el.value : fallback;
         }
 
-        // Static Blueprints featuring 5 lifestyles and distinct multi-stage timelines
         const odysseyBlueprints = [
             {
                 id: "home_base",
-                name: "Home Base Path",
-                subtitle: "Rooted. Stable. Close to What Matters.",
-                paragraph: "Stay close to family, friends, and the community you know and love.",
+                name: "Home Base",
+                subtitle: "Stay Close to Family, Community & Known Care",
+                paragraph: "Build your retirement around established roots, remaining near children, long-time social circles, and familiar medical providers.",
                 image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-                bullets: ["Stability", "Family Proximity", "Simplicity"],
-                outcomeScores: { tax: 3, lifestyle: 2, healthcare: 4, family: 5, flexibility: 1, complexity: 1 },
-                persona: "People who believe retirement is about preserving established roots and maintaining physical proximity to loved ones above all else.",
+                bullets: ["Family Proximity", "Community Ties", "Predictable Care"],
+                baseScores: { tax: 2, lifestyle: 3, healthcare: 5, family: 5, flexibility: 2, complexity: 1 },
+                persona: "Retirees whose primary joy stems from being physically present for children and grandchildren, and who value stability above foreign adventure.",
                 tradeoffs: [
-                    "Exposure to full state and federal domestic tax brackets.",
-                    "Highest vulnerability to local healthcare rate spikes.",
-                    "Loss of cost-of-living purchasing power arbitrage advantages."
+                    "Exposed to full state and federal income and real estate taxes in current region.",
+                    "No geographic cost-of-living purchasing power arbitrage.",
+                    "Higher overall monthly burn rate compared to overseas alternatives."
                 ],
-                age85Reflection: "At age 85, you are surrounded by familiar people in the community you've known for decades. Your daily routines are deeply integrated with nearby family, and your major lifetime decisions are long behind you. You sacrificed early global adventure for an absolute foundation of emotional stability and physical proximity.",
+                age85Reflection: "At age 85, you are surrounded by multi-generational family and lifelong friends. Your routines are deeply rooted in a place where everyone knows you, giving you total social support and medical familiarity.",
                 getTimeline: (inputs) => [
                     {
                         age: "50–65",
-                        label: "Home Base Anchor",
-                        desc: `Keep operations local. Optimize domestic tax shelters and focus on local ${inputs.wl_stage1Priority}.`,
+                        label: "Home Base Anchoring",
+                        desc: "Maintain active home setup while optimizing local domestic tax buckets and maintaining family connections.",
                         image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=400&q=80"
                     },
                     {
                         age: "65–78",
-                        label: "Consolidated Domestic Living",
-                        desc: `Enjoying localized recreation and civic activities near long-standing neighborhood structures, focusing on ${inputs.wl_stage2Priority}.`,
+                        label: "Established Community Living",
+                        desc: "Enjoying local civic structures, neighborhood networks, and trusted primary physician relationships.",
                         image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=400&q=80"
                     },
                     {
                         age: "78+",
-                        label: "Family Support Base",
-                        desc: inputs.wl_childrenLocation === "Different US State" ? "Relocating out-of-state to match children's support hub." : "Retaining established community healthcare connections.",
+                        label: "Family Integrated Support Base",
+                        desc: inputs.wl_familyNearby === "No" ? "Pivoting local housing directly to children's metropolitan region." : "Maintaining long-standing local health system support.",
                         image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80"
                     }
                 ],
-                getAdayInLife: (inputs) => [
-                    { caption: "Morning coffee on your home porch.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Attending local civic gatherings.", img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Quality time with native family.", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" }
+                getAdayInLife: () => [
+                    { caption: "Morning coffee in your established home neighborhood.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Hosting family dinners and grandchild activities.", img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Attending local civic and neighborhood groups.", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" }
                 ]
             },
             {
-                id: "wealth_maximizer",
-                name: "Wealth Maximizer",
-                subtitle: "Optimize. Protect. Leave a Legacy.",
-                paragraph: "Make strategic moves to minimize taxes and maximize your wealth for future generations.",
-                image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=600&q=80",
-                bullets: ["Tax Efficiency", "Asset Protection", "Legacy Focus"],
-                outcomeScores: { tax: 5, lifestyle: 3, healthcare: 3, family: 3, flexibility: 3, complexity: 4 },
-                persona: "Retirees willing to navigate structured global compliance regimes and trusts to insulate family inheritance vehicles.",
+                id: "global_expat",
+                name: "Global Expat",
+                subtitle: "Build Retirement Entirely Outside the United States",
+                paragraph: "Establish a permanent foreign sanctuary to maximize lifestyle quality, cultural richness, and purchasing power.",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+                bullets: ["Maximum Geo-Arbitrage", "High Quality of Life", "Global Culture"],
+                baseScores: { tax: 5, lifestyle: 5, healthcare: 4, family: 1, flexibility: 4, complexity: 5 },
+                persona: "Independent adventurers and cost-conscious retirees eager for new cultural vistas, willing to embrace foreign residency rules.",
                 tradeoffs: [
-                    "High setup and ongoing operational legal fees.",
-                    "Rigid presence rules demanding meticulous calendar monitoring.",
-                    "Requires specialized structural separation during peak transfer windows."
+                    "Physical distance from U.S. based adult children and grandchildren.",
+                    "Complexity of foreign residency visas, tax treaties, and currency risks.",
+                    "U.S. Medicare does not cover medical treatment outside the United States."
                 ],
-                age85Reflection: "At age 85, your multi-generational estate sits fully insulated in optimized trusts, passing clean and protected value to your heirs exactly as planned. You spent decades managing tax jurisdictions and compliance rules, trading spontaneous leisure for structural legacy perfection.",
-                getTimeline: (inputs) => {
-                    let s1Desc = inputs.mp_assetTier === "Ultra" ? "Establish multi-border Offshore Asset Shelters and legacy holding trusts." : "Maximize basic internal sequential Roth conversions and tax bracket arbitrage slots.";
-                    return [
-                        {
-                            age: "50–65",
-                            label: "Tax Optimization Hub",
-                            desc: inputs.wl_stage1Priority === "Tax Optimization" ? `Execute aggressive early Roth conversion mechanics. ${s1Desc}` : `Balance basic capital sheltering with initial ${inputs.wl_stage1Priority} requirements.`,
-                            image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80"
-                        },
-                        {
-                            age: "65–78",
-                            label: "Territorial Asset Shelter",
-                            desc: `Earning tax-free passive distributions while establishing corporate trust anchors in strategic jurisdictions, favoring ${inputs.wl_stage2Priority}.`,
-                            image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80"
-                        },
-                        {
-                            age: "78+",
-                            label: "Generational Transfer",
-                            desc: inputs.wl_childrenLocation === "No Children" ? "Allocating optimized asset pools into private foundations." : "Executing structured inheritance rollouts near legacy beneficiaries.",
-                            image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80"
-                        }
-                    ];
-                },
-                getAdayInLife: (inputs) => [
-                    { caption: "Analyzing tax charts in your office.", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Confirming dividend trust accounts.", img: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Coordinating multi-generational trusts.", img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=300&q=80" }
-                ]
-            },
-            {
-                id: "global_explorer",
-                name: "Global Explorer",
-                subtitle: "Explore. Experience. Embrace the World.",
-                paragraph: "Live where life excites you. Experience new cultures, climates, and adventures.",
-                image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80",
-                bullets: ["Freedom", "Lifestyle", "Adventure"],
-                outcomeScores: { tax: 4, lifestyle: 5, healthcare: 3, family: 1, flexibility: 5, complexity: 5 },
-                persona: "Best for retirees who want retirement to feel like an entirely new chapter of life filled with exploration, rather than a continuation of the old one.",
-                tradeoffs: [
-                    "High operational logistics tracking various travel visas.",
-                    "Extended periods of physical distance from localized family supports.",
-                    "Sovereign tax exposure rules demanding structural adaptability."
-                ],
-                age85Reflection: "At age 85, you look back on a retirement spent exploring the far reaches of the world. Your memories are rich with diverse cultures, unique coastal vistas, and global friendships. While your late-stage care logistics require more active coordination than a static path, you accumulated an extraordinary life of experience rather than physical stability.",
-                getTimeline: (inputs) => {
-                    let s1Loc = "Low Cost Lifestyle Hub";
-                    let s1Desc = inputs.wl_stage1Priority === "Travel" ? "Establish sequential travel cycles across southeast Asia and Latin America to maximize experiences." : "Explore strategic geo-arbitrage while scouting early transitional bases.";
-                    if (inputs.wl_stage1Priority === "Tax Optimization") {
-                        s1Loc = "Taiwan / Strategic Tax Hub";
-                        s1Desc = "Exploit territorial income tax exemptions during active high income drawdown cycles.";
-                    }
-                    return [
-                        {
-                            age: "50–65",
-                            label: s1Loc,
-                            desc: s1Desc,
-                            image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=400&q=80"
-                        },
-                        {
-                            age: "65–78",
-                            label: "Multi-Base Rotation",
-                            desc: `Utilize flexible medium-term residential structures to escape seasonal extremes, focused on ${inputs.wl_stage2Priority}.`,
-                            image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=400&q=80"
-                        },
-                        {
-                            age: "78+",
-                            label: "Domestic Return Anchor",
-                            desc: inputs.wl_childrenLocation === "Different US State" ? "Relocating near out-of-state children's support nets." : "Re-anchoring domestic safety bases to transition care smoothly.",
-                            image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=400&q=80"
-                        }
-                    ];
-                },
-                getAdayInLife: (inputs) => [
-                    { caption: "Overlooking an ocean sunset view.", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Sampling culture and regional cuisine.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Planning the next destination log.", img: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=300&q=80" }
-                ]
-            },
-            {
-                id: "care_shield",
-                name: "Care Shield Path",
-                subtitle: "Plan Ahead. Live with Confidence.",
-                paragraph: "Prioritize top-tier healthcare and long-term care access for peace of mind.",
-                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
-                bullets: ["Healthcare Access", "Safety", "Long-term Care"],
-                outcomeScores: { tax: 3, lifestyle: 3, healthcare: 5, family: 4, flexibility: 3, complexity: 3 },
-                persona: "Best for retirees who prioritize long-term physical insulation, medical tier guarantees, and robust healthcare safety models above all else.",
-                tradeoffs: [
-                    "Demands rigid early commitments limiting late-career geographic pivoting.",
-                    "Requires navigating strict clinical residency entry audits.",
-                    "Higher upfront structural costs dedicated to premium clinical care programs."
-                ],
-                age85Reflection: "At age 85, you are safely situated inside a world-class continuous clinical care community, completely protected from unpredictable healthcare rate hikes or systemic medical friction. By underwriting your late-stage care early, you secured absolute peace of mind for both yourself and your children.",
+                age85Reflection: "At age 85, you look back on decades of vibrant global living, rich international friendships, and extraordinary lifestyle value. You traded domestic convenience for world-class experiences.",
                 getTimeline: (inputs) => [
                     {
                         age: "50–65",
-                        label: "Medical Infrastructure Anchor",
-                        desc: inputs.wl_stage1Priority === "Healthcare" ? "Secure guaranteed health system access privileges before age-based condition parameters change." : "Build clean medical insurance portfolios combined with early active lifestyles.",
-                        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80"
+                        label: "Full Foreign Relocation",
+                        desc: "Establish foreign tax residency (e.g., Portugal, Costa Rica, Panama) to drastically lower living costs while enjoying global culture.",
+                        image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=400&q=80"
                     },
                     {
                         age: "65–78",
-                        label: "Insulated Coverage System",
-                        desc: `Enjoy private global clinical coverage models while minimizing standard deductible exposures, focusing on ${inputs.wl_stage2Priority}.`,
-                        image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=400&q=80"
+                        label: "Permanent Overseas Sanctuary",
+                        desc: "Thriving in affordable high-end coastal or cultural hubs with low-cost private medical care systems.",
+                        image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=400&q=80"
                     },
                     {
                         age: "78+",
-                        label: "Continuous Care Integration",
-                        desc: inputs.wl_stage3Priority === "Long-Term Care" ? "Securing priority entrance placements inside world-class private care ecosystems." : "Integrating family support with premium local nursing care parameters.",
+                        label: "Long-Term Overseas Assisted Care",
+                        desc: "Utilizing highly affordable, high-touch private overseas nursing or in-home care teams.",
+                        image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=400&q=80"
+                    }
+                ],
+                getAdayInLife: () => [
+                    { caption: "Breakfast overlooking a tropical or European coastline.", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Exploring regional markets and historical culture.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Relaxing at an overseas social club with international friends.", img: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: "explore_then_return",
+                name: "Explore Then Return",
+                subtitle: "Active Abroad Years, Returning Near Family at Medicare Age",
+                paragraph: "Spend active early retirement exploring the world, then transition back to the U.S. near children and Medicare around age 65.",
+                image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80",
+                bullets: ["Active Exploration", "Medicare Transition", "Family Integration"],
+                baseScores: { tax: 4, lifestyle: 5, healthcare: 4, family: 4, flexibility: 5, complexity: 3 },
+                persona: "The sweet-spot option for couples who want global travel while young and mobile, but want seamless U.S. healthcare and family closeness as they age.",
+                tradeoffs: [
+                    "Requires managing a major international transition move around age 65.",
+                    "Demands clear financial planning for dual-phase housing costs.",
+                    "Requires keeping U.S. Medicare enrollment timelines tight upon return."
+                ],
+                age85Reflection: "At age 85, you enjoyed the best of both worlds: uninhibited overseas adventure during your active 50s and 60s, followed by two decades of close family moments and Medicare security.",
+                getTimeline: (inputs) => [
+                    {
+                        age: "50–65",
+                        label: "Active Overseas Chapter",
+                        desc: "Live abroad in high-lifestyle international bases during active travel years.",
+                        image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        age: "65–78",
+                        label: "Medicare & Family Return Anchor",
+                        desc: "Return to the U.S. near children at age 65, locking in Medicare Part A/B/G coverage.",
+                        image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        age: "78+",
+                        label: "Domestic Family Base",
+                        desc: "Consolidated near children's primary support network with full domestic health safeguards.",
                         image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=400&q=80"
                     }
                 ],
-                getAdayInLife: (inputs) => [
-                    { caption: "Morning walk on pristine green paths.", img: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Meeting with personalized health coaches.", img: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Enjoying peace of mind in high-end care.", img: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=300&q=80" }
+                getAdayInLife: () => [
+                    { caption: "Active travel and exploration in European or Asian hubs.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Returning to a cozy U.S. home base near children.", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Enjoying peace of mind with Medicare & family support.", img: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=300&q=80" }
+                ]
+            },
+            {
+                id: "strategic_us_move",
+                name: "Strategic U.S. Move",
+                subtitle: "Deliberately Select a U.S. State for Tax, Healthcare & Lifestyle",
+                paragraph: "Relocate within the U.S. to a state specifically chosen to reduce tax burden, lower housing expenses, and access top medical systems.",
+                image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=600&q=80",
+                bullets: ["Domestic Tax Arbitrage", "US Healthcare Systems", "Familiar Comfort"],
+                baseScores: { tax: 4, lifestyle: 4, healthcare: 4, family: 3, flexibility: 3, complexity: 2 },
+                persona: "Retirees seeking $10,000–$30,000+ in annual tax and living savings without cross-border legal or language complications.",
+                tradeoffs: [
+                    "Leaving current social circles and neighborhood ties.",
+                    "Requires strict state residency compliance (183-day rule monitoring).",
+                    "Potential long-distance travel to visit adult children."
+                ],
+                age85Reflection: "At age 85, your state tax savings over 25 years added hundreds of thousands of dollars back to your portfolio, providing financial cushion while keeping you firmly inside world-class U.S. healthcare.",
+                getTimeline: (inputs) => [
+                    {
+                        age: "50–65",
+                        label: "Low-Tax State Relocation",
+                        desc: "Move to zero income tax states (FL, TX, NV, TN, WA) or low-cost hubs.",
+                        image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        age: "65–78",
+                        label: "Optimized US Living Hub",
+                        desc: "Enjoy superior climate and top medical care networks without state tax drag.",
+                        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        age: "78+",
+                        label: "Consolidated Senior Care Network",
+                        desc: "Accessing top-tier domestic medical and assisted living systems in your chosen state.",
+                        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=80"
+                    }
+                ],
+                getAdayInLife: () => [
+                    { caption: "Morning walk in a sunbelt or tax-friendly state community.", img: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Visiting premier medical centers nearby.", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Hosting visiting family in a spacious low-tax residence.", img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=300&q=80" }
                 ]
             },
             {
                 id: "phase_optimizer",
                 name: "Phase Optimizer",
-                subtitle: "Right Place. Right Time. Every Stage.",
-                paragraph: "Adapt your location and priorities across retirement phases for the best of all worlds.",
+                subtitle: "Multi-Stage Strategy: Dynamically Evolving Locations & Priorities",
+                paragraph: "Follow a disciplined multi-chapter strategy, changing location, housing, and financial focus dynamically as retirement moves through stages.",
                 image: [
                     "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80",
                     "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=200&q=80",
                     "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=200&q=80"
-                ], // Split image collages
-                bullets: ["Flexibility", "Tax + Lifestyle Balance", "Life Stage Optimization"],
-                outcomeScores: { tax: 5, lifestyle: 5, healthcare: 5, family: 4, flexibility: 5, complexity: 3 },
-                persona: "Best for retirees who believe different stages of retirement deserve entirely different locations, structures, and optimization strategies.",
-                tradeoffs: [
-                    "Requires intentional physical relocations across life phases.",
-                    "Necessitates ongoing cross-border compliance updates.",
-                    "Requires maintaining multiple domestic/international transition plans."
                 ],
-                age85Reflection: "At age 85, you look back on a retirement lived in deliberate chapters. You optimized your active years for growth and exploration, your transition years for lifestyle, and your care years for family proximity. Each phase was dynamically matched to what mattered most at that time of your life.",
-                getTimeline: (inputs) => {
-                    let s1Loc = "Tax Optimization Hub";
-                    let s1Desc = "Optimize your asset growth. Execute early high-bracket conversion sweeps safely.";
-                    if (inputs.wl_stage1Priority === "Tax Optimization") {
-                        s1Loc = "Taiwan / Tax Optimization Hub";
-                        s1Desc = "Execute strategic Roth conversions while utilizing territorial income tax exemptions.";
-                    } else if (inputs.wl_stage1Priority === "Travel") {
-                        s1Loc = "Portugal / Travel Hub";
-                        s1Desc = "Build structural active nomad routes across southern European cultural spaces.";
-                    }
-
-                    let s2Loc = "Lifestyle Hub";
-                    let s2Desc = "Coordinate high-end amenities and urban living matching your transition targets.";
-                    if (inputs.wl_stage2Priority === "Lifestyle") {
-                        s2Loc = "Portugal / Coastal Lifestyle Hub";
-                        s2Desc = "Transition focus to comfort, local culinary networks, and optimized coastal living.";
-                    } else if (inputs.wl_stage2Priority === "Healthcare") {
-                        s2Loc = "Taiwan / Premium Medical Hub";
-                        s2Desc = "Transition into robust clinical systems to capture low-overhead universal medical protections.";
-                    }
-
-                    let s3Loc = "Care Hub";
-                    let s3Desc = "Anchor care structures directly near safety supports.";
-                    if (inputs.wl_childrenLocation === "Different US State" || inputs.wl_childrenLocation === "Same State") {
-                        s3Loc = "Family Support Base (US Base)";
-                        s3Desc = "Consolidate all plans to re-anchor within immediate physical range of family support.";
-                    } else if (inputs.wl_stage3Priority === "Long-Term Care") {
-                        s3Loc = "Premium Clinical Care Base";
-                        s3Desc = "Secure high-fidelity institutional care access slots near target infrastructure.";
-                    }
-
-                    return [
-                        { age: "50–65", label: s1Loc, desc: s1Desc, image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" },
-                        { age: "65–78", label: s2Loc, desc: s2Desc, image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=400&q=80" },
-                        { age: "78+", label: s3Loc, desc: s3Desc, image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=400&q=80" }
-                    ];
-                },
-                getAdayInLife: (inputs) => [
-                    { caption: "Morning coffee with an ocean view in Portugal.", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Enjoying culture and cuisine in your favorite city.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=300&q=80" },
-                    { caption: "Quality time with grandchildren and family.", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" }
+                bullets: ["Dynamic Stage Matching", "Peak Tax & Health Tuning", "Ultimate Agility"],
+                baseScores: { tax: 5, lifestyle: 5, healthcare: 5, family: 4, flexibility: 5, complexity: 4 },
+                persona: "Strategic thinkers who reject one-size-fits-all retirement and want each age decade matched to the optimal location and focus.",
+                tradeoffs: [
+                    "Requires active transition management every 7–10 years.",
+                    "Demands ongoing coordination between cross-border or multi-state rules.",
+                    "Higher planning overhead during chapter shifts."
+                ],
+                age85Reflection: "At age 85, you look back on three distinct, perfectly executed life chapters: growth & travel in your 50s, lifestyle in your 60s, and family warmth in your late 70s. You lived without compromise.",
+                getTimeline: (inputs) => [
+                    { age: "50–65 (Go-Go)", label: "Tax & Travel Optimization Hub", desc: "Maximize active experiences and tax arbitrage.", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" },
+                    { age: "65–78 (Slow-Go)", label: "Lifestyle & Health Sanctuary", desc: "Transition to high-comfort domestic or foreign lifestyle base.", image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=400&q=80" },
+                    { age: "78+ (No-Go)", label: "Family Proximity & Care Anchor", desc: "Consolidate into primary support zone near family or top clinical centers.", image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80" }
+                ],
+                getAdayInLife: () => [
+                    { caption: "Oceanfront morning during early active years.", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Cultural events during middle retirement.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=300&q=80" },
+                    { caption: "Family gatherings in your late-stage care hub.", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=300&q=80" }
                 ]
             }
         ];
 
-        // Toggle visibility of the side filters panel
         function toggleIntakeSidebar() {
             const sidebar = document.getElementById("intakeSidebar");
             sidebar.classList.toggle("-translate-x-full");
         }
 
-        // Toggle comparison ledger placement/visibility
         function toggleLedger() {
             const panel = document.getElementById("comparisonLedgerPanel");
             panel.classList.toggle("hidden");
@@ -1061,7 +992,6 @@
             }
         }
 
-        // Map values to 5-dot metric representations matching standard visual outcomes
         function renderDots(score) {
             let dotsHtml = '';
             for (let i = 1; i <= 5; i++) {
@@ -1074,166 +1004,236 @@
             return dotsHtml;
         }
 
-        // Handle path selection changes
         function selectPathCard(pathId) {
             appState.activePathId = pathId;
             runSimulationEngine();
             document.getElementById("pathWorkspaceSection").scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Resolve Alignment Core Priorities
-        function getOptimalAlignment(inputs) {
-            let reasons = [];
-            let recommendedPath = "phase_optimizer";
+        function toggleShortlist(lifestyleId) {
+            const isShortlisted = appState.shortlistedIds.has(lifestyleId);
+            const targetBlueprint = odysseyBlueprints.find(b => b.id === lifestyleId);
+            const name = targetBlueprint ? targetBlueprint.name : lifestyleId;
 
-            if (inputs.wl_stage1Priority === "Family" && inputs.wl_stage3Priority === "Family Proximity") {
-                recommendedPath = "home_base";
-                reasons.push("Family selected for 50-65");
-                reasons.push("Family Proximity selected for 78+");
-            } else if (inputs.wl_stage1Priority === "Tax Optimization" && inputs.wl_stage3Priority === "Inheritance") {
-                recommendedPath = "wealth_maximizer";
-                reasons.push("Tax Optimization selected for 50-65");
-                reasons.push("Inheritance selected for 78+");
-            } else if (inputs.wl_stage1Priority === "Travel" && inputs.wl_stage2Priority === "Travel") {
-                recommendedPath = "global_explorer";
-                reasons.push("Travel selected for 50-65");
-                reasons.push("Travel selected for 65-78");
-            } else if (inputs.wl_stage1Priority === "Healthcare" || inputs.wl_stage3Priority === "Long-Term Care") {
-                recommendedPath = "care_shield";
-                reasons.push("Healthcare selected for 50-65");
-                reasons.push("Long-Term Care selected for 78+");
+            if (isShortlisted) {
+                appState.shortlistedIds.delete(lifestyleId);
+                showToast("Shortlist Updated", `Removed "${name}" from your shortlist.`);
             } else {
-                recommendedPath = "phase_optimizer";
-                reasons.push(`${inputs.wl_stage1Priority} selected for 50-65`);
-                reasons.push(`${inputs.wl_stage2Priority} selected for 65-78`);
-                reasons.push(`${inputs.wl_stage3Priority} selected for 78+`);
+                appState.shortlistedIds.add(lifestyleId);
+                showToast("Added to Shortlist", `Added "${name}" to your shortlist.`);
             }
 
-            const pathDetails = odysseyBlueprints.find(b => b.id === recommendedPath);
-            return { name: pathDetails.name, reasons: reasons };
+            runSimulationEngine();
         }
 
-        // MAIN SIMULATOR GRAPHICS ENGINE
-        function runSimulationEngine() {
-            const inputs = {
-                wl_citizenship: getSafeValue("wl_citizenship", "US"),
-                wl_residencyRights: getSafeValue("wl_residencyRights", "None"),
-                wl_childrenLocation: getSafeValue("wl_childrenLocation", "Different US State"),
-                wl_stage1Priority: getSafeValue("wl_stage1Priority", "Tax Optimization"),
-                wl_stage2Priority: getSafeValue("wl_stage2Priority", "Lifestyle"),
-                wl_stage3Priority: getSafeValue("wl_stage3Priority", "Family Proximity"),
-                mp_assetTier: getSafeValue("mp_assetTier", "HNW")
+        /* SAFE DISCOVERY NAVIGATION WITH ENVIRONMENT ERROR GUARD */
+        function continueToPreferenceDiscovery() {
+            const previewFilters = {
+                familyNearby: getSafeValue("wl_familyNearby", "Yes"),
+                stayInUS: getSafeValue("wl_stayInUS", "Yes")
             };
 
-            // Update floating informational badges
+            const payload = {
+                activeLifestyleId: appState.activePathId,
+                shortlistedLifestyles: Array.from(appState.shortlistedIds),
+                previewFilters: previewFilters,
+                updatedAt: new Date().toISOString(),
+                purpose: "Initial exploration signal for Preference Discovery phase",
+                framingNote: "Exploratory signal, not a final binding recommendation"
+            };
+
+            try {
+                localStorage.setItem("RetirementOdysseySelection", JSON.stringify(payload));
+            } catch (e) {
+                console.warn("Unable to save to LocalStorage:", e);
+            }
+
+            showToast("Proceeding to Discovery", "Navigating to Preference Discovery...");
+            
+            setTimeout(() => {
+                try {
+                    const currentHref = window.location ? window.location.href : "";
+                    if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
+                        window.location.href = "retirement-preference-discovery.html";
+                    } else {
+                        console.log("Preview environment detected; navigation simulated. Saved payload:", payload);
+                    }
+                } catch (err) {
+                    console.warn("Location navigation error caught safely:", err);
+                }
+            }, 500);
+        }
+
+        function showToast(title, message) {
+            const toast = document.getElementById("toastNotification");
+            document.getElementById("toastTitle").innerText = title;
+            document.getElementById("toastMessage").innerText = message;
+            toast.classList.remove("hidden");
+            
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 3500);
+        }
+
+        function getExploratoryAlignment(inputs) {
+            let reasons = [];
+            let alignedPath = "phase_optimizer";
+
+            if (inputs.wl_familyNearby === "Yes" && inputs.wl_stayInUS === "Yes") {
+                alignedPath = "home_base";
+                reasons.push("Preview filter set to domestic family focus");
+            } else if (inputs.wl_familyNearby === "No" && inputs.wl_stayInUS === "No") {
+                alignedPath = "global_expat";
+                reasons.push("Preview filter set to open overseas exploration");
+            } else if (inputs.wl_familyNearby === "Yes" && inputs.wl_stayInUS === "No") {
+                alignedPath = "explore_then_return";
+                reasons.push("Preview filter set to abroad exploration returning to domestic family anchor");
+            } else if (inputs.wl_familyNearby === "No" && inputs.wl_stayInUS === "Yes") {
+                alignedPath = "strategic_us_move";
+                reasons.push("Preview filter set to US state relocation");
+            } else {
+                alignedPath = "phase_optimizer";
+                reasons.push("Multi-stage flexibility matching varied life chapters");
+            }
+
+            const pathDetails = odysseyBlueprints.find(b => b.id === alignedPath);
+            return { id: alignedPath, name: pathDetails.name, reasons: reasons };
+        }
+
+        function computeDynamicScores(bp, inputs) {
+            let scores = { ...bp.baseScores };
+
+            if (inputs.wl_familyNearby === "Yes") {
+                if (bp.id === "home_base") scores.family = 5;
+                if (bp.id === "global_expat") scores.family = 1;
+            } else {
+                if (bp.id === "global_expat") scores.family = 3;
+            }
+
+            return scores;
+        }
+
+        function runSimulationEngine() {
+            const inputs = {
+                wl_familyNearby: getSafeValue("wl_familyNearby", "Yes"),
+                wl_stayInUS: getSafeValue("wl_stayInUS", "Yes")
+            };
+
+            const alignmentCheck = getExploratoryAlignment(inputs);
+
+            // Update constraint badges
             const badgesContainer = document.getElementById("liveConstraintBadges");
             badgesContainer.innerHTML = `
-                <span class="bg-slate-100 px-2.5 py-1 rounded-md">Citizenship: ${inputs.wl_citizenship}</span>
-                <span class="bg-slate-100 px-2.5 py-1 rounded-md">Residency: ${inputs.wl_residencyRights}</span>
-                <span class="bg-slate-100 px-2.5 py-1 rounded-md">Asset Tier: ${inputs.mp_assetTier}</span>
+                <span class="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">Family Nearby: ${inputs.wl_familyNearby}</span>
+                <span class="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">Stay in US: ${inputs.wl_stayInUS}</span>
+                <span class="bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-1 rounded-md font-bold">Preview Focus: ${alignmentCheck.name}</span>
             `;
 
-            // Render Ledger rows dynamically (With dynamic family integration indicators)
+            // Render Ledger rows dynamically
             const ledgerBody = document.getElementById("comparisonLedgerBody");
             ledgerBody.innerHTML = "";
             odysseyBlueprints.forEach(bp => {
-                let familyIntegrationScore = 3; 
-                if (bp.id === "home_base") familyIntegrationScore = 5;
-                if (bp.id === "phase_optimizer" && inputs.wl_childrenLocation !== "No Children") familyIntegrationScore = 4;
-                if (bp.id === "global_explorer") familyIntegrationScore = 1;
+                const scores = computeDynamicScores(bp, inputs);
+                const isShortlisted = appState.shortlistedIds.has(bp.id);
+                const isAligned = bp.id === alignmentCheck.id;
 
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-50 transition font-semibold text-slate-800";
+                tr.className = `hover:bg-slate-50 transition font-semibold text-slate-800 ${isAligned ? 'bg-blue-50/30' : ''}`;
                 tr.innerHTML = `
-                    <td class="p-4 font-bold text-slate-900">${bp.name}</td>
-                    <td class="p-4">${renderDots(bp.outcomeScores.tax)}</td>
-                    <td class="p-4">${renderDots(bp.outcomeScores.healthcare)}</td>
-                    <td class="p-4">${renderDots(familyIntegrationScore)}</td>
-                    <td class="p-4">${renderDots(bp.outcomeScores.lifestyle)}</td>
-                    <td class="p-4">${renderDots(bp.outcomeScores.family)}</td>
-                    <td class="p-4">${renderDots(bp.id === "home_base" ? 1 : 4)}</td>
+                    <td class="p-4 font-bold text-slate-900 flex items-center gap-2">
+                        ${bp.name} 
+                        ${isAligned ? '<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Preview Match</span>' : ''}
+                        ${isShortlisted ? '<span class="text-xs text-emerald-600 font-normal">(Shortlisted)</span>' : ''}
+                    </td>
+                    <td class="p-4">${renderDots(scores.tax)}</td>
+                    <td class="p-4">${renderDots(scores.healthcare)}</td>
+                    <td class="p-4">${renderDots(scores.family)}</td>
+                    <td class="p-4">${renderDots(scores.lifestyle)}</td>
+                    <td class="p-4">${renderDots(scores.complexity)}</td>
+                    <td class="p-4">
+                        <button onclick="toggleShortlist('${bp.id}')" class="text-xs font-bold px-3 py-1.5 rounded-md transition ${
+                            isShortlisted 
+                                ? 'bg-emerald-100 text-emerald-800 border border-emerald-200 hover:bg-emerald-200' 
+                                : 'bg-slate-900 text-white hover:bg-slate-800'
+                        }">
+                            ${isShortlisted ? '✓ Shortlisted' : '+ Add to Shortlist'}
+                        </button>
+                    </td>
                 `;
                 ledgerBody.appendChild(tr);
             });
 
-            // Render Horizontal Grid Cards
             const gridView = document.getElementById("scenariosCardGrid");
             gridView.innerHTML = "";
 
             odysseyBlueprints.forEach(bp => {
                 const isSelected = bp.id === appState.activePathId;
+                const isShortlisted = appState.shortlistedIds.has(bp.id);
+                const isAligned = bp.id === alignmentCheck.id;
 
                 const cardElement = document.createElement("div");
-                cardElement.className = `journey-card bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm transition-all duration-300 ${
-                    isSelected ? "scen-card-active ring-2 ring-blue-500/20" : "hover:border-slate-300 hover:shadow-md"
+                cardElement.className = `journey-card bg-white border rounded-2xl p-4 flex flex-col justify-between shadow-sm transition-all duration-300 ${
+                    isSelected ? "scen-card-active ring-2 ring-blue-500/20" : "border-slate-200 hover:border-slate-300 hover:shadow-md"
                 }`;
 
                 let imageHtml = "";
                 if (Array.isArray(bp.image)) {
                     imageHtml = `
-                        <div class="grid grid-cols-3 gap-1 rounded-xl overflow-hidden h-32 mb-3 border border-slate-100">
-                            <img src="${bp.image[0]}" class="object-cover h-full w-full">
-                            <img src="${bp.image[1]}" class="object-cover h-full w-full">
-                            <img src="${bp.image[2]}" class="object-cover h-full w-full">
+                        <div class="grid grid-cols-3 gap-1 rounded-xl overflow-hidden h-28 mb-3 border border-slate-100">
+                            <img src="${bp.image[0]}" class="object-cover h-full w-full" alt="Phase 1">
+                            <img src="${bp.image[1]}" class="object-cover h-full w-full" alt="Phase 2">
+                            <img src="${bp.image[2]}" class="object-cover h-full w-full" alt="Phase 3">
                         </div>
                     `;
                 } else {
-                    imageHtml = `<img src="${bp.image}" class="rounded-xl object-cover h-32 w-full mb-3 border border-slate-100" />`;
+                    imageHtml = `<img src="${bp.image}" class="rounded-xl object-cover h-28 w-full mb-3 border border-slate-100" alt="${bp.name}" />`;
                 }
 
-                const buttonStyle = bp.id === "phase_optimizer" 
+                const buttonStyle = isSelected
                     ? "bg-[#02B17D] hover:bg-[#019367] text-white font-bold" 
-                    : "bg-white hover:bg-slate-50 text-slate-800 font-semibold border border-slate-200";
+                    : "bg-slate-50 hover:bg-slate-100 text-slate-800 font-semibold border border-slate-200";
 
                 cardElement.innerHTML = `
                     <div>
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-serif-title text-[#0B132B] font-semibold text-lg leading-snug">${bp.name}</h3>
-                            ${bp.id === "phase_optimizer" ? `<span class="bg-[#EFF6FF] text-blue-600 border border-blue-100 text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Most Flexible</span>` : ''}
+                        <div class="flex flex-col gap-1 mb-1">
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-serif-title text-[#0B132B] font-bold text-base leading-snug">${bp.name}</h3>
+                                ${isAligned ? `<span class="bg-blue-50 border border-blue-200 text-blue-700 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Worth Exploring</span>` : ''}
+                            </div>
+                            ${isShortlisted ? `<div><span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase">✓ On Shortlist</span></div>` : ''}
                         </div>
-                        <p class="text-xs text-slate-500 italic mb-3">${bp.subtitle}</p>
+                        <p class="text-[11px] text-slate-500 italic mb-2 min-h-[32px]">${bp.subtitle}</p>
                         
                         ${imageHtml}
                         
-                        <p class="text-xs text-slate-600 leading-relaxed mb-4 min-h-[48px]">${bp.paragraph}</p>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-3 min-h-[50px]">${bp.paragraph}</p>
                         
-                        <div class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Value Anchors</div>
-                        <div class="space-y-1.5 mb-4">
-                            ${bp.bullets.map((b, idx) => {
-                                const icons = ["🌟", "🛡️", "🏠", "📈", "🎒", "🤝"];
-                                return `
-                                    <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                                        <span class="text-xs">${icons[idx % icons.length]}</span>
-                                        <span>${b}</span>
-                                    </div>
-                                `;
-                            }).join('')}
+                        <div class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1.5">Value Drivers</div>
+                        <div class="space-y-1 mb-3">
+                            ${bp.bullets.map(b => `
+                                <div class="flex items-center gap-1.5 text-[11px] font-semibold text-slate-700">
+                                    <span class="text-emerald-500">✓</span>
+                                    <span>${b}</span>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
 
-                    <div class="mt-4 pt-3 border-t border-slate-100">
-                        <button onclick="selectPathCard('${bp.id}')" class="w-full text-xs py-2.5 rounded-lg transition-all duration-200 shadow-sm ${buttonStyle}">
-                            Explore Path
+                    <div class="mt-2 pt-2 border-t border-slate-100">
+                        <button onclick="selectPathCard('${bp.id}')" class="w-full text-xs py-2 rounded-lg transition-all duration-200 shadow-sm ${buttonStyle}">
+                            ${isSelected ? "Viewing Details" : "Explore Lifestyle"}
                         </button>
                     </div>
                 `;
                 gridView.appendChild(cardElement);
             });
 
-            // --- STREAMING_CHUNK: Processing selected path details inside the workspace ---
-            // --- ACTIVE CARD DETAILED WORKSPACE RENDERING ---
             const activeBlueprint = odysseyBlueprints.find(b => b.id === appState.activePathId);
             const timelineData = activeBlueprint.getTimeline(inputs);
             const adInLife = activeBlueprint.getAdayInLife(inputs);
-
-            // Compute alignment pointers for the checklist
-            const alignmentCheck = getOptimalAlignment(inputs);
-
-            // Family Integration Scoring for Active Path
-            let activeFamilyIntegration = 3;
-            if (activeBlueprint.id === "home_base") activeFamilyIntegration = 5;
-            if (activeBlueprint.id === "phase_optimizer" && inputs.wl_childrenLocation !== "No Children") activeFamilyIntegration = 4;
-            if (activeBlueprint.id === "global_explorer") activeFamilyIntegration = 1;
+            const activeScores = computeDynamicScores(activeBlueprint, inputs);
+            const isShortlisted = appState.shortlistedIds.has(activeBlueprint.id);
+            const isAligned = activeBlueprint.id === alignmentCheck.id;
 
             const workspace = document.getElementById("pathWorkspaceSection");
             workspace.innerHTML = `
@@ -1241,154 +1241,146 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-6 mb-8 gap-4">
                     <div class="flex items-center gap-4">
                         <div class="bg-emerald-50 text-[#02B17D] p-3 rounded-xl border border-emerald-100">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         </div>
                         <div>
-                            <h2 class="text-2xl font-serif-title font-semibold text-[#0B132B]">${activeBlueprint.name}</h2>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h2 class="text-2xl font-serif-title font-bold text-[#0B132B]">${activeBlueprint.name}</h2>
+                                ${isAligned ? `<span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded-full">Currently Aligned</span>` : ''}
+                                ${isShortlisted ? `<span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">✓ On Your Shortlist</span>` : ''}
+                            </div>
                             <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-0.5">${activeBlueprint.subtitle}</p>
                         </div>
                     </div>
                     
-                    <!-- DYNAMIC VERIFICATION TRACE BANNER -->
-                    <div class="bg-emerald-50 text-[#019367] border border-emerald-100 rounded-xl px-4 py-3 flex flex-col gap-1.5 max-w-sm">
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-800">Most Aligned With Your Priorities</span>
-                        </div>
-                        <div class="text-[11px] text-emerald-700 leading-snug space-y-1">
-                            ${alignmentCheck.reasons.map(r => `<div>✓ ${r}</div>`).join('')}
-                            <div class="font-bold text-emerald-800 mt-1">Result: ${alignmentCheck.name}</div>
-                        </div>
+                    <!-- LIGHTWEIGHT SHORTLIST TOGGLE BUTTON -->
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <button onclick="toggleShortlist('${activeBlueprint.id}')" class="w-full md:w-auto px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm ${
+                            isShortlisted 
+                                ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 hover:bg-emerald-200' 
+                                : 'bg-slate-900 hover:bg-slate-800 text-white'
+                        }">
+                            <span>${isShortlisted ? '✓ Added to Shortlist' : '+ Add to My Shortlist'}</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- 3-Column Split Area matching the requested format -->
+                <!-- EXPLORATORY SIGNAL BANNER -->
+                <div class="bg-slate-50 border border-slate-200 text-slate-700 rounded-xl p-4 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-slate-200 text-slate-800 text-[10px] font-black px-2 py-0.5 rounded uppercase">Exploration Signal</span>
+                            <span class="text-xs font-bold text-slate-900">Initial signal—not a recommendation</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Preview toggles (Family nearby: <strong class="text-slate-800">${inputs.wl_familyNearby}</strong>, Stay in US: <strong class="text-slate-800">${inputs.wl_stayInUS}</strong>) offer initial story angles. Complete preference ranking occurs in Preference Discovery.
+                        </p>
+                    </div>
+                    <div class="text-xs text-blue-700 font-bold bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200 whitespace-nowrap">
+                        Initial Fit: ${alignmentCheck.name}
+                    </div>
+                </div>
+
+                <!-- 3-Column Split Area -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     
-                    <!-- Column 1: Your Retirement Phases -->
+                    <!-- Column 1: Life Stages & Timeline -->
                     <div class="border-r border-slate-100 pr-0 lg:pr-8">
-                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-6">Your Retirement Phases</h4>
-                        <div class="relative pl-6 space-y-8 border-l border-emerald-500 ml-4">
+                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-6">Retirement Life Chapters</h4>
+                        <div class="relative pl-6 space-y-6 border-l-2 border-emerald-500 ml-3">
                             ${timelineData.map((t, idx) => `
                                 <div class="relative">
-                                    <!-- Bullet node marker -->
-                                    <span class="absolute -left-9 top-1 w-6 h-6 rounded-full bg-white border-2 border-emerald-500 flex items-center justify-center text-xs font-bold text-emerald-600">
+                                    <span class="absolute -left-[31px] top-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-500 flex items-center justify-center text-xs font-bold text-emerald-600">
                                         ${idx + 1}
                                     </span>
-                                    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4 transition hover:bg-slate-100">
-                                        <div class="flex items-center gap-2.5 mb-2">
-                                            <span class="text-xs font-bold bg-[#EFF6FF] text-blue-600 px-2 py-0.5 rounded-md">${t.age}</span>
+                                    <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 transition hover:bg-slate-100/80">
+                                        <div class="flex items-center gap-2 mb-1.5">
+                                            <span class="text-xs font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-100">${t.age}</span>
                                             <span class="text-xs font-bold text-[#0B132B]">${t.label}</span>
                                         </div>
-                                        <p class="text-xs text-slate-500 leading-relaxed">${t.desc}</p>
+                                        <p class="text-xs text-slate-600 leading-relaxed">${t.desc}</p>
                                     </div>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
 
-                    <!-- Column 2: What This Life Looks Like & Reflection -->
+                    <!-- Column 2: Visual Experience & Age 85 Reflection -->
                     <div class="border-r border-slate-100 pr-0 lg:pr-8">
-                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-4">What This Life Looks Like</h4>
-                        <p class="text-xs text-slate-500 mb-6">Each phase is dynamically mapped to match your values, ensuring you have the resources to meet milestones when they matter most.</p>
-                        
-                        <h5 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">A Day in This Life</h5>
+                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-3">A Day in This Life</h4>
                         <div class="grid grid-cols-3 gap-2 mb-6">
                             ${adInLife.map(day => `
-                                <div class="group cursor-pointer">
-                                    <img src="${day.img}" class="rounded-lg object-cover h-24 w-full mb-1.5 transition group-hover:opacity-90" />
+                                <div class="group">
+                                    <img src="${day.img}" class="rounded-lg object-cover h-20 w-full mb-1 transition group-hover:opacity-90" alt="${day.caption}" />
                                     <p class="text-[10px] text-slate-600 leading-tight">${day.caption}</p>
                                 </div>
                             `).join('')}
                         </div>
 
-                        <!-- AGE 85 REFLECTION CONTAINER (NEW POWERFUL FEATURE) -->
-                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3.5 mb-4">
-                            <div class="bg-emerald-50 text-[#02B17D] p-2 h-fit rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <!-- AGE 85 REFLECTION -->
+                        <div class="bg-slate-900 text-white rounded-xl p-4 mb-4 shadow-sm border border-slate-800">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded uppercase">Age 85 Reflection</span>
                             </div>
-                            <div>
-                                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Age 85 Reflection</h4>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed italic">"${activeBlueprint.age85Reflection}"</p>
-                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed italic">"${activeBlueprint.age85Reflection}"</p>
                         </div>
 
-                        <!-- Who Chooses This Life? callout -->
-                        <div class="bg-[#F8FAFC] border border-slate-200 rounded-xl p-4 flex gap-3.5">
-                            <div class="bg-emerald-50 text-[#02B17D] p-2 h-fit rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xs font-bold text-slate-800">Who Chooses This Life?</h4>
-                                <p class="text-xs text-slate-500 mt-1 leading-relaxed">${activeBlueprint.persona}</p>
-                            </div>
+                        <!-- Who Chooses This Life? -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Best Suited For</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">${activeBlueprint.persona}</p>
                         </div>
                     </div>
 
-                    <!-- Column 3: Outcome Highlights & Trade-offs -->
+                    <!-- Column 3: Scores, Sacrifices & Profile Shortlist Button -->
                     <div>
-                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-6">Outcome Highlights</h4>
-                        <div class="space-y-4 mb-8">
+                        <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-4">Outcome Scores (Dynamic)</h4>
+                        <div class="space-y-3 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-semibold text-slate-600">Tax Efficiency</span>
-                                <div>${renderDots(activeBlueprint.outcomeScores.tax)}</div>
+                                <span class="font-semibold text-slate-700">Tax Efficiency</span>
+                                <div>${renderDots(activeScores.tax)}</div>
                             </div>
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-semibold text-slate-600">Lifestyle & Experience</span>
-                                <div>${renderDots(activeBlueprint.outcomeScores.lifestyle)}</div>
+                                <span class="font-semibold text-slate-700">Lifestyle & Culture</span>
+                                <div>${renderDots(activeScores.lifestyle)}</div>
                             </div>
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-semibold text-slate-600">Healthcare Access</span>
-                                <div>${renderDots(activeBlueprint.outcomeScores.healthcare)}</div>
-                            </div>
-                            
-                            <!-- FAMILY INFLUENCE INTEGRATION METER -->
-                            <div class="flex justify-between items-center text-xs border-y border-slate-100 py-2">
-                                <span class="font-semibold text-slate-800">Family Integration Meter</span>
-                                <div>${renderDots(activeFamilyIntegration)}</div>
-                            </div>
-                            
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="font-semibold text-slate-600">Flexibility</span>
-                                <div>${renderDots(activeBlueprint.outcomeScores.flexibility)}</div>
+                                <span class="font-semibold text-slate-700">Healthcare Security</span>
+                                <div>${renderDots(activeScores.healthcare)}</div>
                             </div>
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-semibold text-slate-600">Complexity</span>
-                                <div>${renderDots(activeBlueprint.outcomeScores.complexity)}</div>
+                                <span class="font-semibold text-slate-700">Family Proximity</span>
+                                <div>${renderDots(activeScores.family)}</div>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-semibold text-slate-700">Operational Simplicity</span>
+                                <div>${renderDots(6 - activeScores.complexity)}</div>
                             </div>
                         </div>
 
-                        <!-- Consular Eligibility Check Hook -->
-                        <div class="border-t border-slate-100 pt-6 mb-6">
-                            <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-4">Consular Eligibility Checks</h4>
-                            <div class="space-y-3">
-                                ${inputs.wl_citizenship === "US" ? `
-                                    <div class="flex items-start gap-2.5 text-xs text-slate-600">
-                                        <span class="text-emerald-500 font-bold">✓</span>
-                                        <p>Standard domestic transition plans are fully <strong>Accessible</strong> via native US citizenship.</p>
-                                    </div>
-                                ` : ''}
-                                <div class="flex items-start gap-2.5 text-xs text-slate-600">
-                                    <span class="text-amber-500 font-bold">●</span>
-                                    <p>Sovereign options (e.g. Taiwan, Portugal) remain marked as <strong>Potentially Available</strong>. Complete an eligibility review audit.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Trade-offs with Scale Icon matching bottom-right of the screenshot -->
-                        <div class="border-t border-slate-100 pt-6 relative">
-                            <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-4">Trade-Offs to Consider</h4>
-                            <ul class="space-y-2 text-xs text-slate-500 leading-relaxed pr-10">
+                        <!-- Trade-offs / Sacrifices -->
+                        <div class="border-t border-slate-100 pt-4 mb-6">
+                            <h4 class="text-xs font-extrabold uppercase tracking-widest text-[#0B132B] mb-3">Sacrifices & Compromises</h4>
+                            <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
                                 ${activeBlueprint.tradeoffs.map(t => `
                                     <li class="flex items-start gap-2">
-                                        <span class="text-slate-400">•</span>
+                                        <span class="text-amber-500 font-bold">•</span>
                                         <span>${t}</span>
                                     </li>
                                 `).join('')}
                             </ul>
-                            <!-- Floating Scales Icon -->
-                            <div class="absolute right-0 bottom-0 bg-slate-50 text-slate-500 p-2.5 rounded-full border border-slate-200">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2v2"></path></svg>
-                            </div>
+                        </div>
+
+                        <!-- Profile Shortlist Action Box -->
+                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center">
+                            <p class="text-xs text-slate-600 font-medium mb-3">Does this lifestyle appeal to you? Add it to your shortlist for Preference Discovery.</p>
+                            <button onclick="toggleShortlist('${activeBlueprint.id}')" class="w-full font-bold py-2.5 rounded-lg text-xs transition shadow-sm ${
+                                isShortlisted 
+                                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 hover:bg-emerald-200' 
+                                    : 'bg-slate-900 hover:bg-slate-800 text-white'
+                            }">
+                                ${isShortlisted ? '✓ Added to Shortlist' : '+ Add to My Shortlist'}
+                            </button>
                         </div>
 
                     </div>
@@ -1396,11 +1388,9 @@
             `;
         }
 
-        // Initialize display state on window load
         window.onload = function() {
             runSimulationEngine();
         };
     </script>
-
 </body>
 </html>
