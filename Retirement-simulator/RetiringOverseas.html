@@ -46,7 +46,6 @@
       font-family: var(--font-serif);
     }
 
-    /* Global Navigation Header */
     .global-header {
       background-color: #0B132B; 
       color: white;
@@ -435,7 +434,7 @@
       <!-- RIGHT 7 COLUMNS: BLUEPRINT RECOMMENDATION & EVIDENCE -->
       <div class="lg:col-span-7 space-y-6">
 
-        <!-- BLUEPRINT RECOMMENDATION CARD -->
+        <!-- BLUEPRINT RECOMMENDATION CARD WITH DESTINATION HERO PHOTO -->
         <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 border-2 border-emerald-500 rounded-2xl p-6 shadow-md space-y-5">
           
           <div class="flex justify-between items-start border-b border-emerald-200/80 pb-3">
@@ -446,6 +445,26 @@
             <div class="text-right">
               <span class="text-[10px] font-bold text-slate-400 block uppercase">Decision Confidence</span>
               <strong id="recommendationFitBadge" class="text-xs font-extrabold uppercase px-2.5 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-md inline-block mt-0.5">High Confidence</strong>
+            </div>
+          </div>
+
+          <!-- DYNAMIC DESTINATION HERO BANNER WITH SCRAPBOOK PREVIEW -->
+          <div class="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-sm h-48 sm:h-56 group">
+            <img id="destinationHeroImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Portugal Destination" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/1200x500/019367/FFFFFF?text=International+Base'">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <span id="heroCountryTag" class="bg-white/90 backdrop-blur-md text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                  <span id="heroFlagEmoji">🇵🇹</span> <span id="heroCountryName">Portugal</span>
+                </span>
+                <span class="bg-emerald-500/90 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider">Top Match</span>
+              </div>
+
+              <div>
+                <span class="text-emerald-300 font-extrabold text-[10px] uppercase tracking-widest block">Future Snapshot</span>
+                <h4 id="heroTitleText" class="text-white text-lg sm:text-2xl font-serif-title font-bold drop-shadow-sm">Lisbon & Algarve Coastline</h4>
+                <p id="heroSubText" class="text-slate-200 text-xs mt-0.5 font-medium line-clamp-1">Coastal living, mild Mediterranean weather, and JCI private healthcare.</p>
+              </div>
             </div>
           </div>
 
@@ -463,11 +482,11 @@
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
             <div class="sm:col-span-7 space-y-3">
               <div class="flex items-center gap-2">
-                <span class="text-2xl">🌍</span>
+                <span class="text-2xl" id="titleFlagIcon">🇵🇹</span>
                 <h4 id="recommendedCountryTitle" class="text-xl font-bold text-slate-900">Portugal (Lisbon / Algarve)</h4>
               </div>
 
-              <!-- VISUAL DECISION FACTORS (STAR RATINGS) -->
+              <!-- VISUAL DECISION FACTORS SCORECARD -->
               <div class="bg-white/80 p-3 rounded-xl border border-emerald-200 space-y-1.5 text-xs">
                 <strong class="text-[10px] uppercase font-black text-emerald-800 tracking-wider block border-b pb-1">Decision Factors Scorecard:</strong>
                 
@@ -491,9 +510,21 @@
               <div>
                 <span class="text-[10px] text-slate-400 font-bold uppercase block">Budget vs. Living Cost</span>
                 <div class="mt-1 space-y-1">
-                  <div class="flex justify-between"><span class="text-slate-500">Target Budget:</span> <strong class="font-bold text-slate-900">$8,500/mo</strong></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Target Budget:</span> <strong id="recTargetBudgetText" class="font-bold text-slate-900">$8,500/mo</strong></div>
                   <div class="flex justify-between"><span class="text-slate-500">Est. Living Cost:</span> <strong id="recCostText" class="font-bold text-emerald-700">$3,200 – $4,800/mo</strong></div>
                   <div class="flex justify-between border-t pt-1"><span class="text-emerald-800 font-bold">Monthly Surplus:</span> <strong id="recSurplusText" class="font-extrabold text-emerald-800">+$3,700–$5,300/mo</strong></div>
+                </div>
+              </div>
+
+              <!-- VISUAL BUDGET GAUGE -->
+              <div class="space-y-1">
+                <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase">
+                  <span>Living Cost</span>
+                  <span>Surplus</span>
+                </div>
+                <div class="w-full bg-emerald-100 h-2 rounded-full overflow-hidden flex">
+                  <div id="costBarSegment" class="bg-emerald-600 h-full transition-all duration-500" style="width: 45%;"></div>
+                  <div id="surplusBarSegment" class="bg-emerald-300 h-full transition-all duration-500" style="width: 55%;"></div>
                 </div>
               </div>
 
@@ -515,20 +546,26 @@
             <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Related Case Studies & Evidence</span>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div class="bg-white/80 p-3 rounded-xl border border-slate-200 space-y-1">
-                <span class="text-[10px] font-bold text-blue-700 uppercase block">📖 Case Study #104</span>
-                <strong class="text-xs font-bold text-slate-900 block">How Tom & Sarah Saved $420,000 Overseas</strong>
-                <p class="text-[11px] text-slate-600 leading-relaxed">
-                  Basing themselves in Portugal from age 55 to 65 avoided $28,000/yr in U.S. health insurance premiums while executing tax-free Roth conversions.
-                </p>
+              <div class="bg-white/80 p-3 rounded-xl border border-slate-200 space-y-1 flex items-start gap-2.5">
+                <span class="text-xl">📖</span>
+                <div>
+                  <span class="text-[10px] font-bold text-blue-700 uppercase block">Case Study #104</span>
+                  <strong class="text-xs font-bold text-slate-900 block">How Tom & Sarah Saved $420,000 Overseas</strong>
+                  <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">
+                    Basing themselves in Portugal from age 55 to 65 avoided $28,000/yr in U.S. health insurance premiums while executing tax-free Roth conversions.
+                  </p>
+                </div>
               </div>
 
-              <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-1">
-                <span class="text-[10px] font-bold text-amber-800 uppercase block">⚠️ Cautionary Briefing</span>
-                <strong class="text-xs font-bold text-amber-950 block">The $80,000 Tax Trap</strong>
-                <p class="text-[11px] text-amber-900 leading-relaxed">
-                  Moving abroad without verifying double-taxation treaties can trigger unexpected foreign income taxation on traditional IRA distributions.
-                </p>
+              <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-1 flex items-start gap-2.5">
+                <span class="text-xl">⚠️</span>
+                <div>
+                  <span class="text-[10px] font-bold text-amber-800 uppercase block">Cautionary Briefing</span>
+                  <strong class="text-xs font-bold text-amber-950 block">The $80,000 Tax Trap</strong>
+                  <p class="text-[11px] text-amber-900 leading-relaxed mt-0.5">
+                    Moving abroad without verifying double-taxation treaties can trigger unexpected foreign income taxation on traditional IRA distributions.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -558,12 +595,15 @@
 
     </div>
 
-    <!-- GAIN VS TRADE-OFF MATRIX (FULL WIDTH) -->
+    <!-- GAIN VS TRADE-OFF MATRIX (FULL WIDTH ACROSS BOTH COLUMNS) -->
     <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-      <div class="border-b border-slate-100 pb-3">
-        <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Analysis</span>
-        <h3 class="text-lg font-serif-title font-bold text-slate-900">Compare the Trade-Offs</h3>
-        <p class="text-xs text-slate-500 mt-0.5">Evaluating key advantages against major drawbacks across international destinations:</p>
+      <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div>
+          <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Analysis</span>
+          <h3 class="text-lg font-serif-title font-bold text-slate-900">Compare the Trade-Offs</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Evaluating key advantages against major drawbacks across candidate international destinations:</p>
+        </div>
+        <span class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold">4 Major Destinations Evaluated</span>
       </div>
 
       <div class="overflow-x-auto rounded-xl border border-slate-200">
@@ -577,7 +617,7 @@
             </tr>
           </thead>
           <tbody id="tradeoffMatrixBody" class="divide-y divide-slate-100 font-medium">
-            <!-- Dynamically populated via recalculateRecommendation() -->
+            <!-- Dynamically populated via recalculateRecommendation() with visual thumbnails -->
           </tbody>
         </table>
       </div>
@@ -678,19 +718,25 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div class="bg-slate-800/80 p-3 rounded-xl border border-emerald-500/40">
-            <span class="text-[10px] text-emerald-400 font-bold uppercase block">Overseas Base</span>
-            <strong id="savedOverseasVal" class="text-base font-bold text-emerald-300 block mt-0.5">Portugal 🌍</strong>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-emerald-500/40 flex items-center gap-3">
+            <img id="completionThumbImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80" alt="Saved Overseas" class="w-12 h-12 rounded-lg object-cover border border-emerald-400/50">
+            <div>
+              <span class="text-[10px] text-emerald-400 font-bold uppercase block">Overseas Base</span>
+              <strong id="savedOverseasVal" class="text-base font-bold text-emerald-300 block mt-0.5">Portugal 🌍</strong>
+            </div>
           </div>
-          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-            <span class="text-[10px] text-slate-400 font-bold uppercase block">Next Required Location Step</span>
-            <strong class="text-sm font-bold text-white block mt-0.5">Choose U.S. Home Base (Raleigh, NC) 🏡</strong>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex items-center gap-3">
+            <div class="bg-slate-700 w-12 h-12 rounded-lg flex items-center justify-center text-xl">🏡</div>
+            <div>
+              <span class="text-[10px] text-slate-400 font-bold uppercase block">Next Required Location Step</span>
+              <strong id="nextStepTargetText" class="text-sm font-bold text-white block mt-0.5">Choose U.S. Home Base (Raleigh, NC) 🏡</strong>
+            </div>
           </div>
         </div>
 
         <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <span class="text-xs text-slate-300 font-medium">Location Strategy Part 2: <strong class="text-emerald-400">Domestic Location Planning</strong></span>
-          <a href="UScitymatcher.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow-md whitespace-nowrap">
+          <span class="text-xs text-slate-300 font-medium">Location Strategy Part 2: <strong class="text-emerald-400" id="nextStepLabel">Domestic Location Planning</strong></span>
+          <a id="continueLocationBtn" href="UScitymatcher.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow-md whitespace-nowrap">
             <span>Continue Building My Location Strategy →</span>
           </a>
         </div>
@@ -702,22 +748,22 @@
     <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
       <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Your Retirement Journey Sequence</span>
       <div class="grid grid-cols-3 gap-3 text-center text-xs">
-        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-          <span class="text-[10px] text-emerald-800 font-bold uppercase block">Age 55–65</span>
+        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 space-y-1">
+          <span class="text-[10px] text-emerald-800 font-bold uppercase block" id="seqAge1">Age 55–65</span>
           <strong id="seqOverseas" class="text-sm font-bold text-slate-900 block mt-0.5">Portugal 🌍</strong>
-          <span class="text-[10px] text-emerald-700 font-semibold">Active Travel & Tax Conversion</span>
+          <span class="text-[10px] text-emerald-700 font-semibold block" id="seqSub1">Active Travel & Tax Conversion</span>
         </div>
 
-        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-          <span class="text-[10px] text-slate-400 font-bold uppercase block">Age 65+</span>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+          <span class="text-[10px] text-slate-400 font-bold uppercase block" id="seqAge2">Age 65+</span>
           <strong id="seqUSCity" class="text-sm font-bold text-slate-800 block mt-0.5">Raleigh, NC 🏡</strong>
-          <span class="text-[10px] text-slate-500 font-semibold">Medicare & Family Hub</span>
+          <span class="text-[10px] text-slate-500 font-semibold block" id="seqSub2">Medicare & Family Hub</span>
         </div>
 
-        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 opacity-60">
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 opacity-60 space-y-1">
           <span class="text-[10px] text-slate-400 font-bold uppercase block">Age 85+</span>
           <strong class="text-sm font-bold text-slate-800 block mt-0.5">Estate & Care 🏰</strong>
-          <span class="text-[10px] text-slate-500 font-semibold">Trust & Inheritance Shield</span>
+          <span class="text-[10px] text-slate-500 font-semibold block">Trust & Inheritance Shield</span>
         </div>
       </div>
     </div>
@@ -739,17 +785,19 @@
     // State Store
     const blueprintState = {
       pathName: "Explore Then Return",
+      pathId: "explore_then_return",
       monthlySpend: "$8,500 / month",
       overseasBase: "Portugal",
       selectedUSCity: "Raleigh, NC",
       childrenCity: "Seattle, WA"
     };
 
-    // Database of International Destinations
+    // Database of International Destinations with Visual Assets
     const countryDatabase = {
       "EU_South": {
         name: "Portugal (Lisbon / Algarve)",
         country: "Portugal",
+        flagEmoji: "🇵🇹",
         city: "Lisbon",
         visa: "D7 Passive Income Visa",
         costNum: 4000,
@@ -763,6 +811,10 @@
         costStars: "★★★★☆",
         advantage: "Best overall balance & direct U.S. transit",
         drawback: "Recent housing cost increases in Lisbon & Porto",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+        thumb: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80",
+        heroTitle: "Lisbon & Algarve Coastline",
+        heroSub: "Coastal living, mild Mediterranean weather, and JCI private healthcare.",
         healthScore: 25,
         visaScore: 20,
         taxScore: 15,
@@ -772,6 +824,7 @@
       "EU_Central": {
         name: "Spain (Barcelona / Valencia)",
         country: "Spain",
+        flagEmoji: "🇪🇸",
         city: "Barcelona",
         visa: "Non-Lucrative Visa (NLV)",
         costNum: 4600,
@@ -785,6 +838,10 @@
         costStars: "★★★☆☆",
         advantage: "Elite healthcare depth & Mediterranean culture",
         drawback: "Regional wealth tax considerations on non-EU assets",
+        image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80",
+        thumb: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=200&q=80",
+        heroTitle: "Barcelona & Costa Brava",
+        heroSub: "World-class clinical depth and rich Mediterranean lifestyle.",
         healthScore: 25,
         visaScore: 18,
         taxScore: 10,
@@ -794,6 +851,7 @@
       "LATAM": {
         name: "Costa Rica (Central Valley / Guanacaste)",
         country: "Costa Rica",
+        flagEmoji: "🇨🇷",
         city: "San Jose",
         visa: "Pensionado Visa ($1,000/mo income)",
         costNum: 3500,
@@ -807,6 +865,10 @@
         costStars: "★★★★★",
         advantage: "U.S. time zone alignment & fast visa approval",
         drawback: "Slower local administrative bureaucracy & road infrastructure",
+        image: "https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=1200&q=80",
+        thumb: "https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=200&q=80",
+        heroTitle: "Central Valley & Pacific Beaches",
+        heroSub: "U.S. time zone alignment, lush biodiversity, and low income threshold.",
         healthScore: 20,
         visaScore: 20,
         taxScore: 15,
@@ -816,6 +878,7 @@
       "SE_Asia": {
         name: "Malaysia (Kuala Lumpur / Penang)",
         country: "Malaysia",
+        flagEmoji: "🇲🇾",
         city: "Kuala Lumpur",
         visa: "MM2H (Malaysia My Second Home)",
         costNum: 2900,
@@ -829,6 +892,10 @@
         costStars: "★★★★★",
         advantage: "Lowest overall living cost & English-speaking depth",
         drawback: "Longer 20+ hour flight duration back to U.S. home base",
+        image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80",
+        thumb: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=200&q=80",
+        heroTitle: "Kuala Lumpur & Penang Island",
+        heroSub: "Unmatched purchasing power, English fluency, and top-tier JCI hospitals.",
         healthScore: 25,
         visaScore: 12,
         taxScore: 15,
@@ -843,6 +910,7 @@
         const payload = JSON.parse(raw);
 
         if (payload.selectedLifeName) blueprintState.pathName = payload.selectedLifeName;
+        if (payload.selectedLifeId) blueprintState.pathId = payload.selectedLifeId;
         if (payload.monthlySpend) blueprintState.monthlySpend = payload.monthlySpend;
         if (payload.overseasBase) blueprintState.overseasBase = payload.overseasBase;
         if (payload.usCity) blueprintState.selectedUSCity = payload.usCity;
@@ -854,12 +922,27 @@
       document.getElementById("blueprintPathText").innerText = blueprintState.pathName;
       document.getElementById("blueprintBudgetText").innerText = blueprintState.monthlySpend.split('(')[0] || blueprintState.monthlySpend;
       
-      document.getElementById("recapOverseasText").innerText = `${blueprintState.overseasBase} 🌍`;
-      document.getElementById("recapUSText").innerText = `${blueprintState.selectedUSCity} 🏡`;
-      
-      document.getElementById("seqOverseas").innerText = `${blueprintState.overseasBase} 🌍`;
-      document.getElementById("seqUSCity").innerText = `${blueprintState.selectedUSCity} 🏡`;
+      const isPermanentOverseas = blueprintState.pathId === "global_expat";
 
+      if (isPermanentOverseas) {
+        document.getElementById("blueprintAgeText").innerText = "Permanent Overseas Sanctuary (Age 55+)";
+        document.getElementById("recapUSText").innerText = "Not Needed (Permanent Overseas)";
+        document.getElementById("seqAge1").innerText = "Age 55–75";
+        document.getElementById("seqSub1").innerText = "Active Overseas Base";
+        document.getElementById("seqAge2").innerText = "Age 75+";
+        document.getElementById("seqUSCity").innerText = "Overseas Care Sanctuary 🏥";
+        document.getElementById("seqSub2").innerText = "In-Home Private Care";
+        document.getElementById("nextStepTargetText").innerText = "Healthcare & Tax Protection Strategy";
+        document.getElementById("nextStepLabel").innerText = "Section 3 Healthcare Planning";
+        document.getElementById("continueLocationBtn").href = "building-your-retirement.html";
+      } else {
+        document.getElementById("blueprintAgeText").innerText = "Explore Abroad 55–65 → US 65+";
+        document.getElementById("recapUSText").innerText = `${blueprintState.selectedUSCity} 🏡`;
+        document.getElementById("seqOverseas").innerText = `${blueprintState.overseasBase} 🌍`;
+        document.getElementById("seqUSCity").innerText = `${blueprintState.selectedUSCity} 🏡`;
+      }
+
+      document.getElementById("recapOverseasText").innerText = `${blueprintState.overseasBase} 🌍`;
       document.getElementById("teaserOverseasCountry").innerText = blueprintState.overseasBase;
       document.getElementById("teaserUSCity").innerText = blueprintState.selectedUSCity;
 
@@ -907,12 +990,22 @@
 
       const topPick = scored[0];
 
-      // Update Primary Recommendation Card
+      // Update Hero Photo Banner
+      document.getElementById("destinationHeroImg").src = topPick.image;
+      document.getElementById("heroCountryName").innerText = topPick.country;
+      document.getElementById("heroFlagEmoji").innerText = topPick.flagEmoji;
+      document.getElementById("titleFlagIcon").innerText = topPick.flagEmoji;
+      document.getElementById("heroTitleText").innerText = topPick.heroTitle;
+      document.getElementById("heroSubText").innerText = topPick.heroSub;
+      document.getElementById("completionThumbImg").src = topPick.thumb;
+
+      // Update Primary Recommendation Card Details
       document.getElementById("recommendedCountryTitle").innerText = topPick.name;
       document.getElementById("summaryCountryName").innerText = topPick.country;
       
+      const isPermanentOverseas = blueprintState.pathId === "global_expat";
       document.getElementById("timelineOverseasText").innerText = `${topPick.country} 🌍`;
-      document.getElementById("timelineUSText").innerText = `${blueprintState.selectedUSCity} 🏡`;
+      document.getElementById("timelineUSText").innerText = isPermanentOverseas ? "Permanent Base" : `${blueprintState.selectedUSCity} 🏡`;
 
       document.getElementById("starsHealth").innerText = topPick.healthStars;
       document.getElementById("starsVisa").innerText = topPick.visaStars;
@@ -921,15 +1014,32 @@
       document.getElementById("starsFlights").innerText = topPick.flightsStars;
       document.getElementById("starsCost").innerText = topPick.costStars;
 
+      // Budget Math & Surplus Gauges
+      let targetBudgetNum = 8500;
+      try {
+        const parsed = parseInt(blueprintState.monthlySpend.replace(/[^0-9]/g, ''));
+        if (parsed && !isNaN(parsed)) targetBudgetNum = parsed;
+      } catch (e) {}
+
+      const estCostAvg = topPick.costNum;
+      const surplus = Math.max(0, targetBudgetNum - estCostAvg);
+
+      document.getElementById("recTargetBudgetText").innerText = `$${targetBudgetNum.toLocaleString()}/mo`;
       document.getElementById("recCostText").innerText = topPick.costRange;
+      document.getElementById("recSurplusText").innerText = `+$${surplus.toLocaleString()}/mo`;
       document.getElementById("recVisaText").innerText = topPick.visa;
+
+      // Visual Budget Gauge Widths
+      const costPct = Math.min(85, Math.max(20, Math.round((estCostAvg / targetBudgetNum) * 100)));
+      document.getElementById("costBarSegment").style.width = `${costPct}%`;
+      document.getElementById("surplusBarSegment").style.width = `${100 - costPct}%`;
 
       blueprintState.overseasBase = topPick.country;
       document.getElementById("recapOverseasText").innerText = `${topPick.country} 🌍`;
       document.getElementById("seqOverseas").innerText = `${topPick.country} 🌍`;
       document.getElementById("teaserOverseasCountry").innerText = topPick.country;
 
-      // Render Gain vs. Trade-Off Matrix with Highlighted Winner Row
+      // Render Gain vs. Trade-Off Matrix with Highlighted Winner Row & Thumbnails
       const matrixBody = document.getElementById("tradeoffMatrixBody");
       matrixBody.innerHTML = "";
 
@@ -942,16 +1052,21 @@
 
         tr.innerHTML = `
           <td class="p-3">
-            <div class="flex items-center gap-1.5">
-              <span class="font-bold text-sm text-slate-900">${item.name}</span>
-              ${isTop ? '<span class="bg-emerald-600 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase">★ Winner</span>' : ''}
+            <div class="flex items-center gap-2.5">
+              <img src="${item.thumb}" alt="${item.country}" class="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-sm text-slate-900">${item.flagEmoji} ${item.name}</span>
+                  ${isTop ? '<span class="bg-emerald-600 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase">★ Winner</span>' : ''}
+                </div>
+                <span class="text-[10px] text-slate-500 font-semibold block mt-0.5">${item.visa}</span>
+              </div>
             </div>
-            <span class="text-[10px] text-slate-500 font-semibold block mt-0.5">${item.visa}</span>
           </td>
           <td class="p-3 text-emerald-800 font-bold">${item.advantage}</td>
           <td class="p-3 text-slate-600">${item.drawback}</td>
           <td class="p-3 text-right">
-            <span class="text-[10px] ${isTop ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-700'} px-2.5 py-1 rounded font-extrabold uppercase">
+            <span class="text-[10px] ${isTop ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-700'} px-2.5 py-1 rounded font-extrabold uppercase whitespace-nowrap">
               ${isTop ? 'High Confidence' : 'Alternative'}
             </span>
           </td>
@@ -976,7 +1091,7 @@
           strategy: "International Location Strategy",
           country: blueprintState.overseasBase,
           city: primaryData.city,
-          timeline: "55-65",
+          timeline: blueprintState.pathId === "global_expat" ? "55+" : "55-65",
           healthcare: primaryData.healthcare,
           visa: primaryData.visa,
           budgetRange: primaryData.costRange,
@@ -1019,13 +1134,17 @@
         completionCard.classList.remove("hidden");
       }
 
+      const isPermanentOverseas = blueprintState.pathId === "global_expat";
+      const nextHref = isPermanentOverseas ? "building-your-retirement.html" : "UScitymatcher.html";
+      const nextBtnLabel = isPermanentOverseas ? "Continue to Healthcare Planning →" : "Continue Building My Location Strategy →";
+
       const actionGroup = document.getElementById("saveActionGroup");
       actionGroup.innerHTML = `
         <span class="text-xs text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
           <span>✓ International Strategy Added</span>
         </span>
-        <a href="UScitymatcher.html" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
-          <span>Continue Building My Location Strategy →</span>
+        <a href="${nextHref}" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
+          <span>${nextBtnLabel}</span>
         </a>
       `;
     }
