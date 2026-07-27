@@ -189,9 +189,10 @@
       animation: slideUpFade 0.3s ease-out forwards;
     }
 
+    /* Fixed CSS syntax: Replacing invalid ring property with standard box-shadow */
     .card-selected {
       border-color: #02B17D !important;
-      ring: 2px solid #02B17D;
+      box-shadow: 0 0 0 2px rgba(2, 177, 125, 0.25);
       background-color: #F0FDF4 !important;
     }
   </style>
@@ -388,7 +389,7 @@
           <div>
             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">2. Healthcare Network Preference?</label>
             <select id="q_healthcarePref" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
-              <option value="academic" selected>Academic Medical Center (e.g. Duke / UNC / OHSU)</option>
+              <option value="academic" selected>Academic Medical Center (e.g. Duke / UNC / OHSU / UW)</option>
               <option value="regional">Strong Regional Health System</option>
               <option value="routine">Routine Primary Care Network</option>
             </select>
@@ -421,33 +422,41 @@
           <div class="flex justify-between items-start border-b border-emerald-200/80 pb-3">
             <div>
               <span class="bg-emerald-600 text-white font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Blueprint Recommendation</span>
-              <h3 class="text-2xl font-serif-title font-bold text-slate-900 mt-1">Domestic Retirement Destination</h3>
+              <h3 class="text-2xl font-serif-title font-bold text-slate-900 mt-1">Your U.S. Home Base</h3>
             </div>
             <div class="text-right">
-              <span class="text-xs font-bold text-slate-500 block">Match Confidence</span>
-              <strong id="recommendationScoreText" class="text-2xl font-black font-mono text-emerald-700">94%</strong>
+              <span class="text-xs font-bold text-slate-500 block">Estimated Fit</span>
+              <strong id="recommendationFitBadge" class="text-sm font-extrabold uppercase px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md inline-block mt-1">Excellent Fit</strong>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-            <div class="sm:col-span-7 space-y-2">
+            <div class="sm:col-span-7 space-y-3">
               <div class="flex items-center gap-2">
                 <span class="text-2xl">🏡</span>
                 <h4 id="recommendedCityTitle" class="text-xl font-bold text-slate-900">Raleigh, NC</h4>
               </div>
 
+              <!-- DECISION SUMMARY: WHY THIS CITY WON -->
+              <div class="bg-white/80 p-3 rounded-xl border border-emerald-200 space-y-1 text-xs">
+                <strong class="text-[10px] uppercase font-black text-emerald-800 tracking-wider block">Decision Summary — Why It Won:</strong>
+                <p id="decisionSummaryText" class="text-slate-700 leading-relaxed font-medium">
+                  Because your family is in <span id="summaryFamilyRegion" class="font-bold">Southeast U.S.</span>, you chose <span id="summaryHealthPref" class="font-bold">academic healthcare</span>, prefer <span id="summaryClimatePref" class="font-bold">mild climate</span>, and don't require zero state tax, <span id="summaryCityName" class="font-bold text-emerald-800">Raleigh</span> becomes your strongest overall fit.
+                </p>
+              </div>
+
               <ul class="space-y-1 text-xs text-slate-700 font-medium">
                 <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span id="recBulletFamily">Close to family region</span></li>
                 <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span id="recBulletHealth">Excellent academic healthcare network</span></li>
-                <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span>Optimized state tax structure</span></li>
-                <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span>Direct flight access via regional hub</span></li>
+                <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span id="recBulletTax">Moderate 4.5% flat NC income tax</span></li>
+                <li class="flex items-center gap-1.5"><span class="text-emerald-600 font-bold">✓</span> <span id="recBulletAirport">Direct flight access via regional hub</span></li>
               </ul>
             </div>
 
             <div class="sm:col-span-5 bg-white p-3.5 rounded-xl border border-emerald-200 space-y-2 text-xs">
               <div class="flex justify-between items-center border-b pb-1">
-                <span class="text-[10px] text-slate-400 font-bold uppercase">Primary Hospital</span>
-                <strong id="recHospitalText" class="font-bold text-slate-800">Duke Health</strong>
+                <span class="text-[10px] text-slate-400 font-bold uppercase">Nearby Health Systems</span>
+                <strong id="recHospitalText" class="font-bold text-slate-800 text-right">Duke Health / UNC</strong>
               </div>
               <div class="flex justify-between items-center border-b pb-1">
                 <span class="text-[10px] text-slate-400 font-bold uppercase">Primary Airport</span>
@@ -461,16 +470,28 @@
           </div>
         </div>
 
-        <!-- STEP 4: "WHY NOT THE OTHERS?" COMPARISON MATRIX -->
+        <!-- STEP 4: GAIN VS TRADE-OFF MATRIX -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
           <div class="border-b border-slate-100 pb-3">
-            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Rationale</span>
-            <h3 class="text-lg font-serif-title font-bold text-slate-900">Why Not The Others?</h3>
-            <p class="text-xs text-slate-500 mt-0.5">How alternative candidate cities compare against your specific Blueprint criteria:</p>
+            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Analysis</span>
+            <h3 class="text-lg font-serif-title font-bold text-slate-900">Compare the Trade-Offs</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Evaluating what you gain versus what you give up across candidate destinations:</p>
           </div>
 
-          <div class="space-y-2.5" id="alternativesContainer">
-            <!-- Dynamically populated via recalculateRecommendation() -->
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-50 text-slate-700 font-bold uppercase border-b border-slate-200">
+                  <th class="p-3">Choice</th>
+                  <th class="p-3">What You Gain</th>
+                  <th class="p-3">Trade-Off</th>
+                  <th class="p-3 text-right">Fit Level</th>
+                </tr>
+              </thead>
+              <tbody id="tradeoffMatrixBody" class="divide-y divide-slate-100 font-medium">
+                <!-- Dynamically populated via recalculateRecommendation() -->
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -478,24 +499,27 @@
 
     </div>
 
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
+    <!-- STEP 5 & BLUEPRINT COMPLETION CARD -->
+    <div id="locationCompletionContainer" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
       <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
-          <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Step 5 Complete</span>
-          <h3 class="text-xl font-serif-title font-bold text-slate-900">Location Section Complete</h3>
+          <span id="completionStepBadge" class="text-[10px] font-black uppercase text-amber-600 tracking-widest block">Step 2 of 5 — Action Required</span>
+          <h3 id="completionStepTitle" class="text-xl font-serif-title font-bold text-slate-900">Ready to Complete Location Section</h3>
         </div>
 
-        <button id="addToBlueprintBtn" onclick="addToRetirementBlueprint()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
-          <span>[ Add to Retirement Blueprint ]</span>
-        </button>
+        <div id="saveActionGroup" class="flex flex-wrap items-center gap-3">
+          <button id="addToBlueprintBtn" onclick="addToRetirementBlueprint()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
+            <span>[ Add to Retirement Blueprint ]</span>
+          </button>
+        </div>
       </div>
 
       <!-- LOCATION STRATEGY STORY RECAP -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- LOCATION STRATEGY NARRATIVE -->
+        <!-- LOCATION STRATEGY TRANSITION LIFECYCLE -->
         <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block border-b pb-1">Location Strategy</span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block border-b pb-1">Transition-Based Location Strategy</span>
           
           <div class="space-y-2 text-xs">
             <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-slate-200">
@@ -507,7 +531,7 @@
             <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-emerald-300 ring-1 ring-emerald-500/20">
               <span class="font-bold text-slate-700">Age 65+</span>
               <span id="recapUSText" class="font-bold text-emerald-800">Raleigh, NC 🏡</span>
-              <span class="text-emerald-600 font-extrabold">✓</span>
+              <span id="recapUSCheck" class="text-amber-500 font-extrabold">⚡</span>
             </div>
           </div>
 
@@ -516,11 +540,11 @@
           </div>
         </div>
 
-        <!-- VISUAL RETIREMENT BLUEPRINT STATUS MATRIX -->
+        <!-- VISUAL RETIREMENT BLUEPRINT STATUS MATRIX WITH TRANSITION ANIMATIONS -->
         <div class="bg-slate-900 text-white rounded-xl p-4 space-y-3 shadow-md">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
             <span class="text-xs font-black uppercase text-emerald-400 tracking-wider">RETIREMENT BLUEPRINT</span>
-            <span id="blueprintModuleCount" class="text-[10px] text-slate-400 font-mono font-bold">2 of 5 Complete</span>
+            <span id="blueprintModuleCount" class="text-[10px] text-slate-400 font-mono font-bold">1 of 5 Complete</span>
           </div>
 
           <div class="grid grid-cols-5 gap-2 text-center text-xs pt-1">
@@ -529,9 +553,9 @@
               <span class="text-emerald-400 font-bold text-sm">✓</span>
             </div>
 
-            <div id="moduleLocationCard" class="bg-emerald-950 p-2 rounded-lg border border-emerald-400">
-              <span class="block text-[10px] text-emerald-300 uppercase font-bold">Location</span>
-              <span id="moduleLocationCheck" class="text-emerald-400 font-bold text-sm">✓</span>
+            <div id="moduleLocationCard" class="bg-slate-800 p-2 rounded-lg border border-amber-400/60 transition-all duration-500">
+              <span id="moduleLocationLabel" class="block text-[10px] text-amber-300 uppercase font-bold">Location</span>
+              <span id="moduleLocationCheck" class="text-amber-400 font-bold text-sm">⚡</span>
             </div>
 
             <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
@@ -539,9 +563,9 @@
               <span class="text-slate-500 font-bold text-sm">□</span>
             </div>
 
-            <div class="bg-slate-800 p-2 rounded-lg border border-emerald-500/40">
+            <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
               <span class="block text-[10px] text-slate-400 uppercase font-bold">Financial</span>
-              <span class="text-emerald-400 font-bold text-sm">✓</span>
+              <span class="text-slate-500 font-bold text-sm">□</span>
             </div>
 
             <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
@@ -552,11 +576,46 @@
 
           <div class="pt-2 text-right">
             <a href="building-your-retirement.html" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold underline">
-              View Updated Master Blueprint →
+              View Master Retirement Builder →
             </a>
           </div>
         </div>
 
+      </div>
+
+      <!-- DYNAMIC BLUEPRINT COMPLETION CARD (APPEARS UPON SAVE) -->
+      <div id="blueprintCompletionCard" class="hidden bg-gradient-to-r from-emerald-900 to-slate-900 text-white p-6 rounded-2xl border-2 border-emerald-500 shadow-xl space-y-4 animate-toast">
+        <div class="flex justify-between items-start border-b border-emerald-800/80 pb-3">
+          <div>
+            <span class="bg-emerald-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Blueprint Module 2 Secured</span>
+            <h4 class="text-xl font-serif-title font-bold text-white mt-1">Location Strategy Saved to Blueprint</h4>
+          </div>
+          <span class="text-emerald-400 text-xl">✓</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+            <span class="text-[10px] text-slate-400 font-bold uppercase block">Age 55–65 Overseas Base</span>
+            <strong id="savedOverseasVal" class="text-sm font-bold text-white">Portugal 🌍</strong>
+          </div>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-emerald-500/40">
+            <span class="text-[10px] text-emerald-400 font-bold uppercase block">Age 65+ U.S. Home Base</span>
+            <strong id="savedUSCityVal" class="text-sm font-bold text-emerald-300">Raleigh, NC 🏡</strong>
+          </div>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+            <span class="text-[10px] text-slate-400 font-bold uppercase block">Decision Rationale Saved</span>
+            <strong id="savedRationaleVal" class="text-xs font-bold text-slate-200">Family • Academic Health • Airport</strong>
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <span class="text-xs text-slate-300 font-medium">Next Recommended Section: <strong class="text-emerald-400">Section 3 — Healthcare & Medicare Planning</strong></span>
+          <div class="flex items-center gap-2">
+            <a href="building-your-retirement.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs transition shadow-md whitespace-nowrap">
+              <span>Continue Building Your Retirement →</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -574,209 +633,113 @@
   </div>
 
   <script>
-    const blueprintState = {
-      pathName: "Explore Then Return",
-      overseasBase: "Portugal",
-      monthlyBudget: "$8,500 / month",
-      childrenCity: "Seattle, WA",
-      selectedUSCity: "Raleigh, NC",
-      selectedUSState: "NC"
-    };
-
-    const cityDatabase = {
-      "PNW": {
-        name: "Vancouver, WA / Portland Metro",
-        rating: "★★★★★",
-        score: "96%",
-        hospital: "OHSU / Legacy Health",
-        airport: "PDX",
-        reasons: "Zero Income Tax • Proximity • Healthcare",
-        why: "Zero state income tax in Washington combined with immediate access to Oregon medical hubs and PDX airport."
-      },
-      "MTN": {
-        name: "Salt Lake City / Park City, UT",
-        rating: "★★★★★",
-        score: "95%",
-        hospital: "Intermountain Health / Univ. of Utah",
-        airport: "SLC",
-        reasons: "Healthcare • Mountain Climate • Delta Hub",
-        why: "World-class Intermountain medical infrastructure and top-tier international airport access."
-      },
-      "WEST": {
-        name: "Roseville / Sacramento, CA",
-        rating: "★★★★☆",
-        score: "89%",
-        hospital: "Sutter Health / UC Davis",
-        airport: "SMF",
-        reasons: "Family Proximity • Academic Health",
-        why: "High medical quality and proximity to West Coast family nodes, though state taxes require bracket planning."
-      },
-      "NC": {
-        name: "Raleigh, NC",
-        rating: "★★★★★",
-        score: "94%",
-        hospital: "Duke Health / UNC",
-        airport: "RDU",
-        reasons: "Family • Moderate Tax • Academic Health",
-        why: "Ideal balance of top-tier academic medicine, moderate state taxes, and close Southeast regional airport access."
-      },
-      "TX": {
-        name: "Austin, TX",
-        rating: "★★★★☆",
-        score: "88%",
-        hospital: "St. David's / UT Dell Med",
-        airport: "AUS",
-        reasons: "Zero Tax • Sunbelt • Culture",
-        why: "Zero state income tax and high lifestyle appeal, though property taxes and summer heat require planning."
-      },
-      "TN": {
-        name: "Nashville, TN",
-        rating: "★★★★☆",
-        score: "85%",
-        hospital: "Vanderbilt Health",
-        airport: "BNA",
-        reasons: "Zero Tax • Healthcare • Airport",
-        why: "Zero state income tax with elite Vanderbilt medical networks, offset by rising housing costs."
-      },
-      "AZ": {
-        name: "Phoenix / Scottsdale, AZ",
-        rating: "★★★☆☆",
-        score: "78%",
-        hospital: "Mayo Clinic Phoenix",
-        airport: "PHX",
-        reasons: "Sunbelt • Mayo Clinic Depth",
-        why: "World-class Mayo Clinic access, but summer heat and water sustainability require long-term evaluation."
-      },
-      "FL": {
-        name: "Tampa, FL",
-        rating: "★★★★☆",
-        score: "87%",
-        hospital: "Tampa General / Moffitt",
-        airport: "TPA",
-        reasons: "Zero Tax • Coastal • Airport",
-        why: "No state income tax and coastal weather, though homeowner insurance costs are significantly higher."
-      },
-      "MW": {
-        name: "Madison, WI",
-        rating: "★★★★☆",
-        score: "91%",
-        hospital: "UW Health / UW Hospital",
-        airport: "MSN",
-        reasons: "Top Healthcare • Quality of Life",
-        why: "Ranked among America's top health systems with strong community infrastructure, though winter weather applies."
-      },
-      "NE": {
-        name: "Lancaster / Hershey, PA",
-        rating: "★★★★☆",
-        score: "90%",
-        hospital: "Penn State Health / Penn Medicine",
-        airport: "MDT",
-        reasons: "Retirement Tax Friendly • Academic Care",
-        why: "Pennsylvania exempts retirement income and IRAs from state income tax, with excellent regional healthcare."
-      }
-    };
-
-    function autoDetectRegion(cityString) {
-      if (!cityString) return "NC";
-      const s = cityString.toUpperCase();
-
-      if (s.includes("WA") || s.includes("SEATTLE") || s.includes("OR") || s.includes("PORTLAND") || s.includes("PACIFIC")) return "PNW";
-      if (s.includes("CO") || s.includes("DENVER") || s.includes("UT") || s.includes("SALT LAKE") || s.includes("NV")) return "MTN";
-      if (s.includes("CA") || s.includes("CALIFORNIA") || s.includes("SAN FRANCISCO") || s.includes("LOS ANGELES")) return "WEST";
-      if (s.includes("AZ") || s.includes("PHOENIX") || s.includes("NM")) return "AZ";
-      if (s.includes("TX") || s.includes("TEXAS") || s.includes("AUSTIN") || s.includes("DALLAS") || s.includes("HOUSTON")) return "TX";
-      if (s.includes("FL") || s.includes("FLORIDA") || s.includes("TAMPA") || s.includes("MIAMI")) return "FL";
-      if (s.includes("TN") || s.includes("NASHVILLE") || s.includes("KY")) return "TN";
-      if (s.includes("IL") || s.includes("CHICAGO") || s.includes("WI") || s.includes("MADISON") || s.includes("MI")) return "MW";
-      if (s.includes("NY") || s.includes("PA") || s.includes("MA") || s.includes("BOSTON") || s.includes("NJ")) return "NE";
-
-      return "NC"; // default
-    }
-
-    function loadBlueprintData() {
-      try {
-        const raw = localStorage.getItem("WealthLandingSelectedRoadmap");
-        if (raw) {
-          const payload = JSON.parse(raw);
-          if (payload.selectedLifeName) blueprintState.pathName = payload.selectedLifeName;
-          if (payload.overseasBase) blueprintState.overseasBase = payload.overseasBase;
-          if (payload.monthlySpend) blueprintState.monthlyBudget = payload.monthlySpend;
-          if (payload.usCity) blueprintState.selectedUSCity = payload.usCity;
-          if (payload.childrenCity) blueprintState.childrenCity = payload.childrenCity;
-        }
-      } catch (e) {
-        console.warn("Could not parse saved blueprint roadmap data:", e);
-      }
-
-      // Update Header Text
-      document.getElementById("blueprintPathText").innerText = blueprintState.pathName;
-      document.getElementById("blueprintOverseasText").innerText = blueprintState.overseasBase;
-      document.getElementById("blueprintBudgetText").innerText = blueprintState.monthlyBudget.split('(')[0];
-
-      // Auto-detect and set family region dropdown from passed childrenCity
-      const matchedRegion = autoDetectRegion(blueprintState.childrenCity);
-      const regionDropdown = document.getElementById("q_familyRegion");
-      if (regionDropdown) {
-        regionDropdown.value = matchedRegion;
-        const badge = document.getElementById("detectedChildrenBadge");
-        if (badge && blueprintState.childrenCity) {
-          badge.innerText = `Detected (${blueprintState.childrenCity})`;
-          badge.classList.remove("hidden");
-        }
-      }
-
-      recalculateRecommendation();
-    }
-
     function recalculateRecommendation() {
-      const familyRegion = document.getElementById("q_familyRegion").value;
-      const primaryData = cityDatabase[familyRegion] || cityDatabase["NC"];
+      const prefs = {
+        familyRegion: document.getElementById("q_familyRegion").value,
+        healthcarePref: document.getElementById("q_healthcarePref").value,
+        airportPref: document.getElementById("q_airportPref").value,
+        climatePref: document.getElementById("q_climatePref").value
+      };
+
+      const scoredCities = Object.keys(cityDatabase).map(key => {
+        const c = cityDatabase[key];
+        const { totalScore, fitLevel } = calculateCityScore(c, prefs);
+        return { ...c, totalScore, fitLevel };
+      }).sort((a, b) => b.totalScore - a.totalScore);
+
+      const topPick = scoredCities[0];
 
       // Update Primary Recommendation Card
-      document.getElementById("recommendedCityTitle").innerText = primaryData.name;
-      document.getElementById("recommendationScoreText").innerText = primaryData.score;
-      document.getElementById("recHospitalText").innerText = primaryData.hospital;
-      document.getElementById("recAirportText").innerText = primaryData.airport;
-      document.getElementById("recReasonsText").innerText = primaryData.reasons;
+      document.getElementById("recommendedCityTitle").innerText = topPick.name;
+      
+      const badgeEl = document.getElementById("recommendationFitBadge");
+      badgeEl.innerText = topPick.fitLevel;
+      if (topPick.fitLevel === "Excellent Fit") {
+        badgeEl.className = "text-xs font-extrabold uppercase px-2.5 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-md inline-block";
+      } else {
+        badgeEl.className = "text-xs font-extrabold uppercase px-2.5 py-1 bg-blue-100 text-blue-800 border border-blue-300 rounded-md inline-block";
+      }
+
+      // Update Decision Summary ("Why It Won")
+      const familySelectText = document.getElementById("q_familyRegion").options[document.getElementById("q_familyRegion").selectedIndex].text;
+      const healthSelectText = document.getElementById("q_healthcarePref").options[document.getElementById("q_healthcarePref").selectedIndex].text.split('(')[0];
+      const climateSelectText = document.getElementById("q_climatePref").options[document.getElementById("q_climatePref").selectedIndex].text.split('+')[0];
+
+      document.getElementById("summaryFamilyRegion").innerText = familySelectText;
+      document.getElementById("summaryHealthPref").innerText = healthSelectText;
+      document.getElementById("summaryClimatePref").innerText = climateSelectText;
+      document.getElementById("summaryCityName").innerText = topPick.name;
+
+      document.getElementById("recHospitalText").innerText = topPick.hospital;
+      document.getElementById("recAirportText").innerText = topPick.airport;
+      document.getElementById("recReasonsText").innerText = topPick.reasons;
       document.getElementById("recBulletFamily").innerText = `Optimal location for family in ${blueprintState.childrenCity || 'your target region'}`;
+      document.getElementById("recBulletTax").innerText = topPick.taxDetail;
 
-      blueprintState.selectedUSCity = primaryData.name;
+      blueprintState.selectedUSCity = topPick.name;
 
-      // Update Recap Card
       document.getElementById("recapOverseasText").innerText = `${blueprintState.overseasBase} 🌍`;
-      document.getElementById("recapUSText").innerText = `${primaryData.name} 🏡`;
+      document.getElementById("recapUSText").innerText = `${topPick.name} 🏡`;
 
-      // Render Alternatives ("Why Not The Others?")
-      const altContainer = document.getElementById("alternativesContainer");
-      altContainer.innerHTML = "";
+      // Render Gain vs. Trade-Off Matrix
+      const matrixBody = document.getElementById("tradeoffMatrixBody");
+      matrixBody.innerHTML = "";
 
-      Object.keys(cityDatabase).forEach(key => {
-        if (key !== familyRegion) {
-          const item = cityDatabase[key];
-          const div = document.createElement("div");
-          div.className = "p-3 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between text-xs";
-          div.innerHTML = `
-            <div>
-              <strong class="font-bold text-slate-900 block">${item.name}</strong>
-              <span class="text-slate-500 text-[11px]">${item.why}</span>
-            </div>
-            <div class="text-right shrink-0 ml-3">
-              <span class="text-amber-500 font-bold block">${item.rating}</span>
-              <span class="text-[10px] text-slate-400 font-bold font-mono">${item.score} Fit</span>
-            </div>
-          `;
-          altContainer.appendChild(div);
-        }
+      const alternatives = scoredCities.slice(0, 4);
+
+      alternatives.forEach((item, idx) => {
+        const isTop = idx === 0;
+        const tr = document.createElement("tr");
+        tr.className = isTop ? "bg-emerald-50/50 text-slate-900 font-bold" : "hover:bg-slate-50 text-slate-800";
+        tr.innerHTML = `
+          <td class="p-3">
+            <span class="font-bold block text-sm">${item.name}</span>
+            <span class="text-[10px] text-slate-400 font-bold">${item.hospital}</span>
+          </td>
+          <td class="p-3 text-emerald-700 font-bold">${isTop ? "Best overall balance & family fit" : item.reasons.split('•')[0]}</td>
+          <td class="p-3 text-slate-600">${item.tradeOffNote}</td>
+          <td class="p-3 text-right">
+            <span class="text-[10px] ${isTop ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-700'} px-2 py-0.5 rounded font-bold uppercase">${item.fitLevel}</span>
+          </td>
+        `;
+        matrixBody.appendChild(tr);
       });
     }
 
     function addToRetirementBlueprint() {
+      const familyRegion = document.getElementById("q_familyRegion").value;
+      const healthcarePref = document.getElementById("q_healthcarePref").value;
+      const airportPref = document.getElementById("q_airportPref").value;
+      const climatePref = document.getElementById("q_climatePref").value;
+
+      const primaryData = cityDatabase[familyRegion] || cityDatabase["NC"];
+
       try {
         const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
         const payload = JSON.parse(raw);
+        
         payload.usCity = blueprintState.selectedUSCity;
         payload.overseasBase = blueprintState.overseasBase;
         payload.locationSectionComplete = true;
+        
+        // Save rich decision structure to memory
+        payload.locationStrategy = {
+          type: "Domestic Location Strategy",
+          primary_city: blueprintState.selectedUSCity,
+          overseasBase: blueprintState.overseasBase,
+          domesticStage: "Age 65+",
+          hospital: primaryData.hospital,
+          airport: primaryData.airport,
+          taxDetail: primaryData.taxDetail,
+          reasoning: ["Family Proximity", "Academic Health System", "Airport Connectivity"],
+          alternatives: ["Nashville, TN", "Madison, WI", "Austin, TX"],
+          familyRegion: familyRegion,
+          healthcarePreference: healthcarePref,
+          airportPreference: airportPref,
+          climatePreference: climatePref,
+          selectedAt: new Date().toISOString()
+        };
+
         payload.updatedAt = new Date().toISOString();
 
         localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(payload));
@@ -784,27 +747,43 @@
         console.warn("Could not update LocalStorage:", e);
       }
 
-      showToast("Blueprint Updated!", `Saved ${blueprintState.selectedUSCity} to your Retirement Blueprint.`);
+      markLocationAsCompleteUI();
+      showToast("Blueprint Updated!", `Saved ${blueprintState.selectedUSCity} Location Strategy to your Retirement Blueprint.`);
+    }
+
+    function markLocationAsCompleteUI() {
+      document.getElementById("completionStepBadge").className = "text-[10px] font-black uppercase text-[#019367] tracking-widest block";
+      document.getElementById("completionStepBadge").innerText = "Step 2 Complete";
+      document.getElementById("completionStepTitle").innerText = "Location Section Complete";
+
+      document.getElementById("recapUSCheck").className = "text-emerald-600 font-extrabold";
+      document.getElementById("recapUSCheck").innerText = "✓";
+
+      document.getElementById("blueprintModuleCount").innerText = "2 of 5 Complete";
       
-      const btn = document.getElementById("addToBlueprintBtn");
-      btn.className = "bg-emerald-800 text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap";
-      btn.innerHTML = "<span>✓ Saved to Retirement Blueprint</span>";
-    }
+      // Animate Status Card State Change
+      const locCard = document.getElementById("moduleLocationCard");
+      locCard.className = "bg-emerald-950 p-2 rounded-lg border border-emerald-400 ring-2 ring-emerald-400/50 scale-105 transition-all duration-500";
+      document.getElementById("moduleLocationLabel").className = "block text-[10px] text-emerald-300 uppercase font-bold";
+      document.getElementById("moduleLocationCheck").className = "text-emerald-400 font-bold text-sm";
+      document.getElementById("moduleLocationCheck").innerText = "✓";
 
-    function showToast(title, message) {
-      const toast = document.getElementById("toastNotification");
-      if (!toast) return;
-      document.getElementById("toastTitle").innerText = title;
-      document.getElementById("toastMessage").innerText = message;
-      toast.classList.remove("hidden");
-      setTimeout(() => {
-        toast.classList.add("hidden");
-      }, 3500);
-    }
+      // Display Blueprint Completion Card
+      const completionCard = document.getElementById("blueprintCompletionCard");
+      if (completionCard) {
+        document.getElementById("savedOverseasVal").innerText = `${blueprintState.overseasBase} 🌍`;
+        document.getElementById("savedUSCityVal").innerText = `${blueprintState.selectedUSCity} 🏡`;
+        completionCard.classList.remove("hidden");
+      }
 
-    window.onload = function() {
-      loadBlueprintData();
-    };
+      const actionGroup = document.getElementById("saveActionGroup");
+      actionGroup.innerHTML = `
+        <span class="text-xs text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
+          <span>✓ Location Added to Blueprint</span>
+        </span>
+        <a href="building-your-retirement.html" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
+          <span>Return to Retirement Builder →</span>
+        </a>
+      `;
+    }
   </script>
-</body>
-</html>
