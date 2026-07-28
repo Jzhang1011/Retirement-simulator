@@ -422,7 +422,7 @@
         </div>
     </div>
 
-    <!-- VISUAL "YOUR RETIREMENT JOURNEY" STRIP (PHOTO SCRAPBOOK & NAVIGATION SYSTEM) -->
+    <!-- VISUAL "YOUR RETIREMENT JOURNEY" STRIP -->
     <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
             <div>
@@ -430,7 +430,6 @@
                 <h2 class="text-base font-serif-title font-bold text-slate-900 uppercase tracking-wider">YOUR RETIREMENT JOURNEY</h2>
             </div>
             
-            <!-- Human-Centric Chapter Progress Bar -->
             <div class="flex items-center gap-3">
                 <div class="text-right">
                     <span id="humanChapterProgressText" class="text-xs font-bold text-slate-900 block">Chapter 1 Complete • Preparing Chapter 2</span>
@@ -442,13 +441,12 @@
             </div>
         </div>
 
-        <!-- Horizontal Interactive Journey Scrapbook Nodes -->
         <div id="horizontalJourneyStrip" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-1">
             <!-- Dynamically populated via renderJourneyStrip() -->
         </div>
     </section>
 
-    <!-- FORMALIZED ANNUAL REVIEW SYSTEM (RECURRING EVERY JANUARY) -->
+    <!-- ANNUAL REVIEW SYSTEM -->
     <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-3 gap-3">
             <div class="flex items-center gap-2">
@@ -480,7 +478,7 @@
         </div>
     </section>
 
-    <!-- EMOTIONAL NARRATIVE STORY BOX ("YOUR STORY") -->
+    <!-- EMOTIONAL NARRATIVE STORY BOX -->
     <section class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 text-slate-900 rounded-2xl p-6 border border-emerald-200 shadow-sm space-y-2">
         <div class="flex items-center gap-2 text-[#019367]">
             <span class="text-lg">📖</span>
@@ -491,18 +489,14 @@
         </p>
     </section>
 
-    <!-- MAIN CHAPTER TIMELINE WORKSPACE WITH FUTURE SNAPSHOTS & DEPENDENCIES -->
+    <!-- MAIN CHAPTER TIMELINE WORKSPACE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- LEFT 8 COLUMNS: FUTURE SNAPSHOT & CHAPTER DECISION NODES -->
         <div class="lg:col-span-8 space-y-8" id="chaptersContainer">
             <!-- Dynamically populated via renderChapters() -->
         </div>
 
-        <!-- RIGHT 4 COLUMNS: SPECIALIZED TOOLS & DECISION ACCELERATORS -->
         <div class="lg:col-span-4 space-y-6">
-            
-            <!-- READINESS & EXECUTION SUMMARY -->
             <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
                 <div class="border-b border-slate-100 pb-3">
                     <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest">Execution Readiness</span>
@@ -527,7 +521,6 @@
                 </div>
             </div>
 
-            <!-- SPECIALIZED DECISION ACCELERATORS & EXECUTIVE EXPORT -->
             <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4 sticky top-6">
                 <div class="border-b border-slate-100 pb-3">
                     <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Specialized Tools</span>
@@ -570,7 +563,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Action 1: Optimize Strategy -->
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                 <div>
                     <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wider block mb-0.5">Step 1 • Financial Optimization</span>
@@ -582,7 +574,6 @@
                 </button>
             </div>
 
-            <!-- Action 2: Download Roadmap File -->
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                 <div>
                     <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block mb-0.5">Step 2 • Local Portability</span>
@@ -597,7 +588,6 @@
                 </div>
             </div>
 
-            <!-- Action 3: Executive Summary PDF -->
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                 <div>
                     <span class="text-[10px] font-bold text-purple-700 uppercase tracking-wider block mb-0.5">Step 3 • Family & Advisor Alignment</span>
@@ -623,7 +613,7 @@
 
   </main>
 
-  <!-- EMAIL REMINDER MODAL (OPTIONAL ANNUAL REVIEW NOTIFICATION) -->
+  <!-- EMAIL REMINDER MODAL -->
   <div id="emailReminderModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
       <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl border border-slate-200">
           <div class="flex justify-between items-start border-b border-slate-100 pb-3">
@@ -652,7 +642,7 @@
       </div>
   </div>
 
-  <!-- EXECUTIVE SUMMARY MODAL & PRINT PREVIEW AREA -->
+  <!-- EXECUTIVE SUMMARY MODAL -->
   <div id="executiveSummaryModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
       <div class="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
           <div class="flex justify-between items-start border-b border-slate-100 pb-3 no-print">
@@ -664,7 +654,6 @@
               <button onclick="closeExecutiveSummaryModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
           </div>
 
-          <!-- PRINT AREA -->
           <div id="executiveSummaryPrintArea" class="space-y-5">
               <div class="border-b border-slate-200 pb-4 flex justify-between items-end">
                   <div>
@@ -687,7 +676,6 @@
                   </div>
               </div>
 
-              <!-- TARGET LOCATIONS & MILESTONES BRIEF -->
               <div class="grid grid-cols-3 gap-2.5 text-xs">
                   <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
                       <span class="text-[9px] text-slate-400 font-bold uppercase block">Overseas Base</span>
@@ -699,7 +687,7 @@
                   </div>
                   <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
                       <span class="text-[9px] text-slate-400 font-bold uppercase block">Children Location</span>
-                      <strong id="execSummaryKidsCity" class="text-xs font-bold text-slate-800">Seattle, WA</strong>
+                      <strong id="execSummaryKidsCity" class="text-xs font-bold text-slate-800">Los Angeles, CA</strong>
                   </div>
               </div>
 
@@ -743,14 +731,13 @@
   </div>
 
   <script>
-    // Dynamic Roadmap State Store reading from localStorage
     const builderState = {
         activePathId: "explore_then_return",
         activeChapterFocus: 1,
         completedMilestones: new Set(["m1_1"]),
         userOverseasBase: "Portugal",
         userUSCity: "Raleigh, NC",
-        userChildrenCity: "",
+        userChildrenCity: "Los Angeles, CA",
         monthlySpendLabel: "$8,500 / month ($102,000 / year)",
         pathNames: {
             "explore_then_return": "Explore Then Return",
@@ -763,7 +750,6 @@
 
     function loadSavedPathAndLocations() {
         try {
-            // Read Roadmap selection
             const rawRoadmap = localStorage.getItem("WealthLandingSelectedRoadmap");
             if (rawRoadmap) {
                 const payload = JSON.parse(rawRoadmap);
@@ -777,14 +763,12 @@
                 }
             }
 
-            // Read Saved Progress fallback
             const savedProgress = localStorage.getItem("WealthLandingSavedProgress");
             if (savedProgress) {
                 const list = JSON.parse(savedProgress);
                 if (Array.isArray(list)) builderState.completedMilestones = new Set(list);
             }
 
-            // Read Discovery Selection fallback for locations
             const rawDiscovery = localStorage.getItem("RetirementDiscoverySelection");
             if (rawDiscovery) {
                 const payload = JSON.parse(rawDiscovery);
@@ -796,7 +780,6 @@
                 }
             }
 
-            // Ensure fallback defaults if still unset
             if (!builderState.userOverseasBase) builderState.userOverseasBase = "Portugal";
             if (!builderState.userUSCity) builderState.userUSCity = "Raleigh, NC";
             if (!builderState.userChildrenCity) builderState.userChildrenCity = "Los Angeles, CA";
@@ -807,7 +790,6 @@
         updateDynamicUI();
     }
 
-    // Export Roadmap as a private .wlplan JSON file
     function downloadRoadmapFile() {
         const exportData = {
             version: 1,
@@ -834,12 +816,10 @@
         showToast("Roadmap File Downloaded", "Keep this .wlplan file to restore your roadmap on any device.");
     }
 
-    // Trigger file chooser for importing .wlplan
     function triggerImportRoadmap() {
         document.getElementById("importRoadmapInput").click();
     }
 
-    // Handle importing .wlplan file
     function handleImportRoadmap(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -857,7 +837,6 @@
                     builderState.completedMilestones = new Set(imported.completedMilestones);
                 }
 
-                // Save back to LocalStorage
                 localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
                     selectedLifeId: builderState.activePathId,
                     overseasBase: builderState.userOverseasBase,
@@ -879,7 +858,6 @@
         reader.readAsText(file);
     }
 
-    // Generate in-browser .ics Calendar event file for Annual Review
     function generateICSCalendar() {
         const nextYear = new Date().getFullYear() + 1;
         const icsContent = [
@@ -910,7 +888,6 @@
         showToast("Calendar Reminder Downloaded", `Added January ${nextYear} review to calendar.`);
     }
 
-    // Modal Control Functions for Optional Email Reminders
     function openEmailReminderModal() {
         const modal = document.getElementById("emailReminderModal");
         if (modal) modal.classList.remove("hidden");
@@ -935,7 +912,6 @@
         const kidsCity = builderState.userChildrenCity;
         const spend = builderState.monthlySpendLabel;
 
-        // Dynamic Hero Elements
         const heroTitle = document.getElementById("builderHeroTitle");
         const heroSub = document.getElementById("builderHeroSubtitle");
         const pathNameEl = document.getElementById("activePathName");
@@ -947,18 +923,16 @@
         if (heroSub) heroSub.innerText = `Turn your ${name} choice into an interactive visual sequence of location, healthcare, housing, tax, and family milestones.`;
         if (budgetEl) budgetEl.innerText = spend.split('(')[0] || spend;
 
-        // Dynamic Story Narratives
         const stories = {
             "explore_then_return": `"At 55, you'll begin a new chapter living in ${overseas}. Spend ten years exploring Europe while healthcare costs remain low. At 65 you'll return near your children in ${usCity}, activate Medicare, and begin your next chapter."`,
             "strategic_us_move": `"At 55, you'll relocate to ${usCity}, a top-tier low-tax U.S. metro. Save $10k–$30k+ per year in state taxes while maintaining seamless domestic U.S. healthcare access."`,
-            "home_base": `"At 55, you'll rightsize your primary residence in your current community, stay close to children in ${kidsCity}, and rely on trusted local health networks."`,
+            "home_base": `"At 55, you'll rightsize your primary residence in your current community in ${usCity}, stay close to family in ${kidsCity}, and rely on trusted local health networks."`,
             "global_expat": `"At 55, you'll move permanently to ${overseas} to build a foreign sanctuary, maximizing cost-of-living purchasing power and lifestyle quality."`,
             "phase_optimizer": `"At 50, launch an active go-go decade in ${overseas}. At 65, transition to ${usCity}, before consolidating near family in ${kidsCity} after age 78."`
         };
 
         if (storyEl) storyEl.innerText = stories[builderState.activePathId] || stories["explore_then_return"];
 
-        // Dynamic Annual Review Simulator Buttons
         const simContainer = document.getElementById("simulatorButtonsContainer");
         if (simContainer) {
             simContainer.innerHTML = `
@@ -975,7 +949,6 @@
         }
     }
 
-    // Dynamic Chapter Blueprints Generator
     function getDynamicChapterBlueprints() {
         const overseas = builderState.userOverseasBase;
         const usCity = builderState.userUSCity;
@@ -1140,6 +1113,209 @@
                     ],
                     tool: { name: "Medicare Optimization Engine", link: "#" }
                 }
+            ],
+            "home_base": [
+                {
+                    number: 1,
+                    ageLabel: "Age 55",
+                    locationTag: `🏡 ${usCity} (Home Base)`,
+                    photo: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+                    headline: `Rightsizing & Anchoring in ${usCity}`,
+                    desc: `Maintain your established primary residence in ${usCity} near family in ${kidsCity} and long-standing social ties.`,
+                    snapshot: {
+                        tagline: `Imagine Life at Home Base in ${usCity}...`,
+                        bullets: [
+                            `Living in your established, familiar home base community in ${usCity}`,
+                            `Close proximity to children and grandchildren in ${kidsCity}`,
+                            "Continuity of trusted local primary care and specialist physicians",
+                            "Deep social networks and familiar neighborhood routines"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m1_1", title: `Audit primary housing expenses and property tax baseline in ${usCity}`, done: true, requires: null },
+                        { id: "m1_2", title: "Establish primary physician network and preventative wellness plan", done: false, requires: "m1_1" },
+                        { id: "m1_3", title: "Optimize domestic pre-Medicare health insurance coverage", done: false, requires: "m1_2" }
+                    ],
+                    tool: { name: "Home Base Housing & Tax Audit", link: "#" }
+                },
+                {
+                    number: 2,
+                    ageLabel: "Age 65",
+                    locationTag: `🏥 Healthcare Anchor (${usCity})`,
+                    photo: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=600&q=80",
+                    headline: "Seamless Medicare Integration",
+                    desc: "Transition smoothly into Medicare Part A/B and Medigap Plan G without changing doctors or locations.",
+                    snapshot: {
+                        tagline: "Imagine Uninterrupted Local Care...",
+                        bullets: [
+                            "Full Medicare Plan G cost-sharing protection with known local providers",
+                            "Hosting family holidays and weekend dinners in your primary home",
+                            "Zero relocation stress or geographic transition management"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m2_1", title: "Enroll in Medicare Part A/B and Medigap Plan G 3 months before age 65", done: false, requires: "m1_3" },
+                        { id: "m2_2", title: "Confirm local provider Medicare assignment status", done: false, requires: "m2_1" }
+                    ],
+                    tool: { name: "Medicare Optimization Engine", link: "#" }
+                },
+                {
+                    number: 3,
+                    ageLabel: "Age 78",
+                    locationTag: `❤️ Family & Care Base (${usCity})`,
+                    photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
+                    headline: "Long-term security & legacy planning",
+                    desc: "Lock in trusted local continuous care options and execute revocable living trust provisions.",
+                    snapshot: {
+                        tagline: "Imagine Complete Stability & Family Support...",
+                        bullets: [
+                            "In-home assistance or local CCRC support locked in early",
+                            "Revocable living trust insulating home base from probate",
+                            "Surrounded by lifelong friends and nearby family"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m3_1", title: "Execute revocable living trust & beneficiary designations", done: false, requires: "m2_2" }
+                    ],
+                    tool: { name: "Legacy & Trust Planner", link: "#" }
+                }
+            ],
+            "global_expat": [
+                {
+                    number: 1,
+                    ageLabel: "Age 55",
+                    locationTag: `🌍 ${overseas} Sanctuary`,
+                    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+                    headline: `Establishing Foreign Residency in ${overseas}`,
+                    desc: `Build a permanent overseas sanctuary in ${overseas} to maximize lifestyle quality and purchasing power.`,
+                    snapshot: {
+                        tagline: `Imagine Your New Life in ${overseas}...`,
+                        bullets: [
+                            `Coastal or cultural living with high purchasing power in ${overseas}`,
+                            "Full access to JCI-accredited private healthcare systems",
+                            "Rich international expat community and cultural exploration",
+                            `Travel visits with family in ${kidsCity}`
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m1_1", title: `Secure passive income visa (e.g. D7 / Rentista) for ${overseas}`, done: true, requires: null },
+                        { id: "m1_2", title: "Contract international private health insurance policy", done: false, requires: "m1_1" },
+                        { id: "m1_3", title: "Establish local banking and foreign residency compliance", done: false, requires: "m1_2" }
+                    ],
+                    tool: { name: "Overseas Location Matcher", link: "#" }
+                },
+                {
+                    number: 2,
+                    ageLabel: "Age 65",
+                    locationTag: `🏥 Overseas Healthcare Base`,
+                    photo: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80",
+                    headline: "Private healthcare & U.S. Medicare strategy",
+                    desc: "Maintain comprehensive private expat medical coverage while evaluating U.S. Medicare Part B backstop.",
+                    snapshot: {
+                        tagline: "Imagine High-Quality Low-Cost Healthcare...",
+                        bullets: [
+                            "Top-tier private hospital access at a fraction of U.S. insurance premiums",
+                            "Optional Medicare Part B backstop maintained for stateside visits",
+                            "Thriving long-term in an established international hub"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m2_1", title: "Evaluate Medicare Part B enrollment vs. international private policy", done: false, requires: "m1_3" }
+                    ],
+                    tool: { name: "International Healthcare Planner", link: "#" }
+                },
+                {
+                    number: 3,
+                    ageLabel: "Age 78",
+                    locationTag: `❤️ Overseas Care Sanctuary`,
+                    photo: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+                    headline: "Affordable in-home care & legacy shield",
+                    desc: "Leverage high-touch, affordable private in-home nursing or senior care in your foreign base.",
+                    snapshot: {
+                        tagline: "Imagine Luxury Care Without Financial Drag...",
+                        bullets: [
+                            "24/7 dedicated private in-home care at 60-70% lower cost than U.S.",
+                            "Cross-border estate plan protecting international and U.S. assets",
+                            "Peaceful aging in a climate and community you love"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m3_1", title: "Lock in local long-term care management and cross-border trust", done: false, requires: "m2_1" }
+                    ],
+                    tool: { name: "Cross-Border Estate Planner", link: "#" }
+                }
+            ],
+            "phase_optimizer": [
+                {
+                    number: 1,
+                    ageLabel: "Age 50–65 (Go-Go)",
+                    locationTag: `🌍 Active Overseas Base (${overseas})`,
+                    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+                    headline: `Active Travel & Geo-Arbitrage Chapter`,
+                    desc: `Maximize travel, lifestyle purchasing power, and Roth tax conversions in ${overseas}.`,
+                    snapshot: {
+                        tagline: `Imagine Active Global Exploration in ${overseas}...`,
+                        bullets: [
+                            "Peak active travel decade with low international living expenses",
+                            "Aggressive Roth conversion sweeps at low marginal tax brackets",
+                            "Private international major medical coverage"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m1_1", title: `Establish Phase 1 international base in ${overseas}`, done: true, requires: null },
+                        { id: "m1_2", title: "Execute annual Roth conversion sweep strategy", done: false, requires: "m1_1" }
+                    ],
+                    tool: { name: "Phase 1 Strategy Engine", link: "#" }
+                },
+                {
+                    number: 2,
+                    ageLabel: "Age 65–78 (Slow-Go)",
+                    locationTag: `🏡 Domestic US Base (${usCity})`,
+                    photo: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=600&q=80",
+                    headline: "Medicare activation & domestic consolidation",
+                    desc: `Transition to ${usCity} to activate Medicare Part A/B/G and shorten travel distance to children in ${kidsCity}.`,
+                    snapshot: {
+                        tagline: `Imagine Comfortable US Base in ${usCity}...`,
+                        bullets: [
+                            "Seamless Medicare Supplement Plan G coverage",
+                            "Frequent regional visits with adult children and grandchildren",
+                            "Balanced domestic lifestyle with optional seasonal travel"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m2_1", title: `Transition housing base to ${usCity} and activate Medicare`, done: false, requires: "m1_2" }
+                    ],
+                    tool: { name: "Medicare & Housing Transition Tool", link: "#" }
+                },
+                {
+                    number: 3,
+                    ageLabel: "Age 78+ (No-Go)",
+                    locationTag: `❤️ Care Anchor (${kidsCity})`,
+                    photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
+                    headline: "Family proximity & continuous care hub",
+                    desc: `Consolidate housing directly near children in ${kidsCity} for late-life care and estate execution.`,
+                    snapshot: {
+                        tagline: `Imagine Being Steps Away From Family in ${kidsCity}...`,
+                        bullets: [
+                            "Continuous care community or in-home support near adult children",
+                            "Trust assets insulated from state probate",
+                            "Zero medical or care management burden on descendants"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m3_1", title: `Consolidate senior housing in ${kidsCity} and execute trust distribution`, done: false, requires: "m2_1" }
+                    ],
+                    tool: { name: "Legacy & Trust Planner", link: "#" }
+                }
             ]
         };
     }
@@ -1194,7 +1370,6 @@
             stripContainer.appendChild(nodeCard);
         });
 
-        // Update Progress Bar
         const totalChapters = chapters.length;
         const progressEl = document.getElementById("humanChapterProgressText");
         const progressBar = document.getElementById("visualProgressBar");
@@ -1297,7 +1472,6 @@
             }
 
             chapterCard.innerHTML = `
-                <!-- Chapter Header -->
                 <div class="border-b border-slate-100 pb-4 flex justify-between items-start gap-4">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
@@ -1310,7 +1484,6 @@
                     <span class="text-slate-400 font-extrabold text-xs shrink-0">Chapter ${ch.number}</span>
                 </div>
 
-                <!-- FUTURE SNAPSHOT CARD -->
                 <div class="bg-gradient-to-r from-emerald-50/60 via-teal-50/40 to-slate-50 border border-emerald-200/80 rounded-xl p-4 space-y-3">
                     <div class="flex items-center justify-between">
                         <strong class="text-xs font-extrabold text-[#019367] uppercase tracking-wider">${ch.snapshot.tagline}</strong>
@@ -1332,13 +1505,11 @@
 
                 ${blockerBannerHtml}
 
-                <!-- Milestones Sequence -->
                 <div class="space-y-2">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Operational Milestones</span>
                     ${milestoneListHtml}
                 </div>
 
-                <!-- Chapter Tool Link -->
                 <div class="pt-2 flex justify-between items-center text-xs border-t border-slate-100">
                     <span class="text-slate-500 font-medium">Recommended Tool:</span>
                     <a href="${ch.tool.link}" class="text-blue-600 font-bold hover:underline flex items-center gap-1">
@@ -1408,7 +1579,6 @@
             showToast("Milestone Completed", "Next step in sequence unlocked!");
         }
 
-        // Save progress locally
         try {
             localStorage.setItem("WealthLandingSavedProgress", JSON.stringify(Array.from(builderState.completedMilestones)));
         } catch (e) {
