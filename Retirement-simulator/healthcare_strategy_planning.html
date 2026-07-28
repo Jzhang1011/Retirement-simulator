@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9JMJJ5CJR4');
+  </script>
+
+  <title>Healthcare Strategy Planning | Retirement Blueprint | WealthLanding</title>
+  <meta name="description" content="Design your two-stage healthcare strategy across pre-65 overseas private insurance and post-65 U.S. Medicare Plan G as part of the WealthLanding Retirement Blueprint." />
+
+  <!-- Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --navy: #0B132B;
+      --navy-light: #1E293B;
+      --mint: #02B17D;
+      --mint-dark: #019367;
+      --bg: #FAFAFB;
+      --card: #FFFFFF;
+      --border: #E2E8F0;
+      --text: #1E293B;
+      --muted: #64748B;
+      --blue: #2563EB;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--navy-light);
+    }
+
+    .font-serif-title {
+      font-family: var(--font-serif);
+    }
+
+    /* GLOBAL HEADER */
+    .global-header {
+      background-color: #0B132B; 
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 2.25rem;
+      border-bottom: 1px solid #1E293B;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative; 
+      z-index: 1001;      
+    }
+
+    .top-nav-links {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center;
+      gap: 1.25rem;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-nav-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.95rem; 
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .top-nav-links a:hover, .top-nav-links a.active {
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.45rem; 
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: #02B17D; 
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 400px; 
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background-color: #1E293B;
+      border: 1px solid #334155;
+      color: white;
+      padding: 0.65rem 1.25rem 0.65rem 3rem; 
+      border-radius: 8px;
+      font-size: 0.9rem; 
+    }
+
+    .mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;                     
+      transform: translateX(-50%) translateY(12px); 
+      width: 95vw;                   
+      max-width: 1240px; 
+      background: white;
+      border: 1px solid var(--border); 
+      border-radius: 1rem;
+      box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
+      padding: 3.25rem; 
+      display: grid !important;      
+      grid-template-columns: 1.1fr 2.9fr; 
+      gap: 3.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      z-index: 2000; 
+      box-sizing: border-box;
+    }
+
+    .dropdown-trigger:hover .mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-trigger {
+      position: static;
+    }
+
+    .links-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem 1.75rem; 
+    }
+
+    .dropdown-column h4 {
+      color: var(--navy); 
+      font-size: 1.215rem; 
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .dropdown-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem; 
+    }
+
+    .dropdown-column ul a {
+      color: var(--muted) !important; 
+      font-size: 0.95rem; 
+      font-weight: 500;
+      padding: 0;
+    }
+
+    .dropdown-column ul a:hover {
+      color: #02B17D !important; 
+    }
+
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(0.75rem); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-toast {
+      animation: slideUpFade 0.3s ease-out forwards;
+    }
+
+    .winner-row {
+      background-color: #F0FDF4 !important;
+      border-left: 4px solid #02B17D !important;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen pb-16">
+
+  <header class="global-header">
+    <a href="/" class="logo">Wealth<span>Landing</span></a>
+    
+    <nav aria-label="Global Main Directory">
+      <ul class="top-nav-links">
+        
+        <li class="dropdown-trigger">
+          <a href="#" class="active font-bold text-white">Overview <span class="text-[12px] opacity-70">▼</span></a>
+          <div class="mega-dropdown">
+            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
+              <div class="space-y-3">
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">Overview</h2>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                  Your primary workspace baseline dashboard. Track targets, access planning workflows, and monitor active signals.
+                </p>
+              </div>
+            </div>
+            <div class="links-matrix text-left">
+              <div class="dropdown-column">
+                <h4>🚀 Start Here</h4>
+                <ul>
+                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
+                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-column">
+                <h4>🌟 Popular Journeys</h4>
+                <ul>
+                  <li><a href="Odyssey.html">Retirement Odyssey Hub</a></li>
+                  <li><a href="retirement-preference-discovery.html">Preference Discovery</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="dropdown-trigger">
+          <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
+          <div class="mega-dropdown">
+            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
+              <div class="space-y-3">
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">Design Your Life</h2>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">Map your transition across locations, healthcare, and financial strategy.</p>
+              </div>
+            </div>
+            <div class="links-matrix text-left">
+              <div class="dropdown-column">
+                <h4>🗺️ Location & Healthcare</h4>
+                <ul>
+                  <li><a href="RetiringOverseas.html">International Location Planning</a></li>
+                  <li><a href="UScitymatcher.html">U.S. Location Planning</a></li>
+                  <li><a href="cost_for_65+.html">Healthcare Strategy Planning</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </nav>
+    
+    <div class="search-container">
+      <form action="https://www.google.com/search" method="get" target="_blank">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10">🔍</span>
+        <input type="hidden" name="sitesearch" value="wealthlanding.com">
+        <input type="search" name="q" class="search-input" placeholder="Search systems, tools..." aria-label="Search WealthLanding">
+      </form>
+    </div>
+  </header>
+
+  <div class="bg-slate-900 text-white border-b border-slate-800 py-3 px-4 shadow-inner">
+    <div class="max-w-[1350px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest">Life Transition Bridge</span>
+        <span class="text-slate-300 font-semibold hidden md:inline">Sequential Retirement Sequence:</span>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-4 font-bold text-slate-200">
+        <div class="flex items-center gap-1.5 bg-slate-800/90 border border-slate-700 px-3 py-1 rounded-xl">
+          <span id="bridgeAge1Tag" class="text-emerald-400 font-mono text-[10px] uppercase font-black">Age 55–65</span>
+          <strong id="bridgeNodePhase1" class="text-white text-xs">Portugal 🌍</strong>
+          <span id="bridgeNodePhase1Coverage" class="text-[10px] text-emerald-400 font-normal">(Private Expat)</span>
+        </div>
+
+        <span class="text-emerald-500 font-black text-sm">━━━</span>
+
+        <div class="flex items-center gap-1.5 bg-emerald-950/80 border border-emerald-500/50 px-3 py-1 rounded-xl ring-1 ring-emerald-500/30">
+          <span id="bridgeAge2Tag" class="text-emerald-300 font-mono text-[10px] uppercase font-black">Age 65+</span>
+          <strong id="bridgeNodePhase2" class="text-emerald-200 text-xs">Raleigh 🏡</strong>
+          <span id="bridgeNodePhase2Coverage" class="text-[10px] text-emerald-300 font-normal">(Plan G Shield)</span>
+        </div>
+
+        <span class="text-slate-600 font-black text-sm">━━━</span>
+
+        <div class="flex items-center gap-1.5 bg-slate-800/50 border border-slate-800 px-3 py-1 rounded-xl text-slate-400">
+          <span class="text-slate-400 text-xs">Ongoing: Legacy Planning 🏰</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-[1350px] mx-auto px-4 md:px-10 py-8 space-y-8">
+
+    <!-- BLUEPRINT HEADER -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-3">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-1">
+            <span>Retirement Blueprint</span>
+            <span>•</span>
+            <span>Healthcare Strategy</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-serif-title font-bold text-[#0B132B]">Healthcare Strategy Planning</h1>
+        </div>
+        <a href="building-your-retirement.html" class="text-xs text-slate-500 hover:text-slate-800 font-bold flex items-center gap-1">
+          <span>← Return to Retirement Builder</span>
+        </a>
+      </div>
+
+      <!-- ALREADY KNOWN CONTEXT PANEL -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-4">
+        <div>
+          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
+          <div class="flex items-center gap-1 text-xs font-bold text-slate-900">
+            <span class="text-emerald-600 font-black">✓</span>
+            <span>Retirement Path:</span>
+          </div>
+          <strong id="blueprintPathText" class="text-xs text-emerald-700 font-extrabold block truncate">Explore Then Return</strong>
+        </div>
+
+        <div>
+          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
+          <div class="flex items-center gap-1 text-xs font-bold text-slate-900">
+            <span class="text-emerald-600 font-black">✓</span>
+            <span>Overseas Base:</span>
+          </div>
+          <strong id="blueprintOverseasText" class="text-xs text-slate-800 font-extrabold block truncate">Portugal 🌍</strong>
+        </div>
+
+        <div>
+          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
+          <div class="flex items-center gap-1 text-xs font-bold text-slate-900">
+            <span class="text-emerald-600 font-black">✓</span>
+            <span>U.S. Home Base:</span>
+          </div>
+          <strong id="blueprintUSText" class="text-xs text-slate-800 font-extrabold block truncate">Raleigh, NC 🏡</strong>
+        </div>
+
+        <div>
+          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
+          <div class="flex items-center gap-1 text-xs font-bold text-slate-900">
+            <span class="text-emerald-600 font-black">✓</span>
+            <span>Monthly Budget:</span>
+          </div>
+          <strong id="blueprintBudgetText" class="text-xs text-slate-800 font-extrabold block truncate">$8,500 / month</strong>
+        </div>
+
+        <div class="bg-emerald-100/70 border border-emerald-300 rounded-lg p-2.5 flex flex-col justify-center sm:col-span-2 md:col-span-1">
+          <span class="text-[10px] uppercase font-black text-emerald-900 tracking-wider block">Today's Goal</span>
+          <strong class="text-xs font-bold text-emerald-950">Build your healthcare strategy.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- LEFT 5 COLUMNS: REFINING HEALTHCARE CRITERIA -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Healthcare Decision Drivers</span>
+            <h2 class="text-lg font-serif-title font-bold text-slate-900">Refining Healthcare Criteria</h2>
+            <p class="text-xs text-slate-500 mt-0.5">We preloaded your locations and budget. Tell us your coverage and risk requirements:</p>
+          </div>
+
+          <form id="healthcareForm" onsubmit="event.preventDefault(); recalculateRecommendation();" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">1. Pre-Medicare Coverage Model?</label>
+              <select id="q_coverageModel" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
+                <option value="private_intl" selected>Private International Expat Policy (JCI-Accredited)</option>
+                <option value="hybrid_travel">Hybrid Local Universal + Expat Evacuation Bridge</option>
+                <option value="routine_cash">Self-Funded Out-of-Pocket Primary Care</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">2. Medical Risk & Out-of-Pocket Comfort?</label>
+              <select id="q_riskTolerance" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
+                <option value="low_risk" selected>Low Risk — Broad Medigap Plan G Protection Target</option>
+                <option value="moderate_risk">Moderate Risk — Open to Medicare Advantage copays</option>
+                <option value="high_deductible">High Risk — Major Catastrophic Shield Only</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">3. Target Annual Medical Budget Cap?</label>
+              <select id="q_annualMedicalBudget" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
+                <option value="6000">$6,000 / yr (~$500/mo combined)</option>
+                <option value="8000" selected>$8,000 / yr (~$660/mo combined)</option>
+                <option value="12000">$12,000 / yr (~$1,000/mo combined)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">4. Long-Term Care (LTC) Strategy?</label>
+              <select id="q_ltcPriority" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
+                <option value="in_home_care" selected>In-Home Private Nursing & Overseas Care Arbitrage</option>
+                <option value="ccrc">Continuing Care Retirement Community (CCRC) Base</option>
+                <option value="self_fund">Self-Funded Portfolio Reserve Shield</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">5. Academic Hospital & Specialist Access?</label>
+              <select id="q_specialistAccess" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
+                <option value="top_tier" selected>Critical — Direct access to academic medical centers</option>
+                <option value="regional_fine">Regional Specialist Network is Sufficient</option>
+              </select>
+            </div>
+          </form>
+        </div>
+
+        <!-- FINANCIAL INTEGRATION BRIDGE CARD -->
+        <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-2xl p-5 border border-blue-700 shadow-md space-y-2.5">
+          <div class="flex items-center justify-between border-b border-blue-800 pb-2">
+            <span class="text-[10px] font-black uppercase text-blue-300 tracking-wider">⚡ Automatic Strategy Handoff</span>
+            <span id="finBridgeCostTag" class="bg-blue-600 text-white font-mono font-bold text-[10px] px-2 py-0.5 rounded">$7,400 / yr</span>
+          </div>
+          <strong class="text-xs font-bold text-white block">Connects to Financial Strategy</strong>
+          <p class="text-[11px] text-blue-200 leading-relaxed">
+            Your healthcare carrying cost (<span id="finCostHighlight" class="font-bold text-emerald-300">$7,400/yr</span>) auto-populates into Financial Strategy to model Roth conversions, IRMAA tax-tier avoidance, and withdrawal sequencing without repeating entries.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT 7 COLUMNS: BLUEPRINT RECOMMENDATION & HERO VISUAL -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 border-2 border-emerald-500 rounded-2xl p-6 shadow-md space-y-5">
+          
+          <div class="flex justify-between items-start border-b border-emerald-200/80 pb-3">
+            <div>
+              <span class="bg-emerald-600 text-white font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Blueprint Recommendation</span>
+              <h3 class="text-2xl font-serif-title font-bold text-slate-900 mt-1">Your Healthcare Strategy</h3>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] font-bold text-slate-400 block uppercase">Decision Confidence</span>
+              <strong id="recommendationFitBadge" class="text-xs font-extrabold uppercase px-2.5 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-md inline-block mt-0.5">High Confidence</strong>
+            </div>
+          </div>
+
+          <!-- PERSONALIZED ROUTE MAP HERO BANNER -->
+          <div class="relative rounded-2xl overflow-hidden border border-emerald-300/80 shadow-md bg-slate-950 h-48 sm:h-52 group">
+            <img id="healthcareHeroImg" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80" alt="Healthcare Center" class="w-full h-full object-cover opacity-30 transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/1200x500/019367/FFFFFF?text=Healthcare+Strategy'">
+            
+            <div class="absolute inset-0 p-5 flex flex-col justify-between z-10">
+              <div class="flex justify-between items-start">
+                <span class="bg-white/90 backdrop-blur-md text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                  🏥 <span id="heroHealthTitle">Medicare Plan G + Foreign Private</span>
+                </span>
+                <span class="bg-emerald-500 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider shadow">Top Match</span>
+              </div>
+
+              <!-- PERSONALIZED TRANSITION ROUTE GRAPHIC -->
+              <div class="bg-slate-900/90 backdrop-blur-md border border-slate-700 p-3 rounded-xl flex items-center justify-between gap-2 text-white">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🌍</span>
+                  <div>
+                    <span id="heroPhase1Label" class="text-[9px] text-emerald-400 uppercase font-black block">Age 55–65</span>
+                    <strong id="mapPhase1Text" class="text-xs font-bold text-white">Portugal (Private Expat)</strong>
+                  </div>
+                </div>
+
+                <span class="text-emerald-400 font-bold text-xs">➔</span>
+
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🏥</span>
+                  <div>
+                    <span id="heroPhase2Label" class="text-[9px] text-emerald-400 uppercase font-black block">Age 65+</span>
+                    <strong id="mapPhase2Text" class="text-xs font-bold text-emerald-300">Raleigh — Medicare + Plan G (Duke/UNC Access)</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAIN STRATEGY DETAILS & BUDGET SURPLUS -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
+            <div class="sm:col-span-7 space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🛡️</span>
+                <h4 id="recommendedHealthTitle" class="text-xl font-bold text-slate-900">Private Expat ➔ Medigap Plan G Shield</h4>
+              </div>
+
+              <div class="bg-white/90 p-3 rounded-xl border border-emerald-200 space-y-2 text-xs">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-600 font-medium">Recommended Strategy:</span>
+                  <strong id="summaryPlanModelLabel" class="text-emerald-800 font-bold">Private Expat ➔ Medigap Plan G</strong>
+                </div>
+                <div class="flex justify-between items-center border-t pt-1.5">
+                  <span class="text-slate-600 font-medium">Estimated Annual Cost:</span>
+                  <strong id="recCostTextInline" class="text-emerald-700 font-black text-sm">$7,400 / yr</strong>
+                </div>
+                <p id="oneSentenceSummary" class="text-[11px] text-slate-700 leading-snug font-medium pt-1 border-t border-slate-100">
+                  Combines foreign private health insurance in Portugal with supplemental Plan G cost-sharing protection in Raleigh, NC.
+                </p>
+              </div>
+
+              <!-- COLLAPSIBLE DECISION FACTORS SCORECARD -->
+              <details class="bg-white p-3 rounded-xl border border-emerald-200 text-xs text-slate-700 cursor-pointer group">
+                <summary class="font-bold text-emerald-800 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">📊 <span>View Decision Factors Scorecard</span></span>
+                  <span class="text-slate-400 font-normal text-[10px] group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                
+                <div class="pt-3 space-y-2 border-t border-slate-100 mt-2 text-[11px]">
+                  <div class="grid grid-cols-2 gap-x-3 gap-y-1 font-medium text-slate-700">
+                    <div class="flex justify-between"><span>Pre-65 Coverage:</span> <span id="starsPre65" class="text-emerald-600 font-bold">★★★★★</span></div>
+                    <div class="flex justify-between"><span>Post-65 Plan Fit:</span> <span id="starsPlanG" class="text-emerald-600 font-bold">★★★★★</span></div>
+                    <div class="flex justify-between"><span>Doctor Network:</span> <span id="starsNetwork" class="text-emerald-600 font-bold">★★★★★</span></div>
+                    <div class="flex justify-between"><span>OOP Protection:</span> <span id="starsOOP" class="text-emerald-600 font-bold">★★★★★</span></div>
+                    <div class="flex justify-between"><span>Budget Cushion:</span> <span id="starsIRMAA" class="text-emerald-600 font-bold">★★★★☆</span></div>
+                    <div class="flex justify-between"><span>LTC Arbitrage:</span> <span id="starsLTC" class="text-emerald-600 font-bold">★★★★☆</span></div>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- BUDGET SURPLUS & COST METRICS -->
+            <div class="sm:col-span-5 bg-white p-4 rounded-xl border border-emerald-200 space-y-3 text-xs">
+              <div>
+                <span class="text-[10px] text-slate-400 font-bold uppercase block">Annual Healthcare Math</span>
+                <div class="mt-1 space-y-1">
+                  <div class="flex justify-between"><span class="text-slate-500">Target Med Budget:</span> <strong id="recTargetBudgetText" class="font-bold text-slate-900">$8,000/yr</strong></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Est. Combined Premium:</span> <strong id="recCostText" class="font-bold text-emerald-700">$7,400/yr</strong></div>
+                  <div class="flex justify-between border-t pt-1"><span id="recSurplusLabel" class="text-slate-700 font-bold">Annual Buffer:</span> <strong id="recSurplusText" class="font-extrabold text-emerald-800">+$600/yr</strong></div>
+                </div>
+              </div>
+
+              <!-- VISUAL BUDGET GAUGE -->
+              <div class="space-y-1">
+                <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase">
+                  <span>Expense</span>
+                  <span>Buffer</span>
+                </div>
+                <div class="w-full bg-emerald-100 h-2 rounded-full overflow-hidden flex">
+                  <div id="costBarSegment" class="bg-emerald-600 h-full transition-all duration-500" style="width: 80%;"></div>
+                  <div id="surplusBarSegment" class="bg-emerald-300 h-full transition-all duration-500" style="width: 20%;"></div>
+                </div>
+              </div>
+
+              <div class="border-t pt-2 space-y-1">
+                <div class="flex justify-between items-center">
+                  <span class="text-[10px] text-slate-400 font-bold uppercase">U.S. Provider</span>
+                  <strong id="recHospitalText" class="font-bold text-slate-800 text-right truncate max-w-[130px]">Duke / UNC Access</strong>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[10px] text-slate-400 font-bold uppercase">Post-65 Coverage</span>
+                  <strong id="recMedigapTierLabel" class="font-bold text-emerald-700 truncate max-w-[130px]">Plan G Supplemental</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NETFLIX-STYLE EDUCATIONAL EPISODES & CASE STUDIES -->
+          <div class="pt-3 border-t border-emerald-200/80 space-y-3">
+            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Educational Evidence & Deep Dives</span>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              
+              <!-- EPISODE 1 -->
+              <button type="button" onclick="openCaseStudyModal('cardiac')" class="text-left bg-white p-3 rounded-xl border border-slate-200 hover:border-emerald-400 transition cursor-pointer space-y-1.5 flex flex-col justify-between shadow-sm group w-full">
+                <div>
+                  <div class="flex justify-between items-center">
+                    <span class="bg-blue-50 text-blue-700 font-bold text-[9px] px-2 py-0.5 rounded">Illustrative Scenario</span>
+                    <span class="text-[9px] text-slate-400 font-bold">2 min ▶</span>
+                  </div>
+                  <strong class="text-xs font-bold text-slate-900 block mt-1 group-hover:text-emerald-700 transition">Doctor's Cardiac Surgery Bill</strong>
+                  <p class="text-[10px] text-slate-500 leading-snug line-clamp-2 mt-0.5">How Medigap Plan G absorbed cardiac coinsurance gap at Duke Health.</p>
+                </div>
+                <span class="text-[10px] text-emerald-700 font-bold flex items-center gap-1"><span>Read Scenario</span> <span>→</span></span>
+              </button>
+
+              <!-- EPISODE 2 -->
+              <button type="button" onclick="openCaseStudyModal('irmaa')" class="text-left bg-white p-3 rounded-xl border border-slate-200 hover:border-amber-400 transition cursor-pointer space-y-1.5 flex flex-col justify-between shadow-sm group w-full">
+                <div>
+                  <div class="flex justify-between items-center">
+                    <span class="bg-amber-50 text-amber-800 font-bold text-[9px] px-2 py-0.5 rounded">Tax Warning</span>
+                    <span class="text-[9px] text-slate-400 font-bold">3 min ▶</span>
+                  </div>
+                  <strong class="text-xs font-bold text-slate-900 block mt-1 group-hover:text-amber-800 transition">The $10,000 IRMAA Trap</strong>
+                  <p class="text-[10px] text-slate-500 leading-snug line-clamp-2 mt-0.5">How traditional IRA distributions trigger Medicare Part B surcharges.</p>
+                </div>
+                <span class="text-[10px] text-amber-800 font-bold flex items-center gap-1"><span>View Warning</span> <span>→</span></span>
+              </button>
+
+              <!-- EPISODE 3 -->
+              <button type="button" onclick="openCaseStudyModal('plang')" class="text-left bg-white p-3 rounded-xl border border-slate-200 hover:border-emerald-400 transition cursor-pointer space-y-1.5 flex flex-col justify-between shadow-sm group w-full">
+                <div>
+                  <div class="flex justify-between items-center">
+                    <span class="bg-emerald-50 text-emerald-800 font-bold text-[9px] px-2 py-0.5 rounded">Strategy Guide</span>
+                    <span class="text-[9px] text-slate-400 font-bold">5 min ▶</span>
+                  </div>
+                  <strong class="text-xs font-bold text-slate-900 block mt-1 group-hover:text-emerald-700 transition">Why Medigap Plan G Wins</strong>
+                  <p class="text-[10px] text-slate-500 leading-snug line-clamp-2 mt-0.5">Comparing Medigap freedom vs. Medicare Advantage network restrictions.</p>
+                </div>
+                <span class="text-[10px] text-emerald-700 font-bold flex items-center gap-1"><span>Watch Breakdown</span> <span>→</span></span>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TRADE-OFF MATRIX (FULL WIDTH WITH COLOR-CODED COLUMNS) -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+      <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div>
+          <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Strategy Analysis</span>
+          <h3 class="text-lg font-serif-title font-bold text-slate-900">Compare Healthcare Strategy Trade-Offs</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Evaluating key advantages against major drawbacks across coverage models:</p>
+        </div>
+        <span class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold">3 Primary Models Evaluated</span>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-slate-50 text-slate-700 font-bold uppercase border-b border-slate-200">
+              <th class="p-3">Healthcare Strategy Model</th>
+              <th class="p-3 text-emerald-900 bg-emerald-50/70 border-x border-emerald-100">Biggest Advantage</th>
+              <th class="p-3 text-amber-900 bg-amber-50/70">Biggest Drawback / Trade-Off</th>
+              <th class="p-3 text-right">Fit Level</th>
+            </tr>
+          </thead>
+          <tbody id="tradeoffMatrixBody" class="divide-y divide-slate-100 font-medium">
+            <!-- Dynamically populated via recalculateRecommendation() -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BLUEPRINT COMPLETION CONTAINER -->
+    <div id="healthcareCompletionContainer" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
+      <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div>
+          <span id="completionStepBadge" class="text-[10px] font-black uppercase text-amber-600 tracking-widest block">Healthcare Strategy — Action Required</span>
+          <h3 id="completionStepTitle" class="text-xl font-serif-title font-bold text-slate-900">Ready to Complete Healthcare Section</h3>
+        </div>
+
+        <div id="saveActionGroup" class="flex flex-wrap items-center gap-3">
+          <button id="addToBlueprintBtn" onclick="addToRetirementBlueprint()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
+            <span>[ Add to Retirement Blueprint ]</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- HEALTHCARE PIPELINE PROGRESS MATRIX -->
+      <div class="bg-slate-900 text-white rounded-xl p-4 space-y-3 shadow-md">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+          <span class="text-xs font-black uppercase text-emerald-400 tracking-wider">RETIREMENT BLUEPRINT PIPELINE</span>
+          <span id="blueprintModuleCount" class="text-[10px] text-slate-400 font-mono font-bold">2 of 5 Complete</span>
+        </div>
+
+        <div class="grid grid-cols-5 gap-2 text-center text-xs pt-1">
+          <div id="moduleLifeCard" class="bg-slate-800 p-2 rounded-lg border border-emerald-500/40">
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Life</span>
+            <span id="moduleLifeCheck" class="text-emerald-400 font-bold text-sm">✓</span>
+          </div>
+
+          <div id="moduleLocationCard" class="bg-slate-800 p-2 rounded-lg border border-emerald-500/40">
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Location</span>
+            <span id="moduleLocationCheck" class="text-emerald-400 font-bold text-sm">✓</span>
+          </div>
+
+          <div id="moduleHealthCard" class="bg-slate-800 p-2 rounded-lg border border-amber-400/60 transition-all duration-500">
+            <span id="moduleHealthLabel" class="block text-[10px] text-amber-300 uppercase font-bold">Health</span>
+            <span id="moduleHealthCheck" class="text-amber-400 font-bold text-sm">⚡</span>
+          </div>
+
+          <div id="moduleFinancialCard" class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Financial</span>
+            <span id="moduleFinancialCheck" class="text-slate-500 font-bold text-sm">□</span>
+          </div>
+
+          <div id="moduleEstateCard" class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
+            <span class="block text-[10px] text-slate-400 uppercase font-bold">Estate</span>
+            <span id="moduleEstateCheck" class="text-slate-500 font-bold text-sm">□</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DYNAMIC BLUEPRINT COMPLETION CARD (APPEARS UPON SAVE) -->
+      <div id="blueprintCompletionCard" class="hidden bg-gradient-to-r from-emerald-900 to-slate-900 text-white p-6 rounded-2xl border-2 border-emerald-500 shadow-xl space-y-4 animate-toast">
+        <div class="flex justify-between items-start border-b border-emerald-800/80 pb-3">
+          <div>
+            <span class="bg-emerald-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Healthcare Strategy Saved</span>
+            <h4 class="text-xl font-serif-title font-bold text-white mt-1">Healthcare Strategy Added to Blueprint</h4>
+          </div>
+          <span class="text-emerald-400 text-xl font-black">✓</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex items-center gap-3">
+            <div class="bg-slate-700 w-10 h-10 rounded-lg flex items-center justify-center text-lg shrink-0">🌍</div>
+            <div>
+              <span class="text-[10px] text-slate-400 font-bold uppercase block">Pre-Medicare Care</span>
+              <strong id="savedPhase1Val" class="text-xs font-bold text-white">Portugal (Private Expat) ✓</strong>
+            </div>
+          </div>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-emerald-500/40 flex items-center gap-3">
+            <div class="bg-emerald-950 w-10 h-10 rounded-lg flex items-center justify-center text-lg shrink-0 text-emerald-400 border border-emerald-500/50">🏥</div>
+            <div>
+              <span class="text-[10px] text-emerald-400 font-bold uppercase block">Post-65 Care</span>
+              <strong id="savedPhase2Val" class="text-xs font-bold text-emerald-300">Raleigh (Medicare Plan G) ✓</strong>
+            </div>
+          </div>
+          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex items-center gap-3">
+            <div class="bg-slate-700 w-10 h-10 rounded-lg flex items-center justify-center text-lg shrink-0">💡</div>
+            <div>
+              <span class="text-[10px] text-slate-400 font-bold uppercase block">Est. Annual Cost</span>
+              <strong id="savedCostVal" class="text-xs font-bold text-slate-200">$7,400 / yr (~$617/mo)</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <span class="text-xs text-slate-300 font-medium">Next Recommended Section: <strong class="text-emerald-400">Financial Strategy (Roth & Withdrawals)</strong></span>
+          <div class="flex items-center gap-2">
+            <a id="continueAdaptiveBtn" href="OptimizeRoth.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow-md whitespace-nowrap flex items-center gap-2">
+              <span>Continue to Financial Strategy →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- CASE STUDY MODAL DIALOG -->
+  <div id="caseStudyModal" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle" onclick="if(event.target === this) closeCaseStudyModal()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-start border-b border-slate-100 pb-3">
+        <div>
+          <span id="caseModalBadge" class="text-[10px] font-black uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Illustrative Scenario</span>
+          <h3 id="caseModalTitle" class="text-lg font-serif-title font-bold text-slate-900 mt-1">Doctor's Cardiac Surgery Bill</h3>
+        </div>
+        <button type="button" onclick="closeCaseStudyModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+      </div>
+
+      <div id="caseModalContent" class="text-xs text-slate-700 leading-relaxed space-y-2">
+        <!-- Filled via JS -->
+      </div>
+
+      <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-[10px] text-slate-500 leading-relaxed italic">
+        <strong>Educational Disclaimer:</strong> For illustrative education only. Costs, deductibles, and Medicare parameters vary by year, state, carrier, and individual circumstances.
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button type="button" onclick="closeCaseStudyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-xl font-bold text-xs transition">
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const blueprintState = {
+      pathName: "Explore Then Return",
+      pathId: "explore_then_return",
+      monthlySpend: "$8,500 / month",
+      overseasBase: "Portugal",
+      selectedUSCity: "Raleigh, NC",
+      startAge: 55,
+      medicareAge: 65,
+      estimatedAnnualCost: 7400,
+      monthlyHealthcareCost: 617,
+      recommendedModelKey: "plan_g",
+      isHealthcareSaved: false,
+      payloadRaw: {}
+    };
+
+    const healthcareModels = {
+      plan_g: {
+        key: "plan_g",
+        title: "Private Expat ➔ Medigap Plan G Shield",
+        shortTitle: "Medigap Plan G",
+        phase2Coverage: "Medicare Part A/B + Medigap Plan G",
+        baseCost: 7400,
+        summaryText: "Combines foreign health coverage before 65 with broad Medigap Plan G cost-sharing protection after 65.",
+        heroTitle: "Medicare Plan G + Foreign Private",
+        advantage: "Access to providers nationwide who accept Original Medicare, without Medicare Advantage plan-network restrictions",
+        drawback: "Higher fixed monthly premium than Medicare Advantage options",
+        starsPre65: "★★★★★",
+        starsPlanG: "★★★★★",
+        starsNetwork: "★★★★★",
+        starsOOP: "★★★★★",
+        starsIRMAA: "★★★★☆",
+        starsLTC: "★★★★☆"
+      },
+      medicare_advantage: {
+        key: "medicare_advantage",
+        title: "Hybrid Local Care ➔ Medicare Advantage PPO",
+        shortTitle: "Medicare Advantage PPO",
+        phase2Coverage: "Medicare Advantage (Part C) Regional Network",
+        baseCost: 5200,
+        summaryText: "Leverages local/evacuation coverage pre-65 paired with low-premium regional Medicare Advantage network care post-65.",
+        heroTitle: "Medicare Advantage + Local Care",
+        advantage: "Lower monthly fixed plan premiums plus extra included dental/vision allowances",
+        drawback: "Restricted regional specialist networks, copays, and prior authorization rules",
+        starsPre65: "★★★★☆",
+        starsPlanG: "★★★☆☆",
+        starsNetwork: "★★★☆☆",
+        starsOOP: "★★★☆☆",
+        starsIRMAA: "★★★★★",
+        starsLTC: "★★★☆☆"
+      },
+      catastrophic: {
+        key: "catastrophic",
+        title: "Self-Funded Routine Care ➔ High-Deductible Risk Shield",
+        shortTitle: "Catastrophic High-Deductible Guard",
+        phase2Coverage: "Original Medicare A/B + High-Deductible Medigap",
+        baseCost: 3800,
+        summaryText: "Relies on out-of-pocket routine primary care with high-deductible major medical safeguards against severe health events.",
+        heroTitle: "High-Deductible Guard + Routine OOP",
+        advantage: "Lowest upfront monthly carrying premium for healthy active retirement years ($2,950 deductible threshold for 2026)",
+        drawback: "Exposes household cash flow to deductible out-of-pocket thresholds if major medical needs arise",
+        starsPre65: "★★★☆☆",
+        starsPlanG: "★★☆☆☆",
+        starsNetwork: "★★★★☆",
+        starsOOP: "★★☆☆☆",
+        starsIRMAA: "★★★★★",
+        starsLTC: "★★★★★"
+      }
+    };
+
+    function setSafeText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.innerText = text;
+    }
+
+    function loadBlueprintContext() {
+      try {
+        const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
+        const payload = JSON.parse(raw);
+        blueprintState.payloadRaw = payload;
+
+        if (payload.selectedLifeName) blueprintState.pathName = payload.selectedLifeName;
+        if (payload.selectedLifeId) blueprintState.pathId = payload.selectedLifeId;
+        if (payload.monthlySpend) blueprintState.monthlySpend = payload.monthlySpend;
+        if (payload.overseasBase) blueprintState.overseasBase = payload.overseasBase;
+        if (payload.usCity) blueprintState.selectedUSCity = payload.usCity;
+        if (payload.startAge) blueprintState.startAge = payload.startAge;
+        if (payload.medicareAge) blueprintState.medicareAge = payload.medicareAge;
+
+        if (payload.healthcareSectionComplete) {
+          blueprintState.isHealthcareSaved = true;
+        }
+
+        // Restore form selections if previously saved
+        if (payload.healthcareStrategy) {
+          const hs = payload.healthcareStrategy;
+          if (hs.coverageModelPreference) setSelectVal("q_coverageModel", hs.coverageModelPreference);
+          if (hs.riskTolerance) setSelectVal("q_riskTolerance", hs.riskTolerance);
+          if (hs.medicalBudgetCap) setSelectVal("q_annualMedicalBudget", hs.medicalBudgetCap);
+          if (hs.ltcStrategy) setSelectVal("q_ltcPriority", hs.ltcStrategy);
+          if (hs.specialistAccess) setSelectVal("q_specialistAccess", hs.specialistAccess);
+        }
+      } catch (e) {
+        console.warn("Could not read LocalStorage payload:", e);
+      }
+
+      setSafeText("blueprintPathText", blueprintState.pathName);
+      setSafeText("blueprintOverseasText", `${blueprintState.overseasBase} 🌍`);
+      setSafeText("blueprintUSText", `${blueprintState.selectedUSCity} 🏡`);
+      setSafeText("blueprintBudgetText", blueprintState.monthlySpend.split('(')[0] || blueprintState.monthlySpend);
+
+      setSafeText("bridgeAge1Tag", `Age ${blueprintState.startAge}–${blueprintState.medicareAge}`);
+      setSafeText("bridgeAge2Tag", `Age ${blueprintState.medicareAge}+`);
+      setSafeText("bridgeNodePhase1", `${blueprintState.overseasBase} 🌍`);
+      setSafeText("bridgeNodePhase2", `${blueprintState.selectedUSCity} 🏡`);
+
+      setSafeText("heroPhase1Label", `Age ${blueprintState.startAge}–${blueprintState.medicareAge}`);
+      setSafeText("heroPhase2Label", `Age ${blueprintState.medicareAge}+`);
+
+      updateModulePipelineCounts();
+      recalculateRecommendation();
+
+      if (blueprintState.isHealthcareSaved) {
+        markHealthcareAsCompleteUI(true);
+      }
+    }
+
+    function setSelectVal(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    }
+
+    function renderModuleStatus(cardId, checkId, labelId, isComplete, isActive) {
+      const card = document.getElementById(cardId);
+      const check = document.getElementById(checkId);
+      const label = labelId ? document.getElementById(labelId) : null;
+
+      if (!card || !check) return;
+
+      if (isComplete) {
+        card.className = "bg-emerald-950 p-2 rounded-lg border border-emerald-400/80 shadow-sm";
+        check.className = "text-emerald-400 font-bold text-sm";
+        check.innerText = "✓";
+        if (label) label.className = "block text-[10px] text-emerald-300 uppercase font-bold";
+      } else if (isActive) {
+        card.className = "bg-slate-800 p-2 rounded-lg border border-amber-400/60 transition-all duration-500";
+        check.className = "text-amber-400 font-bold text-sm";
+        check.innerText = "⚡";
+        if (label) label.className = "block text-[10px] text-amber-300 uppercase font-bold";
+      } else {
+        card.className = "bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60";
+        check.className = "text-slate-500 font-bold text-sm";
+        check.innerText = "□";
+        if (label) label.className = "block text-[10px] text-slate-400 uppercase font-bold";
+      }
+    }
+
+    function updateModulePipelineCounts() {
+      const payload = blueprintState.payloadRaw || {};
+      const lifeComplete = payload.lifeSectionComplete ?? Boolean(payload.selectedLifeId);
+      const locationComplete = payload.locationSectionComplete ?? Boolean(payload.overseasBase || payload.usCity);
+      const healthComplete = Boolean(payload.healthcareSectionComplete || blueprintState.isHealthcareSaved);
+      const financialComplete = Boolean(payload.financialSectionComplete);
+      const estateComplete = Boolean(payload.estateSectionComplete);
+
+      renderModuleStatus("moduleLifeCard", "moduleLifeCheck", null, lifeComplete, false);
+      renderModuleStatus("moduleLocationCard", "moduleLocationCheck", null, locationComplete, !locationComplete && lifeComplete);
+      renderModuleStatus("moduleHealthCard", "moduleHealthCheck", "moduleHealthLabel", healthComplete, !healthComplete);
+      renderModuleStatus("moduleFinancialCard", "moduleFinancialCheck", null, financialComplete, false);
+      renderModuleStatus("moduleEstateCard", "moduleEstateCheck", null, estateComplete, false);
+
+      const completedList = [lifeComplete, locationComplete, healthComplete, financialComplete, estateComplete];
+      const count = completedList.filter(Boolean).length;
+      setSafeText("blueprintModuleCount", `${count} of 5 Complete`);
+    }
+
+    function recalculateRecommendation() {
+      const covEl = document.getElementById("q_coverageModel");
+      const riskEl = document.getElementById("q_riskTolerance");
+      const budgetEl = document.getElementById("q_annualMedicalBudget");
+      const ltcEl = document.getElementById("q_ltcPriority");
+      const specEl = document.getElementById("q_specialistAccess");
+
+      if (!covEl || !riskEl || !budgetEl || !ltcEl || !specEl) return;
+
+      const covVal = covEl.value;
+      const riskVal = riskEl.value;
+      const budgetCap = parseInt(budgetEl.value) || 8000;
+      const ltcVal = ltcEl.value;
+      const specVal = specEl.value;
+
+      // Decision Scoring System with all 5 input dimensions
+      let scoreG = 30;
+      let scoreAdv = 20;
+      let scoreCat = 10;
+
+      if (riskVal === "low_risk") scoreG += 35;
+      else if (riskVal === "moderate_risk") scoreAdv += 35;
+      else if (riskVal === "high_deductible") scoreCat += 35;
+
+      if (specVal === "top_tier") scoreG += 25;
+      else scoreAdv += 15;
+
+      if (covVal === "private_intl") scoreG += 20;
+      else if (covVal === "hybrid_travel") scoreAdv += 20;
+      else if (covVal === "routine_cash") scoreCat += 20;
+
+      if (budgetCap <= 6000) scoreAdv += 15;
+
+      // Question 4: LTC evaluation
+      if (ltcVal === "in_home_care") { scoreG += 8; scoreAdv += 3; }
+      else if (ltcVal === "ccrc") { scoreG += 10; scoreAdv += 8; }
+      else if (ltcVal === "self_fund") { scoreCat += 12; }
+
+      // Rank and derive confidence margin
+      const ranked = [
+        { key: "plan_g", score: scoreG },
+        { key: "medicare_advantage", score: scoreAdv },
+        { key: "catastrophic", score: scoreCat }
+      ].sort((a, b) => b.score - a.score);
+
+      const margin = ranked[0].score - ranked[1].score;
+      const dynamicConfidence = margin >= 25 ? "High Confidence" : margin >= 12 ? "Moderate Fit" : "Conditional Fit";
+
+      const winnerKey = ranked[0].key;
+      const winner = healthcareModels[winnerKey];
+      blueprintState.recommendedModelKey = winnerKey;
+
+      const coverageLabels = {
+        private_intl: "Private Expat",
+        hybrid_travel: "Local + Evacuation",
+        routine_cash: "Self-Funded Routine"
+      };
+
+      const phase1CoverageText = coverageLabels[covVal] || "Private Expat";
+      setSafeText("bridgeNodePhase1Coverage", `(${phase1CoverageText})`);
+      setSafeText("bridgeNodePhase2Coverage", `(${winner.shortTitle})`);
+
+      let calculatedCost = winner.baseCost;
+      if (covVal === "hybrid_travel") calculatedCost -= 1000;
+      if (covVal === "routine_cash") calculatedCost -= 1800;
+
+      blueprintState.estimatedAnnualCost = calculatedCost;
+      blueprintState.monthlyHealthcareCost = Math.round(calculatedCost / 12);
+
+      const budgetDifference = budgetCap - calculatedCost;
+
+      // DOM Updates
+      setSafeText("recommendedHealthTitle", winner.title);
+      setSafeText("summaryPlanModelLabel", `${phase1CoverageText} ➔ ${winner.shortTitle}`);
+      setSafeText("heroHealthTitle", winner.heroTitle);
+      setSafeText("mapPhase1Text", `${blueprintState.overseasBase} (${phase1CoverageText})`);
+      setSafeText("mapPhase2Text", `${blueprintState.selectedUSCity} — ${winner.phase2Coverage}`);
+
+      setSafeText("recTargetBudgetText", `$${budgetCap.toLocaleString()}/yr`);
+      setSafeText("recCostText", `$${calculatedCost.toLocaleString()}/yr`);
+      setSafeText("recCostTextInline", `$${calculatedCost.toLocaleString()} / yr`);
+
+      setSafeText("recSurplusLabel", budgetDifference >= 0 ? "Annual Surplus:" : "Annual Shortfall:");
+      setSafeText("recSurplusText", budgetDifference >= 0 ? `+$${budgetDifference.toLocaleString()}/yr` : `-$${Math.abs(budgetDifference).toLocaleString()}/yr`);
+      
+      const surplusEl = document.getElementById("recSurplusText");
+      if (surplusEl) {
+        surplusEl.className = budgetDifference >= 0 ? "font-extrabold text-emerald-800" : "font-extrabold text-rose-600";
+      }
+
+      setSafeText("finCostHighlight", `$${calculatedCost.toLocaleString()}/yr`);
+      setSafeText("finBridgeCostTag", `$${calculatedCost.toLocaleString()} / yr`);
+      
+      const providerLabel = specVal === "top_tier" ? "Duke / UNC Academic Access" : "Regional PPO Network";
+      setSafeText("recHospitalText", providerLabel);
+      setSafeText("recMedigapTierLabel", winner.shortTitle);
+
+      setSafeText("oneSentenceSummary", `${winner.summaryText} The strategy uses ${blueprintState.overseasBase} before age ${blueprintState.medicareAge} and ${blueprintState.selectedUSCity} afterward.`);
+
+      setSafeText("recommendationFitBadge", dynamicConfidence);
+      setSafeText("starsPre65", winner.starsPre65);
+      setSafeText("starsPlanG", winner.starsPlanG);
+      setSafeText("starsNetwork", winner.starsNetwork);
+      setSafeText("starsOOP", winner.starsOOP);
+      setSafeText("starsIRMAA", winner.starsIRMAA);
+      setSafeText("starsLTC", winner.starsLTC);
+
+      // Visual Budget Gauge
+      const costPct = Math.min(100, Math.max(10, Math.round((calculatedCost / budgetCap) * 100)));
+      const costBar = document.getElementById("costBarSegment");
+      if (costBar) costBar.style.width = `${Math.min(100, costPct)}%`;
+
+      const surplusBar = document.getElementById("surplusBarSegment");
+      if (surplusBar) surplusBar.style.width = `${Math.max(0, 100 - costPct)}%`;
+
+      renderTradeoffMatrix(winnerKey);
+    }
+
+    function renderTradeoffMatrix(winnerKey) {
+      const tbody = document.getElementById("tradeoffMatrixBody");
+      if (!tbody) return;
+
+      tbody.innerHTML = "";
+
+      const modelsArr = [
+        healthcareModels.plan_g,
+        healthcareModels.medicare_advantage,
+        healthcareModels.catastrophic
+      ];
+
+      modelsArr.forEach(m => {
+        const isWinner = m.key === winnerKey;
+        const tr = document.createElement("tr");
+        tr.className = isWinner 
+          ? "winner-row text-slate-900 font-bold border-l-4 border-emerald-500 shadow-sm"
+          : "hover:bg-slate-50 text-slate-800";
+
+        tr.innerHTML = `
+          <td class="p-3">
+            <div class="flex items-center gap-2.5">
+              <span class="text-xl">${isWinner ? '🛡️' : '🏥'}</span>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900">${m.title}</span>
+                  ${isWinner ? '<span class="bg-emerald-600 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase">★ Recommended</span>' : ''}
+                </div>
+                <span class="text-[10px] text-slate-500 font-semibold block mt-0.5">${m.phase2Coverage}</span>
+              </div>
+            </div>
+          </td>
+          <td class="p-3 text-emerald-900 font-bold bg-emerald-50/40 border-x border-emerald-100">${m.advantage}</td>
+          <td class="p-3 text-amber-900 bg-amber-50/30">${m.drawback}</td>
+          <td class="p-3 text-right">
+            <span class="text-[10px] ${isWinner ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-700'} px-2.5 py-1 rounded font-extrabold uppercase whitespace-nowrap">
+              ${isWinner ? 'Top Match' : 'Alternative'}
+            </span>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addToRetirementBlueprint() {
+      const covModel = document.getElementById("q_coverageModel").value;
+      const riskTol = document.getElementById("q_riskTolerance").value;
+      const medBudget = parseInt(document.getElementById("q_annualMedicalBudget").value) || 8000;
+      const ltcPri = document.getElementById("q_ltcPriority").value;
+      const specAcc = document.getElementById("q_specialistAccess").value;
+
+      const activeWinner = healthcareModels[blueprintState.recommendedModelKey] || healthcareModels.plan_g;
+      const coverageLabels = { private_intl: "Private Expat", hybrid_travel: "Local + Evacuation", routine_cash: "Self-Funded Routine" };
+      const phase1CoverageText = coverageLabels[covModel] || "Private Expat";
+
+      try {
+        const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
+        const payload = JSON.parse(raw);
+        
+        payload.healthcareSectionComplete = true;
+        
+        payload.healthcareStrategy = {
+          type: "Transition Healthcare Strategy",
+          phase1: {
+            location: blueprintState.overseasBase,
+            startAge: blueprintState.startAge,
+            endAge: blueprintState.medicareAge,
+            coverageModelId: covModel,
+            coverageModelLabel: phase1CoverageText
+          },
+          phase2: {
+            location: blueprintState.selectedUSCity,
+            startAge: blueprintState.medicareAge,
+            coverageModel: activeWinner.phase2Coverage,
+            providerPreference: specAcc === "top_tier" ? "Academic Health Systems" : "Regional Network"
+          },
+          estimatedAnnualCost: blueprintState.estimatedAnnualCost,
+          estimatedMonthlyCost: blueprintState.monthlyHealthcareCost,
+          annualBudget: medBudget,
+          annualBuffer: medBudget - blueprintState.estimatedAnnualCost,
+          recommendedModelKey: blueprintState.recommendedModelKey,
+          recommendedPlanTitle: activeWinner.shortTitle,
+          riskTolerance: riskTol,
+          ltcStrategy: ltcPri,
+          specialistAccess: specAcc,
+          confidence: document.getElementById("recommendationFitBadge") ? document.getElementById("recommendationFitBadge").innerText : "High Confidence",
+          rationale: [activeWinner.advantage, "Integrated pre/post-65 transition"],
+          tradeoffs: [activeWinner.drawback],
+          selectedAt: new Date().toISOString()
+        };
+
+        payload.updatedAt = new Date().toISOString();
+        localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(payload));
+        blueprintState.payloadRaw = payload;
+      } catch (e) {
+        console.warn("Could not update LocalStorage:", e);
+      }
+
+      markHealthcareAsCompleteUI();
+      showToast("Blueprint Updated!", "Saved Healthcare Strategy to your Retirement Blueprint.");
+    }
+
+    function markHealthcareAsCompleteUI(silent = false) {
+      blueprintState.isHealthcareSaved = true;
+
+      const stepBadge = document.getElementById("completionStepBadge");
+      if (stepBadge) {
+        stepBadge.className = "text-[10px] font-black uppercase text-[#019367] tracking-widest block";
+        stepBadge.innerText = "Healthcare Strategy Complete";
+      }
+
+      setSafeText("completionStepTitle", "Healthcare Section Complete");
+      updateModulePipelineCounts();
+
+      const covVal = document.getElementById("q_coverageModel") ? document.getElementById("q_coverageModel").value : "private_intl";
+      const coverageLabels = { private_intl: "Private Expat", hybrid_travel: "Local + Evacuation", routine_cash: "Self-Funded Routine" };
+      const phase1Label = coverageLabels[covVal] || "Private Expat";
+
+      const completionCard = document.getElementById("blueprintCompletionCard");
+      if (completionCard) {
+        setSafeText("savedPhase1Val", `${blueprintState.overseasBase} — ${phase1Label} ✓`);
+        setSafeText("savedPhase2Val", `${blueprintState.selectedUSCity} (${healthcareModels[blueprintState.recommendedModelKey].shortTitle}) ✓`);
+        setSafeText("savedCostVal", `$${blueprintState.estimatedAnnualCost.toLocaleString()} / yr (~$${blueprintState.monthlyHealthcareCost}/mo)`);
+        completionCard.classList.remove("hidden");
+      }
+
+      const actionGroup = document.getElementById("saveActionGroup");
+      if (actionGroup) {
+        actionGroup.innerHTML = `
+          <span class="text-xs text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
+            <span>✓ Healthcare Added to Blueprint</span>
+          </span>
+          <a href="building-your-retirement.html" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
+            <span>Return to Master Builder →</span>
+          </a>
+        `;
+      }
+    }
+
+    let lastActiveElement = null;
+
+    function openCaseStudyModal(studyKey) {
+      lastActiveElement = document.activeElement;
+      const modal = document.getElementById("caseStudyModal");
+      const title = document.getElementById("caseModalTitle");
+      const badge = document.getElementById("caseModalBadge");
+      const content = document.getElementById("caseModalContent");
+
+      if (!modal || !title || !content) return;
+
+      if (studyKey === 'cardiac') {
+        badge.innerText = "Illustrative Scenario #302";
+        badge.className = "text-[10px] font-black uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded";
+        title.innerText = "Doctor's Cardiac Surgery Bill";
+        content.innerHTML = `
+          <p><strong>Scenario:</strong> Mark (age 68) suffered a sudden cardiac event requiring emergency hospitalization, catheterization, and subsequent bypass surgery at Duke Health System.</p>
+          <p><strong>Billed Charges & Standard Deductible:</strong> Part A deductible and 20% Part B coinsurance applied. Under 2026 CMS rates, the standard Part B deductible is $283.</p>
+          <p><strong>Medicare & Plan G Protection:</strong> Medicare Part A/B approved negotiated rates. Remaining coinsurance gaps were absorbed by Medigap Plan G.</p>
+          <p><strong>Out-of-Pocket Result:</strong> Mark paid only his annual Part B deductible ($283), protecting against major out-of-pocket copays.</p>
+        `;
+      } else if (studyKey === 'irmaa') {
+        badge.innerText = "Tax Warning Scenario";
+        badge.className = "text-[10px] font-black uppercase text-amber-800 bg-amber-50 px-2 py-0.5 rounded";
+        title.innerText = "The IRMAA Surcharge Trap";
+        content.innerHTML = `
+          <p><strong>Scenario:</strong> Sarah executed a large $150,000 Traditional IRA withdrawal at age 63 to fund a home purchase, spiking her MAGI into high tax brackets.</p>
+          <p><strong>The Trap:</strong> Medicare uses a 2-year lookback rule. When Sarah turned 65, Social Security assessed IRMAA surcharges on both Medicare Part B and Part D premiums.</p>
+          <p><strong>Financial Impact:</strong> Increased annual Medicare premiums significantly per person for two full years.</p>
+          <p><strong>Takeaway:</strong> Coordinate Roth conversions and large withdrawals before age 63 to remain under IRMAA thresholds.</p>
+        `;
+      } else if (studyKey === 'plang') {
+        badge.innerText = "Strategy Guide";
+        badge.className = "text-[10px] font-black uppercase text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded";
+        title.innerText = "Why Medigap Plan G Wins For Transition Retirees";
+        content.innerHTML = `
+          <p><strong>Flexibility Advantage:</strong> Access to providers nationwide who accept Original Medicare, without Medicare Advantage plan-network restrictions or referral requirements.</p>
+          <p><strong>Vs. Medicare Advantage:</strong> Advantage HMO/PPO plans often restrict coverage to local regional networks and require prior authorizations for expensive procedures—a key consideration for retirees splitting time between locations.</p>
+        `;
+      }
+
+      modal.classList.remove("hidden");
+      
+      const closeBtn = modal.querySelector("button");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeCaseStudyModal() {
+      const modal = document.getElementById("caseStudyModal");
+      if (modal) modal.classList.add("hidden");
+      if (lastActiveElement) lastActiveElement.focus();
+    }
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        closeCaseStudyModal();
+      }
+    });
+
+    function showToast(title, message) {
+      const toast = document.getElementById("toastNotification");
+      if (!toast) return;
+      setSafeText("toastTitle", title);
+      setSafeText("toastMessage", message);
+      toast.classList.remove("hidden");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3500);
+    }
+
+    window.onload = function() {
+      loadBlueprintContext();
+    };
+  </script>
+</body>
+</html>
