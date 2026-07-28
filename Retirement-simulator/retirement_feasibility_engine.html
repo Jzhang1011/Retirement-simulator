@@ -251,6 +251,14 @@
                   <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
+              <div class="dropdown-column">
+                <h4>✈️ Location & Healthcare</h4>
+                <ul>
+                  <li><a href="UScitymatcher.html">US Location Planning</a></li>
+                  <li><a href="RetiringOverseas.html">International Location Planning</a></li>
+                  <li><a href="cost_for_65+.html">Healthcare Strategy Planning</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </li>
@@ -330,7 +338,7 @@
             </div>
         </div>
 
-        <!-- RIGHT 6 COLUMNS: PRACTICAL FEASIBILITY CONTROLS (CLEAN SINGLE CONTAINER) -->
+        <!-- RIGHT 6 COLUMNS: PRACTICAL FEASIBILITY CONTROLS -->
         <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Feasibility Controls</span>
@@ -366,11 +374,10 @@
                 </select>
             </div>
 
-            <!-- TARGET LOCATION INPUTS -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100">
                 <div>
                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target Overseas Base</label>
-                    <input type="text" id="feat_overseasBase" value="N/A (Domestic U.S. Only)" placeholder="e.g. Portugal" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
+                    <input type="text" id="feat_overseasBase" value="Portugal" placeholder="e.g. Portugal" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
                 </div>
                 <div>
                     <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target U.S. Return City</label>
@@ -427,7 +434,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="recommendationCardsContainer">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="recommendationCardsContainer">
             <!-- Dynamically populated via renderRecommendationCards() -->
         </div>
     </section>
@@ -465,19 +472,25 @@
             </div>
         </div>
 
-        <!-- COMMITTED ACTION BAR -->
-        <div class="bg-slate-800/90 rounded-xl p-5 border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>
-                <span class="text-[10px] uppercase font-black text-emerald-400 tracking-widest block mb-0.5">Active Committed Life Choice</span>
-                <h4 class="text-base font-serif-title font-bold text-white flex items-center gap-2">
-                    <span>Selected Retirement:</span>
-                    <span id="selectedLifeTitle" class="text-emerald-400">Home Base</span>
-                </h4>
+        <!-- DYNAMIC PATH-SPECIFIC COMPLETION PANEL & CTA -->
+        <div class="bg-slate-800/90 rounded-xl p-5 border border-slate-700 space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-700 pb-3">
+                <div>
+                    <span class="text-[10px] uppercase font-black text-emerald-400 tracking-widest block mb-0.5">Your Feasible Path</span>
+                    <h4 class="text-lg font-serif-title font-bold text-white flex items-center gap-2">
+                        <span>Selected Lifestyle:</span>
+                        <span id="selectedLifeTitle" class="text-emerald-400">Explore Then Return</span>
+                    </h4>
+                </div>
+
+                <button onclick="continueFromFeasibility()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-md whitespace-nowrap shrink-0">
+                    <span id="primaryBtnText">Choose My Overseas Chapter →</span>
+                </button>
             </div>
 
-            <button onclick="startBuildingRetirement()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-md whitespace-nowrap">
-                <span id="primaryBtnText">Commit & Continue Strategy →</span>
-            </button>
+            <p id="pathExplanationText" class="text-xs text-slate-300 leading-relaxed italic">
+                First choose your active-years overseas chapter. Then choose the U.S. home base you may return to later.
+            </p>
         </div>
     </section>
 
@@ -496,20 +509,20 @@
 
   <script>
     const feasibilityState = {
-        selectedLifeId: "home_base",
+        selectedLifeId: "explore_then_return",
         userPriorities: ["Family", "Healthcare", "Taxes"],
         constraints: {
             mustStayUS: "Yes_Strict",
             childrenLoc: "Different US State",
             medicare: "Critical",
-            maxMoves: "0"
+            maxMoves: "1"
         },
+        // Phase Optimizer removed from core candidates as requested
         lifestyles: [
             { id: "home_base", name: "Home Base", subtitle: "SAFEST EMOTIONALLY", baseFit: 98 },
             { id: "strategic_us_move", name: "Strategic U.S. Move", subtitle: "SIMPLEST EXECUTION", baseFit: 90 },
-            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE", baseFit: 82 },
             { id: "global_expat", name: "Global Expat", subtitle: "MAXIMUM GEO-ARBITRAGE", baseFit: 40 },
-            { id: "phase_optimizer", name: "Phase Optimizer", subtitle: "ULTIMATE DECADE MATCHING", baseFit: 50 }
+            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE", baseFit: 82 }
         ]
     };
 
@@ -524,20 +537,64 @@
             highlights: ["Full U.S. healthcare security", "$10k–$30k+ annual state tax savings", "Domestic move simplicity"],
             compromise: "Lower lifestyle & purchasing power upside than overseas"
         },
-        "explore_then_return": {
-            tagline: "BEST OVERALL BALANCE",
-            highlights: ["Adventure before age 65", "Medicare & family return after 65", "Preserves long-term proximity"],
-            compromise: "Requires one major international return move at age 65"
-        },
         "global_expat": {
             tagline: "MAXIMUM GEO-ARBITRAGE",
             highlights: ["Maximum cost of living savings", "Rich cultural immersion", "High purchasing power"],
             compromise: "Conflicts with strict domestic U.S. living or immediate family proximity"
         },
-        "phase_optimizer": {
-            tagline: "ULTIMATE DECADE MATCHING",
-            highlights: ["Peak stage-matched location per decade", "Maximum tax flexibility", "Tailored health transitions"],
-            compromise: "Requires 2+ major relocations across retirement phases"
+        "explore_then_return": {
+            tagline: "BEST OVERALL BALANCE",
+            highlights: ["Adventure before age 65", "Medicare & family return after 65", "Preserves long-term proximity"],
+            compromise: "Requires one major international return move at age 65"
+        }
+    };
+
+    const routeDefinitions = {
+        home_base: {
+            nextPage: "building-your-retirement.html",
+            ctaLabel: "Build My Retirement",
+            explanation: "Your current location becomes the working retirement base. No location-selection step is required.",
+            locationStrategy: {
+                type: "Current Home Base",
+                domesticMoveRequired: false,
+                internationalMoveRequired: false,
+                status: "complete"
+            }
+        },
+        strategic_us_move: {
+            nextPage: "UScitymatcher.html",
+            ctaLabel: "Choose My U.S. Retirement Location",
+            explanation: "The next decision is where in the United States your priorities fit best.",
+            locationStrategy: {
+                type: "Domestic Retirement Move",
+                domesticMoveRequired: true,
+                internationalMoveRequired: false,
+                status: "in_progress"
+            }
+        },
+        global_expat: {
+            nextPage: "RetiringOverseas.html",
+            ctaLabel: "Choose My Overseas Home Base",
+            explanation: "The next decision is which overseas destination can support your long-term retirement.",
+            locationStrategy: {
+                type: "Permanent International",
+                domesticMoveRequired: false,
+                internationalMoveRequired: true,
+                returnToUSPlanned: false,
+                status: "in_progress"
+            }
+        },
+        explore_then_return: {
+            nextPage: "RetiringOverseas.html",
+            ctaLabel: "Choose My Overseas Chapter",
+            explanation: "First choose your active-years overseas chapter. Then choose the U.S. home base you may return to later.",
+            locationStrategy: {
+                type: "Two-Stage Location Strategy",
+                internationalMoveRequired: true,
+                domesticMoveRequired: true,
+                returnToUSPlanned: true,
+                status: "in_progress"
+            }
         }
     };
 
@@ -586,7 +643,6 @@
             movesEl.innerText = movesMap[feasibilityState.constraints.maxMoves] || `${feasibilityState.constraints.maxMoves} Moves`;
         }
 
-        // Automatic domestic override for Overseas Base when U.S. Only or Home Base is active
         const overseasInput = document.getElementById("feat_overseasBase");
         if (overseasInput) {
             if (feasibilityState.constraints.mustStayUS === "Yes_Strict" || feasibilityState.selectedLifeId === "home_base" || feasibilityState.selectedLifeId === "strategic_us_move") {
@@ -742,17 +798,13 @@
     }
 
     function updateActionButtons() {
-        const id = feasibilityState.selectedLifeId;
-        let ctaText = "Commit & Continue Strategy →";
-
-        if (id === "home_base") ctaText = "Build My Home-Based Retirement →";
-        else if (id === "strategic_us_move") ctaText = "Select My U.S. Retirement City →";
-        else if (id === "global_expat") ctaText = "Select My Overseas Home Base →";
-        else if (id === "explore_then_return") ctaText = "Select Overseas Base (Stage 1) →";
-        else if (id === "phase_optimizer") ctaText = "Map Multi-Phase Locations →";
+        const route = routeDefinitions[feasibilityState.selectedLifeId] || routeDefinitions.home_base;
 
         const primaryBtn = document.getElementById("primaryBtnText");
-        if (primaryBtn) primaryBtn.innerText = ctaText;
+        if (primaryBtn) primaryBtn.innerText = `${route.ctaLabel} →`;
+
+        const explanationEl = document.getElementById("pathExplanationText");
+        if (explanationEl) explanationEl.innerText = route.explanation;
     }
 
     function renderScenarioRelaxation() {
@@ -778,7 +830,7 @@
         } else if (sel === "multi_moves") {
             box.innerHTML = `
                 <strong class="text-emerald-400 block font-bold mb-1">Relaxation Impact: Allowed 2 Major Moves</strong>
-                <p>Phase Optimizer becomes fully viable. Allows maximum tax conversions in Stage 1 and premium healthcare consolidation in Stage 3.</p>
+                <p>Phase Optimizer options become fully viable. Allows maximum tax conversions in Stage 1 and premium healthcare consolidation in Stage 3.</p>
             `;
         }
     }
@@ -787,28 +839,45 @@
         renderRecommendationCards();
     }
 
-    function startBuildingRetirement() {
-        const activeBp = feasibilityState.lifestyles.find(l => l.id === feasibilityState.selectedLifeId) || feasibilityState.lifestyles[0];
-        const isUSOnly = feasibilityState.constraints.mustStayUS === "Yes_Strict" || feasibilityState.selectedLifeId === "home_base" || feasibilityState.selectedLifeId === "strategic_us_move";
+    // Unified Routing Function
+    function continueFromFeasibility() {
+        const selectedLifeId = feasibilityState.selectedLifeId;
+        const route = routeDefinitions[selectedLifeId] || routeDefinitions.home_base;
+        const activeBp = feasibilityState.lifestyles.find(l => l.id === selectedLifeId) || feasibilityState.lifestyles[0];
+        const isUSOnly = feasibilityState.constraints.mustStayUS === "Yes_Strict" || selectedLifeId === "home_base" || selectedLifeId === "strategic_us_move";
 
-        const payload = {
-            selectedLifeId: feasibilityState.selectedLifeId,
-            selectedLifeName: activeBp.name,
-            lifeSectionComplete: true,
-            monthlySpend: document.getElementById("feat_monthlySpend") ? document.getElementById("feat_monthlySpend").selectedOptions[0].text : "$8,500 / month ($102k/yr)",
-            housingStrategy: document.getElementById("feat_housingStrategy") ? document.getElementById("feat_housingStrategy").value : "Own_Single",
-            complexityTolerance: document.getElementById("feat_complexityTolerance") ? document.getElementById("feat_complexityTolerance").value : "Moderate",
-            overseasBase: isUSOnly ? "None (Domestic U.S. Only)" : (document.getElementById("feat_overseasBase") ? document.getElementById("feat_overseasBase").value : "Portugal"),
-            usCity: document.getElementById("feat_usCity") ? document.getElementById("feat_usCity").value : "Raleigh, NC",
-            childrenCity: document.getElementById("feat_childrenCity") ? document.getElementById("feat_childrenCity").value : "Los Angeles, CA",
-            reflections: {
-                whyMatters: document.getElementById("refl_whyMatters") ? document.getElementById("refl_whyMatters").value : "",
-                tradeoffs: document.getElementById("refl_tradeoffs") ? document.getElementById("refl_tradeoffs").value : "",
-                nonNegotiable: document.getElementById("refl_nonNegotiable") ? document.getElementById("refl_nonNegotiable").value : "",
-                needsInvestigation: document.getElementById("refl_needsInvestigation") ? document.getElementById("refl_needsInvestigation").value : ""
-            },
-            updatedAt: new Date().toISOString()
+        const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
+        let payload = {};
+        try {
+            payload = JSON.parse(raw);
+        } catch (e) {
+            payload = {};
+        }
+
+        payload.selectedLifeId = selectedLifeId;
+        payload.selectedLifeName = activeBp.name;
+        payload.lifeSectionComplete = true;
+        payload.nextRequiredPage = route.nextPage;
+        
+        // Location strategy status payload matching exact routing requirements
+        payload.locationStrategy = route.locationStrategy;
+        payload.locationSectionComplete = (selectedLifeId === "home_base");
+
+        payload.monthlySpend = document.getElementById("feat_monthlySpend") ? document.getElementById("feat_monthlySpend").selectedOptions[0].text : "$8,500 / month ($102k/yr)";
+        payload.housingStrategy = document.getElementById("feat_housingStrategy") ? document.getElementById("feat_housingStrategy").value : "Own_Single";
+        payload.complexityTolerance = document.getElementById("feat_complexityTolerance") ? document.getElementById("feat_complexityTolerance").value : "Moderate";
+        payload.overseasBase = isUSOnly ? "None (Domestic U.S. Only)" : (document.getElementById("feat_overseasBase") ? document.getElementById("feat_overseasBase").value : "Portugal");
+        payload.usCity = document.getElementById("feat_usCity") ? document.getElementById("feat_usCity").value : "Raleigh, NC";
+        payload.childrenCity = document.getElementById("feat_childrenCity") ? document.getElementById("feat_childrenCity").value : "Los Angeles, CA";
+
+        payload.reflections = {
+            whyMatters: document.getElementById("refl_whyMatters") ? document.getElementById("refl_whyMatters").value : "",
+            tradeoffs: document.getElementById("refl_tradeoffs") ? document.getElementById("refl_tradeoffs").value : "",
+            nonNegotiable: document.getElementById("refl_nonNegotiable") ? document.getElementById("refl_nonNegotiable").value : "",
+            needsInvestigation: document.getElementById("refl_needsInvestigation") ? document.getElementById("refl_needsInvestigation").value : ""
         };
+
+        payload.updatedAt = new Date().toISOString();
 
         try {
             localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(payload));
@@ -816,35 +885,20 @@
             console.warn("Could not save to LocalStorage:", e);
         }
 
-        // Exact Adaptive Routing
-        let targetDestination = "building-your-retirement.html";
-
-        if (feasibilityState.selectedLifeId === "home_base") {
-            targetDestination = "building-your-retirement.html";
-        } else if (feasibilityState.selectedLifeId === "strategic_us_move") {
-            targetDestination = "UScitymatcher.html";
-        } else if (
-            feasibilityState.selectedLifeId === "global_expat" ||
-            feasibilityState.selectedLifeId === "explore_then_return" ||
-            feasibilityState.selectedLifeId === "phase_optimizer"
-        ) {
-            targetDestination = "RetiringOverseas.html";
-        }
-
-        showToast("Strategy Committed", `Navigating to ${targetDestination}...`);
+        showToast("Strategy Committed", `Navigating to ${route.nextPage}...`);
 
         setTimeout(() => {
             try {
                 const currentHref = window.location ? window.location.href : "";
                 if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
-                    window.location.href = targetDestination;
+                    window.location.href = route.nextPage;
                 } else {
-                    console.log("Preview environment detected; navigation simulated. Target destination:", targetDestination);
+                    console.log("Preview environment detected; navigation simulated. Target destination:", route.nextPage);
                 }
             } catch (err) {
                 console.warn("Location navigation error caught safely:", err);
             }
-        }, 600);
+        }, 500);
     }
 
     function showToast(title, message) {
