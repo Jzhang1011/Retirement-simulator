@@ -744,7 +744,7 @@
             "strategic_us_move": "Strategic U.S. Move",
             "home_base": "Home Base",
             "global_expat": "Global Expat",
-            "phase_optimizer": "Phase Optimizer"
+           
         }
     };
 
@@ -927,8 +927,8 @@
             "explore_then_return": `"At 55, you'll begin a new chapter living in ${overseas}. Spend ten years exploring Europe while healthcare costs remain low. At 65 you'll return near your children in ${usCity}, activate Medicare, and begin your next chapter."`,
             "strategic_us_move": `"At 55, you'll relocate to ${usCity}, a top-tier low-tax U.S. metro. Save $10k–$30k+ per year in state taxes while maintaining seamless domestic U.S. healthcare access."`,
             "home_base": `"At 55, you'll rightsize your primary residence in your current community in ${usCity}, stay close to family in ${kidsCity}, and rely on trusted local health networks."`,
-            "global_expat": `"At 55, you'll move permanently to ${overseas} to build a foreign sanctuary, maximizing cost-of-living purchasing power and lifestyle quality."`,
-            "phase_optimizer": `"At 50, launch an active go-go decade in ${overseas}. At 65, transition to ${usCity}, before consolidating near family in ${kidsCity} after age 78."`
+            "global_expat": `"At 55, you'll move permanently to ${overseas} to build a foreign sanctuary, maximizing cost-of-living purchasing power and lifestyle quality."`
+            
         };
 
         if (storyEl) storyEl.innerText = stories[builderState.activePathId] || stories["explore_then_return"];
@@ -1251,72 +1251,8 @@
                     tool: { name: "Cross-Border Estate Planner", link: "#" }
                 }
             ],
-            "phase_optimizer": [
-                {
-                    number: 1,
-                    ageLabel: "Age 50–65 (Go-Go)",
-                    locationTag: `🌍 Active Overseas Base (${overseas})`,
-                    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-                    headline: `Active Travel & Geo-Arbitrage Chapter`,
-                    desc: `Maximize travel, lifestyle purchasing power, and Roth tax conversions in ${overseas}.`,
-                    snapshot: {
-                        tagline: `Imagine Active Global Exploration in ${overseas}...`,
-                        bullets: [
-                            "Peak active travel decade with low international living expenses",
-                            "Aggressive Roth conversion sweeps at low marginal tax brackets",
-                            "Private international major medical coverage"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m1_1", title: `Establish Phase 1 international base in ${overseas}`, done: true, requires: null },
-                        { id: "m1_2", title: "Execute annual Roth conversion sweep strategy", done: false, requires: "m1_1" }
-                    ],
-                    tool: { name: "Phase 1 Strategy Engine", link: "#" }
-                },
-                {
-                    number: 2,
-                    ageLabel: "Age 65–78 (Slow-Go)",
-                    locationTag: `🏡 Domestic US Base (${usCity})`,
-                    photo: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=600&q=80",
-                    headline: "Medicare activation & domestic consolidation",
-                    desc: `Transition to ${usCity} to activate Medicare Part A/B/G and shorten travel distance to children in ${kidsCity}.`,
-                    snapshot: {
-                        tagline: `Imagine Comfortable US Base in ${usCity}...`,
-                        bullets: [
-                            "Seamless Medicare Supplement Plan G coverage",
-                            "Frequent regional visits with adult children and grandchildren",
-                            "Balanced domestic lifestyle with optional seasonal travel"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m2_1", title: `Transition housing base to ${usCity} and activate Medicare`, done: false, requires: "m1_2" }
-                    ],
-                    tool: { name: "Medicare & Housing Transition Tool", link: "#" }
-                },
-                {
-                    number: 3,
-                    ageLabel: "Age 78+ (No-Go)",
-                    locationTag: `❤️ Care Anchor (${kidsCity})`,
-                    photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
-                    headline: "Family proximity & continuous care hub",
-                    desc: `Consolidate housing directly near children in ${kidsCity} for late-life care and estate execution.`,
-                    snapshot: {
-                        tagline: `Imagine Being Steps Away From Family in ${kidsCity}...`,
-                        bullets: [
-                            "Continuous care community or in-home support near adult children",
-                            "Trust assets insulated from state probate",
-                            "Zero medical or care management burden on descendants"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m3_1", title: `Consolidate senior housing in ${kidsCity} and execute trust distribution`, done: false, requires: "m2_1" }
-                    ],
-                    tool: { name: "Legacy & Trust Planner", link: "#" }
-                }
-            ]
+           
+         
         };
     }
 
