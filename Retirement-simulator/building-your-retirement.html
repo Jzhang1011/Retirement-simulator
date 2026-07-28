@@ -1123,7 +1123,7 @@
                         { id: "healthcare_strategy", type: "decision", title: "Complete lifetime healthcare and LTC strategy comparison", done: Boolean(payload.healthcareSectionComplete) },
                         { id: "medicare_enrollment_window", type: "execution", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "healthcare_strategy" }
                     ],
-                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_strategy_planning.html" }
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
                 },
                 {
                     number: 3,
@@ -1167,7 +1167,7 @@
                     milestones: [
                         { id: "m4_1", type: "decision", title: "Execute revocable living trust & beneficiary designations", done: Boolean(payload.estateSectionComplete) }
                     ],
-                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_strategy_planning.html" }
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
                 }
             ]
         };
