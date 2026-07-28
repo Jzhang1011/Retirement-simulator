@@ -46,7 +46,7 @@
             font-family: var(--font-serif);
         }
 
-        /* Global Navigation Header */
+        /* Global Header Navigation */
         .global-header {
             background-color: #0B132B; 
             color: white;
@@ -181,14 +181,6 @@
             color: #02B17D !important; 
         }
 
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(1rem); }
             to { opacity: 1; transform: translateY(0); }
@@ -197,10 +189,9 @@
             animation: slideUpFade 0.3s ease-out forwards;
         }
 
-        /* Selection Glow */
         .recommendation-selected {
-            ring: 2px solid #02B17D;
-            box-shadow: 0 10px 25px -5px rgba(2, 177, 125, 0.15);
+            border-color: #02B17D !important;
+            box-shadow: 0 0 0 2px #02B17D, 0 10px 25px -5px rgba(2, 177, 125, 0.15);
         }
     </style>
 </head>
@@ -211,8 +202,6 @@
     
     <nav aria-label="Global Main Directory">
       <ul class="top-nav-links">
-        
-        <!-- DROP-DOWN 1: OVERVIEW -->
         <li class="dropdown-trigger">
           <a href="#" class="active font-bold text-white">Overview <span class="text-[12px] opacity-70">▼</span></a>
           <div class="mega-dropdown">
@@ -223,111 +212,33 @@
                   Your primary workspace baseline dashboard. Track targets, access planning workflows, and monitor active signals.
                 </p>
               </div>
-              <div class="pt-8">
-                <a href="#" class="text-slate-900 font-bold text-sm inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors group">
-                  Start Diagnostic Tool <span class="transition-transform group-hover:translate-x-1">→</span>
-                </a>
-              </div>
             </div>
             <div class="links-matrix text-left">
               <div class="dropdown-column">
                 <h4>🚀 Start Here</h4>
                 <ul>
-                  <li><a href="#">Financial Diagnostic</a></li>
-                  <li><a href="#">Wealth Score Tracker</a></li>
-                  <li><a href="/">Personal Dashboard</a></li>
+                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
+                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
               <div class="dropdown-column">
                 <h4>🌟 Popular Journeys</h4>
                 <ul>
-                  <li><a href="#">Build My First Million</a></li>
                   <li><a href="Odyssey.html">Retirement Odyssey Hub</a></li>
-                  <li><a href="retirement_preference_discovery.html">Preference Discovery</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>⏱️ Progress Framework</h4>
-                <ul>
-                  <li><a href="#">Latest Estimators</a></li>
-                  <li><a href="#">Retirement Master Plan</a></li>
+                  <li><a href="retirement-preference-discovery.html">Preference Discovery</a></li>
                 </ul>
               </div>
             </div>
           </div>
         </li>
 
-        <!-- DROP-DOWN 2: BUILD WEALTH -->
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Build Wealth <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Build Wealth</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Optimized cash flow architectures and savings rules.</p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>💼 Income Optimization</h4>
-                <ul>
-                  <li><a href="#">Salary Negotiation Rules</a></li>
-                  <li><a href="#">Career ROI Strategy</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>💵 Cash Flow</h4>
-                <ul>
-                  <li><a href="#">High-Yield Savings</a></li>
-                  <li><a href="#">Emergency Reserves</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>🛡️ Taxes</h4>
-                <ul>
-                  <li><a href="#">Tax Bracket Minimization</a></li>
-                  <li><a href="#">HSA & FSA Maximizers</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- DROP-DOWN 3: GROW WEALTH -->
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Grow Wealth <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Grow Wealth</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Index allocations and tax-insulated conversions.</p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>📈 Asset Allocation</h4>
-                <ul><li><a href="#">Index Investing & ETFs</a></li></ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>🏡 Real Estate</h4>
-                <ul><li><a href="#">Rental Property Sourcing</a></li></ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>⚙️ Tools</h4>
-                <ul><li><a href="#">Withdrawal Modeler</a></li></ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- DROP-DOWN 4: DESIGN YOUR LIFE -->
         <li class="dropdown-trigger">
           <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
           <div class="mega-dropdown">
             <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
               <div class="space-y-3">
                 <h2 class="text-3xl font-black tracking-tight text-slate-900">Design Your Life</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Map your life transition and location arbitrage.</p>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">Map your transition across locations, healthcare, and financial strategy.</p>
               </div>
             </div>
             <div class="links-matrix text-left">
@@ -335,27 +246,14 @@
                 <h4>🗺️ Retirement Planning</h4>
                 <ul>
                   <li><a href="Odyssey.html">Odyssey Experience</a></li>
-                  <li><a href="retirement_preference_discovery.html">Preference Discovery</a></li>
+                  <li><a href="retirement-preference-discovery.html">Preference Discovery</a></li>
                   <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>✈️ Location Arbitrage</h4>
-                <ul>
-                  <li><a href="#">US City Matcher</a></li>
-                  <li><a href="#">Overseas Matcher</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>⚙️ Tools</h4>
-                <ul>
-                  <li><a href="#">Lifestyle Comparison</a></li>
+                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
             </div>
           </div>
         </li>
-
       </ul>
     </nav>
     
@@ -371,41 +269,40 @@
   <main class="max-w-[1450px] mx-auto px-4 md:px-12 py-8 space-y-10">
 
     <!-- PAGE HERO HEADER -->
-    <div class="text-center max-w-3xl mx-auto">
-        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-2">
-            <span>Stage 3: Retirement Feasibility Engine</span>
+    <div class="text-center max-w-3xl mx-auto space-y-2">
+        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-1">
+            <span>Stage 3: Feasibility Engine</span>
         </div>
         <h1 class="text-3xl md:text-5xl font-serif-title font-bold text-[#0B132B]">Which Lives Can Actually Work?</h1>
-        <p class="text-slate-600 text-xs md:text-sm mt-2 leading-relaxed">
-            Test candidate retirement lifestyles against hard eligibility, non-negotiable must-haves, preliminary financial capacity, and operational complexity.
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Test candidate retirement lifestyles against hard eligibility, non-negotiable constraints, preliminary financial capacity, and operational complexity.
         </p>
     </div>
 
-    <!-- PRELIMINARY FINANCIAL FIT DISCLAIMER -->
-    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 md:p-5 flex items-start gap-4 shadow-sm text-xs text-blue-900 leading-relaxed">
-        <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold shrink-0">ℹ️</div>
-        <div>
-            <strong class="font-bold text-sm block mb-0.5 text-blue-950">Preliminary Financial & Structural Screening Notice</strong>
-            <span>
-                Outputs on this page reflect a preliminary feasibility screen based on high-level spend projections, location indexes, and constraint matching. Detailed tax-bracket sequencing, Roth conversions, ACA subsidy cliffs, and portfolio withdrawal modeling occur downstream in the Strategy Engine.
-            </span>
+    <!-- WANT VS NEED GAP EVALUATION BANNER -->
+    <div id="gapEvaluationBanner" class="bg-gradient-to-r from-amber-500/10 via-amber-50 to-slate-50 border border-amber-300/80 rounded-2xl p-5 shadow-sm space-y-2 text-xs text-amber-950">
+        <div class="flex items-center justify-between border-b border-amber-200/80 pb-2">
+            <span class="bg-amber-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Gap Assessment • Need vs. Want</span>
+            <span id="gapStatusBadge" class="font-mono font-bold text-amber-800 text-[11px]">Analyzing Gap...</span>
         </div>
+        <p id="gapSummaryText" class="text-xs text-slate-800 leading-relaxed font-medium">
+            Evaluating alignment between what you want (lifestyle & travel) and what you need (Medicare, family proximity, tax compliance)...
+        </p>
     </div>
 
-    <!-- SECTION 1 & 2: DESIRED RETIREMENT & PRACTICAL SITUATION INPUTS -->
+    <!-- INPUTS CARRIED FORWARD & PRACTICAL CONTROLS -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- LEFT 6 COLUMNS: PREFERENCE & MUST-HAVE SUMMARY (CARRIED FORWARD) -->
+        <!-- LEFT 6 COLUMNS: CARRIED FORWARD SUMMARY -->
         <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
             <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
                 <div>
                     <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Inputs Carried Forward</span>
                     <h2 class="text-lg font-serif-title font-bold text-[#0B132B]">Your Priorities & Must-Haves</h2>
                 </div>
-                <a href="retirement_preference_discovery.html" class="text-xs text-blue-600 font-bold hover:underline">Edit Preferences →</a>
+                <a href="retirement-preference-discovery.html" class="text-xs text-blue-600 font-bold hover:underline">Edit Preferences →</a>
             </div>
 
-            <!-- Priority Stack -->
             <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ranked Priorities</label>
                 <div id="priorityTagsContainer" class="flex flex-wrap gap-2">
@@ -413,8 +310,7 @@
                 </div>
             </div>
 
-            <!-- Hard Constraints Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
                 <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
                     <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">U.S. Living Constraint</span>
                     <strong id="summary_mustStayUS" class="text-slate-900 font-bold">Strict Domestic U.S. Only</strong>
@@ -434,7 +330,7 @@
             </div>
         </div>
 
-        <!-- RIGHT 6 COLUMNS: PRACTICAL FINANCIAL & OPERATIONAL SITUATION -->
+        <!-- RIGHT 6 COLUMNS: PRACTICAL FEASIBILITY CONTROLS (CLEAN SINGLE CONTAINER) -->
         <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Feasibility Controls</span>
@@ -442,13 +338,23 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Housing Strategy</label>
-                <select id="feat_housingStrategy" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                    <option value="Own_Single" selected>Own Primary Residence</option>
-                    <option value="Rent_Flexible">Flexible Renting Only</option>
-                    <option value="Dual_Homes">Maintain Dual Residences</option>
-                </select>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target Monthly Spending</label>
+                    <select id="feat_monthlySpend" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
+                        <option value="5k">$5,000 / month ($60k/yr)</option>
+                        <option value="8k" selected>$8,500 / month ($102k/yr)</option>
+                        <option value="14k">$14,000 / month ($168k/yr)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Housing Strategy</label>
+                    <select id="feat_housingStrategy" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
+                        <option value="Own_Single" selected>Own Primary Residence</option>
+                        <option value="Rent_Flexible">Flexible Renting Only</option>
+                        <option value="Dual_Homes">Maintain Dual Residences</option>
+                    </select>
+                </div>
             </div>
 
             <div>
@@ -459,59 +365,27 @@
                     <option value="High">High — Open to multi-stage complexity</option>
                 </select>
             </div>
-        </div>
 
-        <!-- TARGET LOCATION INPUTS FOR DYNAMIC ROADMAP -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100">
-            <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target Overseas Base</label>
-                <input type="text" id="feat_overseasBase" value="Portugal" placeholder="e.g. Portugal, Spain" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
-            </div>
-            <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target U.S. Return City</label>
-                <input type="text" id="feat_usCity" value="Raleigh, NC" placeholder="e.g. Raleigh, NC, Austin, TX" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
-            </div>
-            <div>
-                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Children's City</label>
-                <input type="text" id="feat_childrenCity" value="Seattle, WA" placeholder="e.g. Seattle, WA, Denver, CO" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
-            </div>
-        </div>
-    </div>
-
+            <!-- TARGET LOCATION INPUTS -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target Monthly Spending</label>
-                    <select id="feat_monthlySpend" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                        <option value="5k">$5,000 / month ($60k/yr)</option>
-                        <option value="8k" selected>$8,500 / month ($102k/yr)</option>
-                        <option value="14k">$14,000 / month ($168k/yr)</option>
-                    </select>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target Overseas Base</label>
+                    <input type="text" id="feat_overseasBase" value="N/A (Domestic U.S. Only)" placeholder="e.g. Portugal" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
                 </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Housing Strategy</label>
-                    <select id="feat_housingStrategy" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                        <option value="Own_Single" selected>Own Primary Residence</option>
-                        <option value="Rent_Flexible">Flexible Renting Only</option>
-                        <option value="Dual_Homes">Maintain Dual Residences</option>
-                    </select>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target U.S. Return City</label>
+                    <input type="text" id="feat_usCity" value="Raleigh, NC" placeholder="e.g. Raleigh, NC" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Execution Tolerance</label>
-                    <select id="feat_complexityTolerance" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                        <option value="Low">Low — Simple domestic setup</option>
-                        <option value="Moderate" selected>Moderate — Willing to manage 1 move</option>
-                        <option value="High">High — Open to multi-stage complexity</option>
-                    </select>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Children's City</label>
+                    <input type="text" id="feat_childrenCity" value="Los Angeles, CA" placeholder="e.g. Los Angeles, CA" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
                 </div>
             </div>
         </div>
 
     </section>
 
-    <!-- SCENARIO RELAXATION ("WHAT IF?") SIMULATOR SECTION -->
+    <!-- SCENARIO RELAXATION EXPERIMENT ENGINE -->
     <section class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 border border-slate-800 shadow-xl space-y-5">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
             <div>
@@ -539,7 +413,7 @@
         </div>
     </section>
 
-    <!-- SECTION 6: RECOMMENDED RETIREMENT PATHS (LIGHT BACKGROUND THEME) -->
+    <!-- RECOMMENDED RETIREMENT PATHS -->
     <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
         <div class="border-b border-slate-100 pb-4">
             <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-widest mb-1">
@@ -549,101 +423,63 @@
             </div>
             <h2 class="text-2xl md:text-3xl font-serif-title font-bold text-slate-900">Recommended Retirement Paths</h2>
             <p class="text-xs md:text-sm text-slate-500 mt-1">
-                Based on your priorities, we found three retirement lives worth considering. Choose the one you want to build.
+                Based on your priorities and constraints, select the retirement life you want to commit to and execute.
             </p>
         </div>
 
-        <!-- RECOMMENDATION CARDS GRID (LIGHT THEME) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="recommendationCardsContainer">
             <!-- Dynamically populated via renderRecommendationCards() -->
         </div>
+    </section>
 
-        <!-- SELECTED RETIREMENT LIFE SUMMARY BANNER -->
-        <div class="bg-slate-900 text-white rounded-xl p-5 border border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-md">
+    <!-- REQUIRED REFLECTION WORKSPACE -->
+    <section class="bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 text-white rounded-2xl p-6 md:p-8 border border-emerald-500/40 shadow-xl space-y-6">
+        <div class="border-b border-slate-800 pb-4 flex justify-between items-center">
+            <div>
+                <span class="text-[10px] uppercase font-black text-emerald-400 tracking-widest">Personal Alignment</span>
+                <h3 class="text-xl font-serif-title font-bold text-white mt-1">Required Reflection Before Commitment</h3>
+                <p class="text-xs text-slate-300">Answer these key questions to lock in your conviction for your chosen life.</p>
+            </div>
+            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Commitment Step</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-2">
+                <label class="block font-bold text-emerald-300 uppercase tracking-wider text-[11px]">1. Why does this life matter to me?</label>
+                <textarea id="refl_whyMatters" placeholder="e.g. Balances active global travel in my 50s while ensuring I return near my grandchildren..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-slate-200 text-xs font-medium outline-none focus:border-emerald-500 h-20 resize-none"></textarea>
+            </div>
+
+            <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-2">
+                <label class="block font-bold text-emerald-300 uppercase tracking-wider text-[11px]">2. What trade-offs am I willing to accept?</label>
+                <textarea id="refl_tradeoffs" placeholder="e.g. Managing one international relocation at age 65 and handling foreign lease logistics..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-slate-200 text-xs font-medium outline-none focus:border-emerald-500 h-20 resize-none"></textarea>
+            </div>
+
+            <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-2">
+                <label class="block font-bold text-emerald-300 uppercase tracking-wider text-[11px]">3. What is non-negotiable?</label>
+                <textarea id="refl_nonNegotiable" placeholder="e.g. Must have guaranteed U.S. Medicare Plan G coverage after age 65..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-slate-200 text-xs font-medium outline-none focus:border-emerald-500 h-20 resize-none"></textarea>
+            </div>
+
+            <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl space-y-2">
+                <label class="block font-bold text-emerald-300 uppercase tracking-wider text-[11px]">4. What still needs investigation?</label>
+                <textarea id="refl_needsInvestigation" placeholder="e.g. D7 visa tax treaty details in Portugal and target neighborhood housing options in Raleigh, NC..." class="w-full bg-slate-900 border border-slate-700 p-3 rounded-lg text-slate-200 text-xs font-medium outline-none focus:border-emerald-500 h-20 resize-none"></textarea>
+            </div>
+        </div>
+
+        <!-- COMMITTED ACTION BAR -->
+        <div class="bg-slate-800/90 rounded-xl p-5 border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
                 <span class="text-[10px] uppercase font-black text-emerald-400 tracking-widest block mb-0.5">Active Committed Life Choice</span>
-                <h3 class="text-lg font-serif-title font-bold text-white flex items-center gap-2">
-                    <span>Selected Retirement Life:</span>
-                    <span id="selectedLifeTitle" class="text-emerald-400">Explore Then Return</span>
-                </h3>
+                <h4 class="text-base font-serif-title font-bold text-white flex items-center gap-2">
+                    <span>Selected Retirement:</span>
+                    <span id="selectedLifeTitle" class="text-emerald-400">Home Base</span>
+                </h4>
             </div>
+
             <button onclick="startBuildingRetirement()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition shadow-md whitespace-nowrap">
-                <span id="primaryBtnText">Start Building This Retirement →</span>
+                <span id="primaryBtnText">Commit & Continue Strategy →</span>
             </button>
         </div>
     </section>
-
-    <!-- SECTION 7: TYPICAL VS PERSONAL TRADE-OFFS COMPARISON -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
-        <div class="border-b border-slate-100 pb-4">
-            <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Opportunity Cost Ledger</span>
-            <h2 class="text-xl font-serif-title font-bold text-[#0B132B]">Typical Trade-Off Matrix</h2>
-            <p class="text-xs text-slate-500 mt-1">Every retirement choice carries explicit opportunity costs. Compare what you gain versus what you give up.</p>
-        </div>
-
-        <div class="overflow-x-auto rounded-xl border border-slate-200">
-            <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                    <tr class="bg-slate-50 text-slate-700 font-bold uppercase border-b border-slate-200">
-                        <th class="p-3.5">Lifestyle Candidate</th>
-                        <th class="p-3.5">What You Gain</th>
-                        <th class="p-3.5">What You Give Up</th>
-                        <th class="p-3.5">Execution Burden</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 font-medium text-slate-800">
-                    <tr>
-                        <td class="p-3.5 font-bold text-slate-900">Home Base</td>
-                        <td class="p-3.5 text-emerald-700">Immediate family proximity, community stability, familiar care</td>
-                        <td class="p-3.5 text-rose-700">Tax optimization & geographic cost arbitrage</td>
-                        <td class="p-3.5">Low</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3.5 font-bold text-slate-900">Global Expat</td>
-                        <td class="p-3.5 text-emerald-700">Maximum lifestyle quality and cost-of-living purchasing power</td>
-                        <td class="p-3.5 text-rose-700">Routine physical family proximity & U.S. Medicare coverage</td>
-                        <td class="p-3.5">High</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3.5 font-bold text-slate-900">Explore Then Return</td>
-                        <td class="p-3.5 text-emerald-700">Early international adventure plus later U.S. Medicare/family security</td>
-                        <td class="p-3.5 text-rose-700">One major international return transition around age 65</td>
-                        <td class="p-3.5">Moderate</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3.5 font-bold text-slate-900">Strategic U.S. Move</td>
-                        <td class="p-3.5 text-emerald-700">$10k–$30k+ annual state tax savings with domestic Medicare access</td>
-                        <td class="p-3.5 text-rose-700">Current neighborhood ties and child walkability</td>
-                        <td class="p-3.5">Moderate</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3.5 font-bold text-slate-900">Phase Optimizer</td>
-                        <td class="p-3.5 text-emerald-700">Maximum decade-by-decade alignment for tax, health, and lifestyle</td>
-                        <td class="p-3.5 text-rose-700">Permanence and simplicity across retirement phases</td>
-                        <td class="p-3.5">Very High</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- FINAL DECISION FOOTER -->
-    <footer class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row justify-between items-center gap-6 shadow-sm">
-        <div class="text-left space-y-1">
-            <h3 class="text-lg font-serif-title font-bold text-slate-900">Ready to Start Building This Retirement?</h3>
-            <p class="text-xs text-slate-600 font-medium">
-                Turn your chosen lifestyle into a structured sequence of location, healthcare, housing, tax, and family milestones.
-            </p>
-        </div>
-        <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            <a href="retirement_preference_discovery.html" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-3 rounded-xl text-xs font-semibold transition text-center whitespace-nowrap">
-                Compare Another Path
-            </a>
-            <button onclick="startBuildingRetirement()" class="w-full sm:w-auto bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-md whitespace-nowrap">
-                <span id="footerBtnText">Start Building This Retirement →</span>
-            </button>
-        </div>
-    </footer>
 
   </main>
 
@@ -659,40 +495,39 @@
   </div>
 
   <script>
-    // Feasibility State Store
     const feasibilityState = {
-        selectedLifeId: "explore_then_return",
+        selectedLifeId: "home_base",
         userPriorities: ["Family", "Healthcare", "Taxes"],
         constraints: {
             mustStayUS: "Yes_Strict",
             childrenLoc: "Different US State",
             medicare: "Critical",
-            maxMoves: "1"
+            maxMoves: "0"
         },
         lifestyles: [
-            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE", baseFit: 95 },
-            { id: "strategic_us_move", name: "Strategic U.S. Move", subtitle: "SIMPLEST EXECUTION", baseFit: 92 },
-            { id: "home_base", name: "Home Base", subtitle: "SAFEST EMOTIONALLY", baseFit: 88 },
-            { id: "global_expat", name: "Global Expat", subtitle: "MAXIMUM GEO-ARBITRAGE", baseFit: 75 },
+            { id: "home_base", name: "Home Base", subtitle: "SAFEST EMOTIONALLY", baseFit: 98 },
+            { id: "strategic_us_move", name: "Strategic U.S. Move", subtitle: "SIMPLEST EXECUTION", baseFit: 90 },
+            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE", baseFit: 82 },
+            { id: "global_expat", name: "Global Expat", subtitle: "MAXIMUM GEO-ARBITRAGE", baseFit: 40 },
             { id: "phase_optimizer", name: "Phase Optimizer", subtitle: "ULTIMATE DECADE MATCHING", baseFit: 50 }
         ]
     };
 
     const storyHighlights = {
-        "explore_then_return": {
-            tagline: "BEST OVERALL BALANCE",
-            highlights: ["Adventure before age 65", "Medicare & family return after 65", "Preserves long-term proximity"],
-            compromise: "Requires one major international return move at age 65"
+        "home_base": {
+            tagline: "SAFEST EMOTIONALLY",
+            highlights: ["Immediate family & grandchild proximity", "Deep community social stability", "Familiar healthcare providers"],
+            compromise: "Exposed to full state taxes and highest lifetime cost drag"
         },
         "strategic_us_move": {
             tagline: "SIMPLEST EXECUTION",
             highlights: ["Full U.S. healthcare security", "$10k–$30k+ annual state tax savings", "Domestic move simplicity"],
             compromise: "Lower lifestyle & purchasing power upside than overseas"
         },
-        "home_base": {
-            tagline: "SAFEST EMOTIONALLY",
-            highlights: ["Immediate family & grandchild proximity", "Deep community social stability", "Familiar healthcare providers"],
-            compromise: "Exposed to full state taxes and highest lifetime cost drag"
+        "explore_then_return": {
+            tagline: "BEST OVERALL BALANCE",
+            highlights: ["Adventure before age 65", "Medicare & family return after 65", "Preserves long-term proximity"],
+            compromise: "Requires one major international return move at age 65"
         },
         "global_expat": {
             tagline: "MAXIMUM GEO-ARBITRAGE",
@@ -715,13 +550,14 @@
                 if (payload.constraints) {
                     feasibilityState.constraints.mustStayUS = payload.constraints.mustStayUS || "Yes_Strict";
                     feasibilityState.constraints.childrenLoc = payload.constraints.childrenLocation || "Different US State";
+                    if (payload.constraints.medicareDepend) feasibilityState.constraints.medicare = payload.constraints.medicareDepend;
+                    if (payload.constraints.maxMoves) feasibilityState.constraints.maxMoves = payload.constraints.maxMoves;
                 }
             }
         } catch (e) {
             console.warn("Could not read RetirementDiscoverySelection:", e);
         }
 
-        // Update UI Summaries
         const pContainer = document.getElementById("priorityTagsContainer");
         if (pContainer) {
             pContainer.innerHTML = feasibilityState.userPriorities.map((p, idx) => `
@@ -737,6 +573,61 @@
 
         const childEl = document.getElementById("summary_childrenLoc");
         if (childEl) childEl.innerText = feasibilityState.constraints.childrenLoc;
+
+        const medicareEl = document.getElementById("summary_medicare");
+        if (medicareEl) {
+            const medMap = { "Critical": "Critical at 65+", "Moderate": "Moderate Reliance", "Self_Insure": "Low / Foreign Health" };
+            medicareEl.innerText = medMap[feasibilityState.constraints.medicare] || feasibilityState.constraints.medicare;
+        }
+
+        const movesEl = document.getElementById("summary_maxMoves");
+        if (movesEl) {
+            const movesMap = { "0": "0 Moves (Stay Put)", "1": "1 Major Relocation", "2+": "2+ Multi-Stage Moves" };
+            movesEl.innerText = movesMap[feasibilityState.constraints.maxMoves] || `${feasibilityState.constraints.maxMoves} Moves`;
+        }
+
+        // Automatic domestic override for Overseas Base when U.S. Only or Home Base is active
+        const overseasInput = document.getElementById("feat_overseasBase");
+        if (overseasInput) {
+            if (feasibilityState.constraints.mustStayUS === "Yes_Strict" || feasibilityState.selectedLifeId === "home_base" || feasibilityState.selectedLifeId === "strategic_us_move") {
+                overseasInput.value = "N/A (Domestic U.S. Only)";
+            }
+        }
+
+        updateGapAssessment();
+    }
+
+    function updateGapAssessment() {
+        const mustStayUS = feasibilityState.constraints.mustStayUS;
+        const badge = document.getElementById("gapStatusBadge");
+        const summary = document.getElementById("gapSummaryText");
+        const overseasInput = document.getElementById("feat_overseasBase");
+
+        if (!badge || !summary) return;
+
+        if (feasibilityState.selectedLifeId === "home_base" || feasibilityState.selectedLifeId === "strategic_us_move" || mustStayUS === "Yes_Strict") {
+            if (overseasInput && overseasInput.value === "Portugal") {
+                overseasInput.value = "N/A (Domestic U.S. Only)";
+            }
+        }
+
+        if (mustStayUS === "Yes_Strict" && feasibilityState.selectedLifeId === "global_expat") {
+            badge.innerText = "⚠️ High Need vs. Want Conflict";
+            badge.className = "font-mono font-bold text-rose-700 text-[11px]";
+            summary.innerText = "Major Gap Detected: You selected Global Expat (Want), but your hard constraint requires Strict Domestic U.S. Living (Need). Switch to Home Base or Strategic U.S. Move to eliminate this conflict.";
+        } else if (mustStayUS === "Yes_Strict" && feasibilityState.selectedLifeId === "explore_then_return") {
+            badge.innerText = "⚡ Solved via Multi-Stage Bridge";
+            badge.className = "font-mono font-bold text-amber-800 text-[11px]";
+            summary.innerText = "Bridge Strategy: 'Explore Then Return' satisfies your desire for early international living while ensuring full return to U.S. Medicare and domestic family proximity by age 65.";
+        } else if (feasibilityState.selectedLifeId === "home_base") {
+            badge.innerText = "✓ Perfect Alignment";
+            badge.className = "font-mono font-bold text-emerald-800 text-[11px]";
+            summary.innerText = "Your 'Home Base' selection directly aligns with your Strict U.S. Living constraint, maintaining family proximity and local health networks without cross-border complexity.";
+        } else {
+            badge.innerText = "✓ Strong Alignment";
+            badge.className = "font-mono font-bold text-emerald-800 text-[11px]";
+            summary.innerText = "Your chosen lifestyle directly aligns with your hard constraints, family location, and healthcare reliance rules.";
+        }
     }
 
     function evaluateFeasibility() {
@@ -748,10 +639,9 @@
 
             if (mustStayUS === "Yes_Strict" && bp.id === "global_expat") {
                 bucket = "Conflicts With Must-Haves";
-                matchScore = 50;
-            } else if (mustStayUS === "Yes_Strict" && bp.id === "explore_then_return") {
-                bucket = "Viable With Compromises";
-                matchScore = 85;
+                matchScore = 40;
+            } else if (mustStayUS === "Yes_Strict" && bp.id === "home_base") {
+                matchScore = 98;
             }
 
             return { bp, bucket, matchScore };
@@ -835,7 +725,6 @@
             container.appendChild(card);
         });
 
-        // Update active selection banner with safety check
         const activeBp = feasibilityState.lifestyles.find(l => l.id === feasibilityState.selectedLifeId) || feasibilityState.lifestyles[0];
         const titleEl = document.getElementById("selectedLifeTitle");
         if (titleEl && activeBp) {
@@ -843,28 +732,27 @@
         }
 
         updateActionButtons();
+        updateGapAssessment();
     }
 
     function selectRetirementLife(id) {
         feasibilityState.selectedLifeId = id;
         renderRecommendationCards();
-        showToast("Life Choice Updated", "Committed selection updated for roadmap execution.");
+        showToast("Life Choice Updated", "Committed selection updated.");
     }
 
     function updateActionButtons() {
         const id = feasibilityState.selectedLifeId;
-        let ctaText = "Start Building This Retirement →";
+        let ctaText = "Commit & Continue Strategy →";
 
-        if (id === "explore_then_return") ctaText = "Build My Abroad-to-US Roadmap →";
-        else if (id === "strategic_us_move") ctaText = "Find My Best Retirement State →";
-        else if (id === "global_expat") ctaText = "Build My Overseas Retirement Roadmap →";
-        else if (id === "home_base") ctaText = "Design My Home-Based Retirement →";
-        else if (id === "phase_optimizer") ctaText = "Build My Multi-Phase Roadmap →";
+        if (id === "home_base") ctaText = "Build My Home-Based Retirement →";
+        else if (id === "strategic_us_move") ctaText = "Select My U.S. Retirement City →";
+        else if (id === "global_expat") ctaText = "Select My Overseas Home Base →";
+        else if (id === "explore_then_return") ctaText = "Select Overseas Base (Stage 1) →";
+        else if (id === "phase_optimizer") ctaText = "Map Multi-Phase Locations →";
 
         const primaryBtn = document.getElementById("primaryBtnText");
-        const footerBtn = document.getElementById("footerBtnText");
         if (primaryBtn) primaryBtn.innerText = ctaText;
-        if (footerBtn) footerBtn.innerText = ctaText;
     }
 
     function renderScenarioRelaxation() {
@@ -875,7 +763,7 @@
         if (sel === "none") {
             box.innerHTML = `
                 <strong class="text-emerald-400 block font-bold mb-1">Baseline Experiment Active</strong>
-                <p>Strict domestic U.S. constraint is active. Global Expat remains constrained; Explore Then Return and Strategic U.S. Move are top candidates.</p>
+                <p>Strict domestic U.S. constraint is active. Global Expat remains constrained; Home Base and Strategic U.S. Move are top candidates.</p>
             `;
         } else if (sel === "family_distance") {
             box.innerHTML = `
@@ -901,14 +789,24 @@
 
     function startBuildingRetirement() {
         const activeBp = feasibilityState.lifestyles.find(l => l.id === feasibilityState.selectedLifeId) || feasibilityState.lifestyles[0];
+        const isUSOnly = feasibilityState.constraints.mustStayUS === "Yes_Strict" || feasibilityState.selectedLifeId === "home_base" || feasibilityState.selectedLifeId === "strategic_us_move";
+
         const payload = {
             selectedLifeId: feasibilityState.selectedLifeId,
             selectedLifeName: activeBp.name,
-            assetBucket: document.getElementById("feat_assetBucket") ? document.getElementById("feat_assetBucket").value : "1.5m",
+            lifeSectionComplete: true,
             monthlySpend: document.getElementById("feat_monthlySpend") ? document.getElementById("feat_monthlySpend").selectedOptions[0].text : "$8,500 / month ($102k/yr)",
-            overseasBase: document.getElementById("feat_overseasBase") ? document.getElementById("feat_overseasBase").value : "Portugal",
+            housingStrategy: document.getElementById("feat_housingStrategy") ? document.getElementById("feat_housingStrategy").value : "Own_Single",
+            complexityTolerance: document.getElementById("feat_complexityTolerance") ? document.getElementById("feat_complexityTolerance").value : "Moderate",
+            overseasBase: isUSOnly ? "None (Domestic U.S. Only)" : (document.getElementById("feat_overseasBase") ? document.getElementById("feat_overseasBase").value : "Portugal"),
             usCity: document.getElementById("feat_usCity") ? document.getElementById("feat_usCity").value : "Raleigh, NC",
-            childrenCity: document.getElementById("feat_childrenCity") ? document.getElementById("feat_childrenCity").value : "Seattle, WA",
+            childrenCity: document.getElementById("feat_childrenCity") ? document.getElementById("feat_childrenCity").value : "Los Angeles, CA",
+            reflections: {
+                whyMatters: document.getElementById("refl_whyMatters") ? document.getElementById("refl_whyMatters").value : "",
+                tradeoffs: document.getElementById("refl_tradeoffs") ? document.getElementById("refl_tradeoffs").value : "",
+                nonNegotiable: document.getElementById("refl_nonNegotiable") ? document.getElementById("refl_nonNegotiable").value : "",
+                needsInvestigation: document.getElementById("refl_needsInvestigation") ? document.getElementById("refl_needsInvestigation").value : ""
+            },
             updatedAt: new Date().toISOString()
         };
 
@@ -918,15 +816,30 @@
             console.warn("Could not save to LocalStorage:", e);
         }
 
-        showToast("Path Committed", `Building execution roadmap for ${activeBp.name}...`);
+        // Exact Adaptive Routing
+        let targetDestination = "building-your-retirement.html";
+
+        if (feasibilityState.selectedLifeId === "home_base") {
+            targetDestination = "building-your-retirement.html";
+        } else if (feasibilityState.selectedLifeId === "strategic_us_move") {
+            targetDestination = "UScitymatcher.html";
+        } else if (
+            feasibilityState.selectedLifeId === "global_expat" ||
+            feasibilityState.selectedLifeId === "explore_then_return" ||
+            feasibilityState.selectedLifeId === "phase_optimizer"
+        ) {
+            targetDestination = "RetiringOverseas.html";
+        }
+
+        showToast("Strategy Committed", `Navigating to ${targetDestination}...`);
 
         setTimeout(() => {
             try {
                 const currentHref = window.location ? window.location.href : "";
                 if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
-                    window.location.href = "building-your-retirement.html";
+                    window.location.href = targetDestination;
                 } else {
-                    console.log("Preview environment detected; navigation simulated. Saved payload:", payload);
+                    console.log("Preview environment detected; navigation simulated. Target destination:", targetDestination);
                 }
             } catch (err) {
                 console.warn("Location navigation error caught safely:", err);
