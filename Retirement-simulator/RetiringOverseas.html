@@ -1,210 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9JMJJ5CJR4');
-  </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJM5CJR4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9JMJM5CJR4');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Your Retirement | WealthLanding</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --navy: #0B132B;
+            --navy-light: #1E293B;
+            --mint: #02B17D;
+            --mint-dark: #019367;
+            --bg: #FAFAFB;
+            --card: #FFFFFF;
+            --border: #E2E8F0;
+            --text: #1E293B;
+            --muted: #64748B;
+            --blue: #2563EB;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
 
-  <title>International Location Planning | Retirement Blueprint | WealthLanding</title>
-  <meta name="description" content="Select your overseas retirement anchor base as part of your integrated WealthLanding Retirement Blueprint." />
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--navy-light);
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+        .font-serif-title {
+            font-family: var(--font-serif);
+        }
 
-  <style>
-    :root {
-      --navy: #0B132B;
-      --navy-light: #1E293B;
-      --mint: #02B17D;
-      --mint-dark: #019367;
-      --bg: #FAFAFB;
-      --card: #FFFFFF;
-      --border: #E2E8F0;
-      --text: #1E293B;
-      --muted: #64748B;
-      --blue: #2563EB;
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-    }
+        /* Global Navigation Header */
+        .global-header {
+            background-color: #0B132B; 
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 2.25rem;
+            border-bottom: 1px solid #1E293B;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative; 
+            z-index: 1001;      
+        }
 
-    body {
-      font-family: var(--font-sans);
-      background-color: var(--bg);
-      color: var(--navy-light);
-    }
+        .top-nav-links {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center;
+            gap: 1.25rem;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
 
-    .font-serif-title {
-      font-family: var(--font-serif);
-    }
+        .top-nav-links a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.95rem; 
+            font-weight: 500;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
 
-    .global-header {
-      background-color: #0B132B; 
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.85rem 2.25rem;
-      border-bottom: 1px solid #1E293B;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative; 
-      z-index: 1001;      
-    }
+        .top-nav-links a:hover, .top-nav-links a.active {
+            color: white;
+        }
 
-    .top-nav-links {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center;
-      gap: 1.25rem;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+        .logo {
+            font-size: 1.45rem; 
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.04em;
+        }
 
-    .top-nav-links a {
-      color: #94A3B8;
-      text-decoration: none;
-      font-size: 0.95rem; 
-      font-weight: 500;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
+        .logo span {
+            color: #02B17D; 
+        }
 
-    .top-nav-links a:hover, .top-nav-links a.active {
-      color: white;
-    }
+        .search-container {
+            position: relative;
+            max-width: 400px; 
+            width: 100%;
+        }
 
-    .logo {
-      font-size: 1.45rem; 
-      font-weight: 800;
-      color: white;
-      text-decoration: none;
-      letter-spacing: -0.04em;
-    }
+        .search-input {
+            width: 100%;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            color: white;
+            padding: 0.65rem 1.25rem 0.65rem 3rem; 
+            border-radius: 8px;
+            font-size: 0.9rem; 
+        }
 
-    .logo span {
-      color: #02B17D; 
-    }
+        .mega-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;                     
+            transform: translateX(-50%) translateY(12px); 
+            width: 95vw;                   
+            max-width: 1240px; 
+            background: white;
+            border: 1px solid var(--border); 
+            border-radius: 1rem;
+            box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
+            padding: 3.25rem; 
+            display: grid !important;      
+            grid-template-columns: 1.1fr 2.9fr; 
+            gap: 3.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            z-index: 2000; 
+            box-sizing: border-box;
+        }
 
-    .search-container {
-      position: relative;
-      max-width: 400px; 
-      width: 100%;
-    }
+        .dropdown-trigger:hover .mega-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
 
-    .search-input {
-      width: 100%;
-      background-color: #1E293B;
-      border: 1px solid #334155;
-      color: white;
-      padding: 0.65rem 1.25rem 0.65rem 3rem; 
-      border-radius: 8px;
-      font-size: 0.9rem; 
-    }
+        .dropdown-trigger {
+            position: static;
+        }
 
-    .mega-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 50%;                     
-      transform: translateX(-50%) translateY(12px); 
-      width: 95vw;                   
-      max-width: 1240px; 
-      background: white;
-      border: 1px solid var(--border); 
-      border-radius: 1rem;
-      box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
-      padding: 3.25rem; 
-      display: grid !important;      
-      grid-template-columns: 1.1fr 2.9fr; 
-      gap: 3.5rem;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-      z-index: 2000; 
-      box-sizing: border-box;
-    }
+        .links-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem 1.75rem; 
+        }
 
-    .dropdown-trigger:hover .mega-dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
+        .dropdown-column h4 {
+            color: var(--navy); 
+            font-size: 1.215rem; 
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
 
-    .dropdown-trigger {
-      position: static;
-    }
+        .dropdown-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem; 
+        }
 
-    .links-matrix {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem 1.75rem; 
-    }
+        .dropdown-column ul a {
+            color: var(--muted) !important; 
+            font-size: 0.95rem; 
+            font-weight: 500;
+            padding: 0;
+        }
 
-    .dropdown-column h4 {
-      color: var(--navy); 
-      font-size: 1.215rem; 
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 1.15rem;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-    }
+        .dropdown-column ul a:hover {
+            color: #02B17D !important; 
+        }
 
-    .dropdown-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem; 
-    }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-    .dropdown-column ul a {
-      color: var(--muted) !important; 
-      font-size: 0.95rem; 
-      font-weight: 500;
-      padding: 0;
-    }
+        /* Toast animation */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(1rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-toast {
+            animation: slideUpFade 0.3s ease-out forwards;
+        }
 
-    .dropdown-column ul a:hover {
-      color: #02B17D !important; 
-    }
+        .milestone-locked {
+            opacity: 0.65;
+            background-color: #F8FAFC;
+            border-color: #E2E8F0;
+            cursor: not-allowed;
+        }
 
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(0.75rem); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-toast {
-      animation: slideUpFade 0.3s ease-out forwards;
-    }
+        .milestone-unlocked {
+            background-color: #FFFFFF;
+            border-color: #CBD5E1;
+            cursor: pointer;
+        }
 
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.8; }
-    }
-    .animate-pulse-glow {
-      animation: pulseGlow 1.5s infinite;
-    }
+        .milestone-completed {
+            background-color: #F0FDF4;
+            border-color: #86EFAC;
+        }
 
-    .winner-row {
-      background-color: #F0FDF4 !important;
-      border-left: 4px solid #02B17D !important;
-    }
-  </style>
+        .journey-node-active {
+            border-color: #02B17D !important;
+            box-shadow: 0 10px 25px -5px rgba(2, 177, 125, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* PRINT STYLING FOR EXECUTIVE SUMMARY */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #executiveSummaryPrintArea, #executiveSummaryPrintArea * {
+                visibility: visible;
+            }
+            #executiveSummaryPrintArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                color: #000;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body class="antialiased min-h-screen pb-16">
 
-  <header class="global-header">
+  <header class="global-header no-print">
     <a href="/" class="logo">Wealth<span>Landing</span></a>
     
     <nav aria-label="Global Main Directory">
@@ -234,6 +274,7 @@
               <div class="dropdown-column">
                 <h4>🌟 Popular Journeys</h4>
                 <ul>
+                  <li><a href="#">Build My First Million</a></li>
                   <li><a href="Odyssey.html">Retirement Odyssey Hub</a></li>
                   <li><a href="retirement-preference-discovery.html">Preference Discovery</a></li>
                 </ul>
@@ -267,11 +308,37 @@
                   <li><a href="#">Career ROI Strategy</a></li>
                 </ul>
               </div>
+              <div class="dropdown-column">
+                <h4>💵 Cash Flow</h4>
+                <ul>
+                  <li><a href="#">High-Yield Savings</a></li>
+                  <li><a href="#">Emergency Reserves</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </li>
 
-        <!-- DROP-DOWN 3: DESIGN YOUR LIFE -->
+        <!-- DROP-DOWN 3: GROW WEALTH -->
+        <li class="dropdown-trigger">
+          <a href="#" class="active font-bold text-white">Grow Wealth <span class="text-[12px] opacity-70">▼</span></a>
+          <div class="mega-dropdown">
+            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
+              <div class="space-y-3">
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">Grow Wealth</h2>
+                <p class="text-slate-500 text-sm leading-relaxed font-medium">Index allocations and tax-insulated conversions.</p>
+              </div>
+            </div>
+            <div class="links-matrix text-left">
+              <div class="dropdown-column">
+                <h4>📈 Asset Allocation</h4>
+                <ul><li><a href="#">Index Investing & ETFs</a></li></ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- DROP-DOWN 4: DESIGN YOUR LIFE -->
         <li class="dropdown-trigger">
           <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
           <div class="mega-dropdown">
@@ -291,13 +358,6 @@
                   <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
-              <div class="dropdown-column">
-                <h4>✈️ Location Arbitrage</h4>
-                <ul>
-                  <li><a href="UScitymatcher.html">US Location Planning</a></li>
-                  <li><a href="RetiringOverseas.html">International Location Planning</a></li>
-                </ul>
-              </div>
             </div>
           </div>
         </li>
@@ -314,854 +374,1115 @@
     </div>
   </header>
 
-  <main class="max-w-[1350px] mx-auto px-4 md:px-10 py-8 space-y-8">
+  <main class="max-w-[1450px] mx-auto px-4 md:px-12 py-8 space-y-8 no-print">
 
-    <!-- BLUEPRINT HEADER -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-3">
-        <div>
-          <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-1">
-            <span>Retirement Blueprint</span>
-            <span>•</span>
-            <span>Location Planning — Part 1 of Location Strategy</span>
-          </div>
-          <h1 class="text-2xl md:text-3xl font-serif-title font-bold text-[#0B132B]">International Location Planning</h1>
+    <!-- PAGE HERO HEADER -->
+    <div class="text-center max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-2">
+            <span>Stage 4: Retirement Builder</span>
         </div>
-        <a href="building-your-retirement.html" class="text-xs text-slate-500 hover:text-slate-800 font-bold flex items-center gap-1">
-          <span>← Return to Retirement Builder</span>
-        </a>
-      </div>
-
-      <!-- ALREADY KNOWN CONTEXT PANEL -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-50 border border-slate-200/80 rounded-xl p-4">
-        <div>
-          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
-          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-            <span class="text-emerald-600 font-black">✓</span>
-            <span>Retirement Path:</span>
-          </div>
-          <strong id="blueprintPathText" class="text-xs text-emerald-700 font-extrabold block truncate">Explore Then Return</strong>
-        </div>
-
-        <div>
-          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
-          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-            <span class="text-emerald-600 font-black">✓</span>
-            <span>Monthly Budget:</span>
-          </div>
-          <strong id="blueprintBudgetText" class="text-xs text-slate-800 font-extrabold block truncate">$8,500 / month</strong>
-        </div>
-
-        <div>
-          <span class="text-[10px] uppercase font-black text-slate-400 block tracking-wider mb-0.5">Already Known</span>
-          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-            <span class="text-emerald-600 font-black">✓</span>
-            <span>Retirement Timeline:</span>
-          </div>
-          <strong id="blueprintAgeText" class="text-xs text-slate-800 font-extrabold block truncate">Explore Abroad 55–65 → US 65+</strong>
-        </div>
-
-        <div class="bg-emerald-100/70 border border-emerald-300 rounded-lg p-2.5 flex flex-col justify-center">
-          <span class="text-[10px] uppercase font-black text-emerald-900 tracking-wider block">Today's Goal</span>
-          <strong class="text-xs font-bold text-emerald-950">Choose your international location strategy.</strong>
-        </div>
-      </div>
+        <h1 class="text-3xl md:text-5xl font-serif-title font-bold text-[#0B132B]" id="builderHeroTitle">Building Your Retirement</h1>
+        <p class="text-slate-600 text-xs md:text-sm mt-2 leading-relaxed" id="builderHeroSubtitle">
+            Turn your chosen lifestyle into an interactive visual sequence of location, healthcare, housing, tax, and family milestones.
+        </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-      <!-- LEFT 5 COLUMNS: SHORTENED QUESTIONNAIRE & NEXT STEP PREVIEW -->
-      <div class="lg:col-span-5 space-y-6">
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
-          <div class="border-b border-slate-100 pb-3">
-            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Refining Overseas Choices</span>
-            <h2 class="text-lg font-serif-title font-bold text-slate-900">Using Your Retirement Blueprint</h2>
-            <p class="text-xs text-slate-500 mt-0.5">We preloaded your budget, path, and age timeline. Tell us your international lifestyle requirements:</p>
-          </div>
-
-          <form id="matcherForm" onsubmit="event.preventDefault(); recalculateRecommendation();" class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">1. Preferred Target Region?</label>
-              <select id="q_regionPref" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
-                <option value="EU_South" selected>Southern Europe (Portugal / Spain / Italy / Greece)</option>
-                <option value="LATAM">Latin America (Costa Rica / Mexico / Panama / Colombia)</option>
-                <option value="SE_Asia">Southeast Asia (Malaysia / Thailand / Vietnam / Bali)</option>
-                <option value="EU_Central">Central Europe (France / Switzerland / Austria)</option>
-              </select>
+    <!-- COMMITTED PATH STATUS BAR & ACTION TOOLS -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="space-y-0.5">
+            <div class="flex items-center gap-2">
+                <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2 py-0.5 rounded uppercase">Committed Life Choice</span>
+                <span class="text-xs text-slate-500 font-medium">Selected in Feasibility Engine</span>
             </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">2. Healthcare Quality Requirement?</label>
-              <select id="q_healthcarePref" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
-                <option value="private_intl" selected>Private International Hospitals (JCI-Accredited)</option>
-                <option value="public_universal">Universal Public Healthcare Coverage Integration</option>
-                <option value="routine_out_of_pocket">Routine Out-of-Pocket Primary Care</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">3. Visa & Residency Preference?</label>
-              <select id="q_visaPref" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
-                <option value="passive_income" selected>Passive Income Visa (e.g. D7 / Rentista / Pensionado)</option>
-                <option value="golden_investment">Golden Visa / Real Estate Investment</option>
-                <option value="nomad_tourist">Digital Nomad / Flexible Long-Term Tourist Stay</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">4. Language & Expat Integration?</label>
-              <select id="q_languagePref" onchange="recalculateRecommendation()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-emerald-500">
-                <option value="english_high" selected>High English Proficiency & Established Expat Hub</option>
-                <option value="romance_languages">Spanish / Portuguese (Willing to learn basic phrases)</option>
-                <option value="open_culture">Fully Open to Local Cultural Immersion</option>
-              </select>
-            </div>
-          </form>
+            <h2 class="text-lg font-serif-title font-bold text-slate-900 flex items-center gap-2">
+                <span>Selected Life:</span>
+                <span id="activePathName" class="text-emerald-600">Explore Then Return</span>
+            </h2>
         </div>
 
-        <!-- NEXT PLANNER TEASER CARD -->
-        <div class="bg-blue-50/80 border border-blue-200 rounded-2xl p-5 space-y-2 text-xs text-slate-800">
-          <div class="flex items-center gap-2 text-blue-900 font-extrabold uppercase tracking-wider text-[10px]">
-            <span>💡 How Planners Connect</span>
-          </div>
-          <strong class="text-xs font-bold block text-slate-900">Next Step: Healthcare Strategy Module</strong>
-          <p class="text-[11px] text-slate-600 leading-relaxed">
-            Your international strategy (<span id="teaserOverseasCountry" class="font-bold text-emerald-800">Portugal</span>) and domestic home base (<span id="teaserUSCity" class="font-bold text-slate-900">Raleigh, NC</span>) will auto-populate into Section 3 Healthcare Planning to model foreign private health insurance and U.S. Medicare Supplement transitions without repeating questions.
-          </p>
-        </div>
-      </div>
-
-      <!-- RIGHT 7 COLUMNS: BLUEPRINT RECOMMENDATION & EVIDENCE -->
-      <div class="lg:col-span-7 space-y-6">
-
-        <!-- BLUEPRINT RECOMMENDATION CARD WITH DESTINATION HERO PHOTO -->
-        <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 border-2 border-emerald-500 rounded-2xl p-6 shadow-md space-y-5">
-          
-          <div class="flex justify-between items-start border-b border-emerald-200/80 pb-3">
-            <div>
-              <span class="bg-emerald-600 text-white font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">Blueprint Recommendation</span>
-              <h3 class="text-2xl font-serif-title font-bold text-slate-900 mt-1">International Location Strategy</h3>
-            </div>
-            <div class="text-right">
-              <span class="text-[10px] font-bold text-slate-400 block uppercase">Decision Confidence</span>
-              <strong id="recommendationFitBadge" class="text-xs font-extrabold uppercase px-2.5 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-md inline-block mt-0.5">High Confidence</strong>
-            </div>
-          </div>
-
-          <!-- DYNAMIC DESTINATION HERO BANNER WITH SCRAPBOOK PREVIEW -->
-          <div class="relative rounded-2xl overflow-hidden border border-emerald-200/80 shadow-sm h-48 sm:h-56 group">
-            <img id="destinationHeroImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Portugal Destination" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/1200x500/019367/FFFFFF?text=International+Base'">
+        <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+            <!-- Hidden file input for importing .wlplan file -->
+            <input type="file" id="importRoadmapInput" accept=".wlplan,.json" class="hidden" onchange="handleImportRoadmap(event)">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 flex flex-col justify-between">
-              <div class="flex justify-between items-start">
-                <span id="heroCountryTag" class="bg-white/90 backdrop-blur-md text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
-                  <span id="heroFlagEmoji">🇵🇹</span> <span id="heroCountryName">Portugal</span>
-                </span>
-                <span class="bg-emerald-500/90 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider">Top Match</span>
-              </div>
+            <button onclick="triggerImportRoadmap()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl transition border border-slate-200 flex items-center gap-1.5 whitespace-nowrap">
+                <span>📥 Import Roadmap</span>
+            </button>
 
-              <div>
-                <span class="text-emerald-300 font-extrabold text-[10px] uppercase tracking-widest block">Future Snapshot</span>
-                <h4 id="heroTitleText" class="text-white text-lg sm:text-2xl font-serif-title font-bold drop-shadow-sm">Lisbon & Algarve Coastline</h4>
-                <p id="heroSubText" class="text-slate-200 text-xs mt-0.5 font-medium line-clamp-1">Coastal living, mild Mediterranean weather, and JCI private healthcare.</p>
-              </div>
-            </div>
-          </div>
+            <button onclick="downloadRoadmapFile()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2 whitespace-nowrap">
+                <span>💾 Download My Roadmap</span>
+            </button>
 
-          <!-- ESTIMATED TIMELINE -->
-          <div class="bg-white/90 p-3 rounded-xl border border-emerald-200/80 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs">
-            <span class="text-[10px] uppercase font-black text-slate-400 tracking-wider shrink-0">Strategy Timeline:</span>
-            <div class="flex items-center gap-2 font-bold text-slate-800 w-full sm:w-auto justify-center">
-              <span class="bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded-md text-[11px]">Age 55–65: <strong id="timelineOverseasText">Portugal 🌍</strong></span>
-              <span class="text-slate-400 font-black">→</span>
-              <span class="bg-slate-100 text-slate-800 px-2.5 py-1 rounded-md text-[11px]">Age 65+: <strong id="timelineUSText">Raleigh, NC 🏡</strong></span>
-            </div>
-          </div>
+            <button onclick="openExecutiveSummaryModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-xl transition border border-slate-200 flex items-center gap-2 whitespace-nowrap">
+                <span>📄 Executive Summary</span>
+            </button>
 
-          <!-- MAIN STRATEGY DETAILS & BUDGET SURPLUS -->
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
-            <div class="sm:col-span-7 space-y-3">
-              <div class="flex items-center gap-2">
-                <span class="text-2xl" id="titleFlagIcon">🇵🇹</span>
-                <h4 id="recommendedCountryTitle" class="text-xl font-bold text-slate-900">Portugal (Lisbon / Algarve)</h4>
-              </div>
-
-              <!-- VISUAL DECISION FACTORS SCORECARD -->
-              <div class="bg-white/80 p-3 rounded-xl border border-emerald-200 space-y-1.5 text-xs">
-                <strong class="text-[10px] uppercase font-black text-emerald-800 tracking-wider block border-b pb-1">Decision Factors Scorecard:</strong>
-                
-                <div class="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] font-medium text-slate-700">
-                  <div class="flex justify-between"><span>Healthcare:</span> <span id="starsHealth" class="text-emerald-600 font-bold">★★★★★</span></div>
-                  <div class="flex justify-between"><span>Residency Visa:</span> <span id="starsVisa" class="text-emerald-600 font-bold">★★★★★</span></div>
-                  <div class="flex justify-between"><span>Tax Treaty:</span> <span id="starsTax" class="text-emerald-600 font-bold">★★★★★</span></div>
-                  <div class="flex justify-between"><span>English Expat:</span> <span id="starsLang" class="text-emerald-600 font-bold">★★★★☆</span></div>
-                  <div class="flex justify-between"><span>US Flights:</span> <span id="starsFlights" class="text-emerald-600 font-bold">★★★★★</span></div>
-                  <div class="flex justify-between"><span>Cost Fit:</span> <span id="starsCost" class="text-emerald-600 font-bold">★★★★☆</span></div>
-                </div>
-
-                <p id="decisionSummaryText" class="text-[11px] text-slate-700 leading-snug font-medium pt-1 border-t border-slate-100">
-                  Because Southern Europe fits your healthcare and passive visa criteria, <span id="summaryCountryName" class="font-bold text-emerald-800">Portugal</span> provides the optimal balance of private care, tax protection, and flight connectivity before age 65.
-                </p>
-              </div>
-            </div>
-
-            <!-- BUDGET SURPLUS & SPECIFIC SPECS -->
-            <div class="sm:col-span-5 bg-white p-4 rounded-xl border border-emerald-200 space-y-3 text-xs">
-              <div>
-                <span class="text-[10px] text-slate-400 font-bold uppercase block">Budget vs. Living Cost</span>
-                <div class="mt-1 space-y-1">
-                  <div class="flex justify-between"><span class="text-slate-500">Target Budget:</span> <strong id="recTargetBudgetText" class="font-bold text-slate-900">$8,500/mo</strong></div>
-                  <div class="flex justify-between"><span class="text-slate-500">Est. Living Cost:</span> <strong id="recCostText" class="font-bold text-emerald-700">$3,200 – $4,800/mo</strong></div>
-                  <div class="flex justify-between border-t pt-1"><span class="text-emerald-800 font-bold">Monthly Surplus:</span> <strong id="recSurplusText" class="font-extrabold text-emerald-800">+$3,700–$5,300/mo</strong></div>
-                </div>
-              </div>
-
-              <!-- VISUAL BUDGET GAUGE -->
-              <div class="space-y-1">
-                <div class="flex justify-between text-[10px] text-slate-400 font-bold uppercase">
-                  <span>Living Cost</span>
-                  <span>Surplus</span>
-                </div>
-                <div class="w-full bg-emerald-100 h-2 rounded-full overflow-hidden flex">
-                  <div id="costBarSegment" class="bg-emerald-600 h-full transition-all duration-500" style="width: 45%;"></div>
-                  <div id="surplusBarSegment" class="bg-emerald-300 h-full transition-all duration-500" style="width: 55%;"></div>
-                </div>
-              </div>
-
-              <div class="border-t pt-2 space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="text-[10px] text-slate-400 font-bold uppercase">Residency</span>
-                  <strong id="recVisaText" class="font-bold text-slate-800 text-right">D7 Passive Income</strong>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[10px] text-slate-400 font-bold uppercase">Healthcare</span>
-                  <strong id="recHealthText" class="font-bold text-emerald-700">Private International ★★★★★</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- EDUCATIONAL CASE STUDIES & WHY PORTUGAL DEEP DIVE -->
-          <div class="pt-3 border-t border-emerald-200/80 space-y-3">
-            <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Related Case Studies & Evidence</span>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div class="bg-white/80 p-3 rounded-xl border border-slate-200 space-y-1 flex items-start gap-2.5">
-                <span class="text-xl">📖</span>
-                <div>
-                  <span class="text-[10px] font-bold text-blue-700 uppercase block">Case Study #104</span>
-                  <strong class="text-xs font-bold text-slate-900 block">How Tom & Sarah Saved $420,000 Overseas</strong>
-                  <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">
-                    Basing themselves in Portugal from age 55 to 65 avoided $28,000/yr in U.S. health insurance premiums while executing tax-free Roth conversions.
-                  </p>
-                </div>
-              </div>
-
-              <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-200 space-y-1 flex items-start gap-2.5">
-                <span class="text-xl">⚠️</span>
-                <div>
-                  <span class="text-[10px] font-bold text-amber-800 uppercase block">Cautionary Briefing</span>
-                  <strong class="text-xs font-bold text-amber-950 block">The $80,000 Tax Trap</strong>
-                  <p class="text-[11px] text-amber-900 leading-relaxed mt-0.5">
-                    Moving abroad without verifying double-taxation treaties can trigger unexpected foreign income taxation on traditional IRA distributions.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- WHY PORTUGAL 5-MINUTE BREAKDOWN TRIGGER -->
-            <details class="bg-white p-3 rounded-xl border border-emerald-200 text-xs text-slate-700 cursor-pointer">
-              <summary class="font-bold text-emerald-800 flex items-center justify-between">
-                <span>Why Portugal Wins For Your Strategy (5-Minute Explanation)</span>
-                <span class="text-slate-400 font-normal text-[10px]">Click to expand ▼</span>
-              </summary>
-              <div class="pt-3 space-y-2 leading-relaxed text-[11px] text-slate-600 border-t border-slate-100 mt-2">
-                <p>
-                  <strong>1. D7 Visa Accessibility:</strong> Portugal's D7 visa provides legal residency based on passive retirement income (IRAs, Social Security, dividends) with a low minimum income threshold (~€820/mo per applicant).
-                </p>
-                <p>
-                  <strong>2. World-Class JCI Healthcare:</strong> Hospitals like CUF and Luz Health offer private English-speaking care at 70% lower out-of-pocket costs than U.S. pre-Medicare insurance premiums.
-                </p>
-                <p>
-                  <strong>3. Smooth Return Bridge:</strong> Lisbon provides 7 daily direct flights to the U.S. East Coast, making return visits to family in Raleigh or Seattle fast and accessible.
-                </p>
-              </div>
-            </details>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- GAIN VS TRADE-OFF MATRIX (FULL WIDTH ACROSS BOTH COLUMNS) -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-      <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <div>
-          <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Comparative Analysis</span>
-          <h3 class="text-lg font-serif-title font-bold text-slate-900">Compare the Trade-Offs</h3>
-          <p class="text-xs text-slate-500 mt-0.5">Evaluating key advantages against major drawbacks across candidate international destinations:</p>
-        </div>
-        <span class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold">4 Major Destinations Evaluated</span>
-      </div>
-
-      <div class="overflow-x-auto rounded-xl border border-slate-200">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="bg-slate-50 text-slate-700 font-bold uppercase border-b border-slate-200">
-              <th class="p-3">Country Base</th>
-              <th class="p-3">Biggest Advantage</th>
-              <th class="p-3">Biggest Drawback / Why Not Recommended</th>
-              <th class="p-3 text-right">Fit Level</th>
-            </tr>
-          </thead>
-          <tbody id="tradeoffMatrixBody" class="divide-y divide-slate-100 font-medium">
-            <!-- Dynamically populated via recalculateRecommendation() with visual thumbnails -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- STEP 5 & BLUEPRINT COMPLETION CONTAINER -->
-    <div id="locationCompletionContainer" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
-      <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-        <div>
-          <span id="completionStepBadge" class="text-[10px] font-black uppercase text-amber-600 tracking-widest block">Action Required</span>
-          <h3 id="completionStepTitle" class="text-xl font-serif-title font-bold text-slate-900">Ready to Complete International Section</h3>
-        </div>
-
-        <div id="saveActionGroup" class="flex flex-wrap items-center gap-3">
-          <button id="addToBlueprintBtn" onclick="addToRetirementBlueprint()" class="bg-[#02B17D] hover:bg-[#019367] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
-            <span>[ Add to Retirement Blueprint ]</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- LOCATION STRATEGY STORY RECAP -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <!-- LOCATION STRATEGY TRANSITION LIFECYCLE -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block border-b pb-1">Transition-Based Location Strategy</span>
-          
-          <div class="space-y-2 text-xs">
-            <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-emerald-300 ring-1 ring-emerald-500/20">
-              <span class="font-bold text-slate-700">International Base</span>
-              <span id="recapOverseasText" class="font-bold text-emerald-800">Portugal 🌍</span>
-              <span id="recapOverseasCheck" class="text-amber-500 font-extrabold animate-pulse-glow">⚡</span>
-            </div>
-
-            <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-slate-200">
-              <span class="font-bold text-slate-700">U.S. Home Base</span>
-              <span id="recapUSText" class="font-bold text-slate-500">Not Started 🏡</span>
-              <span id="recapUSCheck" class="text-slate-400 font-extrabold">□</span>
-            </div>
-          </div>
-
-          <div class="text-[11px] text-slate-600 pt-1">
-            <strong>Strategy Rationale:</strong> <span id="recapReasonsList">Private JCI healthcare, D7 visa path, direct U.S. flight connectivity under $8,500/mo budget.</span>
-          </div>
-        </div>
-
-        <!-- VISUAL RETIREMENT BLUEPRINT STATUS MATRIX -->
-        <div class="bg-slate-900 text-white rounded-xl p-4 space-y-3 shadow-md">
-          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span class="text-xs font-black uppercase text-emerald-400 tracking-wider">RETIREMENT BLUEPRINT</span>
-            <span id="blueprintModuleCount" class="text-[10px] text-slate-400 font-mono font-bold">1 of 5 Complete</span>
-          </div>
-
-          <div class="grid grid-cols-5 gap-2 text-center text-xs pt-1">
-            <div class="bg-slate-800 p-2 rounded-lg border border-emerald-500/40">
-              <span class="block text-[10px] text-slate-400 uppercase font-bold">Life</span>
-              <span class="text-emerald-400 font-bold text-sm">✓</span>
-            </div>
-
-            <div id="moduleLocationCard" class="bg-slate-800 p-2 rounded-lg border border-amber-400/60 transition-all duration-500">
-              <span id="moduleLocationLabel" class="block text-[10px] text-amber-300 uppercase font-bold">Location</span>
-              <span id="moduleLocationCheck" class="text-amber-400 font-bold text-sm">⚡</span>
-            </div>
-
-            <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
-              <span class="block text-[10px] text-slate-400 uppercase font-bold">Health</span>
-              <span class="text-slate-500 font-bold text-sm">□</span>
-            </div>
-
-            <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
-              <span class="block text-[10px] text-slate-400 uppercase font-bold">Financial</span>
-              <span class="text-slate-500 font-bold text-sm">□</span>
-            </div>
-
-            <div class="bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
-              <span class="block text-[10px] text-slate-400 uppercase font-bold">Estate</span>
-              <span class="text-slate-500 font-bold text-sm">□</span>
-            </div>
-          </div>
-
-          <div class="pt-2 text-right">
-            <a href="building-your-retirement.html" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold underline">
-              View Master Retirement Builder →
+            <a href="financial-feasibility-audit.html" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl transition border border-slate-200 text-center whitespace-nowrap">
+                ← Revisit Recommendation
             </a>
-          </div>
         </div>
+    </div>
 
-      </div>
-
-      <!-- DYNAMIC BLUEPRINT COMPLETION CARD (APPEARS UPON SAVE) -->
-      <div id="blueprintCompletionCard" class="hidden bg-gradient-to-r from-emerald-900 to-slate-900 text-white p-6 rounded-2xl border-2 border-emerald-500 shadow-xl space-y-4 animate-toast">
-        <div class="flex justify-between items-start border-b border-emerald-800/80 pb-3">
-          <div>
-            <span class="bg-emerald-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded uppercase tracking-wider">International Strategy Added</span>
-            <h4 class="text-xl font-serif-title font-bold text-white mt-1">International Location Secured</h4>
-          </div>
-          <span class="text-emerald-400 text-xl font-black">✓</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div class="bg-slate-800/80 p-3 rounded-xl border border-emerald-500/40 flex items-center gap-3">
-            <img id="completionThumbImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80" alt="Saved Overseas" class="w-12 h-12 rounded-lg object-cover border border-emerald-400/50">
+    <!-- VISUAL "YOUR RETIREMENT JOURNEY" STRIP (PHOTO SCRAPBOOK & NAVIGATION SYSTEM) -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
             <div>
-              <span class="text-[10px] text-emerald-400 font-bold uppercase block">Overseas Base</span>
-              <strong id="savedOverseasVal" class="text-base font-bold text-emerald-300 block mt-0.5">Portugal 🌍</strong>
+                <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest block">Interactive Navigation System</span>
+                <h2 class="text-base font-serif-title font-bold text-slate-900 uppercase tracking-wider">YOUR RETIREMENT JOURNEY</h2>
             </div>
-          </div>
-          <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 flex items-center gap-3">
-            <div class="bg-slate-700 w-12 h-12 rounded-lg flex items-center justify-center text-xl">🏡</div>
-            <div>
-              <span class="text-[10px] text-slate-400 font-bold uppercase block">Next Required Location Step</span>
-              <strong id="nextStepTargetText" class="text-sm font-bold text-white block mt-0.5">Choose U.S. Home Base (Raleigh, NC) 🏡</strong>
+            
+            <!-- Human-Centric Chapter Progress Bar -->
+            <div class="flex items-center gap-3">
+                <div class="text-right">
+                    <span id="humanChapterProgressText" class="text-xs font-bold text-slate-900 block">Chapter 1 Complete • Preparing Chapter 2</span>
+                    <span class="text-[10px] text-slate-500">Click any chapter below to explore</span>
+                </div>
+                <div class="w-24 bg-slate-200 h-2.5 rounded-full overflow-hidden shrink-0">
+                    <div id="visualProgressBar" class="bg-[#02B17D] h-full transition-all duration-500" style="width: 35%;"></div>
+                </div>
             </div>
-          </div>
         </div>
 
-        <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <span class="text-xs text-slate-300 font-medium">Location Strategy Part 2: <strong class="text-emerald-400" id="nextStepLabel">Domestic Location Planning</strong></span>
-          <a id="continueLocationBtn" href="UScitymatcher.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow-md whitespace-nowrap">
-            <span>Continue Building My Location Strategy →</span>
-          </a>
+        <!-- Horizontal Interactive Journey Scrapbook Nodes -->
+        <div id="horizontalJourneyStrip" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-1">
+            <!-- Dynamically populated via renderJourneyStrip() -->
         </div>
-      </div>
+    </section>
+
+    <!-- FORMALIZED ANNUAL REVIEW SYSTEM (RECURRING EVERY JANUARY) -->
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-3 gap-3">
+            <div class="flex items-center gap-2">
+                <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Annual System</span>
+                <h3 class="text-base font-serif-title font-bold text-slate-900">Review This Roadmap Every January</h3>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="generateICSCalendar()" class="bg-emerald-50 hover:bg-emerald-100 text-[#019367] border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                    <span>📅 Add January Review to Calendar</span>
+                </button>
+                <button onclick="openEmailReminderModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                    <span>✉️ Email Me a Review Reminder</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+            <p class="text-xs text-slate-600 leading-relaxed md:col-span-1">
+                Retirement plans change as family, health, location, and tax conditions evolve. Download your private roadmap file and revisit it each January. Simulate a shift below to see how your sequence adapts.
+            </p>
+
+            <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="simulatorButtonsContainer">
+                <!-- Dynamically Populated with User Locations -->
+            </div>
+        </div>
+
+        <div id="simulationFeedbackBox" class="hidden bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-slate-800 leading-relaxed space-y-1">
+            <!-- Populated via JS -->
+        </div>
+    </section>
+
+    <!-- EMOTIONAL NARRATIVE STORY BOX ("YOUR STORY") -->
+    <section class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 text-slate-900 rounded-2xl p-6 border border-emerald-200 shadow-sm space-y-2">
+        <div class="flex items-center gap-2 text-[#019367]">
+            <span class="text-lg">📖</span>
+            <span class="text-xs font-black uppercase tracking-widest">Your Life Narrative</span>
+        </div>
+        <p id="pathStoryParagraph" class="text-sm md:text-base font-serif-title leading-relaxed text-slate-800 italic">
+            "At 55, you'll begin a new chapter living in Portugal..."
+        </p>
+    </section>
+
+    <!-- MAIN CHAPTER TIMELINE WORKSPACE WITH FUTURE SNAPSHOTS & DEPENDENCIES -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT 8 COLUMNS: FUTURE SNAPSHOT & CHAPTER DECISION NODES -->
+        <div class="lg:col-span-8 space-y-8" id="chaptersContainer">
+            <!-- Dynamically populated via renderChapters() -->
+        </div>
+
+        <!-- RIGHT 4 COLUMNS: SPECIALIZED TOOLS & DECISION ACCELERATORS -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- READINESS & EXECUTION SUMMARY -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="border-b border-slate-100 pb-3">
+                    <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest">Execution Readiness</span>
+                    <h3 class="text-base font-serif-title font-bold text-slate-900">Roadmap Status</h3>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                        <span class="text-xs font-semibold text-slate-600">Milestones Done:</span>
+                        <strong id="completedMilestonesText" class="text-xs font-bold text-slate-900">1 of 8 Milestones</strong>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Primary Focus</span>
+                        <strong id="primaryNextFocusText" class="text-xs font-bold text-blue-700 block truncate">Chapter 1 Sourcing</strong>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Target Monthly Budget</span>
+                        <strong id="budgetCushionText" class="text-sm font-bold text-emerald-700">$8,500 / month</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPECIALIZED DECISION ACCELERATORS & EXECUTIVE EXPORT -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4 sticky top-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Specialized Tools</span>
+                    <h3 class="text-base font-serif-title font-bold text-slate-900">Decision Accelerators</h3>
+                </div>
+
+                <div class="space-y-3" id="specializedToolsContainer">
+                    <!-- Populated via JS -->
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 space-y-2">
+                    <button onclick="openExecutiveSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 p-3 rounded-xl font-bold text-xs transition border border-slate-200 flex items-center justify-center gap-2">
+                        <span>📄 Print Executive Summary</span>
+                    </button>
+                    <button onclick="downloadRoadmapFile()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl font-bold text-xs transition shadow-sm flex items-center justify-center gap-2">
+                        <span>💾 Download My Roadmap (.wlplan)</span>
+                    </button>
+                    <button onclick="goToStrategyEngine()" class="w-full bg-[#02B17D] hover:bg-[#019367] text-white p-3.5 rounded-xl font-bold text-xs tracking-wide transition shadow-md flex items-center justify-center gap-2">
+                        <span>Optimize My Roth Strategy →</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-    <!-- FULL RETIREMENT LIFE SEQUENCE PREVIEW STRIP -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-      <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest block">Your Retirement Journey Sequence</span>
-      <div class="grid grid-cols-3 gap-3 text-center text-xs">
-        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 space-y-1">
-          <span class="text-[10px] text-emerald-800 font-bold uppercase block" id="seqAge1">Age 55–65</span>
-          <strong id="seqOverseas" class="text-sm font-bold text-slate-900 block mt-0.5">Portugal 🌍</strong>
-          <span class="text-[10px] text-emerald-700 font-semibold block" id="seqSub1">Active Travel & Tax Conversion</span>
+    <!-- FOOTER COMPLETION WORKSPACE BAR -->
+    <footer class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4">
+            <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-widest mb-1">
+                <span>Milestones Defined</span>
+                <span class="text-slate-400">•</span>
+                <span>Your Roadmap Is Ready</span>
+            </div>
+            <h3 class="text-2xl font-serif-title font-bold text-slate-900">Your Retirement Roadmap Is Ready</h3>
+            <p class="text-xs md:text-sm text-slate-600 font-medium mt-1">
+                You have turned a retirement idea into a practical sequence of life chapters, decisions, and operational milestones.
+            </p>
         </div>
 
-        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
-          <span class="text-[10px] text-slate-400 font-bold uppercase block" id="seqAge2">Age 65+</span>
-          <strong id="seqUSCity" class="text-sm font-bold text-slate-800 block mt-0.5">Raleigh, NC 🏡</strong>
-          <span class="text-[10px] text-slate-500 font-semibold block" id="seqSub2">Medicare & Family Hub</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Action 1: Optimize Strategy -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                    <span class="text-[10px] font-bold text-blue-700 uppercase tracking-wider block mb-0.5">Step 1 • Financial Optimization</span>
+                    <strong class="text-sm font-bold text-slate-900 block">1. Optimize My Roth Strategy</strong>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Model tax bracket sequencing, Roth conversion timing, ACA subsidy bridges, and withdrawal math in the Strategy Engine.</p>
+                </div>
+                <button onclick="goToStrategyEngine()" class="w-full bg-[#02B17D] hover:bg-[#019367] text-white p-3 rounded-xl font-bold text-xs transition shadow-md flex items-center justify-center gap-2">
+                    <span>Optimize Strategy →</span>
+                </button>
+            </div>
+
+            <!-- Action 2: Download Roadmap File -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                    <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block mb-0.5">Step 2 • Local Portability</span>
+                    <strong class="text-sm font-bold text-slate-900 block">2. Download My Roadmap</strong>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Save a private <code class="bg-slate-200 px-1 rounded text-[11px]">.wlplan</code> file to restore your path, target cities, and milestones on any device.</p>
+                </div>
+                <div>
+                    <button onclick="downloadRoadmapFile()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl font-bold text-xs transition shadow-sm flex items-center justify-center gap-2">
+                        <span>💾 Download (.wlplan)</span>
+                    </button>
+                    <span class="text-[10px] text-slate-400 block text-center mt-1.5">No login or account creation required.</span>
+                </div>
+            </div>
+
+            <!-- Action 3: Executive Summary PDF -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                <div>
+                    <span class="text-[10px] font-bold text-purple-700 uppercase tracking-wider block mb-0.5">Step 3 • Family & Advisor Alignment</span>
+                    <strong class="text-sm font-bold text-slate-900 block">3. Print Executive Summary</strong>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Generate a 1-page briefing formatted for spouse, financial advisor, or family discussions.</p>
+                </div>
+                <button onclick="openExecutiveSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 p-3 rounded-xl font-bold text-xs transition border border-slate-200 flex items-center justify-center gap-2">
+                    <span>📄 Print Summary PDF</span>
+                </button>
+            </div>
         </div>
 
-        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 opacity-60 space-y-1">
-          <span class="text-[10px] text-slate-400 font-bold uppercase block">Age 85+</span>
-          <strong class="text-sm font-bold text-slate-800 block mt-0.5">Estate & Care 🏰</strong>
-          <span class="text-[10px] text-slate-500 font-semibold block">Trust & Inheritance Shield</span>
+        <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-amber-900">
+            <div class="flex items-center gap-2">
+                <span>💡</span>
+                <span><strong>Browser Storage Notice:</strong> Your progress is currently stored locally in this browser. Download your <code class="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-[11px]">.wlplan</code> file before clearing browser data or switching devices.</span>
+            </div>
+            <button onclick="generateICSCalendar()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-lg font-bold text-[11px] whitespace-nowrap shrink-0">
+                📅 Remind Me Next Jan
+            </button>
         </div>
-      </div>
-    </div>
+    </footer>
 
   </main>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden">
-    <div class="bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md animate-toast">
-      <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold">✓</div>
-      <div>
-        <h4 id="toastTitle" class="text-sm font-bold text-white">Blueprint Updated</h4>
-        <p id="toastMessage" class="text-xs text-slate-300 mt-0.5">Overseas strategy saved to Retirement Blueprint.</p>
+  <!-- EMAIL REMINDER MODAL (OPTIONAL ANNUAL REVIEW NOTIFICATION) -->
+  <div id="emailReminderModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-5 shadow-2xl border border-slate-200">
+          <div class="flex justify-between items-start border-b border-slate-100 pb-3">
+              <div>
+                  <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Optional Reminder</span>
+                  <h3 class="text-xl font-serif-title font-bold text-slate-900">January Review Reminder</h3>
+              </div>
+              <button onclick="closeEmailReminderModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+          </div>
+
+          <p class="text-xs text-slate-600 leading-relaxed">
+              We can send you a quick reminder every January to revisit your roadmap, re-check tax updates, and adjust for life shifts.
+          </p>
+
+          <form onsubmit="handleEmailReminderSubmit(event)" class="space-y-4">
+              <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Your Email Address</label>
+                  <input type="email" id="reminderEmailInput" required placeholder="you@example.com" class="w-full bg-slate-50 border border-slate-300 p-3 rounded-xl text-xs font-bold text-slate-900 outline-none focus:border-emerald-500">
+              </div>
+
+              <div class="flex gap-3">
+                  <button type="button" onclick="closeEmailReminderModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-xl font-bold text-xs transition">Cancel</button>
+                  <button type="submit" class="w-1/2 bg-[#02B17D] hover:bg-[#019367] text-white p-3 rounded-xl font-bold text-xs transition shadow-md">Set Annual Reminder</button>
+              </div>
+          </form>
       </div>
-    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY MODAL & PRINT PREVIEW AREA -->
+  <div id="executiveSummaryModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start border-b border-slate-100 pb-3 no-print">
+              <div>
+                  <span class="text-[10px] font-black uppercase text-[#019367] tracking-widest">Executive Briefing</span>
+                  <h3 class="text-xl font-serif-title font-bold text-slate-900">Executive Summary</h3>
+                  <p class="text-xs text-slate-500">Suitable for spouse, financial advisor, or family discussions.</p>
+              </div>
+              <button onclick="closeExecutiveSummaryModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+          </div>
+
+          <!-- PRINT AREA -->
+          <div id="executiveSummaryPrintArea" class="space-y-5">
+              <div class="border-b border-slate-200 pb-4 flex justify-between items-end">
+                  <div>
+                      <span class="text-2xl font-black text-slate-900 tracking-tight">Wealth<span class="text-[#02B17D]">Landing</span></span>
+                      <h2 class="text-lg font-serif-title font-bold text-slate-800 mt-1">Executive Retirement Briefing</h2>
+                  </div>
+                  <div class="text-right text-xs text-slate-500">
+                      <span>Created: <strong id="execSummaryDate" class="text-slate-900">July 2026</strong></span>
+                  </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Committed Path</span>
+                      <strong id="execSummaryPath" class="text-sm font-bold text-emerald-700 block">Explore Then Return</strong>
+                  </div>
+                  <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Target Budget Assumption</span>
+                      <strong id="execSummarySpend" class="text-sm font-bold text-slate-900 block">$8,500 / month ($102,000 / yr)</strong>
+                  </div>
+              </div>
+
+              <!-- TARGET LOCATIONS & MILESTONES BRIEF -->
+              <div class="grid grid-cols-3 gap-2.5 text-xs">
+                  <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                      <span class="text-[9px] text-slate-400 font-bold uppercase block">Overseas Base</span>
+                      <strong id="execSummaryOverseas" class="text-xs font-bold text-slate-800">Portugal</strong>
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                      <span class="text-[9px] text-slate-400 font-bold uppercase block">U.S. Return Metro</span>
+                      <strong id="execSummaryUSCity" class="text-xs font-bold text-slate-800">Raleigh, NC</strong>
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                      <span class="text-[9px] text-slate-400 font-bold uppercase block">Children Location</span>
+                      <strong id="execSummaryKidsCity" class="text-xs font-bold text-slate-800">Seattle, WA</strong>
+                  </div>
+              </div>
+
+              <div>
+                  <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 border-b pb-1">Retirement Life Sequence</h4>
+                  <div id="execSummaryChaptersList" class="space-y-2 text-xs text-slate-700">
+                      <!-- Rendered via JS -->
+                  </div>
+              </div>
+
+              <div>
+                  <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 border-b pb-1">Next Immediate Decisions & Status</h4>
+                  <div id="execSummaryNextDecisions" class="space-y-1.5 text-xs text-slate-700 font-medium">
+                      <!-- Rendered via JS -->
+                  </div>
+              </div>
+
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-[10px] text-slate-500 leading-relaxed italic">
+                  <strong>Educational Planning Snapshot Notice:</strong> This summary is prepared for personal alignment and advisor discussions. Final tax-bracket sequencing, Roth conversion timing, ACA subsidy bridges, and withdrawal math are modeled in the WealthLanding Strategy Engine.
+              </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-4 border-t border-slate-100 no-print">
+              <button onclick="closeExecutiveSummaryModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs transition">Close</button>
+              <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs transition shadow-md flex items-center gap-2">
+                  <span>🖨️ Print / Save as PDF</span>
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden no-print">
+      <div class="bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md animate-toast">
+          <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold">✓</div>
+          <div>
+              <h4 id="toastTitle" class="text-sm font-bold text-white">Milestone Updated</h4>
+              <p id="toastMessage" class="text-xs text-slate-300 mt-0.5">Progress saved to active retirement roadmap.</p>
+          </div>
+      </div>
   </div>
 
   <script>
-    // State Store
-    const blueprintState = {
-      pathName: "Explore Then Return",
-      pathId: "explore_then_return",
-      monthlySpend: "$8,500 / month",
-      overseasBase: "Portugal",
-      selectedUSCity: "Raleigh, NC",
-      childrenCity: "Seattle, WA"
+    // Dynamic Roadmap State Store reading from localStorage
+    const builderState = {
+        activePathId: "explore_then_return",
+        activeChapterFocus: 1,
+        completedMilestones: new Set(["m1_1"]),
+        userOverseasBase: "Portugal",
+        userUSCity: "Raleigh, NC",
+        userChildrenCity: "Seattle, WA",
+        monthlySpendLabel: "$8,500 / month ($102,000 / year)",
+        pathNames: {
+            "explore_then_return": "Explore Then Return",
+            "strategic_us_move": "Strategic U.S. Move",
+            "home_base": "Home Base",
+            "global_expat": "Global Expat",
+            "phase_optimizer": "Phase Optimizer"
+        }
     };
 
-    // Database of International Destinations with Visual Assets
-    const countryDatabase = {
-      "EU_South": {
-        name: "Portugal (Lisbon / Algarve)",
-        country: "Portugal",
-        flagEmoji: "🇵🇹",
-        city: "Lisbon",
-        visa: "D7 Passive Income Visa",
-        costNum: 4000,
-        costRange: "$3,200 – $4,800/mo",
-        healthcare: "Private JCI Hospitals (CUF / Luz)",
-        healthStars: "★★★★★",
-        visaStars: "★★★★★",
-        taxStars: "★★★★★",
-        langStars: "★★★★☆",
-        flightsStars: "★★★★★",
-        costStars: "★★★★☆",
-        advantage: "Best overall balance & direct U.S. transit",
-        drawback: "Recent housing cost increases in Lisbon & Porto",
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-        thumb: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80",
-        heroTitle: "Lisbon & Algarve Coastline",
-        heroSub: "Coastal living, mild Mediterranean weather, and JCI private healthcare.",
-        healthScore: 25,
-        visaScore: 20,
-        taxScore: 15,
-        langScore: 10,
-        costScore: 10
-      },
-      "EU_Central": {
-        name: "Spain (Barcelona / Valencia)",
-        country: "Spain",
-        flagEmoji: "🇪🇸",
-        city: "Barcelona",
-        visa: "Non-Lucrative Visa (NLV)",
-        costNum: 4600,
-        costRange: "$3,800 – $5,500/mo",
-        healthcare: "Sanitas / QuironSalud Private Network",
-        healthStars: "★★★★★",
-        visaStars: "★★★★☆",
-        taxStars: "★★★☆☆",
-        langStars: "★★★★☆",
-        flightsStars: "★★★★★",
-        costStars: "★★★☆☆",
-        advantage: "Elite healthcare depth & Mediterranean culture",
-        drawback: "Regional wealth tax considerations on non-EU assets",
-        image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=80",
-        thumb: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=200&q=80",
-        heroTitle: "Barcelona & Costa Brava",
-        heroSub: "World-class clinical depth and rich Mediterranean lifestyle.",
-        healthScore: 25,
-        visaScore: 18,
-        taxScore: 10,
-        langScore: 10,
-        costScore: 8
-      },
-      "LATAM": {
-        name: "Costa Rica (Central Valley / Guanacaste)",
-        country: "Costa Rica",
-        flagEmoji: "🇨🇷",
-        city: "San Jose",
-        visa: "Pensionado Visa ($1,000/mo income)",
-        costNum: 3500,
-        costRange: "$2,800 – $4,200/mo",
-        healthcare: "CIMA & Clinica Biblica (San Jose)",
-        healthStars: "★★★★☆",
-        visaStars: "★★★★★",
-        taxStars: "★★★★☆",
-        langStars: "★★★☆☆",
-        flightsStars: "★★★★☆",
-        costStars: "★★★★★",
-        advantage: "U.S. time zone alignment & fast visa approval",
-        drawback: "Slower local administrative bureaucracy & road infrastructure",
-        image: "https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=1200&q=80",
-        thumb: "https://images.unsplash.com/photo-1518259102261-b40117eabbc9?auto=format&fit=crop&w=200&q=80",
-        heroTitle: "Central Valley & Pacific Beaches",
-        heroSub: "U.S. time zone alignment, lush biodiversity, and low income threshold.",
-        healthScore: 20,
-        visaScore: 20,
-        taxScore: 15,
-        langScore: 8,
-        costScore: 12
-      },
-      "SE_Asia": {
-        name: "Malaysia (Kuala Lumpur / Penang)",
-        country: "Malaysia",
-        flagEmoji: "🇲🇾",
-        city: "Kuala Lumpur",
-        visa: "MM2H (Malaysia My Second Home)",
-        costNum: 2900,
-        costRange: "$2,200 – $3,600/mo",
-        healthcare: "Prince Court & Gleneagles Medical",
-        healthStars: "★★★★★",
-        visaStars: "★★★☆☆",
-        taxStars: "★★★★★",
-        langStars: "★★★★★",
-        flightsStars: "★★☆☆☆",
-        costStars: "★★★★★",
-        advantage: "Lowest overall living cost & English-speaking depth",
-        drawback: "Longer 20+ hour flight duration back to U.S. home base",
-        image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80",
-        thumb: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=200&q=80",
-        heroTitle: "Kuala Lumpur & Penang Island",
-        heroSub: "Unmatched purchasing power, English fluency, and top-tier JCI hospitals.",
-        healthScore: 25,
-        visaScore: 12,
-        taxScore: 15,
-        langScore: 15,
-        costScore: 15
-      }
-    };
+    function loadSavedPathAndLocations() {
+        try {
+            // Read Roadmap selection
+            const rawRoadmap = localStorage.getItem("WealthLandingSelectedRoadmap");
+            if (rawRoadmap) {
+                const payload = JSON.parse(rawRoadmap);
+                if (payload.selectedLifeId) builderState.activePathId = payload.selectedLifeId;
+                if (payload.overseasBase) builderState.userOverseasBase = payload.overseasBase;
+                if (payload.usCity) builderState.userUSCity = payload.usCity;
+                if (payload.childrenCity) builderState.userChildrenCity = payload.childrenCity;
+                if (payload.monthlySpend) builderState.monthlySpendLabel = payload.monthlySpend;
+                if (payload.completedMilestones && Array.isArray(payload.completedMilestones)) {
+                    builderState.completedMilestones = new Set(payload.completedMilestones);
+                }
+            }
 
-    function loadBlueprintContext() {
-      try {
-        const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
-        const payload = JSON.parse(raw);
+            // Read Saved Progress fallback
+            const savedProgress = localStorage.getItem("WealthLandingSavedProgress");
+            if (savedProgress) {
+                const list = JSON.parse(savedProgress);
+                if (Array.isArray(list)) builderState.completedMilestones = new Set(list);
+            }
 
-        if (payload.selectedLifeName) blueprintState.pathName = payload.selectedLifeName;
-        if (payload.selectedLifeId) blueprintState.pathId = payload.selectedLifeId;
-        if (payload.monthlySpend) blueprintState.monthlySpend = payload.monthlySpend;
-        if (payload.overseasBase) blueprintState.overseasBase = payload.overseasBase;
-        if (payload.usCity) blueprintState.selectedUSCity = payload.usCity;
-        if (payload.childrenCity) blueprintState.childrenCity = payload.childrenCity;
-      } catch (e) {
-        console.warn("Could not read LocalStorage payload:", e);
-      }
+            // Read Discovery Selection fallback for locations
+            const rawDiscovery = localStorage.getItem("RetirementDiscoverySelection");
+            if (rawDiscovery) {
+                const payload = JSON.parse(rawDiscovery);
+                if (payload.overseasBase && !builderState.userOverseasBase) builderState.userOverseasBase = payload.overseasBase;
+                if (payload.usCity && !builderState.userUSCity) builderState.userUSCity = payload.usCity;
+                if (payload.childrenCity && !builderState.userChildrenCity) builderState.userChildrenCity = payload.childrenCity;
+            }
+        } catch (e) {
+            console.warn("Could not read stored roadmap/discovery data:", e);
+        }
 
-      document.getElementById("blueprintPathText").innerText = blueprintState.pathName;
-      document.getElementById("blueprintBudgetText").innerText = blueprintState.monthlySpend.split('(')[0] || blueprintState.monthlySpend;
-      
-      const isPermanentOverseas = blueprintState.pathId === "global_expat";
-
-      if (isPermanentOverseas) {
-        document.getElementById("blueprintAgeText").innerText = "Permanent Overseas Sanctuary (Age 55+)";
-        document.getElementById("recapUSText").innerText = "Not Needed (Permanent Overseas)";
-        document.getElementById("seqAge1").innerText = "Age 55–75";
-        document.getElementById("seqSub1").innerText = "Active Overseas Base";
-        document.getElementById("seqAge2").innerText = "Age 75+";
-        document.getElementById("seqUSCity").innerText = "Overseas Care Sanctuary 🏥";
-        document.getElementById("seqSub2").innerText = "In-Home Private Care";
-        document.getElementById("nextStepTargetText").innerText = "Healthcare & Tax Protection Strategy";
-        document.getElementById("nextStepLabel").innerText = "Section 3 Healthcare Planning";
-        document.getElementById("continueLocationBtn").href = "building-your-retirement.html";
-      } else {
-        document.getElementById("blueprintAgeText").innerText = "Explore Abroad 55–65 → US 65+";
-        document.getElementById("recapUSText").innerText = `${blueprintState.selectedUSCity} 🏡`;
-        document.getElementById("seqOverseas").innerText = `${blueprintState.overseasBase} 🌍`;
-        document.getElementById("seqUSCity").innerText = `${blueprintState.selectedUSCity} 🏡`;
-      }
-
-      document.getElementById("recapOverseasText").innerText = `${blueprintState.overseasBase} 🌍`;
-      document.getElementById("teaserOverseasCountry").innerText = blueprintState.overseasBase;
-      document.getElementById("teaserUSCity").innerText = blueprintState.selectedUSCity;
-
-      recalculateRecommendation();
+        updateDynamicUI();
     }
 
-    /* Weighted Algorithm Logic: Region 25%, Health 20%, Visa 20%, Tax 15%, Lang 10%, Cost 10% */
-    function calculateWeightedScore(item, prefs) {
-      let score = 30;
-
-      // Region weight (25%)
-      if (prefs.regionPref === "EU_South" && item.country === "Portugal") score += 25;
-      if (prefs.regionPref === "EU_Central" && item.country === "Spain") score += 25;
-      if (prefs.regionPref === "LATAM" && item.country === "Costa Rica") score += 25;
-      if (prefs.regionPref === "SE_Asia" && item.country === "Malaysia") score += 25;
-
-      // Healthcare weight (20%)
-      if (prefs.healthcarePref === "private_intl") score += item.healthScore;
-      
-      // Visa weight (20%)
-      if (prefs.visaPref === "passive_income") score += item.visaScore;
-
-      // Language weight (10%)
-      if (prefs.languagePref === "english_high") score += item.langScore;
-
-      // Base tax & cost weight (20%)
-      score += item.taxScore + item.costScore;
-
-      return score;
-    }
-
-    function recalculateRecommendation() {
-      const prefs = {
-        regionPref: document.getElementById("q_regionPref").value,
-        healthcarePref: document.getElementById("q_healthcarePref").value,
-        visaPref: document.getElementById("q_visaPref").value,
-        languagePref: document.getElementById("q_languagePref").value
-      };
-
-      const scored = Object.keys(countryDatabase).map(key => {
-        const c = countryDatabase[key];
-        const score = calculateWeightedScore(c, prefs);
-        return { ...c, totalScore: score };
-      }).sort((a, b) => b.totalScore - a.totalScore);
-
-      const topPick = scored[0];
-
-      // Update Hero Photo Banner
-      document.getElementById("destinationHeroImg").src = topPick.image;
-      document.getElementById("heroCountryName").innerText = topPick.country;
-      document.getElementById("heroFlagEmoji").innerText = topPick.flagEmoji;
-      document.getElementById("titleFlagIcon").innerText = topPick.flagEmoji;
-      document.getElementById("heroTitleText").innerText = topPick.heroTitle;
-      document.getElementById("heroSubText").innerText = topPick.heroSub;
-      document.getElementById("completionThumbImg").src = topPick.thumb;
-
-      // Update Primary Recommendation Card Details
-      document.getElementById("recommendedCountryTitle").innerText = topPick.name;
-      document.getElementById("summaryCountryName").innerText = topPick.country;
-      
-      const isPermanentOverseas = blueprintState.pathId === "global_expat";
-      document.getElementById("timelineOverseasText").innerText = `${topPick.country} 🌍`;
-      document.getElementById("timelineUSText").innerText = isPermanentOverseas ? "Permanent Base" : `${blueprintState.selectedUSCity} 🏡`;
-
-      document.getElementById("starsHealth").innerText = topPick.healthStars;
-      document.getElementById("starsVisa").innerText = topPick.visaStars;
-      document.getElementById("starsTax").innerText = topPick.taxStars;
-      document.getElementById("starsLang").innerText = topPick.langStars;
-      document.getElementById("starsFlights").innerText = topPick.flightsStars;
-      document.getElementById("starsCost").innerText = topPick.costStars;
-
-      // Budget Math & Surplus Gauges
-      let targetBudgetNum = 8500;
-      try {
-        const parsed = parseInt(blueprintState.monthlySpend.replace(/[^0-9]/g, ''));
-        if (parsed && !isNaN(parsed)) targetBudgetNum = parsed;
-      } catch (e) {}
-
-      const estCostAvg = topPick.costNum;
-      const surplus = Math.max(0, targetBudgetNum - estCostAvg);
-
-      document.getElementById("recTargetBudgetText").innerText = `$${targetBudgetNum.toLocaleString()}/mo`;
-      document.getElementById("recCostText").innerText = topPick.costRange;
-      document.getElementById("recSurplusText").innerText = `+$${surplus.toLocaleString()}/mo`;
-      document.getElementById("recVisaText").innerText = topPick.visa;
-
-      // Visual Budget Gauge Widths
-      const costPct = Math.min(85, Math.max(20, Math.round((estCostAvg / targetBudgetNum) * 100)));
-      document.getElementById("costBarSegment").style.width = `${costPct}%`;
-      document.getElementById("surplusBarSegment").style.width = `${100 - costPct}%`;
-
-      blueprintState.overseasBase = topPick.country;
-      document.getElementById("recapOverseasText").innerText = `${topPick.country} 🌍`;
-      document.getElementById("seqOverseas").innerText = `${topPick.country} 🌍`;
-      document.getElementById("teaserOverseasCountry").innerText = topPick.country;
-
-      // Render Gain vs. Trade-Off Matrix with Highlighted Winner Row & Thumbnails
-      const matrixBody = document.getElementById("tradeoffMatrixBody");
-      matrixBody.innerHTML = "";
-
-      scored.forEach((item, idx) => {
-        const isTop = idx === 0;
-        const tr = document.createElement("tr");
-        tr.className = isTop 
-          ? "winner-row text-slate-900 font-bold border-l-4 border-emerald-500 shadow-sm" 
-          : "hover:bg-slate-50 text-slate-800";
-
-        tr.innerHTML = `
-          <td class="p-3">
-            <div class="flex items-center gap-2.5">
-              <img src="${item.thumb}" alt="${item.country}" class="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0">
-              <div>
-                <div class="flex items-center gap-1.5">
-                  <span class="font-bold text-sm text-slate-900">${item.flagEmoji} ${item.name}</span>
-                  ${isTop ? '<span class="bg-emerald-600 text-white font-black text-[9px] px-2 py-0.5 rounded uppercase">★ Winner</span>' : ''}
-                </div>
-                <span class="text-[10px] text-slate-500 font-semibold block mt-0.5">${item.visa}</span>
-              </div>
-            </div>
-          </td>
-          <td class="p-3 text-emerald-800 font-bold">${item.advantage}</td>
-          <td class="p-3 text-slate-600">${item.drawback}</td>
-          <td class="p-3 text-right">
-            <span class="text-[10px] ${isTop ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-700'} px-2.5 py-1 rounded font-extrabold uppercase whitespace-nowrap">
-              ${isTop ? 'High Confidence' : 'Alternative'}
-            </span>
-          </td>
-        `;
-        matrixBody.appendChild(tr);
-      });
-    }
-
-    function addToRetirementBlueprint() {
-      const regionPref = document.getElementById("q_regionPref").value;
-      const primaryData = countryDatabase[regionPref] || countryDatabase["EU_South"];
-
-      try {
-        const raw = localStorage.getItem("WealthLandingSelectedRoadmap") || "{}";
-        const payload = JSON.parse(raw);
-        
-        payload.overseasBase = blueprintState.overseasBase;
-        payload.overseasSectionComplete = true;
-        
-        // Save Rich International Decision Payload
-        payload.internationalLocationStrategy = {
-          strategy: "International Location Strategy",
-          country: blueprintState.overseasBase,
-          city: primaryData.city,
-          timeline: blueprintState.pathId === "global_expat" ? "55+" : "55-65",
-          healthcare: primaryData.healthcare,
-          visa: primaryData.visa,
-          budgetRange: primaryData.costRange,
-          reasoning: [primaryData.advantage, "Private JCI Health Access", "Transatlantic Flight Connectivity"],
-          alternatives: ["Spain", "Costa Rica", "Malaysia"],
-          selectedAt: new Date().toISOString()
+    // Export Roadmap as a private .wlplan JSON file
+    function downloadRoadmapFile() {
+        const exportData = {
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            selectedLifeId: builderState.activePathId,
+            overseasBase: builderState.userOverseasBase,
+            usCity: builderState.userUSCity,
+            childrenCity: builderState.userChildrenCity,
+            monthlySpend: builderState.monthlySpendLabel,
+            completedMilestones: Array.from(builderState.completedMilestones)
         };
 
-        payload.updatedAt = new Date().toISOString();
-        localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(payload));
-      } catch (e) {
-        console.warn("Could not update LocalStorage:", e);
-      }
+        const jsonStr = JSON.stringify(exportData, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `wealthlanding-retirement-roadmap-${builderState.activePathId}.wlplan`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
 
-      markLocationAsCompleteUI();
-      showToast("Blueprint Updated!", `Saved ${blueprintState.overseasBase} International Strategy to your Retirement Blueprint.`);
+        showToast("Roadmap File Downloaded", "Keep this .wlplan file to restore your roadmap on any device.");
     }
 
-    function markLocationAsCompleteUI() {
-      document.getElementById("completionStepBadge").className = "text-[10px] font-black uppercase text-[#019367] tracking-widest block";
-      document.getElementById("completionStepBadge").innerText = "International Strategy Complete";
-      document.getElementById("completionStepTitle").innerText = "International Strategy Secured";
+    // Trigger file chooser for importing .wlplan
+    function triggerImportRoadmap() {
+        document.getElementById("importRoadmapInput").click();
+    }
 
-      // Animate Status Conversion (⚡ -> ✓)
-      const checkEl = document.getElementById("recapOverseasCheck");
-      checkEl.className = "text-emerald-600 font-extrabold text-sm transition-all duration-500 scale-125";
-      checkEl.innerText = "✓";
+    // Handle importing .wlplan file
+    function handleImportRoadmap(event) {
+        const file = event.target.files[0];
+        if (!file) return;
 
-      document.getElementById("blueprintModuleCount").innerText = "2 of 5 In Progress";
-      
-      const locCard = document.getElementById("moduleLocationCard");
-      locCard.className = "bg-emerald-950 p-2 rounded-lg border border-emerald-400 ring-2 ring-emerald-400/50 scale-105 transition-all duration-500";
-      document.getElementById("moduleLocationLabel").className = "block text-[10px] text-emerald-300 uppercase font-bold";
-      document.getElementById("moduleLocationCheck").className = "text-emerald-400 font-bold text-sm";
-      document.getElementById("moduleLocationCheck").innerText = "⚡";
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                if (imported.selectedLifeId) builderState.activePathId = imported.selectedLifeId;
+                if (imported.overseasBase) builderState.userOverseasBase = imported.overseasBase;
+                if (imported.usCity) builderState.userUSCity = imported.usCity;
+                if (imported.childrenCity) builderState.userChildrenCity = imported.childrenCity;
+                if (imported.monthlySpend) builderState.monthlySpendLabel = imported.monthlySpend;
+                if (imported.completedMilestones && Array.isArray(imported.completedMilestones)) {
+                    builderState.completedMilestones = new Set(imported.completedMilestones);
+                }
 
-      const completionCard = document.getElementById("blueprintCompletionCard");
-      if (completionCard) {
-        document.getElementById("savedOverseasVal").innerText = `${blueprintState.overseasBase} 🌍`;
-        completionCard.classList.remove("hidden");
-      }
+                // Save back to LocalStorage
+                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
+                    selectedLifeId: builderState.activePathId,
+                    overseasBase: builderState.userOverseasBase,
+                    usCity: builderState.userUSCity,
+                    childrenCity: builderState.userChildrenCity,
+                    monthlySpend: builderState.monthlySpendLabel,
+                    completedMilestones: Array.from(builderState.completedMilestones)
+                }));
 
-      const isPermanentOverseas = blueprintState.pathId === "global_expat";
-      const nextHref = isPermanentOverseas ? "building-your-retirement.html" : "UScitymatcher.html";
-      const nextBtnLabel = isPermanentOverseas ? "Continue to Healthcare Planning →" : "Continue Building My Location Strategy →";
+                updateDynamicUI();
+                renderJourneyStrip();
+                renderChapters();
+                showToast("Roadmap Restored!", `Successfully imported roadmap for ${builderState.pathNames[builderState.activePathId] || 'Selected Path'}.`);
+            } catch (err) {
+                console.error("Import error:", err);
+                showToast("Import Failed", "Invalid .wlplan file format.");
+            }
+        };
+        reader.readAsText(file);
+    }
 
-      const actionGroup = document.getElementById("saveActionGroup");
-      actionGroup.innerHTML = `
-        <span class="text-xs text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
-          <span>✓ International Strategy Added</span>
-        </span>
-        <a href="${nextHref}" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-2 whitespace-nowrap">
-          <span>${nextBtnLabel}</span>
-        </a>
-      `;
+    // Generate in-browser .ics Calendar event file for Annual Review
+    function generateICSCalendar() {
+        const nextYear = new Date().getFullYear() + 1;
+        const icsContent = [
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//WealthLanding//Annual Retirement Review//EN",
+            "BEGIN:VEVENT",
+            `SUMMARY:WealthLanding Annual Retirement Review`,
+            `DESCRIPTION:Revisit your retirement roadmap, review life changes (children, health, housing), and update tax-bracket sequencing.`,
+            `DTSTART:${nextYear}0115T090000Z`,
+            `DTEND:${nextYear}0115T100000Z`,
+            "STATUS:CONFIRMED",
+            "SEQUENCE:0",
+            "END:VEVENT",
+            "END:VCALENDAR"
+        ].join("\r\n");
+
+        const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `WealthLanding-Annual-Review-${nextYear}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast("Calendar Reminder Downloaded", `Added January ${nextYear} review to calendar.`);
+    }
+
+    // Modal Control Functions for Optional Email Reminders
+    function openEmailReminderModal() {
+        const modal = document.getElementById("emailReminderModal");
+        if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeEmailReminderModal() {
+        const modal = document.getElementById("emailReminderModal");
+        if (modal) modal.classList.add("hidden");
+    }
+
+    function handleEmailReminderSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById("reminderEmailInput").value;
+        closeEmailReminderModal();
+        showToast("Reminder Set!", `We will send a January review reminder to ${email}.`);
+    }
+
+    function updateDynamicUI() {
+        const name = builderState.pathNames[builderState.activePathId] || "Selected Retirement";
+        const overseas = builderState.userOverseasBase;
+        const usCity = builderState.userUSCity;
+        const kidsCity = builderState.userChildrenCity;
+        const spend = builderState.monthlySpendLabel;
+
+        // Dynamic Hero Elements
+        const heroTitle = document.getElementById("builderHeroTitle");
+        const heroSub = document.getElementById("builderHeroSubtitle");
+        const pathNameEl = document.getElementById("activePathName");
+        const storyEl = document.getElementById("pathStoryParagraph");
+        const budgetEl = document.getElementById("budgetCushionText");
+
+        if (pathNameEl) pathNameEl.innerText = name;
+        if (heroTitle) heroTitle.innerText = `Building Your ${name} Retirement`;
+        if (heroSub) heroSub.innerText = `Turn your ${name} choice into an interactive visual sequence of location, healthcare, housing, tax, and family milestones.`;
+        if (budgetEl) budgetEl.innerText = spend.split('(')[0] || spend;
+
+        // Dynamic Story Narratives
+        const stories = {
+            "explore_then_return": `"At 55, you'll begin a new chapter living in ${overseas}. Spend ten years exploring Europe while healthcare costs remain low. At 65 you'll return near your children in ${usCity}, activate Medicare, and begin your next chapter."`,
+            "strategic_us_move": `"At 55, you'll relocate to ${usCity}, a top-tier low-tax U.S. metro. Save $10k–$30k+ per year in state taxes while maintaining seamless domestic U.S. healthcare access."`,
+            "home_base": `"At 55, you'll rightsize your primary residence in your current community, stay close to children in ${kidsCity}, and rely on trusted local health networks."`,
+            "global_expat": `"At 55, you'll move permanently to ${overseas} to build a foreign sanctuary, maximizing cost-of-living purchasing power and lifestyle quality."`,
+            "phase_optimizer": `"At 50, launch an active go-go decade in ${overseas}. At 65, transition to ${usCity}, before consolidating near family in ${kidsCity} after age 78."`
+        };
+
+        if (storyEl) storyEl.innerText = stories[builderState.activePathId] || stories["explore_then_return"];
+
+        // Dynamic Annual Review Simulator Buttons
+        const simContainer = document.getElementById("simulatorButtonsContainer");
+        if (simContainer) {
+            simContainer.innerHTML = `
+                <button onclick="simulateLifeEvent('children_moved')" class="text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 transition flex items-center justify-between group shadow-sm">
+                    <span class="truncate">⚠️ 2032: Children moved to ${kidsCity}</span>
+                    <span class="text-emerald-600 font-bold group-hover:translate-x-0.5 transition-transform">Simulate →</span>
+                </button>
+
+                <button onclick="simulateLifeEvent('foreign_tax_change')" class="text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3 rounded-xl text-xs font-semibold text-slate-800 transition flex items-center justify-between group shadow-sm">
+                    <span class="truncate">⚠️ 2032: ${overseas} tax treaty updated</span>
+                    <span class="text-emerald-600 font-bold group-hover:translate-x-0.5 transition-transform">Simulate →</span>
+                </button>
+            `;
+        }
+    }
+
+    // Dynamic Chapter Blueprints Generator
+    function getDynamicChapterBlueprints() {
+        const overseas = builderState.userOverseasBase;
+        const usCity = builderState.userUSCity;
+        const kidsCity = builderState.userChildrenCity;
+        const spend = builderState.monthlySpendLabel;
+
+        return {
+            "explore_then_return": [
+                {
+                    number: 1,
+                    ageLabel: "Age 55",
+                    locationTag: `🌍 ${overseas} Base`,
+                    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+                    headline: `Where should you live first? (${overseas})`,
+                    desc: `Establish your primary base in ${overseas} during active travel years while enjoying high purchasing power.`,
+                    snapshot: {
+                        tagline: `Imagine Your Life in ${overseas}...`,
+                        bullets: [
+                            `Morning coffee overlooking coastal vistas in ${overseas}`,
+                            "Walk to fresh local markets and historic village centers",
+                            "High-speed regional travel at your doorstep",
+                            "Accredited private healthcare only 10 minutes away"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m1_1", title: `Scout & select primary base in ${overseas}`, done: true, requires: null },
+                        { id: "m1_2", title: `Verify international passive income visa requirements for ${overseas}`, done: false, requires: "m1_1" },
+                        { id: "m1_3", title: "Contract foreign housing lease & private health insurance", done: false, requires: "m1_2" }
+                    ],
+                    tool: { name: "Overseas Matcher Tool", link: "#" }
+                },
+                {
+                    number: 2,
+                    ageLabel: "Age 60",
+                    locationTag: "✈️ Return Bridge",
+                    photo: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80",
+                    headline: "How do you bridge health and taxes?",
+                    desc: "Prepare for your return to the U.S. while keeping tax drag low and keeping Medicare enrollment tight.",
+                    snapshot: {
+                        tagline: "Imagine Preparing Your U.S. Transition...",
+                        bullets: [
+                            "Consolidating foreign bank accounts back to U.S. dollar holdings",
+                            `Reserving capital for your target housing base in ${usCity}`,
+                            "Pre-enrolling in Medicare Part A/B 3 months before age 65",
+                            `Coordination visits with children in ${kidsCity}`
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m2_1", title: `Reserve U.S. housing transition capital for ${usCity}`, done: false, requires: "m1_3" },
+                        { id: "m2_2", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "m2_1" }
+                    ],
+                    tool: { name: "Medicare Cost & Bridge Estimator", link: "#" }
+                },
+                {
+                    number: 3,
+                    ageLabel: "Age 65",
+                    locationTag: `🏡 ${usCity}`,
+                    photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
+                    headline: "Where will you age?",
+                    desc: `Consolidate your domestic housing in ${usCity} within short flight or drive distance of adult children in ${kidsCity}.`,
+                    snapshot: {
+                        tagline: `Imagine Life Near Family in ${usCity}...`,
+                        bullets: [
+                            `Cozy residential home in ${usCity} near children and grandchildren`,
+                            "Seamless Medicare Supplement Plan G coverage with zero co-pays",
+                            "Hosting multi-generational holiday dinners and weekend gatherings",
+                            "Established relationships with top local primary care physicians"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m3_1", title: `Purchase or lease primary residence in ${usCity}`, done: false, requires: "m2_2" },
+                        { id: "m3_2", title: "Establish primary care physician network & Medicare Supplement (Plan G)", done: false, requires: "m3_1" }
+                    ],
+                    tool: { name: "US City Matcher Tool", link: "#" }
+                },
+                {
+                    number: 4,
+                    ageLabel: "Age 78",
+                    locationTag: "❤️ Care Community",
+                    photo: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=600&q=80",
+                    headline: "Estate planning and long-term security",
+                    desc: "Shield remaining assets and pass generational wealth cleanly to descendants.",
+                    snapshot: {
+                        tagline: "Imagine Complete Peace of Mind...",
+                        bullets: [
+                            "Continuous care community options locked in before physical need",
+                            "Revocable living trust insulating assets from state probate",
+                            "Seamless, hassle-free inheritance distribution for heirs",
+                            "Surrounded by family with zero medical or financial burden"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m4_1", title: "Execute revocable living trust & beneficiary designations", done: false, requires: "m3_2" }
+                    ],
+                    tool: { name: "Legacy & Trust Planner", link: "#" }
+                }
+            ],
+            "strategic_us_move": [
+                {
+                    number: 1,
+                    ageLabel: "Age 55",
+                    locationTag: `☀️ ${usCity}`,
+                    photo: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=600&q=80",
+                    headline: `State & City Selection (${usCity})`,
+                    desc: `Relocate to ${usCity} for optimal tax savings and high-quality healthcare.`,
+                    snapshot: {
+                        tagline: `Imagine Living in ${usCity}...`,
+                        bullets: [
+                            `Living in a sunny, tax-friendly metro in ${usCity}`,
+                            "Reinvesting tax savings back into compounding index funds",
+                            "Top-rated regional medical centers within 15 minutes"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m1_1", title: `Run state-by-state tax drag audit for ${usCity}`, done: true, requires: null },
+                        { id: "m1_2", title: "Scout primary medical networks in target metro areas", done: false, requires: "m1_1" }
+                    ],
+                    tool: { name: "US City & State Matcher", link: "#" }
+                },
+                {
+                    number: 2,
+                    ageLabel: "Age 60",
+                    locationTag: "📜 Domicile Base",
+                    photo: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80",
+                    headline: "Establishing legal domicile",
+                    desc: "Satisfy strict 183-day state residency compliance requirements.",
+                    snapshot: {
+                        tagline: "Imagine Clean Legal Domicile...",
+                        bullets: [
+                            "Primary driver's license, voter registration, and bank accounts moved",
+                            `Spacious home in ${usCity} suited for hosting visiting adult children`
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m2_1", title: "Purchase residence and establish driver's license & voter registration", done: false, requires: "m1_2" }
+                    ],
+                    tool: { name: "State Domicile Checklist", link: "#" }
+                },
+                {
+                    number: 3,
+                    ageLabel: "Age 65",
+                    locationTag: "🏥 Medicare Hub",
+                    photo: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80",
+                    headline: "Locking in healthcare",
+                    desc: "Utilize state tax savings with top-tier domestic health systems.",
+                    snapshot: {
+                        tagline: "Imagine Premium Domestic Healthcare...",
+                        bullets: [
+                            "Direct access to top regional clinical networks",
+                            "Medicare Plan G coverage absorbing all catastrophic surcharges"
+                        ],
+                        burnRate: spend
+                    },
+                    milestones: [
+                        { id: "m3_1", title: "Activate Medicare Part A, B, and Plan G Medigap coverage", done: false, requires: "m2_1" }
+                    ],
+                    tool: { name: "Medicare Optimization Engine", link: "#" }
+                }
+            ]
+        };
+    }
+
+    function renderJourneyStrip() {
+        const stripContainer = document.getElementById("horizontalJourneyStrip");
+        if (!stripContainer) return;
+        stripContainer.innerHTML = "";
+
+        const allBlueprints = getDynamicChapterBlueprints();
+        const chapters = allBlueprints[builderState.activePathId] || allBlueprints["explore_then_return"];
+        let completedCount = 0;
+
+        chapters.forEach((ch) => {
+            const allMilestones = ch.milestones;
+            const chDoneCount = allMilestones.filter(m => builderState.completedMilestones.has(m.id) || m.done).length;
+            if (chDoneCount === allMilestones.length) completedCount++;
+
+            const isFocused = builderState.activeChapterFocus === ch.number;
+            
+            let statusPill = `<span class="bg-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded font-bold">🔒 Planned</span>`;
+            if (chDoneCount === allMilestones.length) {
+                statusPill = `<span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-black">✓ Complete</span>`;
+            } else if (chDoneCount > 0 || ch.number === 1) {
+                statusPill = `<span class="bg-blue-100 text-blue-800 text-[10px] px-2 py-0.5 rounded font-bold">⚡ Preparing</span>`;
+            }
+
+            const nodeCard = document.createElement("div");
+            nodeCard.onclick = () => focusChapter(ch.number);
+            nodeCard.className = `bg-white border rounded-xl p-3 cursor-pointer transition-all duration-200 flex flex-col justify-between ${
+                isFocused ? "journey-node-active border-emerald-500 ring-2 ring-emerald-500/20" : "border-slate-200 hover:border-slate-300"
+            }`;
+
+            nodeCard.innerHTML = `
+                <div>
+                    <div class="relative h-24 rounded-lg overflow-hidden mb-2">
+                        <img src="${ch.photo}" alt="${ch.locationTag}" class="w-full h-full object-cover">
+                        <div class="absolute top-2 left-2 bg-slate-900/80 text-white font-mono font-bold text-[10px] px-2 py-0.5 rounded backdrop-blur-sm">
+                            ${ch.ageLabel}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold text-slate-900 truncate">${ch.locationTag}</h4>
+                        ${statusPill}
+                    </div>
+                </div>
+                <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500">
+                    <span>Chapter ${ch.number}</span>
+                    <span class="text-emerald-600">${isFocused ? 'Active →' : 'View'}</span>
+                </div>
+            `;
+            stripContainer.appendChild(nodeCard);
+        });
+
+        // Update Progress Bar
+        const totalChapters = chapters.length;
+        const progressEl = document.getElementById("humanChapterProgressText");
+        const progressBar = document.getElementById("visualProgressBar");
+
+        if (progressEl) {
+            if (completedCount === 0) progressEl.innerText = `Preparing Chapter 1 of ${totalChapters}`;
+            else if (completedCount === totalChapters) progressEl.innerText = `All ${totalChapters} Chapters Completed!`;
+            else progressEl.innerText = `Chapter ${completedCount} Complete • Preparing Chapter ${completedCount + 1}`;
+        }
+
+        if (progressBar) {
+            const pct = Math.round((completedCount / totalChapters) * 100) || 25;
+            progressBar.style.width = `${pct}%`;
+        }
+    }
+
+    function focusChapter(chNum) {
+        builderState.activeChapterFocus = chNum;
+        renderJourneyStrip();
+        renderChapters();
+        
+        const targetEl = document.getElementById(`chapterNode_${chNum}`);
+        if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function renderChapters() {
+        const container = document.getElementById("chaptersContainer");
+        const toolsContainer = document.getElementById("specializedToolsContainer");
+        const execChaptersList = document.getElementById("execSummaryChaptersList");
+        const execDecisionsList = document.getElementById("execSummaryNextDecisions");
+        if (!container) return;
+
+        container.innerHTML = "";
+        if (toolsContainer) toolsContainer.innerHTML = "";
+        if (execChaptersList) execChaptersList.innerHTML = "";
+        if (execDecisionsList) execDecisionsList.innerHTML = "";
+
+        const allBlueprints = getDynamicChapterBlueprints();
+        const chapters = allBlueprints[builderState.activePathId] || allBlueprints["explore_then_return"];
+        let totalMilestones = 0;
+        let completedCount = 0;
+        const nextDecisions = [];
+
+        chapters.forEach((ch) => {
+            const isFocused = builderState.activeChapterFocus === ch.number;
+            const chapterCard = document.createElement("div");
+            chapterCard.id = `chapterNode_${ch.number}`;
+            chapterCard.className = `bg-white border rounded-2xl p-6 shadow-sm space-y-5 transition ${
+                isFocused ? "border-emerald-500 ring-2 ring-emerald-500/10" : "border-slate-200"
+            }`;
+
+            let milestoneListHtml = "";
+            let chapterHasBlocker = false;
+
+            ch.milestones.forEach(m => {
+                totalMilestones++;
+                const isPrereqDone = m.requires === null || builderState.completedMilestones.has(m.requires);
+                const isChecked = builderState.completedMilestones.has(m.id) || m.done;
+
+                if (isChecked && isPrereqDone) {
+                    builderState.completedMilestones.add(m.id);
+                    completedCount++;
+                }
+
+                if (!isChecked && isPrereqDone && nextDecisions.length < 3) {
+                    nextDecisions.push(`Chapter ${ch.number}: ${m.title}`);
+                }
+
+                let milestoneClass = "milestone-unlocked";
+                let badgeHtml = `<span class="text-[10px] font-bold text-slate-400 uppercase">🔓 Unlocked</span>`;
+
+                if (!isPrereqDone) {
+                    milestoneClass = "milestone-locked";
+                    badgeHtml = `<span class="text-[10px] font-bold text-rose-500 uppercase">🔒 Locked</span>`;
+                    chapterHasBlocker = true;
+                } else if (isChecked) {
+                    milestoneClass = "milestone-completed";
+                    badgeHtml = `<span class="text-[10px] font-bold text-emerald-700 uppercase">✓ Completed</span>`;
+                }
+
+                milestoneListHtml += `
+                    <div class="p-3.5 rounded-xl border ${milestoneClass} transition flex items-start justify-between gap-3">
+                        <label class="flex items-start gap-3 flex-1 cursor-pointer">
+                            <input type="checkbox" onchange="toggleMilestone('${m.id}', '${m.requires}')" ${isChecked && isPrereqDone ? "checked" : ""} ${!isPrereqDone ? "disabled" : ""} class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
+                            <span class="text-xs font-semibold ${isChecked && isPrereqDone ? "text-slate-400 line-through" : "text-slate-800"}">${m.title}</span>
+                        </label>
+                        ${badgeHtml}
+                    </div>
+                `;
+            });
+
+            let blockerBannerHtml = "";
+            if (chapterHasBlocker) {
+                blockerBannerHtml = `
+                    <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 text-xs flex items-center gap-2">
+                        <span>⚠️</span>
+                        <span><strong>Milestone Lock Active:</strong> Complete earlier prerequisites in Chapter ${ch.number - 1} to unlock these steps.</span>
+                    </div>
+                `;
+            }
+
+            chapterCard.innerHTML = `
+                <!-- Chapter Header -->
+                <div class="border-b border-slate-100 pb-4 flex justify-between items-start gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="bg-blue-50 text-blue-700 font-black text-[10px] px-2.5 py-0.5 rounded-md border border-blue-100">${ch.ageLabel}</span>
+                            <span class="text-xs font-extrabold text-[#019367]">${ch.locationTag}</span>
+                        </div>
+                        <h3 class="text-xl font-serif-title font-bold text-slate-900">${ch.headline}</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">${ch.desc}</p>
+                    </div>
+                    <span class="text-slate-400 font-extrabold text-xs shrink-0">Chapter ${ch.number}</span>
+                </div>
+
+                <!-- FUTURE SNAPSHOT CARD -->
+                <div class="bg-gradient-to-r from-emerald-50/60 via-teal-50/40 to-slate-50 border border-emerald-200/80 rounded-xl p-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-xs font-extrabold text-[#019367] uppercase tracking-wider">${ch.snapshot.tagline}</strong>
+                        <span class="bg-emerald-100 text-emerald-900 text-[10px] font-extrabold px-2 py-0.5 rounded">Target: ${ch.snapshot.burnRate}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                        <div class="md:col-span-5 h-28 rounded-lg overflow-hidden border border-slate-200">
+                            <img src="${ch.photo}" alt="${ch.locationTag}" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <div class="md:col-span-7">
+                            <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                                ${ch.snapshot.bullets.map(b => `<li class="flex items-center gap-1.5"><span class="text-[#019367] font-bold">✓</span> <span>${b}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                ${blockerBannerHtml}
+
+                <!-- Milestones Sequence -->
+                <div class="space-y-2">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Operational Milestones</span>
+                    ${milestoneListHtml}
+                </div>
+
+                <!-- Chapter Tool Link -->
+                <div class="pt-2 flex justify-between items-center text-xs border-t border-slate-100">
+                    <span class="text-slate-500 font-medium">Recommended Tool:</span>
+                    <a href="${ch.tool.link}" class="text-blue-600 font-bold hover:underline flex items-center gap-1">
+                        <span>${ch.tool.name}</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            `;
+
+            container.appendChild(chapterCard);
+
+            if (toolsContainer) {
+                const toolCard = document.createElement("a");
+                toolCard.href = ch.tool.link;
+                toolCard.className = "p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition block text-xs";
+                toolCard.innerHTML = `
+                    <div class="flex justify-between items-center font-bold text-slate-900 mb-0.5">
+                        <span>${ch.tool.name}</span>
+                        <span class="text-blue-600">→</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Chapter ${ch.number} Decision Engine</p>
+                `;
+                toolsContainer.appendChild(toolCard);
+            }
+
+            if (execChaptersList) {
+                const item = document.createElement("div");
+                item.className = "p-2.5 rounded-lg border border-slate-200 bg-slate-50";
+                item.innerHTML = `
+                    <div class="flex justify-between font-bold text-slate-900 mb-0.5">
+                        <span>Chapter ${ch.number}: ${ch.locationTag} (${ch.ageLabel})</span>
+                    </div>
+                    <p class="text-[11px] text-slate-600">${ch.headline}</p>
+                `;
+                execChaptersList.appendChild(item);
+            }
+        });
+
+        if (execDecisionsList) {
+            if (nextDecisions.length === 0) {
+                execDecisionsList.innerHTML = `<div class="p-2 rounded bg-emerald-50 text-emerald-800 text-xs font-bold">✓ All operational milestones completed!</div>`;
+            } else {
+                nextDecisions.forEach((d, idx) => {
+                    const item = document.createElement("div");
+                    item.className = "flex items-center gap-2 p-2 rounded bg-slate-50 border border-slate-200 text-xs";
+                    item.innerHTML = `<span class="bg-blue-600 text-white w-4 h-4 rounded-full flex items-center justify-center font-bold text-[10px] shrink-0">${idx + 1}</span><span class="font-medium text-slate-800">${d}</span>`;
+                    execDecisionsList.appendChild(item);
+                });
+            }
+        }
+
+        document.getElementById("completedMilestonesText").innerText = `${completedCount} of ${totalMilestones} Milestones`;
+        if (chapters[0]) document.getElementById("primaryNextFocusText").innerText = chapters[0].headline;
+    }
+
+    function toggleMilestone(mId, reqId) {
+        if (reqId !== "null" && reqId && !builderState.completedMilestones.has(reqId)) {
+            showToast("Action Blocked", "You must complete the prerequisite milestone first.");
+            return;
+        }
+
+        if (builderState.completedMilestones.has(mId)) {
+            builderState.completedMilestones.delete(mId);
+            showToast("Milestone Unchecked", "Dependent steps have been locked.");
+        } else {
+            builderState.completedMilestones.add(mId);
+            showToast("Milestone Completed", "Next step in sequence unlocked!");
+        }
+
+        // Save progress locally
+        try {
+            localStorage.setItem("WealthLandingSavedProgress", JSON.stringify(Array.from(builderState.completedMilestones)));
+        } catch (e) {
+            console.warn("Could not save milestone progress:", e);
+        }
+        
+        renderJourneyStrip();
+        renderChapters();
+    }
+
+    function simulateLifeEvent(eventType) {
+        const box = document.getElementById("simulationFeedbackBox");
+        if (!box) return;
+        box.classList.remove("hidden");
+
+        const overseas = builderState.userOverseasBase;
+        const kidsCity = builderState.userChildrenCity;
+
+        if (eventType === 'children_moved') {
+            box.innerHTML = `
+                <strong class="text-emerald-900 block font-bold">Annual Review Impact: Children moved to ${kidsCity}</strong>
+                <p class="text-[11px] text-slate-700">Chapter 3 Return Anchor auto-adjusts location target to ${kidsCity}. Healthcare supplement Plan G transfers seamlessly.</p>
+            `;
+            showToast("Annual Review Processed", `Chapter 3 target adjusted to ${kidsCity}.`);
+        } else if (eventType === 'foreign_tax_change') {
+            box.innerHTML = `
+                <strong class="text-amber-900 block font-bold">Annual Review Impact: ${overseas} tax treaty updated</strong>
+                <p class="text-[11px] text-slate-700">Chapter 1 tax buffer adjusted. Accelerated Roth conversions recommended before year 2033 transition.</p>
+            `;
+            showToast("Annual Review Processed", "Chapter 1 Roth conversion sweep recalculated.");
+        }
+    }
+
+    function openExecutiveSummaryModal() {
+        const modal = document.getElementById("executiveSummaryModal");
+        if (!modal) return;
+        const name = builderState.pathNames[builderState.activePathId] || "Selected Retirement";
+        document.getElementById("execSummaryPath").innerText = name;
+        document.getElementById("execSummarySpend").innerText = builderState.monthlySpendLabel;
+        document.getElementById("execSummaryOverseas").innerText = builderState.userOverseasBase;
+        document.getElementById("execSummaryUSCity").innerText = builderState.userUSCity;
+        document.getElementById("execSummaryKidsCity").innerText = builderState.userChildrenCity;
+        document.getElementById("execSummaryDate").innerText = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        modal.classList.remove("hidden");
+    }
+
+    function closeExecutiveSummaryModal() {
+        const modal = document.getElementById("executiveSummaryModal");
+        if (modal) modal.classList.add("hidden");
+    }
+
+    function goToStrategyEngine() {
+        showToast("Opening Strategy Engine", "Navigating to tax and portfolio optimization...");
+        setTimeout(() => {
+            try {
+                const currentHref = window.location ? window.location.href : "";
+                if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
+                    window.location.href = "strategy-engine.html";
+                } else {
+                    console.log("Preview environment detected; strategy engine launch simulated.");
+                }
+            } catch (e) {
+                console.warn("Navigation error caught safely:", e);
+            }
+        }, 500);
     }
 
     function showToast(title, message) {
-      const toast = document.getElementById("toastNotification");
-      if (!toast) return;
-      document.getElementById("toastTitle").innerText = title;
-      document.getElementById("toastMessage").innerText = message;
-      toast.classList.remove("hidden");
-      setTimeout(() => {
-        toast.classList.add("hidden");
-      }, 3500);
+        const toast = document.getElementById("toastNotification");
+        if (!toast) return;
+        document.getElementById("toastTitle").innerText = title;
+        document.getElementById("toastMessage").innerText = message;
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+            toast.classList.add("hidden");
+        }, 3500);
     }
 
     window.onload = function() {
-      loadBlueprintContext();
+        loadSavedPathAndLocations();
+        renderJourneyStrip();
+        renderChapters();
     };
   </script>
 </body>
