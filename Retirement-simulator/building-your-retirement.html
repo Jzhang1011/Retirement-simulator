@@ -291,7 +291,7 @@
                 <ul>
                   <li><a href="UScitymatcher.html">US Location Planning</a></li>
                   <li><a href="RetiringOverseas.html">International Location Planning</a></li>
-                  <li><a href="healthcare_strategy_planning.html">Healthcare Strategy Planning</a></li>
+                  <li><a href="#" onclick="event.preventDefault(); window.location.href = getHealthcarePlannerLink();">Healthcare Strategy Planning</a></li>
                 </ul>
               </div>
             </div>
@@ -856,6 +856,17 @@
       return "#";
     }
 
+    function getHealthcarePlannerLink() {
+      const routes = {
+        home_base: "healthcare_us_strategy.html",
+        strategic_us_move: "healthcare_us_strategy.html",
+        global_expat: "healthcare_international_comparison.html",
+        explore_then_return: "healthcare_transition_strategy.html"
+      };
+
+      return routes[builderState.activePathId] || "healthcare_us_strategy.html";
+    }
+
     function getHealthcareSummary() {
       const strategy = builderState.healthcareStrategy;
 
@@ -917,7 +928,7 @@
           icon: "🏥",
           complete: Boolean(payload.healthcareSectionComplete),
           summary: getHealthcareSummary(),
-          href: "healthcare_strategy_planning.html"
+          href: getHealthcarePlannerLink()
         },
         {
           id: "financial",
@@ -1069,6 +1080,20 @@
     }
 
     /* STREAMING_CHUNK:Defining chapter blueprints with integrated Healthcare links... */
+    function getHealthcareTool() {
+      const labels = {
+        home_base: "U.S. Healthcare & LTC Strategy",
+        strategic_us_move: "U.S. Healthcare & LTC Strategy",
+        global_expat: "International Healthcare & LTC Comparison",
+        explore_then_return: "Transition Healthcare & LTC Strategy"
+      };
+
+      return {
+        name: labels[builderState.activePathId] || "Healthcare & LTC Strategy",
+        link: getHealthcarePlannerLink()
+      };
+    }
+
     function getDynamicChapterBlueprints() {
         const overseas = builderState.userOverseasBase;
         const usCity = builderState.userUSCity;
@@ -1123,7 +1148,7 @@
                         { id: "healthcare_strategy", type: "decision", title: "Complete lifetime healthcare and LTC strategy comparison", done: Boolean(payload.healthcareSectionComplete) },
                         { id: "medicare_enrollment_window", type: "execution", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "healthcare_strategy" }
                     ],
-                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
+                    tool: getHealthcareTool()
                 },
                 {
                     number: 3,
@@ -1167,7 +1192,7 @@
                     milestones: [
                         { id: "m4_1", type: "decision", title: "Execute revocable living trust & beneficiary designations", done: Boolean(payload.estateSectionComplete) }
                     ],
-                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
+                    tool: getHealthcareTool()
                 }
             ]
         };
@@ -1455,13 +1480,15 @@
 
     function downloadRoadmapFile() {
         const exportData = {
-            version: 1,
+            ...builderState.payloadRaw,
+            version: 2,
             exportedAt: new Date().toISOString(),
             selectedLifeId: builderState.activePathId,
             overseasBase: builderState.userOverseasBase,
             usCity: builderState.userUSCity,
             childrenCity: builderState.userChildrenCity,
             monthlySpend: builderState.monthlySpendLabel,
+            healthcareStrategy: builderState.healthcareStrategy || builderState.payloadRaw.healthcareStrategy || null,
             completedMilestones: Array.from(builderState.completedMilestones)
         };
 
@@ -1500,14 +1527,18 @@
                     builderState.completedMilestones = new Set(imported.completedMilestones);
                 }
 
-                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
+                const restoredPayload = {
+                    ...imported,
                     selectedLifeId: builderState.activePathId,
                     overseasBase: builderState.userOverseasBase,
                     usCity: builderState.userUSCity,
                     childrenCity: builderState.userChildrenCity,
                     monthlySpend: builderState.monthlySpendLabel,
                     completedMilestones: Array.from(builderState.completedMilestones)
-                }));
+                };
+                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(restoredPayload));
+                builderState.payloadRaw = restoredPayload;
+                builderState.healthcareStrategy = restoredPayload.healthcareStrategy || restoredPayload.finalHealthcareStrategy || null;
 
                 updateDynamicUI();
                 renderBlueprintSections();
@@ -1648,4 +1679,3 @@
   </script>
 </body>
 </html>
-```eofs
