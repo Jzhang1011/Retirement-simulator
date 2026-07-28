@@ -750,7 +750,7 @@
         completedMilestones: new Set(["m1_1"]),
         userOverseasBase: "Portugal",
         userUSCity: "Raleigh, NC",
-        userChildrenCity: "Seattle, WA",
+        userChildrenCity: "",
         monthlySpendLabel: "$8,500 / month ($102,000 / year)",
         pathNames: {
             "explore_then_return": "Explore Then Return",
@@ -791,7 +791,15 @@
                 if (payload.overseasBase && !builderState.userOverseasBase) builderState.userOverseasBase = payload.overseasBase;
                 if (payload.usCity && !builderState.userUSCity) builderState.userUSCity = payload.usCity;
                 if (payload.childrenCity && !builderState.userChildrenCity) builderState.userChildrenCity = payload.childrenCity;
+                if (payload.constraints && payload.constraints.childrenCity && !builderState.userChildrenCity) {
+                    builderState.userChildrenCity = payload.constraints.childrenCity;
+                }
             }
+
+            // Ensure fallback defaults if still unset
+            if (!builderState.userOverseasBase) builderState.userOverseasBase = "Portugal";
+            if (!builderState.userUSCity) builderState.userUSCity = "Raleigh, NC";
+            if (!builderState.userChildrenCity) builderState.userChildrenCity = "Los Angeles, CA";
         } catch (e) {
             console.warn("Could not read stored roadmap/discovery data:", e);
         }
