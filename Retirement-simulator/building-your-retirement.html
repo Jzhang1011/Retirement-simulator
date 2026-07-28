@@ -10,7 +10,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building Your Retirement | WealthLanding</title>
+    <title>My Retirement Blueprint | WealthLanding</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
             font-family: var(--font-serif);
         }
 
-        /* Global Navigation Header */
+        /* STREAMING_CHUNK:Styling navigation header and dropdowns... */
         .global-header {
             background-color: #0B132B; 
             color: white;
@@ -186,7 +186,6 @@
             scrollbar-width: none;
         }
 
-        /* Toast animation */
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(1rem); }
             to { opacity: 1; transform: translateY(0); }
@@ -219,38 +218,25 @@
             transform: translateY(-2px);
         }
 
-        /* PRINT STYLING FOR EXECUTIVE SUMMARY */
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #executiveSummaryPrintArea, #executiveSummaryPrintArea * {
-                visibility: visible;
-            }
+            body * { visibility: hidden; }
+            #executiveSummaryPrintArea, #executiveSummaryPrintArea * { visibility: visible; }
             #executiveSummaryPrintArea {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                background: white;
-                padding: 20px;
-                color: #000;
+                position: absolute; left: 0; top: 0; width: 100%; background: white; padding: 20px; color: #000;
             }
-            .no-print {
-                display: none !important;
-            }
+            .no-print { display: none !important; }
         }
     </style>
 </head>
 <body class="antialiased min-h-screen pb-16">
 
+  <!-- STREAMING_CHUNK:Rendering global header navigation... -->
   <header class="global-header no-print">
     <a href="/" class="logo">Wealth<span>Landing</span></a>
     
     <nav aria-label="Global Main Directory">
       <ul class="top-nav-links">
         
-        <!-- DROP-DOWN 1: OVERVIEW -->
         <li class="dropdown-trigger">
           <a href="#" class="active font-bold text-white">Overview <span class="text-[12px] opacity-70">▼</span></a>
           <div class="mega-dropdown">
@@ -266,79 +252,21 @@
               <div class="dropdown-column">
                 <h4>🚀 Start Here</h4>
                 <ul>
-                  <li><a href="#">Financial Diagnostic</a></li>
-                  <li><a href="#">Wealth Score Tracker</a></li>
-                  <li><a href="/">Personal Dashboard</a></li>
+                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
+                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
               <div class="dropdown-column">
                 <h4>🌟 Popular Journeys</h4>
                 <ul>
-                  <li><a href="#">Build My First Million</a></li>
                   <li><a href="Odyssey.html">Retirement Odyssey Hub</a></li>
                   <li><a href="retirement-preference-discovery.html">Preference Discovery</a></li>
                 </ul>
               </div>
-              <div class="dropdown-column">
-                <h4>⏱️ Progress Framework</h4>
-                <ul>
-                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
-                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
-                </ul>
-              </div>
             </div>
           </div>
         </li>
 
-        <!-- DROP-DOWN 2: BUILD WEALTH -->
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Build Wealth <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Build Wealth</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Optimized cash flow architectures and savings rules.</p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>💼 Income Optimization</h4>
-                <ul>
-                  <li><a href="#">Salary Negotiation Rules</a></li>
-                  <li><a href="#">Career ROI Strategy</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>💵 Cash Flow</h4>
-                <ul>
-                  <li><a href="#">High-Yield Savings</a></li>
-                  <li><a href="#">Emergency Reserves</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- DROP-DOWN 3: GROW WEALTH -->
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Grow Wealth <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Grow Wealth</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Index allocations and tax-insulated conversions.</p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>📈 Asset Allocation</h4>
-                <ul><li><a href="#">Index Investing & ETFs</a></li></ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- DROP-DOWN 4: DESIGN YOUR LIFE -->
         <li class="dropdown-trigger">
           <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
           <div class="mega-dropdown">
@@ -358,6 +286,14 @@
                   <li><a href="building-your-retirement.html">Retirement Builder</a></li>
                 </ul>
               </div>
+              <div class="dropdown-column">
+                <h4>✈️ Location & Healthcare</h4>
+                <ul>
+                  <li><a href="UScitymatcher.html">US Location Planning</a></li>
+                  <li><a href="RetiringOverseas.html">International Location Planning</a></li>
+                  <li><a href="healthcare_strategy_planning.html">Healthcare Strategy Planning</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </li>
@@ -374,16 +310,17 @@
     </div>
   </header>
 
+  <!-- STREAMING_CHUNK:Rendering page hero and committed path bar... -->
   <main class="max-w-[1450px] mx-auto px-4 md:px-12 py-8 space-y-8 no-print">
 
     <!-- PAGE HERO HEADER -->
-    <div class="text-center max-w-3xl mx-auto">
-        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-2">
+    <div class="text-center max-w-3xl mx-auto space-y-2">
+        <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-1">
             <span>Stage 4: Retirement Builder</span>
         </div>
-        <h1 class="text-3xl md:text-5xl font-serif-title font-bold text-[#0B132B]" id="builderHeroTitle">Building Your Retirement</h1>
-        <p class="text-slate-600 text-xs md:text-sm mt-2 leading-relaxed" id="builderHeroSubtitle">
-            Turn your chosen lifestyle into an interactive visual sequence of location, healthcare, housing, tax, and family milestones.
+        <h1 class="text-3xl md:text-5xl font-serif-title font-bold text-[#0B132B]" id="builderHeroTitle">My Retirement Blueprint</h1>
+        <p class="text-slate-600 text-xs md:text-sm leading-relaxed" id="builderHeroSubtitle">
+            Build the decisions, costs and timing behind your Explore Then Return retirement.
         </p>
     </div>
 
@@ -401,7 +338,6 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-            <!-- Hidden file input for importing .wlplan file -->
             <input type="file" id="importRoadmapInput" accept=".wlplan,.json" class="hidden" onchange="handleImportRoadmap(event)">
             
             <button onclick="triggerImportRoadmap()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl transition border border-slate-200 flex items-center gap-1.5 whitespace-nowrap">
@@ -417,148 +353,197 @@
             </button>
 
             <a href="financial-feasibility-audit.html" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3.5 py-2.5 rounded-xl transition border border-slate-200 text-center whitespace-nowrap">
-                ← Revisit Recommendation
+                ← Revisit Feasibility
             </a>
         </div>
     </div>
 
-    <!-- VISUAL "YOUR RETIREMENT JOURNEY" STRIP -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
-            <div>
-                <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest block">Interactive Navigation System</span>
-                <h2 class="text-base font-serif-title font-bold text-slate-900 uppercase tracking-wider">YOUR RETIREMENT JOURNEY</h2>
-            </div>
-            
-            <div class="flex items-center gap-3">
-                <div class="text-right">
-                    <span id="humanChapterProgressText" class="text-xs font-bold text-slate-900 block">Chapter 1 Complete • Preparing Chapter 2</span>
-                    <span class="text-[10px] text-slate-500">Click any chapter below to explore</span>
-                </div>
-                <div class="w-24 bg-slate-200 h-2.5 rounded-full overflow-hidden shrink-0">
-                    <div id="visualProgressBar" class="bg-[#02B17D] h-full transition-all duration-500" style="width: 35%;"></div>
-                </div>
-            </div>
-        </div>
+    <!-- STREAMING_CHUNK:Rendering view toggle controls... -->
+    <!-- BUILDER VIEW TOGGLE BUTTONS -->
+    <div class="flex justify-center">
+      <div class="inline-flex bg-slate-100 border border-slate-200 rounded-xl p-1 shadow-inner">
+        <button
+          id="blueprintViewBtn"
+          onclick="switchBuilderView('blueprint')"
+          class="px-5 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition">
+          Blueprint View
+        </button>
 
-        <div id="horizontalJourneyStrip" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-1">
-            <!-- Dynamically populated via renderJourneyStrip() -->
-        </div>
-    </section>
-
-    <!-- ANNUAL REVIEW SYSTEM -->
-    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-3 gap-3">
-            <div class="flex items-center gap-2">
-                <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Annual System</span>
-                <h3 class="text-base font-serif-title font-bold text-slate-900">Review This Roadmap Every January</h3>
-            </div>
-            <div class="flex flex-wrap items-center gap-2">
-                <button onclick="generateICSCalendar()" class="bg-emerald-50 hover:bg-emerald-100 text-[#019367] border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
-                    <span>📅 Add January Review to Calendar</span>
-                </button>
-                <button onclick="openEmailReminderModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
-                    <span>✉️ Email Me a Review Reminder</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-            <p class="text-xs text-slate-600 leading-relaxed md:col-span-1">
-                Retirement plans change as family, health, location, and tax conditions evolve. Download your private roadmap file and revisit it each January. Simulate a shift below to see how your sequence adapts.
-            </p>
-
-            <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="simulatorButtonsContainer">
-                <!-- Dynamically Populated with User Locations -->
-            </div>
-        </div>
-
-        <div id="simulationFeedbackBox" class="hidden bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-slate-800 leading-relaxed space-y-1">
-            <!-- Populated via JS -->
-        </div>
-    </section>
-
-    <!-- EMOTIONAL NARRATIVE STORY BOX -->
-    <section class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 text-slate-900 rounded-2xl p-6 border border-emerald-200 shadow-sm space-y-2">
-        <div class="flex items-center gap-2 text-[#019367]">
-            <span class="text-lg">📖</span>
-            <span class="text-xs font-black uppercase tracking-widest">Your Life Narrative</span>
-        </div>
-        <p id="pathStoryParagraph" class="text-sm md:text-base font-serif-title leading-relaxed text-slate-800 italic">
-            "At 55, you'll begin a new chapter living in Portugal..."
-        </p>
-    </section>
-
-    <!-- MAIN CHAPTER TIMELINE WORKSPACE -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <div class="lg:col-span-8 space-y-8" id="chaptersContainer">
-            <!-- Dynamically populated via renderChapters() -->
-        </div>
-
-        <div class="lg:col-span-4 space-y-6">
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest">Execution Readiness</span>
-                    <h3 class="text-base font-serif-title font-bold text-slate-900">Roadmap Status</h3>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-semibold text-slate-600">Milestones Done:</span>
-                        <strong id="completedMilestonesText" class="text-xs font-bold text-slate-900">1 of 8 Milestones</strong>
-                    </div>
-
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Primary Focus</span>
-                        <strong id="primaryNextFocusText" class="text-xs font-bold text-blue-700 block truncate">Chapter 1 Sourcing</strong>
-                    </div>
-
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Target Monthly Budget</span>
-                        <strong id="budgetCushionText" class="text-sm font-bold text-emerald-700">$8,500 / month</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4 sticky top-6">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Specialized Tools</span>
-                    <h3 class="text-base font-serif-title font-bold text-slate-900">Decision Accelerators</h3>
-                </div>
-
-                <div class="space-y-3" id="specializedToolsContainer">
-                    <!-- Populated via JS -->
-                </div>
-
-                <div class="pt-4 border-t border-slate-100 space-y-2">
-                    <button onclick="openExecutiveSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 p-3 rounded-xl font-bold text-xs transition border border-slate-200 flex items-center justify-center gap-2">
-                        <span>📄 Print Executive Summary</span>
-                    </button>
-                    <button onclick="downloadRoadmapFile()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl font-bold text-xs transition shadow-sm flex items-center justify-center gap-2">
-                        <span>💾 Download My Roadmap (.wlplan)</span>
-                    </button>
-                    <button onclick="goToStrategyEngine()" class="w-full bg-[#02B17D] hover:bg-[#019367] text-white p-3.5 rounded-xl font-bold text-xs tracking-wide transition shadow-md flex items-center justify-center gap-2">
-                        <span>Optimize My Roth Strategy →</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
+        <button
+          id="timelineViewBtn"
+          onclick="switchBuilderView('timeline')"
+          class="px-5 py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-900 transition">
+          Timeline View
+        </button>
+      </div>
     </div>
 
+    <!-- STREAMING_CHUNK:Rendering Blueprint View 5-section cards workspace... -->
+    <!-- BLUEPRINT VIEW SECTION -->
+    <section id="blueprintView" class="space-y-5">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div>
+            <span class="text-[10px] uppercase font-black text-emerald-700 tracking-widest">
+              Retirement Blueprint
+            </span>
+            <h2 class="text-xl font-serif-title font-bold text-slate-900">
+              Complete the decisions that shape your retirement
+            </h2>
+          </div>
+          <span class="text-xs text-slate-500 font-semibold">5 Strategic Decision Pillars</span>
+        </div>
+
+        <div id="blueprintSectionsGrid" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <!-- Dynamically rendered via renderBlueprintSections() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Rendering Timeline View workspace... -->
+    <!-- TIMELINE VIEW SECTION -->
+    <section id="timelineView" class="hidden space-y-8">
+      
+      <!-- VISUAL "YOUR RETIREMENT TIMELINE" STRIP -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+              <div>
+                  <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest block">Interactive Navigation System</span>
+                  <h2 class="text-base font-serif-title font-bold text-slate-900 uppercase tracking-wider">YOUR RETIREMENT TIMELINE</h2>
+                  <p class="text-xs text-slate-500">Your Blueprint decisions are organized by age and life stage.</p>
+              </div>
+              
+              <div class="flex items-center gap-3">
+                  <div class="text-right">
+                      <span id="humanChapterProgressText" class="text-xs font-bold text-slate-900 block">Chapter 1 Complete • Preparing Chapter 2</span>
+                  </div>
+                  <div class="w-24 bg-slate-200 h-2.5 rounded-full overflow-hidden shrink-0">
+                      <div id="visualProgressBar" class="bg-[#02B17D] h-full transition-all duration-500" style="width: 35%;"></div>
+                  </div>
+              </div>
+          </div>
+
+          <div id="horizontalJourneyStrip" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-1">
+              <!-- Dynamically populated via renderJourneyStrip() -->
+          </div>
+      </div>
+
+      <!-- ANNUAL REVIEW SYSTEM -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-3 gap-3">
+              <div class="flex items-center gap-2">
+                  <span class="bg-emerald-100 text-emerald-900 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Annual System</span>
+                  <h3 class="text-base font-serif-title font-bold text-slate-900">Review This Roadmap Every January</h3>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                  <button onclick="generateICSCalendar()" class="bg-emerald-50 hover:bg-emerald-100 text-[#019367] border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                      <span>📅 Add January Review to Calendar</span>
+                  </button>
+                  <button onclick="openEmailReminderModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                      <span>✉️ Email Me a Review Reminder</span>
+                  </button>
+              </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <p class="text-xs text-slate-600 leading-relaxed md:col-span-1">
+                  Retirement plans change as family, health, location, and tax conditions evolve. Revisit your private roadmap file each January.
+              </p>
+
+              <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="simulatorButtonsContainer">
+                  <!-- Dynamically Populated -->
+              </div>
+          </div>
+
+          <div id="simulationFeedbackBox" class="hidden bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-xs text-slate-800 leading-relaxed space-y-1">
+              <!-- Populated via JS -->
+          </div>
+      </div>
+
+      <!-- NARRATIVE STORY BOX -->
+      <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-slate-50 text-slate-900 rounded-2xl p-6 border border-emerald-200 shadow-sm space-y-2">
+          <div class="flex items-center gap-2 text-[#019367]">
+              <span class="text-lg">📖</span>
+              <span class="text-xs font-black uppercase tracking-widest">Your Life Narrative</span>
+          </div>
+          <p id="pathStoryParagraph" class="text-sm md:text-base font-serif-title leading-relaxed text-slate-800 italic">
+              "At 55, you'll begin a new chapter living in Portugal..."
+          </p>
+      </div>
+
+      <!-- MAIN CHAPTER TIMELINE WORKSPACE -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <div class="lg:col-span-8 space-y-8" id="chaptersContainer">
+              <!-- Dynamically populated via renderChapters() -->
+          </div>
+
+          <div class="lg:col-span-4 space-y-6">
+              <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+                  <div class="border-b border-slate-100 pb-3">
+                      <span class="text-[10px] uppercase font-black text-[#019367] tracking-widest">Execution Readiness</span>
+                      <h3 class="text-base font-serif-title font-bold text-slate-900">Roadmap Status</h3>
+                  </div>
+
+                  <div class="space-y-3">
+                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                          <span class="text-xs font-semibold text-slate-600">Milestones Done:</span>
+                          <strong id="completedMilestonesText" class="text-xs font-bold text-slate-900">0 of 0 Milestones</strong>
+                      </div>
+
+                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                          <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Primary Focus</span>
+                          <strong id="primaryNextFocusText" class="text-xs font-bold text-blue-700 block truncate">Chapter 1 Sourcing</strong>
+                      </div>
+
+                      <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                          <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Target Monthly Budget</span>
+                          <strong id="budgetCushionText" class="text-sm font-bold text-emerald-700">$8,500 / month</strong>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4 sticky top-6">
+                  <div class="border-b border-slate-100 pb-3">
+                      <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Specialized Tools</span>
+                      <h3 class="text-base font-serif-title font-bold text-slate-900">Decision Accelerators</h3>
+                  </div>
+
+                  <div class="space-y-3" id="specializedToolsContainer">
+                      <!-- Populated via JS -->
+                  </div>
+
+                  <div class="pt-4 border-t border-slate-100 space-y-2">
+                      <button onclick="openExecutiveSummaryModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 p-3 rounded-xl font-bold text-xs transition border border-slate-200 flex items-center justify-center gap-2">
+                          <span>📄 Print Executive Summary</span>
+                      </button>
+                      <button onclick="downloadRoadmapFile()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl font-bold text-xs transition shadow-sm flex items-center justify-center gap-2">
+                          <span>💾 Download My Roadmap (.wlplan)</span>
+                      </button>
+                      <button onclick="goToStrategyEngine()" class="w-full bg-[#02B17D] hover:bg-[#019367] text-white p-3.5 rounded-xl font-bold text-xs tracking-wide transition shadow-md flex items-center justify-center gap-2">
+                          <span>Optimize My Roth Strategy →</span>
+                      </button>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+    </section>
+
+    <!-- STREAMING_CHUNK:Rendering footer completion bar... -->
     <!-- FOOTER COMPLETION WORKSPACE BAR -->
     <footer class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
         <div class="border-b border-slate-100 pb-4">
             <div class="inline-flex items-center gap-2 bg-emerald-50 text-[#019367] border border-emerald-200 px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-widest mb-1">
                 <span>Milestones Defined</span>
                 <span class="text-slate-400">•</span>
-                <span>Your Roadmap Is Ready</span>
+                <span id="footerStatusBadge">Progress Check</span>
             </div>
-            <h3 class="text-2xl font-serif-title font-bold text-slate-900">Your Retirement Roadmap Is Ready</h3>
+            <h3 id="footerCompletionTitle" class="text-2xl font-serif-title font-bold text-slate-900">2 of 5 Blueprint Sections Complete</h3>
             <p class="text-xs md:text-sm text-slate-600 font-medium mt-1">
-                You have turned a retirement idea into a practical sequence of life chapters, decisions, and operational milestones.
+                You are turning a retirement vision into a structured sequence of life chapters, decisions, and operational milestones.
             </p>
         </div>
 
@@ -584,7 +569,6 @@
                     <button onclick="downloadRoadmapFile()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-3 rounded-xl font-bold text-xs transition shadow-sm flex items-center justify-center gap-2">
                         <span>💾 Download (.wlplan)</span>
                     </button>
-                    <span class="text-[10px] text-slate-400 block text-center mt-1.5">No login or account creation required.</span>
                 </div>
             </div>
 
@@ -598,16 +582,6 @@
                     <span>📄 Print Summary PDF</span>
                 </button>
             </div>
-        </div>
-
-        <div class="bg-amber-50/80 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-amber-900">
-            <div class="flex items-center gap-2">
-                <span>💡</span>
-                <span><strong>Browser Storage Notice:</strong> Your progress is currently stored locally in this browser. Download your <code class="bg-amber-100 px-1.5 py-0.5 rounded font-mono text-[11px]">.wlplan</code> file before clearing browser data or switching devices.</span>
-            </div>
-            <button onclick="generateICSCalendar()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-lg font-bold text-[11px] whitespace-nowrap shrink-0">
-                📅 Remind Me Next Jan
-            </button>
         </div>
     </footer>
 
@@ -704,10 +678,6 @@
                       <!-- Rendered via JS -->
                   </div>
               </div>
-
-              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-[10px] text-slate-500 leading-relaxed italic">
-                  <strong>Educational Planning Snapshot Notice:</strong> This summary is prepared for personal alignment and advisor discussions. Final tax-bracket sequencing, Roth conversion timing, ACA subsidy bridges, and withdrawal math are modeled in the WealthLanding Strategy Engine.
-              </div>
           </div>
 
           <div class="flex justify-end gap-3 pt-4 border-t border-slate-100 no-print">
@@ -724,12 +694,13 @@
       <div class="bg-slate-900 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md animate-toast">
           <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold">✓</div>
           <div>
-              <h4 id="toastTitle" class="text-sm font-bold text-white">Milestone Updated</h4>
+              <h4 id="toastTitle" class="text-sm font-bold text-white">Blueprint Updated</h4>
               <p id="toastMessage" class="text-xs text-slate-300 mt-0.5">Progress saved to active retirement roadmap.</p>
           </div>
       </div>
   </div>
 
+  <!-- STREAMING_CHUNK:Initializing JavaScript state and workspace engines... -->
   <script>
     const builderState = {
         activePathId: "explore_then_return",
@@ -739,25 +710,66 @@
         userUSCity: "Raleigh, NC",
         userChildrenCity: "Los Angeles, CA",
         monthlySpendLabel: "$8,500 / month ($102,000 / year)",
+        payloadRaw: {},
+        healthcareStrategy: null,
         pathNames: {
             "explore_then_return": "Explore Then Return",
             "strategic_us_move": "Strategic U.S. Move",
             "home_base": "Home Base",
-            "global_expat": "Global Expat",
-           
+            "global_expat": "Global Expat"
         }
     };
+
+    function setSafeText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.innerText = text;
+    }
+
+    function switchBuilderView(view) {
+      const blueprintView = document.getElementById("blueprintView");
+      const timelineView = document.getElementById("timelineView");
+      const blueprintBtn = document.getElementById("blueprintViewBtn");
+      const timelineBtn = document.getElementById("timelineViewBtn");
+
+      if (!blueprintView || !timelineView) return;
+
+      const showBlueprint = view === "blueprint";
+
+      blueprintView.classList.toggle("hidden", !showBlueprint);
+      timelineView.classList.toggle("hidden", showBlueprint);
+
+      if (blueprintBtn) {
+        blueprintBtn.className = showBlueprint
+          ? "px-5 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition"
+          : "px-5 py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-900 transition";
+      }
+
+      if (timelineBtn) {
+        timelineBtn.className = !showBlueprint
+          ? "px-5 py-2 rounded-lg text-xs font-bold bg-white text-slate-900 shadow-sm transition"
+          : "px-5 py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-900 transition";
+      }
+    }
 
     function loadSavedPathAndLocations() {
         try {
             const rawRoadmap = localStorage.getItem("WealthLandingSelectedRoadmap");
             if (rawRoadmap) {
                 const payload = JSON.parse(rawRoadmap);
+                builderState.payloadRaw = payload;
+
                 if (payload.selectedLifeId) builderState.activePathId = payload.selectedLifeId;
                 if (payload.overseasBase) builderState.userOverseasBase = payload.overseasBase;
                 if (payload.usCity) builderState.userUSCity = payload.usCity;
                 if (payload.childrenCity) builderState.userChildrenCity = payload.childrenCity;
                 if (payload.monthlySpend) builderState.monthlySpendLabel = payload.monthlySpend;
+
+                if (payload.finalHealthcareStrategy) {
+                  builderState.healthcareStrategy = payload.finalHealthcareStrategy;
+                } else if (payload.healthcareStrategy) {
+                  builderState.healthcareStrategy = payload.healthcareStrategy;
+                }
+
                 if (payload.completedMilestones && Array.isArray(payload.completedMilestones)) {
                     builderState.completedMilestones = new Set(payload.completedMilestones);
                 }
@@ -775,9 +787,6 @@
                 if (payload.overseasBase && !builderState.userOverseasBase) builderState.userOverseasBase = payload.overseasBase;
                 if (payload.usCity && !builderState.userUSCity) builderState.userUSCity = payload.usCity;
                 if (payload.childrenCity && !builderState.userChildrenCity) builderState.userChildrenCity = payload.childrenCity;
-                if (payload.constraints && payload.constraints.childrenCity && !builderState.userChildrenCity) {
-                    builderState.userChildrenCity = payload.constraints.childrenCity;
-                }
             }
 
             if (!builderState.userOverseasBase) builderState.userOverseasBase = "Portugal";
@@ -790,121 +799,232 @@
         updateDynamicUI();
     }
 
-    function downloadRoadmapFile() {
-        const exportData = {
-            version: 1,
-            exportedAt: new Date().toISOString(),
-            selectedLifeId: builderState.activePathId,
-            overseasBase: builderState.userOverseasBase,
-            usCity: builderState.userUSCity,
-            childrenCity: builderState.userChildrenCity,
-            monthlySpend: builderState.monthlySpendLabel,
-            completedMilestones: Array.from(builderState.completedMilestones)
-        };
+    /* STREAMING_CHUNK:Defining adaptive location and healthcare summary functions... */
+    function getLocationSummary() {
+      const path = builderState.activePathId;
 
-        const jsonStr = JSON.stringify(exportData, null, 2);
-        const blob = new Blob([jsonStr], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `wealthlanding-retirement-roadmap-${builderState.activePathId}.wlplan`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+      if (path === "home_base") {
+        return `Current home base: ${builderState.userUSCity}`;
+      }
 
-        showToast("Roadmap File Downloaded", "Keep this .wlplan file to restore your roadmap on any device.");
+      if (path === "strategic_us_move") {
+        return builderState.userUSCity
+          ? `Domestic retirement base: ${builderState.userUSCity}`
+          : "Choose a U.S. retirement location";
+      }
+
+      if (path === "global_expat") {
+        return builderState.userOverseasBase
+          ? `Permanent overseas base: ${builderState.userOverseasBase}`
+          : "Choose an overseas retirement base";
+      }
+
+      if (path === "explore_then_return") {
+        return `${builderState.userOverseasBase} → ${builderState.userUSCity}`;
+      }
+
+      return "Location strategy not completed";
     }
 
-    function triggerImportRoadmap() {
-        document.getElementById("importRoadmapInput").click();
+    function getLocationPlannerLink() {
+      const payload = builderState.payloadRaw || {};
+
+      if (builderState.activePathId === "home_base") {
+        return "#";
+      }
+
+      if (builderState.activePathId === "strategic_us_move") {
+        return "UScitymatcher.html";
+      }
+
+      if (builderState.activePathId === "global_expat") {
+        return "RetiringOverseas.html";
+      }
+
+      if (builderState.activePathId === "explore_then_return") {
+        if (!payload.overseasBase) {
+          return "RetiringOverseas.html";
+        }
+
+        if (!payload.usCity) {
+          return "UScitymatcher.html";
+        }
+
+        return "RetiringOverseas.html";
+      }
+
+      return "#";
     }
 
-    function handleImportRoadmap(event) {
-        const file = event.target.files[0];
-        if (!file) return;
+    function getHealthcareSummary() {
+      const strategy = builderState.healthcareStrategy;
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const imported = JSON.parse(e.target.result);
-                if (imported.selectedLifeId) builderState.activePathId = imported.selectedLifeId;
-                if (imported.overseasBase) builderState.userOverseasBase = imported.overseasBase;
-                if (imported.usCity) builderState.userUSCity = imported.usCity;
-                if (imported.childrenCity) builderState.userChildrenCity = imported.childrenCity;
-                if (imported.monthlySpend) builderState.monthlySpendLabel = imported.monthlySpend;
-                if (imported.completedMilestones && Array.isArray(imported.completedMilestones)) {
-                    builderState.completedMilestones = new Set(imported.completedMilestones);
-                }
+      if (!strategy) {
+        return "Compare medical coverage, Medicare and long-term care.";
+      }
 
-                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
-                    selectedLifeId: builderState.activePathId,
-                    overseasBase: builderState.userOverseasBase,
-                    usCity: builderState.userUSCity,
-                    childrenCity: builderState.userChildrenCity,
-                    monthlySpend: builderState.monthlySpendLabel,
-                    completedMilestones: Array.from(builderState.completedMilestones)
-                }));
+      if (strategy.stage1Winner && strategy.stage2Winner && strategy.stage3LtcWinner) {
+        return `Pre-65: ${strategy.stage1Winner} • 65+: ${strategy.stage2Winner} • LTC: ${strategy.stage3LtcWinner}`;
+      }
 
-                updateDynamicUI();
-                renderJourneyStrip();
-                renderChapters();
-                showToast("Roadmap Restored!", `Successfully imported roadmap for ${builderState.pathNames[builderState.activePathId] || 'Selected Path'}.`);
-            } catch (err) {
-                console.error("Import error:", err);
-                showToast("Import Failed", "Invalid .wlplan file format.");
-            }
-        };
-        reader.readAsText(file);
+      if (strategy.phase1 && strategy.phase2) {
+        return `${strategy.phase1.location} → ${strategy.phase2.location}`;
+      }
+
+      return "Healthcare strategy saved";
     }
 
-    function generateICSCalendar() {
-        const nextYear = new Date().getFullYear() + 1;
-        const icsContent = [
-            "BEGIN:VCALENDAR",
-            "VERSION:2.0",
-            "PRODID:-//WealthLanding//Annual Retirement Review//EN",
-            "BEGIN:VEVENT",
-            `SUMMARY:WealthLanding Annual Retirement Review`,
-            `DESCRIPTION:Revisit your retirement roadmap, review life changes (children, health, housing), and update tax-bracket sequencing.`,
-            `DTSTART:${nextYear}0115T090000Z`,
-            `DTEND:${nextYear}0115T100000Z`,
-            "STATUS:CONFIRMED",
-            "SEQUENCE:0",
-            "END:VEVENT",
-            "END:VCALENDAR"
-        ].join("\r\n");
-
-        const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `WealthLanding-Annual-Review-${nextYear}.ics`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        showToast("Calendar Reminder Downloaded", `Added January ${nextYear} review to calendar.`);
+    function getFinancialSummary() {
+      const payload = builderState.payloadRaw || {};
+      if (payload.financialSectionComplete) {
+        return "Roth conversion sweep & tax brackets optimized.";
+      }
+      return "Sequence Roth conversions, IRMAA tiers & withdrawals.";
     }
 
-    function openEmailReminderModal() {
-        const modal = document.getElementById("emailReminderModal");
-        if (modal) modal.classList.remove("hidden");
+    function getEstateSummary() {
+      const payload = builderState.payloadRaw || {};
+      if (payload.estateSectionComplete) {
+        return "Revocable trust & beneficiary structure active.";
+      }
+      return "Model trusts, probate protection & inheritance.";
     }
 
-    function closeEmailReminderModal() {
-        const modal = document.getElementById("emailReminderModal");
-        if (modal) modal.classList.add("hidden");
+    /* STREAMING_CHUNK:Building Blueprint sections grid generator... */
+    function getBlueprintSections() {
+      const payload = builderState.payloadRaw || {};
+
+      return [
+        {
+          id: "life",
+          title: "Life",
+          icon: "🧭",
+          complete: Boolean(payload.selectedLifeId),
+          summary: builderState.pathNames[builderState.activePathId] || "Explore Then Return",
+          href: "retirement-preference-discovery.html"
+        },
+        {
+          id: "location",
+          title: "Location",
+          icon: "🗺️",
+          complete: Boolean(payload.locationSectionComplete || payload.overseasBase || payload.usCity),
+          summary: getLocationSummary(),
+          href: getLocationPlannerLink()
+        },
+        {
+          id: "healthcare",
+          title: "Healthcare & LTC",
+          icon: "🏥",
+          complete: Boolean(payload.healthcareSectionComplete),
+          summary: getHealthcareSummary(),
+          href: "healthcare_strategy_planning.html"
+        },
+        {
+          id: "financial",
+          title: "Financial",
+          icon: "📈",
+          complete: Boolean(payload.financialSectionComplete),
+          summary: getFinancialSummary(),
+          href: "OptimizeRoth.html"
+        },
+        {
+          id: "estate",
+          title: "Estate",
+          icon: "🏛️",
+          complete: Boolean(payload.estateSectionComplete),
+          summary: getEstateSummary(),
+          href: "estate-planner.html"
+        }
+      ];
     }
 
-    function handleEmailReminderSubmit(e) {
-        e.preventDefault();
-        const email = document.getElementById("reminderEmailInput").value;
-        closeEmailReminderModal();
-        showToast("Reminder Set!", `We will send a January review reminder to ${email}.`);
+    function renderBlueprintSections() {
+      const container = document.getElementById("blueprintSectionsGrid");
+      if (!container) return;
+
+      const sections = getBlueprintSections();
+
+      container.innerHTML = sections.map(section => `
+        <a href="${section.href}"
+           class="block rounded-2xl border p-4 transition ${
+             section.complete
+               ? "bg-emerald-50 border-emerald-300 hover:border-emerald-400"
+               : "bg-white border-slate-200 hover:border-emerald-400"
+           }">
+
+          <div class="flex justify-between items-start">
+            <span class="text-2xl">${section.icon}</span>
+            <span class="${
+              section.complete
+                ? "text-emerald-700"
+                : "text-amber-500"
+            } font-black text-sm">
+              ${section.complete ? "✓" : "⚡"}
+            </span>
+          </div>
+
+          <h3 class="text-sm font-bold text-slate-900 mt-3">
+            ${section.title}
+          </h3>
+
+          <p class="text-[11px] text-slate-600 mt-1 leading-relaxed font-medium">
+            ${section.summary}
+          </p>
+
+          <div class="text-[10px] font-bold mt-3 ${
+            section.complete
+              ? "text-emerald-700"
+              : "text-blue-700"
+          }">
+            ${section.complete ? "Review Strategy →" : "Complete Section →"}
+          </div>
+        </a>
+      `).join("");
+
+      updateCompletionFooter();
     }
 
+    function updateCompletionFooter() {
+      const payload = builderState.payloadRaw || {};
+
+      const complete = [
+        Boolean(payload.selectedLifeId),
+        Boolean(payload.locationSectionComplete || payload.overseasBase || payload.usCity),
+        Boolean(payload.healthcareSectionComplete),
+        Boolean(payload.financialSectionComplete),
+        Boolean(payload.estateSectionComplete)
+      ];
+
+      const completeCount = complete.filter(Boolean).length;
+
+      setSafeText("footerStatusBadge", completeCount === 5 ? "100% Complete" : `${completeCount} of 5 Completed`);
+      setSafeText(
+        "footerCompletionTitle",
+        completeCount === 5
+          ? "Your Retirement Blueprint Is Complete"
+          : `${completeCount} of 5 Blueprint Sections Complete`
+      );
+    }
+
+    function loadRequestedView() {
+      const params = new URLSearchParams(window.location.search);
+      const view = params.get("view");
+
+      if (view === "timeline") {
+        switchBuilderView("timeline");
+      } else {
+        switchBuilderView("blueprint");
+      }
+
+      if (params.get("updated") === "healthcare") {
+        showToast(
+          "Healthcare Strategy Added",
+          "Your medical and long-term care decisions now appear in the Blueprint."
+        );
+      }
+    }
+
+    /* STREAMING_CHUNK:Updating dynamic UI texts and narrative story paragraphs... */
     function updateDynamicUI() {
         const name = builderState.pathNames[builderState.activePathId] || "Selected Retirement";
         const overseas = builderState.userOverseasBase;
@@ -919,8 +1039,8 @@
         const budgetEl = document.getElementById("budgetCushionText");
 
         if (pathNameEl) pathNameEl.innerText = name;
-        if (heroTitle) heroTitle.innerText = `Building Your ${name} Retirement`;
-        if (heroSub) heroSub.innerText = `Turn your ${name} choice into an interactive visual sequence of location, healthcare, housing, tax, and family milestones.`;
+        if (heroTitle) heroTitle.innerText = "My Retirement Blueprint";
+        if (heroSub) heroSub.innerText = `Build the decisions, costs and timing behind your ${name} retirement.`;
         if (budgetEl) budgetEl.innerText = spend.split('(')[0] || spend;
 
         const stories = {
@@ -928,7 +1048,6 @@
             "strategic_us_move": `"At 55, you'll relocate to ${usCity}, a top-tier low-tax U.S. metro. Save $10k–$30k+ per year in state taxes while maintaining seamless domestic U.S. healthcare access."`,
             "home_base": `"At 55, you'll rightsize your primary residence in your current community in ${usCity}, stay close to family in ${kidsCity}, and rely on trusted local health networks."`,
             "global_expat": `"At 55, you'll move permanently to ${overseas} to build a foreign sanctuary, maximizing cost-of-living purchasing power and lifestyle quality."`
-            
         };
 
         if (storyEl) storyEl.innerText = stories[builderState.activePathId] || stories["explore_then_return"];
@@ -949,11 +1068,13 @@
         }
     }
 
+    /* STREAMING_CHUNK:Defining chapter blueprints with integrated Healthcare links... */
     function getDynamicChapterBlueprints() {
         const overseas = builderState.userOverseasBase;
         const usCity = builderState.userUSCity;
         const kidsCity = builderState.userChildrenCity;
         const spend = builderState.monthlySpendLabel;
+        const payload = builderState.payloadRaw || {};
 
         return {
             "explore_then_return": [
@@ -975,11 +1096,11 @@
                         burnRate: spend
                     },
                     milestones: [
-                        { id: "m1_1", title: `Scout & select primary base in ${overseas}`, done: true, requires: null },
-                        { id: "m1_2", title: `Verify international passive income visa requirements for ${overseas}`, done: false, requires: "m1_1" },
-                        { id: "m1_3", title: "Contract foreign housing lease & private health insurance", done: false, requires: "m1_2" }
+                        { id: "location_international", type: "decision", title: `Scout & select primary base in ${overseas}`, done: Boolean(payload.overseasBase) },
+                        { id: "visa_requirements", type: "execution", title: `Verify international passive income visa requirements for ${overseas}`, done: false, requires: "location_international" },
+                        { id: "foreign_lease", type: "execution", title: "Contract foreign housing lease & private health insurance", done: false, requires: "visa_requirements" }
                     ],
-                    tool: { name: "Overseas Matcher Tool", link: "#" }
+                    tool: { name: "Overseas Matcher Tool", link: "RetiringOverseas.html" }
                 },
                 {
                     number: 2,
@@ -999,10 +1120,10 @@
                         burnRate: spend
                     },
                     milestones: [
-                        { id: "m2_1", title: `Reserve U.S. housing transition capital for ${usCity}`, done: false, requires: "m1_3" },
-                        { id: "m2_2", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "m2_1" }
+                        { id: "healthcare_strategy", type: "decision", title: "Complete lifetime healthcare and LTC strategy comparison", done: Boolean(payload.healthcareSectionComplete) },
+                        { id: "medicare_enrollment_window", type: "execution", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "healthcare_strategy" }
                     ],
-                    tool: { name: "Medicare Cost & Bridge Estimator", link: "#" }
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_strategy_planning.html" }
                 },
                 {
                     number: 3,
@@ -1015,17 +1136,17 @@
                         tagline: `Imagine Life Near Family in ${usCity}...`,
                         bullets: [
                             `Cozy residential home in ${usCity} near children and grandchildren`,
-                            "Seamless Medicare Supplement Plan G coverage with zero co-pays",
+                            "Seamless Medicare Supplement coverage",
                             "Hosting multi-generational holiday dinners and weekend gatherings",
                             "Established relationships with top local primary care physicians"
                         ],
                         burnRate: spend
                     },
                     milestones: [
-                        { id: "m3_1", title: `Purchase or lease primary residence in ${usCity}`, done: false, requires: "m2_2" },
-                        { id: "m3_2", title: "Establish primary care physician network & Medicare Supplement (Plan G)", done: false, requires: "m3_1" }
+                        { id: "m3_1", type: "decision", title: `Purchase or lease primary residence in ${usCity}`, done: Boolean(payload.usCity) },
+                        { id: "m3_2", type: "execution", title: "Establish primary care physician network & Medicare Supplement", done: false, requires: "m3_1" }
                     ],
-                    tool: { name: "US City Matcher Tool", link: "#" }
+                    tool: { name: "US City Matcher Tool", link: "UScitymatcher.html" }
                 },
                 {
                     number: 4,
@@ -1039,223 +1160,20 @@
                         bullets: [
                             "Continuous care community options locked in before physical need",
                             "Revocable living trust insulating assets from state probate",
-                            "Seamless, hassle-free inheritance distribution for heirs",
-                            "Surrounded by family with zero medical or financial burden"
+                            "Seamless inheritance distribution for heirs"
                         ],
                         burnRate: spend
                     },
                     milestones: [
-                        { id: "m4_1", title: "Execute revocable living trust & beneficiary designations", done: false, requires: "m3_2" }
+                        { id: "m4_1", type: "decision", title: "Execute revocable living trust & beneficiary designations", done: Boolean(payload.estateSectionComplete) }
                     ],
-                    tool: { name: "Legacy & Trust Planner", link: "#" }
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_strategy_planning.html" }
                 }
-            ],
-            "strategic_us_move": [
-                {
-                    number: 1,
-                    ageLabel: "Age 55",
-                    locationTag: `☀️ ${usCity}`,
-                    photo: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=600&q=80",
-                    headline: `State & City Selection (${usCity})`,
-                    desc: `Relocate to ${usCity} for optimal tax savings and high-quality healthcare.`,
-                    snapshot: {
-                        tagline: `Imagine Living in ${usCity}...`,
-                        bullets: [
-                            `Living in a sunny, tax-friendly metro in ${usCity}`,
-                            "Reinvesting tax savings back into compounding index funds",
-                            "Top-rated regional medical centers within 15 minutes"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m1_1", title: `Run state-by-state tax drag audit for ${usCity}`, done: true, requires: null },
-                        { id: "m1_2", title: "Scout primary medical networks in target metro areas", done: false, requires: "m1_1" }
-                    ],
-                    tool: { name: "US City & State Matcher", link: "#" }
-                },
-                {
-                    number: 2,
-                    ageLabel: "Age 60",
-                    locationTag: "📜 Domicile Base",
-                    photo: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80",
-                    headline: "Establishing legal domicile",
-                    desc: "Satisfy strict 183-day state residency compliance requirements.",
-                    snapshot: {
-                        tagline: "Imagine Clean Legal Domicile...",
-                        bullets: [
-                            "Primary driver's license, voter registration, and bank accounts moved",
-                            `Spacious home in ${usCity} suited for hosting visiting adult children`
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m2_1", title: "Purchase residence and establish driver's license & voter registration", done: false, requires: "m1_2" }
-                    ],
-                    tool: { name: "State Domicile Checklist", link: "#" }
-                },
-                {
-                    number: 3,
-                    ageLabel: "Age 65",
-                    locationTag: "🏥 Medicare Hub",
-                    photo: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80",
-                    headline: "Locking in healthcare",
-                    desc: "Utilize state tax savings with top-tier domestic health systems.",
-                    snapshot: {
-                        tagline: "Imagine Premium Domestic Healthcare...",
-                        bullets: [
-                            "Direct access to top regional clinical networks",
-                            "Medicare Plan G coverage absorbing all catastrophic surcharges"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m3_1", title: "Activate Medicare Part A, B, and Plan G Medigap coverage", done: false, requires: "m2_1" }
-                    ],
-                    tool: { name: "Medicare Optimization Engine", link: "#" }
-                }
-            ],
-            "home_base": [
-                {
-                    number: 1,
-                    ageLabel: "Age 55",
-                    locationTag: `🏡 ${usCity} (Home Base)`,
-                    photo: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
-                    headline: `Rightsizing & Anchoring in ${usCity}`,
-                    desc: `Maintain your established primary residence in ${usCity} near family in ${kidsCity} and long-standing social ties.`,
-                    snapshot: {
-                        tagline: `Imagine Life at Home Base in ${usCity}...`,
-                        bullets: [
-                            `Living in your established, familiar home base community in ${usCity}`,
-                            `Close proximity to children and grandchildren in ${kidsCity}`,
-                            "Continuity of trusted local primary care and specialist physicians",
-                            "Deep social networks and familiar neighborhood routines"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m1_1", title: `Audit primary housing expenses and property tax baseline in ${usCity}`, done: true, requires: null },
-                        { id: "m1_2", title: "Establish primary physician network and preventative wellness plan", done: false, requires: "m1_1" },
-                        { id: "m1_3", title: "Optimize domestic pre-Medicare health insurance coverage", done: false, requires: "m1_2" }
-                    ],
-                    tool: { name: "Home Base Housing & Tax Audit", link: "#" }
-                },
-                {
-                    number: 2,
-                    ageLabel: "Age 65",
-                    locationTag: `🏥 Healthcare Anchor (${usCity})`,
-                    photo: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=600&q=80",
-                    headline: "Seamless Medicare Integration",
-                    desc: "Transition smoothly into Medicare Part A/B and Medigap Plan G without changing doctors or locations.",
-                    snapshot: {
-                        tagline: "Imagine Uninterrupted Local Care...",
-                        bullets: [
-                            "Full Medicare Plan G cost-sharing protection with known local providers",
-                            "Hosting family holidays and weekend dinners in your primary home",
-                            "Zero relocation stress or geographic transition management"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m2_1", title: "Enroll in Medicare Part A/B and Medigap Plan G 3 months before age 65", done: false, requires: "m1_3" },
-                        { id: "m2_2", title: "Confirm local provider Medicare assignment status", done: false, requires: "m2_1" }
-                    ],
-                    tool: { name: "Medicare Optimization Engine", link: "#" }
-                },
-                {
-                    number: 3,
-                    ageLabel: "Age 78",
-                    locationTag: `❤️ Family & Care Base (${usCity})`,
-                    photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80",
-                    headline: "Long-term security & legacy planning",
-                    desc: "Lock in trusted local continuous care options and execute revocable living trust provisions.",
-                    snapshot: {
-                        tagline: "Imagine Complete Stability & Family Support...",
-                        bullets: [
-                            "In-home assistance or local CCRC support locked in early",
-                            "Revocable living trust insulating home base from probate",
-                            "Surrounded by lifelong friends and nearby family"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m3_1", title: "Execute revocable living trust & beneficiary designations", done: false, requires: "m2_2" }
-                    ],
-                    tool: { name: "Legacy & Trust Planner", link: "#" }
-                }
-            ],
-            "global_expat": [
-                {
-                    number: 1,
-                    ageLabel: "Age 55",
-                    locationTag: `🌍 ${overseas} Sanctuary`,
-                    photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-                    headline: `Establishing Foreign Residency in ${overseas}`,
-                    desc: `Build a permanent overseas sanctuary in ${overseas} to maximize lifestyle quality and purchasing power.`,
-                    snapshot: {
-                        tagline: `Imagine Your New Life in ${overseas}...`,
-                        bullets: [
-                            `Coastal or cultural living with high purchasing power in ${overseas}`,
-                            "Full access to JCI-accredited private healthcare systems",
-                            "Rich international expat community and cultural exploration",
-                            `Travel visits with family in ${kidsCity}`
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m1_1", title: `Secure passive income visa (e.g. D7 / Rentista) for ${overseas}`, done: true, requires: null },
-                        { id: "m1_2", title: "Contract international private health insurance policy", done: false, requires: "m1_1" },
-                        { id: "m1_3", title: "Establish local banking and foreign residency compliance", done: false, requires: "m1_2" }
-                    ],
-                    tool: { name: "Overseas Location Matcher", link: "#" }
-                },
-                {
-                    number: 2,
-                    ageLabel: "Age 65",
-                    locationTag: `🏥 Overseas Healthcare Base`,
-                    photo: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80",
-                    headline: "Private healthcare & U.S. Medicare strategy",
-                    desc: "Maintain comprehensive private expat medical coverage while evaluating U.S. Medicare Part B backstop.",
-                    snapshot: {
-                        tagline: "Imagine High-Quality Low-Cost Healthcare...",
-                        bullets: [
-                            "Top-tier private hospital access at a fraction of U.S. insurance premiums",
-                            "Optional Medicare Part B backstop maintained for stateside visits",
-                            "Thriving long-term in an established international hub"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m2_1", title: "Evaluate Medicare Part B enrollment vs. international private policy", done: false, requires: "m1_3" }
-                    ],
-                    tool: { name: "International Healthcare Planner", link: "#" }
-                },
-                {
-                    number: 3,
-                    ageLabel: "Age 78",
-                    locationTag: `❤️ Overseas Care Sanctuary`,
-                    photo: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-                    headline: "Affordable in-home care & legacy shield",
-                    desc: "Leverage high-touch, affordable private in-home nursing or senior care in your foreign base.",
-                    snapshot: {
-                        tagline: "Imagine Luxury Care Without Financial Drag...",
-                        bullets: [
-                            "24/7 dedicated private in-home care at 60-70% lower cost than U.S.",
-                            "Cross-border estate plan protecting international and U.S. assets",
-                            "Peaceful aging in a climate and community you love"
-                        ],
-                        burnRate: spend
-                    },
-                    milestones: [
-                        { id: "m3_1", title: "Lock in local long-term care management and cross-border trust", done: false, requires: "m2_1" }
-                    ],
-                    tool: { name: "Cross-Border Estate Planner", link: "#" }
-                }
-            ],
-           
-         
+            ]
         };
     }
 
+    /* STREAMING_CHUNK:Rendering journey node scrapbook strip... */
     function renderJourneyStrip() {
         const stripContainer = document.getElementById("horizontalJourneyStrip");
         if (!stripContainer) return;
@@ -1331,6 +1249,7 @@
         if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    /* STREAMING_CHUNK:Rendering full chapter timeline and milestone list... */
     function renderChapters() {
         const container = document.getElementById("chaptersContainer");
         const toolsContainer = document.getElementById("specializedToolsContainer");
@@ -1362,10 +1281,11 @@
 
             ch.milestones.forEach(m => {
                 totalMilestones++;
-                const isPrereqDone = m.requires === null || builderState.completedMilestones.has(m.requires);
-                const isChecked = builderState.completedMilestones.has(m.id) || m.done;
+                const isDecision = m.type === "decision";
+                const isPrereqDone = !m.requires || builderState.completedMilestones.has(m.requires);
+                const isChecked = isDecision ? m.done : (builderState.completedMilestones.has(m.id) || m.done);
 
-                if (isChecked && isPrereqDone) {
+                if (isChecked) {
                     builderState.completedMilestones.add(m.id);
                     completedCount++;
                 }
@@ -1383,14 +1303,16 @@
                     chapterHasBlocker = true;
                 } else if (isChecked) {
                     milestoneClass = "milestone-completed";
-                    badgeHtml = `<span class="text-[10px] font-bold text-emerald-700 uppercase">✓ Completed</span>`;
+                    badgeHtml = `<span class="text-[10px] font-bold text-emerald-700 uppercase">✓ Complete</span>`;
                 }
 
                 milestoneListHtml += `
                     <div class="p-3.5 rounded-xl border ${milestoneClass} transition flex items-start justify-between gap-3">
                         <label class="flex items-start gap-3 flex-1 cursor-pointer">
-                            <input type="checkbox" onchange="toggleMilestone('${m.id}', '${m.requires}')" ${isChecked && isPrereqDone ? "checked" : ""} ${!isPrereqDone ? "disabled" : ""} class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
-                            <span class="text-xs font-semibold ${isChecked && isPrereqDone ? "text-slate-400 line-through" : "text-slate-800"}">${m.title}</span>
+                            <input type="checkbox" onchange="toggleMilestone('${m.id}', '${m.requires}', ${isDecision})" ${isChecked ? "checked" : ""} ${isDecision || !isPrereqDone ? "disabled" : ""} class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
+                            <span class="text-xs font-semibold ${isChecked ? "text-slate-500 line-through" : "text-slate-800"}">
+                              ${m.title} ${isDecision ? '<span class="text-[9px] text-blue-600 font-bold ml-1 uppercase">(Decision Planner)</span>' : ''}
+                            </span>
                         </label>
                         ${badgeHtml}
                     </div>
@@ -1497,22 +1419,28 @@
             }
         }
 
-        document.getElementById("completedMilestonesText").innerText = `${completedCount} of ${totalMilestones} Milestones`;
-        if (chapters[0]) document.getElementById("primaryNextFocusText").innerText = chapters[0].headline;
+        setSafeText("completedMilestonesText", `${completedCount} of ${totalMilestones} Milestones`);
+        if (chapters[0]) setSafeText("primaryNextFocusText", chapters[0].headline);
     }
 
-    function toggleMilestone(mId, reqId) {
-        if (reqId !== "null" && reqId && !builderState.completedMilestones.has(reqId)) {
+    /* STREAMING_CHUNK:Implementing milestone state handlers and export tools... */
+    function toggleMilestone(mId, reqId, isDecision) {
+        if (isDecision) {
+            showToast("Decision Milestone", "Complete this milestone directly inside its dedicated Planner page.");
+            return;
+        }
+
+        if (reqId && !builderState.completedMilestones.has(reqId)) {
             showToast("Action Blocked", "You must complete the prerequisite milestone first.");
             return;
         }
 
         if (builderState.completedMilestones.has(mId)) {
             builderState.completedMilestones.delete(mId);
-            showToast("Milestone Unchecked", "Dependent steps have been locked.");
+            showToast("Milestone Unchecked", "Dependent steps locked.");
         } else {
             builderState.completedMilestones.add(mId);
-            showToast("Milestone Completed", "Next step in sequence unlocked!");
+            showToast("Milestone Completed", "Next step unlocked!");
         }
 
         try {
@@ -1523,6 +1451,122 @@
         
         renderJourneyStrip();
         renderChapters();
+    }
+
+    function downloadRoadmapFile() {
+        const exportData = {
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            selectedLifeId: builderState.activePathId,
+            overseasBase: builderState.userOverseasBase,
+            usCity: builderState.userUSCity,
+            childrenCity: builderState.userChildrenCity,
+            monthlySpend: builderState.monthlySpendLabel,
+            completedMilestones: Array.from(builderState.completedMilestones)
+        };
+
+        const jsonStr = JSON.stringify(exportData, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `wealthlanding-retirement-roadmap-${builderState.activePathId}.wlplan`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast("Roadmap File Downloaded", "Keep this .wlplan file to restore your roadmap on any device.");
+    }
+
+    function triggerImportRoadmap() {
+        document.getElementById("importRoadmapInput").click();
+    }
+
+    function handleImportRoadmap(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                if (imported.selectedLifeId) builderState.activePathId = imported.selectedLifeId;
+                if (imported.overseasBase) builderState.userOverseasBase = imported.overseasBase;
+                if (imported.usCity) builderState.userUSCity = imported.usCity;
+                if (imported.childrenCity) builderState.userChildrenCity = imported.childrenCity;
+                if (imported.monthlySpend) builderState.monthlySpendLabel = imported.monthlySpend;
+                if (imported.completedMilestones && Array.isArray(imported.completedMilestones)) {
+                    builderState.completedMilestones = new Set(imported.completedMilestones);
+                }
+
+                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
+                    selectedLifeId: builderState.activePathId,
+                    overseasBase: builderState.userOverseasBase,
+                    usCity: builderState.userUSCity,
+                    childrenCity: builderState.userChildrenCity,
+                    monthlySpend: builderState.monthlySpendLabel,
+                    completedMilestones: Array.from(builderState.completedMilestones)
+                }));
+
+                updateDynamicUI();
+                renderBlueprintSections();
+                renderJourneyStrip();
+                renderChapters();
+                showToast("Roadmap Restored!", `Successfully imported roadmap.`);
+            } catch (err) {
+                console.error("Import error:", err);
+                showToast("Import Failed", "Invalid .wlplan file format.");
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function generateICSCalendar() {
+        const nextYear = new Date().getFullYear() + 1;
+        const icsContent = [
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//WealthLanding//Annual Retirement Review//EN",
+            "BEGIN:VEVENT",
+            `SUMMARY:WealthLanding Annual Retirement Review`,
+            `DESCRIPTION:Revisit your retirement roadmap, review life changes, and update tax-bracket sequencing.`,
+            `DTSTART:${nextYear}0115T090000Z`,
+            `DTEND:${nextYear}0115T100000Z`,
+            "STATUS:CONFIRMED",
+            "SEQUENCE:0",
+            "END:VEVENT",
+            "END:VCALENDAR"
+        ].join("\r\n");
+
+        const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `WealthLanding-Annual-Review-${nextYear}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast("Calendar Reminder Downloaded", `Added January ${nextYear} review to calendar.`);
+    }
+
+    function openEmailReminderModal() {
+        const modal = document.getElementById("emailReminderModal");
+        if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeEmailReminderModal() {
+        const modal = document.getElementById("emailReminderModal");
+        if (modal) modal.classList.add("hidden");
+    }
+
+    function handleEmailReminderSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById("reminderEmailInput").value;
+        closeEmailReminderModal();
+        showToast("Reminder Set!", `We will send a January review reminder to ${email}.`);
     }
 
     function simulateLifeEvent(eventType) {
@@ -1552,12 +1596,12 @@
         const modal = document.getElementById("executiveSummaryModal");
         if (!modal) return;
         const name = builderState.pathNames[builderState.activePathId] || "Selected Retirement";
-        document.getElementById("execSummaryPath").innerText = name;
-        document.getElementById("execSummarySpend").innerText = builderState.monthlySpendLabel;
-        document.getElementById("execSummaryOverseas").innerText = builderState.userOverseasBase;
-        document.getElementById("execSummaryUSCity").innerText = builderState.userUSCity;
-        document.getElementById("execSummaryKidsCity").innerText = builderState.userChildrenCity;
-        document.getElementById("execSummaryDate").innerText = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        setSafeText("execSummaryPath", name);
+        setSafeText("execSummarySpend", builderState.monthlySpendLabel);
+        setSafeText("execSummaryOverseas", builderState.userOverseasBase);
+        setSafeText("execSummaryUSCity", builderState.userUSCity);
+        setSafeText("execSummaryKidsCity", builderState.userChildrenCity);
+        setSafeText("execSummaryDate", new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
         modal.classList.remove("hidden");
     }
 
@@ -1572,7 +1616,7 @@
             try {
                 const currentHref = window.location ? window.location.href : "";
                 if (currentHref && !currentHref.startsWith("about:") && !currentHref.startsWith("data:") && window.location.origin !== "null") {
-                    window.location.href = "strategy-engine.html";
+                    window.location.href = "OptimizeRoth.html";
                 } else {
                     console.log("Preview environment detected; strategy engine launch simulated.");
                 }
@@ -1585,19 +1629,23 @@
     function showToast(title, message) {
         const toast = document.getElementById("toastNotification");
         if (!toast) return;
-        document.getElementById("toastTitle").innerText = title;
-        document.getElementById("toastMessage").innerText = message;
+        setSafeText("toastTitle", title);
+        setSafeText("toastMessage", message);
         toast.classList.remove("hidden");
         setTimeout(() => {
             toast.classList.add("hidden");
         }, 3500);
     }
 
+    /* STREAMING_CHUNK:Window onload initialization execution... */
     window.onload = function() {
         loadSavedPathAndLocations();
+        renderBlueprintSections();
         renderJourneyStrip();
         renderChapters();
+        loadRequestedView();
     };
   </script>
 </body>
 </html>
+```eofs
