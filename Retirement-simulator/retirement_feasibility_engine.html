@@ -509,20 +509,27 @@
 
   <script>
     const feasibilityState = {
-        selectedLifeId: "explore_then_return",
+        selectedLifeId: null,
+        hasManualSelection: false,
         userPriorities: ["Family", "Healthcare", "Taxes"],
+        primaryObjective: "family_focus",
         constraints: {
             mustStayUS: "Yes_Strict",
             childrenLoc: "Different US State",
             medicare: "Critical",
-            maxMoves: "1"
+            maxMoves: "1",
+            citizenship: "US_Only",
+            assetTier: "HNW",
+            compOverseas: "Never",
+            compKidsDistance: "Important",
+            compTaxComplexity: "KeepSimple"
         },
-        // Phase Optimizer removed from core candidates as requested
+        // Scores are calculated from ranked priorities plus hard constraints.
         lifestyles: [
-            { id: "home_base", name: "Home Base", subtitle: "SAFEST EMOTIONALLY", baseFit: 98 },
-            { id: "strategic_us_move", name: "Strategic U.S. Move", subtitle: "SIMPLEST EXECUTION", baseFit: 90 },
-            { id: "global_expat", name: "Global Expat", subtitle: "MAXIMUM GEO-ARBITRAGE", baseFit: 40 },
-            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE", baseFit: 82 }
+            { id: "home_base", name: "Home Base", subtitle: "SAFEST EMOTIONALLY" },
+            { id: "strategic_us_move", name: "Strategic U.S. Move", subtitle: "SIMPLEST EXECUTION" },
+            { id: "global_expat", name: "Global Expat", subtitle: "MAXIMUM GEO-ARBITRAGE" },
+            { id: "explore_then_return", name: "Explore Then Return", subtitle: "BEST OVERALL BALANCE" }
         ]
     };
 
@@ -604,11 +611,18 @@
             if (raw) {
                 const payload = JSON.parse(raw);
                 if (payload.selectedPriorities) feasibilityState.userPriorities = payload.selectedPriorities;
+                if (payload.primaryObjective) feasibilityState.primaryObjective = payload.primaryObjective;
                 if (payload.constraints) {
                     feasibilityState.constraints.mustStayUS = payload.constraints.mustStayUS || "Yes_Strict";
                     feasibilityState.constraints.childrenLoc = payload.constraints.childrenLocation || "Different US State";
-                    if (payload.constraints.medicareDepend) feasibilityState.constraints.medicare = payload.constraints.medicareDepend;
-                    if (payload.constraints.maxMoves) feasibilityState.constraints.maxMoves = payload.constraints.maxMoves;
+                    feasibilityState.constraints.medicare = payload.constraints.medicareDepend || "Critical";
+                    feasibilityState.constraints.maxMoves = payload.constraints.maxMoves || "1";
+                    feasibilityState.constraints.citizenship = payload.constraints.citizenship || "US_Only";
+                    feasibilityState.constraints.assetTier = payload.constraints.assetTier || "HNW";
+                    feasibilityState.constraints.compOverseas = payload.constraints.compOverseas ||
+                        (payload.constraints.mustStayUS === "Open_Overseas" ? "Temporary_Chapter" : "Never");
+                    feasibilityState.constraints.compKidsDistance = payload.constraints.compKidsDistance || "Important";
+                    feasibilityState.constraints.compTaxComplexity = payload.constraints.compTaxComplexity || "KeepSimple";
                 }
             }
         } catch (e) {
@@ -687,20 +701,122 @@
     }
 
     function evaluateFeasibility() {
-        const mustStayUS = feasibilityState.constraints.mustStayUS;
-        
-        return feasibilityState.lifestyles.map(bp => {
-            let matchScore = bp.baseFit;
-            let bucket = "Strong Fit";
+        const c = feasibilityState.constraints;
+        const spending = document.getElementById("feat_monthlySpend")?.value || "8k";
+        const housing = document.getElementById("feat_housingStrategy")?.value || "Own_Single";
+        const tolerance = document.getElementById("feat_complexityTolerance")?.value || "Moderate";
 
-            if (mustStayUS === "Yes_Strict" && bp.id === "global_expat") {
-                bucket = "Conflicts With Must-Haves";
-                matchScore = 40;
-            } else if (mustStayUS === "Yes_Strict" && bp.id === "home_base") {
-                matchScore = 98;
+        // 0-5 compatibility by retirement path. Ranked priorities are weighted 3x, 2x, 1x.
+        const priorityFit = {
+            home_base: {
+                Family: 5, Healthcare: 5, Taxes: 1, Travel: 0, Cost: 1, Climate: 2, Culture: 1, Legacy: 3
+            },
+            strategic_us_move: {
+                Family: 3, Healthcare: 5, Taxes: 5, Travel: 1, Cost: 3, Climate: 3, Culture: 2, Legacy: 5
+            },
+            global_expat: {
+                Family: 1, Healthcare: 3, Taxes: 4, Travel: 5, Cost: 5, Climate: 4, Culture: 5, Legacy: 4
+            },
+            explore_then_return: {
+                Family: 4, Healthcare: 5, Taxes: 4, Travel: 5, Cost: 5, Climate: 4, Culture: 5, Legacy: 5
+            }
+        };
+
+        const objectiveFit = {
+            family_focus: { home_base: 5, strategic_us_move: 3, global_expat: 1, explore_then_return: 4 },
+            tax_wealth: { home_base: 1, strategic_us_move: 5, global_expat: 4, explore_then_return: 5 },
+            travel_adventure: { home_base: 0, strategic_us_move: 1, global_expat: 5, explore_then_return: 5 },
+            healthcare_safety: { home_base: 5, strategic_us_move: 5, global_expat: 3, explore_then_return: 5 },
+            lifestyle_freedom: { home_base: 2, strategic_us_move: 3, global_expat: 5, explore_then_return: 5 }
+        };
+
+        return feasibilityState.lifestyles.map(bp => {
+            let raw = 0;
+            let maxRaw = 0;
+            const reasons = [];
+            const conflicts = [];
+
+            feasibilityState.userPriorities.slice(0, 3).forEach((priority, index) => {
+                const weight = 3 - index;
+                raw += (priorityFit[bp.id]?.[priority] || 0) * weight;
+                maxRaw += 5 * weight;
+            });
+
+            raw += (objectiveFit[feasibilityState.primaryObjective]?.[bp.id] || 0) * 2;
+            maxRaw += 10;
+
+            // Hard constraints eliminate paths rather than merely lowering a fixed score.
+            if (c.mustStayUS === "Yes_Strict" && ["global_expat", "explore_then_return"].includes(bp.id)) {
+                conflicts.push("Conflicts with strict domestic U.S. living");
+            }
+            if (c.compOverseas === "Never" && ["global_expat", "explore_then_return"].includes(bp.id)) {
+                conflicts.push("Requires overseas living you marked as unacceptable");
+            }
+            if (c.maxMoves === "0" && bp.id !== "home_base") {
+                conflicts.push("Requires at least one relocation");
+            }
+            if (c.maxMoves === "1" && bp.id === "explore_then_return") {
+                conflicts.push("Requires two relocation chapters");
             }
 
-            return { bp, bucket, matchScore };
+            // Constraint bonuses and penalties.
+            if (c.mustStayUS === "Prefer_US" && bp.id === "explore_then_return") raw += 3;
+            if (c.mustStayUS === "Open_Overseas" && ["global_expat", "explore_then_return"].includes(bp.id)) raw += 4;
+
+            if (c.medicare === "Critical") {
+                if (["home_base", "strategic_us_move", "explore_then_return"].includes(bp.id)) raw += 5;
+                if (bp.id === "global_expat") raw -= 6;
+            } else if (c.medicare === "Moderate") {
+                if (bp.id === "explore_then_return") raw += 5;
+                if (bp.id === "global_expat") raw += 1;
+            } else if (c.medicare === "Self_Insure") {
+                if (["global_expat", "explore_then_return"].includes(bp.id)) raw += 4;
+            }
+
+            if (c.compOverseas === "Temporary_Chapter") {
+                if (bp.id === "explore_then_return") raw += 8;
+                if (bp.id === "global_expat") raw -= 3;
+            } else if (c.compOverseas === "Permanent") {
+                if (bp.id === "global_expat") raw += 8;
+                if (bp.id === "explore_then_return") raw += 4;
+            }
+
+            if (c.compKidsDistance === "Critical") {
+                if (bp.id === "home_base") raw += 6;
+                if (bp.id === "global_expat") raw -= 7;
+            } else if (c.compKidsDistance === "Important") {
+                if (["home_base", "strategic_us_move", "explore_then_return"].includes(bp.id)) raw += 3;
+            }
+
+            if (c.compTaxComplexity === "KeepSimple") {
+                if (bp.id === "home_base") raw += 4;
+                if (["global_expat", "explore_then_return"].includes(bp.id)) raw -= 4;
+            } else if (c.compTaxComplexity === "MaxOptimize") {
+                if (["strategic_us_move", "global_expat", "explore_then_return"].includes(bp.id)) raw += 4;
+            }
+
+            if (tolerance === "Low" && ["global_expat", "explore_then_return"].includes(bp.id)) raw -= 7;
+            if (tolerance === "High" && ["global_expat", "explore_then_return"].includes(bp.id)) raw += 3;
+            if (housing === "Dual_Homes" && bp.id === "explore_then_return") raw += 3;
+            if (housing === "Own_Single" && bp.id === "global_expat") raw -= 2;
+            if (spending === "5k" && ["global_expat", "explore_then_return"].includes(bp.id)) raw += 3;
+            if (spending === "14k" && bp.id === "home_base") raw += 2;
+
+            let matchScore = Math.round(Math.max(0, Math.min(100, (raw / maxRaw) * 100)));
+            let bucket = "Strong Fit";
+            if (conflicts.length) {
+                bucket = "Conflicts With Must-Haves";
+                matchScore = Math.min(matchScore, 35);
+            } else if (matchScore < 65) {
+                bucket = "Available With Trade-offs";
+            }
+
+            const topPriority = feasibilityState.userPriorities[0];
+            const secondPriority = feasibilityState.userPriorities[1];
+            reasons.push(`Matches ${topPriority || "your leading priority"}`);
+            if (secondPriority) reasons.push(`Balances ${secondPriority}`);
+
+            return { bp, bucket, matchScore, reasons, conflicts };
         });
     }
 
@@ -711,6 +827,10 @@
 
         const evaluatedList = evaluateFeasibility();
         const sorted = [...evaluatedList].sort((a, b) => b.matchScore - a.matchScore);
+
+        if (!feasibilityState.hasManualSelection && sorted.length) {
+            feasibilityState.selectedLifeId = sorted[0].bp.id;
+        }
 
         sorted.forEach((item, index) => {
             const { bp, bucket, matchScore } = item;
@@ -756,7 +876,7 @@
                         <div class="bg-white p-3 rounded-xl border border-slate-200/80 text-xs shadow-sm">
                             <strong class="text-[#019367] block text-[10px] uppercase tracking-wider mb-1.5">Why It Stands Out:</strong>
                             <ul class="space-y-1 text-slate-700 font-medium">
-                                ${story.highlights.map(h => `<li class="flex items-center gap-1.5"><span class="text-[#019367] font-bold">✓</span> <span>${h}</span></li>`).join('')}
+                                ${(item.conflicts.length ? item.conflicts : [...item.reasons, ...story.highlights].slice(0, 3)).map(h => `<li class="flex items-center gap-1.5"><span class="${item.conflicts.length ? 'text-rose-600' : 'text-[#019367]'} font-bold">${item.conflicts.length ? '✕' : '✓'}</span> <span>${h}</span></li>`).join('')}
                             </ul>
                         </div>
 
@@ -792,6 +912,7 @@
     }
 
     function selectRetirementLife(id) {
+        feasibilityState.hasManualSelection = true;
         feasibilityState.selectedLifeId = id;
         renderRecommendationCards();
         showToast("Life Choice Updated", "Committed selection updated.");
