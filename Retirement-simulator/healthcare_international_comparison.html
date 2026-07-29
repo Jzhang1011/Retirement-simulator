@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="retirement-os.js"></script>
   <style>
     :root{--navy:#0B132B;--mint:#02B17D;--mint-dark:#019367;--bg:#F7F9FC;--border:#E2E8F0;--muted:#64748B}
     body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:#1E293B}.serif{font-family:'Playfair Display',Georgia,serif}
@@ -130,7 +131,32 @@ const modes={
     {id:'ltc',label:'Long-term-care destination',options:[['overseas','Return overseas for LTC'],['us_home','Age in place in the U.S.'],['ccrc','U.S. continuing-care community'],['flex','Keep both options open with a reserve']]}
   ],defaults:{pre65:'private',medicare:'plan_g',risk:'certainty',access:'academic',ltc:'overseas'}}
 };
-function load(){try{state.payload=JSON.parse(localStorage.getItem('WealthLandingSelectedRoadmap')||'{}');const p=state.payload;state.pathId=p.selectedLifeId||state.pathId;state.pathName=p.selectedLifeName||({'home_base':'Home Base','strategic_us_move':'Strategic U.S. Move','global_expat':'Global Expat','explore_then_return':'Explore Then Return'}[state.pathId]||state.pathName);state.overseasBase=p.overseasBase||state.overseasBase;state.usCity=p.usCity||state.usCity;state.monthlySpend=p.monthlySpend||state.monthlySpend;state.currentAge=Number(p.startAge||p.currentAge||55);const saved=p.healthcareStrategy;if(saved&&saved.answers)state.answers={...saved.answers};}catch(e){console.warn(e)}const cfg=modes[PAGE_MODE];state.answers={...cfg.defaults,...state.answers};document.getElementById('pageTitle').textContent=cfg.title;document.getElementById('pageSubtitle').textContent=cfg.subtitle;renderContext();renderQuestions();recalculate();if(new URLSearchParams(location.search).get('view')==='analysis')document.getElementById('analysisPanel').open=true;}
+function load(){
+  try{
+    const legacy=JSON.parse(localStorage.getItem('WealthLandingSelectedRoadmap')||'{}');
+    const os=window.RetirementOS?RetirementOS.load():{};
+    const locationData=os.location||{};
+    const profile=os.profile||{};
+    const vision=os.vision||{};
+    const healthcare=os.healthcare||{};
+    state.payload=legacy;
+    state.pathId=locationData.pathId||legacy.selectedLifeId||state.pathId;
+    state.pathName=locationData.pathName||legacy.selectedLifeName||({'home_base':'Home Base','strategic_us_move':'Strategic U.S. Move','global_expat':'Global Expat','explore_then_return':'Explore Then Return'}[state.pathId]||state.pathName);
+    state.overseasBase=locationData.overseasBase||legacy.overseasBase||state.overseasBase;
+    state.usCity=locationData.usCity||legacy.usCity||state.usCity;
+    const spend=vision.monthlyRetirementSpending||vision.monthlySpending||legacy.monthlySpend;
+    state.monthlySpend=typeof spend==='number'?money(spend)+' / month':(spend||state.monthlySpend);
+    state.currentAge=Number((profile.identity||{}).currentAge||locationData.startAge||legacy.startAge||legacy.currentAge||55);
+    const saved=Object.keys(healthcare).length?healthcare:legacy.healthcareStrategy;
+    if(saved&&saved.mode===PAGE_MODE&&saved.answers) state.answers={...saved.answers};
+  }catch(e){console.warn('Could not load Retirement OS healthcare context:',e)}
+  const cfg=modes[PAGE_MODE];
+  state.answers={...cfg.defaults,...state.answers};
+  document.getElementById('pageTitle').textContent=cfg.title;
+  document.getElementById('pageSubtitle').textContent=cfg.subtitle;
+  renderContext();renderQuestions();recalculate();
+  if(new URLSearchParams(location.search).get('view')==='analysis') document.getElementById('analysisPanel').open=true;
+}
 function renderContext(){const items=[['Retirement path',state.pathName],['Overseas base',PAGE_MODE==='us_only'?'Not applicable':state.overseasBase],['U.S. base',PAGE_MODE==='international'?'Optional backstop':state.usCity],['Planning age',String(state.currentAge)],['Monthly budget',state.monthlySpend.split('(')[0]]];document.getElementById('contextGrid').innerHTML=items.map(([a,b])=>`<div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="text-[9px] uppercase tracking-wider font-black text-slate-400">${a}</span><strong class="block text-xs text-slate-900 mt-1 truncate">${b}</strong></div>`).join('')}
 function renderQuestions(){const cfg=modes[PAGE_MODE];document.getElementById('questionArea').innerHTML=cfg.questions.map((q,i)=>`<div><label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2">${i+1}. ${q.label}</label><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${q.options.map(([v,l])=>`<button type="button" class="choice ${state.answers[q.id]===v?'active':''}" onclick="choose('${q.id}','${v}')"><strong class="text-xs text-slate-900">${l}</strong></button>`).join('')}</div></div>`).join('')}
 function choose(id,val){state.answers[id]=val;renderQuestions();recalculate()}
@@ -146,7 +172,21 @@ function recalculate(){const a=state.answers;let annual=0,ltcLow=0,ltcHigh=0,tit
  if(a.risk==='low_premium')confidence='Conditional fit';else if(a.risk==='balanced')confidence='Strong fit';state.recommendation={title,rationale,tradeoff,annual,ltcLow,ltcHigh,s1,s2,s3,confidence};renderRecommendation();renderAnalysis();}
 function renderRecommendation(){const r=state.recommendation;document.getElementById('strategyTitle').textContent=r.title;document.getElementById('strategyRationale').textContent=r.rationale;document.getElementById('confidenceBadge').textContent=r.confidence;document.getElementById('annualCost').textContent=money(r.annual);document.getElementById('ltcReserve').textContent=`${money(r.ltcLow)}–${money(r.ltcHigh)}`;document.getElementById('tradeoff').textContent=r.tradeoff;document.getElementById('takeawayText').textContent=`Log ${r.s1.summary}; then ${r.s2.summary}; and reserve ${money(r.ltcLow)}–${money(r.ltcHigh)} for ${r.s3.summary}.`;document.getElementById('stageCards').innerHTML=[r.s1,r.s2,r.s3].map((s,i)=>`<div class="stage"><span class="text-[9px] uppercase tracking-widest font-black ${i===0?'text-emerald-700':i===1?'text-blue-700':'text-amber-700'}">Stage ${i+1} · ${s.age}</span><strong class="block text-sm text-slate-950 mt-2 leading-snug">${s.summary}</strong></div>`).join('')}
 function renderAnalysis(){const rows=PAGE_MODE==='us_only'?[['Original Medicare + Plan G','$7,600','Broad provider access','Higher premium','Strong'],['Medicare Advantage PPO','$5,200','Lower premium','Networks and prior authorization','Conditional'],['High-deductible Medigap','$4,200','Low carrying cost','Higher cost sharing','Conditional']]:PAGE_MODE==='international'?[['Private international insurance','$4,800','Predictable expat access','Underwriting and age limits','Strong'],['Local public/private hybrid','$3,200','Low cost and local integration','Residency and language complexity','Strong'],['Self-funded + catastrophic','$2,600','Lowest routine cost','High tail risk','Conditional']]:[['Private international → Plan G','$6,200','Strong transition continuity','Higher fixed premium','Strong'],['Local hybrid → Advantage','$4,200','Lower cost','Network complexity after return','Conditional'],['Self-funded → high-deductible','$3,400','Lowest carrying cost','More cash-flow volatility','Conditional']];document.getElementById('analysisBody').innerHTML=rows.map((x,i)=>`<tr class="${i===0?'bg-emerald-50':''}">${x.map((v,j)=>`<td class="p-3 ${j===0?'font-bold text-slate-900':'text-slate-600'}">${v}</td>`).join('')}</tr>`).join('')}
-function saveStrategy(continueFinancial){const r=state.recommendation;const p=state.payload||{};p.healthcareSectionComplete=true;p.healthcareStrategy={mode:PAGE_MODE,recommendedPlanTitle:r.title,confidence:r.confidence,answers:{...state.answers},stage1:r.s1,stage2:r.s2,stage3:{...r.s3,costLow:r.ltcLow,costHigh:r.ltcHigh,costLabel:`${money(r.ltcLow)}–${money(r.ltcHigh)}`},estimatedAnnualMedicalCost:r.annual,estimatedMonthlyMedicalCost:Math.round(r.annual/12),ltcReserveLow:r.ltcLow,ltcReserveHigh:r.ltcHigh,primaryTradeoff:r.tradeoff,takeaway:document.getElementById('takeawayText').textContent,updatedAt:new Date().toISOString()};p.updatedAt=new Date().toISOString();localStorage.setItem('WealthLandingSelectedRoadmap',JSON.stringify(p));showToast('Healthcare strategy saved','Your three-stage decision is now available in the Retirement Blueprint.');setTimeout(()=>{location.href=continueFinancial?'OptimizeRoth.html?source=blueprint':'retirement_builder_v2.html?updated=healthcare'},550)}
+function saveStrategy(continueFinancial){
+  const r=state.recommendation;
+  const strategy={mode:PAGE_MODE,recommendedPlanTitle:r.title,confidence:r.confidence,answers:{...state.answers},stage1:r.s1,stage2:r.s2,stage3:{...r.s3,costLow:r.ltcLow,costHigh:r.ltcHigh,costLabel:`${money(r.ltcLow)}–${money(r.ltcHigh)}`},estimatedAnnualMedicalCost:r.annual,estimatedMonthlyMedicalCost:Math.round(r.annual/12),ltcReserveLow:r.ltcLow,ltcReserveHigh:r.ltcHigh,primaryTradeoff:r.tradeoff,takeaway:document.getElementById('takeawayText').textContent,updatedAt:new Date().toISOString()};
+  const p=state.payload||{};
+  p.healthcareSectionComplete=true;
+  p.healthcareStrategy=strategy;
+  p.updatedAt=new Date().toISOString();
+  localStorage.setItem('WealthLandingSelectedRoadmap',JSON.stringify(p));
+  if(window.RetirementOS){
+    RetirementOS.update({healthcare:strategy,journey:{healthcareSectionComplete:true}},'Healthcare Strategy - '+PAGE_MODE);
+    RetirementOS.syncLegacy();
+  }
+  showToast('Healthcare strategy saved','Your three-stage decision is now available in the Retirement Blueprint.');
+  setTimeout(()=>{location.href=continueFinancial?'financial_strategy_engine_OS_v2.html?source=blueprint':'retirement_builder_OS_v2.html?updated=healthcare'},550)
+}
 function showToast(t,m){document.getElementById('toastTitle').textContent=t;document.getElementById('toastText').textContent=m;const el=document.getElementById('toast');el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),3500)}
 window.addEventListener('load',load);
 </script>
