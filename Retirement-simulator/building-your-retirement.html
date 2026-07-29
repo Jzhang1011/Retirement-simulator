@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJM5CJR4"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-9JMJM5CJR4');
+      gtag('config', 'G-9JMJJ5CJR4');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,6 +227,7 @@
             .no-print { display: none !important; }
         }
     </style>
+  <script src="retirement-os.js"></script>
 </head>
 <body class="antialiased min-h-screen pb-16">
 
@@ -291,7 +292,7 @@
                 <ul>
                   <li><a href="UScitymatcher.html">US Location Planning</a></li>
                   <li><a href="RetiringOverseas.html">International Location Planning</a></li>
-                  <li><a href="#" onclick="event.preventDefault(); window.location.href = getHealthcarePlannerLink();">Healthcare Strategy Planning</a></li>
+                  <li><a href="healthcare_us_strategy.html">Healthcare Strategy Planning</a></li>
                 </ul>
               </div>
             </div>
@@ -378,24 +379,41 @@
       </div>
     </div>
 
-    <!-- STREAMING_CHUNK:Rendering Blueprint View 5-section cards workspace... -->
-    <!-- BLUEPRINT VIEW SECTION -->
-    <section id="blueprintView" class="space-y-5">
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+    <!-- BLUEPRINT COMMAND CENTER -->
+    <section id="blueprintView" class="space-y-6">
+      <div id="nextDecisionPanel" class="bg-slate-950 text-white rounded-2xl p-6 md:p-7 shadow-lg border border-slate-800">
+        <!-- Dynamically rendered via renderNextDecisionPanel() -->
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <span class="text-[10px] uppercase font-black text-emerald-700 tracking-widest">
-              Retirement Blueprint
-            </span>
-            <h2 class="text-xl font-serif-title font-bold text-slate-900">
-              Complete the decisions that shape your retirement
-            </h2>
+            <span class="text-[10px] uppercase font-black text-emerald-700 tracking-widest">Your Decision Record</span>
+            <h2 class="text-2xl font-serif-title font-bold text-slate-900">One blueprint. Five connected decisions.</h2>
+            <p class="text-xs text-slate-500 mt-1">Each planner contributes a clear decision. Detailed calculators remain optional evidence.</p>
           </div>
-          <span class="text-xs text-slate-500 font-semibold">5 Strategic Decision Pillars</span>
+          <div class="text-right">
+            <strong id="blueprintProgressCount" class="text-lg font-black text-slate-900">2 of 5</strong>
+            <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">Decisions complete</span>
+          </div>
         </div>
 
-        <div id="blueprintSectionsGrid" class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <!-- Dynamically rendered via renderBlueprintSections() -->
+        <div id="blueprintSectionsGrid" class="grid grid-cols-1 xl:grid-cols-2 gap-5">
+          <!-- Dynamically rendered via renderBlueprintSections() -->
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="lg:col-span-2 bg-gradient-to-r from-emerald-50 via-teal-50 to-white border border-emerald-200 rounded-2xl p-6">
+          <span class="text-[10px] uppercase font-black text-emerald-700 tracking-widest">How to use this workspace</span>
+          <h3 class="text-lg font-serif-title font-bold text-slate-900 mt-1">You do not need to use every advanced calculator.</h3>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">Complete the guided decision in each section and save the result. Open detailed analysis only when you want to test assumptions, compare alternatives, or validate the recommendation.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6">
+          <span class="text-[10px] uppercase font-black text-blue-700 tracking-widest">Final synthesis</span>
+          <h3 class="text-lg font-serif-title font-bold text-slate-900 mt-1">Retirement Optimizer</h3>
+          <p class="text-xs text-slate-600 mt-2">After core decisions are saved, the optimizer will coordinate timing across location, healthcare, tax, Social Security, and LTC.</p>
+          <button onclick="openRetirementOptimizer()" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl p-3 text-xs font-bold">Review Cross-Decision Opportunities →</button>
         </div>
       </div>
     </section>
@@ -753,6 +771,7 @@
 
     function loadSavedPathAndLocations() {
         try {
+            if(window.RetirementOS){ RetirementOS.syncLegacy(); }
             const rawRoadmap = localStorage.getItem("WealthLandingSelectedRoadmap");
             if (rawRoadmap) {
                 const payload = JSON.parse(rawRoadmap);
@@ -863,136 +882,166 @@
         global_expat: "healthcare_international_comparison.html",
         explore_then_return: "healthcare_transition_strategy.html"
       };
-
       return routes[builderState.activePathId] || "healthcare_us_strategy.html";
     }
 
-    function getHealthcareSummary() {
-      const strategy = builderState.healthcareStrategy;
-
-      if (!strategy) {
-        return "Compare medical coverage, Medicare and long-term care.";
-      }
-
-      if (strategy.stage1Winner && strategy.stage2Winner && strategy.stage3LtcWinner) {
-        return `Pre-65: ${strategy.stage1Winner} • 65+: ${strategy.stage2Winner} • LTC: ${strategy.stage3LtcWinner}`;
-      }
-
-      if (strategy.phase1 && strategy.phase2) {
-        return `${strategy.phase1.location} → ${strategy.phase2.location}`;
-      }
-
-      return "Healthcare strategy saved";
+    function formatMoney(value) {
+      const num = Number(value);
+      if (!Number.isFinite(num)) return value || "Not modeled";
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(num);
     }
 
-    function getFinancialSummary() {
-      const payload = builderState.payloadRaw || {};
-      if (payload.financialSectionComplete) {
-        return "Roth conversion sweep & tax brackets optimized.";
+    function getHealthcareDecision() {
+      const s = builderState.healthcareStrategy;
+      if (!s) return null;
+      if (s.stage1 || s.stage2 || s.stage3) {
+        return {
+          title: s.recommendedPlanTitle || "Lifetime Healthcare Strategy",
+          rows: [
+            [s.stage1?.age || s.stage1?.ageRange || "Pre-65", s.stage1?.summary || s.stage1?.coverage || s.stage1?.location || "Saved"],
+            [s.stage2?.age || s.stage2?.ageRange || "Age 65–78", s.stage2?.summary || s.stage2?.coverage || s.stage2?.location || "Saved"],
+            [s.stage3?.age || s.stage3?.ageRange || "Age 79+", s.stage3?.summary || s.stage3?.careModel || s.stage3?.location || "Saved"]
+          ],
+          metricLabel: "Annual medical cost",
+          metricValue: formatMoney(s.estimatedAnnualMedicalCost || s.estimatedAnnualCost),
+          confidence: s.confidence || "Saved decision"
+        };
       }
-      return "Sequence Roth conversions, IRMAA tiers & withdrawals.";
+      if (s.phase1 && s.phase2) {
+        return {
+          title: s.recommendedPlanTitle || "Transition Healthcare Strategy",
+          rows: [
+            [`Age ${s.phase1.startAge || "Pre-65"}–${s.phase1.endAge || 65}`, `${s.phase1.location || "Overseas"} · ${s.phase1.coverageModelLabel || "Coverage saved"}`],
+            [`Age ${s.phase2.startAge || 65}+`, `${s.phase2.location || "United States"} · ${s.phase2.coverageModel || "Medicare strategy saved"}`],
+            ["Long-term care", s.ltcStrategy || "LTC strategy saved"]
+          ],
+          metricLabel: "Annual medical cost",
+          metricValue: formatMoney(s.estimatedAnnualCost),
+          confidence: s.confidence || "Saved decision"
+        };
+      }
+      if (s.stage1Winner) {
+        return {
+          title: "Three-Stage Healthcare Strategy",
+          rows: [["Pre-65", s.stage1Winner], ["Age 65–78", s.stage2Winner], ["Age 79+ LTC", s.stage3LtcWinner]],
+          metricLabel: "IRMAA surcharge",
+          metricValue: formatMoney(s.irmaaSurcharge || 0),
+          confidence: "Saved decision"
+        };
+      }
+      return null;
     }
 
-    function getEstateSummary() {
-      const payload = builderState.payloadRaw || {};
-      if (payload.estateSectionComplete) {
-        return "Revocable trust & beneficiary structure active.";
-      }
-      return "Model trusts, probate protection & inheritance.";
+    function getFinancialDecision() {
+      const p = builderState.payloadRaw || {};
+      const f = p.financialStrategy || p.rothStrategy || null;
+      if (!f) return null;
+      return {
+        title: f.title || f.recommendedPlanTitle || "Retirement Financial Strategy",
+        rows: [
+          ["Conversion window", f.conversionWindow || `${f.startAge || "—"}–${f.endAge || "—"}`],
+          ["Annual conversion", formatMoney(f.annualConversion || f.conversionAmount)],
+          ["Target bracket", f.targetBracket ? `${f.targetBracket}%` : "Saved" ]
+        ],
+        metricLabel: "Projected estate",
+        metricValue: formatMoney(f.projectedEstate || f.estateValue),
+        confidence: f.confidence || "Saved decision"
+      };
     }
 
-    /* STREAMING_CHUNK:Building Blueprint sections grid generator... */
     function getBlueprintSections() {
-      const payload = builderState.payloadRaw || {};
-
+      const p = builderState.payloadRaw || {};
+      const healthcare = getHealthcareDecision();
+      const financial = getFinancialDecision();
+      const locationComplete = Boolean(p.locationSectionComplete || p.overseasBase || p.usCity);
       return [
         {
-          id: "life",
-          title: "Life",
-          icon: "🧭",
-          complete: Boolean(payload.selectedLifeId),
-          summary: builderState.pathNames[builderState.activePathId] || "Explore Then Return",
-          href: "retirement-preference-discovery.html"
+          id:"life", title:"Life Strategy", icon:"🧭", complete:Boolean(p.selectedLifeId),
+          decisionTitle: builderState.pathNames[builderState.activePathId] || "Retirement lifestyle",
+          rows:[["Chosen path", builderState.pathNames[builderState.activePathId] || "Not selected"],["Primary objective", "Turn retirement capacity into a deliberate life plan"]],
+          href:"retirement-preference-discovery.html", primaryLabel:"Review Life Choice", detailHref:"odyssey-exploration.html"
         },
         {
-          id: "location",
-          title: "Location",
-          icon: "🗺️",
-          complete: Boolean(payload.locationSectionComplete || payload.overseasBase || payload.usCity),
-          summary: getLocationSummary(),
-          href: getLocationPlannerLink()
+          id:"location", title:"Location Strategy", icon:"🗺️", complete:locationComplete,
+          decisionTitle:getLocationSummary(),
+          rows: builderState.activePathId === "explore_then_return" ? [["Active chapter", builderState.userOverseasBase],["Later-life base", builderState.userUSCity]] : [["Selected base", getLocationSummary()],["Why it matters", "Taxes, family access, healthcare, and cost of living"]],
+          href:getLocationPlannerLink(), primaryLabel:locationComplete?"Review Location":"Choose Location", detailHref:getLocationPlannerLink()
         },
         {
-          id: "healthcare",
-          title: "Healthcare & LTC",
-          icon: "🏥",
-          complete: Boolean(payload.healthcareSectionComplete),
-          summary: getHealthcareSummary(),
-          href: getHealthcarePlannerLink()
+          id:"healthcare", title:"Healthcare & LTC Strategy", icon:"🏥", complete:Boolean(p.healthcareSectionComplete),
+          decisionTitle: healthcare?.title || "No healthcare decision saved yet",
+          rows: healthcare?.rows || [["Pre-65", "Choose coverage"],["Age 65+", "Choose Medicare or senior-care strategy"],["Age 79+", "Choose LTC location and funding"]],
+          metricLabel:healthcare?.metricLabel || "Decision output", metricValue:healthcare?.metricValue || "3-stage plan", confidence:healthcare?.confidence || "Not started",
+          href:getHealthcarePlannerLink(), primaryLabel:healthcare?"Review Strategy":"Build Healthcare Strategy", detailHref:getHealthcarePlannerLink()+"?view=analysis"
         },
         {
-          id: "financial",
-          title: "Financial",
-          icon: "📈",
-          complete: Boolean(payload.financialSectionComplete),
-          summary: getFinancialSummary(),
-          href: "OptimizeRoth.html"
+          id:"financial", title:"Financial Strategy", icon:"📈", complete:Boolean(p.financialSectionComplete),
+          decisionTitle:financial?.title || "No financial decision saved yet",
+          rows:financial?.rows || [["Conversion window", "Not selected"],["Annual conversion", "Not selected"],["Target tax bracket", "Not selected"]],
+          metricLabel:financial?.metricLabel || "Core output", metricValue:financial?.metricValue || "Tax and withdrawal plan", confidence:financial?.confidence || "Not started",
+          href:"OptimizeRoth.html", primaryLabel:financial?"Review Financial Strategy":"Build Financial Strategy", detailHref:"OptimizeRoth.html?view=analysis"
         },
         {
-          id: "estate",
-          title: "Estate",
-          icon: "🏛️",
-          complete: Boolean(payload.estateSectionComplete),
-          summary: getEstateSummary(),
-          href: "estate-planner.html"
+          id:"estate", title:"Estate & Legacy Strategy", icon:"🏛️", complete:Boolean(p.estateSectionComplete),
+          decisionTitle:p.estateStrategy?.title || "No estate decision saved yet",
+          rows:p.estateStrategy?.rows || [["Ownership structure", "Not selected"],["Beneficiaries", "Not reviewed"],["Legacy objective", "Not documented"]],
+          href:"estate-planner.html", primaryLabel:p.estateSectionComplete?"Review Estate Strategy":"Build Estate Strategy", detailHref:"estate-planner.html?view=analysis"
         }
       ];
+    }
+
+    function getNextDecision() {
+      const sections = getBlueprintSections();
+      return sections.find(x => !x.complete) || null;
+    }
+
+    function renderNextDecisionPanel() {
+      const el = document.getElementById("nextDecisionPanel");
+      if (!el) return;
+      const next = getNextDecision();
+      if (!next) {
+        el.innerHTML = `<div class="flex flex-col md:flex-row md:items-center justify-between gap-5"><div><span class="text-[10px] uppercase tracking-widest font-black text-emerald-400">Blueprint complete</span><h2 class="text-2xl md:text-3xl font-serif-title font-bold mt-1">Your core retirement decisions are connected.</h2><p class="text-sm text-slate-300 mt-2">Review timing opportunities across location, healthcare, taxes, Social Security, and long-term care.</p></div><button onclick="openRetirementOptimizer()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-6 py-3 rounded-xl text-sm whitespace-nowrap">Optimize My Retirement →</button></div>`;
+        return;
+      }
+      el.innerHTML = `<div class="flex flex-col md:flex-row md:items-center justify-between gap-5"><div><span class="text-[10px] uppercase tracking-widest font-black text-emerald-400">Recommended next decision</span><h2 class="text-2xl md:text-3xl font-serif-title font-bold mt-1">${next.icon} ${next.title}</h2><p class="text-sm text-slate-300 mt-2">Complete the guided decision. The detailed calculator is optional and available for validation.</p></div><a href="${next.href}" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-6 py-3 rounded-xl text-sm whitespace-nowrap">${next.primaryLabel} →</a></div>`;
     }
 
     function renderBlueprintSections() {
       const container = document.getElementById("blueprintSectionsGrid");
       if (!container) return;
-
       const sections = getBlueprintSections();
-
+      const count = sections.filter(x=>x.complete).length;
+      setSafeText("blueprintProgressCount", `${count} of ${sections.length}`);
       container.innerHTML = sections.map(section => `
-        <a href="${section.href}"
-           class="block rounded-2xl border p-4 transition ${
-             section.complete
-               ? "bg-emerald-50 border-emerald-300 hover:border-emerald-400"
-               : "bg-white border-slate-200 hover:border-emerald-400"
-           }">
-
-          <div class="flex justify-between items-start">
-            <span class="text-2xl">${section.icon}</span>
-            <span class="${
-              section.complete
-                ? "text-emerald-700"
-                : "text-amber-500"
-            } font-black text-sm">
-              ${section.complete ? "✓" : "⚡"}
-            </span>
+        <article class="rounded-2xl border p-5 flex flex-col justify-between ${section.complete ? "bg-emerald-50/60 border-emerald-300" : "bg-white border-slate-200"}">
+          <div>
+            <div class="flex justify-between items-start gap-3">
+              <div class="flex items-center gap-3"><span class="text-3xl">${section.icon}</span><div><span class="text-[10px] uppercase tracking-widest font-black ${section.complete?"text-emerald-700":"text-slate-400"}">${section.complete?"Decision saved":"Decision needed"}</span><h3 class="text-lg font-serif-title font-bold text-slate-900">${section.title}</h3></div></div>
+              <span class="w-7 h-7 rounded-full flex items-center justify-center font-black ${section.complete?"bg-emerald-600 text-white":"bg-amber-100 text-amber-700"}">${section.complete?"✓":"!"}</span>
+            </div>
+            <div class="mt-4 bg-white/80 border border-slate-200 rounded-xl p-4">
+              <strong class="text-sm text-slate-900 block">${section.decisionTitle}</strong>
+              <div class="mt-3 space-y-2">${section.rows.map(r=>`<div class="flex justify-between gap-3 text-[11px] border-t border-slate-100 pt-2"><span class="text-slate-500 font-semibold">${r[0]}</span><span class="text-slate-900 font-bold text-right">${r[1]}</span></div>`).join("")}</div>
+              ${section.metricLabel?`<div class="mt-3 pt-3 border-t border-slate-200 flex justify-between text-xs"><span class="text-slate-500 font-bold">${section.metricLabel}</span><strong class="text-emerald-700">${section.metricValue}</strong></div>`:""}
+              ${section.confidence?`<div class="mt-2 text-[10px] text-slate-500">Confidence: <strong class="text-slate-800">${section.confidence}</strong></div>`:""}
+            </div>
           </div>
-
-          <h3 class="text-sm font-bold text-slate-900 mt-3">
-            ${section.title}
-          </h3>
-
-          <p class="text-[11px] text-slate-600 mt-1 leading-relaxed font-medium">
-            ${section.summary}
-          </p>
-
-          <div class="text-[10px] font-bold mt-3 ${
-            section.complete
-              ? "text-emerald-700"
-              : "text-blue-700"
-          }">
-            ${section.complete ? "Review Strategy →" : "Complete Section →"}
+          <div class="mt-4 flex flex-col sm:flex-row gap-2">
+            <a href="${section.href}" class="flex-1 text-center bg-slate-900 hover:bg-slate-800 text-white rounded-xl px-4 py-2.5 text-xs font-bold">${section.primaryLabel}</a>
+            <a href="${section.detailHref}" class="flex-1 text-center bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-4 py-2.5 text-xs font-bold">View Detailed Analysis</a>
           </div>
-        </a>
-      `).join("");
-
+        </article>`).join("");
+      renderNextDecisionPanel();
       updateCompletionFooter();
+    }
+
+    function openRetirementOptimizer() {
+      const p = builderState.payloadRaw || {};
+      if (!p.healthcareSectionComplete || !p.financialSectionComplete) {
+        showToast("More Decisions Needed", "Complete Healthcare and Financial Strategy before cross-decision optimization.");
+        return;
+      }
+      window.location.href = "retirement-optimizer.html";
     }
 
     function updateCompletionFooter() {
@@ -1080,20 +1129,6 @@
     }
 
     /* STREAMING_CHUNK:Defining chapter blueprints with integrated Healthcare links... */
-    function getHealthcareTool() {
-      const labels = {
-        home_base: "U.S. Healthcare & LTC Strategy",
-        strategic_us_move: "U.S. Healthcare & LTC Strategy",
-        global_expat: "International Healthcare & LTC Comparison",
-        explore_then_return: "Transition Healthcare & LTC Strategy"
-      };
-
-      return {
-        name: labels[builderState.activePathId] || "Healthcare & LTC Strategy",
-        link: getHealthcarePlannerLink()
-      };
-    }
-
     function getDynamicChapterBlueprints() {
         const overseas = builderState.userOverseasBase;
         const usCity = builderState.userUSCity;
@@ -1148,7 +1183,7 @@
                         { id: "healthcare_strategy", type: "decision", title: "Complete lifetime healthcare and LTC strategy comparison", done: Boolean(payload.healthcareSectionComplete) },
                         { id: "medicare_enrollment_window", type: "execution", title: "Coordinate Medicare Part A/B 3-month enrollment window before age 65", done: false, requires: "healthcare_strategy" }
                     ],
-                    tool: getHealthcareTool()
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
                 },
                 {
                     number: 3,
@@ -1192,7 +1227,7 @@
                     milestones: [
                         { id: "m4_1", type: "decision", title: "Execute revocable living trust & beneficiary designations", done: Boolean(payload.estateSectionComplete) }
                     ],
-                    tool: getHealthcareTool()
+                    tool: { name: "Lifetime Healthcare & LTC Planner", link: "healthcare_transition_strategy.html" }
                 }
             ]
         };
@@ -1480,15 +1515,13 @@
 
     function downloadRoadmapFile() {
         const exportData = {
-            ...builderState.payloadRaw,
-            version: 2,
+            version: 1,
             exportedAt: new Date().toISOString(),
             selectedLifeId: builderState.activePathId,
             overseasBase: builderState.userOverseasBase,
             usCity: builderState.userUSCity,
             childrenCity: builderState.userChildrenCity,
             monthlySpend: builderState.monthlySpendLabel,
-            healthcareStrategy: builderState.healthcareStrategy || builderState.payloadRaw.healthcareStrategy || null,
             completedMilestones: Array.from(builderState.completedMilestones)
         };
 
@@ -1527,18 +1560,14 @@
                     builderState.completedMilestones = new Set(imported.completedMilestones);
                 }
 
-                const restoredPayload = {
-                    ...imported,
+                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify({
                     selectedLifeId: builderState.activePathId,
                     overseasBase: builderState.userOverseasBase,
                     usCity: builderState.userUSCity,
                     childrenCity: builderState.userChildrenCity,
                     monthlySpend: builderState.monthlySpendLabel,
                     completedMilestones: Array.from(builderState.completedMilestones)
-                };
-                localStorage.setItem("WealthLandingSelectedRoadmap", JSON.stringify(restoredPayload));
-                builderState.payloadRaw = restoredPayload;
-                builderState.healthcareStrategy = restoredPayload.healthcareStrategy || restoredPayload.finalHealthcareStrategy || null;
+                }));
 
                 updateDynamicUI();
                 renderBlueprintSections();
@@ -1677,5 +1706,10 @@
         loadRequestedView();
     };
   </script>
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){if(window.RetirementOS){RetirementOS.syncLegacy();}});
+</script>
 </body>
 </html>
+```eofs
