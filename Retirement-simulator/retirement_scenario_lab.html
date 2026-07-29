@@ -21,7 +21,7 @@
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
     .font-serif{font-family:'Playfair Display',Georgia,serif}
-    .global-header{background:#0B132B;color:#fff;display:flex;align-items:center;justify-space-between;padding:.85rem 2.25rem;border-bottom:1px solid #1E293B;position:sticky;top:0;z-index:50}
+    .global-header{background:#0B132B;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.25rem;border-bottom:1px solid #1E293B;position:sticky;top:0;z-index:50}
     .logo{font-size:1.45rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.04em}.logo span{color:#02B17D}
     .nav-links{display:flex;gap:1.4rem;align-items:center}.nav-links a{color:#94A3B8;text-decoration:none;font-size:.9rem;font-weight:600}.nav-links a:hover{color:#fff}
     .shell{max-width:1600px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
@@ -38,7 +38,7 @@
     select:focus,input[type=number]:focus{border-color:#02B17D;box-shadow:0 0 0 3px rgba(2,177,125,.12)}
     .toggle{display:inline-flex;background:#E2E8F0;border-radius:10px;padding:3px;gap:2px}.toggle button{border:0;background:transparent;border-radius:8px;padding:.5rem .8rem;font-size:.72rem;font-weight:800;color:#64748B;cursor:pointer}.toggle button.active{background:#0B132B;color:#fff;box-shadow:0 2px 8px rgba(15,23,42,.2)}
     .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}.metric{padding:1rem}.metric-label{font-size:.66rem;color:#64748B;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.metric-value{font-size:1.35rem;color:#0B132B;font-weight:800;margin-top:.3rem}.metric-delta{font-size:.68rem;font-weight:700;margin-top:.25rem}.positive{color:#019367}.negative{color:#DC2626}.neutral{color:#64748B}
-    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.chart-card{padding:1rem 1.1rem}.chart-card.wide{grid-column:1/-1}.chart-wrap{height:330px;min-height:330px;position:relative;overflow:hidden}.chart-wrap.tall{height:390px;min-height:390px}.svg-chart{width:100%;height:100%;min-height:300px}.svg-chart svg{display:block;width:100%;height:100%}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.chart-card{padding:1.25rem 1.4rem}.chart-card.wide{grid-column:1/-1}.chart-wrap{height:330px;min-height:330px;position:relative;overflow:hidden}.chart-wrap.tall{height:390px;min-height:390px}.svg-chart{width:100%;height:100%;min-height:300px}.svg-chart svg{display:block;width:100%;height:100%}
     .legend-note{font-size:.68rem;color:#64748B;line-height:1.55}.badge{display:inline-flex;align-items:center;gap:.35rem;border-radius:999px;padding:.35rem .65rem;font-size:.68rem;font-weight:800}.badge-green{background:#ECFDF5;color:#047857;border:1px solid #A7F3D0}.badge-dark{background:#0F172A;color:#fff}.badge-blue{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
     .button{border:0;border-radius:10px;padding:.65rem .9rem;font-size:.75rem;font-weight:800;cursor:pointer;transition:all .15s ease}.button-primary{background:#02B17D;color:#fff}.button-primary:hover{background:#019367}.button-secondary{background:#E2E8F0;color:#334155}.button-secondary:hover{background:#CBD5E1}.button-dark{background:#0B132B;color:#fff}.button-dark:hover{background:#1E293B}
     .insight{background:linear-gradient(135deg,#0B132B,#172554);color:#fff;padding:1.2rem}.insight h3{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin:0 0 .45rem}.insight p{font-size:.78rem;line-height:1.65;color:#CBD5E1;margin:0}
@@ -96,6 +96,7 @@
         <div class="flex flex-wrap gap-2">
           <button class="scenario-chip" onclick="applyPreset('delay_ss')">Delay SS to 70</button>
           <button class="scenario-chip" onclick="applyPreset('high_inflation')">High inflation</button>
+          <button class="scenario-chip" onclick="applyPreset('ltc_event')">Severe LTC Event</button>
           <button class="scenario-chip" onclick="applyPreset('lower_returns')">Lower returns</button>
           <button class="scenario-chip" onclick="applyPreset('college')">College surge</button>
         </div>
@@ -134,6 +135,40 @@
         <div class="control-row">
           <div class="control-head"><label class="control-label">College support years</label><span id="collegeYearsOut" class="control-value"></span></div>
           <input id="collegeYears" type="range" min="0" max="12" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+      </div>
+
+      <!-- HEALTHCARE & LTC STRATEGY OVERRIDES -->
+      <div class="control-section">
+        <div class="control-title">Healthcare & LTC Strategy</div>
+        <div class="control-row">
+          <label class="control-label block mb-2">Healthcare Path Strategy</label>
+          <select id="healthcarePath" onchange="onHealthcarePathChange(); runSimulation()">
+            <option value="us_only">U.S. Only (ACA → Medicare + Plan G/Advantage)</option>
+            <option value="international">International Expat (Overseas Private + Medicare Backstop)</option>
+            <option value="transition">Transition / Hybrid (Explore Overseas → U.S. Return)</option>
+            <option value="custom">Custom Parameters</option>
+          </select>
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Pre-65 Annual Medical</label><span id="pre65MedicalOut" class="control-value"></span></div>
+          <input id="pre65Medical" type="range" min="2000" max="25000" step="500" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Medicare / Post-65 Medical</label><span id="post65MedicalOut" class="control-value"></span></div>
+          <input id="post65Medical" type="range" min="2000" max="20000" step="500" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">LTC Event Start Age</label><span id="ltcStartAgeOut" class="control-value"></span></div>
+          <input id="ltcStartAge" type="range" min="70" max="90" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">LTC Duration (Years)</label><span id="ltcDurationOut" class="control-value"></span></div>
+          <input id="ltcDuration" type="range" min="0" max="10" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">LTC Annual Out-of-Pocket</label><span id="ltcCostOut" class="control-value"></span></div>
+          <input id="ltcCost" type="range" min="0" max="200000" step="5000" oninput="updateControlLabels(); runSimulation()">
         </div>
       </div>
 
@@ -208,7 +243,7 @@
         </article>
 
         <article class="panel chart-card">
-          <div class="mb-3"><h2 class="font-serif text-xl font-bold text-slate-950">Spending Over Time</h2><p class="legend-note mt-1">Core household, travel, healthcare, college support, and taxes shown as separate stacked uses of cash.</p></div>
+          <div class="mb-3"><h2 class="font-serif text-xl font-bold text-slate-950">Spending Over Time</h2><p class="legend-note mt-1">Core household, travel, routine healthcare, LTC care events, college, and taxes shown as stacked uses of cash.</p></div>
           <div class="chart-wrap"><div id="spendingChart" class="svg-chart" role="img" aria-label="Spending over time stacked bar chart"></div></div>
         </article>
 
@@ -242,7 +277,7 @@
 <script>
   const fmtCompact = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1});
   const fmtFull = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
-  const chartColors = ['#334155','#02B17D','#2563EB','#F59E0B','#8B5CF6','#EC4899'];
+  const chartColors = ['#334155','#02B17D','#2563EB','#EF4444','#F59E0B','#8B5CF6','#EC4899'];
   let dollarMode='future';
   let baselineResult=null;
   let currentResult=null;
@@ -311,13 +346,22 @@
 
   function findData(os){
     const p=os.personal||{}, a=os.assets||{}, v=os.vision||{}, f=os.financialStrategy||{}, h=os.healthcareStrategy||{}, legacy=JSON.parse(localStorage.getItem('RetirementProfile')||'{}');
+    
+    // Extract healthcare strategy mode & costs if available
+    const pathMode = h.mode || (os.payloadRaw && os.payloadRaw.healthcareStrategy && os.payloadRaw.healthcareStrategy.mode) || 'us_only';
+    
     return {
       currentAge: n(extractValue(pick(p.currentAge, legacy.currentAge)), 51),
       retirementAge: n(extractValue(pick(v.retirementAge, legacy.retirementAge)), 60),
       ssAge: n(extractValue(pick(f.socialSecurityStartAge, legacy.ssAge)), 67),
       annualSpending: n(extractValue(pick(v.annualSpending, v.monthlySpending ? extractValue(v.monthlySpending)*12 : null, legacy.annualSpending)), 102000),
       annualTravel: n(extractValue(pick(v.annualTravel, legacy.annualTravel)), 20000),
-      annualHealthcare: n(extractValue(pick(h.estimatedAnnualMedicalCost, h.annualCost, legacy.annualHealthcare)), 12000),
+      healthcarePath: pathMode,
+      pre65Medical: pathMode === 'international' ? 4800 : (pathMode === 'transition' ? 4800 : 12000),
+      post65Medical: pathMode === 'international' ? 4800 : (pathMode === 'transition' ? 6200 : 7600),
+      ltcStartAge: n(extractValue(pick(h.ltcStartAge)), 80),
+      ltcDuration: n(extractValue(pick(h.ltcDuration)), 3),
+      ltcCost: n(extractValue(pick(h.ltcCost)), 90000),
       pretax: n(extractValue(pick(a.pretax, a.pretaxBalance, legacy.pretax)), 4000000),
       roth: n(extractValue(pick(a.roth, a.rothBalance, legacy.roth)), 300000),
       brokerage: n(extractValue(pick(a.brokerage, a.brokerageBalance, legacy.brokerage)), 700000),
@@ -338,7 +382,10 @@
     const map={
       retirementAge:x.retirementAge, ssAge:x.ssAge, collegeStartAge:x.collegeStartAge,
       annualSpending:x.annualSpending, annualTravel:x.annualTravel, annualTuition:x.tuition,
-      collegeYears:x.collegeYears, inflationRate:x.inflation*100, healthInflationRate:x.healthInflation*100,
+      collegeYears:x.collegeYears, healthcarePath:x.healthcarePath||'us_only',
+      pre65Medical:x.pre65Medical, post65Medical:x.post65Medical,
+      ltcStartAge:x.ltcStartAge, ltcDuration:x.ltcDuration, ltcCost:x.ltcCost,
+      inflationRate:x.inflation*100, healthInflationRate:x.healthInflation*100,
       growthRate:x.growth*100, capGainYield:x.capGainYield*100, targetBracket:x.targetBracket,
       conversionStartAge:x.conversionStartAge, conversionCap:x.conversionCap, stateTaxRate:x.stateTaxRate*100
     };
@@ -359,6 +406,12 @@
       annualTravel:n(document.getElementById('annualTravel').value, 20000),
       tuition:n(document.getElementById('annualTuition').value, 0),
       collegeYears:n(document.getElementById('collegeYears').value, 4),
+      healthcarePath:document.getElementById('healthcarePath').value,
+      pre65Medical:n(document.getElementById('pre65Medical').value, 12000),
+      post65Medical:n(document.getElementById('post65Medical').value, 7600),
+      ltcStartAge:n(document.getElementById('ltcStartAge').value, 80),
+      ltcDuration:n(document.getElementById('ltcDuration').value, 3),
+      ltcCost:n(document.getElementById('ltcCost').value, 90000),
       inflation:n(document.getElementById('inflationRate').value, 3)/100,
       healthInflation:n(document.getElementById('healthInflationRate').value, 5.5)/100,
       growth:n(document.getElementById('growthRate').value, 6)/100,
@@ -370,22 +423,42 @@
     }
   }
 
+  function onHealthcarePathChange() {
+    const path = document.getElementById('healthcarePath').value;
+    if (path === 'us_only') {
+      document.getElementById('pre65Medical').value = 12000;
+      document.getElementById('post65Medical').value = 7600;
+    } else if (path === 'international') {
+      document.getElementById('pre65Medical').value = 4800;
+      document.getElementById('post65Medical').value = 4800;
+    } else if (path === 'transition') {
+      document.getElementById('pre65Medical').value = 4800;
+      document.getElementById('post65Medical').value = 6200;
+    }
+    updateControlLabels();
+  }
+
   function updateControlLabels(){
     const $=(id)=>document.getElementById(id);
-    $('retirementAgeOut').textContent=`Age ${$('retirementAge').value}`;
-    $('ssAgeOut').textContent=`Age ${$('ssAge').value}`;
-    $('collegeStartOut').textContent=`Age ${$('collegeStartAge').value}`;
-    $('spendingOut').textContent=fmtCompact.format(n($('annualSpending').value));
-    $('travelOut').textContent=fmtCompact.format(n($('annualTravel').value));
-    $('tuitionOut').textContent=fmtCompact.format(n($('annualTuition').value));
-    $('collegeYearsOut').textContent=`${$('collegeYears').value} years`;
-    $('inflationOut').textContent=`${n($('inflationRate').value).toFixed(1)}%`;
-    $('healthInflationOut').textContent=`${n($('healthInflationRate').value).toFixed(1)}%`;
-    $('growthOut').textContent=`${n($('growthRate').value).toFixed(1)}%`;
-    $('capGainYieldOut').textContent=`${n($('capGainYield').value).toFixed(1)}%`;
-    $('conversionStartOut').textContent=`Age ${$('conversionStartAge').value}`;
-    $('conversionCapOut').textContent=fmtCompact.format(n($('conversionCap').value));
-    $('stateTaxOut').textContent=`${n($('stateTaxRate').value).toFixed(1)}%`;
+    if($('retirementAgeOut')) $('retirementAgeOut').textContent=`Age ${$('retirementAge').value}`;
+    if($('ssAgeOut')) $('ssAgeOut').textContent=`Age ${$('ssAge').value}`;
+    if($('collegeStartOut')) $('collegeStartOut').textContent=`Age ${$('collegeStartAge').value}`;
+    if($('spendingOut')) $('spendingOut').textContent=fmtCompact.format(n($('annualSpending').value));
+    if($('travelOut')) $('travelOut').textContent=fmtCompact.format(n($('annualTravel').value));
+    if($('tuitionOut')) $('tuitionOut').textContent=fmtCompact.format(n($('annualTuition').value));
+    if($('collegeYearsOut')) $('collegeYearsOut').textContent=`${$('collegeYears').value} years`;
+    if($('pre65MedicalOut')) $('pre65MedicalOut').textContent=fmtCompact.format(n($('pre65Medical').value)) + '/yr';
+    if($('post65MedicalOut')) $('post65MedicalOut').textContent=fmtCompact.format(n($('post65Medical').value)) + '/yr';
+    if($('ltcStartAgeOut')) $('ltcStartAgeOut').textContent=`Age ${$('ltcStartAge').value}`;
+    if($('ltcDurationOut')) $('ltcDurationOut').textContent=`${$('ltcDuration').value} yrs`;
+    if($('ltcCostOut')) $('ltcCostOut').textContent=fmtCompact.format(n($('ltcCost').value)) + '/yr';
+    if($('inflationOut')) $('inflationOut').textContent=`${n($('inflationRate').value).toFixed(1)}%`;
+    if($('healthInflationOut')) $('healthInflationOut').textContent=`${n($('healthInflationRate').value).toFixed(1)}%`;
+    if($('growthOut')) $('growthOut').textContent=`${n($('growthRate').value).toFixed(1)}%`;
+    if($('capGainYieldOut')) $('capGainYieldOut').textContent=`${n($('capGainYield').value).toFixed(1)}%`;
+    if($('conversionStartOut')) $('conversionStartOut').textContent=`Age ${$('conversionStartAge').value}`;
+    if($('conversionCapOut')) $('conversionCapOut').textContent=fmtCompact.format(n($('conversionCap').value));
+    if($('stateTaxOut')) $('stateTaxOut').textContent=`${n($('stateTaxRate').value).toFixed(1)}%`;
   }
 
   function federalTax(taxable){
@@ -422,7 +495,14 @@
       const otherIncome=0;
       const core=age>=x.retirementAge?n(x.annualSpending,102000)*inflationFactor:n(x.annualSpending,102000)*.75*inflationFactor;
       const travel=age>=x.retirementAge&&age<80?n(x.annualTravel,20000)*inflationFactor:n(x.annualTravel,20000)*.35*inflationFactor;
-      const healthcare=n(x.annualHealthcare,12000)*healthFactor;
+      
+      // Multi-stage Medical & LTC Calculations
+      const baseMedical = age < 65 ? n(x.pre65Medical, 12000) : n(x.post65Medical, 7600);
+      const healthcare = baseMedical * healthFactor;
+      
+      const isLtcActive = age >= n(x.ltcStartAge, 80) && age < (n(x.ltcStartAge, 80) + n(x.ltcDuration, 3));
+      const ltcEventCost = isLtcActive ? n(x.ltcCost, 90000) * healthFactor : 0;
+
       const college=(age>=x.collegeStartAge&&age<x.collegeStartAge+x.collegeYears)?n(x.tuition,0)*(Math.pow(1.05, age-x.collegeStartAge)):0;
 
       let conversion=0;
@@ -446,7 +526,7 @@
       const irmaa=(age>=65&&taxableOrdinary>206000)?(taxableOrdinary>322000?9000:4500):0;
       const taxes=fed+state+capitalGainsTax+payrollOther+irmaa;
 
-      let need=core+travel+healthcare+collegeGap+taxes-earnings-ss-otherIncome;
+      let need=core+travel+healthcare+ltcEventCost+collegeGap+taxes-earnings-ss-otherIncome;
       let brokerageDraw=0, pretaxDraw=0, rothDraw=0, cashDraw=0;
 
       if(need>0){cashDraw=Math.min(cash,need); cash-=cashDraw; need-=cashDraw;}
@@ -460,12 +540,12 @@
       if(total<lowest){lowest=total; lowestAge=age;}
 
       cumulativeTax+=taxes;
-      cumulativeSpend+=core+travel+healthcare+college;
+      cumulativeSpend+=core+travel+healthcare+ltcEventCost+college;
 
       rows.push({
         age, t, pretax, roth, brokerage, cash, home, college529,
         fed, state, capitalGainsTax, payrollOther, irmaa,
-        core, travel, healthcare, college, taxes,
+        core, travel, healthcare, ltcEventCost, college, taxes,
         earnings, ss, otherIncome, pretaxDraw, rothDraw, brokerageDraw, cashDraw,
         total, inflationFactor
       });
@@ -491,13 +571,16 @@
     return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[ch]));
   }
 
+  /* Refined SVG Stacked Bar Visual Rendering with Crisp Styling, Clean Gridlines, and Straight Numbered X-Axis */
   function renderSvgStackedBar(container, datasets, rows){
     if (!container) return;
     const sample = everyYears(rows);
     const rect = container.getBoundingClientRect();
     const width = Math.max(320, Math.floor(rect.width || container.clientWidth || 700));
     const height = Math.max(260, Math.floor(rect.height || container.clientHeight || 330));
-    const pad = { l: 75, r: 20, t: 25, b: 65 };
+    
+    // Adjusted padding for clean layout with top legend and clean bottom numbers
+    const pad = { l: 65, r: 20, t: 35, b: 45 };
     const plotW = Math.max(100, width - pad.l - pad.r);
     const plotH = Math.max(100, height - pad.t - pad.b);
 
@@ -512,14 +595,14 @@
     const parts = [];
 
     parts.push(`<svg viewBox="0 0 ${width} ${height}" style="width:100%;height:100%;display:block" xmlns="http://www.w3.org/2000/svg">`);
-    parts.push(`<rect width="${width}" height="${height}" fill="#ffffff" rx="12"/>`);
+    parts.push(`<rect width="${width}" height="${height}" fill="#ffffff" rx="14"/>`);
 
     /* Horizontal grid lines and Y-axis labels */
     for(let i=0; i<=5; i++){
       const y = pad.t + plotH - (plotH * i / 5);
       const val = max * i / 5;
-      parts.push(`<line x1="${pad.l}" y1="${y}" x2="${pad.l+plotW}" y2="${y}" stroke="#F1F5F9" stroke-width="1"/>`);
-      parts.push(`<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-family="Plus Jakarta Sans,sans-serif" font-size="10" font-weight="600" fill="#64748B">${escapeXml(fmtCompact.format(val))}</text>`);
+      parts.push(`<line x1="${pad.l}" y1="${y}" x2="${pad.l+plotW}" y2="${y}" stroke="#F1F5F9" stroke-width="1.2"/>`);
+      parts.push(`<text x="${pad.l-10}" y="${y+4}" text-anchor="end" font-family="Plus Jakarta Sans,sans-serif" font-size="10.5" font-weight="600" fill="#94A3B8">${escapeXml(fmtCompact.format(val))}</text>`);
     }
 
     /* Stacked Bars */
@@ -531,29 +614,31 @@
         if(bh > 0){
           const x = pad.l + idx * slot + (slot - barW) / 2;
           const y = yBase - bh;
-          parts.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(1, bh).toFixed(1)}" fill="${d.color||chartColors[di%chartColors.length]}" rx="1"><title>${escapeXml(d.label)} — Age ${r.age}: ${escapeXml(fmtFull.format(val))}</title></rect>`);
+          const color = d.color || chartColors[di % chartColors.length];
+          parts.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(1, bh).toFixed(1)}" fill="${color}" rx="1.5" class="chart-bar"><title>${escapeXml(d.label)} — Age ${r.age}: ${escapeXml(fmtFull.format(val))}</title></rect>`);
           yBase -= bh;
         }
       });
 
-      /* X-axis ticks */
+      /* X-axis ticks: NUMBER ONLY, STRAIGHT HORIZONTAL, CENTERED BENEATH BARS */
       if(idx % 2 === 0 || idx === sample.length - 1){
         const x = pad.l + idx * slot + slot / 2;
-        const y = pad.t + plotH + 18;
-        parts.push(`<text x="${x.toFixed(1)}" y="${y}" transform="rotate(-35 ${x.toFixed(1)} ${y})" text-anchor="end" font-family="Plus Jakarta Sans,sans-serif" font-size="10" font-weight="600" fill="#64748B">Age ${r.age}</text>`);
+        const y = pad.t + plotH + 20;
+        parts.push(`<text x="${x.toFixed(1)}" y="${y}" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="11" font-weight="600" fill="#64748B">${r.age}</text>`);
       }
     });
 
-    /* Interactive Legend */
-    let lx = pad.l, ly = height - 18;
+    /* Interactive Top Legend with Clean Circles */
+    let lx = pad.l, ly = 16;
     datasets.forEach((d, i) => {
-      const estimated = d.label.length * 5.8 + 32;
+      const estimated = d.label.length * 6.5 + 24;
       if(lx + estimated > width - pad.r){
         lx = pad.l;
-        ly += 14;
+        ly += 16;
       }
-      parts.push(`<rect x="${lx}" y="${ly-8}" width="8" height="8" rx="2" fill="${d.color||chartColors[i%chartColors.length]}"/>`);
-      parts.push(`<text x="${lx+12}" y="${ly-1}" font-family="Plus Jakarta Sans,sans-serif" font-size="9" font-weight="700" fill="#475569">${escapeXml(d.label)}</text>`);
+      const color = d.color || chartColors[i % chartColors.length];
+      parts.push(`<circle cx="${lx+4}" cy="${ly-3}" r="4" fill="${color}"/>`);
+      parts.push(`<text x="${lx+12}" y="${ly}" font-family="Plus Jakarta Sans,sans-serif" font-size="10.5" font-weight="600" fill="#475569">${escapeXml(d.label)}</text>`);
       lx += estimated;
     });
 
@@ -571,8 +656,28 @@
     if(!result || !Array.isArray(result.rows) || !result.rows.length) return;
     buildChart('assetChart',[{label:'Pretax',get:r=>r.pretax,color:'#334155'},{label:'Roth',get:r=>r.roth,color:'#02B17D'},{label:'Brokerage',get:r=>r.brokerage,color:'#2563EB'},{label:'Cash',get:r=>r.cash,color:'#F59E0B'},{label:'Home equity',get:r=>r.home,color:'#8B5CF6'},{label:'529',get:r=>r.college529,color:'#EC4899'}],result.rows);
     buildChart('taxChart',[{label:'Federal income tax',get:r=>r.fed,color:'#0F172A'},{label:'State income tax',get:r=>r.state,color:'#2563EB'},{label:'Capital-gains tax',get:r=>r.capitalGainsTax,color:'#F59E0B'},{label:'Payroll / other tax',get:r=>r.payrollOther,color:'#8B5CF6'},{label:'IRMAA-related cost',get:r=>r.irmaa,color:'#EC4899'}],result.rows);
-    buildChart('spendingChart',[{label:'Core household',get:r=>r.core,color:'#334155'},{label:'Travel',get:r=>r.travel,color:'#02B17D'},{label:'Healthcare',get:r=>r.healthcare,color:'#2563EB'},{label:'College support',get:r=>r.college,color:'#F59E0B'},{label:'Taxes',get:r=>r.taxes,color:'#DC2626'}],result.rows);
+    buildChart('spendingChart',[{label:'Core household',get:r=>r.core,color:'#334155'},{label:'Travel',get:r=>r.travel,color:'#02B17D'},{label:'Routine Healthcare',get:r=>r.healthcare,color:'#2563EB'},{label:'LTC Care Event',get:r=>r.ltcEventCost,color:'#EF4444'},{label:'College support',get:r=>r.college,color:'#F59E0B'},{label:'Taxes',get:r=>r.taxes,color:'#DC2626'}],result.rows);
     buildChart('incomeChart',[{label:'Earnings',get:r=>r.earnings,color:'#334155'},{label:'Social Security',get:r=>r.ss,color:'#02B17D'},{label:'Pretax withdrawals',get:r=>r.pretaxDraw,color:'#2563EB'},{label:'Roth withdrawals',get:r=>r.rothDraw,color:'#8B5CF6'},{label:'Brokerage withdrawals',get:r=>r.brokerageDraw,color:'#F59E0B'},{label:'Cash withdrawals',get:r=>r.cashDraw,color:'#94A3B8'}],result.rows);
+  }
+
+  function applyPreset(name){
+    if(name==='delay_ss') document.getElementById('ssAge').value=70;
+    if(name==='high_inflation'){
+      document.getElementById('inflationRate').value=5;
+      document.getElementById('healthInflationRate').value=8;
+    }
+    if(name==='ltc_event'){
+      document.getElementById('ltcStartAge').value=80;
+      document.getElementById('ltcDuration').value=3;
+      document.getElementById('ltcCost').value=120000;
+    }
+    if(name==='lower_returns') document.getElementById('growthRate').value=3.5;
+    if(name==='college'){
+      document.getElementById('annualTuition').value=100000;
+      document.getElementById('collegeYears').value=8;
+    }
+    updateControlLabels();
+    runSimulation();
   }
 
   function displayValue(v){return fmtCompact.format(n(v,0))}
@@ -619,11 +724,26 @@
     document.getElementById('insightText').textContent=`Terminal assets change by ${fmtFull.format(assetD)}, lifetime tax by ${fmtFull.format(taxD)}, and modeled lifetime spending by ${fmtFull.format(spendD)}. Review the stacked bars to see which years and categories create the difference.`;
   }
 
+  function persistUserState() {
+    try {
+      const os = getOS();
+      os.lastActiveLabState = {
+        timestamp: new Date().toISOString(),
+        inputs: getInputs(),
+        dollarMode: dollarMode
+      };
+      localStorage.setItem('WealthLandingRetirementOS', JSON.stringify(os));
+    } catch (e) {
+      console.warn('Could not save user state to local storage:', e);
+    }
+  }
+
   function runSimulation(){
     currentResult=simulate(getInputs());
     updateMetrics(currentResult);
     renderCharts(currentResult);
     explain(currentResult);
+    persistUserState();
   }
 
   function setDollarMode(mode){
@@ -631,25 +751,11 @@
     document.getElementById('futureDollarBtn').classList.toggle('active',mode==='future');
     document.getElementById('currentDollarBtn').classList.toggle('active',mode==='current');
     if(currentResult) renderCharts(currentResult);
+    persistUserState();
   }
 
   function resetScenario(){
     setInputs(baselineInputs);
-    runSimulation();
-  }
-
-  function applyPreset(name){
-    if(name==='delay_ss') document.getElementById('ssAge').value=70;
-    if(name==='high_inflation'){
-      document.getElementById('inflationRate').value=5;
-      document.getElementById('healthInflationRate').value=8;
-    }
-    if(name==='lower_returns') document.getElementById('growthRate').value=3.5;
-    if(name==='college'){
-      document.getElementById('annualTuition').value=100000;
-      document.getElementById('collegeYears').value=8;
-    }
-    updateControlLabels();
     runSimulation();
   }
 
@@ -690,10 +796,23 @@
 
   function initializeLab(){
     try{
-      baselineInputs=findData(getOS());
-      setInputs(baselineInputs);
-      baselineResult=simulate(baselineInputs);
-      currentResult=baselineResult;
+      const os = getOS();
+      baselineInputs = findData(os);
+
+      const savedState = os.lastActiveLabState;
+      if (savedState && savedState.inputs) {
+        const restoredInputs = { ...baselineInputs, ...savedState.inputs };
+        setInputs(restoredInputs);
+        if (savedState.dollarMode) {
+          setDollarMode(savedState.dollarMode);
+        }
+      } else {
+        setInputs(baselineInputs);
+      }
+
+      baselineResult = simulate(baselineInputs);
+      currentResult = simulate(getInputs());
+      
       updateMetrics(currentResult);
       requestAnimationFrame(() => renderCharts(currentResult));
       explain(currentResult);
