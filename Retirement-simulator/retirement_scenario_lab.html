@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9JMJJ5CJR4');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retirement Scenario Lab | WealthLanding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{--navy:#0B132B;--mint:#02B17D;--mint-dark:#019367;--bg:#F6F8FA;--card:#fff;--border:#E2E8F0;--text:#1E293B;--muted:#64748B}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+    .font-serif{font-family:'Playfair Display',Georgia,serif}
+    .global-header{background:#0B132B;color:#fff;display:flex;align-items:center;justify-space-between;padding:.85rem 2.25rem;border-bottom:1px solid #1E293B;position:sticky;top:0;z-index:50}
+    .logo{font-size:1.45rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.04em}.logo span{color:#02B17D}
+    .nav-links{display:flex;gap:1.4rem;align-items:center}.nav-links a{color:#94A3B8;text-decoration:none;font-size:.9rem;font-weight:600}.nav-links a:hover{color:#fff}
+    .shell{max-width:1600px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+    .lab-grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:1.25rem;align-items:start}
+    .panel{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.04)}
+    .controls{position:sticky;top:82px;max-height:calc(100vh - 100px);overflow:auto}
+    .control-section{padding:1rem 1.15rem;border-top:1px solid #EDF2F7}.control-section:first-of-type{border-top:0}
+    .control-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#334155;margin-bottom:.75rem}
+    .control-row{margin-bottom:.95rem}.control-row:last-child{margin-bottom:0}
+    .control-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.35rem}
+    .control-label{font-size:.75rem;font-weight:700;color:#334155}.control-value{font-size:.72rem;font-weight:800;color:#019367;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:999px;padding:.15rem .5rem;white-space:nowrap}
+    input[type=range]{width:100%;accent-color:#02B17D}
+    select,input[type=number]{width:100%;border:1px solid #CBD5E1;background:#F8FAFC;border-radius:10px;padding:.6rem .7rem;font-size:.78rem;font-weight:600;color:#1E293B;outline:none}
+    select:focus,input[type=number]:focus{border-color:#02B17D;box-shadow:0 0 0 3px rgba(2,177,125,.12)}
+    .toggle{display:inline-flex;background:#E2E8F0;border-radius:10px;padding:3px;gap:2px}.toggle button{border:0;background:transparent;border-radius:8px;padding:.5rem .8rem;font-size:.72rem;font-weight:800;color:#64748B;cursor:pointer}.toggle button.active{background:#0B132B;color:#fff;box-shadow:0 2px 8px rgba(15,23,42,.2)}
+    .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}.metric{padding:1rem}.metric-label{font-size:.66rem;color:#64748B;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.metric-value{font-size:1.35rem;color:#0B132B;font-weight:800;margin-top:.3rem}.metric-delta{font-size:.68rem;font-weight:700;margin-top:.25rem}.positive{color:#019367}.negative{color:#DC2626}.neutral{color:#64748B}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.chart-card{padding:1rem 1.1rem}.chart-card.wide{grid-column:1/-1}.chart-wrap{height:330px;min-height:330px;position:relative;overflow:hidden}.chart-wrap.tall{height:390px;min-height:390px}.svg-chart{width:100%;height:100%;min-height:300px}.svg-chart svg{display:block;width:100%;height:100%}
+    .legend-note{font-size:.68rem;color:#64748B;line-height:1.55}.badge{display:inline-flex;align-items:center;gap:.35rem;border-radius:999px;padding:.35rem .65rem;font-size:.68rem;font-weight:800}.badge-green{background:#ECFDF5;color:#047857;border:1px solid #A7F3D0}.badge-dark{background:#0F172A;color:#fff}.badge-blue{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+    .button{border:0;border-radius:10px;padding:.65rem .9rem;font-size:.75rem;font-weight:800;cursor:pointer;transition:all .15s ease}.button-primary{background:#02B17D;color:#fff}.button-primary:hover{background:#019367}.button-secondary{background:#E2E8F0;color:#334155}.button-secondary:hover{background:#CBD5E1}.button-dark{background:#0B132B;color:#fff}.button-dark:hover{background:#1E293B}
+    .insight{background:linear-gradient(135deg,#0B132B,#172554);color:#fff;padding:1.2rem}.insight h3{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin:0 0 .45rem}.insight p{font-size:.78rem;line-height:1.65;color:#CBD5E1;margin:0}
+    .scenario-chip{border:1px solid #CBD5E1;background:#fff;border-radius:10px;padding:.55rem .7rem;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s ease}.scenario-chip:hover{border-color:#02B17D;color:#019367;background:#F0FDF4}
+    
+    /* Custom Notification Dialog UI */
+    .dialog-backdrop{position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s ease}
+    .dialog-backdrop.open{opacity:1;pointer-events:auto}
+    .dialog-box{background:#fff;border-radius:20px;padding:1.75rem;max-width:440px;width:90%;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);transform:scale(.95);transition:transform .2s ease}
+    .dialog-backdrop.open .dialog-box{transform:scale(1)}
+    
+    @media(max-width:1200px){.lab-grid{grid-template-columns:310px minmax(0,1fr)}.metric-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:900px){.global-header{padding:.8rem 1rem}.nav-links{display:none}.shell{padding:1rem}.lab-grid{grid-template-columns:1fr}.controls{position:relative;top:auto;max-height:none}.chart-grid{grid-template-columns:1fr}.chart-card.wide{grid-column:auto}.metric-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+
+<header class="global-header">
+  <a href="/" class="logo">Wealth<span>Landing</span></a>
+  <nav class="nav-links" aria-label="Retirement tools">
+    <a href="retirement_builder_OS_v2.html">Builder</a>
+    <a href="financial_strategy_engine_decision_lab.html">Financial Decision Lab</a>
+    <a href="#" style="color:white">Advanced Scenario Lab</a>
+  </nav>
+  <div class="badge badge-green">Advanced users</div>
+</header>
+
+<main class="shell">
+  <section class="mb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+    <div>
+      <div class="badge badge-blue mb-2">Retirement Flight Simulator</div>
+      <h1 class="font-serif text-3xl md:text-5xl font-bold text-slate-950 tracking-tight">Retirement Scenario Lab</h1>
+      <p class="text-sm text-slate-600 mt-2 max-w-3xl">Start with your Retirement OS plan, change one life assumption at a time, and see how taxes, assets, spending, and income sources evolve over the full retirement horizon.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="toggle" aria-label="Dollar view">
+        <button id="futureDollarBtn" class="active" onclick="setDollarMode('future')">Future $</button>
+        <button id="currentDollarBtn" onclick="setDollarMode('current')">Current $</button>
+      </div>
+      <button class="button button-secondary" onclick="resetScenario()">Reset baseline</button>
+      <button class="button button-dark" onclick="saveScenario()">Save scenario</button>
+    </div>
+  </section>
+
+  <div class="lab-grid">
+    <aside class="panel controls">
+      <div class="p-5 bg-slate-950 text-white rounded-t-[18px]">
+        <div class="text-[10px] uppercase tracking-[.18em] text-emerald-400 font-black">Scenario overrides</div>
+        <h2 class="font-serif text-xl font-bold mt-1">Change the assumptions</h2>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">These controls do not overwrite your Blueprint until you explicitly adopt a scenario.</p>
+      </div>
+
+      <div class="control-section">
+        <div class="control-title">Quick scenarios</div>
+        <div class="flex flex-wrap gap-2">
+          <button class="scenario-chip" onclick="applyPreset('delay_ss')">Delay SS to 70</button>
+          <button class="scenario-chip" onclick="applyPreset('high_inflation')">High inflation</button>
+          <button class="scenario-chip" onclick="applyPreset('lower_returns')">Lower returns</button>
+          <button class="scenario-chip" onclick="applyPreset('college')">College surge</button>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div class="control-title">Life timing</div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Retirement age</label><span id="retirementAgeOut" class="control-value"></span></div>
+          <input id="retirementAge" type="range" min="50" max="70" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Social Security start age</label><span id="ssAgeOut" class="control-value"></span></div>
+          <input id="ssAge" type="range" min="62" max="70" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">College support start age</label><span id="collegeStartOut" class="control-value"></span></div>
+          <input id="collegeStartAge" type="range" min="45" max="75" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div class="control-title">Household spending</div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Core annual spending</label><span id="spendingOut" class="control-value"></span></div>
+          <input id="annualSpending" type="range" min="50000" max="250000" step="5000" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Annual travel</label><span id="travelOut" class="control-value"></span></div>
+          <input id="annualTravel" type="range" min="0" max="100000" step="2500" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Annual college tuition</label><span id="tuitionOut" class="control-value"></span></div>
+          <input id="annualTuition" type="range" min="0" max="200000" step="5000" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">College support years</label><span id="collegeYearsOut" class="control-value"></span></div>
+          <input id="collegeYears" type="range" min="0" max="12" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div class="control-title">Economic assumptions</div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">General inflation</label><span id="inflationOut" class="control-value"></span></div>
+          <input id="inflationRate" type="range" min="1" max="7" step="0.1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Healthcare inflation</label><span id="healthInflationOut" class="control-value"></span></div>
+          <input id="healthInflationRate" type="range" min="2" max="10" step="0.1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Portfolio growth</label><span id="growthOut" class="control-value"></span></div>
+          <input id="growthRate" type="range" min="1" max="10" step="0.1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Brokerage capital-gain yield</label><span id="capGainYieldOut" class="control-value"></span></div>
+          <input id="capGainYield" type="range" min="0" max="8" step="0.1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+      </div>
+
+      <div class="control-section">
+        <div class="control-title">Tax and conversion policy</div>
+        <div class="control-row">
+          <label class="control-label block mb-2">Target federal bracket</label>
+          <select id="targetBracket" onchange="runSimulation()">
+            <option value="0.22">22%</option><option value="0.24">24%</option><option value="0.32">32%</option><option value="0.35">35%</option>
+          </select>
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Conversion start age</label><span id="conversionStartOut" class="control-value"></span></div>
+          <input id="conversionStartAge" type="range" min="45" max="75" step="1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">Annual conversion cap</label><span id="conversionCapOut" class="control-value"></span></div>
+          <input id="conversionCap" type="range" min="0" max="500000" step="10000" oninput="updateControlLabels(); runSimulation()">
+        </div>
+        <div class="control-row">
+          <div class="control-head"><label class="control-label">State income-tax rate</label><span id="stateTaxOut" class="control-value"></span></div>
+          <input id="stateTaxRate" type="range" min="0" max="13.3" step="0.1" oninput="updateControlLabels(); runSimulation()">
+        </div>
+      </div>
+    </aside>
+
+    <section class="space-y-4 min-w-0">
+      <div class="metric-grid">
+        <div class="panel metric"><div class="metric-label">Terminal assets</div><div id="terminalAssets" class="metric-value">—</div><div id="terminalDelta" class="metric-delta neutral">Baseline</div></div>
+        <div class="panel metric"><div class="metric-label">Lifetime tax</div><div id="lifetimeTax" class="metric-value">—</div><div id="taxDelta" class="metric-delta neutral">Baseline</div></div>
+        <div class="panel metric"><div class="metric-label">Lifetime spending</div><div id="lifetimeSpend" class="metric-value">—</div><div id="spendDelta" class="metric-delta neutral">Baseline</div></div>
+        <div class="panel metric"><div class="metric-label">Lowest assets</div><div id="lowestAssets" class="metric-value">—</div><div id="lowestAge" class="metric-delta neutral">—</div></div>
+        <div class="panel metric"><div class="metric-label">Pretax remaining</div><div id="pretaxRemaining" class="metric-value">—</div><div id="conversionWindow" class="metric-delta neutral">—</div></div>
+      </div>
+
+      <div class="panel insight">
+        <div class="flex items-start justify-between gap-4">
+          <div><h3 id="insightTitle">Your baseline is loaded</h3><p id="insightText">Move any control to see how the scenario changes the plan.</p></div>
+          <span id="scenarioStatus" class="badge badge-green">Baseline</span>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="panel chart-card wide">
+          <div class="flex items-start justify-between gap-4 mb-3"><div><h2 class="font-serif text-xl font-bold text-slate-950">Total Assets Over Time</h2><p class="legend-note mt-1">Stacked by pretax, Roth, brokerage, cash, home equity, and 529 assets.</p></div><span class="badge badge-dark">Stacked assets</span></div>
+          <div class="chart-wrap tall"><div id="assetChart" class="svg-chart" role="img" aria-label="Total assets over time stacked bar chart"></div></div>
+        </article>
+
+        <article class="panel chart-card">
+          <div class="mb-3"><h2 class="font-serif text-xl font-bold text-slate-950">Taxes Paid Over Time</h2><p class="legend-note mt-1">Federal income tax, state income tax, capital-gains tax, payroll/other tax, and IRMAA-related costs.</p></div>
+          <div class="chart-wrap"><div id="taxChart" class="svg-chart" role="img" aria-label="Taxes over time stacked bar chart"></div></div>
+        </article>
+
+        <article class="panel chart-card">
+          <div class="mb-3"><h2 class="font-serif text-xl font-bold text-slate-950">Spending Over Time</h2><p class="legend-note mt-1">Core household, travel, healthcare, college support, and taxes shown as separate stacked uses of cash.</p></div>
+          <div class="chart-wrap"><div id="spendingChart" class="svg-chart" role="img" aria-label="Spending over time stacked bar chart"></div></div>
+        </article>
+
+        <article class="panel chart-card wide">
+          <div class="mb-3"><h2 class="font-serif text-xl font-bold text-slate-950">Income and Funding Sources</h2><p class="legend-note mt-1">Social Security, earnings, pretax withdrawals, Roth withdrawals, brokerage withdrawals, and other income.</p></div>
+          <div class="chart-wrap"><div id="incomeChart" class="svg-chart" role="img" aria-label="Income sources over time stacked bar chart"></div></div>
+        </article>
+      </div>
+
+      <div class="panel p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div><div class="text-xs font-black uppercase tracking-widest text-emerald-700">Scenario governance</div><p class="text-sm text-slate-600 mt-1">Saved scenarios remain experiments. They do not replace your selected Financial Strategy unless you explicitly adopt them.</p></div>
+        <button class="button button-primary" onclick="adoptScenario()">Adopt this scenario</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="dialogBackdrop" class="dialog-backdrop">
+  <div class="dialog-box">
+    <h3 id="dialogTitle" class="font-serif text-xl font-bold text-slate-950 mb-2">Notification</h3>
+    <p id="dialogMessage" class="text-sm text-slate-600 mb-6 leading-relaxed"></p>
+    <div class="flex justify-end gap-2">
+      <button id="dialogCancelBtn" class="button button-secondary hidden" onclick="closeDialog(false)">Cancel</button>
+      <button id="dialogConfirmBtn" class="button button-primary" onclick="closeDialog(true)">OK</button>
+    </div>
+  </div>
+</div>
+
+<script src="retirement-os.js"></script>
+
+<script>
+  const fmtCompact = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1});
+  const fmtFull = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+  const chartColors = ['#334155','#02B17D','#2563EB','#F59E0B','#8B5CF6','#EC4899'];
+  let dollarMode='future';
+  let baselineResult=null;
+  let currentResult=null;
+  let baselineInputs=null;
+  let dialogResolver = null;
+
+  function showCustomDialog(title, message, isConfirm = false) {
+    document.getElementById('dialogTitle').textContent = title;
+    document.getElementById('dialogMessage').textContent = message;
+    const cancelBtn = document.getElementById('dialogCancelBtn');
+    if (isConfirm) {
+      cancelBtn.classList.remove('hidden');
+    } else {
+      cancelBtn.classList.add('hidden');
+    }
+    document.getElementById('dialogBackdrop').classList.add('open');
+    return new Promise((resolve) => {
+      dialogResolver = resolve;
+    });
+  }
+
+  function closeDialog(result) {
+    document.getElementById('dialogBackdrop').classList.remove('open');
+    if (dialogResolver) {
+      dialogResolver(result);
+      dialogResolver = null;
+    }
+  }
+
+  function getOS(){
+    try{
+      if(window.RetirementOS && typeof window.RetirementOS.load==='function') return window.RetirementOS.load();
+      return JSON.parse(localStorage.getItem('WealthLandingRetirementOS')||'{}');
+    }catch(e){return {}}
+  }
+
+  /* Safe Numeric Parsing Helper */
+  function n(v, fallback = 0) {
+    if (v === null || v === undefined) return fallback;
+    const num = Number(v);
+    return Number.isFinite(num) ? num : fallback;
+  }
+
+  function pick(...vals){
+    for(const v of vals){
+      if(v!==undefined&&v!==null&&v!=='') return v;
+    }
+    return null;
+  }
+
+  /* Robust Object Value Extractor */
+  function extractValue(v) {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'number') return v;
+    if (typeof v === 'string') {
+      const parsed = parseFloat(v.replace(/[^0-9.-]/g, ''));
+      return isNaN(parsed) ? null : parsed;
+    }
+    if (typeof v === 'object') {
+      if ('value' in v) return extractValue(v.value);
+      if ('amount' in v) return extractValue(v.amount);
+      if ('balance' in v) return extractValue(v.balance);
+    }
+    return null;
+  }
+
+  function findData(os){
+    const p=os.personal||{}, a=os.assets||{}, v=os.vision||{}, f=os.financialStrategy||{}, h=os.healthcareStrategy||{}, legacy=JSON.parse(localStorage.getItem('RetirementProfile')||'{}');
+    return {
+      currentAge: n(extractValue(pick(p.currentAge, legacy.currentAge)), 51),
+      retirementAge: n(extractValue(pick(v.retirementAge, legacy.retirementAge)), 60),
+      ssAge: n(extractValue(pick(f.socialSecurityStartAge, legacy.ssAge)), 67),
+      annualSpending: n(extractValue(pick(v.annualSpending, v.monthlySpending ? extractValue(v.monthlySpending)*12 : null, legacy.annualSpending)), 102000),
+      annualTravel: n(extractValue(pick(v.annualTravel, legacy.annualTravel)), 20000),
+      annualHealthcare: n(extractValue(pick(h.estimatedAnnualMedicalCost, h.annualCost, legacy.annualHealthcare)), 12000),
+      pretax: n(extractValue(pick(a.pretax, a.pretaxBalance, legacy.pretax)), 4000000),
+      roth: n(extractValue(pick(a.roth, a.rothBalance, legacy.roth)), 300000),
+      brokerage: n(extractValue(pick(a.brokerage, a.brokerageBalance, legacy.brokerage)), 700000),
+      cash: n(extractValue(pick(a.cash, a.cashBalance, legacy.cash)), 200000),
+      home: n(extractValue(pick(a.homeEquity, legacy.homeEquity)), 500000),
+      college529: n(extractValue(pick(a.college529, a['529'], legacy.college529)), 300000),
+      annualIncome: n(extractValue(pick(p.annualIncome, legacy.annualIncome)), 250000),
+      annualSS: n(extractValue(pick(f.annualSocialSecurity, legacy.annualSS)), 50000),
+      stateTaxRate: n(extractValue(pick(f.stateTaxRate, legacy.stateTaxRate)), 5)/100,
+      conversionStartAge: n(extractValue(pick(f.conversion&&f.conversion.calculatedStartAge, f.conversionStartAge, legacy.conversionStartAge)), 60),
+      conversionCap: n(extractValue(pick(f.conversion&&f.conversion.recommendedAnnualAmount, f.annualConversion, legacy.conversionCap)), 250000),
+      inflation: 0.03, healthInflation: 0.055, growth: 0.06, capGainYield: 0.025,
+      tuition: 0, collegeStartAge: 55, collegeYears: 4, targetBracket: 0.24
+    }
+  }
+
+  function setInputs(x){
+    const map={
+      retirementAge:x.retirementAge, ssAge:x.ssAge, collegeStartAge:x.collegeStartAge,
+      annualSpending:x.annualSpending, annualTravel:x.annualTravel, annualTuition:x.tuition,
+      collegeYears:x.collegeYears, inflationRate:x.inflation*100, healthInflationRate:x.healthInflation*100,
+      growthRate:x.growth*100, capGainYield:x.capGainYield*100, targetBracket:x.targetBracket,
+      conversionStartAge:x.conversionStartAge, conversionCap:x.conversionCap, stateTaxRate:x.stateTaxRate*100
+    };
+    Object.entries(map).forEach(([id,val])=>{
+      const el=document.getElementById(id);
+      if(el) el.value=val;
+    });
+    updateControlLabels();
+  }
+
+  function getInputs(){
+    return {
+      ...baselineInputs,
+      retirementAge:n(document.getElementById('retirementAge').value, 60),
+      ssAge:n(document.getElementById('ssAge').value, 67),
+      collegeStartAge:n(document.getElementById('collegeStartAge').value, 55),
+      annualSpending:n(document.getElementById('annualSpending').value, 102000),
+      annualTravel:n(document.getElementById('annualTravel').value, 20000),
+      tuition:n(document.getElementById('annualTuition').value, 0),
+      collegeYears:n(document.getElementById('collegeYears').value, 4),
+      inflation:n(document.getElementById('inflationRate').value, 3)/100,
+      healthInflation:n(document.getElementById('healthInflationRate').value, 5.5)/100,
+      growth:n(document.getElementById('growthRate').value, 6)/100,
+      capGainYield:n(document.getElementById('capGainYield').value, 2.5)/100,
+      targetBracket:n(document.getElementById('targetBracket').value, 0.24),
+      conversionStartAge:n(document.getElementById('conversionStartAge').value, 60),
+      conversionCap:n(document.getElementById('conversionCap').value, 250000),
+      stateTaxRate:n(document.getElementById('stateTaxRate').value, 5)/100
+    }
+  }
+
+  function updateControlLabels(){
+    const $=(id)=>document.getElementById(id);
+    $('retirementAgeOut').textContent=`Age ${$('retirementAge').value}`;
+    $('ssAgeOut').textContent=`Age ${$('ssAge').value}`;
+    $('collegeStartOut').textContent=`Age ${$('collegeStartAge').value}`;
+    $('spendingOut').textContent=fmtCompact.format(n($('annualSpending').value));
+    $('travelOut').textContent=fmtCompact.format(n($('annualTravel').value));
+    $('tuitionOut').textContent=fmtCompact.format(n($('annualTuition').value));
+    $('collegeYearsOut').textContent=`${$('collegeYears').value} years`;
+    $('inflationOut').textContent=`${n($('inflationRate').value).toFixed(1)}%`;
+    $('healthInflationOut').textContent=`${n($('healthInflationRate').value).toFixed(1)}%`;
+    $('growthOut').textContent=`${n($('growthRate').value).toFixed(1)}%`;
+    $('capGainYieldOut').textContent=`${n($('capGainYield').value).toFixed(1)}%`;
+    $('conversionStartOut').textContent=`Age ${$('conversionStartAge').value}`;
+    $('conversionCapOut').textContent=fmtCompact.format(n($('conversionCap').value));
+    $('stateTaxOut').textContent=`${n($('stateTaxRate').value).toFixed(1)}%`;
+  }
+
+  function federalTax(taxable){
+    const brackets=[[23850,.10],[96950,.12],[206700,.22],[394600,.24],[501050,.32],[751600,.35],[Infinity,.37]];
+    let tax=0,prev=0,remaining=Math.max(0,taxable);
+    for(const [cap,rate] of brackets){
+      const slice=Math.min(remaining,cap-prev);
+      if(slice>0){tax+=slice*rate;remaining-=slice}
+      prev=cap;
+      if(remaining<=0)break;
+    }
+    return tax;
+  }
+
+  function simulate(x){
+    const start=n(x.currentAge, 51), end=95;
+    let pretax=n(x.pretax, 4000000), roth=n(x.roth, 300000), brokerage=n(x.brokerage, 700000), cash=n(x.cash, 200000), home=n(x.home, 500000), college529=n(x.college529, 300000);
+    const rows=[]; let cumulativeTax=0, cumulativeSpend=0, lowest=Infinity, lowestAge=start, conversionEnd=null;
+
+    for(let age=start; age<=end; age++){
+      const t=age-start;
+      const inflationFactor=Math.pow(1+n(x.inflation,0.03), t);
+      const healthFactor=Math.pow(1+n(x.healthInflation,0.055), t);
+
+      pretax*=1+n(x.growth,0.06);
+      roth*=1+n(x.growth,0.06);
+      brokerage*=1+n(x.growth,0.06);
+      cash*=1+Math.min(.03,n(x.growth,0.06)/2);
+      home*=1+Math.max(.01,n(x.inflation,0.03));
+      college529*=1+n(x.growth,0.06)*.75;
+
+      const earnings=age<x.retirementAge?n(x.annualIncome,250000):0;
+      const ss=age>=x.ssAge?n(x.annualSS,50000)*(1+0.08*Math.max(0,x.ssAge-67))*inflationFactor:0;
+      const otherIncome=0;
+      const core=age>=x.retirementAge?n(x.annualSpending,102000)*inflationFactor:n(x.annualSpending,102000)*.75*inflationFactor;
+      const travel=age>=x.retirementAge&&age<80?n(x.annualTravel,20000)*inflationFactor:n(x.annualTravel,20000)*.35*inflationFactor;
+      const healthcare=n(x.annualHealthcare,12000)*healthFactor;
+      const college=(age>=x.collegeStartAge&&age<x.collegeStartAge+x.collegeYears)?n(x.tuition,0)*(Math.pow(1.05, age-x.collegeStartAge)):0;
+
+      let conversion=0;
+      if(age>=x.conversionStartAge&&pretax>0){
+        conversion=Math.min(n(x.conversionCap,250000), pretax);
+        pretax-=conversion;
+        roth+=conversion;
+        if(conversion>0) conversionEnd=age;
+      }
+
+      let college529Draw=Math.min(college, college529);
+      college529-=college529Draw;
+      const collegeGap=college-college529Draw;
+
+      const capGainIncome=brokerage*n(x.capGainYield,0.025);
+      const taxableOrdinary=Math.max(0, earnings+ss*.85+conversion);
+      const fed=federalTax(taxableOrdinary);
+      const state=Math.max(0,(taxableOrdinary+capGainIncome)*n(x.stateTaxRate,0.05));
+      const capitalGainsTax=Math.max(0,capGainIncome*.15);
+      const payrollOther=earnings>0?earnings*.0765:0;
+      const irmaa=(age>=65&&taxableOrdinary>206000)?(taxableOrdinary>322000?9000:4500):0;
+      const taxes=fed+state+capitalGainsTax+payrollOther+irmaa;
+
+      let need=core+travel+healthcare+collegeGap+taxes-earnings-ss-otherIncome;
+      let brokerageDraw=0, pretaxDraw=0, rothDraw=0, cashDraw=0;
+
+      if(need>0){cashDraw=Math.min(cash,need); cash-=cashDraw; need-=cashDraw;}
+      if(need>0){brokerageDraw=Math.min(brokerage,need); brokerage-=brokerageDraw; need-=brokerageDraw;}
+      if(need>0){pretaxDraw=Math.min(pretax,need); pretax-=pretaxDraw; need-=pretaxDraw;}
+      if(need>0){rothDraw=Math.min(roth,need); roth-=rothDraw; need-=rothDraw;}
+      if(need<0) brokerage+=Math.abs(need);
+
+      pretax=Math.max(0,pretax); roth=Math.max(0,roth); brokerage=Math.max(0,brokerage); cash=Math.max(0,cash);
+      const total=pretax+roth+brokerage+cash+home+college529;
+      if(total<lowest){lowest=total; lowestAge=age;}
+
+      cumulativeTax+=taxes;
+      cumulativeSpend+=core+travel+healthcare+college;
+
+      rows.push({
+        age, t, pretax, roth, brokerage, cash, home, college529,
+        fed, state, capitalGainsTax, payrollOther, irmaa,
+        core, travel, healthcare, college, taxes,
+        earnings, ss, otherIncome, pretaxDraw, rothDraw, brokerageDraw, cashDraw,
+        total, inflationFactor
+      });
+    }
+    return {
+      rows, terminal:rows.length?rows.at(-1).total:0,
+      lifetimeTax:cumulativeTax, lifetimeSpend:cumulativeSpend,
+      lowest:lowest===Infinity?0:lowest, lowestAge,
+      pretaxRemaining:rows.length?rows.at(-1).pretax:0, conversionEnd
+    };
+  }
+
+  function shown(v,row){
+    const num = n(v, 0);
+    return (dollarMode==='current' && row && row.inflationFactor) ? num/row.inflationFactor : num;
+  }
+
+  function everyYears(rows){
+    return rows.filter((r,i)=>i%3===0||i===rows.length-1);
+  }
+
+  function escapeXml(value){
+    return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[ch]));
+  }
+
+  function renderSvgStackedBar(container, datasets, rows){
+    if (!container) return;
+    const sample = everyYears(rows);
+    const rect = container.getBoundingClientRect();
+    const width = Math.max(320, Math.floor(rect.width || container.clientWidth || 700));
+    const height = Math.max(260, Math.floor(rect.height || container.clientHeight || 330));
+    const pad = { l: 75, r: 20, t: 25, b: 65 };
+    const plotW = Math.max(100, width - pad.l - pad.r);
+    const plotH = Math.max(100, height - pad.t - pad.b);
+
+    const totals = sample.map(r => datasets.reduce((sum, d) => sum + Math.max(0, Number(shown(d.get(r), r)) || 0), 0));
+    let max = Math.max(...totals, 1);
+    const magnitude = Math.pow(10, Math.floor(Math.log10(max)));
+    max = Math.ceil((max / (magnitude || 1)) * 1.1) * (magnitude || 1);
+    if (!Number.isFinite(max) || max <= 0) max = 100000;
+
+    const slot = plotW / (sample.length || 1);
+    const barW = Math.max(4, slot * 0.65);
+    const parts = [];
+
+    parts.push(`<svg viewBox="0 0 ${width} ${height}" style="width:100%;height:100%;display:block" xmlns="http://www.w3.org/2000/svg">`);
+    parts.push(`<rect width="${width}" height="${height}" fill="#ffffff" rx="12"/>`);
+
+    /* Horizontal grid lines and Y-axis labels */
+    for(let i=0; i<=5; i++){
+      const y = pad.t + plotH - (plotH * i / 5);
+      const val = max * i / 5;
+      parts.push(`<line x1="${pad.l}" y1="${y}" x2="${pad.l+plotW}" y2="${y}" stroke="#F1F5F9" stroke-width="1"/>`);
+      parts.push(`<text x="${pad.l-8}" y="${y+4}" text-anchor="end" font-family="Plus Jakarta Sans,sans-serif" font-size="10" font-weight="600" fill="#64748B">${escapeXml(fmtCompact.format(val))}</text>`);
+    }
+
+    /* Stacked Bars */
+    sample.forEach((r, idx) => {
+      let yBase = pad.t + plotH;
+      datasets.forEach((d, di) => {
+        const val = Math.max(0, Number(shown(d.get(r), r)) || 0);
+        const bh = plotH * val / max;
+        if(bh > 0){
+          const x = pad.l + idx * slot + (slot - barW) / 2;
+          const y = yBase - bh;
+          parts.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(1, bh).toFixed(1)}" fill="${d.color||chartColors[di%chartColors.length]}" rx="1"><title>${escapeXml(d.label)} — Age ${r.age}: ${escapeXml(fmtFull.format(val))}</title></rect>`);
+          yBase -= bh;
+        }
+      });
+
+      /* X-axis ticks */
+      if(idx % 2 === 0 || idx === sample.length - 1){
+        const x = pad.l + idx * slot + slot / 2;
+        const y = pad.t + plotH + 18;
+        parts.push(`<text x="${x.toFixed(1)}" y="${y}" transform="rotate(-35 ${x.toFixed(1)} ${y})" text-anchor="end" font-family="Plus Jakarta Sans,sans-serif" font-size="10" font-weight="600" fill="#64748B">Age ${r.age}</text>`);
+      }
+    });
+
+    /* Interactive Legend */
+    let lx = pad.l, ly = height - 18;
+    datasets.forEach((d, i) => {
+      const estimated = d.label.length * 5.8 + 32;
+      if(lx + estimated > width - pad.r){
+        lx = pad.l;
+        ly += 14;
+      }
+      parts.push(`<rect x="${lx}" y="${ly-8}" width="8" height="8" rx="2" fill="${d.color||chartColors[i%chartColors.length]}"/>`);
+      parts.push(`<text x="${lx+12}" y="${ly-1}" font-family="Plus Jakarta Sans,sans-serif" font-size="9" font-weight="700" fill="#475569">${escapeXml(d.label)}</text>`);
+      lx += estimated;
+    });
+
+    parts.push('</svg>');
+    container.innerHTML = parts.join('');
+  }
+
+  function buildChart(id, datasets, rows){
+    const container = document.getElementById(id);
+    if (!container) return;
+    renderSvgStackedBar(container, datasets, rows);
+  }
+
+  function renderCharts(result){
+    if(!result || !Array.isArray(result.rows) || !result.rows.length) return;
+    buildChart('assetChart',[{label:'Pretax',get:r=>r.pretax,color:'#334155'},{label:'Roth',get:r=>r.roth,color:'#02B17D'},{label:'Brokerage',get:r=>r.brokerage,color:'#2563EB'},{label:'Cash',get:r=>r.cash,color:'#F59E0B'},{label:'Home equity',get:r=>r.home,color:'#8B5CF6'},{label:'529',get:r=>r.college529,color:'#EC4899'}],result.rows);
+    buildChart('taxChart',[{label:'Federal income tax',get:r=>r.fed,color:'#0F172A'},{label:'State income tax',get:r=>r.state,color:'#2563EB'},{label:'Capital-gains tax',get:r=>r.capitalGainsTax,color:'#F59E0B'},{label:'Payroll / other tax',get:r=>r.payrollOther,color:'#8B5CF6'},{label:'IRMAA-related cost',get:r=>r.irmaa,color:'#EC4899'}],result.rows);
+    buildChart('spendingChart',[{label:'Core household',get:r=>r.core,color:'#334155'},{label:'Travel',get:r=>r.travel,color:'#02B17D'},{label:'Healthcare',get:r=>r.healthcare,color:'#2563EB'},{label:'College support',get:r=>r.college,color:'#F59E0B'},{label:'Taxes',get:r=>r.taxes,color:'#DC2626'}],result.rows);
+    buildChart('incomeChart',[{label:'Earnings',get:r=>r.earnings,color:'#334155'},{label:'Social Security',get:r=>r.ss,color:'#02B17D'},{label:'Pretax withdrawals',get:r=>r.pretaxDraw,color:'#2563EB'},{label:'Roth withdrawals',get:r=>r.rothDraw,color:'#8B5CF6'},{label:'Brokerage withdrawals',get:r=>r.brokerageDraw,color:'#F59E0B'},{label:'Cash withdrawals',get:r=>r.cashDraw,color:'#94A3B8'}],result.rows);
+  }
+
+  function displayValue(v){return fmtCompact.format(n(v,0))}
+  
+  function setDelta(id,current,base,goodWhenHigher=true){
+    const el=document.getElementById(id);
+    if (!el) return;
+    const d=n(current,0)-n(base,0);
+    el.textContent=`${d>=0?'+':''}${fmtCompact.format(d)} vs baseline`;
+    const positive=goodWhenHigher?d>=0:d<=0;
+    el.className=`metric-delta ${Math.abs(d)<1?'neutral':positive?'positive':'negative'}`;
+  }
+
+  function updateMetrics(result){
+    if(!result) return;
+    document.getElementById('terminalAssets').textContent=displayValue(result.terminal);
+    document.getElementById('lifetimeTax').textContent=displayValue(result.lifetimeTax);
+    document.getElementById('lifetimeSpend').textContent=displayValue(result.lifetimeSpend);
+    document.getElementById('lowestAssets').textContent=displayValue(result.lowest);
+    document.getElementById('lowestAge').textContent=`Lowest at age ${result.lowestAge}`;
+    document.getElementById('pretaxRemaining').textContent=displayValue(result.pretaxRemaining);
+    document.getElementById('conversionWindow').textContent=result.conversionEnd?`Conversion ages ${getInputs().conversionStartAge}–${result.conversionEnd}`:'No conversions';
+    if(baselineResult){
+      setDelta('terminalDelta',result.terminal,baselineResult.terminal,true);
+      setDelta('taxDelta',result.lifetimeTax,baselineResult.lifetimeTax,false);
+      setDelta('spendDelta',result.lifetimeSpend,baselineResult.lifetimeSpend,true);
+    }
+  }
+
+  function explain(result){
+    if(!baselineResult || !result) return;
+    const assetD=result.terminal-baselineResult.terminal;
+    const taxD=result.lifetimeTax-baselineResult.lifetimeTax;
+    const spendD=result.lifetimeSpend-baselineResult.lifetimeSpend;
+    const changed=JSON.stringify(getInputs())!==JSON.stringify(baselineInputs);
+    
+    document.getElementById('scenarioStatus').textContent=changed?'Active experiment':'Baseline';
+    if(!changed){
+      document.getElementById('insightTitle').textContent='Your recommended baseline is loaded';
+      document.getElementById('insightText').textContent='Change a variable on the left to see the impact on terminal assets, lifetime tax, spending, and account composition.';
+      return;
+    }
+    document.getElementById('insightTitle').textContent=assetD>=0?'This scenario increases terminal assets':'This scenario reduces terminal assets';
+    document.getElementById('insightText').textContent=`Terminal assets change by ${fmtFull.format(assetD)}, lifetime tax by ${fmtFull.format(taxD)}, and modeled lifetime spending by ${fmtFull.format(spendD)}. Review the stacked bars to see which years and categories create the difference.`;
+  }
+
+  function runSimulation(){
+    currentResult=simulate(getInputs());
+    updateMetrics(currentResult);
+    renderCharts(currentResult);
+    explain(currentResult);
+  }
+
+  function setDollarMode(mode){
+    dollarMode=mode;
+    document.getElementById('futureDollarBtn').classList.toggle('active',mode==='future');
+    document.getElementById('currentDollarBtn').classList.toggle('active',mode==='current');
+    if(currentResult) renderCharts(currentResult);
+  }
+
+  function resetScenario(){
+    setInputs(baselineInputs);
+    runSimulation();
+  }
+
+  function applyPreset(name){
+    if(name==='delay_ss') document.getElementById('ssAge').value=70;
+    if(name==='high_inflation'){
+      document.getElementById('inflationRate').value=5;
+      document.getElementById('healthInflationRate').value=8;
+    }
+    if(name==='lower_returns') document.getElementById('growthRate').value=3.5;
+    if(name==='college'){
+      document.getElementById('annualTuition').value=100000;
+      document.getElementById('collegeYears').value=8;
+    }
+    updateControlLabels();
+    runSimulation();
+  }
+
+  async function saveScenario(){
+    const os=getOS();
+    os.advancedScenarios=os.advancedScenarios||[];
+    os.advancedScenarios.push({
+      id:`scenario_${Date.now()}`,
+      name:`Scenario ${new Date().toLocaleDateString('en-US')}`,
+      createdAt:new Date().toISOString(),
+      overrides:getInputs(),
+      results:{
+        terminalAssets:currentResult?currentResult.terminal:0,
+        lifetimeTax:currentResult?currentResult.lifetimeTax:0,
+        lifetimeSpending:currentResult?currentResult.lifetimeSpend:0
+      }
+    });
+    localStorage.setItem('WealthLandingRetirementOS',JSON.stringify(os));
+    await showCustomDialog('Scenario Saved', 'Scenario saved without changing your selected strategy.', false);
+  }
+
+  async function adoptScenario(){
+    const confirmed = await showCustomDialog('Adopt Scenario', 'Adopt these assumptions as the active Retirement OS scenario?', true);
+    if(!confirmed) return;
+    const os=getOS();
+    os.activeScenario={
+      updatedAt:new Date().toISOString(),
+      assumptions:getInputs(),
+      results:{
+        terminalAssets:currentResult?currentResult.terminal:0,
+        lifetimeTax:currentResult?currentResult.lifetimeTax:0,
+        lifetimeSpending:currentResult?currentResult.lifetimeSpend:0
+      }
+    };
+    localStorage.setItem('WealthLandingRetirementOS',JSON.stringify(os));
+    await showCustomDialog('Scenario Adopted', 'Scenario adopted as the active planning assumptions.', false);
+  }
+
+  function initializeLab(){
+    try{
+      baselineInputs=findData(getOS());
+      setInputs(baselineInputs);
+      baselineResult=simulate(baselineInputs);
+      currentResult=baselineResult;
+      updateMetrics(currentResult);
+      requestAnimationFrame(() => renderCharts(currentResult));
+      explain(currentResult);
+    }catch(err){
+      console.error('Scenario Lab initialization failed:',err);
+      const insight=document.getElementById('insightText');
+      if(insight) insight.textContent='The simulator could not initialize: '+err.message;
+    }
+  }
+
+  let labInitialized=false;
+  function startLab(){
+    if(labInitialized) return;
+    labInitialized=true;
+    initializeLab();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', startLab, {once:true});
+  } else {
+    startLab();
+  }
+
+  /* ResizeObserver to automatically redraw SVG charts when panels or window resize */
+  const resizeObserver = new ResizeObserver(() => {
+    if(currentResult) renderCharts(currentResult);
+  });
+  
+  document.querySelectorAll('.chart-wrap').forEach(el => resizeObserver.observe(el));
+</script>
+</body>
+</html>
