@@ -19,6 +19,7 @@
 @media(max-width:1180px){.top-nav-links{gap:.72rem}.top-nav-links>li>a{font-size:.8rem}.search-container{width:200px;flex-basis:200px}}@media(max-width:980px){.global-header{padding:.85rem 1rem}.global-header nav{display:none}.search-container{margin-left:auto}.mega-dropdown{display:none}}@media(max-width:560px){.search-container{display:none}}
 
 </style>
+  <script src="retirement-os.js"></script>
 </head>
 <body>
 
@@ -53,7 +54,19 @@ function completeProfile(){if(!validate(3))return;const assets=val('traditional'
 function labelPriority(){return{timing:'Retirement timing',tax:'Lifetime taxes',healthcare:'Healthcare',location:'Location',legacy:'Family legacy',unclear:'Integrated baseline'}[priority]}
 function live(){const assets=val('traditional')+val('roth')+val('brokerage')+val('cash')+val('hsa');$('liveAge').textContent=val('age');$('liveRetire').textContent=val('retire');$('liveState').textContent=$('state').value;$('liveAssets').textContent=money(assets);$('liveSpend').textContent=money(val('spend')*12);$('livePriority').textContent=labelPriority();const story={timing:['Bill vs Tom','The same starting wealth can create different lives when retirement timing changes the sequence of decisions.'],tax:['The IRS Co-owner','A traditional retirement account contains a future tax obligation—not only spendable wealth.'],healthcare:['The Couple Who Paid $80,000 Too Much','Healthcare costs are shaped by income choices years before Medicare begins.'],location:['The Move Worth $500,000','Where you live can reshape spending, taxes, healthcare access, and family proximity.'],legacy:['Bill vs Tom','Account type and withdrawal sequence can change what ultimately reaches a family.'],unclear:['The Retirement You Have Not Chosen Yet','A baseline story can reveal which decision deserves attention first.']}[priority];$('storyTitle').textContent=story[0];$('storyText').textContent=story[1];$('storyWhy').textContent='Relevant because your primary concern is '+labelPriority().toLowerCase()+'.'}
 function buildProfile(){return{version:2,source:'Retirement Onboarding',identity:{currentAge:val('age'),targetRetirementAge:val('retire'),maritalStatus:$('marital').value,filingStatus:$('filing').value,currentState:$('state').value,childrenCount:val('children')},finances:{traditionalBalance:val('traditional'),rothBalance:val('roth'),brokerageBalance:val('brokerage'),cashReserve:val('cash'),hsaBalance:val('hsa'),homeEquity:val('home'),annualSavings:val('saving')},income:{currentHouseholdIncome:val('income'),pensionIncome:val('pension'),socialSecurityIncome:val('ss')},goals:{monthlyRetirementSpending:val('spend'),primaryConcern:priority},journey:{currentPhase:'profile_complete',nextPage:'Retirement_Forecast.html',completedPages:['Retirement_Gateway.html','Retirement_Onboarding.html'],completionPct:25},timestamps:{updatedAt:new Date().toISOString()}}}
-function saveAndContinue(){localStorage.setItem('RetirementProfile',JSON.stringify(buildProfile()));location.href='Retirement_Forecast.html'}
+function saveAndContinue(){
+  const profile=buildProfile();
+  localStorage.setItem('RetirementProfile',JSON.stringify(profile));
+  if(window.RetirementOS){
+    RetirementOS.update({
+      profile:{identity:profile.identity,finances:profile.finances,income:profile.income},
+      vision:profile.goals,
+      journey:profile.journey
+    },'Retirement Onboarding');
+    RetirementOS.syncLegacy();
+  }
+  location.href='Retirement_Forecast.html';
+}
 window.addEventListener('DOMContentLoaded',()=>{const cached=localStorage.getItem('RetirementProfile');if(cached){try{const p=JSON.parse(cached);if(p.identity){$('age').value=p.identity.currentAge||52;$('retire').value=p.identity.targetRetirementAge||60;$('marital').value=p.identity.maritalStatus||'Married / partnered';$('filing').value=p.identity.filingStatus||'Married Filing Jointly';$('state').value=p.identity.currentState||'VA';$('children').value=p.identity.childrenCount||0}if(p.finances){$('traditional').value=p.finances.traditionalBalance||0;$('roth').value=p.finances.rothBalance||0;$('brokerage').value=p.finances.brokerageBalance||0;$('cash').value=p.finances.cashReserve||0;$('hsa').value=p.finances.hsaBalance||0;$('home').value=p.finances.homeEquity||0;$('saving').value=p.finances.annualSavings||0}if(p.income){$('income').value=p.income.currentHouseholdIncome||0;$('pension').value=p.income.pensionIncome||0;$('ss').value=p.income.socialSecurityIncome||0}if(p.goals){$('spend').value=p.goals.monthlyRetirementSpending||7500;priority=p.goals.primaryConcern||'timing';document.querySelectorAll('.choice').forEach(x=>x.classList.toggle('selected',x.dataset.v===priority))}}catch(e){}}document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',live));live()});
 </script>
 <script>
