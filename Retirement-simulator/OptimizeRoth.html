@@ -9,7 +9,7 @@
     gtag('config', 'G-9JMJJ5CJR4');
   </script>
 
-  <title>Retirement Strategy Engine | WealthLanding</title>
+  <title>Retirement Financial Strategy | WealthLanding</title>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -630,7 +630,17 @@
       background: #059669;
       transform: translateY(-1px);
     }
+
+    .decision-shell{background:linear-gradient(135deg,#ecfdf5 0%,#eff6ff 55%,#fff 100%);border:1px solid #a7f3d0;border-radius:1.35rem;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 12px 30px -20px rgba(15,23,42,.28)}
+    .known-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1rem}.known-item{background:rgba(255,255,255,.86);border:1px solid #dbeafe;border-radius:.8rem;padding:.8rem}.known-item small{display:block;color:#64748b;font-weight:800;text-transform:uppercase;font-size:.65rem;letter-spacing:.05em}.known-item strong{display:block;margin-top:.2rem;font-size:.82rem;color:#0f172a}
+    .strategy-output{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:.8rem;margin-top:1rem}.output-card{background:#fff;border:1px solid #dbeafe;border-radius:.9rem;padding:1rem}.output-card.primary{border:2px solid #10b981}.output-card small{display:block;color:#64748b;font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.output-card strong{display:block;margin-top:.25rem;font-size:1rem}.output-card.primary strong{font-size:1.18rem}.decision-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}.decision-actions button,.decision-actions a{border:0;border-radius:.75rem;padding:.8rem 1.15rem;font-weight:800;font-size:.84rem;text-decoration:none;cursor:pointer}.save-primary{background:#10b981;color:#fff}.save-secondary{background:#0f172a;color:#fff}.return-link{background:#fff;color:#334155;border:1px solid #cbd5e1!important}.analysis-drawer{border:1px solid #cbd5e1;border-radius:1.25rem;background:#fff;overflow:hidden;margin-bottom:1.5rem}.analysis-drawer>summary{padding:1.1rem 1.35rem;font-weight:850;cursor:pointer;background:#f8fafc;display:flex;justify-content:space-between;list-style:none}.analysis-drawer>summary::-webkit-details-marker{display:none}.analysis-drawer>summary:after{content:'Open';color:#2563eb;font-size:.78rem}.analysis-drawer[open]>summary:after{content:'Close'}.analysis-inner{padding:1.25rem}.blueprint-toast{position:fixed;right:24px;bottom:24px;background:#0f172a;color:#fff;padding:1rem 1.15rem;border-radius:.85rem;box-shadow:0 15px 35px rgba(0,0,0,.25);display:none;z-index:5000;font-size:.84rem}
+    @media(max-width:900px){.known-grid,.strategy-output{grid-template-columns:1fr 1fr}}@media(max-width:600px){.known-grid,.strategy-output{grid-template-columns:1fr}}
   </style>
+  <script src="retirement-os.js"></script>
+
+<style>
+.imported-field{position:relative}.imported-field input,.imported-field select{background:#f8fafc!important;color:#334155;border-style:dashed!important;pointer-events:none}.imported-field:after{content:"Imported from Blueprint";display:block;margin-top:.3rem;font-size:.65rem;font-weight:800;color:#047857}.owner-edit{font-size:.68rem;font-weight:800;color:#2563eb;text-decoration:none;margin-left:.35rem}
+</style>
 </head>
 <body>
 
@@ -665,8 +675,8 @@
 
     <div class="header-greeting">
       <div>
-        <h1>Retirement Strategy Dashboard</h1>
-        <p>Simulate tax-optimized Roth conversion windows, healthcare preservation, and state-level tax arbitrage.</p>
+        <h1>Retirement Financial Strategy</h1>
+        <p>Turn your retirement profile, location, and healthcare decisions into one coordinated tax and withdrawal strategy.</p>
       </div>
       <div class="toggle-group">
         <button id="btn-future" class="toggle-btn active" onclick="setCurrencyMode('future')">Future Dollars</button>
@@ -674,6 +684,41 @@
       </div>
     </div>
 
+    <section class="decision-shell" aria-labelledby="financialDecisionTitle">
+      <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:.7rem;font-weight:900;color:#047857;text-transform:uppercase;letter-spacing:.08em;">Retirement Blueprint · Financial Decision</div>
+          <h2 id="financialDecisionTitle" style="margin:.3rem 0 0;font-family:Playfair Display,serif;font-size:1.75rem;">Your Recommended Financial Strategy</h2>
+          <p style="margin:.35rem 0 0;color:#475569;font-size:.9rem;">Review the decision first. Open the detailed analysis only when you want to inspect the supporting calculations.</p>
+        </div>
+        <span id="decisionConfidence" class="pill-badge">High confidence</span>
+      </div>
+      <div class="known-grid">
+        <div class="known-item"><small>Lifestyle</small><strong id="knownLifestyle">Loaded from Blueprint</strong></div>
+        <div class="known-item"><small>Location</small><strong id="knownLocation">Loaded from Blueprint</strong></div>
+        <div class="known-item"><small>Healthcare</small><strong id="knownHealthcare">Not yet connected</strong></div>
+        <div class="known-item"><small>Spending</small><strong id="knownSpending">Loaded from profile</strong></div>
+      </div>
+      <div class="strategy-output">
+        <div class="output-card primary"><small>Recommended Strategy</small><strong id="decisionStrategyName">Roth conversion and withdrawal sequence</strong><div id="decisionStrategyReason" style="margin-top:.35rem;color:#64748b;font-size:.75rem;line-height:1.4;">Calculated from your selected objective and constraints.</div></div>
+        <div class="output-card"><small>Conversion Window</small><strong id="decisionWindow">—</strong></div>
+        <div class="output-card"><small>Annual Conversion</small><strong id="decisionAnnualConversion">—</strong></div>
+        <div class="output-card"><small>Target Bracket</small><strong id="decisionBracket">—</strong></div>
+        <div class="output-card"><small>Projected Estate</small><strong id="decisionEstate">—</strong></div>
+        <div class="output-card"><small>Lifetime Tax</small><strong id="decisionLifetimeTax">—</strong></div>
+        <div class="output-card"><small>Tax Saved vs. No Conversion</small><strong id="decisionTaxSaved">—</strong></div>
+        <div class="output-card"><small>Primary Trade-off</small><strong id="decisionTradeoff" style="font-size:.82rem;line-height:1.35;">Higher taxes now for lower future RMD and estate tax drag.</strong></div>
+      </div>
+      <div class="decision-actions">
+        <button class="save-primary" onclick="saveFinancialStrategy(false)">Save to Retirement Blueprint</button>
+        <button class="save-secondary" onclick="saveFinancialStrategy(true)">Save & Analyze Retirement Timing</button>
+        <a class="return-link" href="retirement_builder_v2.html">Return to Retirement Blueprint</a>
+      </div>
+    </section>
+
+    <details class="analysis-drawer">
+      <summary><span>View Detailed Financial Analysis</span></summary>
+      <div class="analysis-inner">
     <div class="overview-grid">
       
       <div class="left-metrics-col">
@@ -761,11 +806,11 @@
     <div class="main-layout">
       
       <div class="wizard-card">
-        <div class="step-title">Step 1 · Retirement Profile</div>
+        <div class="step-title">Step 1 · Imported Retirement Profile <a class="owner-edit" href="Retirement_Onboarding_OS_v2.html">Edit profile →</a></div>
         <div class="input-grid">
-          <div class="field"><label>Current Age</label><input id="currentAge" type="number" value="52"></div>
-          <div class="field"><label>Retirement Age</label><input id="retireAge" type="number" value="60"></div>
-          <div class="field"><label>Residence State for Income Tax</label><select id="residenceState"></select></div>
+          <div class="field"><label>Current Age</label><input data-owned-by="onboarding" readonly id="currentAge" type="number" value="52"></div>
+          <div class="field"><label>Retirement Age</label><input data-owned-by="onboarding" readonly id="retireAge" type="number" value="60"></div>
+          <div class="field"><label>Residence State for Income Tax</label><select data-owned-by="onboarding" disabled id="residenceState"></select></div>
           <div class="field">
             <label>Social Security Start Age</label>
             <select id="ssClaimAgeSelect">
@@ -781,10 +826,10 @@
       <div class="wizard-card">
         <div class="step-title">Step 2 · Assets</div>
         <div class="input-grid">
-          <div class="field"><label>Pre-Tax IRA / 401(k)</label><input id="pretax" type="number" value="1200000"></div>
-          <div class="field"><label>Roth Balance</label><input id="roth" type="number" value="150000"></div>
-          <div class="field"><label>Brokerage ETF Value</label><input id="brokerage" type="number" value="250000"></div>
-          <div class="field"><label>Cash Reserve</label><input id="cash" type="number" value="100000"></div>
+          <div class="field"><label>Pre-Tax IRA / 401(k)</label><input data-owned-by="onboarding" readonly id="pretax" type="number" value="1200000"></div>
+          <div class="field"><label>Roth Balance</label><input data-owned-by="onboarding" readonly id="roth" type="number" value="150000"></div>
+          <div class="field"><label>Brokerage ETF Value</label><input data-owned-by="onboarding" readonly id="brokerage" type="number" value="250000"></div>
+          <div class="field"><label>Cash Reserve</label><input data-owned-by="onboarding" readonly id="cash" type="number" value="100000"></div>
         </div>
       </div>
 
@@ -909,8 +954,8 @@
             <summary class="cascading-summary"><span>💰 Contributions, College & Spending</span><span>▼</span></summary>
             <div class="cascading-content">
               <div class="field"><label>Pre-Retirement Spending</label><input id="preRetirementSpend" type="number" value="140000"></div>
-              <div class="field"><label>Post-Retirement Annual Spending</label><input id="annualSpend" type="number" value="90000"></div>
-              <div class="field"><label>Annual Savings Until Retirement</label><input id="annualSavings" type="number" value="30000"></div>
+              <div class="field"><label>Post-Retirement Annual Spending</label><input data-owned-by="onboarding" readonly id="annualSpend" type="number" value="90000"></div>
+              <div class="field"><label>Annual Savings Until Retirement</label><input data-owned-by="onboarding" readonly id="annualSavings" type="number" value="30000"></div>
               <div class="field"><label>Annual Backdoor Roth / Adult</label><input id="annualBackdoorPerAdult" type="number" value="0"></div>
               <div class="field"><label>Annual Mega Backdoor</label><input id="annualMegaBackdoor" type="number" value="0"></div>
               <div class="field"><label>Total College Cost / Child</label><input id="collegeCostPerChild" type="number" value="150000"></div>
@@ -1006,18 +1051,21 @@
 
       <div class="router-box">
         <div>
-          <h4 style="margin: 0 0 0.3rem 0; font-size: 1.15rem; font-weight: 800; color: white;">Next Decision: Where Should You Execute This Strategy?</h4>
-          <p style="margin:0; font-size: 0.88rem; color: #94a3b8;">Explore location matchers or healthcare tools to further optimize conversion windows.</p>
+          <h4 style="margin:0 0 .3rem;font-size:1.15rem;font-weight:800;color:white;">Detailed analysis complete</h4>
+          <p style="margin:0;font-size:.88rem;color:#94a3b8;">Save the summarized financial decision to your Blueprint, or continue to the Retirement Optimizer to coordinate timing across location, healthcare, Social Security, and conversions.</p>
         </div>
-        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn-router" onclick="goToUSMatcher()">U.S. Cities</button>
-          <button class="btn-router" onclick="goToOverseasMatcher()">Overseas</button>
-          <button class="btn-router" style="background:#2563eb;" onclick="goToHealthcareTool()">65+ Healthcare</button>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+          <button class="btn-router" onclick="saveFinancialStrategy(false)">Save to Blueprint</button>
+          <button class="btn-router" style="background:#2563eb;" onclick="saveFinancialStrategy(true)">Analyze Retirement Timing</button>
+          <button class="btn-router" style="background:#475569;" onclick="window.location.href='retirement_builder_v2.html'">Return to Builder</button>
         </div>
       </div>
 
     </div>
+      </div>
+    </details>
   </div>
+  <div id="blueprintToast" class="blueprint-toast">Financial strategy saved to your Retirement Blueprint.</div>
 
   <script>
     const FED=[{r:.10,u:24800},{r:.12,u:100800},{r:.22,u:211400},{r:.24,u:403550},{r:.32,u:512450},{r:.35,u:768700},{r:.37,u:Infinity}],LTCG=[{r:0,u:98900},{r:.15,u:613700},{r:.20,u:Infinity}],STD=32200,NIIT=250000,ACA={5:193400};
@@ -1123,6 +1171,100 @@
       } catch (e) {
         console.warn('Could not load RetirementProfile from localStorage', e);
       }
+    }
+
+    function setTextSafe(id, value){ const el=document.getElementById(id); if(el) el.textContent=value; }
+
+    function loadBlueprintDecisionContext(){
+      try{
+        const payload=JSON.parse(localStorage.getItem('WealthLandingSelectedRoadmap')||'{}');
+        const pathNames={home_base:'Home Base',strategic_us_move:'Strategic U.S. Move',global_expat:'Global Expat',explore_then_return:'Explore Then Return'};
+        setTextSafe('knownLifestyle', pathNames[payload.selectedLifeId]||payload.selectedLifeName||'Retirement path');
+        let loc='Current U.S. home';
+        if(payload.selectedLifeId==='global_expat') loc=payload.overseasBase||'Overseas base';
+        else if(payload.selectedLifeId==='explore_then_return') loc=`${payload.overseasBase||'Overseas'} → ${payload.usCity||'U.S. return city'}`;
+        else if(payload.usCity) loc=payload.usCity;
+        setTextSafe('knownLocation',loc);
+        const hs=payload.healthcareStrategy;
+        if(hs){
+          setTextSafe('knownHealthcare',hs.recommendedPlanTitle||hs.takeaway||'Healthcare strategy saved');
+          if(hs.estimatedAnnualMedicalCost){
+            const currentSpend=Number(document.getElementById('annualSpend').value||0);
+            if(currentSpend>0 && payload.healthcareCostsIncluded!==true){
+              // Keep medical costs modeled separately; show context without double-counting living spend.
+            }
+          }
+          if(hs.ltcReserveLow && hs.ltcReserveHigh){
+            const midpoint=(Number(hs.ltcReserveLow)+Number(hs.ltcReserveHigh))/2;
+            const annual=Math.round(midpoint/7/1000)*1000;
+            if(annual>0) document.getElementById('ltcAnnualCost').value=annual;
+          }
+        }
+        const profile=JSON.parse(localStorage.getItem('RetirementProfile')||'{}');
+        const monthly=profile?.goals?.monthlyRetirementSpending || (payload.monthlySpend ? parseFloat(String(payload.monthlySpend).replace(/[^0-9.]/g,'')) : 0);
+        if(monthly) setTextSafe('knownSpending',fmt.format(monthly*12)+' / year');
+        if(payload.selectedLifeId==='global_expat'){ document.getElementById('strategyPreset').value='abroad'; }
+        if(payload.selectedLifeId==='strategic_us_move'){ document.getElementById('strategyPreset').value='taxfree_state'; }
+      }catch(e){ console.warn('Could not load Blueprint context',e); }
+    }
+
+    function updateDecisionSummary(rows, noConvRows, i){
+      if(!rows||!rows.length) return;
+      const conversionRows=rows.filter(r=>r.conv>0);
+      const first=conversionRows[0], last=conversionRows[conversionRows.length-1];
+      const avg=conversionRows.length ? conversionRows.reduce((s,r)=>s+r.conv,0)/conversionRows.length : 0;
+      const term=rows[rows.length-1];
+      const lifetimeTax=rows.reduce((s,r)=>s+r.totalTax,0);
+      const noConvTax=noConvRows.reduce((s,r)=>s+r.totalTax,0);
+      const saved=Math.max(0,noConvTax-lifetimeTax);
+      const objective=i.objective==='max_roth'?'Maximize Roth inheritance':'Minimize lifetime tax';
+      const presetLabels={us:'U.S. bracket-managed conversions',taxfree_state:'Tax-free-state conversion window',abroad:'Overseas conversion window',custom:'Custom coordinated strategy'};
+      setTextSafe('decisionStrategyName',presetLabels[i.strategyPreset]||objective);
+      setTextSafe('decisionStrategyReason',objective+' while coordinating ACA, IRMAA, state tax, spending, and long-term-care assumptions.');
+      setTextSafe('decisionWindow',first&&last?`Age ${first.age}–${last.age}`:'No conversion window');
+      setTextSafe('decisionAnnualConversion',avg?fmt.format(avg)+' average':'$0');
+      setTextSafe('decisionBracket',i.bracket==='none'?'No cap':i.bracket+'% federal');
+      setTextSafe('decisionEstate',fmt.format(term.afterTax));
+      setTextSafe('decisionLifetimeTax',fmt.format(lifetimeTax));
+      setTextSafe('decisionTaxSaved',fmt.format(saved));
+      let trade='Higher current tax payments in exchange for lower future pretax balances and RMD exposure.';
+      if(i.strategyPreset==='abroad') trade='Larger conversions may accelerate federal tax now and require careful U.S. residency and treaty review.';
+      if(i.strategyPreset==='taxfree_state') trade='Tax savings depend on completing the move and establishing domicile before major conversions.';
+      setTextSafe('decisionTradeoff',trade);
+      window.__latestFinancialDecision={first,last,avg,term,lifetimeTax,saved,i};
+    }
+
+    function saveFinancialStrategy(continueToOptimizer){
+      const d=window.__latestFinancialDecision;
+      if(!d){ render(); return; }
+      try{
+        const payload=JSON.parse(localStorage.getItem('WealthLandingSelectedRoadmap')||'{}');
+        const i=d.i;
+        payload.financialSectionComplete=true;
+        payload.financialStrategy={
+          type:'Retirement Financial Strategy',
+          objective:i.objective,
+          strategyPreset:i.strategyPreset,
+          recommendedPlanTitle:document.getElementById('decisionStrategyName').textContent,
+          conversionWindow:d.first&&d.last?{startAge:d.first.age,endAge:d.last.age}:null,
+          averageAnnualConversion:Math.round(d.avg),
+          targetFederalBracket:i.bracket,
+          projectedEstateValue:Math.round(d.term.afterTax),
+          projectedRothAt85:Math.round(d.term.roth),
+          projectedPretaxAt85:Math.round(d.term.pretax),
+          estimatedLifetimeTax:Math.round(d.lifetimeTax),
+          estimatedTaxSavedVsNoConversion:Math.round(d.saved),
+          socialSecurityClaimAge:i.ssStartChoice,
+          primaryTradeoff:document.getElementById('decisionTradeoff').textContent,
+          confidence:'Model-based recommendation',
+          updatedAt:new Date().toISOString()
+        };
+        payload.updatedAt=new Date().toISOString();
+        localStorage.setItem('WealthLandingSelectedRoadmap',JSON.stringify(payload));
+        if(window.RetirementOS){RetirementOS.update({financial:payload.financialStrategy},'Financial Strategy');RetirementOS.syncLegacy();}
+        const toast=document.getElementById('blueprintToast'); if(toast){toast.style.display='block';setTimeout(()=>toast.style.display='none',2500);}
+        if(continueToOptimizer) setTimeout(()=>window.location.href='retirement_optimizer.html',500);
+      }catch(e){ console.warn('Could not save financial strategy',e); }
     }
 
     function inputs(){
@@ -1779,6 +1921,8 @@
       let calculatedEstateGain = Math.max(0, term.afterTax - noConvTerm.afterTax);
       let calculatedPretaxReduction = Math.max(0, dispRows[0].pretax - term.pretax);
 
+      updateDecisionSummary(dispRows, dispNoConvRows, i);
+
       let currentNetWorth = dispRows[0].pretax + dispRows[0].roth + dispRows[0].broker + dispRows[0].cash;
       document.getElementById('cardCurrentNetWorth').textContent = fmt.format(currentNetWorth);
       document.getElementById('lblRetireAge').textContent = i.ret;
@@ -1908,8 +2052,21 @@
 
     populateStateSelector();
     loadPreviousPageProfile();
+    loadBlueprintDecisionContext();
     document.querySelectorAll('input,select').forEach(el=>el.addEventListener('change', render));
     render();
   </script>
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('[data-owned-by="onboarding"]').forEach(function(el){var f=el.closest('.field');if(f)f.classList.add('imported-field');});
+  if(window.RetirementOS){
+    var os=RetirementOS.load(),i=(os.profile||{}).identity||{},f=(os.profile||{}).finances||{},v=os.vision||{};
+    var map={currentAge:i.currentAge,retireAge:i.targetRetirementAge,pretax:f.traditionalBalance,roth:f.rothBalance,brokerage:f.brokerageBalance,cash:f.cashReserve,annualSavings:f.annualSavings,annualSpend:v.monthlyRetirementSpending?Number(v.monthlyRetirementSpending)*12:null};
+    Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el&&map[id]!==undefined&&map[id]!==null)el.value=map[id];});
+    var state=document.getElementById('residenceState');if(state&&i.currentState)state.value=i.currentState;
+  }
+});
+</script>
 </body>
 </html>
