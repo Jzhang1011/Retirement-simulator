@@ -820,7 +820,11 @@
                 mustStayUS: getSafeValue("disc_mustStayUS", "Yes_Strict"),
                 medicareDepend: getSafeValue("disc_medicareDepend", "Critical"),
                 maxMoves: getSafeValue("disc_maxMoves", "1"),
-                assetTier: getSafeValue("disc_assetTier", "HNW")
+                assetTier: getSafeValue("disc_assetTier", "HNW"),
+                citizenship: getSafeValue("disc_citizenship", "US_Only"),
+                compOverseas: getSafeValue("disc_compOverseas", "Never"),
+                compKidsDistance: getSafeValue("disc_compKidsDistance", "Important"),
+                compTaxComplexity: getSafeValue("disc_compTaxComplexity", "KeepSimple")
             },
             updatedAt: new Date().toISOString()
         };
