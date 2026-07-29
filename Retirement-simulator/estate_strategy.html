@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9JMJJ5CJR4');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estate & Legacy Strategy | WealthLanding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="retirement-os.js"></script>
+  <style>
+    :root{--navy:#0B132B;--mint:#02B17D;--mint-dark:#019367;--bg:#F7F8FA;--border:#E2E8F0;--muted:#64748B}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#1E293B;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+    .serif{font-family:'Playfair Display',Georgia,serif}
+    .global-header{background:#0B132B;color:white;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.25rem;border-bottom:1px solid #1E293B;position:sticky;top:0;z-index:1000}
+    .logo{font-size:1.45rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.04em}.logo span{color:var(--mint)}
+    .nav{display:flex;gap:1.25rem;align-items:center}.nav a{color:#94A3B8;text-decoration:none;font-size:.9rem;font-weight:600}.nav a:hover,.nav a.active{color:#fff}
+    .search{position:relative;width:min(360px,32vw)}.search input{width:100%;background:#1E293B;border:1px solid #334155;color:#fff;padding:.68rem 1rem .68rem 2.7rem;border-radius:9px}.search span{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:#94A3B8}
+    .card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+    .pill{border:1px solid var(--border);border-radius:999px;padding:.45rem .75rem;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .strategy-card{transition:.2s ease;cursor:pointer}.strategy-card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(15,23,42,.08)}
+    .strategy-card.selected{border:2px solid var(--mint);box-shadow:0 0 0 3px rgba(2,177,125,.12),0 14px 30px rgba(2,177,125,.12)}
+    .bar{height:10px;background:#E2E8F0;border-radius:999px;overflow:hidden}.bar>span{display:block;height:100%;border-radius:999px}
+    .seg{height:100%;display:inline-block}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+    .metric{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:14px;padding:1rem}
+    .metric .k{font-size:.68rem;color:#64748B;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.metric .v{font-size:1.25rem;color:#0F172A;font-weight:800;margin-top:.25rem}
+    .btn{border:0;border-radius:12px;padding:.85rem 1rem;font-weight:800;font-size:.82rem;cursor:pointer}.btn-primary{background:var(--mint);color:white}.btn-primary:hover{background:var(--mint-dark)}.btn-dark{background:#0F172A;color:white}.btn-light{background:#F1F5F9;color:#334155}
+    input[type=range]{width:100%;accent-color:var(--mint)}
+    select,input,textarea{font-family:inherit}
+    .status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:.45rem}
+    .risk-high{background:#FFF1F2;border-color:#FECDD3}.risk-medium{background:#FFFBEB;border-color:#FDE68A}.risk-low{background:#ECFDF5;border-color:#A7F3D0}
+    @media(max-width:900px){.global-header{flex-wrap:wrap;gap:.8rem;padding:.8rem 1rem}.nav{order:3;width:100%;overflow:auto}.search{width:45vw}.desktop-grid{grid-template-columns:1fr!important}.sticky-panel{position:static!important}}
+  </style>
+</head>
+<body>
+<header class="global-header">
+  <a href="/" class="logo">Wealth<span>Landing</span></a>
+  <nav class="nav" aria-label="Global navigation">
+    <a href="Gateway.html">Overview</a>
+    <a href="Odyssey.html">Design Your Life</a>
+    <a href="building-your-retirement.html">Retirement Blueprint</a>
+    <a href="#" class="active">Estate Strategy</a>
+  </nav>
+  <div class="search">
+    <form action="https://www.google.com/search" method="get" target="_blank">
+      <span>⌕</span><input type="hidden" name="sitesearch" value="wealthlanding.com"><input type="search" name="q" aria-label="Search WealthLanding" placeholder="Search WealthLanding...">
+    </form>
+  </div>
+</header>
+
+<main class="max-w-[1460px] mx-auto px-4 md:px-10 py-8 space-y-8">
+  <section class="card p-7 md:p-9 bg-gradient-to-br from-white to-emerald-50/40">
+    <div class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6">
+      <div class="max-w-3xl">
+        <span class="pill bg-emerald-50 text-emerald-700 border-emerald-200">Estate Decision Lab</span>
+        <h1 class="serif text-4xl md:text-5xl font-bold text-slate-950 mt-4">What should your wealth accomplish after you are gone?</h1>
+        <p class="text-slate-600 mt-3 leading-relaxed">Choose the legacy outcome first. Then map assets, protection, lifetime gifts, family readiness, and non-financial values into one coordinated strategy.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 min-w-[48%]">
+        <div class="metric"><div class="k">Projected Estate</div><div class="v" id="heroEstate">$6.4M</div></div>
+        <div class="metric"><div class="k">Current Dollars</div><div class="v" id="heroEstateCurrent">$3.9M</div></div>
+        <div class="metric"><div class="k">Household</div><div class="v" id="heroHousehold">Married</div></div>
+        <div class="metric"><div class="k">Children</div><div class="v" id="heroChildren">2</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="financialConnection" class="card p-6 md:p-7">
+    <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-6">
+      <div class="max-w-2xl">
+        <div class="text-[11px] font-extrabold tracking-[.18em] text-blue-700 uppercase">Imported Financial Strategy</div>
+        <h2 class="serif text-2xl font-bold text-slate-950 mt-1" id="financialStrategyTitle">Financial projection not yet completed</h2>
+        <p class="text-sm text-slate-600 mt-2" id="financialStrategySummary">Complete the Financial Decision Lab to import projected estate, terminal Roth and pretax balances, lifetime tax, and conversion strategy.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="financial_strategy_engine_decision_lab_v2.html" class="btn btn-light no-underline">Edit Financial Strategy</a>
+        <a href="retirement_scenario_lab_working.html" class="btn btn-dark no-underline">Stress-test in Scenario Lab</a>
+      </div>
+    </div>
+    <div id="financialMetrics" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mt-5"></div>
+    <div id="financialIncomplete" class="hidden mt-5 bg-amber-50 border border-amber-200 text-amber-950 rounded-2xl p-4 text-sm"></div>
+  </section>
+
+  <section class="grid desktop-grid grid-cols-[1.15fr_.85fr] gap-8 items-start">
+    <div class="space-y-8">
+      <section class="card p-6 md:p-7">
+        <div class="flex justify-between gap-4 items-start mb-5">
+          <div><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Imported Estate Snapshot</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Your estate composition from Financial Strategy</h2><p id="compositionStatus" class="text-sm text-slate-500 mt-1"></p></div>
+          <a href="building-your-retirement.html" class="text-sm font-bold text-blue-600 hover:underline">Edit Blueprint →</a>
+        </div>
+        <div id="assetStack" class="h-7 rounded-full overflow-hidden flex bg-slate-100 mb-5"></div>
+        <div id="assetLegend" class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm"></div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="mb-5"><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Decision 1</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Choose what the legacy should accomplish</h2><p class="text-sm text-slate-500 mt-1">The legal structure comes later. Start with the family outcome.</p></div>
+        <div id="strategyGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="mb-5"><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Decision 2</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">How much control should continue after transfer?</h2></div>
+        <div class="grid md:grid-cols-4 gap-3" id="controlGrid"></div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Asset Transfer Map</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Give every asset a destination and purpose</h2></div>
+          <button class="btn btn-light" onclick="resetTransferMap()">Reset suggestions</button>
+        </div>
+        <div id="transferRows" class="space-y-3"></div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="mb-6"><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Living Legacy</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Help while you are here to see the impact</h2><p class="text-sm text-slate-500 mt-1">These controls change the estimated terminal estate but may create earlier family value.</p></div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-5">
+            <label class="block"><div class="flex justify-between text-sm font-bold"><span>Education support</span><span id="educationLabel">$200,000</span></div><input id="educationRange" type="range" min="0" max="600000" step="25000" value="200000"></label>
+            <label class="block"><div class="flex justify-between text-sm font-bold"><span>First-home support</span><span id="homeGiftLabel">$100,000</span></div><input id="homeGiftRange" type="range" min="0" max="500000" step="25000" value="100000"></label>
+            <label class="block"><div class="flex justify-between text-sm font-bold"><span>Annual family gifting</span><span id="annualGiftLabel">$30,000</span></div><input id="annualGiftRange" type="range" min="0" max="150000" step="5000" value="30000"></label>
+          </div>
+          <div class="bg-slate-950 text-white rounded-2xl p-5">
+            <div class="text-[11px] uppercase tracking-[.16em] font-extrabold text-emerald-400">Estimated impact</div>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              <div><div class="text-xs text-slate-400">Terminal estate change</div><div class="text-2xl font-extrabold mt-1" id="livingEstateImpact">-$510K</div></div>
+              <div><div class="text-xs text-slate-400">Family value delivered earlier</div><div class="text-2xl font-extrabold mt-1 text-emerald-400" id="livingFamilyValue">$540K</div></div>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed mt-4">This is a planning illustration, not a tax or legal determination. The eventual simulator can model timing, investment opportunity cost, and tax treatment in more detail.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="mb-5"><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Family Readiness</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Will the plan work when the family must execute it?</h2></div>
+        <div id="readinessGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+      </section>
+
+      <section class="card p-6 md:p-7">
+        <div class="mb-5"><div class="text-[11px] font-extrabold tracking-[.18em] text-emerald-700 uppercase">Leave More Than Money</div><h2 class="serif text-2xl font-bold text-slate-950 mt-1">Begin your family legacy letter</h2></div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="block"><span class="text-sm font-bold">Financial lessons</span><textarea id="legacyLessons" rows="4" class="w-full mt-2 border border-slate-200 rounded-xl p-3 text-sm" placeholder="What do you want your children to understand about earning, saving, investing, and risk?"></textarea></label>
+          <label class="block"><span class="text-sm font-bold">Family values</span><textarea id="legacyValues" rows="4" class="w-full mt-2 border border-slate-200 rounded-xl p-3 text-sm" placeholder="What values should guide how the wealth is used?"></textarea></label>
+          <label class="block"><span class="text-sm font-bold">Advice for future decisions</span><textarea id="legacyAdvice" rows="4" class="w-full mt-2 border border-slate-200 rounded-xl p-3 text-sm" placeholder="What should heirs remember when making major life decisions?"></textarea></label>
+          <label class="block"><span class="text-sm font-bold">Stories worth preserving</span><textarea id="legacyStories" rows="4" class="w-full mt-2 border border-slate-200 rounded-xl p-3 text-sm" placeholder="What experiences, sacrifices, or turning points should not be forgotten?"></textarea></label>
+        </div>
+      </section>
+    </div>
+
+    <aside class="sticky-panel sticky top-24 space-y-6">
+      <section class="card p-6">
+        <div class="text-[11px] font-extrabold tracking-[.18em] text-blue-700 uppercase">Financial Strategy Feedback</div>
+        <h3 class="serif text-xl font-bold text-slate-950 mt-1">Could this estate choice change the financial plan?</h3>
+        <div id="financialFeedback" class="space-y-3 mt-4 text-sm"></div>
+        <a href="financial_strategy_engine_decision_lab_v2.html" class="btn btn-light inline-block no-underline mt-4">Revisit Financial Strategy</a>
+      </section>
+      <section class="card p-6 bg-slate-950 text-white border-slate-800">
+        <div class="text-[11px] uppercase tracking-[.18em] font-extrabold text-emerald-400">Recommended Estate Strategy</div>
+        <h2 class="serif text-3xl font-bold mt-2" id="recommendationTitle">Blended Protected Legacy</h2>
+        <p class="text-slate-300 text-sm mt-3 leading-relaxed" id="recommendationSummary"></p>
+        <div class="mt-5 space-y-3" id="recommendationWhy"></div>
+        <div class="mt-5 pt-5 border-t border-slate-800">
+          <div class="text-xs uppercase tracking-widest font-extrabold text-rose-300">Why not choose this?</div>
+          <div class="mt-3 space-y-2 text-sm text-slate-300" id="recommendationTradeoffs"></div>
+        </div>
+      </section>
+
+      <section class="card p-6">
+        <div class="text-[11px] uppercase tracking-[.18em] font-extrabold text-emerald-700">Estate Risk Dashboard</div>
+        <div id="riskList" class="space-y-3 mt-4"></div>
+      </section>
+
+      <section class="card p-6">
+        <div class="text-[11px] uppercase tracking-[.18em] font-extrabold text-emerald-700">Strategy Allocation</div>
+        <div class="space-y-4 mt-4">
+          <label class="block"><div class="flex justify-between text-sm font-bold"><span>Direct inheritance</span><span id="directPctLabel">30%</span></div><input id="directPct" type="range" min="0" max="100" step="5" value="30"></label>
+          <label class="block"><div class="flex justify-between text-sm font-bold"><span>Protected trust</span><span id="trustPctLabel">50%</span></div><input id="trustPct" type="range" min="0" max="100" step="5" value="50"></label>
+          <label class="block"><div class="flex justify-between text-sm font-bold"><span>Charitable legacy</span><span id="charityPctLabel">10%</span></div><input id="charityPct" type="range" min="0" max="100" step="5" value="10"></label>
+          <label class="block"><div class="flex justify-between text-sm font-bold"><span>Living legacy reserve</span><span id="livingPctLabel">10%</span></div><input id="livingPct" type="range" min="0" max="100" step="5" value="10"></label>
+        </div>
+        <div id="allocationWarning" class="mt-4 text-xs rounded-xl p-3 bg-amber-50 border border-amber-200 text-amber-900"></div>
+      </section>
+
+      <section class="card p-6 space-y-3">
+        <button class="btn btn-primary w-full" onclick="saveEstateStrategy()">Adopt This Estate Strategy</button>
+        <button class="btn btn-dark w-full" onclick="saveAndContinue()">Save & Return to Blueprint</button>
+        <a href="financial_strategy_engine_decision_lab_v2.html" class="btn btn-light w-full block text-center">Review Financial Strategy</a>
+      </section>
+    </aside>
+  </section>
+</main>
+
+<div id="toast" class="fixed right-6 bottom-6 hidden bg-slate-950 text-white px-5 py-4 rounded-xl shadow-2xl border border-slate-700 z-[2000]"><strong id="toastTitle">Saved</strong><div id="toastBody" class="text-xs text-slate-300 mt-1"></div></div>
+
+<script>
+const fmtMoney = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n||0);
+const fmtCompact = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:'compact',maximumFractionDigits:1}).format(n||0);
+
+const state = {
+  selectedStrategy:'blended',
+  control:'staged',
+  estateFuture:0,
+  estateCurrent:0,
+  financialComplete:false,
+  financial:{},
+  sourceStatus:'Financial projection incomplete',
+  household:'Married',
+  children:2,
+  assets:[
+    {id:'roth',name:'Roth IRA',value:0,color:'#02B17D',recipient:'Children',method:'Protected trust',taxCharacter:'Generally income-tax-free to heirs; inherited-account rules still apply',valueBasis:'terminal'},
+    {id:'pretax',name:'Pretax IRA',value:0,color:'#0EA5E9',recipient:'Children / Charity',method:'Tax-aware split',taxCharacter:'Generally ordinary income to heirs as distributed',valueBasis:'terminal'},
+    {id:'brokerage',name:'Brokerage',value:0,color:'#8B5CF6',recipient:'Children',method:'Trust or direct',taxCharacter:'Potential basis adjustment at death; treatment depends on ownership',valueBasis:'current'},
+    {id:'home',name:'Real Estate',value:0,color:'#F59E0B',recipient:'Spouse, then children',method:'Trust / sale instruction',taxCharacter:'Basis, title, state, and foreign-property rules may apply',valueBasis:'current'},
+    {id:'cash',name:'Cash & Insurance',value:0,color:'#64748B',recipient:'Family trust',method:'Beneficiary designation',taxCharacter:'Cash has no embedded income tax; insurance treatment depends on policy ownership',valueBasis:'current'}
+  ],
+  readiness:{beneficiaries:true,executor:true,backupExecutor:false,trust:false,familyLetter:false,digitalAssets:false},
+  allocations:{direct:30,trust:50,charity:10,living:10}
+};
+
+const strategies = [
+  {id:'equal',name:'Equal Inheritance',tag:'Simple & fair',desc:'Divide wealth evenly among heirs with minimal administration.',complexity:'Low',protection:2,why:['Clear family expectations','Simple administration','Works well for responsible adult heirs'],tradeoffs:['Limited protection from creditors or divorce','May ignore different heir needs'],alloc:{direct:75,trust:15,charity:5,living:5}},
+  {id:'protected',name:'Protected Inheritance',tag:'Preserve & protect',desc:'Use trust-based distributions to protect heirs and guide timing.',complexity:'Moderate',protection:5,why:['Strong beneficiary protection','Supports staged or purpose-based access','Reduces risk of rapid spending'],tradeoffs:['Higher legal and trustee cost','More administration for the family'],alloc:{direct:15,trust:75,charity:5,living:5}},
+  {id:'living',name:'Living Legacy',tag:'Impact now',desc:'Transfer meaningful support during life for education, housing, or opportunity.',complexity:'Moderate',protection:3,why:['You see the impact','Support arrives when heirs may need it most','Can reduce future estate size'],tradeoffs:['Less wealth remains for later uncertainty','Requires stronger liquidity planning'],alloc:{direct:25,trust:25,charity:5,living:45}},
+  {id:'dynasty',name:'Multigenerational Legacy',tag:'Beyond one generation',desc:'Preserve family wealth, governance, and education across generations.',complexity:'High',protection:5,why:['Long-term family protection','Supports future generations','Pairs wealth with governance and education'],tradeoffs:['High complexity and administration','Requires committed trustees and family governance'],alloc:{direct:5,trust:80,charity:10,living:5}},
+  {id:'blended',name:'Blended Protected Legacy',tag:'Recommended balance',desc:'Combine protected inheritance, direct flexibility, lifetime support, and charity.',complexity:'Moderate',protection:4,why:['Balances protection and flexibility','Supports both lifetime and after-death goals','Fits families with several competing objectives'],tradeoffs:['Requires coordination across several tools','More complex than a simple beneficiary plan'],alloc:{direct:30,trust:50,charity:10,living:10}}
+];
+
+const controls=[
+  {id:'direct',name:'Direct transfer',desc:'Immediate and simple'},
+  {id:'staged',name:'Staged access',desc:'Distributions by age or milestone'},
+  {id:'purpose',name:'Purpose-based',desc:'Education, housing, health, business'},
+  {id:'governance',name:'Long-term governance',desc:'Trustee oversight across generations'}
+];
+
+function unwrap(v, fallback=null){
+  if(v===undefined||v===null||v==='') return fallback;
+  if(typeof v==='object' && 'value' in v) return v.value;
+  return v;
+}
+function firstNumber(...vals){
+  for(const v of vals){const n=Number(unwrap(v,NaN));if(Number.isFinite(n)&&n>=0)return n}
+  return 0;
+}
+function loadOS(){
+  try{
+    const os = window.RetirementOS?.load ? window.RetirementOS.load() : JSON.parse(localStorage.getItem('WealthLandingRetirementOS')||'{}');
+    let legacy={}; try{legacy=JSON.parse(localStorage.getItem('WealthLandingSelectedRoadmap')||'{}')}catch(_e){}
+    const p=os?.personal||os?.profile||{};
+    const h=os?.household||{};
+    const f=os?.financialStrategy||os?.financial||legacy?.financialStrategy||{};
+    const a=os?.assets||{};
+    state.financial=f||{};
+    state.household=unwrap(h.maritalStatus,unwrap(p.maritalStatus,state.household));
+    state.children=firstNumber(h.childrenCount,p.children,p.numberOfChildren,state.children);
+    const projected=firstNumber(f.projectedEstateValue,f.projectedEstate,f.terminalEstate,f.terminalAssets?.totalAfterTaxEstate);
+    const rothTerminal=firstNumber(f.projectedRothAt85,f.terminalAssets?.roth);
+    const pretaxTerminal=firstNumber(f.projectedPretaxAt85,f.terminalAssets?.pretax);
+    state.financialComplete=projected>0 || rothTerminal>0 || pretaxTerminal>0;
+    state.estateFuture=projected;
+    const infl=firstNumber(f.assumptions?.inflationRate,os?.assumptions?.inflationRate,0.025) || 0.025;
+    const currentAge=firstNumber(p.currentAge,55);
+    const terminalAge=firstNumber(f.terminalAge,f.assumptions?.longevityAge,85) || 85;
+    state.estateCurrent=state.estateFuture>0 ? state.estateFuture/Math.pow(1+infl,Math.max(0,terminalAge-currentAge)) : 0;
+    const vals={
+      roth:rothTerminal,
+      pretax:pretaxTerminal,
+      brokerage:firstNumber(f.terminalAssets?.brokerage,a.brokerage),
+      home:firstNumber(f.terminalAssets?.homeEquity,a.homeEquity,a.home),
+      cash:firstNumber(f.terminalAssets?.cash,f.terminalAssets?.insurance,a.cash,a.insurance)
+    };
+    state.assets.forEach(x=>{x.value=vals[x.id]||0;x.valueBasis=(x.id==='roth'||x.id==='pretax'||f.terminalAssets?.[x.id]!==undefined)?'terminal':'current'});
+    const saved=os?.estateStrategy||{};
+    if(saved.strategyType) state.selectedStrategy=saved.strategyType;
+    if(saved.controlPreference) state.control=saved.controlPreference;
+    if(saved.allocations) state.allocations={...state.allocations,...saved.allocations};
+    if(saved.readiness) state.readiness={...state.readiness,...saved.readiness};
+    state.sourceStatus=state.financialComplete?'Imported from the adopted Financial Strategy':'Financial projection incomplete';
+  }catch(e){console.warn('Estate OS load failed',e);state.financialComplete=false}
+}
+function renderHero(){
+  heroEstate.textContent=state.estateFuture>0?fmtCompact(state.estateFuture):'Not available';
+  heroEstateCurrent.textContent=state.estateCurrent>0?fmtCompact(state.estateCurrent):'Not available';
+  heroHousehold.textContent=state.household||'Not recorded'; heroChildren.textContent=Number.isFinite(state.children)?state.children:'Not recorded';
+}
+function renderFinancialConnection(){
+  const f=state.financial||{};
+  financialStrategyTitle.textContent=f.selectedStrategyTitle||f.strategyTitle||f.objective||'Financial projection not yet completed';
+  const w=f.conversionWindow;
+  const windowText=w&&w.startAge!=null&&w.endAge!=null?`Age ${w.startAge}-${w.endAge}`:'Not available';
+  const bracket=firstNumber(f.targetFederalBracket);
+  const bracketText=bracket?`${bracket<1?Math.round(bracket*100):bracket}%`:'Not available';
+  financialStrategySummary.textContent=state.financialComplete?'This estate page is using the adopted financial strategy. The estate projection and terminal retirement-account balances are imported rather than recalculated here.':'Complete the Financial Decision Lab to import projected estate, terminal Roth and pretax balances, lifetime tax, and conversion strategy.';
+  const metrics=[
+    ['Conversion window',windowText],['Target bracket',bracketText],
+    ['Terminal Roth',firstNumber(f.projectedRothAt85,f.terminalAssets?.roth)?fmtCompact(firstNumber(f.projectedRothAt85,f.terminalAssets?.roth)):'Not available'],
+    ['Terminal pretax',firstNumber(f.projectedPretaxAt85,f.terminalAssets?.pretax)?fmtCompact(firstNumber(f.projectedPretaxAt85,f.terminalAssets?.pretax)):'Not available'],
+    ['Lifetime tax',firstNumber(f.estimatedLifetimeTax,f.taxProfile?.estimatedLifetimeTax)?fmtCompact(firstNumber(f.estimatedLifetimeTax,f.taxProfile?.estimatedLifetimeTax)):'Not available'],
+    ['SS claim age',firstNumber(f.socialSecurityClaimAge)?`Age ${firstNumber(f.socialSecurityClaimAge)}`:'Not available']
+  ];
+  financialMetrics.innerHTML=metrics.map(([k,v])=>`<div class="metric"><div class="k">${k}</div><div class="v text-lg">${v}</div></div>`).join('');
+  if(!state.financialComplete){financialIncomplete.classList.remove('hidden');financialIncomplete.innerHTML='<strong>Quantitative sections are provisional.</strong> This page will not fabricate projected balances. You can still choose legacy preferences, but complete Financial Strategy before adopting the asset-transfer map.';}else financialIncomplete.classList.add('hidden');
+}
+function renderAssets(){
+  const available=state.assets.filter(a=>a.value>0);
+  const total=available.reduce((s,a)=>s+a.value,0);
+  compositionStatus.textContent=state.financialComplete?(available.length<state.assets.length?'Terminal Roth and pretax values are imported. Assets without a terminal projection are shown only when another Retirement OS source provides them.':'All displayed values are imported from the Retirement OS.'):'No completed Financial Strategy was found. Detailed estate composition is intentionally left unavailable.';
+  if(!total){assetStack.innerHTML='<div class="w-full h-full flex items-center justify-center text-xs font-bold text-slate-500">Complete Financial Strategy to populate this chart</div>';assetLegend.innerHTML='<div class="col-span-full bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-950">Projected asset composition is not available. The Estate Lab will not substitute current balances or fabricated percentages for missing terminal projections.</div>';return;}
+  assetStack.innerHTML=available.map(a=>`<span class="seg" style="width:${a.value/total*100}%;background:${a.color}" title="${a.name}: ${fmtMoney(a.value)}"></span>`).join('');
+  assetLegend.innerHTML=available.map(a=>`<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:${a.color}"></span><div><div class="font-bold text-slate-800">${a.name}</div><div class="text-xs text-slate-500">${fmtCompact(a.value)} · ${Math.round(a.value/total*100)}% · ${a.valueBasis==='terminal'?'terminal projection':'latest recorded value'}</div></div></div>`).join('');
+}
+function renderFinancialFeedback(){
+  const f=state.financial||{};const pretax=firstNumber(f.projectedPretaxAt85,f.terminalAssets?.pretax);const charity=state.allocations.charity||0;const items=[];
+  if(!state.financialComplete) items.push(['Complete Financial Strategy','Estate projections and tax coordination are not available yet.']);
+  if(pretax>500000) items.push(['Large pretax balance remains',`${fmtCompact(pretax)} may create ordinary-income tax for heirs. Compare additional Roth conversion or tax-aware beneficiary choices.`]);
+  if(charity>=10 && pretax>0) items.push(['Charitable allocation detected','Pretax assets may be more tax-efficient for charitable beneficiaries than Roth assets.']);
+  if(['protected','dynasty','blended'].includes(state.selectedStrategy)) items.push(['Trust coordination required','Beneficiary designations and account ownership must align with the intended trust structure.']);
+  financialFeedback.innerHTML=items.map(([h,b])=>`<div class="rounded-xl border border-slate-200 bg-slate-50 p-3"><div class="font-extrabold text-slate-900">${h}</div><div class="text-xs text-slate-600 mt-1">${b}</div></div>`).join('')||'<div class="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-emerald-950">No immediate financial-strategy conflict detected.</div>';
+}
+function renderStrategies(){
+  strategyGrid.innerHTML=strategies.map(s=>`<button class="strategy-card text-left card p-5 ${state.selectedStrategy===s.id?'selected':''}" onclick="selectStrategy('${s.id}')"><div class="flex justify-between gap-3"><span class="pill ${s.id==='blended'?'bg-emerald-50 text-emerald-700 border-emerald-200':'bg-slate-50 text-slate-600'}">${s.tag}</span><span class="text-xs font-black text-slate-500">Protection ${'★'.repeat(s.protection)}${'☆'.repeat(5-s.protection)}</span></div><h3 class="serif text-xl font-bold text-slate-950 mt-4">${s.name}</h3><p class="text-sm text-slate-500 mt-2 leading-relaxed">${s.desc}</p><div class="mt-4 text-xs font-bold text-slate-700">Complexity: ${s.complexity}</div></button>`).join('');
+}
+function renderControls(){
+  controlGrid.innerHTML=controls.map(c=>`<button onclick="selectControl('${c.id}')" class="text-left rounded-2xl border p-4 ${state.control===c.id?'border-emerald-500 bg-emerald-50':'border-slate-200 bg-slate-50'}"><div class="font-extrabold text-slate-900">${c.name}</div><div class="text-xs text-slate-500 mt-1">${c.desc}</div></button>`).join('');
+}
+function renderTransfers(){
+  const rows=state.assets.filter(a=>a.value>0);
+  if(!rows.length){transferRows.innerHTML='<div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm text-amber-950">Complete Financial Strategy before assigning projected terminal assets. Estate-specific decisions can still be explored above.</div>';return;}
+  transferRows.innerHTML=rows.map((a)=>{const i=state.assets.indexOf(a);return `<div class="grid xl:grid-cols-[.9fr_1.15fr_.75fr_.9fr] gap-3 items-center bg-slate-50 border border-slate-200 rounded-2xl p-4"><div><div class="font-extrabold text-slate-900">${a.name}</div><div class="text-xs text-slate-500">${a.valueBasis==='terminal'?'Projected terminal':'Latest recorded'} ${fmtCompact(a.value)}</div></div><div><span class="text-[10px] uppercase font-extrabold text-slate-500">Tax character</span><div class="text-xs text-slate-700 mt-1 leading-relaxed">${a.taxCharacter}</div></div><label><span class="text-[10px] uppercase font-extrabold text-slate-500">Recipient</span><input value="${a.recipient}" oninput="state.assets[${i}].recipient=this.value" class="w-full mt-1 border border-slate-200 rounded-lg p-2 text-sm bg-white"></label><label><span class="text-[10px] uppercase font-extrabold text-slate-500">Transfer approach</span><select onchange="state.assets[${i}].method=this.value" class="w-full mt-1 border border-slate-200 rounded-lg p-2 text-sm bg-white"><option ${a.method==='Direct transfer'?'selected':''}>Direct transfer</option><option ${a.method==='Protected trust'?'selected':''}>Protected trust</option><option ${a.method==='Trust or direct'?'selected':''}>Trust or direct</option><option ${a.method==='Tax-aware split'?'selected':''}>Tax-aware split</option><option ${a.method==='Trust / sale instruction'?'selected':''}>Trust / sale instruction</option><option ${a.method==='Beneficiary designation'?'selected':''}>Beneficiary designation</option></select></label></div>`}).join('');
+}
+function renderReadiness(){
+  const items=[['beneficiaries','Beneficiary designations'],['executor','Executor selected'],['backupExecutor','Backup executor'],['trust','Trust documents'],['familyLetter','Family legacy letter'],['digitalAssets','Digital asset inventory']];
+  readinessGrid.innerHTML=items.map(([id,label])=>`<button onclick="state.readiness.${id}=!state.readiness.${id};renderReadiness();renderRisks()" class="text-left rounded-2xl border p-4 ${state.readiness[id]?'bg-emerald-50 border-emerald-200':'bg-amber-50 border-amber-200'}"><div class="font-extrabold text-slate-900">${state.readiness[id]?'✓':'!'} ${label}</div><div class="text-xs mt-1 ${state.readiness[id]?'text-emerald-700':'text-amber-800'}">${state.readiness[id]?'Ready or documented':'Needs attention'}</div></button>`).join('');
+}
+function renderRecommendation(){
+  const s=strategies.find(x=>x.id===state.selectedStrategy)||strategies[4];
+  recommendationTitle.textContent=s.name; recommendationSummary.textContent=s.desc;
+  recommendationWhy.innerHTML=s.why.map(x=>`<div class="flex gap-2 text-sm"><span class="text-emerald-400 font-black">✓</span><span>${x}</span></div>`).join('');
+  recommendationTradeoffs.innerHTML=s.tradeoffs.map(x=>`<div class="flex gap-2"><span class="text-rose-300 font-black">!</span><span>${x}</span></div>`).join('');
+}
+function renderRisks(){
+  const pretax=state.assets.find(x=>x.id==='pretax')?.value||0;
+  const risks=[];
+  if(!state.readiness.beneficiaries) risks.push(['High','Beneficiary designations are incomplete']);
+  if(!state.readiness.backupExecutor) risks.push(['Medium','No backup executor is documented']);
+  if(!state.readiness.trust && ['protected','dynasty','blended'].includes(state.selectedStrategy)) risks.push(['High','Selected strategy depends on trust planning that is not yet created']);
+  if(pretax>750000) risks.push(['Medium','Large pretax balance may create ordinary-income tax for heirs']);
+  if(!state.readiness.familyLetter) risks.push(['Low','Non-financial legacy has not been documented']);
+  if(!state.readiness.digitalAssets) risks.push(['Low','Digital accounts and access instructions are missing']);
+  riskList.innerHTML=risks.map(r=>`<div class="rounded-xl border p-3 ${r[0]==='High'?'risk-high':r[0]==='Medium'?'risk-medium':'risk-low'}"><div class="text-xs font-extrabold uppercase tracking-wider">${r[0]} priority</div><div class="text-sm font-bold mt-1">${r[1]}</div></div>`).join('')||'<div class="rounded-xl border p-3 risk-low"><div class="font-bold">No major readiness gaps detected.</div></div>';
+}
+function renderAllocation(){
+  directPct.value=state.allocations.direct;trustPct.value=state.allocations.trust;charityPct.value=state.allocations.charity;livingPct.value=state.allocations.living;
+  directPctLabel.textContent=state.allocations.direct+'%';trustPctLabel.textContent=state.allocations.trust+'%';charityPctLabel.textContent=state.allocations.charity+'%';livingPctLabel.textContent=state.allocations.living+'%';
+  const total=Object.values(state.allocations).reduce((a,b)=>a+b,0); allocationWarning.textContent=total===100?'Allocation totals 100%.':'Allocation totals '+total+'%. Adjust to 100% before adoption.'; allocationWarning.className='mt-4 text-xs rounded-xl p-3 border '+(total===100?'bg-emerald-50 border-emerald-200 text-emerald-900':'bg-amber-50 border-amber-200 text-amber-900');
+}
+function updateLiving(){
+  const ed=+educationRange.value, home=+homeGiftRange.value, annual=+annualGiftRange.value;
+  educationLabel.textContent=fmtMoney(ed);homeGiftLabel.textContent=fmtMoney(home);annualGiftLabel.textContent=fmtMoney(annual);
+  const familyValue=ed+home+annual*8; const estateImpact=familyValue*1.18;
+  livingFamilyValue.textContent=fmtCompact(familyValue);livingEstateImpact.textContent='-'+fmtCompact(estateImpact);
+}
+function selectStrategy(id){state.selectedStrategy=id;const s=strategies.find(x=>x.id===id);state.allocations={...s.alloc};renderAll()}
+function selectControl(id){state.control=id;renderControls()}
+function resetTransferMap(){state.assets.forEach(a=>{if(a.id==='roth'){a.recipient='Children';a.method='Protected trust'}if(a.id==='pretax'){a.recipient='Children / Charity';a.method='Tax-aware split'}if(a.id==='brokerage'){a.recipient='Children';a.method='Trust or direct'}if(a.id==='home'){a.recipient='Spouse, then children';a.method='Trust / sale instruction'}if(a.id==='cash'){a.recipient='Family trust';a.method='Beneficiary designation'}});renderTransfers()}
+function bindRanges(){
+  [educationRange,homeGiftRange,annualGiftRange].forEach(x=>x.addEventListener('input',updateLiving));
+  [['directPct','direct'],['trustPct','trust'],['charityPct','charity'],['livingPct','living']].forEach(([id,key])=>document.getElementById(id).addEventListener('input',e=>{state.allocations[key]=+e.target.value;renderAllocation()}));
+}
+function estatePayload(){
+  return {primaryObjective:state.selectedStrategy,strategyType:state.selectedStrategy,controlPreference:state.control,projectedEstate:state.estateFuture,projectedEstateCurrentDollars:state.estateCurrent,financialProjectionStatus:state.financialComplete?'imported':'incomplete',financialStrategyReference:{selectedStrategyId:state.financial.selectedStrategyId||null,selectedStrategyTitle:state.financial.selectedStrategyTitle||null,conversionWindow:state.financial.conversionWindow||null,targetFederalBracket:state.financial.targetFederalBracket||null,projectedRothAt85:firstNumber(state.financial.projectedRothAt85,state.financial.terminalAssets?.roth),projectedPretaxAt85:firstNumber(state.financial.projectedPretaxAt85,state.financial.terminalAssets?.pretax),estimatedLifetimeTax:firstNumber(state.financial.estimatedLifetimeTax,state.financial.taxProfile?.estimatedLifetimeTax)},allocations:{...state.allocations},livingLegacy:{educationSupport:+educationRange.value,homeSupport:+homeGiftRange.value,annualGifting:+annualGiftRange.value},assetTransferMap:state.assets.filter(a=>a.value>0).map(a=>({asset:a.name,projectedValue:a.value,valueBasis:a.valueBasis,taxCharacter:a.taxCharacter,recipient:a.recipient,transferApproach:a.method})),readiness:{...state.readiness},legacyLetter:{financialLessons:legacyLessons.value,familyValues:legacyValues.value,advice:legacyAdvice.value,stories:legacyStories.value},updatedAt:new Date().toISOString()};
+}
+function saveEstateStrategy(){
+  if(!state.financialComplete){showToast('Financial projection required','Complete Financial Strategy before adopting the quantitative estate plan.');return false}
+  const total=Object.values(state.allocations).reduce((a,b)=>a+b,0);if(total!==100){showToast('Allocation needs adjustment','The strategy must total 100% before adoption.');return false}
+  const payload=estatePayload();
+  try{let os=window.RetirementOS?.load?window.RetirementOS.load():JSON.parse(localStorage.getItem('WealthLandingRetirementOS')||'{}');os.estateStrategy=payload;if(window.RetirementOS?.save)window.RetirementOS.save(os);else localStorage.setItem('WealthLandingRetirementOS',JSON.stringify(os));localStorage.setItem('WealthLandingEstateStrategy',JSON.stringify(payload));showToast('Estate strategy adopted','The strategy is now saved to the Retirement Blueprint.');return true}catch(e){console.error(e);showToast('Could not save','Please check local storage permissions.');return false}
+}
+function saveAndContinue(){if(saveEstateStrategy())setTimeout(()=>location.href='building-your-retirement.html',500)}
+function showToast(t,b){toastTitle.textContent=t;toastBody.textContent=b;toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),3200)}
+function renderAll(){renderHero();renderFinancialConnection();renderAssets();renderStrategies();renderControls();renderTransfers();renderReadiness();renderRecommendation();renderRisks();renderAllocation();renderFinancialFeedback();updateLiving()}
+
+document.addEventListener('DOMContentLoaded',()=>{loadOS();renderAll();bindRanges()});
+</script>
+</body>
+</html>
