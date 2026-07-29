@@ -752,9 +752,10 @@
 
       <div class="frontier-actions">
         <button class="save-primary" onclick="saveFinancialStrategy(false)">Adopt This Strategy</button>
-        <button class="save-secondary" onclick="saveFinancialStrategy(true)">Adopt & Analyze Timing</button>
+        <button class="save-secondary" onclick="saveFinancialStrategy(true)">Adopt & Open Scenario Lab</button>
         <button class="advanced-link" onclick="document.querySelector('.analysis-drawer').open=true;document.querySelector('.analysis-drawer').scrollIntoView({behavior:'smooth'})">Inspect Detailed Calculations</button>
-        <a class="advanced-link" href="retirement_builder_v2.html">Return to Retirement Blueprint</a>
+        <a class="advanced-link" href="building-your-retirement.html">Return to Retirement Blueprint</a>
+        <a class="advanced-link" href="retirement_scenario_lab_working.html">Advanced users: Open Scenario Lab →</a>
       </div>
     </section>
 
@@ -828,12 +829,26 @@
         </div>
 
         <div style="display: flex; gap: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1.25rem; flex-wrap: wrap;">
-          <div><span style="color: var(--muted); font-size: 0.75rem;">Lifetime Tax Saved:</span> <b id="cardTaxSaved" style="color: var(--emerald); font-size: 0.95rem;">$0</b></div>
+          <div><span style="color: var(--muted); font-size: 0.75rem;">Estimated Total Tax Reduction:</span> <b id="cardTaxSaved" style="color: var(--emerald); font-size: 0.95rem;">$0</b></div>
+          <div><span style="color: var(--muted); font-size: 0.75rem;">Taxes Paid Difference:</span> <b id="cardPaidTaxDifference" style="color: var(--royal); font-size: 0.95rem;">$0</b></div>
+          <div><span style="color: var(--muted); font-size: 0.75rem;">Embedded Pretax Tax Avoided:</span> <b id="cardEmbeddedTaxAvoided" style="font-size: 0.95rem;">$0</b></div>
           <div><span style="color: var(--muted); font-size: 0.75rem;">Estate Value Gain:</span> <b id="cardEstateGain" style="color: var(--royal); font-size: 0.95rem;">$0</b></div>
           <div><span style="color: var(--muted); font-size: 0.75rem;">Pretax IRA Reduced:</span> <b id="cardPretaxReduction" style="font-size: 0.95rem;">$0</b></div>
         </div>
       </div>
 
+    </div>
+
+    <div class="card" style="margin-bottom: 1.25rem;">
+      <div class="card-body" style="padding:1rem 1.15rem;">
+        <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);">How the tax comparison works</div>
+            <div id="taxComparisonExplanation" style="margin-top:.35rem;font-size:.86rem;line-height:1.55;color:#334155;">Comparing taxes paid plus estimated tax embedded in remaining pretax assets.</div>
+          </div>
+          <div id="terminalTaxAssumption" class="pill-badge" style="white-space:nowrap;">Terminal pretax tax assumption: 24%</div>
+        </div>
+      </div>
     </div>
 
     <div class="card" style="margin-bottom: 1.75rem;">
@@ -1095,12 +1110,12 @@
       <div class="router-box">
         <div>
           <h4 style="margin:0 0 .3rem;font-size:1.15rem;font-weight:800;color:white;">Detailed analysis complete</h4>
-          <p style="margin:0;font-size:.88rem;color:#94a3b8;">Save the summarized financial decision to your Blueprint, or continue to the Retirement Optimizer to coordinate timing across location, healthcare, Social Security, and conversions.</p>
+          <p style="margin:0;font-size:.88rem;color:#94a3b8;">Save the summarized financial decision to your Blueprint, or open the Advanced Scenario Lab to test retirement timing, Social Security, spending, growth, inflation, college costs, and other life-driven assumptions.</p>
         </div>
         <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
           <button class="btn-router" onclick="saveFinancialStrategy(false)">Save to Blueprint</button>
-          <button class="btn-router" style="background:#2563eb;" onclick="saveFinancialStrategy(true)">Analyze Retirement Timing</button>
-          <button class="btn-router" style="background:#475569;" onclick="window.location.href='retirement_builder_v2.html'">Return to Builder</button>
+          <button class="btn-router" style="background:#2563eb;" onclick="saveFinancialStrategy(true)">Open Advanced Scenario Lab</button>
+          <button class="btn-router" style="background:#475569;" onclick="window.location.href='building-your-retirement.html'">Return to Builder</button>
         </div>
       </div>
 
@@ -1396,7 +1411,7 @@
         payload.updatedAt=new Date().toISOString();
         localStorage.setItem('WealthLandingSelectedRoadmap',JSON.stringify(payload));
         const toast=document.getElementById('blueprintToast'); if(toast){toast.textContent=`${def.title} saved to your Retirement Blueprint.`;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500);}
-        if(continueToOptimizer) setTimeout(()=>window.location.href='retirement_optimizer.html',500);
+        if(continueToOptimizer) setTimeout(()=>window.location.href='retirement_scenario_lab_working.html',500);
       }catch(e){ console.warn('Could not save financial strategy',e); }
     }
 
@@ -2050,9 +2065,21 @@
       let noConvLifetimeTax = dispNoConvRows.reduce((s,r)=>s+r.totalTax,0);
       let currentLifetimeTax = dispRows.reduce((s,r)=>s+r.totalTax,0);
 
-      let calculatedTaxSaved = Math.max(0, noConvLifetimeTax - currentLifetimeTax);
-      let calculatedEstateGain = Math.max(0, term.afterTax - noConvTerm.afterTax);
-      let calculatedPretaxReduction = Math.max(0, dispRows[0].pretax - term.pretax);
+      // Economic tax comparison: taxes already paid plus estimated tax still embedded
+      // in the terminal pretax balance. This avoids falsely showing $0 simply because
+      // the no-conversion case defers tax beyond the modeled period.
+      const selectedBracket = Number(v('bracketTarget','24')) / 100;
+      const terminalPretaxTaxRate = Math.min(0.37, Math.max(0.12, Number.isFinite(selectedBracket) ? selectedBracket : 0.24));
+      const currentEmbeddedPretaxTax = term.pretax * terminalPretaxTaxRate;
+      const noConvEmbeddedPretaxTax = noConvTerm.pretax * terminalPretaxTaxRate;
+      const currentEconomicTaxBurden = currentLifetimeTax + currentEmbeddedPretaxTax;
+      const noConvEconomicTaxBurden = noConvLifetimeTax + noConvEmbeddedPretaxTax;
+
+      let calculatedTaxSaved = noConvEconomicTaxBurden - currentEconomicTaxBurden;
+      let paidTaxDifference = currentLifetimeTax - noConvLifetimeTax;
+      let embeddedTaxAvoided = noConvEmbeddedPretaxTax - currentEmbeddedPretaxTax;
+      let calculatedEstateGain = term.afterTax - noConvTerm.afterTax;
+      let calculatedPretaxReduction = Math.max(0, noConvTerm.pretax - term.pretax);
 
       if(!window.__buildingFrontier){ updateDecisionSummary(dispRows, dispNoConvRows, i); }
 
@@ -2082,9 +2109,30 @@
       document.getElementById('cardRetireWorth').textContent = fmt.format(retRow.afterTax);
       document.getElementById('cardLongevityWorth').textContent = fmt.format(term.afterTax);
 
-      document.getElementById('cardTaxSaved').textContent=fmt.format(calculatedTaxSaved);
-      document.getElementById('cardEstateGain').textContent=fmt.format(calculatedEstateGain);
+      const taxSavedEl=document.getElementById('cardTaxSaved');
+      if(taxSavedEl){
+        taxSavedEl.textContent=(calculatedTaxSaved>=0?'':'−')+fmt.format(Math.abs(calculatedTaxSaved));
+        taxSavedEl.style.color=calculatedTaxSaved>=0?'var(--emerald)':'#dc2626';
+      }
+      const paidDiffEl=document.getElementById('cardPaidTaxDifference');
+      if(paidDiffEl){
+        paidDiffEl.textContent=(paidTaxDifference>0?'+':'−')+fmt.format(Math.abs(paidTaxDifference));
+        paidDiffEl.style.color=paidTaxDifference>0?'#b45309':'var(--emerald)';
+      }
+      const embeddedEl=document.getElementById('cardEmbeddedTaxAvoided');
+      if(embeddedEl){
+        embeddedEl.textContent=(embeddedTaxAvoided>=0?'+':'−')+fmt.format(Math.abs(embeddedTaxAvoided));
+        embeddedEl.style.color=embeddedTaxAvoided>=0?'var(--emerald)':'#dc2626';
+      }
+      document.getElementById('cardEstateGain').textContent=(calculatedEstateGain>=0?'+':'−')+fmt.format(Math.abs(calculatedEstateGain));
       document.getElementById('cardPretaxReduction').textContent=fmt.format(calculatedPretaxReduction);
+      const assumptionEl=document.getElementById('terminalTaxAssumption');
+      if(assumptionEl) assumptionEl.textContent=`Terminal pretax tax assumption: ${Math.round(terminalPretaxTaxRate*100)}%`;
+      const explainEl=document.getElementById('taxComparisonExplanation');
+      if(explainEl){
+        const direction=calculatedTaxSaved>=0?'an estimated reduction':'an estimated increase';
+        explainEl.innerHTML=`The selected strategy pays <b>${paidTaxDifference>=0?fmt.format(paidTaxDifference)+' more':fmt.format(Math.abs(paidTaxDifference))+' less'}</b> during the modeled lifetime and avoids <b>${fmt.format(Math.max(0,embeddedTaxAvoided))}</b> of estimated tax embedded in pretax assets at age 85. Combined, that is ${direction} of <b>${fmt.format(Math.abs(calculatedTaxSaved))}</b> versus no conversion.`;
+      }
 
       let wealthiestRow = [...dispRows].sort((a,b) => b.afterTax - a.afterTax)[0];
       document.getElementById('dynamicInsightText').textContent = `Your wealthiest projected year occurs at age ${wealthiestRow.age} with ${fmt.format(wealthiestRow.afterTax)} in net after-tax capital.`;
