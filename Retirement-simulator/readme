@@ -1,27 +1,94 @@
+Gateway
+      │
+      ▼
+Onboarding
+      │
+      ▼
+Forecast
+      │
+      ▼
+Odyssey Exploration
+      │
+      ▼
+Preference Discovery
+      │
+      ▼
+Feasibility Engine
+      │
+      ▼
+────────────────────────────────────────────
+        USER CHOOSES A RETIREMENT LIFE
+────────────────────────────────────────────
 
+Home Base
+     │
+     ▼
+Retirement Builder
+     │
+     ├── Housing Strategy
+     ├── Healthcare Strategy
+     ├── Financial Strategy
+     ├── Estate Strategy
+     │
+     ▼
+Retirement Blueprint
 
-/* US city matcher*/
-Odyssey Exploration (Odyssey.html)
-  └─► Saves shortlisted lifestyles to `RetirementOdysseySelection`
+Strategic U.S. Move
+        │
+        ▼
+U.S. Location Planner
+        │
+        ▼
+Retirement Builder
+        │
+        ├── Healthcare Strategy
+        ├── Financial Strategy
+        ├── Estate Strategy
+        │
+        ▼
+Retirement Blueprint
 
-Preference Discovery (retirement-preference-discovery.html)
-  └─► Saves priorities & non-negotiables to `RetirementDiscoverySelection`
+Global Expat
+      │
+      ▼
+International Location Planner
+      │
+      ▼
+Retirement Builder
+      │
+      ├── Healthcare/LTC Planner
+      ├── Financial Strategy
+      ├── Estate Strategy
+      │
+      ▼
+Retirement Blueprint
 
-Retirement Feasibility Engine (financial-feasibility-audit.html)
-  └─► Saves committed choice, locations & budget to `WealthLandingSelectedRoadmap`
+Explore Then Return
+        │
+        ▼
+International Location Planner
+        │
+        ▼
+U.S. Location Planner
+        │
+        ▼
+Retirement Builder
+        │
+        ├── Healthcare/LTC Planner
+        ├── Financial Strategy
+        ├── Estate Strategy
+        │
+        ▼
+Retirement Blueprint
 
-U.S. Retirement City Matcher (UScitymatcher.html)
-  └─► Reads `WealthLandingSelectedRoadmap`
-  └─► Preloads Path, Overseas Base & Target Budget into Section 2 Header
-  └─► Updates `WealthLandingSelectedRoadmap` with chosen U.S. city when saved
-
-/* Retiring overseas*/
-Carried-Forward ValueOriginating PageStorage Key in localStorageHow It Is Used in RetiringOverseas.htmlCommitted Retirement PathFeasibility Engine(financial-feasibility-audit.html)selectedLifeName(e.g. "Explore Then Return" vs. "Global Expat")
-• Preloaded in top Already Known banner.
-• Controls page behavior: If Global Expat, it removes the U.S. return phase and directs the user to Healthcare Planning instead of U.S. City Matching.Target Monthly BudgetFeasibility Engine(financial-feasibility-audit.html)monthlySpend(e.g. "$8,500 / month")
-• Preloaded in top Already Known banner.
-• Budget Math: Used to automatically calculate and display your Monthly Surplus against estimated living costs (e.g. $8,500 budget – $3,200 living cost = +$5,300 surplus).Target U.S. Home BaseFeasibility Engine / U.S. MatcherusCity(e.g. "Raleigh, NC")
-• Preloaded into the Strategy Timeline (Age 65+: Raleigh, NC 🏡).
-• Integrated into flight connectivity ratings, next-step teasers, and the bottom Retirement Journey Sequence Strip.Children / Family CityFeasibility Engine / DiscoverychildrenCity(e.g. "Seattle, WA")
-• Used as context for transatlantic flight connectivity reasoning and return-phase travel distance checks.Initial Overseas Base (if entered)Feasibility Engine(financial-feasibility-audit.html)overseasBase(e.g. "Portugal")
-• Serves as the pre-selected baseline country recommendation before refinement questions are answered.
+Blueprint Healthcare Card
+        ↓
+Lifetime Healthcare & LTC Planner
+        ↓
+Save Stage 1, Stage 2 and Stage 3 decisions
+        ↓
+Return to Blueprint
+        ↓
+Healthcare card becomes complete
+        ↓
+Healthcare decisions appear inside Timeline View
