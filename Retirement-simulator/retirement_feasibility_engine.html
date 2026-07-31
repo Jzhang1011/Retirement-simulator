@@ -298,100 +298,311 @@
         </p>
     </div>
 
-    <!-- INPUTS CARRIED FORWARD & PRACTICAL CONTROLS -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- LEFT 6 COLUMNS: CARRIED FORWARD SUMMARY -->
-        <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
-            <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
-                <div>
-                    <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Inputs Carried Forward</span>
-                    <h2 class="text-lg font-serif-title font-bold text-[#0B132B]">Your Priorities & Must-Haves</h2>
-                </div>
-                <a href="retirement_preference_discovery.html" class="text-xs text-blue-600 font-bold hover:underline">Edit Preferences →</a>
-            </div>
+ <!-- ===========================================================
+DECISION CONTEXT
+=========================================================== -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- =======================================================
+    LEFT PANEL
+    ======================================================== -->
+    <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
+
+        <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-start">
 
             <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Ranked Priorities</label>
-                <div id="priorityTagsContainer" class="flex flex-wrap gap-2">
-                    <!-- JS Populated -->
+                <div class="text-[10px] uppercase tracking-widest font-black text-[#02B17D]">
+                    Carried Forward
                 </div>
+
+                <h2 class="text-xl font-serif-title font-bold text-slate-900">
+                    Decision Guardrails
+                </h2>
+
+                <p class="text-xs text-slate-500 mt-1 max-w-md">
+                    These preferences were collected earlier and define what every recommendation must respect.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">U.S. Living Constraint</span>
-                    <strong id="summary_mustStayUS" class="text-slate-900 font-bold">Strict Domestic U.S. Only</strong>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Children / Heirs Location</span>
-                    <strong id="summary_childrenLoc" class="text-slate-900 font-bold">Different U.S. State</strong>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">U.S. Medicare Reliance</span>
-                    <strong id="summary_medicare" class="text-slate-900 font-bold">Critical at 65+</strong>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block mb-0.5">Maximum Moves</span>
-                    <strong id="summary_maxMoves" class="text-slate-900 font-bold">1 Major Relocation</strong>
-                </div>
-            </div>
+            <a href="retirement_preference_discovery.html"
+               class="text-xs font-bold text-blue-600 hover:underline">
+                Edit →
+            </a>
+
         </div>
 
-        <!-- RIGHT 6 COLUMNS: PRACTICAL FEASIBILITY CONTROLS -->
-        <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-            <div class="border-b border-slate-100 pb-3">
-                <span class="text-[10px] uppercase font-extrabold tracking-widest text-[#019367]">Feasibility Controls</span>
-                <h2 class="text-lg font-serif-title font-bold text-[#0B132B]">Your Practical Situation</h2>
+        <div class="p-6 space-y-5">
+
+            <div>
+
+                <label class="text-xs uppercase font-bold tracking-wider text-slate-500">
+                    Ranked Priorities
+                </label>
+
+                <div id="priorityTagsContainer"
+                     class="flex flex-wrap gap-2 mt-2">
+                </div>
+
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3">
+
+                <div class="bg-slate-50 rounded-xl border p-4">
+
+                    <div class="text-[10px] uppercase font-bold text-slate-400">
+                        Location Preference
+                    </div>
+
+                    <div id="summary_mustStayUS"
+                         class="font-bold mt-1">
+                    </div>
+
+                </div>
+
+                <div class="bg-slate-50 rounded-xl border p-4">
+
+                    <div class="text-[10px] uppercase font-bold text-slate-400">
+                        Family Consideration
+                    </div>
+
+                    <div id="summary_childrenLoc"
+                         class="font-bold mt-1">
+                    </div>
+
+                </div>
+
+                <div class="bg-slate-50 rounded-xl border p-4">
+
+                    <div class="text-[10px] uppercase font-bold text-slate-400">
+                        Medicare Strategy
+                    </div>
+
+                    <div id="summary_medicare"
+                         class="font-bold mt-1">
+                    </div>
+
+                </div>
+
+                <div class="bg-slate-50 rounded-xl border p-4">
+
+                    <div class="text-[10px] uppercase font-bold text-slate-400">
+                        Retirement Transition
+                    </div>
+
+                    <div id="summary_maxMoves"
+                         class="font-bold mt-1">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =======================================================
+    RIGHT PANEL
+    ======================================================== -->
+
+    <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
+
+        <div class="px-6 py-5 border-b border-slate-100">
+
+            <div class="text-[10px] uppercase tracking-widest font-black text-[#02B17D]">
+                Interactive Scenario
+            </div>
+
+            <h2 class="text-xl font-serif-title font-bold text-slate-900">
+                Scenario Assumptions
+            </h2>
+
+            <p class="text-xs text-slate-500 mt-1 max-w-lg">
+                Change these assumptions to see how they affect which retirement lifestyles remain feasible.
+            </p>
+
+        </div>
+
+        <div class="p-6 space-y-5">
+
+            <div class="grid grid-cols-2 gap-4">
+
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target Monthly Spending</label>
-                    <select id="feat_monthlySpend" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                        <option value="5k">$5,000 / month ($60k/yr)</option>
-                        <option value="8k" selected>$8,500 / month ($102k/yr)</option>
-                        <option value="14k">$14,000 / month ($168k/yr)</option>
+
+                    <label class="text-xs uppercase font-bold text-slate-600">
+                        Monthly Spending
+                    </label>
+
+                    <select id="feat_monthlySpend"
+                            class="w-full mt-2 border rounded-xl p-3 bg-slate-50">
+
+                        <option>$5,000 / month</option>
+                        <option selected>$8,500 / month</option>
+                        <option>$14,000 / month</option>
+
                     </select>
+
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Housing Strategy</label>
-                    <select id="feat_housingStrategy" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                        <option value="Own_Single" selected>Own Primary Residence</option>
-                        <option value="Rent_Flexible">Flexible Renting Only</option>
-                        <option value="Dual_Homes">Maintain Dual Residences</option>
+
+                    <label class="text-xs uppercase font-bold text-slate-600">
+                        Housing Strategy
+                    </label>
+
+                    <select id="feat_housingStrategy"
+                            class="w-full mt-2 border rounded-xl p-3 bg-slate-50">
+
+                        <option selected>
+                            Own Primary Residence
+                        </option>
+
+                        <option>
+                            Flexible Renting
+                        </option>
+
+                        <option>
+                            Dual Residences
+                        </option>
+
                     </select>
+
                 </div>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <div>
+
+                    <label class="text-xs uppercase font-bold text-slate-600">
+                        Healthcare Before 65
+                    </label>
+
+                    <select id="feat_healthcareBridge"
+                            class="w-full mt-2 border rounded-xl p-3 bg-slate-50">
+
+                        <option>
+                            Employer Coverage
+                        </option>
+
+                        <option selected>
+                            ACA Marketplace
+                        </option>
+
+                        <option>
+                            Private Insurance
+                        </option>
+
+                        <option>
+                            Foreign Healthcare
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label class="text-xs uppercase font-bold text-slate-600">
+                        Administrative Complexity
+                    </label>
+
+                    <select id="feat_adminComplexity"
+                            class="w-full mt-2 border rounded-xl p-3 bg-slate-50">
+
+                        <option>
+                            Keep Things Simple
+                        </option>
+
+                        <option selected>
+                            Some Additional Planning
+                        </option>
+
+                        <option>
+                            Comfortable Managing Complexity
+                        </option>
+
+                    </select>
+
+                </div>
+
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Execution Tolerance</label>
-                <select id="feat_complexityTolerance" onchange="recalculateFeasibility()" class="w-full bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-xs font-bold text-slate-800 outline-none focus:border-blue-500">
-                    <option value="Low">Low — Simple domestic setup</option>
-                    <option value="Moderate" selected>Moderate — Willing to manage 1 move</option>
-                    <option value="High">High — Open to multi-stage complexity</option>
+
+                <label class="text-xs uppercase font-bold text-slate-600">
+                    Temporary Dual Residence
+                </label>
+
+                <select id="feat_dualResidence"
+                        class="w-full mt-2 border rounded-xl p-3 bg-slate-50">
+
+                    <option selected>
+                        No
+                    </option>
+
+                    <option>
+                        Up to 2 Years
+                    </option>
+
+                    <option>
+                        Long-term
+                    </option>
+
                 </select>
+
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-100">
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target Overseas Base</label>
-                    <input type="text" id="feat_overseasBase" value="Portugal" placeholder="e.g. Portugal" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+
+                <div class="text-[10px] uppercase font-black text-emerald-700 tracking-wider">
+                    Current Test Scenario
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Target U.S. Return City</label>
-                    <input type="text" id="feat_usCity" value="Raleigh, NC" placeholder="e.g. Raleigh, NC" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
+
+                <div class="grid grid-cols-2 gap-y-2 text-xs mt-3">
+
+                    <div class="text-slate-500">
+                        Spending
+                    </div>
+
+                    <div id="scenarioSpend" class="font-bold">
+                        $8,500 / month
+                    </div>
+
+                    <div class="text-slate-500">
+                        Housing
+                    </div>
+
+                    <div id="scenarioHousing" class="font-bold">
+                        Own Primary Residence
+                    </div>
+
+                    <div class="text-slate-500">
+                        Healthcare
+                    </div>
+
+                    <div id="scenarioHealthcare" class="font-bold">
+                        ACA Marketplace
+                    </div>
+
+                    <div class="text-slate-500">
+                        Administration
+                    </div>
+
+                    <div id="scenarioComplexity" class="font-bold">
+                        Moderate
+                    </div>
+
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Children's City</label>
-                    <input type="text" id="feat_childrenCity" value="Los Angeles, CA" placeholder="e.g. Los Angeles, CA" class="w-full bg-slate-50 border border-slate-200 p-2 rounded-lg text-xs font-bold text-slate-800">
-                </div>
+
             </div>
+
         </div>
 
-    </section>
+    </div>
 
+</section>
     <!-- SCENARIO RELAXATION EXPERIMENT ENGINE -->
     <section class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 border border-slate-800 shadow-xl space-y-5">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
