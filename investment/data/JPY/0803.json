@@ -1,0 +1,264 @@
+{
+  "schema_version": "2.0",
+  "review_id": "JPY-001-2026-08-04",
+  "thesis": {
+    "id": "JPY-001",
+    "version": "1.0",
+    "name": "JPY Structural Investment Thesis",
+    "slug": "jpy",
+    "category": "macro-currency",
+    "horizon": "12–24 months"
+  },
+  "review": {
+    "date": "2026-08-04",
+    "period_start": "2026-07-22",
+    "period_end": "2026-08-04",
+    "cadence": "biweekly"
+  },
+  "status": "intact",
+  "thesis_health": {
+    "current": 82,
+    "previous": 82,
+    "change": 0,
+    "trend": "stable",
+    "reason_code": "NO_ASSUMPTION_CHANGE",
+    "reason": "No core assumption materially changed. Restrictive Federal Reserve policy, gradual BOJ normalization, and absent sustained intervention remain consistent with the thesis, while BOJ inflation risks and recent capital-flow weakness require monitoring."
+  },
+  "material_change": false,
+  "decision": {
+    "action": "no_change",
+    "summary": "Maintain current positioning. Increase monitoring of BOJ policy signaling, carry conditions, and whether recent foreign-security sales develop into sustained repatriation."
+  },
+  "key_developments": [
+    {
+      "title": "Federal Reserve maintained a restrictive policy rate",
+      "assumption_id": "A1",
+      "assumption_name": "Federal Reserve remains restrictive",
+      "impact": "The 3.50%–3.75% federal funds target remains substantially above Japan's policy rate, preserving a meaningful policy differential.",
+      "direction": "supports_thesis",
+      "materiality": "moderate",
+      "evidence_type": "fact"
+    },
+    {
+      "title": "Three FOMC members preferred a rate increase",
+      "assumption_id": "A1",
+      "assumption_name": "Federal Reserve remains restrictive",
+      "impact": "The hawkish dissent reduces near-term aggressive-easing risk but does not independently change the structural assumption.",
+      "direction": "supports_thesis",
+      "materiality": "minor",
+      "evidence_type": "fact"
+    },
+    {
+      "title": "BOJ held the overnight call rate near 1.0%",
+      "assumption_id": "A2",
+      "assumption_name": "Bank of Japan tightens gradually",
+      "impact": "The unchanged rate remains consistent with gradual normalization rather than rapid tightening or policy-regime change.",
+      "direction": "supports_thesis",
+      "materiality": "moderate",
+      "evidence_type": "fact"
+    },
+    {
+      "title": "One BOJ member proposed raising the rate to 1.25%",
+      "assumption_id": "A2",
+      "assumption_name": "Bank of Japan tightens gradually",
+      "impact": "The dissent signals greater concern about upside inflation risks, but an 8–1 majority rejected faster tightening.",
+      "direction": "weakens_thesis",
+      "materiality": "moderate",
+      "evidence_type": "fact"
+    },
+    {
+      "title": "Policy-rate differential continued supporting carry economics",
+      "assumption_id": "A3",
+      "assumption_name": "Carry remains attractive",
+      "impact": "The policy-rate gap remains meaningful and no reviewed official evidence established systemic funding stress or forced deleveraging.",
+      "direction": "supports_thesis",
+      "materiality": "moderate",
+      "evidence_type": "interpretation"
+    },
+    {
+      "title": "Japan reported zero foreign-exchange intervention",
+      "assumption_id": "A4",
+      "assumption_name": "No sustained intervention",
+      "impact": "Official data showed no intervention from June 29 through July 29, confirming that intervention risk had not become repeated action.",
+      "direction": "supports_thesis",
+      "materiality": "moderate",
+      "evidence_type": "fact"
+    },
+    {
+      "title": "Residents remained net sellers of foreign debt securities",
+      "assumption_id": "A6",
+      "assumption_name": "Japanese capital continues overseas",
+      "impact": "Residents recorded a second consecutive week of net long-term and short-term foreign-debt sales, but the period is insufficient to establish structural repatriation.",
+      "direction": "weakens_thesis",
+      "materiality": "minor",
+      "evidence_type": "fact"
+    }
+  ],
+  "scorecard": [
+    {
+      "driver_id": "A1",
+      "driver": "Federal Reserve remains relatively restrictive",
+      "score": 5,
+      "trend": "stable"
+    },
+    {
+      "driver_id": "A2",
+      "driver": "Bank of Japan tightens gradually",
+      "score": 4,
+      "trend": "weakening"
+    },
+    {
+      "driver_id": "A3",
+      "driver": "Carry trades remain profitable",
+      "score": 4,
+      "trend": "stable"
+    },
+    {
+      "driver_id": "A4",
+      "driver": "Japan avoids sustained intervention",
+      "score": 5,
+      "trend": "stable"
+    },
+    {
+      "driver_id": "A5",
+      "driver": "Global markets remain broadly stable",
+      "score": 4,
+      "trend": "stable"
+    },
+    {
+      "driver_id": "A6",
+      "driver": "Japanese capital continues flowing overseas",
+      "score": 3,
+      "trend": "weakening"
+    }
+  ],
+  "assumptions_changed": [],
+  "action_center": {
+    "overall_action": "hold_supported",
+    "opportunities": [],
+    "watch_items": [
+      "BOJ normalization pace — hawkish dissent and inflation concerns",
+      "Carry-trade durability — volatility and funding costs",
+      "Japanese overseas portfolio flows — foreign-debt sales repatriation"
+    ],
+    "avoid": [
+      {
+        "name": "Import-cost-sensitive domestic businesses",
+        "reason": "Weak-yen benefits are limited where pricing power cannot offset imported costs."
+      }
+    ]
+  },
+  "risks": [
+    {
+      "rank": 1,
+      "name": "Durable domestic inflation accelerates BOJ tightening",
+      "trend": "increasing",
+      "assumption_ids": ["A2", "A3"]
+    },
+    {
+      "rank": 2,
+      "name": "Foreign-security sales develop into structural repatriation",
+      "trend": "increasing",
+      "assumption_ids": ["A6"]
+    },
+    {
+      "rank": 3,
+      "name": "Global volatility triggers forced carry deleveraging",
+      "trend": "stable",
+      "assumption_ids": ["A3", "A5"]
+    },
+    {
+      "rank": 4,
+      "name": "Federal Reserve shifts into aggressive easing",
+      "trend": "decreasing",
+      "assumption_ids": ["A1", "A3"]
+    }
+  ],
+  "next_decision_points": [
+    {
+      "event": "Japan international securities-flow release",
+      "date": "2026-08-06",
+      "expected_outcome": "Determine whether resident foreign-asset sales persist for another week.",
+      "potential_impact": "medium",
+      "assumption_ids": ["A6"]
+    },
+    {
+      "event": "BOJ Summary of Opinions",
+      "date": "2026-08-10",
+      "expected_outcome": "Clarify whether support for faster tightening extends beyond one dissenter.",
+      "potential_impact": "high",
+      "assumption_ids": ["A2", "A3"]
+    },
+    {
+      "event": "Japan national consumer-price release",
+      "date": "2026-08-21",
+      "expected_outcome": "Test whether domestic and services inflation remain durable.",
+      "potential_impact": "high",
+      "assumption_ids": ["A2"]
+    },
+    {
+      "event": "BOJ Monetary Policy Meeting",
+      "date": "2026-09-18",
+      "expected_outcome": "Assess whether normalization remains gradual or begins accelerating.",
+      "potential_impact": "high",
+      "assumption_ids": ["A2", "A3"]
+    }
+  ],
+  "research_questions": [
+    "Does the BOJ dissent represent emerging board-wide support for faster tightening?",
+    "Are Japanese services inflation and wages becoming domestically sustained?",
+    "Do subsequent portfolio-flow releases confirm sustained capital repatriation?",
+    "Are volatility and funding costs rising enough to impair carry profitability?",
+    "Would favored Japanese companies remain attractive under a materially stronger yen?"
+  ],
+  "sources": [
+    {
+      "title": "Federal Reserve issues FOMC statement",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
+      "published_date": "2026-07-29",
+      "accessed_date": "2026-08-04"
+    },
+    {
+      "title": "Statement on Monetary Policy",
+      "publisher": "Bank of Japan",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260731a.pdf",
+      "published_date": "2026-07-31",
+      "accessed_date": "2026-08-04"
+    },
+    {
+      "title": "Foreign Exchange Intervention Operations, June 29 through July 29, 2026",
+      "publisher": "Ministry of Finance Japan",
+      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/feio/monthly/20260731e.html",
+      "published_date": "2026-07-31",
+      "accessed_date": "2026-08-04"
+    },
+    {
+      "title": "International Transactions in Securities, July 19 through July 25, 2026",
+      "publisher": "Ministry of Finance Japan",
+      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/itn_transactions_in_securities/week.pdf",
+      "published_date": "2026-07-30",
+      "accessed_date": "2026-08-04"
+    },
+    {
+      "title": "International Transactions in Securities Release Schedule",
+      "publisher": "Ministry of Finance Japan",
+      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/itn_transactions_in_securities/schedule.htm",
+      "published_date": null,
+      "accessed_date": "2026-08-04"
+    },
+    {
+      "title": "Consumer Price Index Schedule of Release",
+      "publisher": "Statistics Bureau of Japan",
+      "url": "https://www.stat.go.jp/english/data/cpi/1582.html",
+      "published_date": "2026-01-23",
+      "accessed_date": "2026-08-04"
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "generated_by": "ChatGPT",
+    "approved_by": null,
+    "approved_date": null
+  }
+}
