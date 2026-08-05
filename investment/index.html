@@ -309,80 +309,68 @@ const FALLBACK_NINTENDO_COMPANY = {
 let globalThemes = [];
 let globalCompanies = [];
 
-function resolveJsonPath(entry, defaultDir) {
-  if (!entry) return null;
+function getCandidatePaths(entry, defaultDir) {
+  const paths = [];
   let file = typeof entry === 'string' ? entry : (entry.file || entry.slug || '');
-  if (!file) return null;
-  
+  if (!file) return paths;
+
   if (file.startsWith('./')) file = file.slice(2);
   if (file.startsWith('/')) file = file.slice(1);
   if (!file.endsWith('.json')) file += '.json';
-  
+
   if (file.startsWith('data/')) {
-    return './' + file;
+    paths.push('./' + file);
+  } else if (file.startsWith(defaultDir + '/')) {
+    paths.push('./data/' + file);
+    paths.push('./' + file);
+  } else {
+    paths.push(`./data/${defaultDir}/${file}`);
+    paths.push(`./data/${file}`);
+    paths.push(`./${file}`);
   }
-  if (file.startsWith(defaultDir + '/')) {
-    return './data/' + file;
-  }
-  return `./data/${defaultDir}/${file}`;
+  return paths;
 }
 
-async function fetchJsonSafely(path) {
-  try {
-    const res = await fetch(path, { cache: 'no-store' });
-    if (res.ok) {
-      return await res.json();
+async function fetchJsonSafely(paths) {
+  for (const path of paths) {
+    try {
+      const res = await fetch(path, { cache: 'no-store' });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      // Ignore network errors for missing candidate paths
     }
-  } catch (e) {
-    // Silent catch for missing or 404 files
   }
   return null;
 }
 
 async function loadThemeEntry(entry) {
-  const primaryPath = resolveJsonPath(entry, 'themes');
-  if (primaryPath) {
-    const data = await fetchJsonSafely(primaryPath);
-    if (data) return data;
+  const candidatePaths = getCandidatePaths(entry, 'themes');
+  const data = await fetchJsonSafely(candidatePaths);
+  if (!data) {
+    console.info(`Theme JSON skipped (file not yet published): ${typeof entry === 'string' ? entry : (entry.slug || entry.file)}`);
   }
-  
-  const rawSlug = typeof entry === 'string' ? entry : (entry.slug || '');
-  if (rawSlug) {
-    const fallbackPath = `./data/${rawSlug}.json`;
-    const data = await fetchJsonSafely(fallbackPath);
-    if (data) return data;
-  }
-
-  console.warn(`Theme JSON not found on server (skipping): ${typeof entry === 'string' ? entry : entry.slug}`);
-  return null;
+  return data;
 }
 
 async function loadCompanyEntry(entry) {
-  const primaryPath = resolveJsonPath(entry, 'companies');
-  if (primaryPath) {
-    const data = await fetchJsonSafely(primaryPath);
-    if (data) return data;
+  const candidatePaths = getCandidatePaths(entry, 'companies');
+  const data = await fetchJsonSafely(candidatePaths);
+  if (!data) {
+    console.info(`Company JSON skipped (file not yet published): ${typeof entry === 'string' ? entry : (entry.slug || entry.file)}`);
   }
-
-  const rawSlug = typeof entry === 'string' ? entry : (entry.slug || '');
-  if (rawSlug) {
-    const fallbackPath = `./data/${rawSlug}.json`;
-    const data = await fetchJsonSafely(fallbackPath);
-    if (data) return data;
-  }
-
-  console.warn(`Company JSON not found on server (skipping): ${typeof entry === 'string' ? entry : entry.slug}`);
-  return null;
+  return data;
 }
 
 async function load() {
   try {
-    const manifest = await fetchJsonSafely('./data/index.json');
+    const manifest = await fetchJsonSafely(['./data/index.json', './index.json']);
     if (manifest) {
       const themeEntries = manifest.themes || manifest.theses || [];
       const companyEntries = manifest.companies || [];
 
-      // Fetch each entry independently without throwing or failing Promise.all
+      // Fetch each entry in parallel with individual error suppression
       const loadedThemes = await Promise.all(themeEntries.map(loadThemeEntry));
       const loadedCompanies = await Promise.all(companyEntries.map(loadCompanyEntry));
 
@@ -390,12 +378,19 @@ async function load() {
       globalCompanies = loadedCompanies.filter(Boolean);
     }
   } catch (e) {
-    console.warn("Could not load registry manifest index.json", e);
+    console.warn("Manifest index load failed, falling back to local files.", e);
   }
 
-  // Fallbacks if no valid files were fetched
-  if (globalThemes.length === 0) globalThemes = [FALLBACK_JPY_THEME];
-  if (globalCompanies.length === 0) globalCompanies = [FALLBACK_NINTENDO_COMPANY];
+  // Fallback to JPY / Nintendo if no valid files were returned from server
+  if (globalThemes.length === 0) {
+    const directJpy = await fetchJsonSafely(['./data/themes/jpy.json', './data/jpy.json']);
+    globalThemes = [directJpy || FALLBACK_JPY_THEME];
+  }
+  
+  if (globalCompanies.length === 0) {
+    const directNintendo = await fetchJsonSafely(['./data/companies/nintendo-jpy.json', './data/nintendo-jpy.json']);
+    globalCompanies = [directNintendo || FALLBACK_NINTENDO_COMPANY];
+  }
 
   renderDashboard(globalThemes, globalCompanies);
 }
