@@ -1,0 +1,391 @@
+{
+  "schema_version": "4.0",
+  "review_id": "NINTENDO-JPY-2026-08-05",
+  "company": {
+    "id": "NINTENDO-JPY-001",
+    "name": "Nintendo Co., Ltd.",
+    "slug": "nintendo-jpy",
+    "ticker": "7974",
+    "exchange": "Tokyo Stock Exchange Prime Market",
+    "currency": "JPY",
+    "theme_dependencies": [
+      "jpy"
+    ]
+  },
+  "review": {
+    "date": "2026-08-05",
+    "previous_review_id": null
+  },
+  "market_data": {
+    "current_price": 7428,
+    "price_date": "2026-08-05",
+    "price_timestamp": "2026-08-05T15:30:00+09:00",
+    "price_source": "WSJ market data supplied by FactSet; regular-market close",
+    "share_basis": "local_share"
+  },
+  "operating_scenarios": {
+    "bull": {
+      "probability": 0.25,
+      "conditions": [
+        "Nintendo Switch 2 second-year hardware sales materially exceed the 16.5 million-unit company forecast.",
+        "Software attach, first-party mix, and digital engagement strengthen as the installed base expands.",
+        "Operating margins recover as the revenue mix shifts from launch hardware toward software and services.",
+        "Component and tariff costs moderate or are offset through pricing, scale, and product mix.",
+        "Movies, licensing, merchandise, and other IP initiatives produce durable incremental earnings.",
+        "Foreign-exchange benefits are supportive but not the primary source of earnings growth."
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 430,
+        "enterprise_pe_multiple": 26,
+        "net_cash_per_share_jpy": 2035,
+        "switch_2_hardware_outcome": "materially_above_guidance",
+        "software_attach": "strong",
+        "digital_mix": "expanding",
+        "margin_direction": "recovering",
+        "fx_treatment": "included_in_normalized_earnings_not_counted_as_separate_return_engine"
+      }
+    },
+    "fair": {
+      "probability": 0.55,
+      "conditions": [
+        "Nintendo Switch 2 hardware sales are approximately consistent with the 16.5 million-unit company forecast.",
+        "Software growth and recurring engagement partly offset lower hardware volume.",
+        "Fiscal 2027 operating profit remains near the ¥370 billion company forecast.",
+        "Digital sales and annual playing users remain constructive.",
+        "Component and tariff costs remain significant but manageable.",
+        "IP monetization contributes without requiring speculative valuation assumptions."
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 340,
+        "enterprise_pe_multiple": 22,
+        "net_cash_per_share_jpy": 2035,
+        "switch_2_hardware_outcome": "near_guidance",
+        "software_attach": "moderate",
+        "digital_mix": "stable_to_improving",
+        "margin_direction": "gradual_recovery",
+        "fx_treatment": "included_in_normalized_earnings_not_counted_as_separate_return_engine"
+      }
+    },
+    "bear": {
+      "probability": 0.2,
+      "conditions": [
+        "Nintendo Switch 2 hardware sales fall materially below company guidance.",
+        "Price increases weaken consumer demand or reduce platform adoption.",
+        "Software attach and first-party sales fail to scale with the installed base.",
+        "Memory, tariff, or supply-chain costs remain elevated and compress margins.",
+        "A stronger yen reduces translated revenue and profit.",
+        "Broader IP initiatives fail to offset weaker platform economics."
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 260,
+        "enterprise_pe_multiple": 17,
+        "net_cash_per_share_jpy": 2035,
+        "switch_2_hardware_outcome": "below_guidance",
+        "software_attach": "weak",
+        "digital_mix": "stagnant",
+        "margin_direction": "compressed",
+        "fx_treatment": "included_in_normalized_earnings_not_counted_as_separate_return_engine"
+      }
+    }
+  },
+  "valuation": {
+    "bull": {
+      "value_per_share": 13215,
+      "method": "Normalized earnings multiple plus net financial assets per local share",
+      "assumptions": [
+        "Normalized EPS of ¥430.",
+        "Enterprise earnings multiple of 26 times.",
+        "Net cash and investment securities less interest-bearing liabilities of ¥2,035 per share.",
+        "Switch 2 materially exceeds second-year expectations.",
+        "Software, digital, and IP economics support margin recovery."
+      ]
+    },
+    "fair": {
+      "value_per_share": 9515,
+      "method": "Normalized earnings multiple plus net financial assets per local share",
+      "assumptions": [
+        "Normalized EPS of ¥340.",
+        "Enterprise earnings multiple of 22 times.",
+        "Net cash and investment securities less interest-bearing liabilities of ¥2,035 per share.",
+        "Switch 2 performs approximately in line with management guidance.",
+        "Software growth and digital engagement offset lower hardware volume."
+      ]
+    },
+    "bear": {
+      "value_per_share": 6455,
+      "method": "Normalized earnings multiple plus net financial assets per local share",
+      "assumptions": [
+        "Normalized EPS of ¥260.",
+        "Enterprise earnings multiple of 17 times.",
+        "Net cash and investment securities less interest-bearing liabilities of ¥2,035 per share.",
+        "Hardware and software demand miss expectations.",
+        "Cost inflation, tariffs, or yen appreciation reduce earnings."
+      ]
+    },
+    "probability_weighted_value": 9828,
+    "net_cash_per_share": 2035,
+    "upside_to_fair_value_pct": 28.1,
+    "downside_to_bear_value_pct": -13.1
+  },
+  "entry_zones": {
+    "strong_buy_below": 6455,
+    "attractive_below": 8800,
+    "fair_value_low": 8800,
+    "fair_value_high": 10500,
+    "expensive_above": 13215
+  },
+  "market_view": {
+    "why_price_differs_from_value": [
+      "The market discounts fiscal 2027 earnings because Nintendo forecasts a decline in second-year Switch 2 hardware units.",
+      "Investors may treat approximately ¥100 billion of component and tariff pressure as structural rather than transitional.",
+      "The launch-year hardware mix reduced operating margin and created uncertainty about the pace of margin recovery.",
+      "Switch 2 price increases introduce demand-elasticity risk.",
+      "Second-year software attach and engagement have not yet been demonstrated.",
+      "The market may apply a discount to Nintendo's large net-cash position because much of the capital remains retained.",
+      "Foreign-exchange gains increased reported fiscal 2026 earnings and may not recur if the yen appreciates."
+    ],
+    "market_implied_assumptions": [
+      "Enterprise value is approximately ¥5,393 per share after deducting estimated net cash.",
+      "The market values fair-case normalized earnings of ¥340 per share at approximately 15.9 times on an ex-cash basis.",
+      "Switch 2 hardware demand is expected to remain near or below the 16.5 million-unit company forecast.",
+      "Software attach and digital-mix improvement will be moderate rather than exceptional.",
+      "Component and tariff costs will remain elevated.",
+      "Broader IP monetization will not create a major independent earnings stream.",
+      "Yen-driven translation effects should not receive a durable valuation premium."
+    ],
+    "mispricing_drivers": [
+      "Potential underestimation of software and digital economics following the hardware launch phase.",
+      "Potential underappreciation of Nintendo's approximately ¥2,035 per-share net financial asset position.",
+      "Conservative management guidance may cause the market to understate upside if software attach and second-year hardware demand exceed expectations.",
+      "Near-term hardware-margin pressure may obscure the long-duration economics of proprietary IP and first-party software.",
+      "The market may be assigning limited value to capital returns and broader entertainment monetization."
+    ]
+  },
+  "valuation_status": "undervalued",
+  "current_zone": "attractive",
+  "return_engines": [
+    {
+      "name": "Proprietary IP and first-party software",
+      "independence": "primary",
+      "evidence": "Nintendo controls durable franchises and high-margin first-party software economics.",
+      "valuation_link": "Supports normalized earnings and premium enterprise multiples when attach and first-party mix strengthen."
+    },
+    {
+      "name": "Nintendo Switch 2 installed-base expansion",
+      "independence": "primary",
+      "evidence": "Fiscal 2026 Switch 2 hardware sales reached 19.86 million units after the June 2025 launch.",
+      "valuation_link": "Expands the addressable base for software, subscriptions, accessories, and recurring engagement."
+    },
+    {
+      "name": "Digital mix and recurring engagement",
+      "independence": "independent_from_hardware_units",
+      "evidence": "Fiscal 2026 digital sales increased 25 percent to ¥407.6 billion and represented 54.6 percent of platform software sales.",
+      "valuation_link": "Improves lifetime customer economics and supports margin recovery."
+    },
+    {
+      "name": "Broader IP monetization",
+      "independence": "partially_independent",
+      "evidence": "Film, licensing, merchandise, stores, and entertainment initiatives extend Nintendo franchises beyond game sales.",
+      "valuation_link": "Provides earnings diversification, although no separate speculative valuation premium is applied."
+    },
+    {
+      "name": "Capital allocation and net cash",
+      "independence": "independent",
+      "evidence": "Nintendo held approximately ¥2.346 trillion of net cash and investment securities after interest-bearing liabilities and completed a ¥99.9 billion share repurchase and cancellation.",
+      "valuation_link": "Adds approximately ¥2,035 per share to scenario values and protects downside."
+    },
+    {
+      "name": "JPY translation",
+      "independence": "not_independent",
+      "evidence": "Foreign exchange increased fiscal 2026 sales and operating profit, but is linked to Nintendo's foreign-revenue exposure.",
+      "valuation_link": "Included in normalized scenario earnings and not counted as a separate return engine."
+    }
+  ],
+  "catalysts": [
+    {
+      "name": "Fiscal 2027 first-quarter earnings",
+      "date": "2026-08-06",
+      "expected_effect": "Provides the first major current test of Switch 2 second-year demand, software attach, gross margin, inventory, component costs, and guidance.",
+      "scenario_impact": "A strong result would raise the bull case; weak demand or margin deterioration would increase the bear case.",
+      "valuation_impact": "May change normalized EPS, the applicable enterprise multiple, and the current valuation zone."
+    },
+    {
+      "name": "United States and European price increases",
+      "date": "2026-09-01",
+      "expected_effect": "Tests Nintendo's pricing power and consumer-demand elasticity.",
+      "scenario_impact": "Successful pricing supports fair and bull margins; material volume weakness supports the bear case.",
+      "valuation_impact": "Changes revenue, gross-margin, and installed-base assumptions."
+    },
+    {
+      "name": "Fiscal 2027 software pipeline",
+      "date": null,
+      "expected_effect": "Strong first-party and third-party releases can increase software attach and recurring engagement.",
+      "scenario_impact": "Supports fair-to-bull transition when attach and engagement broaden.",
+      "valuation_impact": "Raises normalized EPS and may justify a higher enterprise earnings multiple."
+    },
+    {
+      "name": "Additional capital returns",
+      "date": null,
+      "expected_effect": "Further repurchases, cancellations, or increased distributions may reduce the discount applied to retained financial assets.",
+      "scenario_impact": "Improves downside resilience across scenarios.",
+      "valuation_impact": "Can increase per-share value and improve realization of net-cash value."
+    }
+  ],
+  "risks": [
+    {
+      "name": "Switch 2 demand shortfall",
+      "trigger": "Hardware sales materially miss the 16.5 million-unit fiscal 2027 forecast.",
+      "scenario_impact": "Moves probability toward the bear case.",
+      "valuation_impact": "Reduces normalized earnings and the justified enterprise multiple."
+    },
+    {
+      "name": "Weak software attach",
+      "trigger": "Software sales and engagement fail to scale with the installed base.",
+      "scenario_impact": "Undermines fair and bull margin assumptions.",
+      "valuation_impact": "Reduces normalized EPS and weakens the case for a premium multiple."
+    },
+    {
+      "name": "Price elasticity",
+      "trigger": "Regional hardware and software price increases materially reduce unit demand.",
+      "scenario_impact": "Raises bear probability.",
+      "valuation_impact": "Offsets margin benefits with weaker installed-base growth."
+    },
+    {
+      "name": "Component, tariff, and supply-chain cost pressure",
+      "trigger": "Costs materially exceed the approximately ¥100 billion included in company guidance.",
+      "scenario_impact": "Pressures fair-case margins and increases bear probability.",
+      "valuation_impact": "Reduces normalized EPS."
+    },
+    {
+      "name": "Foreign-exchange reversal",
+      "trigger": "A stronger yen materially reduces translated revenue, operating profit, or financial income.",
+      "scenario_impact": "Weakens reported earnings without necessarily changing underlying franchise quality.",
+      "valuation_impact": "Reduces normalized JPY earnings; no separate FX premium is included."
+    },
+    {
+      "name": "Capital-allocation inefficiency",
+      "trigger": "Net cash is deployed into low-return investments or remains structurally inaccessible to shareholders.",
+      "scenario_impact": "Reduces downside protection and confidence.",
+      "valuation_impact": "May require a discount to reported net financial assets."
+    }
+  ],
+  "invalidation_conditions": [
+    "Nintendo Switch 2 hardware demand materially underperforms company guidance without a credible recovery path.",
+    "Software attach and first-party sales fail to scale with the installed base.",
+    "Annual playing users decline materially and persistently.",
+    "Digital mix and recurring engagement stagnate or reverse.",
+    "Operating margins fail to recover despite a higher software mix.",
+    "Normalized earnings fall below approximately ¥260 per share without a credible recovery path.",
+    "Price increases cause sustained demand destruction.",
+    "Earnings growth depends primarily on yen depreciation rather than operating performance.",
+    "Broader IP projects consume capital without producing durable returns.",
+    "Net cash is materially impaired or deployed at inadequate returns."
+  ],
+  "decision": {
+    "state": "watchlist",
+    "cta": "add_to_watchlist_pending_august_6_earnings",
+    "summary": "Nintendo trades below the fair and probability-weighted values and has substantial balance-sheet protection, but the August 6 earnings release is required to verify Switch 2 demand, software attach, margin recovery, and cost assumptions before escalating the decision.",
+    "next_catalyst": "Fiscal 2027 first-quarter earnings release on August 6, 2026",
+    "next_decision_date": "2026-08-07"
+  },
+  "sources": [
+    {
+      "source_id": "SRC-CORE-OS-V4-1",
+      "title": "WealthLanding Investment OS — Compact Operating System v4.1",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_source_of_truth",
+      "reference": "00_CORE_OPERATING_SYSTEM.md"
+    },
+    {
+      "source_id": "SRC-CORE-COMPANY-SCHEMA-V4",
+      "title": "WealthLanding Company Schema v4.0",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_source_of_truth",
+      "reference": "00_CORE_COMPANY_SCHEMA.json"
+    },
+    {
+      "source_id": "SRC-JPY-MASTER",
+      "title": "JPY Structural Investment Thesis — Master Research File",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_theme_source",
+      "reference": "JPY_MASTER_RESEARCH.md"
+    },
+    {
+      "source_id": "SRC-JPY-BASELINE",
+      "title": "JPY Baseline Unapproved Placeholder",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_theme_baseline",
+      "reference": "JPY_BASELINE.json"
+    },
+    {
+      "source_id": "SRC-NINTENDO-RESEARCH",
+      "title": "Nintendo + JPY — Company Research File",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_company_source",
+      "reference": "NINTENDO_JPY_RESEARCH.md"
+    },
+    {
+      "source_id": "SRC-NINTENDO-BASELINE",
+      "title": "Nintendo JPY Baseline Unapproved Placeholder",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_company_baseline",
+      "reference": "NINTENDO_JPY_BASELINE.json"
+    },
+    {
+      "source_id": "SRC-NINTENDO-FY2026-RESULTS",
+      "title": "Financial Results Explanatory Material for the Fiscal Year Ended March 2026",
+      "publisher": "Nintendo Co., Ltd.",
+      "date": "2026-05-08",
+      "source_type": "primary",
+      "reference": "https://www.nintendo.co.jp/ir/pdf/2026/260508_4e.pdf"
+    },
+    {
+      "source_id": "SRC-NINTENDO-ANNUAL-2026",
+      "title": "Annual Report 2026",
+      "publisher": "Nintendo Co., Ltd.",
+      "date": "2026-06-25",
+      "source_type": "primary",
+      "reference": "https://www.nintendo.co.jp/ir/pdf/2026/annual2603e.pdf"
+    },
+    {
+      "source_id": "SRC-NINTENDO-IR-CALENDAR",
+      "title": "Nintendo Investor Relations Information and Earnings Calendar",
+      "publisher": "Nintendo Co., Ltd.",
+      "date": "2026-08-05",
+      "source_type": "primary",
+      "reference": "https://www.nintendo.co.jp/ir/en/index.html"
+    },
+    {
+      "source_id": "SRC-JPX-NINTENDO-IDENTITY",
+      "title": "Tokyo Stock Exchange Listed Company Search — Nintendo Co., Ltd.",
+      "publisher": "Japan Exchange Group",
+      "date": "2026-08-05",
+      "source_type": "primary",
+      "reference": "https://www2.jpx.co.jp/tseHpFront/StockSearch.do?callJorEFlg=1&method=topsearch&topSearchStr=7974"
+    },
+    {
+      "source_id": "SRC-NINTENDO-PRICE-2026-08-05",
+      "title": "Nintendo Co., Ltd. 7974 Tokyo Market Quote",
+      "publisher": "WSJ / FactSet",
+      "date": "2026-08-05",
+      "source_type": "market_data",
+      "reference": "https://www.wsj.com/market-data/quotes/JP/XTKS/7974/historical-prices"
+    }
+  ],
+  "publication": {
+    "status": "draft",
+    "page_url": "/Investing/company_template.html?company=nintendo-jpy",
+    "generated_at": "2026-08-05T15:47:00-04:00"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
