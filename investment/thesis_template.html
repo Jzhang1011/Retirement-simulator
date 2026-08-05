@@ -370,7 +370,7 @@
                 <p class="text-slate-500 text-base leading-relaxed font-medium">Build long-term wealth through disciplined investing, independent research, and productive assets.</p>
               </div>
               <div class="pt-8">
-                <a href="/Investing/index.html" class="text-slate-900 font-bold text-base inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors group">Explore Investment Research <span class="transition-transform group-hover:translate-x-1">→</span></a>
+                <a href="/investment/index.html" class="text-slate-900 font-bold text-base inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors group">Explore Investment Research <span class="transition-transform group-hover:translate-x-1">→</span></a>
                 <p class="text-sm text-slate-400 mt-1">Monitor structural themes and identify what deserves deeper research.</p>
               </div>
             </div>
@@ -387,10 +387,10 @@
               <div class="dropdown-column">
                 <h4>🔬 Investment Research</h4>
                 <ul>
-                  <li><a href="/Investing/index.html">Research Hub</a></li>
-                  <li><a href="/Investing/index.html#active-theses">Thesis Library</a></li>
-                  <li><a href="/Investing/index.html#opportunities">Company Research</a></li>
-                  <li><a href="/Investing/index.html#watch-radar">Market Regime Monitor</a></li>
+                  <li><a href="/investment/index.html">Research Hub</a></li>
+                  <li><a href="/investment/index.html#active-theses">Thesis Library</a></li>
+                  <li><a href="/investment/index.html#opportunities">Company Research</a></li>
+                  <li><a href="/investment/index.html#watch-radar">Market Regime Monitor</a></li>
                 </ul>
               </div>
               <div class="dropdown-column">
@@ -690,7 +690,7 @@ function wlSubmitSearch(form) {
 <script>
 const THESIS_CONFIG = {
   defaultThesis: document.body.dataset.thesis || 'jpy',
-  dataBasePath: './data',
+  dataBasePath: './data/themes',
   fileExtension: '.json'
 };
 
@@ -747,7 +747,7 @@ function renderDashboard(rawData) {
   trend.className = `tag ${data?.thesis_health?.trend === 'weakening' ? 'tag-amber' : data?.thesis_health?.trend === 'improving' ? 'tag-blue' : 'tag-green'}`;
 
   document.getElementById('scorecard-container').innerHTML = data.scorecard.length ? data.scorecard.map(item => `
-    <div><div class="flex justify-between mb-2"><span>${escapeHtml(item?.driver)}</span><b>${escapeHtml(item?.score)}/5</b></div><div class="metric-bar"><div class="metric-fill" style="width:${Number(item?.score||0)*20}%"></div></div>${item?.reason ? `<p class="text-[10px] text-slate-400 mt-2 leading-4">${escapeHtml(item.reason)}</p>` : ''}</div>`).join('') : '<p class="text-xs text-slate-500">No scorecard items available.</p>';
+    <div><div class="flex justify-between mb-2"><span>${escapeHtml(item?.driver ?? item?.assumption ?? item?.assumption_id)}</span><b>${escapeHtml(item?.score)}/5</b></div><div class="metric-bar"><div class="metric-fill" style="width:${Number(item?.score||0)*20}%"></div></div>${item?.reason ? `<p class="text-[10px] text-slate-400 mt-2 leading-4">${escapeHtml(item.reason)}</p>` : ''}</div>`).join('') : '<p class="text-xs text-slate-500">No scorecard items available.</p>';
 
   document.getElementById('scenario-container').innerHTML = data.scenarios.length ? data.scenarios.map(scenario => `
     <article class="rounded-2xl border p-4 ${scenarioClass(scenario?.id)}">
@@ -759,7 +759,7 @@ function renderDashboard(rawData) {
 
   document.getElementById('catalyst-container').innerHTML = data.catalysts.length ? data.catalysts.map(catalyst => `
     <div class="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-      <div class="flex items-start justify-between gap-3"><div class="font-bold text-sm">${escapeHtml(catalyst?.name ?? catalyst?.id)}</div><span class="tag ${catalyst?.status === 'confirmed' ? 'tag-green' : catalyst?.direction === 'negative' ? 'tag-amber' : 'tag-blue'}">${escapeHtml(titleCase(catalyst?.status))}</span></div>
+      <div class="flex items-start justify-between gap-3"><div class="font-bold text-sm">${escapeHtml(catalyst?.name ?? catalyst?.id)}</div><span class="tag ${(catalyst?.status ?? catalyst?.state) === 'confirmed' ? 'tag-green' : catalyst?.direction === 'negative' ? 'tag-amber' : 'tag-blue'}">${escapeHtml(titleCase(catalyst?.status ?? catalyst?.state))}</span></div>
       <p class="text-xs text-slate-500 leading-5 mt-2">${escapeHtml(catalyst?.evidence)}</p>
       <div class="text-[10px] text-slate-400 mt-2">Next check: ${formatDate(catalyst?.next_check ?? catalyst?.next_check_date)}</div>
     </div>`).join('') : '<p class="text-xs text-slate-500">No catalysts published.</p>';
@@ -781,7 +781,7 @@ function renderDashboard(rawData) {
 
   const watchItems = [
     ...data.risks.map(risk => ({label:risk?.name,meta:risk?.trigger,status:risk?.status ?? risk?.trend})),
-    ...data.catalysts.filter(catalyst => catalyst?.status === 'developing').map(catalyst => ({label:catalyst?.name ?? catalyst?.id,meta:catalyst?.evidence,status:catalyst?.status}))
+    ...data.catalysts.filter(catalyst => String(catalyst?.status ?? catalyst?.state ?? '').startsWith('developing')).map(catalyst => ({label:catalyst?.name ?? catalyst?.id,meta:catalyst?.evidence,status:catalyst?.status ?? catalyst?.state}))
   ];
   document.getElementById('watch-items-container').innerHTML = watchItems.length ? watchItems.slice(0,8).map(item=>`<li class="flex justify-between gap-3"><span><b>${escapeHtml(item.label)}</b>${item.meta ? `<span class="block text-slate-400 mt-1">${escapeHtml(item.meta)}</span>` : ''}</span><span class="tag tag-amber">${escapeHtml(titleCase(item.status))}</span></li>`).join('') : '<li class="text-slate-500">No watch items listed.</li>';
 
