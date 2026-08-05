@@ -1,136 +1,961 @@
 {
-  "schema_version": "3.0",
-  "review_id": "JPY-001-2026-08-05",
+  "schema_version": "4.0",
+  "review_id": "JPY-2026-08-05",
   "thesis": {
     "id": "JPY-001",
-    "version": "2.0",
     "name": "JPY Structural Investment Thesis",
     "slug": "jpy",
-    "category": "macro-currency-japan-equities",
+    "category": "country-and-currency-regime",
     "horizon": "12-24 months"
   },
   "review": {
     "date": "2026-08-05",
-    "period_start": "2026-07-23",
+    "period_start": "2026-07-21",
     "period_end": "2026-08-05",
     "cadence": "weekly",
-    "previous_review_id": "JPY-001-BASELINE"
+    "previous_review_id": null
   },
   "status": "intact",
   "thesis_health": {
-    "current": 78,
-    "previous": 78,
-    "change": 0,
+    "current": 74,
+    "previous": null,
+    "change": null,
     "trend": "stable",
-    "reason_code": "NO_MATERIAL_CHANGE",
-    "reason": "Fed and BOJ evidence preserves a positive rate differential and gradual-normalization regime; one week of resident foreign-security selling does not establish structural repatriation."
+    "reason_code": "INITIAL_BASELINE_MIXED_CONFIRMATION",
+    "reason": "The first evidence-based baseline confirms orderly monetary normalization and continued governance reform, while real-income and imported-inflation risks prevent an upgrade to strengthening."
   },
-  "material_change": false,
+  "material_change": true,
   "scenario_model": {
     "current_scenario": "fair",
-    "confidence": 0.7,
+    "confidence": 0.72,
     "scenarios": [
-      {"id":"bull","probability":0.25,"previous_probability":0.25,"change":0,"description":"Weak yen, gradual BOJ, corporate reform, and company execution reinforce.","entry_conditions":["Wide rate differentials","Contained volatility","Governance acceleration"],"exit_conditions":["Rapid BOJ tightening","Extreme valuation"]},
-      {"id":"fair","probability":0.55,"previous_probability":0.55,"change":0,"description":"Macro support remains, but company quality and valuation determine returns.","entry_conditions":["Gradual BOJ","Profitable carry","Mixed company outcomes"],"exit_conditions":["Multiple bull or bear triggers align"]},
-      {"id":"bear","probability":0.2,"previous_probability":0.2,"change":0,"description":"Yen reversal combines with weaker earnings and insufficient valuation support.","entry_conditions":["Aggressive Fed easing","Carry unwind","Earnings downgrades"],"exit_conditions":["Valuation resets","Carry stabilizes"]}
+      {
+        "id": "bull",
+        "probability": 0.27,
+        "description": "Orderly monetary normalization, durable wage-price interaction, effective governance reform, and improving real household income broaden market leadership.",
+        "entry_conditions": [
+          "Real wages turn durably positive.",
+          "Household consumption strengthens.",
+          "BOJ normalization continues without funding or credit stress.",
+          "Governance reform produces measurable capital-allocation improvements.",
+          "Market leadership broadens beyond currency-sensitive exporters."
+        ],
+        "exit_conditions": [
+          "Real-income gains reverse.",
+          "Policy normalization becomes disorderly.",
+          "Governance implementation proves cosmetic.",
+          "Equity returns narrow to FX-dependent companies."
+        ]
+      },
+      {
+        "id": "fair",
+        "probability": 0.55,
+        "description": "Nominal growth and reform continue, but higher import costs, weak household purchasing power, and policy uncertainty produce uneven outcomes.",
+        "entry_conditions": [
+          "Nominal growth remains positive.",
+          "Financial conditions remain accommodative despite higher policy rates.",
+          "Consumption remains resilient but does not accelerate materially.",
+          "Governance reform advances unevenly across companies."
+        ],
+        "exit_conditions": [
+          "Domestic demand broadens enough to support the bull scenario.",
+          "Persistent real-income deterioration or financial stress supports the bear scenario."
+        ]
+      },
+      {
+        "id": "bear",
+        "probability": 0.18,
+        "description": "Inflation remains externally driven, real income deteriorates, or policy tightening creates funding, credit, or domestic-demand stress.",
+        "entry_conditions": [
+          "Real wages remain persistently negative.",
+          "Household consumption contracts materially.",
+          "JGB volatility or funding stress rises sharply.",
+          "Credit conditions deteriorate.",
+          "Governance reform reverses or fails to affect capital allocation.",
+          "Broad earnings expectations weaken."
+        ],
+        "exit_conditions": [
+          "Real-income growth and consumption recover.",
+          "Financial conditions remain stable through additional normalization.",
+          "Company-level governance actions produce durable returns."
+        ]
+      }
     ]
   },
   "decision": {
-    "state": "monitor",
+    "state": "deep_dive",
     "previous_state": "monitor",
-    "changed": false,
-    "summary": "Keep broad JPY exposure unchanged and complete Nintendo's post-earnings integrated deep dive before promoting any named opportunity.",
-    "reason_codes": ["BASE_CASE_SUPPORTED","NO_CORE_ASSUMPTION_CHANGED","VALUATION_REQUIRED"],
+    "changed": true,
+    "summary": "The JPY thesis is intact and merits targeted deep dives into financial normalization and governance-reform beneficiaries, but incomplete domestic-demand confirmation and imported-inflation risks argue against broad portfolio promotion.",
+    "cta": "prioritize_financials_and_governance_deep_dives_with_currency_hedging",
+    "reason_codes": [
+      "ORDERLY_BOJ_NORMALIZATION",
+      "GOVERNANCE_REFORM_ADVANCED",
+      "NOMINAL_GROWTH_POSITIVE",
+      "DOMESTIC_DEMAND_MIXED",
+      "REAL_INCOME_RISK",
+      "FX_TRANSLATION_NOT_SUFFICIENT"
+    ],
     "required_actions": [
-      {"action":"begin_company_deep_dive","target":"NINTENDO_JPY","priority":"high","due_date":"2026-08-07"},
-      {"action":"continue_monitoring","target":"JPY-001","priority":"medium","due_date":null}
+      "Build valuation-ready screens for financial normalization beneficiaries.",
+      "Identify companies with completed governance and capital-allocation actions.",
+      "Review second-quarter GDP and current real-wage evidence before changing thesis health.",
+      "Compare hedged and unhedged Japan exposure.",
+      "Do not issue company entry prices or company buy or sell decisions within the theme review."
     ]
   },
   "developments": [
-    {"date":"2026-07-29","type":"monetary_policy","evidence":"The FOMC held the federal funds target at 3.50%-3.75%; three voters preferred a 25 bp hike.","assumptions":["A1","A3"],"direction":"supportive","material":false},
-    {"date":"2026-07-31","type":"monetary_policy","evidence":"The BOJ held after the June increase to about 1.0%; a proposal for 1.25% failed. Wages remain firm while reported general-services inflation recently eased to 1.0%-1.5%.","assumptions":["A2","A3"],"direction":"mixed","material":false},
-    {"date":"2026-07-30","type":"capital_flows","evidence":"For the week ended July 25, residents bought 320.2 billion yen of foreign equities/funds but sold 811.4 billion yen of long-term foreign debt and 41.1 billion yen of short-term foreign debt.","assumptions":["A6"],"direction":"weakening","material":false},
-    {"date":"2026-07-31","type":"intervention","evidence":"MOF reported zero foreign-exchange intervention from June 29 through July 29.","assumptions":["A4"],"direction":"supportive","material":false},
-    {"date":"2026-08-04","type":"company_results","evidence":"Toyota reported 10.4% revenue growth and lower operating income, raised its outlook, and announced a buyback; operating evidence remains mixed.","assumptions":["A7","A8"],"direction":"mixed","material":false}
+    {
+      "development_id": "JPY-D-2026-08-05-01",
+      "date": "2026-07-31",
+      "fact": "The Bank of Japan maintained the uncollateralized overnight call-rate target at around 1.0 percent by an 8-1 vote; one member proposed 1.25 percent.",
+      "classification": "fact",
+      "materiality": "high",
+      "durability": "medium",
+      "direction": "positive",
+      "evidence_quality": "primary",
+      "assumption_ids": [
+        "JPY-A2"
+      ],
+      "interpretation": "Normalization is continuing without evidence of abrupt tightening or current market dysfunction, although the dissent indicates increased upside-policy risk.",
+      "action": "Maintain financial normalization as the highest-ranked opportunity and monitor BOJ opinions, JGB volatility, funding conditions, and credit quality.",
+      "source_ids": [
+        "SRC-BOJ-2026-07-31-POLICY"
+      ]
+    },
+    {
+      "development_id": "JPY-D-2026-08-05-02",
+      "date": "2026-08-03",
+      "fact": "The BOJ projected moderate growth, resilient private consumption, tight labor conditions, continued nominal-wage growth, and weakness in household sentiment.",
+      "classification": "fact",
+      "materiality": "high",
+      "durability": "medium",
+      "direction": "mixed",
+      "evidence_quality": "primary",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ],
+      "interpretation": "Nominal growth remains supportive, but domestic demand is resilient rather than clearly accelerating.",
+      "action": "Keep domestic consumption opportunities below financial and governance opportunities until real-income and consumption evidence improves.",
+      "source_ids": [
+        "SRC-BOJ-2026-08-03-OUTLOOK"
+      ]
+    },
+    {
+      "development_id": "JPY-D-2026-08-05-03",
+      "date": "2026-08-03",
+      "fact": "The BOJ projected underlying inflation around 2 percent while warning that yen depreciation and commodity costs are increasing import prices and reducing household real income.",
+      "classification": "fact",
+      "materiality": "high",
+      "durability": "medium",
+      "direction": "mixed",
+      "evidence_quality": "primary",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4",
+        "JPY-A5"
+      ],
+      "interpretation": "Inflation durability is improving, but imported inflation can weaken consumption and small-company margins; currency translation alone is not a durable return engine.",
+      "action": "Prioritize companies with pricing power, productivity gains, or domestic cost advantages and remove FX translation when evaluating exporter quality.",
+      "source_ids": [
+        "SRC-BOJ-2026-08-03-OUTLOOK"
+      ]
+    },
+    {
+      "development_id": "JPY-D-2026-08-05-04",
+      "date": "2026-07-21",
+      "fact": "The Tokyo Stock Exchange implemented revised listing regulations associated with the July 2026 Corporate Governance Code revision.",
+      "classification": "fact",
+      "materiality": "high",
+      "durability": "high",
+      "direction": "positive",
+      "evidence_quality": "primary",
+      "assumption_ids": [
+        "JPY-A3"
+      ],
+      "interpretation": "The institutional governance-reform framework has advanced, but company-level capital-allocation outcomes remain the required confirmation test.",
+      "action": "Screen for completed buybacks, cross-shareholding reductions, asset disposals, ROE improvements, and productive reinvestment before promoting named companies.",
+      "source_ids": [
+        "SRC-JPX-2026-07-21-GOVERNANCE",
+        "SRC-FSA-2026-08-03-GOVERNANCE"
+      ]
+    },
+    {
+      "development_id": "JPY-D-2026-08-05-05",
+      "date": "2026-06-08",
+      "fact": "Japan's first-quarter 2026 real GDP increased 0.5 percent quarter over quarter, with a positive domestic-demand contribution and moderate household-consumption growth.",
+      "classification": "fact",
+      "materiality": "medium",
+      "durability": "medium",
+      "direction": "positive",
+      "evidence_quality": "primary",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ],
+      "interpretation": "The economy remains outside a renewed-deflationary contraction regime, but the data do not yet establish a broad consumption-led expansion.",
+      "action": "Use the August 17 second-quarter GDP release as the next major test of domestic-demand breadth.",
+      "source_ids": [
+        "SRC-CAO-2026-06-08-GDP"
+      ]
+    }
   ],
   "scorecard": [
-    {"driver_id":"A1","driver":"Federal Reserve remains relatively restrictive","score":4,"trend":"stable","reason":"Fed held at 3.50%-3.75% and three voters preferred a hike."},
-    {"driver_id":"A2","driver":"BOJ tightens gradually","score":4,"trend":"stable","reason":"July hold after June hike; wages firm, services inflation softer, one failed hawkish proposal."},
-    {"driver_id":"A3","driver":"Carry remains attractive","score":4,"trend":"stable","reason":"Positive U.S.-Japan 2Y and 10Y sovereign differentials persist; direct volatility and hedge-cost confirmation remains incomplete."},
-    {"driver_id":"A4","driver":"No sustained intervention regime","score":4,"trend":"stable","reason":"MOF reported zero intervention for June 29-July 29."},
-    {"driver_id":"A5","driver":"Global markets remain broadly stable","score":3,"trend":"stable","reason":"No verified systemic funding stress; geopolitical and AI concentration risks remain."},
-    {"driver_id":"A6","driver":"Japanese capital continues overseas","score":4,"trend":"weakening","reason":"Latest week showed net foreign-security selling by residents, but the durable multi-period repatriation threshold was not met."},
-    {"driver_id":"A7","driver":"Corporate reform continues","score":4,"trend":"stable","reason":"TSE cost-of-capital implementation continues; quality must be verified company by company."},
-    {"driver_id":"A8","driver":"Selected companies remain attractive independent of FX","score":3,"trend":"stable","reason":"Fresh operating evidence is mixed and normalized valuations are incomplete."}
+    {
+      "assumption_id": "JPY-A1",
+      "assumption": "Nominal growth remains positive.",
+      "score": 4,
+      "previous_score": null,
+      "change": null,
+      "status": "confirmed",
+      "direction": "positive",
+      "reason": "Moderate economic growth, positive first-quarter GDP, continued nominal-wage growth, and a durable wage-price mechanism support the assumption."
+    },
+    {
+      "assumption_id": "JPY-A2",
+      "assumption": "BOJ normalization remains orderly.",
+      "score": 4,
+      "previous_score": null,
+      "change": null,
+      "status": "confirmed",
+      "direction": "positive",
+      "reason": "The BOJ maintained a 1.0 percent policy setting while reporting accommodative financial conditions and no current funding or credit stress."
+    },
+    {
+      "assumption_id": "JPY-A3",
+      "assumption": "Governance reform improves capital allocation.",
+      "score": 4,
+      "previous_score": null,
+      "change": null,
+      "status": "partially_confirmed",
+      "direction": "positive",
+      "reason": "The revised governance code and listing rules strengthen the institutional framework, but company-level implementation remains uneven and unverified."
+    },
+    {
+      "assumption_id": "JPY-A4",
+      "assumption": "Domestic demand improves.",
+      "score": 3,
+      "previous_score": null,
+      "change": null,
+      "status": "mixed",
+      "direction": "neutral",
+      "reason": "Consumption is resilient and wages are rising, but household sentiment and real-income pressure prevent full confirmation."
+    },
+    {
+      "assumption_id": "JPY-A5",
+      "assumption": "Select exporters retain pricing power.",
+      "score": 3,
+      "previous_score": null,
+      "change": null,
+      "status": "unconfirmed_at_theme_level",
+      "direction": "neutral",
+      "reason": "Weak-yen translation can support reported profits while also raising input costs; company-level margin, unit, and pricing evidence is required."
+    }
   ],
-  "assumptions_changed": [],
+  "assumptions_changed": [
+    {
+      "assumption_id": "JPY-A1",
+      "previous_state": "not_established",
+      "current_state": "confirmed",
+      "direction": "positive",
+      "reason": "The initial baseline finds continuing nominal growth and a durable wage-price mechanism."
+    },
+    {
+      "assumption_id": "JPY-A2",
+      "previous_state": "not_established",
+      "current_state": "confirmed",
+      "direction": "positive",
+      "reason": "Policy normalization has advanced while financial conditions remain accommodative."
+    },
+    {
+      "assumption_id": "JPY-A3",
+      "previous_state": "not_established",
+      "current_state": "partially_confirmed",
+      "direction": "positive",
+      "reason": "The July 2026 governance-code and listing-rule revisions strengthen the institutional reform framework."
+    },
+    {
+      "assumption_id": "JPY-A4",
+      "previous_state": "not_established",
+      "current_state": "mixed",
+      "direction": "neutral",
+      "reason": "Consumption resilience is offset by weak household sentiment and imported-inflation pressure on real income."
+    },
+    {
+      "assumption_id": "JPY-A5",
+      "previous_state": "not_established",
+      "current_state": "unconfirmed_at_theme_level",
+      "direction": "neutral",
+      "reason": "Theme-level evidence cannot distinguish exporter pricing power from currency translation."
+    }
+  ],
   "catalysts": [
-    {"id":"CAT-01","status":"confirmed","direction":"positive","evidence":"Fed held and three dissents favored tightening.","next_check":"2026-09-16"},
-    {"id":"CAT-02","status":"developing","direction":"mixed","evidence":"BOJ held after June hike; wage-price evidence is not uniformly hawkish.","next_check":"2026-08-10"},
-    {"id":"CAT-04","status":"not_active","direction":"positive","evidence":"MOF monthly intervention total was zero.","next_check":"2026-08-31"},
-    {"id":"CAT-05","status":"developing","direction":"negative","evidence":"One week of net resident foreign-security selling; confirmation requires multiple periods.","next_check":"2026-08-06"},
-    {"id":"CAT-07","status":"developing","direction":"mixed","evidence":"Company results are mixed; Nintendo Q1 is due August 6.","next_check":"2026-08-06"}
+    {
+      "catalyst_id": "JPY-C1",
+      "name": "BOJ policy normalization",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A2"
+      ],
+      "state": "active_constructive",
+      "direction": "positive",
+      "confirmation_test": "Additional normalization occurs without sharp JGB volatility, funding stress, credit deterioration, or a material domestic-demand slowdown.",
+      "failure_test": "A disorderly yield move, tightening financial conditions, or policy tightening into weakening demand.",
+      "next_check_date": "2026-08-10"
+    },
+    {
+      "catalyst_id": "JPY-C2",
+      "name": "Wage and real-income transmission",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ],
+      "state": "developing_mixed",
+      "direction": "neutral",
+      "confirmation_test": "Nominal wages exceed consumer-price growth durably and household consumption strengthens.",
+      "failure_test": "Persistent real-wage deterioration and declining household consumption.",
+      "next_check_date": "2026-08-17"
+    },
+    {
+      "catalyst_id": "JPY-C3",
+      "name": "Governance reform",
+      "assumption_ids": [
+        "JPY-A3"
+      ],
+      "state": "strengthening_institutionally",
+      "direction": "positive",
+      "confirmation_test": "Listed companies execute capital returns, reduce cross-shareholdings, improve asset efficiency, and raise productive investment.",
+      "failure_test": "Compliance disclosures increase without measurable balance-sheet or operating changes.",
+      "next_check_date": "2026-09-30"
+    },
+    {
+      "catalyst_id": "JPY-C4",
+      "name": "Yen regime shift",
+      "assumption_ids": [
+        "JPY-A2",
+        "JPY-A4",
+        "JPY-A5"
+      ],
+      "state": "elevated_uncertainty",
+      "direction": "mixed",
+      "confirmation_test": "Currency stabilization reduces imported inflation without damaging exporter competitiveness or financial conditions.",
+      "failure_test": "Renewed depreciation materially weakens household real income or abrupt appreciation exposes FX-only earnings.",
+      "next_check_date": "2026-09-18"
+    },
+    {
+      "catalyst_id": "JPY-C5",
+      "name": "Second-quarter GDP",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ],
+      "state": "pending",
+      "direction": "neutral",
+      "confirmation_test": "Household consumption and business investment broaden domestic-demand growth.",
+      "failure_test": "Domestic demand contracts or growth depends mainly on inventories, fiscal transfers, or external demand.",
+      "next_check_date": "2026-08-17"
+    }
   ],
   "opportunities": [
-    {"rank":1,"group":"global_ip_entertainment","name":"Nintendo","independent_return_engines":["Proprietary IP and software ecosystem","Net cash and licensing","Weak-yen translation overlay"],"catalyst":"August 6 Q1 release and Switch 2/software trajectory","valuation_status":"Not reviewed","main_risk":"Product-cycle execution and yen sensitivity","next_action":"Begin NINTENDO_JPY integrated deep dive after results"},
-    {"rank":2,"group":"trading_houses","name":"Mitsubishi Corporation","independent_return_engines":["Diversified global assets","Asset recycling and shareholder returns"],"catalyst":"Q1 results and cash-funded capital allocation","valuation_status":"Not reviewed","main_risk":"Commodity exposure and capital allocation","next_action":"Start normalized SOTP and cash-return valuation review"},
-    {"rank":3,"group":"banks","name":"MUFG","independent_return_engines":["Domestic net-interest-margin expansion","Capital returns and international franchise"],"catalyst":"Q1 results and BOJ transmission","valuation_status":"Not reviewed","main_risk":"Credit costs and rapid tightening","next_action":"Review NIM, deposit beta, credit costs, CET1 and price-to-book"},
-    {"rank":4,"group":"currency_hedged_japan","name":"WisdomTree Japan Hedged Equity Fund (DXJ)","independent_return_engines":["Japanese corporate earnings","Governance rerating with reduced yen translation"],"catalyst":"Corporate reform and earnings delivery","valuation_status":"Not reviewed","main_risk":"Forfeited yen appreciation and index concentration","next_action":"Compare hedge cost, weights and drawdowns with unhedged EWJ"},
-    {"rank":5,"group":"export_automation","name":"Toyota","independent_return_engines":["Hybrid leadership and global scale","Buyback and capital return","Weak-yen translation overlay"],"catalyst":"Raised FY outlook and 1 trillion yen buyback","valuation_status":"Not reviewed","main_risk":"Margin pressure, China competition, logistics costs and stronger yen","next_action":"Start normalized margin and FX sensitivity review"},
-    {"rank":6,"group":"semiconductor_equipment","name":"Tokyo Electron","independent_return_engines":["Process-equipment leadership","Global AI and semiconductor capital spending","Shareholder returns"],"catalyst":"Revised H1 and dividend outlook","valuation_status":"Not reviewed","main_risk":"AI concentration, China restrictions, cyclicality and FX","next_action":"Continue monitoring; do not classify as an AI-rotation hedge"}
+    {
+      "rank": 1,
+      "opportunity_id": "JPY-OPP-FINANCIALS",
+      "group": "financial-normalization",
+      "name": "Financial normalization beneficiaries",
+      "ticker": null,
+      "asset_type": "sector",
+      "independent_return_engines": [
+        "Higher asset yields and net-interest income",
+        "Deposit-franchise economics",
+        "Capital returns and balance-sheet optimization"
+      ],
+      "catalyst": "Further orderly BOJ normalization with stable credit conditions.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Duration losses, funding-cost pressure, or credit deterioration offset the benefit of higher rates.",
+      "next_action": "Screen banks and insurers for deposit quality, asset sensitivity, duration exposure, credit risk, capital returns, and valuation; create company packets for qualifying names.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "No named company has been selected, and company-specific return engines, valuation requirements, and catalyst exposure have not been verified.",
+        "priority": "P0",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 2,
+      "opportunity_id": "JPY-OPP-GOVERNANCE",
+      "group": "governance-reform",
+      "name": "Governance and capital-allocation reform beneficiaries",
+      "ticker": null,
+      "asset_type": "sector",
+      "independent_return_engines": [
+        "Cross-shareholding reductions and asset releases",
+        "Buybacks and dividend growth",
+        "ROE improvement and productive reinvestment"
+      ],
+      "catalyst": "Implementation of the July 2026 Corporate Governance Code revision.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Governance compliance remains cosmetic and does not improve returns on capital.",
+      "next_action": "Identify companies showing completed capital-allocation actions and initiate valuation handoffs only after company-specific triggers are satisfied.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "The governance catalyst is material at the theme level, but no named company has yet demonstrated sufficient company-specific implementation and valuation need.",
+        "priority": "P0",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 3,
+      "opportunity_id": "JPY-OPP-PRODUCTIVITY",
+      "group": "labor-saving-productivity",
+      "name": "Labor-saving, automation, and productivity investment",
+      "ticker": null,
+      "asset_type": "sector",
+      "independent_return_engines": [
+        "Structural labor shortages",
+        "Domestic capital expenditure",
+        "Productivity gains and pricing power"
+      ],
+      "catalyst": "Business investment aimed at automation, digitalization, and labor substitution.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "High input costs, project delays, or insufficient customer returns reduce investment demand.",
+      "next_action": "Build a candidate list with independently verified order growth, margins, recurring revenue, and domestic-demand exposure.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "No named company has been evaluated for independent return engines, valuation requirements, or company-specific catalysts.",
+        "priority": "P1",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 4,
+      "opportunity_id": "JPY-OPP-EXPORTERS",
+      "group": "quality-exporters",
+      "name": "Quality exporters with proprietary pricing power",
+      "ticker": null,
+      "asset_type": "sector",
+      "independent_return_engines": [
+        "Product differentiation and intellectual property",
+        "Unit and market-share growth",
+        "Global demand",
+        "Selective foreign-exchange benefit"
+      ],
+      "catalyst": "Continued external demand and evidence that local-currency margins and unit growth remain strong.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Reported profit growth is primarily currency translation while underlying demand or margins weaken.",
+      "next_action": "Remove FX translation from operating analysis and require a company valuation review before any security-level action.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "Theme evidence does not identify a specific exporter whose pricing power and independent return engines have been verified.",
+        "priority": "P1",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 5,
+      "opportunity_id": "JPY-OPP-DOMESTIC",
+      "group": "domestic-reflation",
+      "name": "Domestic services and consumption beneficiaries",
+      "ticker": null,
+      "asset_type": "sector",
+      "independent_return_engines": [
+        "Real-wage growth",
+        "Services demand",
+        "Domestic operating leverage"
+      ],
+      "catalyst": "Sustained positive real wages and broader household consumption.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Imported inflation and weak household sentiment prevent nominal wage gains from translating into real demand.",
+      "next_action": "Monitor real wages and household consumption before increasing conviction or initiating company reviews.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "The domestic-demand assumption remains mixed and no named company has sufficient evidence for promotion.",
+        "priority": "P1",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 6,
+      "opportunity_id": "JPY-OPP-HEDGED-BROAD",
+      "group": "broad-market-exposure",
+      "name": "Currency-hedged broad Japan exposure",
+      "ticker": null,
+      "asset_type": "fund_category",
+      "independent_return_engines": [
+        "Broad market earnings growth",
+        "Governance reform",
+        "Reduction of adverse yen translation for foreign investors"
+      ],
+      "catalyst": "Broader sector participation and continuing governance reform.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Hedging costs reduce returns or yen appreciation makes unhedged exposure superior.",
+      "next_action": "Compare hedged and unhedged expected returns, implementation costs, and scenario sensitivity before selecting an instrument.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "This is a fund category rather than a named operating company.",
+        "priority": "P2",
+        "trigger_rules": [
+          {
+            "trigger": "rank_top_3",
+            "value": false
+          },
+          {
+            "trigger": "high_conviction",
+            "value": false
+          },
+          {
+            "trigger": "valuation_required",
+            "value": false
+          },
+          {
+            "trigger": "multiple_return_engines",
+            "value": false
+          },
+          {
+            "trigger": "major_catalyst",
+            "value": false
+          },
+          {
+            "trigger": "named_company_central",
+            "value": false
+          }
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    }
   ],
   "risks": [
-    {"id":"R1","name":"BOJ acceleration","status":"monitor","trigger":"Repeated rapid hikes or durable hawkish guidance"},
-    {"id":"R2","name":"Structural repatriation","status":"watch","trigger":"Resident net foreign-security selling sustained across multiple periods"},
-    {"id":"R3","name":"Carry unwind","status":"monitor","trigger":"Persistent FX volatility plus funding stress and forced deleveraging"},
-    {"id":"R4","name":"Macro-only stock selection","status":"active","trigger":"Named opportunities lack normalized valuation or FX-independent economics"},
-    {"id":"R5","name":"AI concentration","status":"monitor","trigger":"Semiconductor exposure amplifies rather than diversifies a U.S. AI correction"}
+    {
+      "risk_id": "JPY-R1",
+      "name": "Persistent real-income deterioration",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ],
+      "severity": "high",
+      "trigger": "Nominal wage growth repeatedly trails inflation and household consumption weakens.",
+      "scenario_impact": "Raises bear probability and lowers domestic-reflation opportunity rankings."
+    },
+    {
+      "risk_id": "JPY-R2",
+      "name": "Disorderly monetary normalization",
+      "assumption_ids": [
+        "JPY-A2"
+      ],
+      "severity": "high",
+      "trigger": "JGB volatility, funding costs, or credit stress rise sharply following policy tightening.",
+      "scenario_impact": "Weakens the thesis and can invalidate the financial-normalization opportunity."
+    },
+    {
+      "risk_id": "JPY-R3",
+      "name": "Imported-inflation regime",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4",
+        "JPY-A5"
+      ],
+      "severity": "high",
+      "trigger": "Yen depreciation and commodity costs raise inflation without corresponding productivity or wage gains.",
+      "scenario_impact": "Reduces household demand and increases the probability that inflation is not a healthy reflation signal."
+    },
+    {
+      "risk_id": "JPY-R4",
+      "name": "Cosmetic governance compliance",
+      "assumption_ids": [
+        "JPY-A3"
+      ],
+      "severity": "medium",
+      "trigger": "Disclosure and policy changes do not produce measurable capital returns, asset releases, or ROE improvement.",
+      "scenario_impact": "Lowers the ranking of governance-reform beneficiaries."
+    },
+    {
+      "risk_id": "JPY-R5",
+      "name": "Narrow market leadership",
+      "assumption_ids": [
+        "JPY-A3",
+        "JPY-A4",
+        "JPY-A5"
+      ],
+      "severity": "medium",
+      "trigger": "Equity returns remain concentrated in a small number of exporters or AI-linked firms.",
+      "scenario_impact": "Reduces confidence that the structural opportunity is broadening."
+    },
+    {
+      "risk_id": "JPY-R6",
+      "name": "Global-demand shock",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A5"
+      ],
+      "severity": "high",
+      "trigger": "External demand or global capital expenditure deteriorates materially.",
+      "scenario_impact": "Weakens exporters, business investment, and the fair scenario."
+    },
+    {
+      "risk_id": "JPY-R7",
+      "name": "Exporter false positives",
+      "assumption_ids": [
+        "JPY-A5"
+      ],
+      "severity": "medium",
+      "trigger": "Profit growth is predominantly translation-driven while unit demand or local-currency margins deteriorate.",
+      "scenario_impact": "Requires exporter opportunity downgrades and company-level rejection."
+    }
   ],
   "next_decision_points": [
-    {"date":"2026-08-06","event":"Nintendo Q1 results","decision_test":"Independent operating engine, catalyst execution and normalized valuation"},
-    {"date":"2026-08-06","event":"MOF weekly international securities transactions","decision_test":"Whether resident net selling persists"},
-    {"date":"2026-08-10","event":"BOJ Summary of Opinions","decision_test":"Breadth and durability of hawkish guidance"},
-    {"date":"2026-08-12","event":"U.S. CPI for July","decision_test":"Whether inflation changes the restrictive-Fed assumption"}
+    {
+      "date": "2026-08-07",
+      "event": "Release of historical CPI data using the 2025 base",
+      "decision_test": "Determine whether rebasing materially changes the assessment of inflation breadth and household purchasing-power pressure."
+    },
+    {
+      "date": "2026-08-10",
+      "event": "BOJ Summary of Opinions for the July meeting",
+      "decision_test": "Determine whether support for faster tightening is broadening beyond the single dissenting member."
+    },
+    {
+      "date": "2026-08-17",
+      "event": "First preliminary estimate of second-quarter 2026 GDP",
+      "decision_test": "Determine whether household consumption and business investment broaden domestic-demand growth."
+    },
+    {
+      "date": "2026-08-21",
+      "event": "July 2026 CPI release",
+      "decision_test": "Assess underlying inflation, energy effects, yen pass-through, and real-income implications."
+    },
+    {
+      "date": "2026-09-18",
+      "event": "September BOJ monetary-policy meeting",
+      "decision_test": "Test whether further normalization remains gradual and consistent with stable financial conditions."
+    },
+    {
+      "date": "2026-09-30",
+      "event": "Governance implementation review",
+      "decision_test": "Identify listed companies converting governance-code pressure into measurable capital returns and operating improvements."
+    }
   ],
   "research_backlog": [
-    {"priority":"P0","item":"Ingest Nintendo August 6 filing and build NINTENDO_JPY integrated packet with normalized valuation and 5%/10%/15% yen sensitivities."},
-    {"priority":"P0","item":"Track three to four additional MOF weekly flow releases before classifying A6 as materially changed."},
-    {"priority":"P0","item":"Obtain 1M/3M USDJPY implied volatility, forward points, cross-currency basis and funding spreads to quantify carry profitability."},
-    {"priority":"P1","item":"Build aligned daily U.S.-Japan 2Y and 10Y spread series and define a structural-narrowing threshold."},
-    {"priority":"P1","item":"Complete normalized valuation packets for Nintendo, Mitsubishi, MUFG, Toyota and Tokyo Electron."},
-    {"priority":"P1","item":"Compare DXJ with unhedged EWJ on hedge cost, concentration, valuation and risk-off behavior."},
-    {"priority":"P1","item":"Verify cash-funded buybacks, cross-holding reductions and ROE progress at named companies."},
-    {"priority":"P2","item":"Test for sustained rotation from U.S. AI into Japanese value and IP using flows and relative performance."},
-    {"priority":"P1","item":"Replace placeholder baseline dates with an approved review ID and auditable evidence boundary."}
+    {
+      "priority": "P0",
+      "question": "Do the latest official wage data show sustained positive real-wage growth after accounting for CPI revisions?"
+    },
+    {
+      "priority": "P0",
+      "question": "Does second-quarter GDP show broader household consumption and business-investment growth?"
+    },
+    {
+      "priority": "P0",
+      "question": "Which Japanese banks and insurers combine favorable asset sensitivity with strong deposits, controlled duration risk, sound credit quality, capital returns, and valuation support?"
+    },
+    {
+      "priority": "P1",
+      "question": "Which listed companies have completed buybacks, dividend increases, cross-shareholding reductions, asset disposals, or parent-subsidiary restructurings since the governance revision?"
+    },
+    {
+      "priority": "P1",
+      "question": "Is market leadership broadening across financials, domestic services, productivity beneficiaries, and exporters?"
+    },
+    {
+      "priority": "P1",
+      "question": "How do currency-hedged and unhedged Japan exposures perform under bull, fair, and bear yen scenarios after implementation costs?"
+    },
+    {
+      "priority": "P2",
+      "question": "Which exporters retain positive unit growth and local-currency margins after removing foreign-exchange translation?"
+    },
+    {
+      "priority": "P2",
+      "question": "What quantitative thresholds for JGB volatility, credit spreads, real wages, and consumption should trigger a thesis-health downgrade?"
+    }
   ],
   "sources": [
-    {"type":"core_file","name":"JPY theme package","items":["JPY__01_thesis.md","JPY__02_assumption_map.md","JPY__03_scenario_model.md","JPY__04_catalyst_and_trigger_map.md","JPY__05_monitoring_indicators.md","JPY__06_pattern_recognition.md","JPY__07_opportunity_playbook.md","JPY__08_subtheme_deep_dives.md","JPY__09_valuation_framework.md","JPY__10_weekly_review_prompt.md","JPY__11_regime_interaction_model.md","JPY__12_invalidation_conditions.md","jpy.baseline.json"]},
-    {"type":"primary","name":"Federal Reserve FOMC statement, 2026-07-29","url":"https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm"},
-    {"type":"primary","name":"BLS Economic News Releases, JOLTS and ECI","url":"https://www.bls.gov/bls/newsrels.htm"},
-    {"type":"primary","name":"BOJ Statement on Monetary Policy, 2026-07-31","url":"https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260731a.pdf"},
-    {"type":"primary","name":"BOJ July 2026 Outlook Report","url":"https://www.boj.or.jp/en/mopo/outlook/gor2607b.pdf"},
-    {"type":"primary","name":"U.S. Treasury Daily Treasury Rates","url":"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"},
-    {"type":"primary","name":"Japan MOF 2-year JGB auction, 2026-07-30","url":"https://www.mof.go.jp/english/policy/jgbs/auction/calendar/eresul/eresul20260730.htm"},
-    {"type":"primary","name":"Japan MOF 10-year JGB auction, 2026-08-04","url":"https://www.mof.go.jp/english/policy/jgbs/auction/calendar/eresul/eresul20260804.htm"},
-    {"type":"primary","name":"Japan MOF weekly international securities transactions, 2026-07-30","url":"https://www.mof.go.jp/policy/international_policy/reference/itn_transactions_in_securities/week.pdf"},
-    {"type":"primary","name":"Japan MOF FX intervention operations, 2026-06-29 to 2026-07-29","url":"https://www.mof.go.jp/english/policy/international_policy/reference/feio/monthly/20260731e.html"},
-    {"type":"primary","name":"JPX cost-of-capital initiative update","url":"https://www.jpx.co.jp/english/equities/follow-up/02.html"},
-    {"type":"company","name":"Toyota FY2027 Q1 results","url":"https://global.toyota/pages/global_toyota/ir/financial-results/2027_1q_presentation_en.pdf"},
-    {"type":"company","name":"Mitsubishi Corporation investor relations","url":"https://www.mitsubishicorp.com/jp/en/ir/"},
-    {"type":"company","name":"MUFG financial information","url":"https://www.mufg.jp/english/ir/fs/2026/index.html"},
-    {"type":"company","name":"Tokyo Electron FY2027 Q1 earnings materials","url":"https://www.tel.com/ir/library/report/"},
-    {"type":"company","name":"Nintendo IR calendar and financial highlights","url":"https://www.nintendo.co.jp/ir/en/schedule/index.html"},
-    {"type":"fund","name":"WisdomTree DXJ official fund page","url":"https://www.wisdomtree.com/us/products/equity/dxj"}
+    {
+      "source_id": "SRC-CORE-OS-V4-1",
+      "title": "WealthLanding Investment OS — Compact Operating System v4.1",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_source_of_truth",
+      "reference": "00_CORE_OPERATING_SYSTEM.md",
+      "assumption_ids": []
+    },
+    {
+      "source_id": "SRC-CORE-THEME-SCHEMA-V4",
+      "title": "WealthLanding Theme Schema v4.0",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_source_of_truth",
+      "reference": "00_CORE_THEME_SCHEMA.json",
+      "assumption_ids": []
+    },
+    {
+      "source_id": "SRC-JPY-MASTER",
+      "title": "JPY Structural Investment Thesis — Master Research File",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_source_of_truth",
+      "reference": "JPY_MASTER_RESEARCH.md",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A2",
+        "JPY-A3",
+        "JPY-A4",
+        "JPY-A5"
+      ]
+    },
+    {
+      "source_id": "SRC-JPY-BASELINE",
+      "title": "JPY Baseline Unapproved Placeholder",
+      "publisher": "WealthLanding",
+      "date": null,
+      "source_type": "uploaded_baseline",
+      "reference": "JPY_BASELINE.json",
+      "assumption_ids": []
+    },
+    {
+      "source_id": "SRC-BOJ-2026-07-31-POLICY",
+      "title": "Statement on Monetary Policy",
+      "publisher": "Bank of Japan",
+      "date": "2026-07-31",
+      "source_type": "primary",
+      "reference": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260731a.pdf",
+      "assumption_ids": [
+        "JPY-A2"
+      ]
+    },
+    {
+      "source_id": "SRC-BOJ-2026-08-03-OUTLOOK",
+      "title": "Outlook for Economic Activity and Prices, July 2026",
+      "publisher": "Bank of Japan",
+      "date": "2026-08-03",
+      "source_type": "primary",
+      "reference": "https://www.boj.or.jp/en/mopo/outlook/gor2607b.pdf",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A2",
+        "JPY-A4",
+        "JPY-A5"
+      ]
+    },
+    {
+      "source_id": "SRC-JPX-2026-07-21-GOVERNANCE",
+      "title": "Corporate Governance Code July 2026 Revision Published",
+      "publisher": "Tokyo Stock Exchange",
+      "date": "2026-07-21",
+      "source_type": "primary",
+      "reference": "https://www.jpx.co.jp/english/corporate/news/news-releases/1020/20260721-01.html",
+      "assumption_ids": [
+        "JPY-A3"
+      ]
+    },
+    {
+      "source_id": "SRC-FSA-2026-08-03-GOVERNANCE",
+      "title": "Finalization of the Corporate Governance Code 2026 Revision",
+      "publisher": "Financial Services Agency of Japan",
+      "date": "2026-08-03",
+      "source_type": "primary",
+      "reference": "https://www.fsa.go.jp/en/news/2026/20260721-2.html",
+      "assumption_ids": [
+        "JPY-A3"
+      ]
+    },
+    {
+      "source_id": "SRC-CAO-2026-06-08-GDP",
+      "title": "Quarterly Estimates of GDP for January-March 2026, Second Preliminary Estimates",
+      "publisher": "Cabinet Office, Government of Japan",
+      "date": "2026-06-08",
+      "source_type": "primary",
+      "reference": "https://www.esri.cao.go.jp/en/sna/data/sokuhou/files/2026/qe261_2/pdf/gaiyou2612_e.pdf",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ]
+    },
+    {
+      "source_id": "SRC-CAO-2026-GDP-SCHEDULE",
+      "title": "National Accounts Release Schedule",
+      "publisher": "Cabinet Office, Government of Japan",
+      "date": "2026-08-05",
+      "source_type": "primary",
+      "reference": "https://www.esri.cao.go.jp/en/sna/kouhyou/kouhyou_top.html",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ]
+    },
+    {
+      "source_id": "SRC-STAT-2026-CPI-SCHEDULE",
+      "title": "Consumer Price Index Results and 2025-Base Release Schedule",
+      "publisher": "Statistics Bureau of Japan",
+      "date": "2026-08-05",
+      "source_type": "primary",
+      "reference": "https://www.stat.go.jp/english/data/cpi/index.htm",
+      "assumption_ids": [
+        "JPY-A1",
+        "JPY-A4"
+      ]
+    }
   ],
   "publication": {
     "status": "draft",
-    "headline": "JPY Thesis Remains Intact, but Repatriation Needs Watching",
-    "summary": "Fed and BOJ policy preserve the fair/selective regime. One week of Japanese resident foreign-security selling is a watch item, not a structural reversal.",
-    "page_url": "/Investing/thesis_template.html?thesis=jpy",
+    "headline": "JPY Thesis Intact as Orderly Normalization and Governance Reform Offset Real-Income Risk",
+    "summary": "Japan's structural investment thesis remains intact. BOJ normalization and governance reform support financial and capital-allocation opportunities, while weak household purchasing power and imported inflation keep the fair scenario dominant.",
+    "page_url": "/Investing/theme.html?theme=jpy",
     "show_on_homepage": false,
     "featured": false,
     "generated_by": "ChatGPT",
-    "generated_at": "2026-08-05T12:00:00-04:00"
+    "generated_at": "2026-08-05T14:57:00-04:00"
   },
-  "approval": {"status":"pending","approved_by":null,"approved_at":null}
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
 }
