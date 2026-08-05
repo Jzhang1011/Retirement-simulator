@@ -1,3 +1,32 @@
+/investment/data/
+├── index.json
+├── themes/
+│   ├── jpy.json
+│   ├── cooling.json
+│   ├── water.json
+│   ├── waste.json
+│   └── aging.json
+└── companies/
+    ├── jpy/
+    │   ├── top1.json
+    │   ├── top2.json
+    │   └── top3.json
+    ├── cooling/
+    │   ├── top1.json
+    │   ├── top2.json
+    │   └── top3.json
+    ├── water/
+    │   ├── top1.json
+    │   ├── top2.json
+    │   └── top3.json
+    ├── waste/
+    │   ├── top1.json
+    │   ├── top2.json
+    │   └── top3.json
+    └── aging/
+        ├── top1.json
+        ├── top2.json
+        └── top3.json
 # WealthLanding Investment Fix Packet
 
 Upload this folder structure under `/investment/`:
