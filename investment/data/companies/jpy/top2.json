@@ -1,0 +1,249 @@
+{
+  "schema_version": "4.2",
+  "review_id": "ITOCHU-2026-08-05",
+  "ranking": {
+    "theme_slug": "jpy",
+    "rank": 2,
+    "slot": "top2",
+    "selected_company_slug": "itochu",
+    "previous_company_slug": null,
+    "comparison_status": "initial_baseline",
+    "selected_at": "2026-08-05"
+  },
+  "company": {
+    "id": "JP3143600009",
+    "name": "ITOCHU Corporation",
+    "slug": "itochu",
+    "ticker": "8001",
+    "exchange": "Tokyo Stock Exchange Prime",
+    "reporting_currency": "JPY",
+    "trading_currency": "JPY",
+    "theme_dependencies": [
+      "jpy"
+    ]
+  },
+  "review": {
+    "date": "2026-08-05",
+    "previous_review_id": null
+  },
+  "market_data": {
+    "current_price": 5073,
+    "price_date": "2026-08-05",
+    "price_timestamp": null,
+    "price_source": "Yahoo Finance Tokyo delayed quote",
+    "share_basis": "local_share_post_2026_five_for_one_split"
+  },
+  "investment_thesis": {
+    "summary": "ITOCHU combines non-resource operating growth, consumer exposure, portfolio optimization, governance reform, and shareholder returns, but its current price discounts execution near the bull scenario.",
+    "return_engines": [
+      "Non-resource operating growth",
+      "Portfolio optimization and growth investments",
+      "Consumer and domestic operating exposure",
+      "Governance-driven repurchases and dividends",
+      "Selective resource and power upside"
+    ],
+    "market_implied_assumptions": [
+      "Normalized EPS approaches 150 yen",
+      "Core profit exceeds the 900 billion yen plan",
+      "New investments earn attractive returns",
+      "ROE remains near or above 15 percent",
+      "Shareholder returns remain substantial"
+    ],
+    "why_price_may_differ_from_value": [
+      "The market rewards ITOCHU's superior execution record",
+      "The non-resource mix may deserve a structural premium",
+      "Investors may extrapolate first-quarter core-profit growth",
+      "The share split and repurchase may support demand",
+      "The market may underweight portfolio and investment-cycle risk"
+    ]
+  },
+  "operating_scenarios": {
+    "bull": {
+      "probability": 0.3,
+      "conditions": [
+        "Sustainable EPS reaches 155 to 160 yen",
+        "Core profit materially exceeds plan",
+        "Growth investments earn attractive returns",
+        "ROE remains near or above 15 percent"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 158,
+        "valuation_multiple": 34.8,
+        "attributable_profit_jpy_billion": 1050
+      },
+      "failure_conditions": [
+        "Investment returns disappoint",
+        "Core-profit growth narrows",
+        "ROE falls below 14 percent"
+      ]
+    },
+    "fair": {
+      "probability": 0.5,
+      "conditions": [
+        "EPS remains between 137 and 145 yen",
+        "ROE remains near 15 percent",
+        "Core earnings grow moderately",
+        "Shareholder returns are executed"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 142,
+        "valuation_multiple": 29.9,
+        "attributable_profit_jpy_billion": 950
+      },
+      "failure_conditions": [
+        "EPS falls below 130 yen",
+        "Investment spending materially exceeds cash generation"
+      ]
+    },
+    "bear": {
+      "probability": 0.2,
+      "conditions": [
+        "EPS falls toward 120 to 125 yen",
+        "Investment returns disappoint",
+        "Commodity or geopolitical losses rise",
+        "The valuation premium contracts"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_jpy": 123,
+        "valuation_multiple": 22.8,
+        "attributable_profit_jpy_billion": 825
+      },
+      "failure_conditions": [
+        "Core profit remains above plan",
+        "ROE remains at or above 15 percent"
+      ]
+    }
+  },
+  "valuation": {
+    "bull": {
+      "value_per_share": 5500,
+      "method": "Normalized earnings multiple",
+      "assumptions": [
+        "158 yen normalized EPS",
+        "34.8 times earnings",
+        "Successful investment deployment and sustained high ROE"
+      ]
+    },
+    "fair": {
+      "value_per_share": 4250,
+      "method": "Normalized earnings multiple",
+      "assumptions": [
+        "142 yen normalized EPS",
+        "29.9 times earnings",
+        "Moderate core growth and continued capital returns"
+      ]
+    },
+    "bear": {
+      "value_per_share": 2800,
+      "method": "Normalized earnings multiple",
+      "assumptions": [
+        "123 yen normalized EPS",
+        "22.8 times earnings",
+        "Weaker investment returns and valuation compression"
+      ]
+    },
+    "probability_weighted_value": 4205,
+    "net_cash_per_share": null,
+    "upside_to_fair_value_pct": -16.2,
+    "downside_to_bear_value_pct": 44.8,
+    "confidence": "medium",
+    "explanation": "The raw scenario-weighted value is 4335 yen. A 130 yen reserve for portfolio opacity, investment execution, and cyclicality produces an adopted probability-weighted value of 4205 yen. The company operates with net debt and financial liabilities rather than excess net cash."
+  },
+  "entry_zones": {
+    "strong_buy_below": 3050,
+    "attractive_below": 3650,
+    "fair_value_low": 3650,
+    "fair_value_high": 4650,
+    "expensive_above": 4650
+  },
+  "valuation_status": "overvalued",
+  "current_zone": "expensive",
+  "catalysts": [
+    {
+      "name": "Second-quarter FY2026 results",
+      "timing": "2026-11",
+      "expected_effect": "Confirm core-profit breadth, EPS trajectory, and guidance."
+    },
+    {
+      "name": "Execution of 300 billion yen repurchase",
+      "timing": "FY2026",
+      "expected_effect": "Increase per-share value and demonstrate capital discipline."
+    },
+    {
+      "name": "Growth-investment earnings",
+      "timing": "2026-2028",
+      "expected_effect": "Potentially raise normalized earnings above current guidance."
+    }
+  ],
+  "risks": [
+    {
+      "name": "Investment execution",
+      "impact": "New investments may fail to earn the cost of capital."
+    },
+    {
+      "name": "Commodity and geopolitical volatility",
+      "impact": "Resource, power, and international assets may experience losses or impairments."
+    },
+    {
+      "name": "Valuation compression",
+      "impact": "A premium multiple leaves limited protection if growth normalizes."
+    },
+    {
+      "name": "Portfolio opacity",
+      "impact": "Complex holdings can obscure normalized earnings and liabilities."
+    }
+  ],
+  "invalidation_conditions": [
+    "Core profit depends increasingly on one-time gains",
+    "ROE falls below 12 percent",
+    "New investments fail to produce visible earnings or cash returns",
+    "Free cash flow cannot support shareholder returns",
+    "Capital allocation becomes materially more aggressive",
+    "Normalized EPS falls below 120 yen without a credible recovery path"
+  ],
+  "decision": {
+    "state": "watchlist",
+    "cta": "wait_for_better_entry",
+    "summary": "Business quality and current execution are strong, but the share price exceeds fair and probability-weighted value and requires near-bull operating outcomes.",
+    "next_catalyst": "Second-quarter FY2026 results",
+    "next_decision_date": "2026-11-02",
+    "required_actions": [
+      "Review core-profit composition.",
+      "Measure returns on newly committed investments.",
+      "Update leverage and cash-flow analysis.",
+      "Recalculate EPS and entry zones after half-year results."
+    ]
+  },
+  "sources": [
+    {
+      "publisher": "ITOCHU Corporation",
+      "title": "First Quarter FY2026 Consolidated Financial Results",
+      "date": "2026-08-03",
+      "citation": ":contentReference[oaicite:33]{index=33}"
+    },
+    {
+      "publisher": "ITOCHU Corporation",
+      "title": "First Quarter FY2026 Business Results Summary",
+      "date": "2026-08-03",
+      "citation": ":contentReference[oaicite:34]{index=34}"
+    },
+    {
+      "publisher": "Yahoo Finance",
+      "title": "ITOCHU Tokyo market quote",
+      "date": "2026-08-05",
+      "citation": ":contentReference[oaicite:35]{index=35}"
+    }
+  ],
+  "output": {
+    "live_json_path": "/investment/data/companies/jpy/top2.json",
+    "detail_url": "/investment/company.html?theme=jpy&rank=2"
+  },
+  "publication": {
+    "status": "draft"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
