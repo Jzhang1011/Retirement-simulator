@@ -309,83 +309,93 @@ const FALLBACK_NINTENDO_COMPANY = {
 let globalThemes = [];
 let globalCompanies = [];
 
-/**
- * Resolves relative file paths safely against current origin,
- * preventing 'TypeError: Failed to parse URL' in blob iFrame sandboxes.
- */
-function resolveFetchUrl(path) {
-  if (!path) return path;
-  if (path.startsWith('http://') || path.startsWith('https://')) {
-    return path;
+function resolveJsonPath(entry, defaultDir) {
+  if (!entry) return null;
+  let file = typeof entry === 'string' ? entry : (entry.file || entry.slug || '');
+  if (!file) return null;
+  
+  if (file.startsWith('./')) file = file.slice(2);
+  if (file.startsWith('/')) file = file.slice(1);
+  if (!file.endsWith('.json')) file += '.json';
+  
+  if (file.startsWith('data/')) {
+    return './' + file;
   }
-  const cleanPath = path.replace(/^\.\//, '').replace(/^\//, '');
-  if (window.location.protocol === 'blob:' || window.location.href.startsWith('blob:')) {
-    try {
-      return new URL(cleanPath, window.location.origin).href;
-    } catch (e) {
-      return cleanPath;
-    }
+  if (file.startsWith(defaultDir + '/')) {
+    return './data/' + file;
   }
-  return path;
+  return `./data/${defaultDir}/${file}`;
 }
 
-async function getJSON(path) {
-  const targetUrl = resolveFetchUrl(path);
-  const r = await fetch(targetUrl, { cache: 'no-store' });
-  if (!r.ok) throw new Error(`${path}: ${r.status}`);
-  return r.json();
+async function fetchJsonSafely(path) {
+  try {
+    const res = await fetch(path, { cache: 'no-store' });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (e) {
+    // Silent catch for missing or 404 files
+  }
+  return null;
+}
+
+async function loadThemeEntry(entry) {
+  const primaryPath = resolveJsonPath(entry, 'themes');
+  if (primaryPath) {
+    const data = await fetchJsonSafely(primaryPath);
+    if (data) return data;
+  }
+  
+  const rawSlug = typeof entry === 'string' ? entry : (entry.slug || '');
+  if (rawSlug) {
+    const fallbackPath = `./data/${rawSlug}.json`;
+    const data = await fetchJsonSafely(fallbackPath);
+    if (data) return data;
+  }
+
+  console.warn(`Theme JSON not found on server (skipping): ${typeof entry === 'string' ? entry : entry.slug}`);
+  return null;
+}
+
+async function loadCompanyEntry(entry) {
+  const primaryPath = resolveJsonPath(entry, 'companies');
+  if (primaryPath) {
+    const data = await fetchJsonSafely(primaryPath);
+    if (data) return data;
+  }
+
+  const rawSlug = typeof entry === 'string' ? entry : (entry.slug || '');
+  if (rawSlug) {
+    const fallbackPath = `./data/${rawSlug}.json`;
+    const data = await fetchJsonSafely(fallbackPath);
+    if (data) return data;
+  }
+
+  console.warn(`Company JSON not found on server (skipping): ${typeof entry === 'string' ? entry : entry.slug}`);
+  return null;
 }
 
 async function load() {
   try {
-    const manifest = await getJSON('./data/index.json');
-    const themeEntries = manifest.themes || manifest.theses || [];
-    const companyEntries = manifest.companies || [];
+    const manifest = await fetchJsonSafely('./data/index.json');
+    if (manifest) {
+      const themeEntries = manifest.themes || manifest.theses || [];
+      const companyEntries = manifest.companies || [];
 
-    // Safely load each theme JSON; missing/unreleased JSON files will be skipped without failing
-    const loadedThemes = await Promise.all(themeEntries.map(async (x) => {
-      let rawFile = typeof x === 'string' ? x : (x.file || x.slug);
-      let path = rawFile.startsWith('data/') ? `./${rawFile}` : `./data/${rawFile.startsWith('themes/') ? '' : 'themes/'}${rawFile}`;
-      if (!path.endsWith('.json')) path += '.json';
+      // Fetch each entry independently without throwing or failing Promise.all
+      const loadedThemes = await Promise.all(themeEntries.map(loadThemeEntry));
+      const loadedCompanies = await Promise.all(companyEntries.map(loadCompanyEntry));
 
-      try {
-        return await getJSON(path);
-      } catch (e1) {
-        try {
-          const fallbackPath = `./data/${typeof x === 'string' ? x : x.slug}.json`;
-          return await getJSON(fallbackPath);
-        } catch (e2) {
-          console.warn(`Skipping unreleased theme file: ${path}`);
-          return null;
-        }
-      }
-    }));
-
-    // Safely load each company JSON
-    const loadedCompanies = await Promise.all(companyEntries.map(async (x) => {
-      let rawFile = typeof x === 'string' ? x : (x.file || x.slug);
-      let path = rawFile.startsWith('data/') ? `./${rawFile}` : `./data/${rawFile.startsWith('companies/') ? '' : 'companies/'}${rawFile}`;
-      if (!path.endsWith('.json')) path += '.json';
-
-      try {
-        return await getJSON(path);
-      } catch (err) {
-        console.warn(`Skipping unreleased company file: ${path}`);
-        return null;
-      }
-    }));
-
-    globalThemes = loadedThemes.filter(Boolean);
-    globalCompanies = loadedCompanies.filter(Boolean);
-
-    if (globalThemes.length === 0) globalThemes = [FALLBACK_JPY_THEME];
-    if (globalCompanies.length === 0) globalCompanies = [FALLBACK_NINTENDO_COMPANY];
-
+      globalThemes = loadedThemes.filter(Boolean);
+      globalCompanies = loadedCompanies.filter(Boolean);
+    }
   } catch (e) {
-    console.warn("Could not load registry manifest index.json from path, using preview defaults.", e);
-    globalThemes = [FALLBACK_JPY_THEME];
-    globalCompanies = [FALLBACK_NINTENDO_COMPANY];
+    console.warn("Could not load registry manifest index.json", e);
   }
+
+  // Fallbacks if no valid files were fetched
+  if (globalThemes.length === 0) globalThemes = [FALLBACK_JPY_THEME];
+  if (globalCompanies.length === 0) globalCompanies = [FALLBACK_NINTENDO_COMPANY];
 
   renderDashboard(globalThemes, globalCompanies);
 }
@@ -413,7 +423,7 @@ function renderDashboard(themes, companies, filter = 'all', searchQuery = '') {
   // Render Theme Grid
   const themeGridEl = document.getElementById('theme-grid');
   if (filteredThemes.length === 0) {
-    themeGridEl.innerHTML = `<div class="col-span-full card p-8 text-center text-slate-500">No active investment themes available.</div>`;
+    themeGridEl.innerHTML = `<div class="col-span-full card p-8 text-center text-slate-500">No matching investment themes found.</div>`;
   } else {
     themeGridEl.innerHTML = filteredThemes.map(t => {
       const opp = (t.opportunities || t.action_center?.opportunities || [])[0];
@@ -475,7 +485,7 @@ function renderDashboard(themes, companies, filter = 'all', searchQuery = '') {
   // Render Company Grid
   const companyGridEl = document.getElementById('company-grid');
   if (filteredCompanies.length === 0) {
-    companyGridEl.innerHTML = `<div class="col-span-full card p-8 text-center text-slate-500">No company valuations published yet.</div>`;
+    companyGridEl.innerHTML = `<div class="col-span-full card p-8 text-center text-slate-500">No matching company reviews found.</div>`;
   } else {
     companyGridEl.innerHTML = filteredCompanies.map(c => {
       const p = c.market_data?.current_price ?? c.market_data?.price;
