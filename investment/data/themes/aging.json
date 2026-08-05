@@ -1,0 +1,912 @@
+{
+  "schema_version": "4.0",
+  "review_id": "AGING-2026-08-05",
+  "thesis": {
+    "id": "AGING-001",
+    "name": "Aging Economy",
+    "slug": "aging",
+    "category": "structural-demographics-and-healthcare",
+    "horizon": "10-20 years"
+  },
+  "review": {
+    "date": "2026-08-05",
+    "period_start": "2026-07-23",
+    "period_end": "2026-08-05",
+    "cadence": "weekly",
+    "previous_review_id": null
+  },
+  "status": "intact",
+  "thesis_health": {
+    "current": 74,
+    "previous": null,
+    "change": null,
+    "trend": "stable",
+    "reason_code": "FIRST_EVIDENCE_BASELINE",
+    "reason": "Aging-related demand and selected company execution remain constructive, but reimbursement growth is modest relative to labor and operating-cost exposure, while quality and program-integrity oversight are increasing."
+  },
+  "material_change": false,
+  "scenario_model": {
+    "current_scenario": "fair",
+    "confidence": 0.72,
+    "scenarios": [
+      {
+        "id": "bull",
+        "probability": 0.25,
+        "description": "Aging-related utilization grows while reimbursement, technology, workforce productivity and outcomes improve together, supporting margin expansion across selected care, diagnostics, mobility and administrative services.",
+        "entry_conditions": [
+          "Reimbursement consistently meets or exceeds labor and compliance inflation",
+          "Home and community care gains share with stable or improving outcomes",
+          "Senior-housing occupancy growth remains broad-based without material overbuilding",
+          "Workflow technology produces measurable labor-hour savings",
+          "Diagnostics and device utilization grows without material reimbursement deterioration"
+        ],
+        "exit_conditions": [
+          "Provider margins fail to improve despite utilization growth",
+          "Quality failures or reimbursement pressure spread across multiple opportunity groups"
+        ]
+      },
+      {
+        "id": "fair",
+        "probability": 0.55,
+        "description": "Demand remains durable, but reimbursement, affordability, labor availability, regulation and capital intensity create wide dispersion among companies and opportunity groups.",
+        "entry_conditions": [
+          "Utilization remains positive",
+          "Annual reimbursement updates remain positive but modest",
+          "Labor and compliance costs remain material constraints",
+          "Company outcomes vary significantly by business model and execution"
+        ],
+        "exit_conditions": [
+          "Multiple opportunity groups demonstrate simultaneous reimbursement, productivity and outcome improvement",
+          "Demand rises while provider cash flow and quality deteriorate broadly"
+        ]
+      },
+      {
+        "id": "bear",
+        "probability": 0.2,
+        "description": "Funding pressure, labor shortages, poor care quality, policy changes, affordability constraints or prevention advances undermine the economics of existing aging-related business models.",
+        "entry_conditions": [
+          "Reimbursement persistently trails labor and operating costs",
+          "Care-quality failures or enforcement actions become widespread",
+          "Senior-housing supply materially exceeds affordable demand",
+          "Home-based care fails to achieve sustainable unit economics",
+          "Payer or pharmaceutical policy materially reduces provider cash flow"
+        ],
+        "exit_conditions": [
+          "Rate-cost coverage improves",
+          "Productivity gains become measurable",
+          "Quality and cash conversion stabilize across multiple sectors"
+        ]
+      }
+    ]
+  },
+  "decision": {
+    "state": "deep_dive",
+    "previous_state": "monitor",
+    "changed": true,
+    "summary": "The Aging Economy thesis remains intact. Current evidence supports deeper company work in diagnostics, senior housing and home-based care, but no company should be promoted to a portfolio decision without valuation and explicit reimbursement, labor, quality and capital-intensity analysis.",
+    "cta": "run_priority_aging_company_reviews",
+    "reason_codes": [
+      "DEMAND_CONFIRMED",
+      "REIMBURSEMENT_MIXED",
+      "SENIOR_HOUSING_OPERATING_STRENGTH",
+      "HOME_BASED_CARE_SUPPORTED",
+      "QUALITY_OVERSIGHT_RISING",
+      "VALUATION_REQUIRED"
+    ],
+    "required_actions": [
+      "Complete company reviews for Welltower, Labcorp, Option Care Health and Encompass Health",
+      "Quantify reimbursement growth versus labor inflation by care setting",
+      "Evaluate valuation and capital intensity before any portfolio-candidate decision"
+    ]
+  },
+  "developments": [
+    {
+      "id": "AGING-DEV-2026-08-05-01",
+      "date": "2026-07-29",
+      "title": "CMS finalized a 2.4 percent FY2027 skilled-nursing payment update",
+      "fact": "CMS finalized a 2.4 percent increase in SNF payment rates, based on a 3.3 percent market-basket update less a 0.9 percent productivity adjustment, while maintaining value-based payment and program-integrity mechanisms.",
+      "interpretation": "The payment increase supports nominal revenue but does not establish that reimbursement will exceed nursing wages, insurance, supplies and compliance costs. Program-integrity scrutiny remains a material operator-specific risk.",
+      "assumption_ids": [
+        "AGING-A2",
+        "AGING-A3",
+        "AGING-A6"
+      ],
+      "direction": "mixed",
+      "materiality": "medium",
+      "durability": "medium",
+      "uncertainty": "medium",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-CMS-SNF-2027"
+      ]
+    },
+    {
+      "id": "AGING-DEV-2026-08-05-02",
+      "date": "2026-07-30",
+      "title": "Hospice reimbursement increased while provider-level oversight expanded",
+      "fact": "CMS finalized a 2.3 percent FY2027 hospice payment increase and updated provider-level service and spending variation information intended to identify potentially concerning utilization and non-hospice spending.",
+      "interpretation": "Demand remains supported, but compliance, documentation and care-quality systems are becoming more important sources of differentiation and risk.",
+      "assumption_ids": [
+        "AGING-A2",
+        "AGING-A5",
+        "AGING-A6"
+      ],
+      "direction": "mixed",
+      "materiality": "medium",
+      "durability": "high",
+      "uncertainty": "medium",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-CMS-HOSPICE-2027"
+      ]
+    },
+    {
+      "id": "AGING-DEV-2026-08-05-03",
+      "date": "2026-07-30",
+      "title": "Inpatient rehabilitation received a positive rate update and tighter operating requirements",
+      "fact": "CMS finalized a 2.3 percent FY2027 IRF payment increase, estimated to raise payments by 340 million dollars, while clarifying therapy and interdisciplinary-team requirements and accelerating future quality-data reporting.",
+      "interpretation": "Rehabilitation utilization and reimbursement remain constructive, while operational discipline and workflow infrastructure are increasingly important.",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A2",
+        "AGING-A3",
+        "AGING-A6"
+      ],
+      "direction": "positive",
+      "materiality": "medium",
+      "durability": "medium",
+      "uncertainty": "low",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-CMS-IRF-2027"
+      ]
+    },
+    {
+      "id": "AGING-DEV-2026-08-05-04",
+      "date": "2026-07-27",
+      "title": "Welltower reported strong senior-housing occupancy and operating growth",
+      "fact": "Welltower reported 20.5 percent same-store NOI growth in its Seniors Housing Operating portfolio, supported by 330 basis points of occupancy growth and 5.2 percent revenue-per-occupied-room growth.",
+      "interpretation": "Selected senior-housing platforms are converting demographic demand into occupancy, pricing and operating leverage, although the evidence is company-specific and requires valuation and capital-allocation review.",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A2",
+        "AGING-A3"
+      ],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "medium",
+      "uncertainty": "medium",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-WELL-Q2-2026"
+      ]
+    },
+    {
+      "id": "AGING-DEV-2026-08-05-05",
+      "date": "2026-07-29",
+      "title": "Option Care Health maintained profitable alternate-site infusion growth",
+      "fact": "Option Care Health reported 1.9 percent revenue growth, 3.0 percent adjusted EBITDA growth, 9.8 percent adjusted EPS growth and 184 million dollars of quarterly operating cash flow.",
+      "interpretation": "Home and alternate-site infusion remains commercially viable and cash-generative, but growth is moderate and payer, reimbursement and therapy-mix sensitivities remain material.",
+      "assumption_ids": [
+        "AGING-A3",
+        "AGING-A4",
+        "AGING-A5"
+      ],
+      "direction": "positive",
+      "materiality": "medium",
+      "durability": "medium",
+      "uncertainty": "medium",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-OPCH-Q2-2026"
+      ]
+    },
+    {
+      "id": "AGING-DEV-2026-08-05-06",
+      "date": "2026-07-30",
+      "title": "Labcorp reported continued diagnostics growth and raised guidance",
+      "fact": "Labcorp reported 5.8 percent revenue growth, 14.9 percent adjusted EPS growth and raised full-year guidance. Diagnostics Laboratories revenue increased 5.5 percent with positive organic volume and price-mix contributions.",
+      "interpretation": "Diagnostics combines aging-related utilization with specialty-test growth, health-system partnerships and scalable infrastructure, making it less directly caregiver-intensive than facility-based care.",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A5"
+      ],
+      "direction": "positive",
+      "materiality": "medium",
+      "durability": "medium",
+      "uncertainty": "medium",
+      "thesis_change": false,
+      "source_refs": [
+        "SRC-LH-Q2-2026"
+      ]
+    }
+  ],
+  "scorecard": [
+    {
+      "driver_id": "AGING-A1",
+      "driver": "Older populations increase demand for care and support",
+      "score": 4,
+      "trend": "stable",
+      "reason": "Senior-housing occupancy, rehabilitation reimbursement and diagnostic utilization remain constructive."
+    },
+    {
+      "driver_id": "AGING-A2",
+      "driver": "Funding and reimbursement remain adequate",
+      "score": 3,
+      "trend": "stable",
+      "reason": "CMS finalized positive nominal updates, but the increases remain modest relative to labor and compliance exposure."
+    },
+    {
+      "driver_id": "AGING-A3",
+      "driver": "Labor scarcity increases productivity demand",
+      "score": 4,
+      "trend": "stable",
+      "reason": "Operating and reporting requirements strengthen the need for workflow tools, but externally verified productivity outcomes remain limited."
+    },
+    {
+      "driver_id": "AGING-A4",
+      "driver": "Home and community settings gain share",
+      "score": 4,
+      "trend": "stable",
+      "reason": "Alternate-site infusion remains profitable and cash-generative, while home-health reimbursement policy remains unresolved."
+    },
+    {
+      "driver_id": "AGING-A5",
+      "driver": "Chronic-disease management remains a durable need",
+      "score": 4,
+      "trend": "stable",
+      "reason": "Diagnostics, infusion and rehabilitation continue to demonstrate recurring utilization."
+    },
+    {
+      "driver_id": "AGING-A6",
+      "driver": "Leading providers maintain quality and trust",
+      "score": 3,
+      "trend": "stable",
+      "reason": "Expanded quality reporting and program-integrity oversight increase differentiation but also enforcement and reputational risk."
+    }
+  ],
+  "assumptions_changed": [],
+  "catalysts": [
+    {
+      "id": "AGING-CAT-01",
+      "name": "Senior-housing occupancy recovery",
+      "status": "confirmed",
+      "direction": "positive",
+      "evidence": "Welltower reported strong occupancy, pricing and same-store NOI growth.",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A2",
+        "AGING-A3"
+      ],
+      "confirmation_test": "Occupancy and NOI growth remain broad-based without material labor-cost deterioration or local overbuilding.",
+      "failure_test": "New supply, affordability pressure or staffing costs reverse occupancy and margin gains.",
+      "next_check": "2026-10-31"
+    },
+    {
+      "id": "AGING-CAT-02",
+      "name": "Reimbursement reform",
+      "status": "developing",
+      "direction": "mixed",
+      "evidence": "SNF, hospice and IRF received positive FY2027 updates, but rates remain modest and program-integrity requirements increased.",
+      "assumption_ids": [
+        "AGING-A2",
+        "AGING-A6"
+      ],
+      "confirmation_test": "Payment growth covers labor and compliance inflation while access and outcomes remain stable.",
+      "failure_test": "Rates trail costs or enforcement and reporting burdens materially reduce provider cash flow.",
+      "next_check": "2026-10-01"
+    },
+    {
+      "id": "AGING-CAT-03",
+      "name": "Aging in place",
+      "status": "developing",
+      "direction": "positive",
+      "evidence": "Option Care Health continued to generate profitable growth and operating cash flow from home and alternate-site infusion.",
+      "assumption_ids": [
+        "AGING-A4",
+        "AGING-A5"
+      ],
+      "confirmation_test": "Organic growth accelerates while payer stability, outcomes and cost savings remain demonstrable.",
+      "failure_test": "Payer pressure, clinical-quality issues or weak unit economics prevent share gains.",
+      "next_check": "2026-10-31"
+    },
+    {
+      "id": "AGING-CAT-04",
+      "name": "Care-workflow productivity",
+      "status": "developing",
+      "direction": "positive",
+      "evidence": "CMS shortened future reporting timelines and increased operational data requirements across post-acute settings.",
+      "assumption_ids": [
+        "AGING-A3",
+        "AGING-A6"
+      ],
+      "confirmation_test": "Technology vendors demonstrate reduced labor hours, faster documentation and improved outcomes.",
+      "failure_test": "Technology increases administrative complexity without measurable productivity.",
+      "next_check": "2026-12-31"
+    },
+    {
+      "id": "AGING-CAT-05",
+      "name": "Diagnostics and specialty testing",
+      "status": "confirmed",
+      "direction": "positive",
+      "evidence": "Labcorp reported positive organic volume, price-mix and specialty-testing expansion.",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A5"
+      ],
+      "confirmation_test": "Organic growth and margin improvement continue without material reimbursement deterioration.",
+      "failure_test": "Utilization management, reimbursement cuts or weak test differentiation erode organic growth.",
+      "next_check": "2026-10-31"
+    }
+  ],
+  "opportunities": [
+    {
+      "rank": 1,
+      "opportunity_id": "AGING-OPP-DIAGNOSTICS",
+      "group": "diagnostics_and_monitoring",
+      "name": "Labcorp",
+      "ticker": "LH",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Recurring diagnostic utilization",
+        "Specialty-testing and oncology mix",
+        "Health-system and regional-laboratory partnerships",
+        "Biopharma laboratory services"
+      ],
+      "catalyst": "Conversion of oncology, genetic and at-home screening launches into sustained organic growth.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Reimbursement pressure, utilization management and acquisition integration.",
+      "next_action": "Run a company review using normalized organic growth, margin, cash conversion and capital-allocation scenarios.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "labcorp-aging",
+        "reason": "Labcorp ranks first, has multiple independent return engines, has a current operating catalyst and requires valuation before an investment decision.",
+        "priority": "P0",
+        "trigger_rules": [
+          "rank_top_3",
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "companies/labcorp-aging.json",
+        "detail_url": "/investment/company.html?company=labcorp-aging"
+      }
+    },
+    {
+      "rank": 2,
+      "opportunity_id": "AGING-OPP-SENIOR-HOUSING",
+      "group": "senior_housing",
+      "name": "Welltower",
+      "ticker": "WELL",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Senior-housing occupancy recovery",
+        "Revenue-per-occupied-room growth",
+        "Operating-platform productivity",
+        "Asset recycling and capital deployment"
+      ],
+      "catalyst": "Continued occupancy and same-store NOI growth across the enlarged senior-housing portfolio.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Premium valuation, acquisition returns, affordability and capital intensity.",
+      "next_action": "Run a company review testing normalized occupancy, pricing, labor costs, leverage and external-growth returns.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "welltower-aging",
+        "reason": "Welltower is a top-three opportunity with high thematic relevance, multiple return engines, strong current operating evidence and an unresolved valuation question.",
+        "priority": "P0",
+        "trigger_rules": [
+          "rank_top_3",
+          "high_conviction",
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst",
+          "named_company_central"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "companies/welltower-aging.json",
+        "detail_url": "/investment/company.html?company=welltower-aging"
+      }
+    },
+    {
+      "rank": 3,
+      "opportunity_id": "AGING-OPP-HOME-CARE",
+      "group": "home_and_alternate_site_care",
+      "name": "Option Care Health",
+      "ticker": "OPCH",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Site-of-care substitution",
+        "Recurring chronic-infusion demand",
+        "National clinical network",
+        "Operating cash-flow generation"
+      ],
+      "catalyst": "Reacceleration of organic revenue and adjusted EBITDA growth.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Payer concentration, drug reimbursement, therapy mix and execution.",
+      "next_action": "Run a company review with payer, therapy-mix, reimbursement and cash-conversion sensitivities.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "option-care-health-aging",
+        "reason": "Option Care Health is a top-three opportunity with multiple return engines and a direct need for valuation and payer-risk analysis.",
+        "priority": "P0",
+        "trigger_rules": [
+          "rank_top_3",
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "companies/option-care-health-aging.json",
+        "detail_url": "/investment/company.html?company=option-care-health-aging"
+      }
+    },
+    {
+      "rank": 4,
+      "opportunity_id": "AGING-OPP-REHABILITATION",
+      "group": "inpatient_rehabilitation",
+      "name": "Encompass Health",
+      "ticker": "EHC",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Stroke, neurological and orthopedic rehabilitation demand",
+        "Bed and hospital expansion",
+        "Operating scale",
+        "Medicare reimbursement growth"
+      ],
+      "catalyst": "Q2 results and evidence that volume and rate growth exceed labor inflation.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Labor costs, compliance requirements, payer concentration and expansion execution.",
+      "next_action": "Complete the company review after ingesting Q2 results and management commentary.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "encompass-health-aging",
+        "reason": "The company has multiple return engines, an immediate catalyst and requires valuation and reimbursement sensitivity analysis.",
+        "priority": "P0",
+        "trigger_rules": [
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "companies/encompass-health-aging.json",
+        "detail_url": "/investment/company.html?company=encompass-health-aging"
+      }
+    },
+    {
+      "rank": 5,
+      "opportunity_id": "AGING-OPP-MEDICAL-DEVICES",
+      "group": "medical_devices",
+      "name": "Stryker",
+      "ticker": "SYK",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Procedure-volume growth",
+        "Product innovation",
+        "Installed-base pull-through",
+        "Hospital productivity"
+      ],
+      "catalyst": "Q2 organic-growth performance and updated guidance.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Premium valuation, hospital budgets, regulatory exposure and product execution.",
+      "next_action": "Review Q2 filing and determine whether operating growth and valuation justify promotion.",
+      "company_review": {
+        "status": "candidate",
+        "company_slug": "stryker-aging",
+        "reason": "Stryker has multiple aging-linked return engines, but the company is not top-three and promotion depends on valuation and current operating evidence.",
+        "priority": "P1",
+        "trigger_rules": [
+          "valuation_required",
+          "multiple_return_engines"
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 6,
+      "opportunity_id": "AGING-OPP-HEARING-VISION-MOBILITY",
+      "group": "hearing_vision_and_mobility",
+      "name": "Hearing, vision and mobility products",
+      "ticker": null,
+      "asset_type": "opportunity_group",
+      "independent_return_engines": [
+        "Age-related sensory and mobility demand",
+        "Replacement cycles",
+        "Private-pay exposure",
+        "Service and consumable revenue"
+      ],
+      "catalyst": "Evidence of sustained unit growth and recurring service without excessive reimbursement dependence.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Consumer affordability, channel competition and product commoditization.",
+      "next_action": "Screen companies for reimbursement-independent growth, recurring service and defensible distribution.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "No named company has yet passed the direct-exposure, business-quality and valuation-review threshold.",
+        "priority": "P2",
+        "trigger_rules": [],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 7,
+      "opportunity_id": "AGING-OPP-SPECIALTY-PHARMA",
+      "group": "chronic_care_and_specialty_pharmaceuticals",
+      "name": "Chronic-care and specialty pharmaceuticals",
+      "ticker": null,
+      "asset_type": "opportunity_group",
+      "independent_return_engines": [
+        "Recurring disease management",
+        "Therapeutic differentiation",
+        "Adherence and persistence",
+        "New indication expansion"
+      ],
+      "catalyst": "Clinical or reimbursement evidence supporting durable differentiated therapy economics.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Pricing regulation, patent loss, clinical failure and therapeutic displacement.",
+      "next_action": "Rank companies by clinical differentiation, patent duration, payer access and prevention-displacement risk.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "The opportunity is broad and no named company has yet met promotion requirements.",
+        "priority": "P2",
+        "trigger_rules": [],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 8,
+      "opportunity_id": "AGING-OPP-WORKFLOW",
+      "group": "healthcare_staffing_and_workflow_tools",
+      "name": "Healthcare staffing and workflow tools",
+      "ticker": null,
+      "asset_type": "opportunity_group",
+      "independent_return_engines": [
+        "Labor scarcity",
+        "Scheduling automation",
+        "Clinical documentation productivity",
+        "Revenue-cycle and compliance support"
+      ],
+      "catalyst": "Externally verified labor-hour savings and improved customer retention.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Weak measurable return on investment, integration burden and customer-budget pressure.",
+      "next_action": "Identify vendors with documented labor-hour, capacity or outcome improvements.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "Company-level evidence is insufficient to select a named promotion candidate.",
+        "priority": "P1",
+        "trigger_rules": [],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 9,
+      "opportunity_id": "AGING-OPP-RETIREMENT-SERVICES",
+      "group": "retirement_income_and_wealth_transfer",
+      "name": "Retirement-income and wealth-transfer services",
+      "ticker": null,
+      "asset_type": "opportunity_group",
+      "independent_return_engines": [
+        "Recurring assets under administration",
+        "Annuity and income demand",
+        "Estate and tax administration",
+        "Long-duration advisory relationships"
+      ],
+      "catalyst": "Evidence of durable net flows and customer retention through changing interest-rate regimes.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Regulation, spread compression, fiduciary risk and customer-acquisition costs.",
+      "next_action": "Build an opportunity screen covering recurring assets, spread sensitivity, fiduciary quality and customer acquisition.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "A dedicated subtheme screen is required before selecting a named company.",
+        "priority": "P2",
+        "trigger_rules": [],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 10,
+      "opportunity_id": "AGING-OPP-SNF-HOSPICE",
+      "group": "skilled_nursing_and_hospice",
+      "name": "Skilled nursing and hospice providers",
+      "ticker": null,
+      "asset_type": "opportunity_group",
+      "independent_return_engines": [
+        "Non-discretionary utilization",
+        "Local referral networks",
+        "Annual reimbursement updates"
+      ],
+      "catalyst": "Evidence that reimbursement and productivity consistently exceed labor and compliance-cost growth.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Quality failures, government-payer concentration, labor intensity and enforcement actions.",
+      "next_action": "Monitor rate-cost coverage and provider-level quality before promoting a company.",
+      "company_review": {
+        "status": "none",
+        "company_slug": "",
+        "reason": "Current reimbursement and oversight evidence does not support company promotion without stronger quality and cash-flow evidence.",
+        "priority": "P2",
+        "trigger_rules": [],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "AGING-RISK-01",
+      "name": "Reimbursement inadequacy",
+      "severity": "high",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A2"
+      ],
+      "trigger": "Medicare, Medicaid or commercial rate growth persistently trails labor, insurance, supply and compliance inflation.",
+      "monitoring_action": "Compare annual payment updates with setting-specific wage and operating-cost inflation."
+    },
+    {
+      "id": "AGING-RISK-02",
+      "name": "Labor-cost and caregiver availability pressure",
+      "severity": "high",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A3"
+      ],
+      "trigger": "Vacancies, agency staffing or wage growth reduce margins and constrain capacity despite strong demand.",
+      "monitoring_action": "Track labor cost as a percentage of revenue, vacancies, agency usage and measurable technology productivity."
+    },
+    {
+      "id": "AGING-RISK-03",
+      "name": "Care-quality and regulatory failure",
+      "severity": "high",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A6"
+      ],
+      "trigger": "Survey deficiencies, readmissions, litigation, fraud findings or enforcement actions materially affect reimbursement or trust.",
+      "monitoring_action": "Review outcomes, Care Compare data, enforcement actions, litigation and compliance disclosures."
+    },
+    {
+      "id": "AGING-RISK-04",
+      "name": "Payer concentration",
+      "severity": "high",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A2",
+        "AGING-A5"
+      ],
+      "trigger": "A government or commercial payer changes reimbursement, utilization management or network participation terms.",
+      "monitoring_action": "Build company-level payer and contract-concentration sensitivity tables."
+    },
+    {
+      "id": "AGING-RISK-05",
+      "name": "Capital intensity and overbuilding",
+      "severity": "medium",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A1",
+        "AGING-A2"
+      ],
+      "trigger": "Senior-housing or care-facility investment exceeds affordable demand or raises leverage and financing costs.",
+      "monitoring_action": "Track construction starts, acquisition yields, leverage, development returns and local affordability."
+    },
+    {
+      "id": "AGING-RISK-06",
+      "name": "Affordability pressure",
+      "severity": "high",
+      "direction": "negative",
+      "assumption_ids": [
+        "AGING-A2",
+        "AGING-A4"
+      ],
+      "trigger": "Private-pay prices or out-of-pocket costs rise faster than household income and assets.",
+      "monitoring_action": "Compare senior-housing and home-care costs with household income, wealth and long-term-care coverage."
+    }
+  ],
+  "next_decision_points": [
+    {
+      "date": "2026-08-06",
+      "event": "Encompass Health Q2 earnings call",
+      "decision_test": "Whether volume, reimbursement and margins are outpacing labor costs and whether expansion returns remain attractive."
+    },
+    {
+      "date": "2026-08-31",
+      "event": "CMS home-health proposed-rule comment deadline",
+      "decision_test": "Whether industry evidence changes the expected final reimbursement and program-integrity outcome."
+    },
+    {
+      "date": "2026-10-01",
+      "event": "FY2027 SNF, hospice and IRF policy implementation period",
+      "decision_test": "Whether operator guidance indicates that final rate updates cover labor and compliance inflation."
+    },
+    {
+      "date": "2026-10-31",
+      "event": "Next major senior-housing earnings cycle",
+      "decision_test": "Whether occupancy and NOI growth remain broad-based and whether capital deployment is creating acceptable returns."
+    }
+  ],
+  "research_backlog": [
+    {
+      "priority": "P0",
+      "item": "Locate and ingest the latest human-approved aging.json before the next review so changes can be measured against an auditable baseline."
+    },
+    {
+      "priority": "P0",
+      "item": "Build company packets for Welltower, Labcorp, Option Care Health and Encompass Health."
+    },
+    {
+      "priority": "P0",
+      "item": "Quantify reimbursement growth versus wage, benefit, insurance and compliance inflation for home health, SNF, hospice and IRF providers."
+    },
+    {
+      "priority": "P1",
+      "item": "Obtain senior-housing construction starts, inventory growth, occupancy and affordability data by major market."
+    },
+    {
+      "priority": "P1",
+      "item": "Build a payer-concentration and reimbursement-sensitivity matrix for the leading Aging opportunity companies."
+    },
+    {
+      "priority": "P1",
+      "item": "Identify healthcare workflow vendors with externally verified labor-hour, documentation-time or capacity improvements."
+    },
+    {
+      "priority": "P1",
+      "item": "Compare hearing, vision and mobility companies on private-pay exposure, replacement cycles, recurring service and channel economics."
+    },
+    {
+      "priority": "P2",
+      "item": "Build the retirement-income and wealth-transfer opportunity framework covering recurring assets, annuity spreads, fiduciary quality and customer-acquisition economics."
+    },
+    {
+      "priority": "P2",
+      "item": "Monitor whether obesity, cardiovascular and neurodegenerative therapies shift spending among chronic-care categories rather than reducing total Aging-economy demand."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-CORE-OS",
+      "type": "core_file",
+      "name": "WealthLanding Investment OS Compact Operating System v4.1",
+      "publisher": "WealthLanding",
+      "date": null,
+      "url": null,
+      "document_reference": "00_CORE_OPERATING_SYSTEM.md"
+    },
+    {
+      "id": "SRC-CORE-THEME-SCHEMA",
+      "type": "core_file",
+      "name": "WealthLanding Core Theme Schema v4.0",
+      "publisher": "WealthLanding",
+      "date": null,
+      "url": null,
+      "document_reference": "00_CORE_THEME_SCHEMA.json"
+    },
+    {
+      "id": "SRC-AGING-MASTER",
+      "type": "theme_file",
+      "name": "Aging Economy Investment Thesis Master Research File",
+      "publisher": "WealthLanding",
+      "date": null,
+      "url": null,
+      "document_reference": "AGING_MASTER_RESEARCH.md"
+    },
+    {
+      "id": "SRC-CMS-SNF-2027",
+      "type": "primary",
+      "name": "Fiscal Year 2027 Skilled Nursing Facility Prospective Payment System Final Rule",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "date": "2026-07-29",
+      "url": "https://www.cms.gov/newsroom/fact-sheets/fiscal-year-2027-skilled-nursing-facility-prospective-payment-system-final-rule-cms-1843-f",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-CMS-HOSPICE-2027",
+      "type": "primary",
+      "name": "Fiscal Year 2027 Hospice Wage Index and Payment Rate Update Final Rule",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "date": "2026-07-30",
+      "url": "https://www.cms.gov/newsroom/fact-sheets/fiscal-year-2027-hospice-wage-index-payment-rate-update-hospice-quality-reporting-program",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-CMS-IRF-2027",
+      "type": "primary",
+      "name": "FY 2027 Inpatient Rehabilitation Facilities Prospective Payment System Final Rule",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "date": "2026-07-30",
+      "url": "https://www.cms.gov/newsroom/fact-sheets/fy-2027-inpatient-rehabilitation-facilities-irf-prospective-payment-system-pps-final-rule-cms-1845-f",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-CMS-HH-2027",
+      "type": "primary",
+      "name": "Calendar Year 2027 Home Health Prospective Payment System Proposed Rule",
+      "publisher": "Centers for Medicare & Medicaid Services",
+      "date": "2026-07-01",
+      "url": "https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-home-health-prospective-payment-system-proposed-rule-fact-sheet-cms-1844-p",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-WELL-Q2-2026",
+      "type": "company_primary",
+      "name": "Welltower Reports Second Quarter 2026 Results",
+      "publisher": "Welltower Inc.",
+      "date": "2026-07-27",
+      "url": "https://welltower.com/wp-content/uploads/2026/07/2Q26-Earnings-Release-99.1-FINAL.pdf",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-VTR-Q2-2026",
+      "type": "company_primary",
+      "name": "Ventas Reports 2026 Second Quarter Results",
+      "publisher": "Ventas Inc.",
+      "date": "2026-07-29",
+      "url": "https://ir.ventasreit.com/news/news-details/2026/Ventas-Reports-2026-Second-Quarter-Results/default.aspx",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-OPCH-Q2-2026",
+      "type": "company_primary",
+      "name": "Option Care Health Second Quarter 2026 Results",
+      "publisher": "Option Care Health Inc.",
+      "date": "2026-07-29",
+      "url": "https://investors.optioncarehealth.com/node/20591/pdf",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-LH-Q2-2026",
+      "type": "company_primary",
+      "name": "Labcorp Announces 2026 Second Quarter Results",
+      "publisher": "Labcorp Holdings Inc.",
+      "date": "2026-07-30",
+      "url": "https://ir.labcorp.com/news-releases/news-release-details/labcorp-announces-2026-second-quarter-results-raises-full-year",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-EHC-Q2-SCHEDULE",
+      "type": "company_primary",
+      "name": "Encompass Health Announces Date of 2026 Second Quarter Earnings Call",
+      "publisher": "Encompass Health Corporation",
+      "date": "2026-07-09",
+      "url": "https://encompasshealth.com/press-releases/encompass-health-announces-date-of-2026-second-quarter-earnings-call",
+      "document_reference": null
+    },
+    {
+      "id": "SRC-SYK-Q2-2026",
+      "type": "company_primary",
+      "name": "Stryker Second Quarter 2026 Earnings Materials",
+      "publisher": "Stryker Corporation",
+      "date": "2026-07-30",
+      "url": "https://investors.stryker.com/home/",
+      "document_reference": null
+    }
+  ],
+  "publication": {
+    "status": "draft",
+    "headline": "Aging Demand Remains Durable, but Investability Depends on Reimbursement and Productivity",
+    "summary": "Senior-housing, diagnostics and alternate-site care evidence remains constructive. Modest reimbursement updates, labor pressure and expanding quality oversight keep the Aging Economy in the fair scenario and require company-level valuation before portfolio decisions.",
+    "page_url": "/investment/theme.html?thesis=aging",
+    "show_on_homepage": false,
+    "featured": false,
+    "generated_by": "ChatGPT",
+    "generated_at": "2026-08-05T16:46:00-04:00"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
