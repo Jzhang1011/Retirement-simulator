@@ -642,6 +642,20 @@
     </div>
   </section>
 
+
+  <section class="grid lg:grid-cols-12 gap-6">
+    <div class="lg:col-span-7 card p-5 md:p-6">
+      <div class="eyebrow">Scenario Model</div>
+      <h2 class="font-serif text-2xl font-bold mt-1">Bull, fair, and bear conditions</h2>
+      <div id="scenario-container" class="grid md:grid-cols-3 gap-4 mt-5"></div>
+    </div>
+    <div class="lg:col-span-5 card p-5 md:p-6">
+      <div class="eyebrow">Catalyst Monitor</div>
+      <h2 class="font-serif text-2xl font-bold mt-1">What the scanner is waiting for</h2>
+      <div id="catalyst-container" class="space-y-4 mt-5"></div>
+    </div>
+  </section>
+
   <section id="action-center" class="space-y-4">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-3"><div><div class="eyebrow">Action Center</div><h2 class="font-serif text-2xl md:text-3xl font-bold mt-1">Top opportunities still supported</h2></div><p class="text-xs text-slate-400 max-w-md">These are research priorities, not personalized recommendations.</p></div>
     <div id="opportunities-container" class="grid lg:grid-cols-3 gap-5"></div>
@@ -675,73 +689,104 @@ function wlSubmitSearch(form) {
 
 <script>
 const THESIS_CONFIG = {
-  // CHANGE ONLY THIS VALUE when you want a different default thesis.
-  // Example: "jpy", "ai", "luxury", "housing"
   defaultThesis: document.body.dataset.thesis || 'jpy',
-
-  // Recommended folder: /data/jpy.json, /data/ai.json, etc.
   dataBasePath: './data',
   fileExtension: '.json'
 };
 
-const STATUS_LABELS = {strengthening:'Thesis Strengthening', intact:'Thesis Intact', weakening:'Thesis Weakening', invalidated:'Thesis Invalidated'};
-const ACTION_LABELS = {no_change:'No change', monitor:'Monitor', investigate:'Investigate', reassess:'Reassess', reduce_exposure:'Reduce exposure', exit_thesis:'Exit thesis', hold_supported:'Hold supported opportunities', research_more:'Research more', monitor_only:'Monitor only', reduce_risk:'Reduce risk', no_action:'No action'};
-const STATUS_CLASSES = {new:'tag-blue', still_supported:'tag-green', watch:'tag-amber', weakening:'tag-amber', no_longer_supported:'tag-amber'};
+const STATUS_LABELS = {strengthening:'Thesis Strengthening',intact:'Thesis Intact',weakening:'Thesis Weakening',invalidated:'Thesis Invalidated'};
+const STATUS_CLASSES = {new:'tag-blue',still_supported:'tag-green',watch:'tag-amber',weakening:'tag-amber',no_longer_supported:'tag-amber',not_reviewed:'tag-amber'};
+const titleCase = value => String(value ?? '').replaceAll('_',' ').replace(/\b\w/g, c => c.toUpperCase());
+const formatDate = value => value ? new Date(value + 'T00:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : 'Date unavailable';
+const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
-function titleCase(value='') { return String(value).replaceAll('_',' ').replace(/\b\w/g, c => c.toUpperCase()); }
-function formatDate(value) { if (!value) return 'Date unavailable'; const d = new Date(value + 'T00:00:00'); return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); }
-function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function heroTitle(data) {
   const name = data?.thesis?.name || 'Investment thesis';
-  if (data.status === 'strengthening') return `${name} is strengthening and expanding its opportunity set.`;
-  if (data.status === 'weakening') return `${name} is weakening and requires greater selectivity.`;
-  if (data.status === 'invalidated') return `${name} no longer supports its prior investment conclusion.`;
-  return `${name} remains intact and continues to support selective opportunities.`;
+  if (data?.status === 'strengthening') return `${name} is strengthening and expanding its opportunity set.`;
+  if (data?.status === 'weakening') return `${name} is weakening and requires greater selectivity.`;
+  if (data?.status === 'invalidated') return `${name} no longer supports its prior investment conclusion.`;
+  return `${name} remains intact, but opportunity selection still requires company-level valuation.`;
 }
+
 function normalizeData(data) {
-  data.scorecard = Array.isArray(data.scorecard) ? data.scorecard : [];
-  data.next_decision_points = Array.isArray(data.next_decision_points) ? data.next_decision_points : [];
-  data.action_center = data.action_center || {};
-  data.action_center.opportunities = Array.isArray(data.action_center.opportunities) ? data.action_center.opportunities : [];
-  data.action_center.watch_items = Array.isArray(data.action_center.watch_items) ? data.action_center.watch_items : [];
-  data.action_center.avoid = Array.isArray(data.action_center.avoid) ? data.action_center.avoid : [];
-  return data;
+  return {
+    ...data,
+    scorecard: Array.isArray(data?.scorecard) ? data.scorecard : [],
+    opportunities: Array.isArray(data?.opportunities) ? data.opportunities : (Array.isArray(data?.action_center?.opportunities) ? data.action_center.opportunities : []),
+    catalysts: Array.isArray(data?.catalysts) ? data.catalysts : [],
+    risks: Array.isArray(data?.risks) ? data.risks : [],
+    next_decision_points: Array.isArray(data?.next_decision_points) ? data.next_decision_points : [],
+    scenarios: Array.isArray(data?.scenario_model?.scenarios) ? data.scenario_model.scenarios : [],
+    decision_state: data?.decision?.state ?? data?.decision?.action ?? data?.action_center?.overall_action ?? 'monitor'
+  };
 }
+
+function scenarioClass(id) {
+  return id === 'bull' ? 'border-emerald-200 bg-emerald-50' : id === 'bear' ? 'border-rose-200 bg-rose-50' : 'border-blue-200 bg-blue-50';
+}
+
 function renderDashboard(rawData) {
   const data = normalizeData(rawData);
-  document.title = `WealthLanding — ${data.thesis.name}`;
-  document.getElementById('thesis-status-text').textContent = STATUS_LABELS[data.status] || titleCase(data.status);
-  document.getElementById('review-date-text').textContent = `Reviewed ${formatDate(data.review.date)}`;
+  document.title = `WealthLanding — ${data?.thesis?.name ?? 'Investment Thesis'}`;
+  document.getElementById('thesis-status-text').textContent = STATUS_LABELS[data?.status] || titleCase(data?.status);
+  document.getElementById('review-date-text').textContent = `Reviewed ${formatDate(data?.review?.date)}`;
   document.getElementById('hero-title').textContent = heroTitle(data);
-  document.getElementById('hero-summary').textContent = data.decision.summary;
-  document.getElementById('decision-action-text').textContent = ACTION_LABELS[data.action_center.overall_action] || titleCase(data.action_center.overall_action);
-  document.getElementById('decision-summary-text').textContent = data.decision.summary;
+  document.getElementById('hero-summary').textContent = data?.decision?.summary ?? data?.publication?.summary ?? '';
+  document.getElementById('decision-action-text').textContent = titleCase(data.decision_state);
+  document.getElementById('decision-summary-text').textContent = data?.decision?.summary ?? '';
+
   const material = document.getElementById('material-change-text');
-  material.textContent = data.material_change ? 'Yes' : 'No';
-  material.className = `font-bold ${data.material_change ? 'text-amber-400' : 'text-emerald-400'}`;
-  document.getElementById('health-score').textContent = data.thesis_health.current;
-  document.getElementById('health-bar').style.width = `${data.thesis_health.current}%`;
-  document.getElementById('health-reason').textContent = data.thesis_health.reason;
+  material.textContent = data?.material_change ? 'Yes' : 'No';
+  material.className = `font-bold ${data?.material_change ? 'text-amber-400' : 'text-emerald-400'}`;
+
+  document.getElementById('health-score').textContent = data?.thesis_health?.current ?? '—';
+  document.getElementById('health-bar').style.width = `${Number(data?.thesis_health?.current)||0}%`;
+  document.getElementById('health-reason').textContent = data?.thesis_health?.reason ?? '';
   const trend = document.getElementById('health-trend');
-  trend.textContent = titleCase(data.thesis_health.trend);
-  trend.className = `tag ${data.thesis_health.trend === 'weakening' ? 'tag-amber' : data.thesis_health.trend === 'improving' ? 'tag-blue' : 'tag-green'}`;
+  trend.textContent = titleCase(data?.thesis_health?.trend);
+  trend.className = `tag ${data?.thesis_health?.trend === 'weakening' ? 'tag-amber' : data?.thesis_health?.trend === 'improving' ? 'tag-blue' : 'tag-green'}`;
 
   document.getElementById('scorecard-container').innerHTML = data.scorecard.length ? data.scorecard.map(item => `
-    <div><div class="flex justify-between mb-2"><span>${escapeHtml(item.driver)}</span><b>${item.score}/5</b></div><div class="metric-bar"><div class="metric-fill" style="width:${item.score*20}%"></div></div></div>`).join('') : '<p class="text-xs text-slate-500">No scorecard items available.</p>';
+    <div><div class="flex justify-between mb-2"><span>${escapeHtml(item?.driver)}</span><b>${escapeHtml(item?.score)}/5</b></div><div class="metric-bar"><div class="metric-fill" style="width:${Number(item?.score||0)*20}%"></div></div>${item?.reason ? `<p class="text-[10px] text-slate-400 mt-2 leading-4">${escapeHtml(item.reason)}</p>` : ''}</div>`).join('') : '<p class="text-xs text-slate-500">No scorecard items available.</p>';
 
-  document.getElementById('opportunities-container').innerHTML = data.action_center.opportunities.length ? data.action_center.opportunities.slice(0,3).map(op => `
-    <article class="card opportunity-card p-5">
-      <div class="flex items-start justify-between"><div class="rank-badge">${op.rank}</div><span class="tag ${STATUS_CLASSES[op.status] || 'tag-blue'}">${titleCase(op.status)}</span></div>
-      <div class="mt-5"><div class="flex items-center gap-2"><h3 class="text-xl font-extrabold">${escapeHtml(op.name)}</h3>${op.ticker ? `<span class="text-[10px] text-slate-400">${escapeHtml(op.ticker)}</span>`:''}</div><p class="text-xs text-slate-500 mt-2 leading-5">${escapeHtml(op.why_now?.[0] || '')}</p></div>
-      <div class="mt-5 pt-4 border-t border-slate-100"><div class="text-[9px] uppercase tracking-widest text-slate-400 font-bold mb-2">Why it still works</div><ul class="space-y-2 text-xs text-slate-600">${(op.why_now || []).map(x=>`<li>✓ ${escapeHtml(x)}</li>`).join('')}</ul></div>
-      <div class="mt-4 bg-amber-50 rounded-xl p-3 text-[11px] text-amber-800"><b>Watch:</b> ${escapeHtml((op.watch_items || []).join(', ') || 'No watch items listed')}.</div>
-    </article>`).join('') : '<div class="card p-6 text-sm text-slate-500 md:col-span-3">No supported opportunities were published in this review.</div>';
+  document.getElementById('scenario-container').innerHTML = data.scenarios.length ? data.scenarios.map(scenario => `
+    <article class="rounded-2xl border p-4 ${scenarioClass(scenario?.id)}">
+      <div class="flex justify-between gap-3"><div class="font-extrabold">${escapeHtml(titleCase(scenario?.id))}</div><div class="font-black">${Math.round(Number(scenario?.probability||0)*100)}%</div></div>
+      <p class="text-xs text-slate-600 mt-3 leading-5">${escapeHtml(scenario?.description)}</p>
+      <div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-4">Entry conditions</div>
+      <ul class="text-xs text-slate-600 mt-2 space-y-1">${(scenario?.entry_conditions ?? []).slice(0,3).map(item=>`<li>• ${escapeHtml(item)}</li>`).join('')}</ul>
+    </article>`).join('') : '<p class="text-xs text-slate-500">No scenario model published.</p>';
 
-  document.getElementById('decision-points-container').innerHTML = data.next_decision_points.length ? data.next_decision_points.map((point,i)=>`
-    <div class="relative ${i ? 'mt-6' : ''}"><span class="absolute -left-10 top-0 w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[10px] font-bold text-emerald-700">${i+1}</span><h3 class="text-sm font-bold">${escapeHtml(point.event)}</h3><p class="text-xs text-slate-500 mt-1 leading-5">${escapeHtml(point.expected_outcome)} · ${titleCase(point.potential_impact)} impact${point.date ? ` · ${formatDate(point.date)}`:''}</p></div>`).join('') : '<p class="text-xs text-slate-500">No upcoming decision points listed.</p>';
+  document.getElementById('catalyst-container').innerHTML = data.catalysts.length ? data.catalysts.map(catalyst => `
+    <div class="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+      <div class="flex items-start justify-between gap-3"><div class="font-bold text-sm">${escapeHtml(catalyst?.name ?? catalyst?.id)}</div><span class="tag ${catalyst?.status === 'confirmed' ? 'tag-green' : catalyst?.direction === 'negative' ? 'tag-amber' : 'tag-blue'}">${escapeHtml(titleCase(catalyst?.status))}</span></div>
+      <p class="text-xs text-slate-500 leading-5 mt-2">${escapeHtml(catalyst?.evidence)}</p>
+      <div class="text-[10px] text-slate-400 mt-2">Next check: ${formatDate(catalyst?.next_check ?? catalyst?.next_check_date)}</div>
+    </div>`).join('') : '<p class="text-xs text-slate-500">No catalysts published.</p>';
 
-  document.getElementById('watch-items-container').innerHTML = data.action_center.watch_items.length ? data.action_center.watch_items.map((item,i)=>`<li class="flex justify-between gap-3"><span>${escapeHtml(item)}</span><span class="tag ${i===0?'tag-amber':'tag-blue'}">${i===0?'High Impact':'Monitor'}</span></li>`).join('') : '<li class="text-slate-500">No watch items listed.</li>';
-  document.getElementById('avoid-container').innerHTML = `<div class="eyebrow">Avoid for Now</div>` + (data.action_center.avoid.length ? data.action_center.avoid.map(item=>`<div class="mt-3"><h3 class="font-bold">${escapeHtml(item.name)}</h3><p class="text-xs text-slate-500 mt-2 leading-5">${escapeHtml(item.reason)}</p></div>`).join('') : '<p class="text-xs text-slate-500 mt-3">No explicit avoid items in this review.</p>');
+  document.getElementById('opportunities-container').innerHTML = data.opportunities.length ? data.opportunities.slice(0,6).map(opportunity => {
+    const engines = opportunity?.independent_return_engines ?? opportunity?.why_now ?? [];
+    const status = opportunity?.valuation_status ?? opportunity?.status ?? 'research';
+    return `<article class="card opportunity-card p-5">
+      <div class="flex items-start justify-between"><div class="rank-badge">${escapeHtml(opportunity?.rank)}</div><span class="tag ${STATUS_CLASSES[String(status).toLowerCase().replaceAll(' ','_')] || 'tag-blue'}">${escapeHtml(titleCase(status))}</span></div>
+      <div class="mt-5"><h3 class="text-xl font-extrabold">${escapeHtml(opportunity?.name)}</h3><p class="text-xs text-slate-500 mt-2 leading-5">${escapeHtml(opportunity?.catalyst ?? engines[0] ?? '')}</p></div>
+      <div class="mt-5 pt-4 border-t border-slate-100"><div class="text-[9px] uppercase tracking-widest text-slate-400 font-bold mb-2">Independent return engines</div><ul class="space-y-2 text-xs text-slate-600">${engines.slice(0,4).map(item=>`<li>✓ ${escapeHtml(item)}</li>`).join('')}</ul></div>
+      ${opportunity?.main_risk ? `<div class="mt-4 bg-amber-50 rounded-xl p-3 text-[11px] text-amber-800"><b>Main risk:</b> ${escapeHtml(opportunity.main_risk)}</div>` : ''}
+      ${opportunity?.next_action ? `<div class="mt-3 text-xs text-slate-600"><b>Next:</b> ${escapeHtml(opportunity.next_action)}</div>` : ''}
+    </article>`;
+  }).join('') : '<div class="card p-6 text-sm text-slate-500 md:col-span-3">No supported opportunities were published in this review.</div>';
+
+  document.getElementById('decision-points-container').innerHTML = data.next_decision_points.length ? data.next_decision_points.map((point,index)=>`
+    <div class="relative ${index ? 'mt-6' : ''}"><span class="absolute -left-10 top-0 w-7 h-7 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[10px] font-bold text-emerald-700">${index+1}</span><h3 class="text-sm font-bold">${escapeHtml(point?.event)}</h3><p class="text-xs text-slate-500 mt-1 leading-5">${escapeHtml(point?.decision_test ?? point?.expected_outcome ?? '')}${point?.potential_impact ? ` · ${titleCase(point.potential_impact)} impact` : ''}${point?.date ? ` · ${formatDate(point.date)}` : ''}</p></div>`).join('') : '<p class="text-xs text-slate-500">No upcoming decision points listed.</p>';
+
+  const watchItems = [
+    ...data.risks.map(risk => ({label:risk?.name,meta:risk?.trigger,status:risk?.status ?? risk?.trend})),
+    ...data.catalysts.filter(catalyst => catalyst?.status === 'developing').map(catalyst => ({label:catalyst?.name ?? catalyst?.id,meta:catalyst?.evidence,status:catalyst?.status}))
+  ];
+  document.getElementById('watch-items-container').innerHTML = watchItems.length ? watchItems.slice(0,8).map(item=>`<li class="flex justify-between gap-3"><span><b>${escapeHtml(item.label)}</b>${item.meta ? `<span class="block text-slate-400 mt-1">${escapeHtml(item.meta)}</span>` : ''}</span><span class="tag tag-amber">${escapeHtml(titleCase(item.status))}</span></li>`).join('') : '<li class="text-slate-500">No watch items listed.</li>';
+
+  const avoid = data?.action_center?.avoid ?? [];
+  document.getElementById('avoid-container').innerHTML = `<div class="eyebrow">Avoid for Now</div>` + (avoid.length ? avoid.map(item=>`<div class="mt-3"><h3 class="font-bold">${escapeHtml(item?.name)}</h3><p class="text-xs text-slate-500 mt-2 leading-5">${escapeHtml(item?.reason)}</p></div>`).join('') : `<p class="text-xs text-slate-500 mt-3">No explicit avoid list. Current state: ${escapeHtml(titleCase(data.decision_state))}.</p>`);
 }
 
 function resolveDataUrl() {
@@ -752,35 +797,25 @@ function resolveDataUrl() {
   return `${THESIS_CONFIG.dataBasePath}/${encodeURIComponent(thesis)}${THESIS_CONFIG.fileExtension}`;
 }
 
-function showLoadError(dataUrl, error) {
+function showLoadError(dataUrl,error) {
   const main = document.querySelector('main');
-  main.innerHTML = `
-    <section class="card p-7 md:p-10 border-amber-200 bg-amber-50">
-      <div class="eyebrow text-amber-700">Data connection error</div>
-      <h1 class="font-serif text-3xl font-bold mt-2 text-slate-950">Unable to load this investment thesis.</h1>
-      <p class="mt-4 text-sm text-slate-700 leading-6">The page requested <code class="bg-white px-2 py-1 rounded border border-amber-200">${escapeHtml(dataUrl)}</code>.</p>
-      <div class="mt-5 text-sm text-slate-600 space-y-2">
-        <p>Verify that the JSON file exists in <strong>/Investing/data/</strong>.</p>
-        <p>Verify the filename matches the <strong>?thesis=</strong> value and that the JSON is valid.</p>
-        <p class="text-xs text-slate-500">Technical detail: ${escapeHtml(error.message || String(error))}</p>
-      </div>
-      <a href="./index.html" class="inline-block mt-6 bg-slate-950 text-white px-5 py-3 rounded-xl font-bold text-sm no-underline">Return to Research Hub</a>
-    </section>`;
+  main.innerHTML = `<section class="card p-7 md:p-10 border-amber-200 bg-amber-50"><div class="eyebrow text-amber-700">Data connection error</div><h1 class="font-serif text-3xl font-bold mt-2 text-slate-950">Unable to load this investment thesis.</h1><p class="mt-4 text-sm text-slate-700 leading-6">The page requested <code class="bg-white px-2 py-1 rounded border border-amber-200">${escapeHtml(dataUrl)}</code>.</p><p class="mt-5 text-xs text-slate-500">${escapeHtml(error?.message ?? error)}</p><a href="./index.html" class="inline-block mt-6 bg-slate-950 text-white px-5 py-3 rounded-xl font-bold text-sm no-underline">Return to Research Hub</a></section>`;
 }
 
 async function loadLatest() {
   const dataUrl = resolveDataUrl();
   try {
-    const response = await fetch(dataUrl, {cache:'no-store'});
+    const response = await fetch(dataUrl,{cache:'no-store'});
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    renderDashboard(data);
+    renderDashboard(await response.json());
   } catch (error) {
-    console.error(`Could not load ${dataUrl}`, error);
-    showLoadError(dataUrl, error);
+    console.error(`Could not load ${dataUrl}`,error);
+    showLoadError(dataUrl,error);
   }
 }
-document.addEventListener('DOMContentLoaded', loadLatest);
+
+document.querySelector('form[role="search"]')?.addEventListener('submit',event=>{const input=document.getElementById('wl-site-search');if(!input.value.trim()){event.preventDefault();return}document.getElementById('wl-search-query-hidden').value=`site:wealthlanding.com ${input.value.trim()}`;});
+document.addEventListener('DOMContentLoaded',loadLatest);
 </script>
 
 </body>
