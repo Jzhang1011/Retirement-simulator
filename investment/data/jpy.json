@@ -1,264 +1,136 @@
 {
-  "schema_version": "2.0",
-  "review_id": "JPY-001-2026-08-04",
+  "schema_version": "3.0",
+  "review_id": "JPY-001-2026-08-05",
   "thesis": {
     "id": "JPY-001",
-    "version": "1.0",
+    "version": "2.0",
     "name": "JPY Structural Investment Thesis",
     "slug": "jpy",
-    "category": "macro-currency",
-    "horizon": "12–24 months"
+    "category": "macro-currency-japan-equities",
+    "horizon": "12-24 months"
   },
   "review": {
-    "date": "2026-08-04",
-    "period_start": "2026-07-22",
-    "period_end": "2026-08-04",
-    "cadence": "biweekly"
+    "date": "2026-08-05",
+    "period_start": "2026-07-23",
+    "period_end": "2026-08-05",
+    "cadence": "weekly",
+    "previous_review_id": "JPY-001-BASELINE"
   },
   "status": "intact",
   "thesis_health": {
-    "current": 82,
-    "previous": 82,
+    "current": 78,
+    "previous": 78,
     "change": 0,
     "trend": "stable",
-    "reason_code": "NO_ASSUMPTION_CHANGE",
-    "reason": "No core assumption materially changed. Restrictive Federal Reserve policy, gradual BOJ normalization, and absent sustained intervention remain consistent with the thesis, while BOJ inflation risks and recent capital-flow weakness require monitoring."
+    "reason_code": "NO_MATERIAL_CHANGE",
+    "reason": "Fed and BOJ evidence preserves a positive rate differential and gradual-normalization regime; one week of resident foreign-security selling does not establish structural repatriation."
   },
   "material_change": false,
-  "decision": {
-    "action": "no_change",
-    "summary": "Maintain current positioning. Increase monitoring of BOJ policy signaling, carry conditions, and whether recent foreign-security sales develop into sustained repatriation."
-  },
-  "key_developments": [
-    {
-      "title": "Federal Reserve maintained a restrictive policy rate",
-      "assumption_id": "A1",
-      "assumption_name": "Federal Reserve remains restrictive",
-      "impact": "The 3.50%–3.75% federal funds target remains substantially above Japan's policy rate, preserving a meaningful policy differential.",
-      "direction": "supports_thesis",
-      "materiality": "moderate",
-      "evidence_type": "fact"
-    },
-    {
-      "title": "Three FOMC members preferred a rate increase",
-      "assumption_id": "A1",
-      "assumption_name": "Federal Reserve remains restrictive",
-      "impact": "The hawkish dissent reduces near-term aggressive-easing risk but does not independently change the structural assumption.",
-      "direction": "supports_thesis",
-      "materiality": "minor",
-      "evidence_type": "fact"
-    },
-    {
-      "title": "BOJ held the overnight call rate near 1.0%",
-      "assumption_id": "A2",
-      "assumption_name": "Bank of Japan tightens gradually",
-      "impact": "The unchanged rate remains consistent with gradual normalization rather than rapid tightening or policy-regime change.",
-      "direction": "supports_thesis",
-      "materiality": "moderate",
-      "evidence_type": "fact"
-    },
-    {
-      "title": "One BOJ member proposed raising the rate to 1.25%",
-      "assumption_id": "A2",
-      "assumption_name": "Bank of Japan tightens gradually",
-      "impact": "The dissent signals greater concern about upside inflation risks, but an 8–1 majority rejected faster tightening.",
-      "direction": "weakens_thesis",
-      "materiality": "moderate",
-      "evidence_type": "fact"
-    },
-    {
-      "title": "Policy-rate differential continued supporting carry economics",
-      "assumption_id": "A3",
-      "assumption_name": "Carry remains attractive",
-      "impact": "The policy-rate gap remains meaningful and no reviewed official evidence established systemic funding stress or forced deleveraging.",
-      "direction": "supports_thesis",
-      "materiality": "moderate",
-      "evidence_type": "interpretation"
-    },
-    {
-      "title": "Japan reported zero foreign-exchange intervention",
-      "assumption_id": "A4",
-      "assumption_name": "No sustained intervention",
-      "impact": "Official data showed no intervention from June 29 through July 29, confirming that intervention risk had not become repeated action.",
-      "direction": "supports_thesis",
-      "materiality": "moderate",
-      "evidence_type": "fact"
-    },
-    {
-      "title": "Residents remained net sellers of foreign debt securities",
-      "assumption_id": "A6",
-      "assumption_name": "Japanese capital continues overseas",
-      "impact": "Residents recorded a second consecutive week of net long-term and short-term foreign-debt sales, but the period is insufficient to establish structural repatriation.",
-      "direction": "weakens_thesis",
-      "materiality": "minor",
-      "evidence_type": "fact"
-    }
-  ],
-  "scorecard": [
-    {
-      "driver_id": "A1",
-      "driver": "Federal Reserve remains relatively restrictive",
-      "score": 5,
-      "trend": "stable"
-    },
-    {
-      "driver_id": "A2",
-      "driver": "Bank of Japan tightens gradually",
-      "score": 4,
-      "trend": "weakening"
-    },
-    {
-      "driver_id": "A3",
-      "driver": "Carry trades remain profitable",
-      "score": 4,
-      "trend": "stable"
-    },
-    {
-      "driver_id": "A4",
-      "driver": "Japan avoids sustained intervention",
-      "score": 5,
-      "trend": "stable"
-    },
-    {
-      "driver_id": "A5",
-      "driver": "Global markets remain broadly stable",
-      "score": 4,
-      "trend": "stable"
-    },
-    {
-      "driver_id": "A6",
-      "driver": "Japanese capital continues flowing overseas",
-      "score": 3,
-      "trend": "weakening"
-    }
-  ],
-  "assumptions_changed": [],
-  "action_center": {
-    "overall_action": "hold_supported",
-    "opportunities": [],
-    "watch_items": [
-      "BOJ normalization pace — hawkish dissent and inflation concerns",
-      "Carry-trade durability — volatility and funding costs",
-      "Japanese overseas portfolio flows — foreign-debt sales repatriation"
-    ],
-    "avoid": [
-      {
-        "name": "Import-cost-sensitive domestic businesses",
-        "reason": "Weak-yen benefits are limited where pricing power cannot offset imported costs."
-      }
+  "scenario_model": {
+    "current_scenario": "fair",
+    "confidence": 0.7,
+    "scenarios": [
+      {"id":"bull","probability":0.25,"previous_probability":0.25,"change":0,"description":"Weak yen, gradual BOJ, corporate reform, and company execution reinforce.","entry_conditions":["Wide rate differentials","Contained volatility","Governance acceleration"],"exit_conditions":["Rapid BOJ tightening","Extreme valuation"]},
+      {"id":"fair","probability":0.55,"previous_probability":0.55,"change":0,"description":"Macro support remains, but company quality and valuation determine returns.","entry_conditions":["Gradual BOJ","Profitable carry","Mixed company outcomes"],"exit_conditions":["Multiple bull or bear triggers align"]},
+      {"id":"bear","probability":0.2,"previous_probability":0.2,"change":0,"description":"Yen reversal combines with weaker earnings and insufficient valuation support.","entry_conditions":["Aggressive Fed easing","Carry unwind","Earnings downgrades"],"exit_conditions":["Valuation resets","Carry stabilizes"]}
     ]
   },
+  "decision": {
+    "state": "monitor",
+    "previous_state": "monitor",
+    "changed": false,
+    "summary": "Keep broad JPY exposure unchanged and complete Nintendo's post-earnings integrated deep dive before promoting any named opportunity.",
+    "reason_codes": ["BASE_CASE_SUPPORTED","NO_CORE_ASSUMPTION_CHANGED","VALUATION_REQUIRED"],
+    "required_actions": [
+      {"action":"begin_company_deep_dive","target":"NINTENDO_JPY","priority":"high","due_date":"2026-08-07"},
+      {"action":"continue_monitoring","target":"JPY-001","priority":"medium","due_date":null}
+    ]
+  },
+  "developments": [
+    {"date":"2026-07-29","type":"monetary_policy","evidence":"The FOMC held the federal funds target at 3.50%-3.75%; three voters preferred a 25 bp hike.","assumptions":["A1","A3"],"direction":"supportive","material":false},
+    {"date":"2026-07-31","type":"monetary_policy","evidence":"The BOJ held after the June increase to about 1.0%; a proposal for 1.25% failed. Wages remain firm while reported general-services inflation recently eased to 1.0%-1.5%.","assumptions":["A2","A3"],"direction":"mixed","material":false},
+    {"date":"2026-07-30","type":"capital_flows","evidence":"For the week ended July 25, residents bought 320.2 billion yen of foreign equities/funds but sold 811.4 billion yen of long-term foreign debt and 41.1 billion yen of short-term foreign debt.","assumptions":["A6"],"direction":"weakening","material":false},
+    {"date":"2026-07-31","type":"intervention","evidence":"MOF reported zero foreign-exchange intervention from June 29 through July 29.","assumptions":["A4"],"direction":"supportive","material":false},
+    {"date":"2026-08-04","type":"company_results","evidence":"Toyota reported 10.4% revenue growth and lower operating income, raised its outlook, and announced a buyback; operating evidence remains mixed.","assumptions":["A7","A8"],"direction":"mixed","material":false}
+  ],
+  "scorecard": [
+    {"driver_id":"A1","driver":"Federal Reserve remains relatively restrictive","score":4,"trend":"stable","reason":"Fed held at 3.50%-3.75% and three voters preferred a hike."},
+    {"driver_id":"A2","driver":"BOJ tightens gradually","score":4,"trend":"stable","reason":"July hold after June hike; wages firm, services inflation softer, one failed hawkish proposal."},
+    {"driver_id":"A3","driver":"Carry remains attractive","score":4,"trend":"stable","reason":"Positive U.S.-Japan 2Y and 10Y sovereign differentials persist; direct volatility and hedge-cost confirmation remains incomplete."},
+    {"driver_id":"A4","driver":"No sustained intervention regime","score":4,"trend":"stable","reason":"MOF reported zero intervention for June 29-July 29."},
+    {"driver_id":"A5","driver":"Global markets remain broadly stable","score":3,"trend":"stable","reason":"No verified systemic funding stress; geopolitical and AI concentration risks remain."},
+    {"driver_id":"A6","driver":"Japanese capital continues overseas","score":4,"trend":"weakening","reason":"Latest week showed net foreign-security selling by residents, but the durable multi-period repatriation threshold was not met."},
+    {"driver_id":"A7","driver":"Corporate reform continues","score":4,"trend":"stable","reason":"TSE cost-of-capital implementation continues; quality must be verified company by company."},
+    {"driver_id":"A8","driver":"Selected companies remain attractive independent of FX","score":3,"trend":"stable","reason":"Fresh operating evidence is mixed and normalized valuations are incomplete."}
+  ],
+  "assumptions_changed": [],
+  "catalysts": [
+    {"id":"CAT-01","status":"confirmed","direction":"positive","evidence":"Fed held and three dissents favored tightening.","next_check":"2026-09-16"},
+    {"id":"CAT-02","status":"developing","direction":"mixed","evidence":"BOJ held after June hike; wage-price evidence is not uniformly hawkish.","next_check":"2026-08-10"},
+    {"id":"CAT-04","status":"not_active","direction":"positive","evidence":"MOF monthly intervention total was zero.","next_check":"2026-08-31"},
+    {"id":"CAT-05","status":"developing","direction":"negative","evidence":"One week of net resident foreign-security selling; confirmation requires multiple periods.","next_check":"2026-08-06"},
+    {"id":"CAT-07","status":"developing","direction":"mixed","evidence":"Company results are mixed; Nintendo Q1 is due August 6.","next_check":"2026-08-06"}
+  ],
+  "opportunities": [
+    {"rank":1,"group":"global_ip_entertainment","name":"Nintendo","independent_return_engines":["Proprietary IP and software ecosystem","Net cash and licensing","Weak-yen translation overlay"],"catalyst":"August 6 Q1 release and Switch 2/software trajectory","valuation_status":"Not reviewed","main_risk":"Product-cycle execution and yen sensitivity","next_action":"Begin NINTENDO_JPY integrated deep dive after results"},
+    {"rank":2,"group":"trading_houses","name":"Mitsubishi Corporation","independent_return_engines":["Diversified global assets","Asset recycling and shareholder returns"],"catalyst":"Q1 results and cash-funded capital allocation","valuation_status":"Not reviewed","main_risk":"Commodity exposure and capital allocation","next_action":"Start normalized SOTP and cash-return valuation review"},
+    {"rank":3,"group":"banks","name":"MUFG","independent_return_engines":["Domestic net-interest-margin expansion","Capital returns and international franchise"],"catalyst":"Q1 results and BOJ transmission","valuation_status":"Not reviewed","main_risk":"Credit costs and rapid tightening","next_action":"Review NIM, deposit beta, credit costs, CET1 and price-to-book"},
+    {"rank":4,"group":"currency_hedged_japan","name":"WisdomTree Japan Hedged Equity Fund (DXJ)","independent_return_engines":["Japanese corporate earnings","Governance rerating with reduced yen translation"],"catalyst":"Corporate reform and earnings delivery","valuation_status":"Not reviewed","main_risk":"Forfeited yen appreciation and index concentration","next_action":"Compare hedge cost, weights and drawdowns with unhedged EWJ"},
+    {"rank":5,"group":"export_automation","name":"Toyota","independent_return_engines":["Hybrid leadership and global scale","Buyback and capital return","Weak-yen translation overlay"],"catalyst":"Raised FY outlook and 1 trillion yen buyback","valuation_status":"Not reviewed","main_risk":"Margin pressure, China competition, logistics costs and stronger yen","next_action":"Start normalized margin and FX sensitivity review"},
+    {"rank":6,"group":"semiconductor_equipment","name":"Tokyo Electron","independent_return_engines":["Process-equipment leadership","Global AI and semiconductor capital spending","Shareholder returns"],"catalyst":"Revised H1 and dividend outlook","valuation_status":"Not reviewed","main_risk":"AI concentration, China restrictions, cyclicality and FX","next_action":"Continue monitoring; do not classify as an AI-rotation hedge"}
+  ],
   "risks": [
-    {
-      "rank": 1,
-      "name": "Durable domestic inflation accelerates BOJ tightening",
-      "trend": "increasing",
-      "assumption_ids": ["A2", "A3"]
-    },
-    {
-      "rank": 2,
-      "name": "Foreign-security sales develop into structural repatriation",
-      "trend": "increasing",
-      "assumption_ids": ["A6"]
-    },
-    {
-      "rank": 3,
-      "name": "Global volatility triggers forced carry deleveraging",
-      "trend": "stable",
-      "assumption_ids": ["A3", "A5"]
-    },
-    {
-      "rank": 4,
-      "name": "Federal Reserve shifts into aggressive easing",
-      "trend": "decreasing",
-      "assumption_ids": ["A1", "A3"]
-    }
+    {"id":"R1","name":"BOJ acceleration","status":"monitor","trigger":"Repeated rapid hikes or durable hawkish guidance"},
+    {"id":"R2","name":"Structural repatriation","status":"watch","trigger":"Resident net foreign-security selling sustained across multiple periods"},
+    {"id":"R3","name":"Carry unwind","status":"monitor","trigger":"Persistent FX volatility plus funding stress and forced deleveraging"},
+    {"id":"R4","name":"Macro-only stock selection","status":"active","trigger":"Named opportunities lack normalized valuation or FX-independent economics"},
+    {"id":"R5","name":"AI concentration","status":"monitor","trigger":"Semiconductor exposure amplifies rather than diversifies a U.S. AI correction"}
   ],
   "next_decision_points": [
-    {
-      "event": "Japan international securities-flow release",
-      "date": "2026-08-06",
-      "expected_outcome": "Determine whether resident foreign-asset sales persist for another week.",
-      "potential_impact": "medium",
-      "assumption_ids": ["A6"]
-    },
-    {
-      "event": "BOJ Summary of Opinions",
-      "date": "2026-08-10",
-      "expected_outcome": "Clarify whether support for faster tightening extends beyond one dissenter.",
-      "potential_impact": "high",
-      "assumption_ids": ["A2", "A3"]
-    },
-    {
-      "event": "Japan national consumer-price release",
-      "date": "2026-08-21",
-      "expected_outcome": "Test whether domestic and services inflation remain durable.",
-      "potential_impact": "high",
-      "assumption_ids": ["A2"]
-    },
-    {
-      "event": "BOJ Monetary Policy Meeting",
-      "date": "2026-09-18",
-      "expected_outcome": "Assess whether normalization remains gradual or begins accelerating.",
-      "potential_impact": "high",
-      "assumption_ids": ["A2", "A3"]
-    }
+    {"date":"2026-08-06","event":"Nintendo Q1 results","decision_test":"Independent operating engine, catalyst execution and normalized valuation"},
+    {"date":"2026-08-06","event":"MOF weekly international securities transactions","decision_test":"Whether resident net selling persists"},
+    {"date":"2026-08-10","event":"BOJ Summary of Opinions","decision_test":"Breadth and durability of hawkish guidance"},
+    {"date":"2026-08-12","event":"U.S. CPI for July","decision_test":"Whether inflation changes the restrictive-Fed assumption"}
   ],
-  "research_questions": [
-    "Does the BOJ dissent represent emerging board-wide support for faster tightening?",
-    "Are Japanese services inflation and wages becoming domestically sustained?",
-    "Do subsequent portfolio-flow releases confirm sustained capital repatriation?",
-    "Are volatility and funding costs rising enough to impair carry profitability?",
-    "Would favored Japanese companies remain attractive under a materially stronger yen?"
+  "research_backlog": [
+    {"priority":"P0","item":"Ingest Nintendo August 6 filing and build NINTENDO_JPY integrated packet with normalized valuation and 5%/10%/15% yen sensitivities."},
+    {"priority":"P0","item":"Track three to four additional MOF weekly flow releases before classifying A6 as materially changed."},
+    {"priority":"P0","item":"Obtain 1M/3M USDJPY implied volatility, forward points, cross-currency basis and funding spreads to quantify carry profitability."},
+    {"priority":"P1","item":"Build aligned daily U.S.-Japan 2Y and 10Y spread series and define a structural-narrowing threshold."},
+    {"priority":"P1","item":"Complete normalized valuation packets for Nintendo, Mitsubishi, MUFG, Toyota and Tokyo Electron."},
+    {"priority":"P1","item":"Compare DXJ with unhedged EWJ on hedge cost, concentration, valuation and risk-off behavior."},
+    {"priority":"P1","item":"Verify cash-funded buybacks, cross-holding reductions and ROE progress at named companies."},
+    {"priority":"P2","item":"Test for sustained rotation from U.S. AI into Japanese value and IP using flows and relative performance."},
+    {"priority":"P1","item":"Replace placeholder baseline dates with an approved review ID and auditable evidence boundary."}
   ],
   "sources": [
-    {
-      "title": "Federal Reserve issues FOMC statement",
-      "publisher": "Board of Governors of the Federal Reserve System",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm",
-      "published_date": "2026-07-29",
-      "accessed_date": "2026-08-04"
-    },
-    {
-      "title": "Statement on Monetary Policy",
-      "publisher": "Bank of Japan",
-      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260731a.pdf",
-      "published_date": "2026-07-31",
-      "accessed_date": "2026-08-04"
-    },
-    {
-      "title": "Foreign Exchange Intervention Operations, June 29 through July 29, 2026",
-      "publisher": "Ministry of Finance Japan",
-      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/feio/monthly/20260731e.html",
-      "published_date": "2026-07-31",
-      "accessed_date": "2026-08-04"
-    },
-    {
-      "title": "International Transactions in Securities, July 19 through July 25, 2026",
-      "publisher": "Ministry of Finance Japan",
-      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/itn_transactions_in_securities/week.pdf",
-      "published_date": "2026-07-30",
-      "accessed_date": "2026-08-04"
-    },
-    {
-      "title": "International Transactions in Securities Release Schedule",
-      "publisher": "Ministry of Finance Japan",
-      "url": "https://www.mof.go.jp/english/policy/international_policy/reference/itn_transactions_in_securities/schedule.htm",
-      "published_date": null,
-      "accessed_date": "2026-08-04"
-    },
-    {
-      "title": "Consumer Price Index Schedule of Release",
-      "publisher": "Statistics Bureau of Japan",
-      "url": "https://www.stat.go.jp/english/data/cpi/1582.html",
-      "published_date": "2026-01-23",
-      "accessed_date": "2026-08-04"
-    }
+    {"type":"core_file","name":"JPY theme package","items":["JPY__01_thesis.md","JPY__02_assumption_map.md","JPY__03_scenario_model.md","JPY__04_catalyst_and_trigger_map.md","JPY__05_monitoring_indicators.md","JPY__06_pattern_recognition.md","JPY__07_opportunity_playbook.md","JPY__08_subtheme_deep_dives.md","JPY__09_valuation_framework.md","JPY__10_weekly_review_prompt.md","JPY__11_regime_interaction_model.md","JPY__12_invalidation_conditions.md","jpy.baseline.json"]},
+    {"type":"primary","name":"Federal Reserve FOMC statement, 2026-07-29","url":"https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm"},
+    {"type":"primary","name":"BLS Economic News Releases, JOLTS and ECI","url":"https://www.bls.gov/bls/newsrels.htm"},
+    {"type":"primary","name":"BOJ Statement on Monetary Policy, 2026-07-31","url":"https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260731a.pdf"},
+    {"type":"primary","name":"BOJ July 2026 Outlook Report","url":"https://www.boj.or.jp/en/mopo/outlook/gor2607b.pdf"},
+    {"type":"primary","name":"U.S. Treasury Daily Treasury Rates","url":"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"},
+    {"type":"primary","name":"Japan MOF 2-year JGB auction, 2026-07-30","url":"https://www.mof.go.jp/english/policy/jgbs/auction/calendar/eresul/eresul20260730.htm"},
+    {"type":"primary","name":"Japan MOF 10-year JGB auction, 2026-08-04","url":"https://www.mof.go.jp/english/policy/jgbs/auction/calendar/eresul/eresul20260804.htm"},
+    {"type":"primary","name":"Japan MOF weekly international securities transactions, 2026-07-30","url":"https://www.mof.go.jp/policy/international_policy/reference/itn_transactions_in_securities/week.pdf"},
+    {"type":"primary","name":"Japan MOF FX intervention operations, 2026-06-29 to 2026-07-29","url":"https://www.mof.go.jp/english/policy/international_policy/reference/feio/monthly/20260731e.html"},
+    {"type":"primary","name":"JPX cost-of-capital initiative update","url":"https://www.jpx.co.jp/english/equities/follow-up/02.html"},
+    {"type":"company","name":"Toyota FY2027 Q1 results","url":"https://global.toyota/pages/global_toyota/ir/financial-results/2027_1q_presentation_en.pdf"},
+    {"type":"company","name":"Mitsubishi Corporation investor relations","url":"https://www.mitsubishicorp.com/jp/en/ir/"},
+    {"type":"company","name":"MUFG financial information","url":"https://www.mufg.jp/english/ir/fs/2026/index.html"},
+    {"type":"company","name":"Tokyo Electron FY2027 Q1 earnings materials","url":"https://www.tel.com/ir/library/report/"},
+    {"type":"company","name":"Nintendo IR calendar and financial highlights","url":"https://www.nintendo.co.jp/ir/en/schedule/index.html"},
+    {"type":"fund","name":"WisdomTree DXJ official fund page","url":"https://www.wisdomtree.com/us/products/equity/dxj"}
   ],
   "publication": {
-    "status": "published",
+    "status": "draft",
+    "headline": "JPY Thesis Remains Intact, but Repatriation Needs Watching",
+    "summary": "Fed and BOJ policy preserve the fair/selective regime. One week of Japanese resident foreign-security selling is a watch item, not a structural reversal.",
+    "page_url": "/Investing/thesis_template.html?thesis=jpy",
+    "show_on_homepage": false,
+    "featured": false,
     "generated_by": "ChatGPT",
-    "approved_by": null,
-    "approved_date": null
-  }
+    "generated_at": "2026-08-05T12:00:00-04:00"
+  },
+  "approval": {"status":"pending","approved_by":null,"approved_at":null}
 }
