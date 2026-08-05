@@ -1,11 +1,32 @@
 {
-  "schema_version": "2.0",
-  "updated": "2026-08-05",
-  "themes": [
-    {
-      "slug": "jpy",
-      "file": "themes/jpy.json"
-    }
-  ],
-  "companies": []
+"schema_version": "2.0",
+"updated": "2026-08-05",
+"themes": [
+{
+"slug": "jpy",
+"file": "themes/jpy.json"
+},
+{
+"slug": "cooling",
+"file": "themes/cooling.json"
+},
+{
+"slug": "water",
+"file": "themes/water.json"
+},
+{
+"slug": "waste",
+"file": "themes/waste.json"
+},
+{
+"slug": "aging",
+"file": "themes/aging.json"
+}
+],
+"companies": [
+{
+"slug": "nintendo-jpy",
+"file": "companies/nintendo-jpy.json"
+}
+]
 }
