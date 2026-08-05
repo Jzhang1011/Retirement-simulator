@@ -1,0 +1,864 @@
+{
+  "schema_version": "4.0",
+  "review_id": "COOLING-2026-08-05",
+  "thesis": {
+    "id": "COOLING-001",
+    "name": "Cooling Infrastructure",
+    "slug": "cooling",
+    "category": "infrastructure-and-climate-adaptation",
+    "horizon": "3-10 years"
+  },
+  "review": {
+    "date": "2026-08-05",
+    "period_start": "2026-07-29",
+    "period_end": "2026-08-05",
+    "cadence": "weekly",
+    "previous_review_id": null
+  },
+  "status": "strengthening",
+  "thesis_health": {
+    "current": 82,
+    "previous": 75,
+    "change": 7,
+    "trend": "improving",
+    "reason_code": "MULTIPLE_ASSUMPTIONS_CONFIRMING",
+    "reason": "Rising thermal intensity, liquid-cooling deployment, strong supplier orders, expanding backlogs and improving price-cost economics confirm several core assumptions, while power availability and execution complexity remain constraints."
+  },
+  "material_change": true,
+  "scenario_model": {
+    "current_scenario": "fair",
+    "confidence": 0.78,
+    "scenarios": [
+      {
+        "id": "bull",
+        "probability": 0.3,
+        "description": "High-density AI deployment, liquid cooling, commercial HVAC retrofits and service attachment expand together while differentiated suppliers preserve pricing power and capacity keeps pace.",
+        "entry_conditions": [
+          "Order growth remains broad across data-center cooling, applied HVAC and controls.",
+          "Backlog conversion improves without increasing cancellations.",
+          "Liquid-cooling service attachment and recurring revenue become measurable.",
+          "Grid constraints increase efficiency spending without materially delaying deployment.",
+          "Supplier margins remain stable or improve despite capacity expansion."
+        ],
+        "exit_conditions": [
+          "Bookings or backlog weaken across multiple suppliers.",
+          "Hardware pricing compresses because of rapid standardization.",
+          "Power constraints cause widespread data-center project deferrals.",
+          "Service attachment fails to develop."
+        ]
+      },
+      {
+        "id": "fair",
+        "probability": 0.55,
+        "description": "Structural cooling demand remains strong, but power availability, project timing, customer concentration, mix and normal equipment cyclicality produce uneven growth and valuation dispersion.",
+        "entry_conditions": [
+          "Thermal density and cooling requirements continue increasing.",
+          "Orders and backlogs remain positive but conversion varies by supplier.",
+          "Power and permitting constraints delay some projects.",
+          "Margins remain mixed because of execution, regional and product-mix differences."
+        ],
+        "exit_conditions": [
+          "Multiple demand and profitability indicators strengthen enough to support the bull case.",
+          "Cancellations, price erosion or project stagnation spread across end markets."
+        ]
+      },
+      {
+        "id": "bear",
+        "probability": 0.15,
+        "description": "Grid and permitting bottlenecks delay deployments, backlog conversion weakens, customer budgets tighten and cooling hardware commoditizes faster than suppliers can build service and controls economics.",
+        "entry_conditions": [
+          "Major capacity additions are repeatedly postponed or cancelled.",
+          "Backlog conversion and cash generation deteriorate across several suppliers.",
+          "Liquid-cooling components experience sustained price erosion.",
+          "Commercial retrofit and service demand weaken.",
+          "Customer concentration produces material order volatility."
+        ],
+        "exit_conditions": [
+          "Power availability and project conversion improve.",
+          "Suppliers demonstrate durable service revenue and pricing power.",
+          "Demand broadens beyond a small number of AI customers."
+        ]
+      }
+    ]
+  },
+  "decision": {
+    "state": "deep_dive",
+    "previous_state": "monitor",
+    "changed": true,
+    "summary": "Cooling Infrastructure is strengthening as AI thermal density, integrated liquid-cooling adoption, commercial HVAC demand and supplier backlogs improve together, but grid constraints and execution risk keep the fair scenario dominant.",
+    "cta": "launch_vertiv_and_modine_company_reviews",
+    "reason_codes": [
+      "THERMAL_INTENSITY_RISING",
+      "LIQUID_COOLING_ADOPTION",
+      "BACKLOG_AND_BOOKINGS_STRENGTH",
+      "SUPPLIER_DIFFERENTIATION_CONFIRMED",
+      "POWER_CONSTRAINT_REMAINS"
+    ],
+    "required_actions": [
+      "Run complete company valuation reviews for Vertiv and Modine.",
+      "Track backlog conversion, cancellations, service attachment and customer concentration.",
+      "Quantify spending shifts caused by higher-temperature and closed-loop liquid-cooling architectures."
+    ]
+  },
+  "developments": [
+    {
+      "id": "COOL-DEV-2026-08-05-01",
+      "date": "2026-07-29",
+      "title": "Vertiv demand and margins accelerated",
+      "fact": "Vertiv reported second-quarter 2026 sales of $3.274 billion, up 24% year over year, including 18% organic growth. Adjusted operating margin increased 410 basis points to 22.6%, and management raised full-year guidance while reporting only minor timing shifts from temporary congestion and project complexity.",
+      "interpretation": "Demand is converting into revenue, cash flow and margin rather than remaining only in pipeline. Favorable price-cost and margin expansion support supplier differentiation, while project complexity remains an execution constraint.",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A2",
+        "COOL-A5",
+        "COOL-A6"
+      ],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "medium_high",
+      "uncertainty": "medium",
+      "thesis_change": "strengthens",
+      "source_refs": [
+        "SRC-04"
+      ]
+    },
+    {
+      "id": "COOL-DEV-2026-08-05-02",
+      "date": "2026-07-30",
+      "title": "Commercial HVAC and applied-equipment bookings broadened",
+      "fact": "Trane Technologies reported 37% organic bookings growth, a 123% book-to-bill ratio and a record $12.1 billion backlog. Americas Commercial HVAC bookings increased 50% and applied-equipment bookings increased 130%, while adjusted operating margin declined 60 basis points.",
+      "interpretation": "Demand is broadening beyond pure-play liquid cooling into applied HVAC, efficiency and retrofit infrastructure, but the margin decline shows that demand strength does not guarantee expanding economics.",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A3",
+        "COOL-A5",
+        "COOL-A6"
+      ],
+      "direction": "positive_mixed",
+      "materiality": "high",
+      "durability": "medium_high",
+      "uncertainty": "medium",
+      "thesis_change": "strengthens_with_margin_caveat",
+      "source_refs": [
+        "SRC-05"
+      ]
+    },
+    {
+      "id": "COOL-DEV-2026-08-05-03",
+      "date": "2026-07-29",
+      "title": "Mission-critical HVAC demand supported equipment and services",
+      "fact": "Johnson Controls reported organic sales growth of 11%, with Products and Systems up 12% and Services up 10%. Organic orders increased 37% and backlog reached $15.9 billion, supported by data centers and other mission-critical environments.",
+      "interpretation": "Concurrent equipment and service growth supports the view that installed-base maintenance, controls and optimization can produce more durable economics than equipment shipments alone.",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A3",
+        "COOL-A5"
+      ],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "high",
+      "uncertainty": "medium",
+      "thesis_change": "strengthens",
+      "source_refs": [
+        "SRC-06"
+      ]
+    },
+    {
+      "id": "COOL-DEV-2026-08-05-04",
+      "date": "2026-07-21",
+      "title": "High-temperature closed-loop liquid cooling changed system economics",
+      "fact": "NVIDIA stated that Vera Rubin NVL72 uses a 45-degree Celsius liquid-cooling inlet that enables chiller-free dry-cooler operation and can save millions of gallons of water per megawatt annually in new AI factories.",
+      "interpretation": "Higher-temperature cooling increases the value of integrated liquid loops, pumps, heat exchangers, dry coolers and controls, while potentially reducing conventional chiller content in some new facilities.",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A3",
+        "COOL-A4",
+        "COOL-A5"
+      ],
+      "direction": "positive_disruptive",
+      "materiality": "high",
+      "durability": "high",
+      "uncertainty": "medium",
+      "thesis_change": "strengthens_and_changes_opportunity_mix",
+      "source_refs": [
+        "SRC-07"
+      ]
+    },
+    {
+      "id": "COOL-DEV-2026-08-05-05",
+      "date": "2026-07-09",
+      "title": "Transmission availability became a binding project constraint",
+      "fact": "The U.S. Department of Energy's draft 2026 National Transmission Needs Study identified pressing transmission needs associated partly with data centers, manufacturing and other large loads.",
+      "interpretation": "Power scarcity increases the value of efficient cooling and useful compute per megawatt, but may delay entire projects and therefore keeps the fair scenario dominant.",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A3",
+        "COOL-A6"
+      ],
+      "direction": "mixed",
+      "materiality": "high",
+      "durability": "high",
+      "uncertainty": "medium",
+      "thesis_change": "does_not_weaken_but_limits_bull_case",
+      "source_refs": [
+        "SRC-10",
+        "SRC-12"
+      ]
+    },
+    {
+      "id": "COOL-DEV-2026-08-05-06",
+      "date": "2026-08-05",
+      "title": "AI data-center efficiency and retrofit practices became more formalized",
+      "fact": "PNNL, ASHRAE and NEMA published an AI Data Center Energy Performance Framework covering efficient design, commissioning, retrofit, energy and water efficiency, grid interaction, operations and modernization. The framework is voluntary.",
+      "interpretation": "The framework supports demand for controls, commissioning, monitoring and retrofit services, but is not equivalent to mandatory regulation.",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A3",
+        "COOL-A4",
+        "COOL-A5"
+      ],
+      "direction": "positive",
+      "materiality": "medium",
+      "durability": "high",
+      "uncertainty": "medium",
+      "thesis_change": "supports_without_scenario_change",
+      "source_refs": [
+        "SRC-11"
+      ]
+    }
+  ],
+  "scorecard": [
+    {
+      "assumption_id": "COOL-A1",
+      "name": "Thermal intensity rises in critical infrastructure",
+      "score": 5,
+      "trend": "improving",
+      "assessment": "Rack-scale AI architectures and supplier results strongly confirm increasing thermal and infrastructure intensity."
+    },
+    {
+      "assumption_id": "COOL-A2",
+      "name": "Cooling remains mission-critical",
+      "score": 5,
+      "trend": "improving",
+      "assessment": "Strong bookings, backlogs, service demand and limited evidence of broad cancellation confirm resilient budgets."
+    },
+    {
+      "assumption_id": "COOL-A3",
+      "name": "Efficiency regulation and energy costs support upgrades",
+      "score": 4,
+      "trend": "improving",
+      "assessment": "Grid constraints, efficiency economics and emerging frameworks support upgrades, though mandatory regulation remains limited."
+    },
+    {
+      "assumption_id": "COOL-A4",
+      "name": "Water constraints favor advanced systems",
+      "score": 4,
+      "trend": "improving",
+      "assessment": "Closed-loop and higher-temperature architectures offer credible water savings, but broad procurement evidence remains incomplete."
+    },
+    {
+      "assumption_id": "COOL-A5",
+      "name": "Leading suppliers retain differentiation",
+      "score": 4,
+      "trend": "improving",
+      "assessment": "Integrated engineering, margin expansion, service and portfolio breadth support differentiation, while standardization remains a future risk."
+    },
+    {
+      "assumption_id": "COOL-A6",
+      "name": "Supply chains can support growth",
+      "score": 3,
+      "trend": "stable",
+      "assessment": "Capacity additions support growth, but temporary congestion, skilled labor and project complexity remain material constraints."
+    }
+  ],
+  "assumptions_changed": [
+    {
+      "assumption_id": "COOL-A1",
+      "previous_state": "unestablished",
+      "current_state": "strengthening",
+      "reason": "Rack-scale AI design and supplier performance confirm higher thermal and infrastructure intensity.",
+      "source_refs": [
+        "SRC-04",
+        "SRC-07"
+      ]
+    },
+    {
+      "assumption_id": "COOL-A2",
+      "previous_state": "unestablished",
+      "current_state": "strengthening",
+      "reason": "Strong bookings, backlog and service growth demonstrate mission-critical customer spending.",
+      "source_refs": [
+        "SRC-04",
+        "SRC-05",
+        "SRC-06"
+      ]
+    },
+    {
+      "assumption_id": "COOL-A3",
+      "previous_state": "unestablished",
+      "current_state": "strengthening",
+      "reason": "Power constraints and formal efficiency frameworks increase the value of efficient cooling and retrofit activity.",
+      "source_refs": [
+        "SRC-10",
+        "SRC-11",
+        "SRC-12"
+      ]
+    },
+    {
+      "assumption_id": "COOL-A4",
+      "previous_state": "unestablished",
+      "current_state": "strengthening_with_incomplete_market_validation",
+      "reason": "Higher-temperature closed-loop cooling offers material water savings, but broad customer procurement evidence is not yet available.",
+      "source_refs": [
+        "SRC-07"
+      ]
+    },
+    {
+      "assumption_id": "COOL-A5",
+      "previous_state": "unestablished",
+      "current_state": "strengthening",
+      "reason": "Margin expansion, integrated portfolios and engineering capability support differentiation.",
+      "source_refs": [
+        "SRC-04",
+        "SRC-08",
+        "SRC-09"
+      ]
+    },
+    {
+      "assumption_id": "COOL-A6",
+      "previous_state": "unestablished",
+      "current_state": "intact_with_execution_risk",
+      "reason": "Suppliers are expanding capacity, but congestion and increasingly complex deployments remain visible.",
+      "source_refs": [
+        "SRC-04",
+        "SRC-05"
+      ]
+    }
+  ],
+  "catalysts": [
+    {
+      "id": "COOL-CAT-01",
+      "name": "High-density data-center deployment",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A2",
+        "COOL-A5"
+      ],
+      "state": "confirming",
+      "confirmation_test": "Sustained orders, revenue conversion and rising thermal-management content per megawatt.",
+      "failure_test": "Broad project cancellations, utilization weakness or reduced infrastructure intensity.",
+      "next_check": "Next Vertiv, NVIDIA and hyperscaler infrastructure updates."
+    },
+    {
+      "id": "COOL-CAT-02",
+      "name": "Liquid-cooling adoption",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A4",
+        "COOL-A5"
+      ],
+      "state": "confirming",
+      "confirmation_test": "Commercial deployment of integrated CDUs, liquid loops, dry coolers, pumps, controls and service.",
+      "failure_test": "Reliability problems, weak utilization or rapid component commoditization.",
+      "next_check": "Second-half 2026 Vera Rubin production ramp and supplier order disclosures."
+    },
+    {
+      "id": "COOL-CAT-03",
+      "name": "Efficiency standards and regulation",
+      "assumption_ids": [
+        "COOL-A3"
+      ],
+      "state": "developing",
+      "confirmation_test": "Voluntary frameworks influence procurement or are incorporated into enforceable codes and standards.",
+      "failure_test": "Weak adoption or unattractive retrofit payback.",
+      "next_check": "Future ASHRAE, PNNL, NEMA and jurisdictional updates."
+    },
+    {
+      "id": "COOL-CAT-04",
+      "name": "Water scarcity",
+      "assumption_ids": [
+        "COOL-A4"
+      ],
+      "state": "developing",
+      "confirmation_test": "Customers specify low-water, closed-loop or dry-cooling architectures in procurement.",
+      "failure_test": "Water benefits do not change purchasing decisions.",
+      "next_check": "Customer design specifications and water-use disclosures."
+    },
+    {
+      "id": "COOL-CAT-05",
+      "name": "Retrofit cycle",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A3"
+      ],
+      "state": "confirming",
+      "confirmation_test": "Installed-base upgrades, controls and service grow alongside new equipment.",
+      "failure_test": "Maintenance deferrals or weak service attachment.",
+      "next_check": "Next Trane and Johnson Controls results."
+    },
+    {
+      "id": "COOL-CAT-06",
+      "name": "Manufacturing-capacity expansion",
+      "assumption_ids": [
+        "COOL-A6"
+      ],
+      "state": "confirming_with_risk",
+      "confirmation_test": "Capacity ramps shorten lead times without damaging quality or margins.",
+      "failure_test": "Persistent bottlenecks, cost inflation or underutilized capacity.",
+      "next_check": "Modine fiscal 2027 production-ramp disclosure and supplier lead-time data."
+    }
+  ],
+  "opportunities": [
+    {
+      "rank": 1,
+      "opportunity_id": "COOL-OPP-VRT",
+      "group": "liquid-cooling-systems-and-data-center-infrastructure",
+      "name": "Vertiv Holdings",
+      "ticker": "VRT",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "AI-driven thermal and power infrastructure demand",
+        "Integrated liquid-cooling systems",
+        "Installed-base service and lifecycle support",
+        "Manufacturing-capacity expansion and backlog conversion"
+      ],
+      "catalyst": "Conversion of the AI infrastructure pipeline and expansion of the end-to-end thermal chain.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Customer concentration, project timing, supply-chain complexity and elevated execution expectations.",
+      "next_action": "Run a complete Vertiv company valuation review.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "vertiv-cooling",
+        "reason": "Vertiv ranks first, is central to the theme, has multiple independent return engines and a major catalyst, and requires current-price valuation.",
+        "priority": "P0",
+        "trigger_rules": [
+          "rank_top_3",
+          "high_conviction",
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst",
+          "named_company_central"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "/data/companies/vertiv-cooling.json",
+        "detail_url": "/investment/company.html?company=vertiv-cooling"
+      }
+    },
+    {
+      "rank": 2,
+      "opportunity_id": "COOL-OPP-MOD",
+      "group": "thermal-management-equipment-and-heat-exchangers",
+      "name": "Modine Manufacturing",
+      "ticker": "MOD",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Data-center cooling capacity expansion",
+        "Heat-transfer engineering",
+        "Commercial HVAC products",
+        "Manufacturing scale and operating leverage"
+      ],
+      "catalyst": "Fiscal 2027 data-center production ramp and capacity utilization.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Capacity execution, customer concentration and equipment cyclicality.",
+      "next_action": "Run a complete Modine company valuation review.",
+      "company_review": {
+        "status": "required",
+        "company_slug": "modine-cooling",
+        "reason": "Modine ranks second, has direct data-center thermal exposure, multiple return engines and a major capacity catalyst requiring valuation work.",
+        "priority": "P0",
+        "trigger_rules": [
+          "rank_top_3",
+          "valuation_required",
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": true,
+        "company_json_path": "/data/companies/modine-cooling.json",
+        "detail_url": "/investment/company.html?company=modine-cooling"
+      }
+    },
+    {
+      "rank": 3,
+      "opportunity_id": "COOL-OPP-TT",
+      "group": "commercial-hvac-chillers-and-retrofits",
+      "name": "Trane Technologies",
+      "ticker": "TT",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Applied HVAC equipment growth",
+        "Energy-efficiency retrofit demand",
+        "Controls and digital optimization",
+        "Recurring service",
+        "Transport refrigeration"
+      ],
+      "catalyst": "Conversion of record Commercial HVAC and applied-equipment backlog.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Margin compression, regional variation and exposure to broader construction cycles.",
+      "next_action": "Quantify data-center and retrofit exposure before a full valuation promotion.",
+      "company_review": {
+        "status": "candidate",
+        "company_slug": "trane-technologies-cooling",
+        "reason": "Trane ranks in the top three and has several return engines, but direct data-center and cooling exposure must be isolated from the broader portfolio.",
+        "priority": "P1",
+        "trigger_rules": [
+          "rank_top_3",
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 4,
+      "opportunity_id": "COOL-OPP-SU",
+      "group": "integrated-liquid-cooling-energy-management-and-software",
+      "name": "Schneider Electric",
+      "ticker": "SU.PA",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Liquid-cooling systems and CDUs",
+        "Electrical distribution and power management",
+        "Controls, monitoring and software",
+        "Global service and channel scale"
+      ],
+      "catalyst": "Scaling the Motivair portfolio into hyperscale and AI-factory deployments.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Conglomerate dilution, acquisition integration and limited separate disclosure of liquid-cooling economics.",
+      "next_action": "Verify Motivair revenue, margins, backlog and service attachment.",
+      "company_review": {
+        "status": "candidate",
+        "company_slug": "schneider-electric-cooling",
+        "reason": "Schneider offers integrated power, cooling, software and service capabilities, but direct liquid-cooling economics require validation.",
+        "priority": "P1",
+        "trigger_rules": [
+          "multiple_return_engines",
+          "major_catalyst",
+          "named_company_central"
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 5,
+      "opportunity_id": "COOL-OPP-JCI",
+      "group": "chillers-controls-and-cooling-services",
+      "name": "Johnson Controls",
+      "ticker": "JCI",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Applied HVAC and chiller systems",
+        "Building controls",
+        "Mission-critical service revenue",
+        "Retrofit and energy-efficiency demand"
+      ],
+      "catalyst": "Conversion of mission-critical backlog and continued service growth.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Backlog conversion, project mix and execution complexity.",
+      "next_action": "Review fiscal 2026 segment disclosures and quantify data-center cooling exposure.",
+      "company_review": {
+        "status": "candidate",
+        "company_slug": "johnson-controls-cooling",
+        "reason": "Johnson Controls has strong orders, backlog and service growth tied to mission-critical environments, but standalone cooling economics need further analysis.",
+        "priority": "P1",
+        "trigger_rules": [
+          "multiple_return_engines",
+          "major_catalyst"
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    },
+    {
+      "rank": 6,
+      "opportunity_id": "COOL-OPP-NVT",
+      "group": "fluid-control-components-connectivity-and-monitoring",
+      "name": "nVent Electric",
+      "ticker": "NVT",
+      "asset_type": "company",
+      "independent_return_engines": [
+        "Liquid-cooling components and fluid connectivity",
+        "Electrical protection and enclosures",
+        "Manufacturing-capacity expansion",
+        "Monitoring and control integration"
+      ],
+      "catalyst": "Ramp of expanded U.S. manufacturing capacity for data-center liquid-cooling solutions.",
+      "valuation_status": "not_reviewed",
+      "main_risk": "Component commoditization and lower value capture than integrated system suppliers.",
+      "next_action": "Quantify direct liquid-cooling revenue, orders, margins and customer concentration.",
+      "company_review": {
+        "status": "candidate",
+        "company_slug": "nvent-cooling",
+        "reason": "nVent has direct liquid-cooling component exposure and a capacity catalyst, but evidence is insufficient to establish durable value capture.",
+        "priority": "P2",
+        "trigger_rules": [
+          "major_catalyst",
+          "valuation_required"
+        ],
+        "company_packet_required": false,
+        "company_json_path": "",
+        "detail_url": ""
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "COOL-RISK-01",
+      "name": "Power and transmission bottlenecks",
+      "severity": "high",
+      "probability": "medium_high",
+      "trigger": "Data-center projects are delayed faster than efficiency and retrofit spending increases.",
+      "assumption_ids": [
+        "COOL-A1",
+        "COOL-A3",
+        "COOL-A6"
+      ]
+    },
+    {
+      "id": "COOL-RISK-02",
+      "name": "Backlog conversion deterioration",
+      "severity": "high",
+      "probability": "medium",
+      "trigger": "Backlog rises while revenue conversion, project milestones or cash generation weaken.",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A6"
+      ]
+    },
+    {
+      "id": "COOL-RISK-03",
+      "name": "Customer concentration",
+      "severity": "high",
+      "probability": "medium",
+      "trigger": "One hyperscaler, AI platform or project class represents a disproportionate share of orders.",
+      "assumption_ids": [
+        "COOL-A2",
+        "COOL-A5"
+      ]
+    },
+    {
+      "id": "COOL-RISK-04",
+      "name": "Liquid-cooling commoditization",
+      "severity": "high",
+      "probability": "medium",
+      "trigger": "Standardized CDUs, cold plates or interfaces produce rapid price erosion and lower switching costs.",
+      "assumption_ids": [
+        "COOL-A5"
+      ]
+    },
+    {
+      "id": "COOL-RISK-05",
+      "name": "Cooling-architecture substitution",
+      "severity": "medium_high",
+      "probability": "medium",
+      "trigger": "Higher-temperature dry cooling reduces conventional chiller content faster than suppliers reposition.",
+      "assumption_ids": [
+        "COOL-A3",
+        "COOL-A4",
+        "COOL-A5"
+      ]
+    },
+    {
+      "id": "COOL-RISK-06",
+      "name": "Margin leakage",
+      "severity": "medium_high",
+      "probability": "medium",
+      "trigger": "Labor, tariffs, components or project complexity offset pricing and productivity.",
+      "assumption_ids": [
+        "COOL-A5",
+        "COOL-A6"
+      ]
+    },
+    {
+      "id": "COOL-RISK-07",
+      "name": "Water benefits fail to change procurement",
+      "severity": "medium",
+      "probability": "medium",
+      "trigger": "Operators acknowledge water savings but continue purchasing conventional systems without meaningful design change.",
+      "assumption_ids": [
+        "COOL-A4"
+      ]
+    }
+  ],
+  "next_decision_points": [
+    {
+      "date": "2026-08-20",
+      "event": "Modine annual meeting and fiscal 2027 operating update",
+      "decision_test": "Confirm data-center production ramp, capacity utilization, customer concentration and margin conversion."
+    },
+    {
+      "date": "2026-09-07",
+      "event": "DOE draft National Transmission Needs Study comment deadline",
+      "decision_test": "Assess whether the final process changes expectations for power availability, interconnection timing or regional project delays."
+    },
+    {
+      "date": "2026-10-31",
+      "event": "Next major supplier quarterly-report cycle",
+      "decision_test": "Test backlog conversion, cancellations, price-cost, service attachment, customer concentration and margin durability across Vertiv, Trane and Johnson Controls."
+    },
+    {
+      "date": "2026-12-31",
+      "event": "Second-half 2026 Vera Rubin production ramp",
+      "decision_test": "Determine whether high-temperature liquid cooling creates broad demand for CDUs, pumps, heat exchangers, dry coolers, controls and services."
+    }
+  ],
+  "research_backlog": [
+    {
+      "priority": "P0",
+      "question": "Complete current-price company valuation reviews for Vertiv and Modine."
+    },
+    {
+      "priority": "P0",
+      "question": "Quantify cooling-system content per megawatt for air cooling, direct-to-chip liquid cooling and immersion architectures."
+    },
+    {
+      "priority": "P0",
+      "question": "Measure backlog conversion and cancellation trends across major data-center and commercial-cooling suppliers."
+    },
+    {
+      "priority": "P1",
+      "question": "Estimate recurring service and maintenance attachment by supplier and cooling architecture."
+    },
+    {
+      "priority": "P1",
+      "question": "Quantify supplier exposure to individual hyperscalers, colocation operators and AI platforms."
+    },
+    {
+      "priority": "P1",
+      "question": "Determine whether high-temperature liquid loops reduce conventional chiller content or shift value toward dry coolers, pumps, heat exchangers and controls."
+    },
+    {
+      "priority": "P1",
+      "question": "Compare water-use effectiveness and total water consumption across cooling architectures and climate zones."
+    },
+    {
+      "priority": "P2",
+      "question": "Track mandatory data-center energy and water requirements separately from voluntary technical frameworks."
+    },
+    {
+      "priority": "P2",
+      "question": "Measure lead times for CDUs, chillers, compressors, pumps, fans, heat exchangers and skilled commissioning labor."
+    },
+    {
+      "priority": "P2",
+      "question": "Identify monitoring-software vendors with recurring economics independent of equipment sales."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-01",
+      "title": "WealthLanding Investment OS — Compact Operating System v4.1",
+      "publisher": "WealthLanding",
+      "date": null,
+      "type": "internal_methodology",
+      "reference": "00_CORE_OPERATING_SYSTEM.md"
+    },
+    {
+      "id": "SRC-02",
+      "title": "Cooling Infrastructure Investment Thesis — Master Research File",
+      "publisher": "WealthLanding",
+      "date": null,
+      "type": "internal_research",
+      "reference": "COOLING_MASTER_RESEARCH.md"
+    },
+    {
+      "id": "SRC-03",
+      "title": "WealthLanding Theme Schema v4.0",
+      "publisher": "WealthLanding",
+      "date": null,
+      "type": "internal_schema",
+      "reference": "00_CORE_THEME_SCHEMA.json"
+    },
+    {
+      "id": "SRC-04",
+      "title": "Vertiv Reports Strong Second Quarter 2026",
+      "publisher": "Vertiv Holdings",
+      "date": "2026-07-29",
+      "type": "company_results",
+      "url": "https://investors.vertiv.com/news/news-details/2026/Vertiv-Reports-Strong-Second-Quarter-2026-with-Diluted-EPS-Growth-of-53-Adjusted-Diluted-EPS-Growth-of-60-Raises-Full-Year-2026-Guidance-Across-All-Key-Metrics/default.aspx"
+    },
+    {
+      "id": "SRC-05",
+      "title": "Trane Technologies Reports Strong Second Quarter Results",
+      "publisher": "Trane Technologies",
+      "date": "2026-07-30",
+      "type": "company_results",
+      "url": "https://investors.tranetechnologies.com/news-and-events/news-releases/news-release-details/2026/Trane-Technologies-Reports-Strong-Second-Quarter-Results-Raises-Full-Year-Revenue-and-EPS-Guidance/default.aspx"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Johnson Controls Reports Strong Q3 Results; Raises FY26 Guidance",
+      "publisher": "Johnson Controls",
+      "date": "2026-07-29",
+      "type": "company_results",
+      "url": "https://investors.johnsoncontrols.com/news/news-details/2026/Johnson-Controls-Reports-Strong-Q3-Results-Raises-FY26-Guidance/default.aspx"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Vera Rubin Driving Performance Per Watt, Lower Token Costs",
+      "publisher": "NVIDIA",
+      "date": "2026-07-21",
+      "type": "technology_announcement",
+      "url": "https://blogs.nvidia.com/blog/vera-rubin/"
+    },
+    {
+      "id": "SRC-08",
+      "title": "Motivair Announces 2.5 MW CDU Scalable to 10 MW and Beyond",
+      "publisher": "Schneider Electric",
+      "date": "2026-01-21",
+      "type": "product_announcement",
+      "url": "https://www.se.com/ww/en/about-us/newsroom/news/press-releases/motivair-by-schneider-electric-announces-new-cdu-with-capability-to-scale-to-10mw-and-beyond-for-next-gen-ai-factories-6970111e5238242c6201a203/"
+    },
+    {
+      "id": "SRC-09",
+      "title": "Vertiv Acquires Strategic Thermal Labs",
+      "publisher": "Vertiv Holdings",
+      "date": "2026-05-07",
+      "type": "company_announcement",
+      "url": "https://investors.vertiv.com/news/news-details/2026/Vertiv-Strengthens-Liquid-Cooling-System-Capability-with-Acquisition-of-Strategic-Thermal-Labs/default.aspx"
+    },
+    {
+      "id": "SRC-10",
+      "title": "DOE Publishes Draft 2026 National Transmission Needs Study",
+      "publisher": "U.S. Department of Energy",
+      "date": "2026-07-09",
+      "type": "government_report",
+      "url": "https://www.energy.gov/oe/articles/does-office-electricity-publishes-2026-draft-national-transmission-needs-study"
+    },
+    {
+      "id": "SRC-11",
+      "title": "AI Data Center Energy Performance Framework",
+      "publisher": "PNNL, ASHRAE and NEMA",
+      "date": "2026-08-05",
+      "type": "industry_framework",
+      "url": "https://www.ashrae.org/technical-resources/ai-data-center-framework"
+    },
+    {
+      "id": "SRC-12",
+      "title": "Electricity 2026 Executive Summary",
+      "publisher": "International Energy Agency",
+      "date": "2026-02-01",
+      "type": "energy_outlook",
+      "url": "https://www.iea.org/reports/electricity-2026/executive-summary"
+    }
+  ],
+  "publication": {
+    "status": "draft",
+    "headline": "Cooling Infrastructure Strengthens as AI Thermal Density and Supplier Backlogs Accelerate",
+    "summary": "Cooling Infrastructure is strengthening as integrated liquid cooling, commercial HVAC, service demand and supplier backlogs improve together. Power availability, backlog conversion and architecture-driven value shifts keep the fair scenario dominant.",
+    "page_url": "/investment/theme.html?thesis=cooling",
+    "show_on_homepage": false,
+    "featured": false,
+    "generated_by": "ChatGPT",
+    "generated_at": "2026-08-05T16:53:00-04:00"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
