@@ -702,104 +702,138 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'
 const pretty = value => String(value ?? '').replaceAll('_',' ').replace(/\b\w/g, c => c.toUpperCase());
 const dateLabel = value => value ? new Intl.DateTimeFormat('en-US',{year:'numeric',month:'short',day:'numeric'}).format(new Date(value+'T00:00:00')) : 'Date unavailable';
 const statusStyle = status => ({strengthening:['bg-emerald-50 text-emerald-700','bg-emerald-500'],intact:['bg-blue-50 text-blue-700','bg-blue-500'],weakening:['bg-amber-50 text-amber-700','bg-amber-500'],invalidated:['bg-rose-50 text-rose-700','bg-rose-500']}[status] || ['bg-slate-100 text-slate-700','bg-slate-400']);
-const convictionWeight = c => ({high:3,medium:2,low:1}[c]||0);
+const opportunityList = thesis => thesis?.opportunities ?? thesis?.action_center?.opportunities ?? [];
+const opportunityEngines = opportunity => opportunity?.independent_return_engines ?? opportunity?.why_now ?? [];
+const decisionState = thesis => thesis?.decision?.state ?? thesis?.decision?.action ?? thesis?.action_center?.overall_action ?? 'monitor';
+const opportunityScore = opportunity => Number(opportunity?.thesis_alignment ?? opportunity?.score ?? 0);
+const opportunityPriority = opportunity => Number(opportunity?.rank ?? 999);
 
 async function loadHub() {
   try {
     const manifestResponse = await fetch(CONFIG.manifestUrl, {cache:'no-store'});
     if (!manifestResponse.ok) throw new Error(`Manifest returned ${manifestResponse.status}`);
     const manifest = await manifestResponse.json();
-    const files = Array.isArray(manifest) ? manifest : manifest.theses;
-    if (!Array.isArray(files) || files.length === 0) throw new Error('Manifest contains no thesis files.');
-    const results = await Promise.allSettled(files.map(async entry => {
-      const rawUrl = typeof entry === 'string' ? entry : entry.file;
+    const entries = Array.isArray(manifest) ? manifest : (manifest.theses ?? []);
+    if (!Array.isArray(entries) || entries.length === 0) throw new Error('Manifest contains no thesis files.');
+
+    const results = await Promise.allSettled(entries.map(async entry => {
+      const rawUrl = typeof entry === 'string' ? entry : entry?.file;
+      if (!rawUrl) throw new Error('Manifest entry is missing a file value.');
       const url = rawUrl.includes('/') ? rawUrl : `./data/${rawUrl}`;
-      const r = await fetch(url, {cache:'no-store'});
-      if (!r.ok) throw new Error(`${url} returned ${r.status}`);
-      return r.json();
+      const response = await fetch(url, {cache:'no-store'});
+      if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+      return response.json();
     }));
-    state.theses = results.filter(r=>r.status==='fulfilled').map(r=>r.value).filter(d=>d?.publication?.status !== 'draft');
-    if (!state.theses.length) {
-      // For development, allow drafts when no published files exist.
-      state.theses = results.filter(r=>r.status==='fulfilled').map(r=>r.value);
-    }
-    const failures = results.filter(r=>r.status==='rejected');
+
+    const loaded = results.filter(result => result.status === 'fulfilled').map(result => result.value);
+    const published = loaded.filter(item => item?.publication?.status === 'published');
+    state.theses = published.length ? published : loaded;
+
+    const failures = results.filter(result => result.status === 'rejected');
     if (failures.length) showError(`${failures.length} thesis file(s) could not be loaded; available files are still shown.`);
     renderAll();
   } catch (error) {
-    showError(`The hub could not load ${CONFIG.manifestUrl}. ${error.message}`);
+    console.error('Investment hub load error:', error);
+    showError(`The investment dashboard encountered an error. ${error.message}`);
     renderEmpty();
   }
 }
 
 function renderAll() {
-  const sorted = [...state.theses].sort((a,b)=>(b.review?.date||'').localeCompare(a.review?.date||''));
+  const sorted = [...state.theses].sort((a,b)=>(b?.review?.date||'').localeCompare(a?.review?.date||''));
   state.theses = sorted;
   document.getElementById('metric-theses').textContent = sorted.length;
   const opportunities = collectOpportunities(sorted);
-  document.getElementById('metric-opportunities').textContent = opportunities.filter(o=>o.conviction==='high' && ['new','still_supported'].includes(o.status)).length;
-  document.getElementById('metric-review').textContent = sorted[0] ? `${sorted[0].thesis.name} · ${dateLabel(sorted[0].review.date)}` : 'No reviews published';
-  renderTheses(); renderOpportunities(opportunities); renderDecisionPoints(); renderRiskWatch(); renderReviews();
+  document.getElementById('metric-opportunities').textContent = opportunities.filter(item => item.rank <= 3 || opportunityScore(item) >= 80).length;
+  document.getElementById('metric-review').textContent = sorted[0] ? `${sorted[0]?.thesis?.name ?? 'Latest thesis'} · ${dateLabel(sorted[0]?.review?.date)}` : 'No reviews published';
+  renderTheses();
+  renderOpportunities(opportunities);
+  renderDecisionPoints();
+  renderRiskWatch();
+  renderReviews();
 }
 
 function renderTheses() {
   const grid = document.getElementById('thesis-grid');
-  const list = state.filter==='all' ? state.theses : state.theses.filter(t=>t.status===state.filter);
-  grid.innerHTML = list.map(t=>{
-    const [pill,dot]=statusStyle(t.status); const slug=t.thesis.slug; const opp=t.action_center?.opportunities?.[0];
-    return `<article class="hub-card p-7 flex flex-col" data-status="${escapeHtml(t.status)}">
+  const list = state.filter === 'all' ? state.theses : state.theses.filter(thesis => thesis?.status === state.filter);
+  grid.innerHTML = list.map(thesis => {
+    const [pill,dot] = statusStyle(thesis?.status);
+    const slug = thesis?.thesis?.slug ?? '';
+    const topOpportunity = opportunityList(thesis).sort((a,b)=>opportunityPriority(a)-opportunityPriority(b))[0];
+    const scenario = thesis?.scenario_model?.current_scenario;
+    return `<article class="hub-card p-7 flex flex-col" data-status="${escapeHtml(thesis?.status)}">
       <div class="flex justify-between gap-5 items-start">
-        <div><div class="text-xs uppercase tracking-wider text-slate-400 font-bold">${escapeHtml(t.thesis.category)}</div><h3 class="font-serif text-2xl font-bold mt-2">${escapeHtml(t.thesis.name)}</h3></div>
-        <div class="health-ring shrink-0" style="--score:${Number(t.thesis_health.current)||0}"><span>${escapeHtml(t.thesis_health.current)}</span></div>
+        <div><div class="text-xs uppercase tracking-wider text-slate-400 font-bold">${escapeHtml(thesis?.thesis?.category)}</div><h3 class="font-serif text-2xl font-bold mt-2">${escapeHtml(thesis?.thesis?.name)}</h3></div>
+        <div class="health-ring shrink-0" style="--score:${Number(thesis?.thesis_health?.current)||0}"><span>${escapeHtml(thesis?.thesis_health?.current)}</span></div>
       </div>
-      <div class="mt-5"><span class="status-pill ${pill}"><span class="dot ${dot}"></span>${escapeHtml(pretty(t.status))}</span><span class="ml-2 text-xs font-bold text-slate-400">${escapeHtml(pretty(t.thesis_health.trend))}</span></div>
-      <p class="text-slate-600 text-sm leading-relaxed mt-5">${escapeHtml(t.decision.summary)}</p>
-      <div class="mt-6 rounded-xl bg-slate-50 border border-slate-100 p-4"><div class="text-[11px] uppercase tracking-wider font-extrabold text-slate-400">Top opportunity</div><div class="font-bold mt-1">${escapeHtml(opp?.name || 'No opportunity published')}</div></div>
-      <div class="mt-auto pt-6 flex items-center justify-between"><span class="text-xs text-slate-400">Reviewed ${dateLabel(t.review.date)}</span><a href="${CONFIG.thesisPageUrl+encodeURIComponent(slug)}" class="font-extrabold text-sm text-emerald-700 hover:text-emerald-600">Open thesis →</a></div>
+      <div class="mt-5"><span class="status-pill ${pill}"><span class="dot ${dot}"></span>${escapeHtml(pretty(thesis?.status))}</span><span class="ml-2 text-xs font-bold text-slate-400">${escapeHtml(pretty(thesis?.thesis_health?.trend))}</span>${scenario ? `<span class="ml-2 text-xs font-bold text-slate-400">· ${escapeHtml(pretty(scenario))} case</span>` : ''}</div>
+      <p class="text-slate-600 text-sm leading-relaxed mt-5">${escapeHtml(thesis?.decision?.summary)}</p>
+      <div class="mt-6 rounded-xl bg-slate-50 border border-slate-100 p-4"><div class="text-[11px] uppercase tracking-wider font-extrabold text-slate-400">Top opportunity</div><div class="font-bold mt-1">${escapeHtml(topOpportunity?.name || 'No opportunity published')}</div>${topOpportunity?.valuation_status ? `<div class="text-xs text-slate-400 mt-1">Valuation: ${escapeHtml(topOpportunity.valuation_status)}</div>` : ''}</div>
+      <div class="mt-auto pt-6 flex items-center justify-between"><span class="text-xs text-slate-400">Reviewed ${dateLabel(thesis?.review?.date)}</span><a href="${CONFIG.thesisPageUrl+encodeURIComponent(slug)}" class="font-extrabold text-sm text-emerald-700 hover:text-emerald-600">Open thesis →</a></div>
     </article>`;
   }).join('') || '<div class="col-span-full text-slate-500">No theses match this filter.</div>';
 }
 
 function collectOpportunities(theses) {
   const map = new Map();
-  for (const t of theses) for (const o of (t.action_center?.opportunities||[])) {
-    const id = o.opportunity_id || o.ticker || o.name.toLowerCase();
-    const item = map.get(id) || {...o, thesisSupport:[]};
-    item.thesisSupport.push({name:t.thesis.name,slug:t.thesis.slug,status:t.status});
-    if ((o.thesis_alignment||0) > (item.thesis_alignment||0)) Object.assign(item,o);
-    map.set(id,item);
+  for (const thesis of theses) {
+    for (const opportunity of opportunityList(thesis)) {
+      const id = opportunity?.opportunity_id ?? opportunity?.company_slug ?? opportunity?.ticker ?? String(opportunity?.name ?? '').toLowerCase();
+      if (!id) continue;
+      const existing = map.get(id) || {...opportunity, thesisSupport:[]};
+      existing.thesisSupport.push({name:thesis?.thesis?.name,slug:thesis?.thesis?.slug,status:thesis?.status});
+      if (opportunityScore(opportunity) > opportunityScore(existing)) Object.assign(existing, opportunity);
+      map.set(id, existing);
+    }
   }
-  return [...map.values()].sort((a,b)=>convictionWeight(b.conviction)-convictionWeight(a.conviction)||(b.thesis_alignment||0)-(a.thesis_alignment||0)).slice(0,CONFIG.maxOpportunities);
+  return [...map.values()].sort((a,b)=>opportunityPriority(a)-opportunityPriority(b) || opportunityScore(b)-opportunityScore(a)).slice(0,CONFIG.maxOpportunities);
 }
 
 function renderOpportunities(items) {
-  document.getElementById('opportunity-grid').innerHTML = items.map((o,i)=>`<article class="hub-card p-6">
-    <div class="flex items-start justify-between gap-4"><div><div class="text-xs font-black text-emerald-600">#${i+1} · ${escapeHtml(pretty(o.conviction))} conviction</div><h3 class="text-xl font-extrabold mt-1">${escapeHtml(o.name)}</h3><div class="text-xs text-slate-400 mt-1">${escapeHtml(o.ticker||pretty(o.asset_type))}</div></div><div class="text-right"><div class="text-2xl font-black">${escapeHtml(o.thesis_alignment)}%</div><div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Alignment</div></div></div>
-    <ul class="mt-5 space-y-2 text-sm text-slate-600">${(o.why_now||[]).slice(0,3).map(x=>`<li class="flex gap-2"><span class="text-emerald-500 font-black">✓</span><span>${escapeHtml(x)}</span></li>`).join('')}</ul>
-    <div class="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-500"><span class="font-bold text-slate-700">Supported by:</span> ${o.thesisSupport.map(t=>escapeHtml(t.name)).join(' · ')}</div>
-  </article>`).join('') || '<div class="text-slate-500">No supported opportunities were published.</div>';
+  document.getElementById('opportunity-grid').innerHTML = items.map((opportunity,index) => {
+    const engines = opportunityEngines(opportunity).slice(0,3);
+    const score = opportunityScore(opportunity);
+    const meta = opportunity?.ticker ?? pretty(opportunity?.group ?? opportunity?.asset_type ?? 'research candidate');
+    return `<article class="hub-card p-6">
+      <div class="flex items-start justify-between gap-4"><div><div class="text-xs font-black text-emerald-600">#${opportunity?.rank ?? index+1} · ${escapeHtml(pretty(opportunity?.valuation_status ?? opportunity?.status ?? 'Research'))}</div><h3 class="text-xl font-extrabold mt-1">${escapeHtml(opportunity?.name)}</h3><div class="text-xs text-slate-400 mt-1">${escapeHtml(meta)}</div></div>${score ? `<div class="text-right"><div class="text-2xl font-black">${escapeHtml(score)}%</div><div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Alignment</div></div>` : ''}</div>
+      <ul class="mt-5 space-y-2 text-sm text-slate-600">${engines.map(item=>`<li class="flex gap-2"><span class="text-emerald-500 font-black">✓</span><span>${escapeHtml(item)}</span></li>`).join('')}</ul>
+      ${opportunity?.catalyst ? `<div class="mt-5 text-sm"><span class="font-bold text-slate-700">Catalyst:</span> <span class="text-slate-500">${escapeHtml(opportunity.catalyst)}</span></div>` : ''}
+      ${opportunity?.next_action ? `<div class="mt-3 text-sm"><span class="font-bold text-slate-700">Next:</span> <span class="text-slate-500">${escapeHtml(opportunity.next_action)}</span></div>` : ''}
+      <div class="mt-5 pt-4 border-t border-slate-100 text-xs text-slate-500"><span class="font-bold text-slate-700">Supported by:</span> ${opportunity.thesisSupport.map(item=>escapeHtml(item.name)).join(' · ')}</div>
+    </article>`;
+  }).join('') || '<div class="text-slate-500">No supported opportunities were published.</div>';
 }
 
 function renderDecisionPoints() {
-  const items=[]; state.theses.forEach(t=>(t.next_decision_points||[]).forEach(x=>items.push({...x,thesis:t.thesis.name})));
-  items.sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));
-  document.getElementById('decision-points').innerHTML=items.slice(0,6).map(x=>`<div class="flex gap-4"><div class="w-20 shrink-0 text-xs font-bold text-slate-400">${x.date?dateLabel(x.date):'TBD'}</div><div><div class="font-bold text-sm">${escapeHtml(x.event)}</div><div class="text-xs text-slate-500 mt-1">${escapeHtml(x.thesis)} · ${escapeHtml(pretty(x.potential_impact))} impact</div></div></div>`).join('')||'<div class="text-sm text-slate-500">No decision points published.</div>';
+  const items=[];
+  state.theses.forEach(thesis => (thesis?.next_decision_points ?? []).forEach(point => items.push({...point, thesis:thesis?.thesis?.name})));
+  items.sort((a,b)=>(a?.date||'9999').localeCompare(b?.date||'9999'));
+  document.getElementById('decision-points').innerHTML = items.slice(0,6).map(point => {
+    const explanation = point?.decision_test ?? point?.expected_outcome ?? '';
+    const impact = point?.potential_impact ? ` · ${pretty(point.potential_impact)} impact` : '';
+    return `<div class="flex gap-4"><div class="w-20 shrink-0 text-xs font-bold text-slate-400">${point?.date?dateLabel(point.date):'TBD'}</div><div><div class="font-bold text-sm">${escapeHtml(point?.event)}</div><div class="text-xs text-slate-500 mt-1">${escapeHtml(point?.thesis)}${impact}</div>${explanation ? `<div class="text-xs text-slate-400 mt-1">${escapeHtml(explanation)}</div>` : ''}</div></div>`;
+  }).join('') || '<div class="text-sm text-slate-500">No decision points published.</div>';
 }
 
 function renderRiskWatch() {
-  const items=[]; state.theses.forEach(t=>{(t.risks||[]).forEach(x=>items.push({label:x.name,meta:`${t.thesis.name} · ${pretty(x.trend)}`}));(t.action_center?.watch_items||[]).forEach(x=>items.push({label:x,meta:t.thesis.name}));});
-  document.getElementById('risk-watch').innerHTML=items.slice(0,8).map(x=>`<div class="flex gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-amber-400 shrink-0"></span><div><div class="font-bold text-sm">${escapeHtml(x.label)}</div><div class="text-xs text-slate-400 mt-1">${escapeHtml(x.meta)}</div></div></div>`).join('')||'<div class="text-sm text-slate-500">No watch items published.</div>';
+  const items=[];
+  state.theses.forEach(thesis => {
+    (thesis?.risks ?? []).forEach(risk => items.push({label:risk?.name,meta:`${thesis?.thesis?.name ?? ''} · ${pretty(risk?.status ?? risk?.trend ?? 'monitor')}`}));
+    (thesis?.catalysts ?? []).filter(catalyst => ['developing','confirmed'].includes(catalyst?.status)).forEach(catalyst => items.push({label:catalyst?.evidence ?? catalyst?.name ?? catalyst?.id,meta:`${thesis?.thesis?.name ?? ''} · ${pretty(catalyst?.status)}`}));
+    (thesis?.action_center?.watch_items ?? []).forEach(item => items.push({label:item,meta:thesis?.thesis?.name}));
+  });
+  document.getElementById('risk-watch').innerHTML = items.slice(0,8).map(item=>`<div class="flex gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-amber-400 shrink-0"></span><div><div class="font-bold text-sm">${escapeHtml(item.label)}</div><div class="text-xs text-slate-400 mt-1">${escapeHtml(item.meta)}</div></div></div>`).join('') || '<div class="text-sm text-slate-500">No watch items published.</div>';
 }
 
 function renderReviews() {
-  document.getElementById('review-list').innerHTML=state.theses.slice(0,8).map(t=>`<a href="${CONFIG.thesisPageUrl+encodeURIComponent(t.thesis.slug)}" class="grid md:grid-cols-12 gap-4 py-5 items-center hover:bg-slate-900/60 px-2 transition"><div class="md:col-span-2 text-sm text-slate-500">${dateLabel(t.review.date)}</div><div class="md:col-span-4 font-bold">${escapeHtml(t.thesis.name)}</div><div class="md:col-span-2 text-sm capitalize text-slate-300">${escapeHtml(pretty(t.status))}</div><div class="md:col-span-3 text-sm text-slate-400">${escapeHtml(t.decision.action.replaceAll('_',' '))}</div><div class="md:col-span-1 text-right text-emerald-400 font-bold">→</div></a>`).join('')||'<div class="py-5 text-slate-500">No reviews published.</div>';
+  document.getElementById('review-list').innerHTML = state.theses.slice(0,8).map(thesis=>`<a href="${CONFIG.thesisPageUrl+encodeURIComponent(thesis?.thesis?.slug ?? '')}" class="grid md:grid-cols-12 gap-4 py-5 items-center hover:bg-slate-900/60 px-2 transition"><div class="md:col-span-2 text-sm text-slate-500">${dateLabel(thesis?.review?.date)}</div><div class="md:col-span-4 font-bold">${escapeHtml(thesis?.thesis?.name)}</div><div class="md:col-span-2 text-sm capitalize text-slate-300">${escapeHtml(pretty(thesis?.status))}</div><div class="md:col-span-3 text-sm text-slate-400">${escapeHtml(pretty(decisionState(thesis)))}</div><div class="md:col-span-1 text-right text-emerald-400 font-bold">→</div></a>`).join('') || '<div class="py-5 text-slate-500">No reviews published.</div>';
 }
 
-function showError(message) {const el=document.getElementById('hub-error');el.textContent=message;el.classList.remove('hidden')}
-function renderEmpty() {document.getElementById('metric-theses').textContent='0';document.getElementById('metric-opportunities').textContent='0';document.getElementById('metric-review').textContent='No data loaded';renderAll()}
+function showError(message) { const element=document.getElementById('hub-error'); element.textContent=message; element.classList.remove('hidden'); }
+function renderEmpty() { state.theses=[]; renderAll(); }
 
-document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{state.filter=btn.dataset.filter;document.querySelectorAll('.filter-btn').forEach(b=>b.className='filter-btn bg-slate-100 px-4 py-2 rounded-lg text-sm font-bold');btn.className='filter-btn bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold';renderTheses()}));
-document.querySelector('form[role="search"]')?.addEventListener('submit',e=>{const input=document.getElementById('wl-site-search');if(!input.value.trim()){e.preventDefault();return}document.getElementById('wl-search-query-hidden').value=`site:wealthlanding.com ${input.value.trim()}`;});
+document.querySelectorAll('.filter-btn').forEach(button=>button.addEventListener('click',()=>{state.filter=button.dataset.filter;document.querySelectorAll('.filter-btn').forEach(item=>item.className='filter-btn bg-slate-100 px-4 py-2 rounded-lg text-sm font-bold');button.className='filter-btn bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold';renderTheses();}));
+document.querySelector('form[role="search"]')?.addEventListener('submit',event=>{const input=document.getElementById('wl-site-search');if(!input.value.trim()){event.preventDefault();return}document.getElementById('wl-search-query-hidden').value=`site:wealthlanding.com ${input.value.trim()}`;});
 loadHub();
 </script>
 </body>
