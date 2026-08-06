@@ -258,8 +258,8 @@
         ticker: item.ticker || '',
         selection_reason: item.company_review?.reason || item.next_action || '',
         analysis_status: item.company_review?.status || 'pending',
-        company_json_path: `/data/companies/${slug}/top${index + 1}.json`,
-        detail_url: `/company.html?theme=${slug}&rank=${index + 1}`
+        company_json_path: `./data/companies/${slug}/top${index + 1}.json`,
+        detail_url: `./company.html?theme=${slug}&rank=${index + 1}`
       }));
   }
 
@@ -361,14 +361,12 @@
 
     const results = await Promise.all(entries.map(async entry => {
       const rank = Number(entry.rank);
-      const candidates = [
-        `/data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
-      /*  `/data/companies/${encodeURIComponent(slug)}/top${rank}.json`,*/
-        `/data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
-        `./data/companies/top${rank}.json`,
-        entry.company_json_path?.replace(/^\/investment\//, './'),
-        entry.company_json_path?.replace(/^\/data\//, './data/')
-      ].filter(Boolean);
+     const candidates = [
+  `./data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
+  `./data/companies/top${rank}.json`,
+  entry.company_json_path ? entry.company_json_path.replace(/^\/(investment\/)?/, './') : null,
+  entry.company_json_path
+].filter(Boolean);
 
       for (const path of [...new Set(candidates)]) {
         try { 
@@ -389,8 +387,8 @@
     // Comprehensive candidate paths across root and relative folder structures
     const candidatePaths = [
       `./data/themes/${encodeURIComponent(slug)}.json`,
-      `/data/themes/${encodeURIComponent(slug)}.json`,
-      `/data/themes/${encodeURIComponent(slug)}.json`,
+      `./data/themes/${encodeURIComponent(slug)}.json`,
+      `./data/themes/${encodeURIComponent(slug)}.json`,
       `./data/${encodeURIComponent(slug)}.json`,
       `./${encodeURIComponent(slug)}.json`
     ];
