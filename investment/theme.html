@@ -161,10 +161,18 @@
 <script>
   const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const pretty = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, character => character.toUpperCase());
-  const normalizeSlug = value => String(value || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+  
+  // Robust slug sanitizer that strips .json extensions cleanly
+  const normalizeSlug = value => {
+    if (!value) return '';
+    let raw = String(value).trim().toLowerCase();
+    if (raw.endsWith('.json')) raw = raw.slice(0, -5);
+    return raw.replace(/[^a-z0-9-]/g, '');
+  };
+
   const money = (value, currency) => value == null ? 'Pending' : `${currency || ''} ${Number(value).toLocaleString()}`.trim();
 
-  // Safely resolve relative URLs for blob: and preview environments
+  // Resolution helper for blob: and production environments
   function resolveUrl(path) {
     if (!path) return '';
     try {
@@ -181,8 +189,15 @@
   async function getJSON(path) {
     const targetUrl = resolveUrl(path);
     const response = await fetch(targetUrl, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`${path}: ${response.status}`);
-    return response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} for ${path}`);
+    }
+    try {
+      return await response.json();
+    } catch (err) {
+      console.error(`JSON Syntax Error in file "${path}":`, err);
+      throw new Error(`Invalid JSON format in ${path}: ${err.message}`);
+    }
   }
 
   const FALLBACK_JPY_THEME = {
@@ -348,13 +363,18 @@
       const rank = Number(entry.rank);
       const candidates = [
         `./data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
+        `/investment/data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
+        `/data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
         `./data/companies/top${rank}.json`,
         entry.company_json_path?.replace(/^\/investment\//, './'),
         entry.company_json_path?.replace(/^\/data\//, './data/')
       ].filter(Boolean);
 
       for (const path of [...new Set(candidates)]) {
-        try { return { entry, company: await getJSON(path) }; } catch (_) {}
+        try { 
+          const companyData = await getJSON(path);
+          if (companyData) return { entry, company: companyData };
+        } catch (_) {}
       }
       return { entry, company: null };
     }));
@@ -363,26 +383,35 @@
   }
 
   async function load() {
-    const slug = normalizeSlug(new URLSearchParams(location.search).get('thesis') || 'jpy');
+    const rawParam = new URLSearchParams(location.search).get('thesis');
+    const slug = normalizeSlug(rawParam || 'jpy');
     
+    // Comprehensive candidate paths across root and relative folder structures
     const candidatePaths = [
       `./data/themes/${encodeURIComponent(slug)}.json`,
+      `/investment/data/themes/${encodeURIComponent(slug)}.json`,
+      `/data/themes/${encodeURIComponent(slug)}.json`,
       `./data/${encodeURIComponent(slug)}.json`,
       `./${encodeURIComponent(slug)}.json`
     ];
 
     let theme = null;
+    let lastError = null;
+
     for (const path of candidatePaths) {
       try {
         theme = await getJSON(path);
-        if (theme) break;
+        if (theme) {
+          console.info(`Successfully loaded theme from: ${path}`);
+          break;
+        }
       } catch (e) {
-        // Try next candidate path
+        lastError = e;
       }
     }
 
     if (!theme) {
-      console.info(`Theme network path not found, using baseline fallback for "${slug}".`);
+      console.warn(`Could not load theme JSON from any remote candidate path (${lastError?.message}). Using baseline fallback for "${slug}".`);
       theme = FALLBACK_JPY_THEME;
     }
 
@@ -469,7 +498,6 @@
 
   load().catch(error => {
     console.error("Theme load error:", error);
-    // Render fallback data on any unexpected error
     loadWithFallback();
   });
 
