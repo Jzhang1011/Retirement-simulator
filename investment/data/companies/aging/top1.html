@@ -1,0 +1,213 @@
+{
+  "schema_version": "4.2",
+  "review_id": "RMD-2026-08-06",
+  "ranking": {
+    "theme_slug": "aging",
+    "rank": 1,
+    "slot": "top1",
+    "selected_company_slug": "resmed",
+    "previous_company_slug": null,
+    "comparison_status": "initial_baseline",
+    "selected_at": "2026-08-06"
+  },
+  "company": {
+    "id": "RMD",
+    "name": "ResMed Inc.",
+    "slug": "resmed",
+    "ticker": "RMD",
+    "exchange": "NYSE",
+    "reporting_currency": "USD",
+    "trading_currency": "USD",
+    "theme_dependencies": ["aging"]
+  },
+  "review": {
+    "date": "2026-08-06",
+    "previous_review_id": null
+  },
+  "market_data": {
+    "current_price": 224.03,
+    "price_date": "2026-08-06",
+    "price_timestamp": "2026-08-06T07:29:58-04:00",
+    "price_source": "Current U.S. equity market data",
+    "share_basis": "NYSE_common_share"
+  },
+  "investment_thesis": {
+    "summary": "ResMed combines direct aging-in-place exposure with recurring masks and accessories, connected home-care technology, strong margins, cash generation and a net-cash balance sheet.",
+    "return_engines": [
+      "Sleep-device adoption",
+      "Recurring masks and accessories",
+      "Connected home-care and digital-health adoption",
+      "Margin expansion and capital returns"
+    ],
+    "market_implied_assumptions": [
+      "Organic growth moderates toward mid-single digits",
+      "Recent gross-margin expansion is not fully durable",
+      "Alternative therapies reduce some future treatment starts",
+      "Portfolio simplification produces limited incremental value"
+    ],
+    "why_price_may_differ_from_value": [
+      "Fiscal 2026 results had not been released at the review timestamp",
+      "Uncertainty regarding obesity therapies and alternative sleep-apnea treatments",
+      "MatrixCare portfolio-transition uncertainty",
+      "Potential normalization of recent margin gains"
+    ]
+  },
+  "operating_scenarios": {
+    "bull": {
+      "probability": 0.25,
+      "conditions": [
+        "High-single-digit organic revenue growth",
+        "Sustained mask and accessory resupply",
+        "Gross margin remains above 62%",
+        "Portfolio simplification improves returns"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_reference": 13.65,
+        "valuation_multiple": 22.0
+      },
+      "failure_conditions": [
+        "Organic growth falls below 6%",
+        "Material therapeutic substitution"
+      ]
+    },
+    "fair": {
+      "probability": 0.55,
+      "conditions": [
+        "Mid- to high-single-digit organic growth",
+        "Stable connected-care adoption",
+        "Margins remain structurally above prior-cycle levels"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_reference": 12.5,
+        "valuation_multiple": 20.0
+      },
+      "failure_conditions": [
+        "Mask resupply weakens",
+        "Gross margin falls below 59%"
+      ]
+    },
+    "bear": {
+      "probability": 0.2,
+      "conditions": [
+        "Diagnosis and device growth decelerate",
+        "Alternative therapies reduce treatment starts",
+        "Margins normalize materially"
+      ],
+      "financial_assumptions": {
+        "normalized_eps_reference": 10.0,
+        "valuation_multiple": 18.0
+      },
+      "failure_conditions": [
+        "Organic growth reaccelerates",
+        "Connected-care adoption expands materially"
+      ]
+    }
+  },
+  "valuation": {
+    "bull": {
+      "value_per_share": 300.0,
+      "method": "Forward normalized earnings with cash-flow cross-check",
+      "assumptions": [
+        "Normalized EPS reference of approximately 13.65 dollars",
+        "22 times valuation multiple"
+      ]
+    },
+    "fair": {
+      "value_per_share": 250.0,
+      "method": "Forward normalized earnings multiple",
+      "assumptions": [
+        "Normalized EPS reference of approximately 12.50 dollars",
+        "20 times valuation multiple"
+      ]
+    },
+    "bear": {
+      "value_per_share": 180.0,
+      "method": "Compressed forward earnings multiple",
+      "assumptions": [
+        "Normalized EPS reference of approximately 10 dollars",
+        "18 times valuation multiple"
+      ]
+    },
+    "probability_weighted_value": 248.5,
+    "net_cash_per_share": 6.84,
+    "upside_to_fair_value_pct": 11.59,
+    "downside_to_bear_value_pct": -19.65,
+    "confidence": "medium",
+    "explanation": "The valuation uses scenario-specific normalized earnings and multiples. Net cash is a supporting balance-sheet factor and is not added separately to avoid double counting value already reflected in the earnings multiple."
+  },
+  "entry_zones": {
+    "strong_buy_below": 185.0,
+    "attractive_below": 220.0,
+    "fair_value_low": 220.0,
+    "fair_value_high": 265.0,
+    "expensive_above": 265.0
+  },
+  "valuation_status": "moderately_undervalued",
+  "current_zone": "fair_value",
+  "catalysts": [
+    {
+      "name": "Fiscal 2026 results",
+      "timing": "2026-08-06",
+      "expected_effect": "Update revenue, margin, earnings and cash-flow assumptions"
+    },
+    {
+      "name": "MatrixCare portfolio simplification",
+      "timing": "2026-H2",
+      "expected_effect": "Potentially improve focus, margins and capital allocation"
+    },
+    {
+      "name": "New mask and device launches",
+      "timing": "2026-2027",
+      "expected_effect": "Support market share and recurring resupply"
+    }
+  ],
+  "risks": [
+    "Therapeutic substitution",
+    "Product recall or regulatory action",
+    "Competitive share loss",
+    "Margin normalization",
+    "Portfolio-allocation mistakes"
+  ],
+  "invalidation_conditions": [
+    "Sustained organic revenue growth below 5%",
+    "Gross margin below 58% without a temporary explanation",
+    "Material decline in mask and accessory demand",
+    "Evidence that alternative therapies structurally reduce the addressable market"
+  ],
+  "decision": {
+    "state": "watchlist",
+    "cta": "buy_below_attractive_threshold",
+    "summary": "ResMed offers the strongest combination of business quality and valuation support among the selected aging companies, but the current price is just above the attractive threshold and fiscal 2026 results are pending.",
+    "next_catalyst": "Fiscal fourth-quarter and full-year 2026 results",
+    "next_decision_date": "2026-08-07",
+    "required_actions": [
+      "Update fiscal 2026 earnings and cash-flow inputs",
+      "Review MatrixCare transaction implications",
+      "Recalculate entry zones after management guidance"
+    ]
+  },
+  "sources": [
+    {
+      "name": "ResMed fiscal third-quarter 2026 earnings release",
+      "date": "2026-04-30",
+      "type": "company_primary_source"
+    },
+    {
+      "name": "Current RMD market-price data",
+      "date": "2026-08-06",
+      "type": "market_data"
+    }
+  ],
+  "output": {
+    "live_json_path": "/investment/data/companies/aging/top1.json",
+    "detail_url": "/investment/company.html?theme=aging&rank=1"
+  },
+  "publication": {
+    "status": "draft"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
