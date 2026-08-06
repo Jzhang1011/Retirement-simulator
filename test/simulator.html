@@ -22,7 +22,156 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 body{background:var(--color-background-secondary);color:var(--color-text-primary);padding:20px}
-.wrap{max-width:2100px;margin:0 auto;padding:1.25rem 0}
+
+/* PASSCODE OVERLAY STYLES */
+#passcode-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#passcode-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.lock-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border-secondary);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+.lock-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  color: var(--color-text-primary);
+}
+.lock-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+.lock-subtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+.passcode-input-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+.passcode-field {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 18px;
+  letter-spacing: 0.25em;
+  text-align: center;
+  border: 1.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+.passcode-field:focus {
+  border-color: #185FA5;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.15);
+  background: #ffffff;
+}
+.lock-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #111827;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.lock-btn:hover {
+  background: #1f2937;
+}
+.lock-btn:active {
+  transform: scale(0.98);
+}
+.error-msg {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 8px;
+  min-height: 18px;
+  font-weight: 500;
+}
+.shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* MAIN CONTENT LOCK STATE */
+.wrap {
+  max-width: 2100px;
+  margin: 0 auto;
+  padding: 1.25rem 0;
+  transition: filter 0.3s ease;
+}
+.wrap.locked {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.top-bar-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.lock-status-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: var(--color-background-primary);
+  border: .5px solid var(--color-border-secondary);
+  padding: 6px 12px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: all 0.2s;
+}
+.lock-status-btn:hover {
+  background: #f3f4f6;
+  color: var(--color-text-primary);
+}
+
 .top{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin-bottom:1.25rem}
 .met{background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:1rem 1.25rem;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
 .ml{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px;line-height:1.3;text-transform:uppercase;letter-spacing:.03em}
@@ -109,7 +258,48 @@ body{background:var(--color-background-secondary);color:var(--color-text-primary
 </head>
 <body>
 
-<div class="wrap">
+<!-- PASSCODE PROTECTION OVERLAY -->
+<div id="passcode-overlay">
+  <div class="lock-card" id="lock-card">
+    <div class="lock-icon-wrapper">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+    <h2 class="lock-title">Protected Dashboard</h2>
+    <p class="lock-subtitle">Please enter your passcode to view your portfolio and retirement model.</p>
+    
+    <form id="passcode-form" onsubmit="handlePasscodeSubmit(event)">
+      <div class="passcode-input-group">
+        <input 
+          type="password" 
+          id="passcode-input" 
+          class="passcode-field" 
+          placeholder="••••" 
+          maxlength="10" 
+          autocomplete="off" 
+          autofocus 
+          required 
+        />
+        <div id="error-msg" class="error-msg"></div>
+      </div>
+      <button type="submit" class="lock-btn">Unlock Dashboard</button>
+    </form>
+  </div>
+</div>
+
+<div class="wrap locked" id="main-content">
+
+<div class="top-bar-controls">
+  <button class="lock-status-btn" onclick="lockDashboard()" title="Lock Dashboard">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+    Lock Dashboard
+  </button>
+</div>
 
 <!-- PART 1: CURRENT PORTFOLIO DASHBOARD -->
 <div class="info">
@@ -295,7 +485,7 @@ body{background:var(--color-background-secondary);color:var(--color-text-primary
         <div class="sl-hint">Determines capital gains portion when selling taxable assets</div>
       </div>
 
-      <!-- ACA Premium Slider Added Back -->
+      <!-- ACA Premium Slider -->
       <div class="slider-group" style="color: #0F6E56;">
         <div class="sl-top"><span class="sl-lbl">ACA Silver baseline premium</span><span class="sl-val" id="val-aca">$24K/yr</span></div>
         <div class="sl-track-wrap">
@@ -489,7 +679,78 @@ body{background:var(--color-background-secondary);color:var(--color-text-primary
 </div>
 
 <script>
-// A master try/catch wrapper that executes entirely independent of window load states
+// ==========================================
+// PASSCODE PROTECTION LOGIC
+// ==========================================
+// Configurable Passcode (Default: "2026")
+const CORRECT_PASSCODE = "2026"; 
+const STORAGE_KEY = "dashboard_unlocked_session";
+
+function initPasscodeProtection() {
+  const isUnlocked = sessionStorage.getItem(STORAGE_KEY) === "true";
+  if (isUnlocked) {
+    unlockDashboardUI();
+  } else {
+    lockDashboardUI();
+  }
+}
+
+function handlePasscodeSubmit(e) {
+  e.preventDefault();
+  const inputEl = document.getElementById('passcode-input');
+  const errorEl = document.getElementById('error-msg');
+  const cardEl = document.getElementById('lock-card');
+  const enteredPasscode = inputEl.value.trim();
+
+  if (enteredPasscode === CORRECT_PASSCODE) {
+    sessionStorage.setItem(STORAGE_KEY, "true");
+    errorEl.innerText = "";
+    inputEl.value = "";
+    unlockDashboardUI();
+  } else {
+    errorEl.innerText = "Incorrect passcode. Please try again.";
+    cardEl.classList.remove('shake');
+    // Trigger reflow to restart animation
+    void cardEl.offsetWidth; 
+    cardEl.classList.add('shake');
+    inputEl.value = "";
+    inputEl.focus();
+  }
+}
+
+function unlockDashboardUI() {
+  const overlay = document.getElementById('passcode-overlay');
+  const mainContent = document.getElementById('main-content');
+  overlay.classList.add('hidden');
+  mainContent.classList.remove('locked');
+}
+
+function lockDashboard() {
+  sessionStorage.removeItem(STORAGE_KEY);
+  lockDashboardUI();
+}
+
+function lockDashboardUI() {
+  const overlay = document.getElementById('passcode-overlay');
+  const mainContent = document.getElementById('main-content');
+  const inputEl = document.getElementById('passcode-input');
+  const errorEl = document.getElementById('error-msg');
+  
+  if (errorEl) errorEl.innerText = "";
+  if (inputEl) inputEl.value = "";
+  
+  overlay.classList.remove('hidden');
+  mainContent.classList.add('locked');
+  
+  setTimeout(() => {
+    if (inputEl) inputEl.focus();
+  }, 100);
+}
+
+// Run protection check as early as possible
+initPasscodeProtection();
+
+// Master try/catch wrapper that executes entirely independent of window load states
 try {
 
   // ==========================================
@@ -940,7 +1201,6 @@ try {
       let fpl = parseInt(document.getElementById('sl-fpl').value);
       if (isNaN(fpl)) fpl = 400;
       
-      // Allow IRMAA to be fully 0
       let irm = parseInt(document.getElementById('sl-irm').value);
       if (isNaN(irm)) irm = 5;
       
