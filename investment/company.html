@@ -148,37 +148,42 @@
 
     const identity = data.company || data.identity || {};
     const ranking = data.ranking || {};
-    const currency = identity.currency || data.market_data?.currency || '';
+    const currency =
+      identity.trading_currency ||
+      identity.reporting_currency ||
+      identity.currency ||
+      data.market_data?.currency ||
+      data.valuation?.currency ||
+      '';
+
     const companyName = identity.name || data.company_name || `Top ${rank} company`;
     const ticker = identity.ticker || data.ticker || '—';
-  const currentPrice =
-  data.market_data?.current_price ??
-  data.market_data?.price ??
-  data.valuation?.current_price ??
-  null;
 
-const fairValue =
-  data.valuation?.fair?.value_per_share ??
-  data.valuation?.fair_value ??
-  data.valuation?.fair_value_per_share ??
-  data.valuation?.probability_weighted_value ??
-  data.valuation?.weighted_value ??
-  data.scenario_model?.probability_weighted_value ??
-  null;
+    const currentPrice =
+      data.market_data?.current_price ??
+      data.market_data?.price ??
+      data.valuation?.current_price ??
+      null;
 
-const marginOfSafety =
-  data.valuation?.upside_to_fair_value_pct ??
-  data.valuation?.margin_of_safety_pct ??
-  data.valuation?.margin_of_safety ??
-  data.valuation?.upside_to_fair_value ??
-  (
-    currentPrice != null && fairValue != null
-      ? ((fairValue / currentPrice) - 1) * 100
-      : null
-  );
+    const fairValue =
+      data.valuation?.fair?.value_per_share ??
+      data.valuation?.fair_value ??
+      data.valuation?.fair_value_per_share ??
+      data.valuation?.probability_weighted_value ??
+      data.valuation?.weighted_value ??
+      data.scenario_model?.probability_weighted_value ??
+      null;
 
-document.getElementById('current-price').textContent =
-  money(currentPrice, currency);
+    const marginOfSafety =
+      data.valuation?.upside_to_fair_value_pct ??
+      data.valuation?.margin_of_safety_pct ??
+      data.valuation?.margin_of_safety ??
+      data.valuation?.upside_to_fair_value ??
+      (
+        currentPrice != null && fairValue != null
+          ? ((Number(fairValue) / Number(currentPrice)) - 1) * 100
+          : null
+      );
 
     document.title = `${companyName} Decision | WealthLanding`;
     document.getElementById('company-name').textContent = companyName;
@@ -187,10 +192,10 @@ document.getElementById('current-price').textContent =
     document.getElementById('thesis-summary').textContent = data.investment_thesis?.summary || data.publication?.summary || data.decision?.summary || '';
     document.getElementById('cta').textContent = pretty(data.decision?.cta || data.decision?.state || 'under review');
     document.getElementById('cta-summary').textContent = data.decision?.summary || '';
-    document.getElementById('current-price').textContent = money(data.market_data?.price, currency);
+    document.getElementById('current-price').textContent = money(currentPrice, currency);
     document.getElementById('price-date').textContent = data.market_data?.price_date ? `As of ${data.market_data.price_date}` : 'Current market price required';
     document.getElementById('fair-value').textContent = money(fairValue, currency);
-    document.getElementById('valuation-status').textContent = pretty(data.valuation?.status || data.valuation_status || 'pending');
+    document.getElementById('valuation-status').textContent = pretty(data.valuation_status || data.valuation?.status || data.current_zone || 'pending');
     document.getElementById('mos').textContent = marginOfSafety == null ? 'Pending' : `${Number(marginOfSafety).toFixed(1)}%`;
     document.getElementById('confidence').textContent = pretty(data.valuation?.confidence || data.scenario_model?.confidence || 'pending');
     document.getElementById('valuation-explanation').textContent = data.valuation?.explanation || data.valuation?.summary || '';
@@ -201,10 +206,40 @@ document.getElementById('current-price').textContent =
     document.getElementById('theme-nav-link').href = themeUrl;
     document.getElementById('theme-nav-link').textContent = `${pretty(theme)} theme`;
 
-    document.getElementById('scenario-values').innerHTML = (data.scenario_model?.scenarios || []).map(scenario => {
-      const value = scenario.value ?? scenario.value_per_share ?? scenario.fair_value;
-      const conditions = scenario.conditions || scenario.entry_conditions || scenario.required_conditions || [];
-      return `<article class="value-card"><div class="flex justify-between gap-4"><h3 class="text-xl font-extrabold">${pretty(scenario.id || scenario.name)}</h3><span class="tag bg-slate-100">${scenario.probability == null ? 'Pending' : Math.round(scenario.probability * 100) + '%'}</span></div><strong class="block mt-4">${money(value, currency)}</strong><div class="text-xs uppercase tracking-wider text-slate-400 font-bold mt-4">Required conditions</div><ul class="text-sm text-slate-600 mt-2 space-y-2">${conditions.map(item => `<li>• ${esc(item)}</li>`).join('')}</ul></article>`;
+    const scenarioNames = ['bull', 'fair', 'bear'];
+    const scenarioModelList = Array.isArray(data.scenario_model?.scenarios)
+      ? data.scenario_model.scenarios
+      : [];
+
+    document.getElementById('scenario-values').innerHTML = scenarioNames.map(name => {
+      const modelScenario = scenarioModelList.find(item =>
+        String(item?.id || item?.name || '').toLowerCase() === name
+      ) || {};
+
+      const operating = data.operating_scenarios?.[name] || modelScenario;
+      const valuationScenario = data.valuation?.[name] || {};
+
+      const value =
+        valuationScenario.value_per_share ??
+        valuationScenario.value ??
+        operating.value_per_share ??
+        operating.value ??
+        operating.fair_value ??
+        null;
+
+      const probability =
+        operating.probability ??
+        valuationScenario.probability ??
+        null;
+
+      const conditions =
+        operating.conditions ||
+        operating.entry_conditions ||
+        operating.required_conditions ||
+        valuationScenario.assumptions ||
+        [];
+
+      return `<article class="value-card"><div class="flex justify-between gap-4"><h3 class="text-xl font-extrabold">${pretty(name)}</h3><span class="tag bg-slate-100">${probability == null ? 'Pending' : Math.round(Number(probability) * 100) + '%'}</span></div><strong class="block mt-4">${money(value, currency)}</strong><div class="text-xs uppercase tracking-wider text-slate-400 font-bold mt-4">Required conditions</div><ul class="text-sm text-slate-600 mt-2 space-y-2">${conditions.map(item => `<li>• ${esc(item)}</li>`).join('')}</ul></article>`;
     }).join('');
 
     const zones = data.entry_zones || data.valuation?.entry_zones || {};
@@ -217,7 +252,7 @@ document.getElementById('current-price').textContent =
 
     document.getElementById('engines').innerHTML = engineList(data).map(item => `<div class="flex gap-3 items-start"><span class="check">✓</span><span class="text-sm font-semibold">${esc(item)}</span></div>`).join('');
 
-    document.getElementById('catalysts').innerHTML = (data.catalysts || []).map(item => `<div class="rounded-xl bg-slate-50 p-4"><div class="flex justify-between gap-4"><b>${esc(item.name || item.id)}</b><span class="tag bg-white">${pretty(item.status || item.state || 'watch')}</span></div><p class="text-sm text-slate-500 mt-2">${esc(item.decision_effect || item.effect || item.confirmation_test || '')}</p></div>`).join('');
+    document.getElementById('catalysts').innerHTML = (data.catalysts || []).map(item => `<div class="rounded-xl bg-slate-50 p-4"><div class="flex justify-between gap-4"><b>${esc(item.name || item.id)}</b><span class="tag bg-white">${pretty(item.status || item.state || item.timing || 'watch')}</span></div><p class="text-sm text-slate-500 mt-2">${esc(item.decision_effect || item.expected_effect || item.effect || item.confirmation_test || '')}</p></div>`).join('');
 
     document.getElementById('now-title').textContent = pretty(data.decision?.state || data.decision?.cta || 'under review');
     document.getElementById('now-summary').textContent = data.decision?.summary || '';
