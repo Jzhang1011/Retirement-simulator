@@ -183,7 +183,7 @@
     const companyName = identity.name || company?.company_name || entry.company_name || `Top ${entry.rank}`;
     const ticker = identity.ticker || company?.ticker || entry.ticker || '';
     const currency = identity.currency || company?.company?.currency || company?.market_data?.currency || '';
-    const currentPrice = company?.market_data?.price;
+  const currentPrice = company?.market_data?.current_price ?? company?.market_data?.price ?? null;
     const fairValue = valuation.fair_value ?? valuation.weighted_value ?? company?.scenario_model?.probability_weighted_value;
     const primaryEngine = engineName(engineFramework.primary_company_engine) || (company?.investment_thesis?.return_engines || [])[0] || '';
     const themeEngine = engineName(engineFramework.secondary_jpy_engine) || engineName(engineFramework.secondary_theme_engine) || (company?.investment_thesis?.return_engines || [])[1] || '';
