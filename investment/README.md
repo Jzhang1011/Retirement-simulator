@@ -27,7 +27,19 @@
         ├── top1.json
         ├── top2.json
         └── top3.json
-# WealthLanding Investment Fix Packet
+
+
+theme.html?thesis=jpy
+        ↓
+loads themes/jpy.json
+        ↓
+reads ranked_company_reviews
+        ↓
+loads companies/jpy/top1.json
+      companies/jpy/top2.json
+      companies/jpy/top3.json
+        ↓
+renders the current company names and analyses
 
 Upload this folder structure under `/investment/`:
 
