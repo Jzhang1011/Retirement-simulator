@@ -151,8 +151,34 @@
     const currency = identity.currency || data.market_data?.currency || '';
     const companyName = identity.name || data.company_name || `Top ${rank} company`;
     const ticker = identity.ticker || data.ticker || '—';
-    const fairValue = data.valuation?.fair_value ?? data.valuation?.weighted_value ?? data.scenario_model?.probability_weighted_value;
-    const marginOfSafety = data.valuation?.margin_of_safety ?? data.valuation?.upside_to_fair_value;
+  const currentPrice =
+  data.market_data?.current_price ??
+  data.market_data?.price ??
+  data.valuation?.current_price ??
+  null;
+
+const fairValue =
+  data.valuation?.fair?.value_per_share ??
+  data.valuation?.fair_value ??
+  data.valuation?.fair_value_per_share ??
+  data.valuation?.probability_weighted_value ??
+  data.valuation?.weighted_value ??
+  data.scenario_model?.probability_weighted_value ??
+  null;
+
+const marginOfSafety =
+  data.valuation?.upside_to_fair_value_pct ??
+  data.valuation?.margin_of_safety_pct ??
+  data.valuation?.margin_of_safety ??
+  data.valuation?.upside_to_fair_value ??
+  (
+    currentPrice != null && fairValue != null
+      ? ((fairValue / currentPrice) - 1) * 100
+      : null
+  );
+
+document.getElementById('current-price').textContent =
+  money(currentPrice, currency);
 
     document.title = `${companyName} Decision | WealthLanding`;
     document.getElementById('company-name').textContent = companyName;
