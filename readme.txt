@@ -1,3 +1,123 @@
+LEVEL 0
+WEALTHLANDING
+index.html
+│
+│
+├── LEVEL 1: LIFE STAGES
+│   │
+│   └── life-stages.html                         [NEW]
+│       │
+│       ├── Starting Out 18–25
+│       │   ├── Budgeting
+│       │   ├── Emergency Fund
+│       │   ├── Debt
+│       │   ├── Credit
+│       │   └── Start Investing
+│       │
+│       ├── Building & Growing 25–40
+│       │   ├── Home Buying
+│       │   ├── Investing
+│       │   ├── Credit Card Rewards
+│       │   ├── Real Estate vs Index Funds
+│       │   └── Joint Finances
+│       │
+│       ├── Family & Peak Wealth 40–55
+│       │   ├── College
+│       │   ├── Taxes
+│       │   ├── Insurance
+│       │   ├── Investing
+│       │   └── Retirement Preparation
+│       │
+│       └── Pre-Retirement & Freedom 55+
+│           ├── Start My Retirement
+│           ├── Taxes
+│           ├── Social Security
+│           ├── Healthcare
+│           └── Estate
+│
+├── LEVEL 1: GOALS & DECISIONS
+│   │
+│   └── decisions.html                           [NEW]
+│       │
+│       ├── Manage My Money
+│       ├── Pay Off Debt
+│       ├── Optimize Credit Card Rewards
+│       ├── Buy a Home
+│       ├── Start Investing
+│       ├── Real Estate vs Index Funds
+│       ├── Lower My Taxes
+│       ├── Plan for College
+│       ├── Protect My Family
+│       ├── Plan My Retirement
+│       │       ↓
+│       │   Retirement_Gateway.html
+│       │
+│       └── Build a Legacy
+│
+├── LEVEL 1: RETIREMENT
+│   │
+│   ├── Start My Retirement
+│   │       ↓
+│   │   Retirement_Gateway.html
+│   │       ↓
+│   │   Onboarding
+│   │       ↓
+│   │   Retirement_Forecast.html
+│   │       ↓
+│   │   Odyssey
+│   │       ↓
+│   │   Preference Discovery
+│   │       ↓
+│   │   Feasibility
+│   │       ↓
+│   │   building-your-retirement.html
+│   │
+│   ├── My Retirement Blueprint
+│   │       ↓
+│   │   building-your-retirement.html
+│   │       ├── Life Strategy
+│   │       ├── Location
+│   │       ├── Healthcare
+│   │       ├── Financial
+│   │       └── Estate
+│   │
+│   ├── Retirement Odyssey
+│   ├── Retirement Profiles
+│   └── Retirement Stories / Guides
+│
+├── LEVEL 1: TOOLS
+│   │
+│   └── tools.html                               [REBUILD]
+│       │
+│       ├── Credit Card Rewards Optimizer
+│       ├── Real Estate vs Index Funds
+│       ├── Compound Growth
+│       ├── Home Affordability
+│       ├── Debt Payoff
+│       ├── FIRE
+│       ├── Retirement Strategy Engine
+│       ├── US City Matcher
+│       ├── Overseas Matcher
+│       └── Healthcare Planner
+│
+└── LEVEL 1: LEARN
+    │
+    ├── Blog / Latest Insights
+    ├── Stories
+    │   ├── Wealth Stories
+    │   └── Retirement Stories
+    ├── Guides
+    │   ├── Money
+    │   ├── Investing
+    │   ├── Real Estate
+    │   ├── Taxes
+    │   └── Retirement
+    ├── Decision Explainers
+    └── Research
+
+
+
+
 Generate Sitemap Automatically https://www.xml-sitemaps.com/ or https://www.mysitemapgenerator.com/
 
 WealthLanding
