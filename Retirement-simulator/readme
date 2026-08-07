@@ -1,3 +1,20 @@
+| Current page                 | File                                            | Previous                       | Primary next               | Notes                    |
+| ---------------------------- | ----------------------------------------------- | ------------------------------ | -------------------------- | ------------------------ |
+| Retirement Gateway           | `Retirement_Gateway.html`                       | WealthLanding / Retirement nav | Onboarding                 | Start of flow            |
+| Retirement Onboarding        | `wealthlanding_onboarding.html`                 | Gateway                        | Forecast                   | Flow-only                |
+| Retirement Forecast          | existing forecast                               | Onboarding                     | Odyssey / next guided step | Flow-only                |
+| Odyssey                      | Odyssey page                                    | Forecast / public nav          | Preference Discovery       | Can also be standalone   |
+| Preference Discovery         | `retirement-preference-discovery.html`          | Odyssey                        | Feasibility                | Flow                     |
+| Feasibility Engine           | `financial-feasibility-audit.html`              | Preference Discovery           | Building Your Retirement   | Commits chosen path      |
+| **Building Your Retirement** | `building-your-retirement.html`                 | Feasibility / returning user   | Recommended next decision  | **Central hub**          |
+| Life Strategy                | preference / Odyssey                            | Blueprint                      | Back to Blueprint          | Specialist module        |
+| Location Strategy            | `UScitymatcher.html` or `RetiringOverseas.html` | Blueprint                      | Back to Blueprint          | Routed by chosen path    |
+| Healthcare Strategy          | healthcare planner chosen dynamically           | Blueprint                      | Back to Blueprint          | Routed by chosen path    |
+| Financial Strategy           | `OptimizeRoth.html`                             | Blueprint                      | Back to Blueprint          | Decision saved           |
+| Estate Strategy              | `estate-planner.html`                           | Blueprint                      | Back to Blueprint          | Decision saved           |
+| Retirement Optimizer         | `retirement-optimizer.html`                     | Blueprint after core decisions | Back to Blueprint          | Cross-decision synthesis |
+
+
 Gateway
       │
       ▼
