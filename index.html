@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9JMJJ5CJR4');
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WealthLanding - Lifetime Financial Education</title>
@@ -73,7 +81,7 @@
     </div>
 
     <!-- Main Sticky Navigation Bar -->
-    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 transition-all duration-200">
+    <header class="sticky top-0 z-40 bg-[#0a1128] border-b border-slate-800 transition-all duration-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 
@@ -83,199 +91,311 @@
                         <i class="fa-solid fa-chart-line text-lg"></i>
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-brand-600 transition">Wealth<span class="text-brand-600">Landing</span></span>
-                        <span class="block text-[10px] font-semibold tracking-wider text-slate-600 uppercase -mt-1">Lifetime Education</span>
+                        <span class="text-xl font-extrabold tracking-tight text-white group-hover:text-emerald-400 transition">Wealth<span class="text-emerald-400">Landing</span></span>
+                        <span class="block text-[10px] font-semibold tracking-wider text-slate-400 uppercase -mt-1">Lifetime Education</span>
                     </div>
                 </a>
 
-                <!-- Desktop Navigation Items -->
+                <!-- Desktop Navigation Items (Exact 5 Dropdowns from Screenshots) -->
                 <nav class="hidden lg:flex items-center gap-1">
                     
-                    <!-- MENU ITEM 1: Life Stages (Mega Menu) -->
+                    <!-- MENU 1: Life Stages -->
                     <div class="relative group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 rounded-lg hover:bg-slate-100/70 transition">
+                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
                             <span>Life Stages</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-hover:text-brand-600 group-hover:rotate-180 transition-transform duration-200"></i>
+                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
 
-                        <!-- Mega Menu Dropdown -->
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[880px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 p-6 grid grid-cols-12 gap-6 z-50">
-                            
-                            <div class="col-span-8 grid grid-cols-2 gap-4">
-                                <!-- Stage 1 -->
-                                <a href="#life-stages-explorer" onclick="selectStageTab('early')" class="p-3.5 rounded-xl hover:bg-emerald-50/60 border border-transparent hover:border-emerald-100 transition group/item">
-                                    <div class="flex items-center gap-3 mb-1.5">
-                                        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-                                            🌱
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-900 group-hover/item:text-brand-600 transition text-sm">Starting Out</h4>
-                                            <span class="text-[11px] font-medium text-slate-600">Ages 18–25 • Foundation</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs text-slate-500 leading-relaxed pl-11">First job, budgeting 101, credit score building & student loans.</p>
-                                </a>
-
-                                <!-- Stage 2 -->
-                                <a href="#life-stages-explorer" onclick="selectStageTab('building')" class="p-3.5 rounded-xl hover:bg-blue-50/60 border border-transparent hover:border-blue-100 transition group/item">
-                                    <div class="flex items-center gap-3 mb-1.5">
-                                        <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
-                                            🚀
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-900 group-hover/item:text-blue-600 transition text-sm">Building & Growing</h4>
-                                            <span class="text-[11px] font-medium text-slate-600">Ages 25–40 • Acceleration</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs text-slate-500 leading-relaxed pl-11">Buying a home, joint finances, career growth & investing basics.</p>
-                                </a>
-
-                                <!-- Stage 3 -->
-                                <a href="#life-stages-explorer" onclick="selectStageTab('peak')" class="p-3.5 rounded-xl hover:bg-purple-50/60 border border-transparent hover:border-purple-100 transition group/item">
-                                    <div class="flex items-center gap-3 mb-1.5">
-                                        <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
-                                            🛡️
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-900 group-hover/item:text-purple-600 transition text-sm">Family & Peak Wealth</h4>
-                                            <span class="text-[11px] font-medium text-slate-600">Ages 40–55 • Optimization</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs text-slate-500 leading-relaxed pl-11">College savings, advanced tax strategies & insurance protection.</p>
-                                </a>
-
-                                <!-- Stage 4 -->
-                                <a href="#life-stages-explorer" onclick="selectStageTab('retire')" class="p-3.5 rounded-xl hover:bg-amber-50/60 border border-transparent hover:border-amber-100 transition group/item">
-                                    <div class="flex items-center gap-3 mb-1.5">
-                                        <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
-                                            🏖️
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-slate-900 group-hover/item:text-amber-600 transition text-sm">Pre-Retirement & Freedom</h4>
-                                            <span class="text-[11px] font-medium text-slate-600">Ages 55+ • Distribution</span>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs text-slate-500 leading-relaxed pl-11">Social Security optimization, Medicare, estate planning & legacy.</p>
-                                </a>
-                            </div>
-
-                            <!-- Right Featured Box inside Dropdown -->
-                            <div class="col-span-4 bg-slate-900 rounded-xl p-5 text-white flex flex-col justify-between relative overflow-hidden">
-                                <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-500/20 rounded-full blur-xl pointer-events-none"></div>
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                            <!-- Left Sidebar Panel -->
+                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
                                 <div>
-                                    <span class="inline-block text-[10px] font-bold tracking-wider text-brand-400 uppercase bg-brand-900/60 px-2 py-0.5 rounded border border-brand-700/50 mb-3">Popular Guide</span>
-                                    <h4 class="text-base font-bold text-white mb-2 leading-snug">First-Time Homebuyer Blueprint</h4>
-                                    <p class="text-xs text-slate-300 mb-4">Calculate how much house you can actually afford without sacrificing retirement.</p>
+                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHERE AM I?</div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Life Stages</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Start with your current chapter. See the financial priorities and decisions that tend to matter most now.</p>
                                 </div>
-                                <a href="#life-stages-explorer" onclick="selectStageTab('building')" class="inline-flex items-center text-xs font-semibold text-brand-400 hover:text-brand-300 gap-2 group/btn">
-                                    <span>Read Free Guide</span>
-                                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
-                                </a>
+                                <div class="pt-6 border-t border-slate-200/80">
+                                    <a href="#life-stages-explorer" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition group/link">
+                                        <span>Explore all life stages &rarr;</span>
+                                        <span class="text-[9px] font-extrabold tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase">NEW HUB</span>
+                                    </a>
+                                </div>
                             </div>
 
-                        </div>
-                    </div>
-
-                    <!-- MENU ITEM 2: Topics & Goals -->
-                    <div class="relative group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 rounded-lg hover:bg-slate-100/70 transition">
-                            <span>Topics & Goals</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-hover:text-brand-600 group-hover:rotate-180 transition-transform duration-200"></i>
-                        </button>
-
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[720px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 p-6 grid grid-cols-3 gap-6 z-50">
-                            <div>
-                                <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Core Pillars</h5>
-                                <ul class="space-y-2.5 text-xs font-semibold text-slate-700">
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-wallet text-brand-500 w-4"></i> Budgeting & Debt</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-brand-500 w-4"></i> Investing Essentials</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-house text-brand-500 w-4"></i> Real Estate & Mortgages</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-file-invoice-dollar text-brand-500 w-4"></i> Tax Optimization</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Life Goals</h5>
-                                <ul class="space-y-2.5 text-xs font-semibold text-slate-700">
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-blue-500 w-4"></i> College & Education Savings</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-ring text-purple-500 w-4"></i> Marriage & Joint Wealth</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-umbrella text-amber-500 w-4"></i> Insurance & Estate Protection</a></li>
-                                    <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i class="fa-solid fa-piggy-bank text-emerald-500 w-4"></i> Retirement Income Planning</a></li>
-                                </ul>
-                            </div>
-                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 flex flex-col justify-between">
+                            <!-- Right Content Matrix -->
+                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white">
                                 <div>
-                                    <div class="text-xs font-bold text-slate-900 mb-1">Need Immediate Answers?</div>
-                                    <p class="text-xs text-slate-500">Search over 120+ structured financial topic guides.</p>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">STARTING OUT</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li class="text-slate-500 font-semibold py-1">18–25 · Build the foundation</li>
+                                        <li><a href="#life-stages-explorer" onclick="selectStageTab('early')" class="hover:text-emerald-600 py-1 block">Budget & cash flow</a></li>
+                                        <li><a href="#life-stages-explorer" onclick="selectStageTab('early')" class="hover:text-emerald-600 py-1 block">Credit & debt</a></li>
+                                        <li><a href="#life-stages-explorer" onclick="selectStageTab('early')" class="hover:text-emerald-600 py-1 block">Start investing</a></li>
+                                    </ul>
+
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">FAMILY TO FREEDOM</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li class="text-slate-500 font-semibold py-1">40–55 · Coordinate priorities</li>
+                                        <li class="text-slate-500 font-semibold py-1">55+ · Prepare for freedom</li>
+                                        <li>
+                                            <a href="#life-stages-explorer" onclick="selectStageTab('retire')" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Start My Retirement
+                                            </a>
+                                        </li>
+                                        <li><a href="#life-stages-explorer" onclick="selectStageTab('peak')" class="hover:text-emerald-600 py-1 block">Protect family & legacy</a></li>
+                                    </ul>
                                 </div>
-                                <div class="mt-3">
-                                    <div class="relative">
-                                        <input type="text" placeholder="e.g., 401k match..." class="w-full text-xs pl-8 pr-3 py-2 rounded-lg border border-slate-200 focus:outline-none focus:border-brand-500">
-                                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
-                                    </div>
+
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">BUILDING & GROWING</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li class="text-slate-500 font-semibold py-1">25–40 · Turn income into assets</li>
+                                        <li>
+                                            <a href="tools.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Credit Card Rewards Optimizer
+                                            </a>
+                                        </li>
+                                        <li><a href="#life-stages-explorer" onclick="selectStageTab('building')" class="hover:text-emerald-600 py-1 block">Buy a home</a></li>
+                                        <li><a href="real_estate_vs_stocks_model.html" target="_blank" class="hover:text-emerald-600 py-1 block">Real estate vs. index funds</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- MENU ITEM 3: Tools & Calculators (NEW MEGA MENU) -->
+                    <!-- MENU 2: Goals & Decisions -->
                     <div class="relative group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-600 rounded-lg hover:bg-slate-100/70 transition">
-                            <span>Tools & Calculators</span>
-                            <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-hover:text-brand-600 group-hover:rotate-180 transition-transform duration-200"></i>
+                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
+                            <span>Goals & Decisions</span>
+                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
 
-                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[760px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 p-6 grid grid-cols-12 gap-6 z-50">
-                            <div class="col-span-8 grid grid-cols-2 gap-4">
-                                <a href="tools.html#compound" class="p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition group/tool">
-                                    <div class="flex items-center gap-2.5 mb-1">
-                                        <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
-                                            <i class="fa-solid fa-chart-line"></i>
-                                        </div>
-                                        <h4 class="text-xs font-bold text-slate-900 group-hover/tool:text-brand-600 transition">Compound Growth</h4>
-                                    </div>
-                                    <p class="text-[11px] text-slate-500 leading-snug">Project wealth growth based on regular savings & rate of return.</p>
-                                </a>
-
-                                <a href="tools.html#home" class="p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition group/tool">
-                                    <div class="flex items-center gap-2.5 mb-1">
-                                        <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">
-                                            <i class="fa-solid fa-house font-bold"></i>
-                                        </div>
-                                        <h4 class="text-xs font-bold text-slate-900 group-hover/tool:text-blue-600 transition">Home Affordability</h4>
-                                    </div>
-                                    <p class="text-[11px] text-slate-500 leading-snug">Determine safe mortgage limits based on income & debt-to-income.</p>
-                                </a>
-
-                                <a href="tools.html#debt" class="p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition group/tool">
-                                    <div class="flex items-center gap-2.5 mb-1">
-                                        <div class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">
-                                            <i class="fa-solid fa-scale-balanced"></i>
-                                        </div>
-                                        <h4 class="text-xs font-bold text-slate-900 group-hover/tool:text-purple-600 transition">Snowball vs Avalanche</h4>
-                                    </div>
-                                    <p class="text-[11px] text-slate-500 leading-snug">Compare interest saved vs psychological wins to clear debt faster.</p>
-                                </a>
-
-                                <a href="tools.html#fire" class="p-3 rounded-xl hover:bg-slate-50 border border-slate-100 transition group/tool">
-                                    <div class="flex items-center gap-2.5 mb-1">
-                                        <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
-                                            <i class="fa-solid fa-umbrella text-xs"></i>
-                                        </div>
-                                        <h4 class="text-xs font-bold text-slate-900 group-hover/tool:text-amber-600 transition">FIRE & Early Retirement</h4>
-                                    </div>
-                                    <p class="text-[11px] text-slate-500 leading-snug">Calculate your "FIRE Number" and years required to achieve independence.</p>
-                                </a>
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
+                                <div>
+                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHAT DO I WANT TO DO?</div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Goals & Decisions</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Go directly to the financial question you are trying to answer. No need to map your goal to an age or life stage first.</p>
+                                </div>
+                                <div class="pt-6 border-t border-slate-200/80">
+                                    <a href="#curriculum" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition">
+                                        <span>Browse all decisions &rarr;</span>
+                                        <span class="text-[9px] font-extrabold tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase">NEW HUB</span>
+                                    </a>
+                                </div>
                             </div>
 
-                            <div class="col-span-4 bg-emerald-950/90 rounded-xl p-4 text-white flex flex-col justify-between">
+                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white">
                                 <div>
-                                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-900/60 px-2 py-0.5 rounded">Tools Hub</span>
-                                    <h4 class="text-xs font-bold text-white mt-2 mb-1">Interactive Decision Suite</h4>
-                                    <p class="text-[11px] text-emerald-200 leading-relaxed mb-3">Model your home buying limit, compound growth, and debt payoff.</p>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">MANAGE MONEY</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Manage my spending</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Pay off debt</a></li>
+                                        <li>
+                                            <a href="tools.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Optimize credit card rewards
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">FUTURE</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="simulator.html" target="_blank" class="hover:text-emerald-600 py-1 block">Lower my taxes</a></li>
+                                        <li>
+                                            <a href="#life-stages-explorer" onclick="selectStageTab('retire')" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Plan my retirement
+                                            </a>
+                                        </li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Build a legacy</a></li>
+                                    </ul>
                                 </div>
-                                <a href="tools.html" class="w-full py-2 text-center text-xs font-bold text-emerald-950 bg-emerald-400 hover:bg-emerald-300 rounded-lg transition">
-                                    Open Tools Suite
-                                </a>
+
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">BUILD ASSETS</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Start investing</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Buy a home</a></li>
+                                        <li>
+                                            <a href="real_estate_vs_stocks_model.html" target="_blank" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Real estate vs. index funds
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MENU 3: Retirement -->
+                    <div class="relative group py-6">
+                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
+                            <span>Retirement</span>
+                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
+                        </button>
+
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
+                                <div>
+                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">CONNECTED JOURNEY</div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Retirement</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Design the life first, test feasibility, then connect location, healthcare, financial and legacy decisions in one blueprint.</p>
+                                </div>
+                                <div class="pt-6 border-t border-slate-200/80">
+                                    <a href="#life-stages-explorer" onclick="selectStageTab('retire')" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition">
+                                        <span>Start My Retirement &rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">START</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li>
+                                            <a href="#life-stages-explorer" onclick="selectStageTab('retire')" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Start My Retirement
+                                            </a>
+                                        </li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Continue My Retirement</a></li>
+                                    </ul>
+
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">MY RETIREMENT</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li>
+                                            <a href="simulator.html" target="_blank" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                My Retirement Blueprint
+                                            </a>
+                                        </li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement stories</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement guides</a></li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">EXPLORE</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement Odyssey</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement Profiles</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Explore U.S. locations</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Explore living overseas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MENU 4: Tools -->
+                    <div class="relative group py-6">
+                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
+                            <span>Tools</span>
+                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
+                        </button>
+
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
+                                <div>
+                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">RUN THE NUMBERS</div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Tools</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Use a calculator, comparison model or optimizer when you already know which question you want to test.</p>
+                                </div>
+                                <div class="pt-6 border-t border-slate-200/80">
+                                    <a href="tools.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition">
+                                        <span>Explore all tools &rarr;</span>
+                                        <span class="text-[9px] font-extrabold tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase">REBUILD HUB</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">FEATURED</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li>
+                                            <a href="tools.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Credit Card Rewards Optimizer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="real_estate_vs_stocks_model.html" target="_blank" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Real estate vs. index funds
+                                            </a>
+                                        </li>
+                                        <li><a href="simulator.html" target="_blank" class="hover:text-emerald-600 py-1 block">Retirement planning experience</a></li>
+                                    </ul>
+
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">RETIREMENT TOOLS</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="simulator.html" target="_blank" class="hover:text-emerald-600 py-1 block">Roth strategy</a></li>
+                                        <li><a href="tools.html" class="hover:text-emerald-600 py-1 block">U.S. City Matcher</a></li>
+                                        <li><a href="tools.html" class="hover:text-emerald-600 py-1 block">Retiring Overseas</a></li>
+                                        <li><a href="simulator.html" target="_blank" class="hover:text-emerald-600 py-1 block">Healthcare strategy</a></li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">MONEY & INVESTING</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="tools.html#debt" class="hover:text-emerald-600 py-1 block">Debt payoff</a></li>
+                                        <li><a href="tools.html#compound" class="hover:text-emerald-600 py-1 block">Compound growth</a></li>
+                                        <li><a href="tools.html#home" class="hover:text-emerald-600 py-1 block">Home affordability</a></li>
+                                        <li><a href="tools.html" class="hover:text-emerald-600 py-1 block">Investment tools</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MENU 5: Learn -->
+                    <div class="relative group py-6">
+                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
+                            <span>Learn</span>
+                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
+                        </button>
+
+                        <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
+                                <div>
+                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">UNDERSTAND BEFORE ACTING</div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Learn</h3>
+                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Stories, guides, explainers and research connect concepts to the decisions and tools that help you act.</p>
+                                </div>
+                                <div class="pt-6 border-t border-slate-200/80">
+                                    <a href="tools.html#research-theses" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition">
+                                        <span>Explore the learning library &rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">LATEST</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li>
+                                            <a href="theme.html?thesis=jpy" target="_blank" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                                Blog & latest insights
+                                            </a>
+                                        </li>
+                                        <li><a href="real_estate_vs_stocks_model.html" target="_blank" class="hover:text-emerald-600 py-1 block">Financial stories</a></li>
+                                        <li><a href="company-dynamic-fixed.html?theme=jpy&rank=1" target="_blank" class="hover:text-emerald-600 py-1 block">Case studies</a></li>
+                                    </ul>
+
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">RETIREMENT</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement stories</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Retirement guides</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Decision explainers</a></li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">GUIDES</h5>
+                                    <ul class="space-y-1.5 text-xs text-slate-600">
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Money</a></li>
+                                        <li><a href="#" class="hover:text-emerald-600 py-1 block">Investing</a></li>
+                                        <li><a href="real_estate_vs_stocks_model.html" target="_blank" class="hover:text-emerald-600 py-1 block">Real estate</a></li>
+                                        <li><a href="simulator.html" target="_blank" class="hover:text-emerald-600 py-1 block">Taxes</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -284,7 +404,7 @@
 
                 <!-- Right Action Buttons -->
                 <div class="hidden sm:flex items-center gap-3">
-                    <button onclick="openPathfinderModal()" class="px-5 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-md shadow-brand-600/20 hover:shadow-lg hover:shadow-brand-600/30 transition flex items-center gap-2 group">
+                    <button onclick="openPathfinderModal()" class="px-5 py-2.5 text-sm font-bold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-md shadow-brand-600/20 transition flex items-center gap-2 group">
                         <i class="fa-solid fa-compass text-sm group-hover:rotate-45 transition-transform duration-300"></i>
                         <span>Find Your Path</span>
                     </button>
@@ -292,7 +412,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="flex lg:hidden">
-                    <button id="mobileMenuBtn" class="p-2 rounded-lg text-slate-700 hover:bg-slate-100">
+                    <button id="mobileMenuBtn" class="p-2 rounded-lg text-slate-300 hover:bg-slate-800">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -301,34 +421,49 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Drawer (Hidden by default) -->
+    <!-- Mobile Menu Drawer -->
     <div id="mobileMenu" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm lg:hidden">
         <div class="fixed right-0 top-0 bottom-0 w-5/6 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
             <div>
                 <div class="flex items-center justify-between mb-8">
-                    <span class="text-lg font-bold text-slate-900">WealthLanding</span>
+                    <span class="text-lg font-bold text-slate-900">WealthLanding Navigation</span>
                     <button id="closeMobileMenuBtn" class="p-2 text-slate-500 hover:text-slate-900">
                         <i class="fa-solid fa-xmark text-xl"></i>
                     </button>
                 </div>
                 
-                <div class="space-y-4">
-                    <div class="font-bold text-xs text-slate-400 uppercase tracking-wider">Life Stages</div>
-                    <div class="space-y-2 pl-2 border-l-2 border-slate-100">
-                        <a href="#life-stages-explorer" onclick="selectStageTab('early'); document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700 py-1">🌱 Starting Out (18-25)</a>
-                        <a href="#life-stages-explorer" onclick="selectStageTab('building'); document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700 py-1">🚀 Building & Growing (25-40)</a>
-                        <a href="#life-stages-explorer" onclick="selectStageTab('peak'); document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700 py-1">🛡️ Family & Peak Wealth (40-55)</a>
-                        <a href="#life-stages-explorer" onclick="selectStageTab('retire'); document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700 py-1">🏖️ Pre-Retirement & Freedom (55+)</a>
+                <div class="space-y-5 text-left">
+                    <div>
+                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Life Stages</div>
+                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
+                            <a href="#life-stages-explorer" onclick="selectStageTab('early'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🌱 Starting Out (18-25)</a>
+                            <a href="#life-stages-explorer" onclick="selectStageTab('building'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🚀 Building & Growing (25-40)</a>
+                            <a href="#life-stages-explorer" onclick="selectStageTab('peak'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🛡️ Family & Peak (40-55)</a>
+                            <a href="#life-stages-explorer" onclick="selectStageTab('retire'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🏖️ Pre-Retirement (55+)</a>
+                        </div>
                     </div>
 
-                    <div class="font-bold text-xs text-slate-400 uppercase tracking-wider pt-4">Explore</div>
-                    <a href="tools.html" onclick="document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700">Tools & Calculators</a>
-                    <a href="#curriculum" onclick="document.getElementById('mobileMenu').classList.add('hidden');" class="block text-sm font-semibold text-slate-700">Curriculum Roadmap</a>
+                    <div>
+                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Goals & Decisions</div>
+                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
+                            <a href="tools.html" class="block font-semibold text-slate-700 py-1">Manage Spending & Debt</a>
+                            <a href="real_estate_vs_stocks_model.html" target="_blank" class="block font-semibold text-slate-700 py-1">Real Estate vs Index Funds</a>
+                            <a href="simulator.html" target="_blank" class="block font-semibold text-slate-700 py-1">Retirement & Tax Planning</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Tools & Research</div>
+                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
+                            <a href="tools.html" class="block font-semibold text-slate-700 py-1">Interactive Tools Hub</a>
+                            <a href="theme.html?thesis=jpy" target="_blank" class="block font-semibold text-slate-700 py-1">Investment Research & Theses</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="pt-6 border-t border-slate-100">
-                <button onclick="openPathfinderModal()" class="w-full py-3 text-center text-sm font-bold text-white bg-brand-600 rounded-xl shadow-md">
+                <button onclick="openPathfinderModal(); document.getElementById('mobileMenu').classList.add('hidden');" class="w-full py-3 text-center text-sm font-bold text-white bg-brand-600 rounded-xl shadow-md">
                     Find Your Financial Path
                 </button>
             </div>
