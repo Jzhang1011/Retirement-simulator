@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -96,7 +95,7 @@
                     </div>
                 </a>
 
-                <!-- Desktop Navigation Items (Exact 5 Dropdowns from Screenshots) -->
+                <!-- Desktop Navigation Items -->
                 <nav class="hidden lg:flex items-center gap-1">
                     
                     <!-- MENU 1: Life Stages -->
@@ -138,7 +137,7 @@
                                         <li class="text-slate-500 font-semibold py-1">40–55 · Coordinate priorities</li>
                                         <li class="text-slate-500 font-semibold py-1">55+ · Prepare for freedom</li>
                                         <li>
-                                            a href="Retirement-simulator/Retirement_Gateway.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
+                                            <a href="Retirement-simulator/Retirement_Gateway.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition shadow-2xs">
                                                 Start My Retirement
                                             </a>
                                         </li>
@@ -156,7 +155,7 @@
                                             </a>
                                         </li>
                                         <li><a href="#life-stages-explorer" onclick="selectStageTab('building')" class="hover:text-emerald-600 py-1 block">Buy a home</a></li>
-                                        <li><a href="/investment/real_estate_vs_stocks_model.html" target="_blank" class="hover:text-emerald-600 py-1 block">Real estate vs. index funds</a></li>
+                                        <li><a href="investment/real_estate_vs_stocks_model.html" target="_blank" class="hover:text-emerald-600 py-1 block">Real estate vs. index funds</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -320,7 +319,7 @@
                                                 Real estate vs. index funds
                                             </a>
                                         </li>
-                                        <li><a href="/investment.index" target="_blank" class="hover:text-emerald-600 py-1 block">Market and Investment</a></li>
+                                        <li><a href="investment/index.html" target="_blank" class="hover:text-emerald-600 py-1 block">Market and Investment</a></li>
                                     </ul>
 
                                     <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">RETIREMENT TOOLS</h5>
@@ -744,7 +743,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data for Life Stages Explorer Tabs
+        // Data for Life Stages Explorer Tabs with independent guide URLs
         const stageData = {
             early: {
                 title: "🌱 Starting Out (Ages 18–25)",
@@ -766,7 +765,8 @@
                     "Manage & Refinance High-Interest Debt"
                 ],
                 recommendedGuide: "The 20s Money Playbook: 5 Steps to Financial Independence",
-                calcName: "Student Debt vs. Investing Tool"
+                calcName: "Student Debt vs. Investing Tool",
+                guideUrl: "curriculum/early-career-playbook.html"
             },
             building: {
                 title: "🚀 Building & Growing (Ages 25–40)",
@@ -788,7 +788,8 @@
                     "Joint Finances & Shared Budgeting Strategy"
                 ],
                 recommendedGuide: "How Much House Can You Really Afford?",
-                calcName: "Home Affordability & Down Payment Tool"
+                calcName: "Home Affordability & Down Payment Tool",
+                guideUrl: "curriculum/home-affordability-guide.html"
             },
             peak: {
                 title: "🛡️ Family & Peak Wealth (Ages 40–55)",
@@ -807,7 +808,8 @@
                     "Max Out Annual Employer 401(k) Limits"
                 ],
                 recommendedGuide: "Tax-Efficient Portfolio Blueprint",
-                calcName: "College Savings & 529 Growth Calculator"
+                calcName: "College Savings & 529 Growth Calculator",
+                guideUrl: "curriculum/tax-efficient-portfolio.html"
             },
             retire: {
                 title: "🏖️ Pre-Retirement & Freedom (55+ or Whenever you think it is time)",
@@ -827,7 +829,8 @@
                     "Wills, Trusts & Legacy Asset Distribution"
                 ],
                 recommendedGuide: "Optimize your financial decisions for better retirement",
-                calcName: "Retirement optimization engine"
+                calcName: "Retirement optimization engine",
+                guideUrl: "Retirement-simulator/Retirement_Gateway.html"
             }
         };
 
@@ -886,7 +889,7 @@
                         
                         <div class="relative z-10 pt-4 border-t border-slate-700/80 flex items-center justify-between mt-6">
                             <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-calculator text-brand-400"></i> ${data.calcName}</span>
-                            <a href="Retirement-simulator/Retirement_Gateway.html" class="px-4 py-2 text-xs font-bold text-white bg-brand-600 hover:bg-brand-500 rounded-lg transition shadow-md flex items-center gap-1.5">
+                            <a href="${data.guideUrl}" class="px-4 py-2 text-xs font-bold text-white bg-brand-600 hover:bg-brand-500 rounded-lg transition shadow-md flex items-center gap-1.5">
                                 <span>Start Guide</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </a>
