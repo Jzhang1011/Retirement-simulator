@@ -10,7 +10,7 @@
     head.appendChild(fa);
   }
 
-  // 3. Inject standalone CSS styles (Fixes z-index, center alignment, and overflow issues)
+  // 3. Inject standalone CSS styles (Fixes z-index stacking and overflow clipping)
   const styleId = 'wealthlanding-header-fixed-styles';
   let styleTag = document.getElementById(styleId);
   if (!styleTag) {
@@ -25,7 +25,8 @@
     .wl-header-root,
     .wl-header-container,
     .wl-header-inner,
-    .wl-nav-list {
+    .wl-nav-list,
+    .wl-nav-item {
       overflow: visible !important;
       clip-path: none !important;
     }
@@ -50,7 +51,6 @@
       max-width: 80rem !important;
       margin: 0 auto !important;
       padding: 0 1rem !important;
-      position: relative !important; /* Context anchor for centered mega menus */
     }
     .wl-header-inner {
       display: flex !important;
@@ -107,9 +107,8 @@
       .wl-nav-list { display: flex !important; }
     }
 
-    /* Position static keeps all mega menus anchored to the center header container */
     .wl-nav-item {
-      position: static !important;
+      position: relative !important;
       padding: 1.5rem 0 !important;
     }
     .wl-nav-btn, .wl-nav-link-direct {
@@ -132,7 +131,7 @@
       background-color: rgba(30, 41, 59, 0.8) !important;
     }
 
-    /* Mega Dropdown Box Floating Centered ABOVE All Page Content */
+    /* Mega Dropdown Box Floating ABOVE All Page Content */
     .wl-nav-mega {
       position: absolute !important;
       top: 100% !important;
@@ -259,18 +258,6 @@
     .wl-mega-card:hover {
       background-color: #d1fae5 !important;
     }
-    .wl-pill-badge {
-      display: inline-block !important;
-      padding: 0.125rem 0.5rem !important;
-      border-radius: 9999px !important;
-      background-color: #d1fae5 !important;
-      color: #065f46 !important;
-      font-size: 9px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.05em !important;
-      text-transform: uppercase !important;
-      margin-left: 0.5rem !important;
-    }
 
     /* Header Action Button */
     .wl-action-btn {
@@ -356,7 +343,7 @@
           <nav>
             <ul class="wl-nav-list">
               
-              <!-- 1. Life Stages -->
+              <!-- Life Stages -->
               <li class="wl-nav-item">
                 <button class="wl-nav-btn">
                   <span>Life Stages</span>
@@ -370,10 +357,7 @@
                       <p class="wl-mega-desc">Start with your current chapter. See the financial priorities and decisions that matter most now.</p>
                     </div>
                     <div style="padding-top:1rem; border-top:1px solid #cbd5e1;">
-                      <a href="/#life-stages-explorer" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">
-                        Explore all life stages &rarr;
-                        <span class="wl-pill-badge">NEW HUB</span>
-                      </a>
+                      <a href="/#life-stages-explorer" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">Explore all life stages &rarr;</a>
                     </div>
                   </div>
                   <div class="wl-mega-right">
@@ -394,7 +378,6 @@
                             Start My Retirement
                           </a>
                         </li>
-                        <li><a href="/curriculum/tax-efficient-portfolio.html">Protect family & legacy</a></li>
                       </ul>
                     </div>
                     <div>
@@ -414,7 +397,7 @@
                 </div>
               </li>
 
-              <!-- 2. Goals & Decisions -->
+              <!-- Goals & Decisions -->
               <li class="wl-nav-item">
                 <button class="wl-nav-btn">
                   <span>Goals & Decisions</span>
@@ -425,13 +408,7 @@
                     <div>
                       <div class="wl-mega-tag">WHAT DO I WANT TO DO?</div>
                       <h3 class="wl-mega-title">Goals & Decisions</h3>
-                      <p class="wl-mega-desc">Go directly to the financial question you are trying to answer. No need to map your goal to an age or life stage first.</p>
-                    </div>
-                    <div style="padding-top:1rem; border-top:1px solid #cbd5e1;">
-                      <a href="/#curriculum" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">
-                        Browse all decisions &rarr;
-                        <span class="wl-pill-badge">NEW HUB</span>
-                      </a>
+                      <p class="wl-mega-desc">Go directly to the financial question you are trying to answer.</p>
                     </div>
                   </div>
                   <div class="wl-mega-right">
@@ -440,21 +417,7 @@
                       <ul class="wl-mega-list">
                         <li><a href="/tools.html">Manage my spending</a></li>
                         <li><a href="/tools.html#debt">Pay off debt</a></li>
-                        <li>
-                          <a href="/tools.html" class="wl-mega-card">
-                            Optimize credit card rewards
-                          </a>
-                        </li>
-                      </ul>
-                      <div class="wl-mega-col-title" style="margin-top:1.25rem;">FUTURE</div>
-                      <ul class="wl-mega-list">
-                        <li><a href="/simulator.html">Lower my taxes</a></li>
-                        <li>
-                          <a href="/Retirement-simulator/Retirement_Gateway.html" class="wl-mega-card">
-                            Plan my retirement
-                          </a>
-                        </li>
-                        <li><a href="/curriculum/tax-efficient-portfolio.html">Build a legacy</a></li>
+                        <li><a href="/tools.html">Optimize rewards</a></li>
                       </ul>
                     </div>
                     <div>
@@ -462,18 +425,15 @@
                       <ul class="wl-mega-list">
                         <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
                         <li><a href="/curriculum/home-affordability-guide.html">Buy a home</a></li>
-                        <li>
-                          <a href="/investment/real_estate_vs_stocks_model.html" class="wl-mega-card">
-                            Real estate vs. index funds
-                          </a>
-                        </li>
+                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real estate vs. index funds</a></li>
+                        <li><a href="/Retirement-simulator/Retirement_Gateway.html">Plan my retirement</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </li>
 
-              <!-- 3. Retirement -->
+              <!-- Retirement -->
               <li class="wl-nav-item">
                 <button class="wl-nav-btn">
                   <span>Retirement</span>
@@ -527,7 +487,7 @@
                 </div>
               </li>
 
-              <!-- 4. Tools -->
+              <!-- Tools -->
               <li class="wl-nav-item">
                 <button class="wl-nav-btn">
                   <span>Tools</span>
@@ -584,7 +544,7 @@
                 </div>
               </li>
 
-              <!-- 5. Learn -->
+              <!-- Learn -->
               <li class="wl-nav-item">
                 <button class="wl-nav-btn">
                   <span>Learn</span>
@@ -593,42 +553,25 @@
                 <div class="wl-nav-mega">
                   <div class="wl-mega-left">
                     <div>
-                      <div class="wl-mega-tag">UNDERSTAND BEFORE ACTING</div>
+                      <div class="wl-mega-tag">LEARNING LIBRARY</div>
                       <h3 class="wl-mega-title">Learn</h3>
-                      <p class="wl-mega-desc">Stories, guides, explainers and research connect concepts to the decisions and tools that help you act.</p>
-                    </div>
-                    <div style="padding-top:1rem; border-top:1px solid #cbd5e1;">
-                      <a href="/tools.html#research-theses" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">
-                        Explore the learning library &rarr;
-                      </a>
+                      <p class="wl-mega-desc">Clear explainers and guides for every life stage.</p>
                     </div>
                   </div>
                   <div class="wl-mega-right">
                     <div>
-                      <div class="wl-mega-col-title">LATEST</div>
+                      <div class="wl-mega-col-title">GUIDES</div>
                       <ul class="wl-mega-list">
-                        <li>
-                          <a href="/theme.html?thesis=jpy" class="wl-mega-card">
-                            Blog & latest insights
-                          </a>
-                        </li>
-                        <li><a href="/investment/real_estate_vs_stocks_model.html">Financial stories</a></li>
-                        <li><a href="/company-dynamic-fixed.html?theme=jpy&rank=1">Case studies</a></li>
-                      </ul>
-                      <div class="wl-mega-col-title" style="margin-top:1.25rem;">RETIREMENT</div>
-                      <ul class="wl-mega-list">
-                        <li><a href="/Retirement-simulator/Topic/Assets_lifestyle/Happy_retirement.html">Retirement stories</a></li>
-                        <li><a href="/Retirement-simulator/building-your-retirement.html">Retirement guides</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html">Decision explainers</a></li>
+                        <li><a href="/curriculum/early-career-playbook.html">Early Career Playbook</a></li>
+                        <li><a href="/curriculum/home-affordability-guide.html">Home Buying Guide</a></li>
+                        <li><a href="/curriculum/tax-efficient-portfolio.html">Tax-Efficient Investing</a></li>
                       </ul>
                     </div>
                     <div>
-                      <div class="wl-mega-col-title">GUIDES</div>
+                      <div class="wl-mega-col-title">MODELS</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/curriculum/early-career-playbook.html">Money</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html">Investing</a></li>
-                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real estate</a></li>
-                        <li><a href="/curriculum/tax-efficient-portfolio.html">Taxes</a></li>
+                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real Estate vs Stocks</a></li>
+                        <li><a href="/simulator.html">Tax & Roth Simulator</a></li>
                       </ul>
                     </div>
                   </div>
@@ -767,10 +710,3 @@
     renderHeader();
   }
 })();
-```eof
-
----
-
-### Summary of Changes
-1. **No Horizontal Overflow:** The mega menu box is now attached to the central container (`.wl-header-container`) using `position: static` on list items. All 5 mega dropdowns open perfectly centered over the header without pushing the right side of the screen.
-2. **Exact Content Layout:** Updated all 5 menus (**Life Stages**, **Goals & Decisions**, **Retirement**, **Tools**, and **Learn**) to match the headings, badges, descriptions, and highlighted cards shown in your target screenshots.
