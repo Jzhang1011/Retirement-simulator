@@ -1,7 +1,8 @@
 (function() {
-  // 1. Inject mandatory CSS & FontAwesome dependencies if missing in the host page
-  const head = document.head;
+  // 1. Ensure document head is ready
+  const head = document.head || document.getElementsByTagName('head')[0];
 
+  // 2. Inject FontAwesome icon stylesheet if missing
   if (!document.querySelector('link[href*="font-awesome"]')) {
     const fa = document.createElement('link');
     fa.rel = 'stylesheet';
@@ -9,351 +10,621 @@
     head.appendChild(fa);
   }
 
-  if (!window.tailwind && !document.querySelector('script[src*="tailwindcss"]')) {
-    const tw = document.createElement('script');
-    tw.src = 'https://cdn.tailwindcss.com';
-    head.appendChild(tw);
+  // 3. Inject standalone CSS styles (Works on ANY page with or without Tailwind)
+  const styleId = 'wealthlanding-standalone-header-styles';
+  if (!document.getElementById(styleId)) {
+    const styleTag = document.createElement('style');
+    styleTag.id = styleId;
+    styleTag.textContent = `
+      /* Header Container Base */
+      .wl-header-root {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 99999 !important;
+        background-color: #0a1128 !important;
+        border-bottom: 1px solid #1e293b !important;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        box-sizing: border-box !important;
+      }
+      .wl-header-container {
+        max-width: 80rem !important;
+        margin: 0 auto !important;
+        padding: 0 1rem !important;
+      }
+      .wl-header-inner {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 5rem !important;
+      }
+
+      /* Logo & Brand */
+      .wl-brand-link {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        text-decoration: none !important;
+      }
+      .wl-brand-icon {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        border-radius: 0.75rem !important;
+        background: linear-gradient(to top right, #047857, #059669, #34d399) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.2) !important;
+      }
+      .wl-brand-text {
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        letter-spacing: -0.025em !important;
+      }
+      .wl-brand-accent { color: #34d399 !important; }
+      .wl-brand-sub {
+        display: block !important;
+        font-size: 0.625rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.05em !important;
+        color: #94a3b8 !important;
+        text-transform: uppercase !important;
+        margin-top: -0.25rem !important;
+      }
+
+      /* Navigation Group & Mega Dropdown */
+      .wl-nav-list {
+        display: none !important;
+        align-items: center !important;
+        gap: 0.25rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+      }
+      @media (min-width: 1024px) {
+        .wl-nav-list { display: flex !important; }
+      }
+
+      .wl-nav-item {
+        position: relative !important;
+        padding: 1.5rem 0 !important;
+      }
+      .wl-nav-btn, .wl-nav-link-direct {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.375rem !important;
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        font-weight: 700 !important;
+        color: #f1f5f9 !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0.5rem !important;
+        cursor: pointer !important;
+        text-decoration: none !important;
+        transition: color 0.15s ease, background-color 0.15s ease !important;
+      }
+      .wl-nav-btn:hover, .wl-nav-link-direct:hover {
+        color: #34d399 !important;
+        background-color: rgba(30, 41, 59, 0.6) !important;
+      }
+
+      /* Mega Dropdown Panel */
+      .wl-nav-mega {
+        position: absolute !important;
+        top: 100% !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(8px) !important;
+        width: 900px !important;
+        max-width: 92vw !important;
+        background-color: #ffffff !important;
+        border-radius: 1rem !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
+        z-index: 99999 !important;
+        overflow: hidden !important;
+        display: grid !important;
+        grid-template-columns: 4fr 8fr !important;
+        text-align: left !important;
+      }
+
+      /* Invisible Bridge preventing hover glitch */
+      .wl-nav-mega::before {
+        content: "" !important;
+        position: absolute !important;
+        top: -16px !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 16px !important;
+        background: transparent !important;
+      }
+
+      /* Active Hover States */
+      .wl-nav-item:hover .wl-nav-mega,
+      .wl-nav-item:focus-within .wl-nav-mega,
+      .wl-nav-mega.js-visible {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(-50%) translateY(0) !important;
+        pointer-events: auto !important;
+      }
+
+      /* Inner Mega Menu Layout */
+      .wl-mega-left {
+        background-color: #f2f7f4 !important;
+        padding: 1.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        border-right: 1px solid #e2e8f0 !important;
+      }
+      .wl-mega-right {
+        padding: 1.5rem !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.5rem !important;
+        background-color: #ffffff !important;
+        color: #1e293b !important;
+      }
+      .wl-mega-tag {
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.1em !important;
+        color: #16a34a !important;
+        text-transform: uppercase !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .wl-mega-title {
+        font-size: 1.5rem !important;
+        font-weight: 900 !important;
+        color: #0f172a !important;
+        margin: 0 0 0.75rem 0 !important;
+        line-height: 1.2 !important;
+      }
+      .wl-mega-desc {
+        font-size: 0.75rem !important;
+        color: #475569 !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+      }
+      .wl-mega-col-title {
+        font-size: 0.75rem !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .wl-mega-list {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .wl-mega-list li {
+        margin-bottom: 0.25rem !important;
+      }
+      .wl-mega-list a {
+        display: block !important;
+        padding: 0.25rem 0 !important;
+        font-size: 0.75rem !important;
+        color: #475569 !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        transition: color 0.15s ease !important;
+      }
+      .wl-mega-list a:hover {
+        color: #16a34a !important;
+      }
+      .wl-mega-card {
+        display: block !important;
+        padding: 0.625rem 0.875rem !important;
+        margin: 0.375rem 0 !important;
+        border-radius: 0.75rem !important;
+        background-color: #eef8f3 !important;
+        border: 1px solid #a7f3d0 !important;
+        color: #0f5233 !important;
+        font-weight: 700 !important;
+        font-size: 0.75rem !important;
+        text-decoration: none !important;
+        transition: background-color 0.15s ease !important;
+      }
+      .wl-mega-card:hover {
+        background-color: #d1fae5 !important;
+      }
+
+      /* Header Right Action Button */
+      .wl-action-btn {
+        display: none !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        padding: 0.625rem 1.25rem !important;
+        font-size: 0.875rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        background-color: #059669 !important;
+        border-radius: 0.75rem !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        transition: background-color 0.15s ease !important;
+      }
+      .wl-action-btn:hover {
+        background-color: #10b981 !important;
+      }
+      @media (min-width: 640px) {
+        .wl-action-btn { display: inline-flex !important; }
+      }
+
+      /* Mobile Hamburger & Drawer */
+      .wl-mobile-toggle {
+        display: flex !important;
+        padding: 0.5rem !important;
+        background: transparent !important;
+        border: none !important;
+        color: #cbd5e1 !important;
+        font-size: 1.25rem !important;
+        cursor: pointer !important;
+      }
+      @media (min-width: 1024px) {
+        .wl-mobile-toggle { display: none !important; }
+      }
+
+      .wl-mobile-drawer {
+        display: none;
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 999999 !important;
+        background-color: rgba(15, 23, 42, 0.6) !important;
+        backdrop-filter: blur(4px) !important;
+      }
+      .wl-mobile-drawer.js-open {
+        display: block !important;
+      }
+      .wl-mobile-panel {
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 83.333% !important;
+        max-width: 24rem !important;
+        background-color: #ffffff !important;
+        padding: 1.5rem !important;
+        box-shadow: -10px 0 25px -5px rgba(0,0,0,0.3) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        overflow-y: auto !important;
+      }
+    `;
+    head.appendChild(styleTag);
   }
 
-  // Standalone CSS fallback so dropdowns work reliably on any page regardless of CSS loading order
-  const styleTag = document.createElement('style');
-  styleTag.id = 'wealthlanding-header-styles';
-  styleTag.textContent = `
-    /* Mega Menu Dropdown Core Styling */
-    .wl-nav-mega {
-      position: absolute !important;
-      top: 100% !important;
-      left: 50% !important;
-      transform: translateX(-50%) translateY(10px) !important;
-      width: 900px !important;
-      max-width: 92vw !important;
-      background-color: #ffffff !important;
-      border-radius: 1rem !important;
-      border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
-      z-index: 9999 !important;
-    }
-
-    /* Hover & Active Display Rules */
-    .wl-nav-group:hover .wl-nav-mega,
-    .wl-nav-group:focus-within .wl-nav-mega,
-    .wl-nav-mega.js-visible {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: translateX(-50%) translateY(0) !important;
-      pointer-events: auto !important;
-    }
-
-    /* Ensure text styling inside mega menu */
-    .wl-nav-mega h3, .wl-nav-mega h5, .wl-nav-mega p, .wl-nav-mega a, .wl-nav-mega span, .wl-nav-mega li {
-      font-family: Inter, system-ui, -apple-system, sans-serif !important;
-    }
-  `;
-  head.appendChild(styleTag);
-
+  // 4. Global Header HTML Structure
   const headerHTML = `
-    <header class="sticky top-0 z-50 bg-[#0a1128] border-b border-slate-800 transition-all duration-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                
-                <!-- Brand Logo -->
-                <a href="/" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
-                        <i class="fa-solid fa-chart-line text-lg"></i>
-                    </div>
-                    <div class="text-left">
-                        <span class="text-xl font-extrabold tracking-tight text-white group-hover:text-emerald-400 transition">Wealth<span class="text-emerald-400">Landing</span></span>
-                        <span class="block text-[10px] font-semibold tracking-wider text-slate-400 uppercase -mt-1">Lifetime Education</span>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation Items -->
-                <nav class="hidden lg:flex items-center gap-1">
-                    
-                    <!-- MENU 1: Life Stages -->
-                    <div class="relative wl-nav-group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
-                            <span>Life Stages</span>
-                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
-                        </button>
-
-                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
-                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
-                                <div>
-                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHERE AM I?</div>
-                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Life Stages</h3>
-                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Start with your current chapter. See the financial priorities and decisions that tend to matter most now.</p>
-                                </div>
-                                <div class="pt-6 border-t border-slate-200/80">
-                                    <a href="/#life-stages-explorer" class="inline-flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-emerald-700 transition">
-                                        <span>Explore all life stages &rarr;</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white text-slate-800">
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">STARTING OUT</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li class="text-slate-500 font-semibold py-1">18–25 · Build the foundation</li>
-                                        <li><a href="/curriculum/early-career-playbook.html" class="hover:text-emerald-600 py-1 block">Budget & cash flow</a></li>
-                                        <li><a href="/curriculum/early-career-playbook.html" class="hover:text-emerald-600 py-1 block">Credit & debt</a></li>
-                                        <li><a href="/curriculum/early-career-playbook.html" class="hover:text-emerald-600 py-1 block">Start investing</a></li>
-                                    </ul>
-
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mt-5 mb-2">FAMILY TO FREEDOM</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li class="text-slate-500 font-semibold py-1">40–55 · Coordinate priorities</li>
-                                        <li class="text-slate-500 font-semibold py-1">55+ · Prepare for freedom</li>
-                                        <li>
-                                            <a href="/Retirement-simulator/Retirement_Gateway.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition">
-                                                Start My Retirement
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">BUILDING & GROWING</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li class="text-slate-500 font-semibold py-1">25–40 · Turn income into assets</li>
-                                        <li>
-                                            <a href="/tools.html" class="block p-2.5 px-3.5 my-1.5 rounded-xl bg-[#eef8f3] border border-emerald-200/80 text-[#0f5233] font-bold text-xs hover:bg-emerald-100 transition">
-                                                Credit Card Rewards Optimizer
-                                            </a>
-                                        </li>
-                                        <li><a href="/curriculum/home-affordability-guide.html" class="hover:text-emerald-600 py-1 block">Buy a home</a></li>
-                                        <li><a href="/investment/real_estate_vs_stocks_model.html" class="hover:text-emerald-600 py-1 block">Real estate vs. index funds</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MENU 2: Goals & Decisions -->
-                    <div class="relative wl-nav-group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
-                            <span>Goals & Decisions</span>
-                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
-                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
-                                <div>
-                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHAT DO I WANT TO DO?</div>
-                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Goals & Decisions</h3>
-                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Go directly to the financial question you are trying to answer.</p>
-                                </div>
-                            </div>
-                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white text-slate-800">
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">MANAGE MONEY</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/tools.html" class="hover:text-emerald-600 py-1 block">Manage my spending</a></li>
-                                        <li><a href="/tools.html#debt" class="hover:text-emerald-600 py-1 block">Pay off debt</a></li>
-                                        <li><a href="/tools.html" class="hover:text-emerald-600 py-1 block">Optimize rewards</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">BUILD ASSETS</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/curriculum/early-career-playbook.html" class="hover:text-emerald-600 py-1 block">Start investing</a></li>
-                                        <li><a href="/curriculum/home-affordability-guide.html" class="hover:text-emerald-600 py-1 block">Buy a home</a></li>
-                                        <li><a href="/investment/real_estate_vs_stocks_model.html" class="hover:text-emerald-600 py-1 block">Real estate vs. index funds</a></li>
-                                        <li><a href="/Retirement-simulator/Retirement_Gateway.html" class="hover:text-emerald-600 py-1 block">Plan my retirement</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MENU 3: Retirement -->
-                    <div class="relative wl-nav-group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
-                            <span>Retirement</span>
-                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
-                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
-                                <div>
-                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">RETIREMENT HUB</div>
-                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Retirement</h3>
-                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Connect location, healthcare, and financial blueprints in one plan.</p>
-                                </div>
-                            </div>
-                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white text-slate-800">
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">JOURNEYS</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/Retirement-simulator/Retirement_Gateway.html" class="hover:text-emerald-600 py-1 block">Start My Retirement</a></li>
-                                        <li><a href="/Retirement-simulator/building-your-retirement.html" class="hover:text-emerald-600 py-1 block">My Retirement Blueprint</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">EXPLORE</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/Retirement-simulator/UScitymatcher.html" class="hover:text-emerald-600 py-1 block">U.S. City Matcher</a></li>
-                                        <li><a href="/Retirement-simulator/RetiringOverseas.html" class="hover:text-emerald-600 py-1 block">Living Overseas</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MENU 4: Tools -->
-                    <div class="relative wl-nav-group py-6">
-                        <a href="/tools.html" class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
-                            <span>Tools</span>
-                        </a>
-                    </div>
-
-                    <!-- MENU 5: Learn -->
-                    <div class="relative wl-nav-group py-6">
-                        <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
-                            <span>Learn</span>
-                            <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
-                            <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
-                                <div>
-                                    <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">LEARNING LIBRARY</div>
-                                    <h3 class="text-2xl font-black text-slate-900 mb-3 tracking-tight">Learn</h3>
-                                    <p class="text-xs text-slate-600 leading-relaxed font-medium">Clear explainers and guides for every life stage.</p>
-                                </div>
-                            </div>
-                            <div class="col-span-8 p-6 grid grid-cols-2 gap-6 bg-white text-slate-800">
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">GUIDES</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/curriculum/early-career-playbook.html" class="hover:text-emerald-600 py-1 block">Early Career Playbook</a></li>
-                                        <li><a href="/curriculum/home-affordability-guide.html" class="hover:text-emerald-600 py-1 block">Home Buying Guide</a></li>
-                                        <li><a href="/curriculum/tax-efficient-portfolio.html" class="hover:text-emerald-600 py-1 block">Tax-Efficient Investing</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">MODELS</h5>
-                                    <ul class="space-y-1.5 text-xs text-slate-600">
-                                        <li><a href="/investment/real_estate_vs_stocks_model.html" class="hover:text-emerald-600 py-1 block">Real Estate vs Stocks</a></li>
-                                        <li><a href="/simulator.html" class="hover:text-emerald-600 py-1 block">Tax & Roth Simulator</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </nav>
-
-                <!-- Right Action Button -->
-                <div class="hidden sm:flex items-center gap-3">
-                    <a href="/#life-stages-explorer" class="px-5 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl shadow-md transition flex items-center gap-2">
-                        <i class="fa-solid fa-compass text-sm"></i>
-                        <span>Find Your Path</span>
-                    </a>
-                </div>
-
-                <!-- Mobile Hamburger Button -->
-                <div class="flex lg:hidden">
-                    <button id="globalMobileMenuBtn" class="p-2 rounded-lg text-slate-300 hover:bg-slate-800 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
-
+    <header class="wl-header-root">
+      <div class="wl-header-container">
+        <div class="wl-header-inner">
+          
+          <!-- Logo -->
+          <a href="/" class="wl-brand-link">
+            <div class="wl-brand-icon">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
+            <div>
+              <span class="wl-brand-text">Wealth<span class="wl-brand-accent">Landing</span></span>
+              <span class="wl-brand-sub">Lifetime Education</span>
+            </div>
+          </a>
+
+          <!-- Desktop Navigation -->
+          <nav>
+            <ul class="wl-nav-list">
+              
+              <!-- Life Stages -->
+              <li class="wl-nav-item">
+                <button class="wl-nav-btn">
+                  <span>Life Stages</span>
+                  <i class="fa-solid fa-caret-down" style="font-size:10px;"></i>
+                </button>
+                <div class="wl-nav-mega">
+                  <div class="wl-mega-left">
+                    <div>
+                      <div class="wl-mega-tag">WHERE AM I?</div>
+                      <h3 class="wl-mega-title">Life Stages</h3>
+                      <p class="wl-mega-desc">Start with your current chapter. See the financial priorities and decisions that matter most now.</p>
+                    </div>
+                    <div style="padding-top:1rem; border-top:1px solid #cbd5e1;">
+                      <a href="/#life-stages-explorer" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">Explore all life stages &rarr;</a>
+                    </div>
+                  </div>
+                  <div class="wl-mega-right">
+                    <div>
+                      <div class="wl-mega-col-title">STARTING OUT</div>
+                      <ul class="wl-mega-list">
+                        <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">18–25 · Build foundation</li>
+                        <li><a href="/curriculum/early-career-playbook.html">Budget & cash flow</a></li>
+                        <li><a href="/curriculum/early-career-playbook.html">Credit & debt</a></li>
+                        <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
+                      </ul>
+                      <div class="wl-mega-col-title" style="margin-top:1.25rem;">FAMILY TO FREEDOM</div>
+                      <ul class="wl-mega-list">
+                        <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">40–55 · Coordinate priorities</li>
+                        <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">55+ · Prepare for freedom</li>
+                        <li>
+                          <a href="/Retirement-simulator/Retirement_Gateway.html" class="wl-mega-card">
+                            Start My Retirement
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="wl-mega-col-title">BUILDING & GROWING</div>
+                      <ul class="wl-mega-list">
+                        <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">25–40 · Turn income into assets</li>
+                        <li>
+                          <a href="/tools.html" class="wl-mega-card">
+                            Credit Card Rewards Optimizer
+                          </a>
+                        </li>
+                        <li><a href="/curriculum/home-affordability-guide.html">Buy a home</a></li>
+                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real estate vs. index funds</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Goals & Decisions -->
+              <li class="wl-nav-item">
+                <button class="wl-nav-btn">
+                  <span>Goals & Decisions</span>
+                  <i class="fa-solid fa-caret-down" style="font-size:10px;"></i>
+                </button>
+                <div class="wl-nav-mega">
+                  <div class="wl-mega-left">
+                    <div>
+                      <div class="wl-mega-tag">WHAT DO I WANT TO DO?</div>
+                      <h3 class="wl-mega-title">Goals & Decisions</h3>
+                      <p class="wl-mega-desc">Go directly to the financial question you are trying to answer.</p>
+                    </div>
+                  </div>
+                  <div class="wl-mega-right">
+                    <div>
+                      <div class="wl-mega-col-title">MANAGE MONEY</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/tools.html">Manage my spending</a></li>
+                        <li><a href="/tools.html#debt">Pay off debt</a></li>
+                        <li><a href="/tools.html">Optimize rewards</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="wl-mega-col-title">BUILD ASSETS</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
+                        <li><a href="/curriculum/home-affordability-guide.html">Buy a home</a></li>
+                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real estate vs. index funds</a></li>
+                        <li><a href="/Retirement-simulator/Retirement_Gateway.html">Plan my retirement</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Retirement -->
+              <li class="wl-nav-item">
+                <button class="wl-nav-btn">
+                  <span>Retirement</span>
+                  <i class="fa-solid fa-caret-down" style="font-size:10px;"></i>
+                </button>
+                <div class="wl-nav-mega">
+                  <div class="wl-mega-left">
+                    <div>
+                      <div class="wl-mega-tag">RETIREMENT HUB</div>
+                      <h3 class="wl-mega-title">Retirement</h3>
+                      <p class="wl-mega-desc">Connect location, healthcare, and financial blueprints in one plan.</p>
+                    </div>
+                  </div>
+                  <div class="wl-mega-right">
+                    <div>
+                      <div class="wl-mega-col-title">JOURNEYS</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/Retirement-simulator/Retirement_Gateway.html">Start My Retirement</a></li>
+                        <li><a href="/Retirement-simulator/building-your-retirement.html">My Retirement Blueprint</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="wl-mega-col-title">EXPLORE</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/Retirement-simulator/UScitymatcher.html">U.S. City Matcher</a></li>
+                        <li><a href="/Retirement-simulator/RetiringOverseas.html">Living Overseas</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Tools -->
+              <li class="wl-nav-item">
+                <a href="/tools.html" class="wl-nav-link-direct">Tools</a>
+              </li>
+
+              <!-- Learn -->
+              <li class="wl-nav-item">
+                <button class="wl-nav-btn">
+                  <span>Learn</span>
+                  <i class="fa-solid fa-caret-down" style="font-size:10px;"></i>
+                </button>
+                <div class="wl-nav-mega">
+                  <div class="wl-mega-left">
+                    <div>
+                      <div class="wl-mega-tag">LEARNING LIBRARY</div>
+                      <h3 class="wl-mega-title">Learn</h3>
+                      <p class="wl-mega-desc">Clear explainers and guides for every life stage.</p>
+                    </div>
+                  </div>
+                  <div class="wl-mega-right">
+                    <div>
+                      <div class="wl-mega-col-title">GUIDES</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/curriculum/early-career-playbook.html">Early Career Playbook</a></li>
+                        <li><a href="/curriculum/home-affordability-guide.html">Home Buying Guide</a></li>
+                        <li><a href="/curriculum/tax-efficient-portfolio.html">Tax-Efficient Investing</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="wl-mega-col-title">MODELS</div>
+                      <ul class="wl-mega-list">
+                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real Estate vs Stocks</a></li>
+                        <li><a href="/simulator.html">Tax & Roth Simulator</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </nav>
+
+          <!-- Right Action CTA -->
+          <div>
+            <a href="/#life-stages-explorer" class="wl-action-btn">
+              <i class="fa-solid fa-compass"></i>
+              <span>Find Your Path</span>
+            </a>
+            
+            <!-- Mobile Menu Trigger -->
+            <button id="wlMobileMenuBtn" class="wl-mobile-toggle" aria-label="Open Mobile Menu">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+
         </div>
+      </div>
     </header>
 
-    <!-- Mobile Slide-out Drawer -->
-    <div id="globalMobileDrawer" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm lg:hidden">
-        <div class="fixed right-0 top-0 bottom-0 w-5/6 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
+    <!-- Mobile Navigation Drawer -->
+    <div id="wlMobileDrawer" class="wl-mobile-drawer">
+      <div class="wl-mobile-panel">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid #f1f5f9;">
+            <span style="font-size:1rem; font-weight:800; color:#0f172a;">WealthLanding Menu</span>
+            <button id="wlCloseMobileDrawerBtn" style="background:none; border:none; color:#64748b; font-size:1.25rem; cursor:pointer;">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:1.25rem; text-align:left;">
             <div>
-                <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
-                    <span class="text-base font-extrabold text-slate-900">WealthLanding Menu</span>
-                    <button id="closeGlobalMobileDrawerBtn" class="p-2 text-slate-400 hover:text-slate-900">
-                        <i class="fa-solid fa-xmark text-xl"></i>
-                    </button>
-                </div>
-
-                <div class="space-y-5 text-left">
-                    <div>
-                        <div class="font-extrabold text-xs text-emerald-700 uppercase tracking-wider mb-2">Life Stages</div>
-                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
-                            <a href="/curriculum/early-career-playbook.html" class="block font-semibold text-slate-700 py-1">🌱 Starting Out (18-25)</a>
-                            <a href="/curriculum/home-affordability-guide.html" class="block font-semibold text-slate-700 py-1">🚀 Building & Growing (25-40)</a>
-                            <a href="/curriculum/tax-efficient-portfolio.html" class="block font-semibold text-slate-700 py-1">🛡️ Family & Peak (40-55)</a>
-                            <a href="/Retirement-simulator/Retirement_Gateway.html" class="block font-semibold text-slate-700 py-1">🏖️ Pre-Retirement (55+)</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="font-extrabold text-xs text-emerald-700 uppercase tracking-wider mb-2">Goals & Tools</div>
-                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
-                            <a href="/tools.html" class="block font-semibold text-slate-700 py-1">Tools & Calculators</a>
-                            <a href="/investment/real_estate_vs_stocks_model.html" class="block font-semibold text-slate-700 py-1">Real Estate vs Stocks</a>
-                            <a href="/Retirement-simulator/Retirement_Gateway.html" class="block font-semibold text-slate-700 py-1">Retirement Gateway</a>
-                        </div>
-                    </div>
-                </div>
+              <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Life Stages</div>
+              <div style="padding-left:0.5rem; border-left:2px solid #f1f5f9; display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
+                <a href="/curriculum/early-career-playbook.html" style="color:#334155; font-weight:600; text-decoration:none;">🌱 Starting Out (18-25)</a>
+                <a href="/curriculum/home-affordability-guide.html" style="color:#334155; font-weight:600; text-decoration:none;">🚀 Building & Growing (25-40)</a>
+                <a href="/curriculum/tax-efficient-portfolio.html" style="color:#334155; font-weight:600; text-decoration:none;">🛡️ Family & Peak (40-55)</a>
+                <a href="/Retirement-simulator/Retirement_Gateway.html" style="color:#334155; font-weight:600; text-decoration:none;">🏖️ Pre-Retirement (55+)</a>
+              </div>
             </div>
 
-            <div class="pt-6 border-t border-slate-100">
-                <a href="/#life-stages-explorer" class="block w-full py-3 text-center text-sm font-bold text-white bg-emerald-600 rounded-xl shadow-md">
-                    Find Your Financial Path
-                </a>
+            <div>
+              <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Goals & Tools</div>
+              <div style="padding-left:0.5rem; border-left:2px solid #f1f5f9; display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
+                <a href="/tools.html" style="color:#334155; font-weight:600; text-decoration:none;">Tools & Calculators</a>
+                <a href="/investment/real_estate_vs_stocks_model.html" style="color:#334155; font-weight:600; text-decoration:none;">Real Estate vs Stocks</a>
+                <a href="/Retirement-simulator/Retirement_Gateway.html" style="color:#334155; font-weight:600; text-decoration:none;">Retirement Gateway</a>
+              </div>
             </div>
+          </div>
         </div>
+
+        <div style="padding-top:1.5rem; border-top:1px solid #f1f5f9;">
+          <a href="/#life-stages-explorer" style="display:block; width:100%; padding:0.75rem; text-center:center; font-size:0.875rem; font-weight:700; color:#fff; background:#059669; border-radius:0.75rem; text-decoration:none; text-align:center;">
+            Find Your Financial Path
+          </a>
+        </div>
+      </div>
     </div>
   `;
 
-  const target = document.getElementById('global-header-target');
-  if (target) {
+  // 5. Mount Header to Page
+  function renderHeader() {
+    let target = document.getElementById('global-header-target');
+    
+    // Auto-create target container at the top of body if missing
+    if (!target) {
+      target = document.createElement('div');
+      target.id = 'global-header-target';
+      if (document.body.firstChild) {
+        document.body.insertBefore(target, document.body.firstChild);
+      } else {
+        document.body.appendChild(target);
+      }
+    }
+
     target.innerHTML = headerHTML;
 
     // Mobile Drawer Handlers
-    const mobileBtn = document.getElementById('globalMobileMenuBtn');
-    const closeBtn = document.getElementById('closeGlobalMobileDrawerBtn');
-    const drawer = document.getElementById('globalMobileDrawer');
+    const mobileBtn = document.getElementById('wlMobileMenuBtn');
+    const closeBtn = document.getElementById('wlCloseMobileDrawerBtn');
+    const drawer = document.getElementById('wlMobileDrawer');
 
     if (mobileBtn && drawer) {
       mobileBtn.addEventListener('click', function() {
-        drawer.classList.remove('hidden');
+        drawer.classList.add('js-open');
       });
     }
 
     if (closeBtn && drawer) {
       closeBtn.addEventListener('click', function() {
-        drawer.classList.add('hidden');
+        drawer.classList.remove('js-open');
       });
     }
 
-    // Touch/Click Toggle Support for Dropdowns
-    document.querySelectorAll('.wl-nav-group > button').forEach(function(btn) {
+    // Touch/Click Toggle Support for Dropdowns on Desktop & Touch Devices
+    document.querySelectorAll('.wl-nav-item > .wl-nav-btn').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
-        if (window.innerWidth <= 1024 || ('ontouchstart' in window)) {
-          e.preventDefault();
-          const currentMenu = this.nextElementSibling;
-          const isVisible = currentMenu ? currentMenu.classList.contains('js-visible') : false;
+        e.preventDefault();
+        const megaMenu = this.nextElementSibling;
+        if (!megaMenu) return;
 
-          document.querySelectorAll('.wl-nav-mega').forEach(function(menu) {
-            menu.classList.remove('js-visible');
-          });
+        const isVisible = megaMenu.classList.contains('js-visible');
 
-          if (!isVisible && currentMenu) {
-            currentMenu.classList.add('js-visible');
-          }
+        document.querySelectorAll('.wl-nav-mega').forEach(function(menu) {
+          menu.classList.remove('js-visible');
+        });
+
+        if (!isVisible) {
+          megaMenu.classList.add('js-visible');
         }
       });
     });
 
-    // Close Dropdown Menu on Outside Click
+    // Close Dropdown Menu when clicking outside
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.wl-nav-group')) {
+      if (!e.target.closest('.wl-nav-item')) {
         document.querySelectorAll('.wl-nav-mega').forEach(function(menu) {
           menu.classList.remove('js-visible');
         });
       }
     });
   }
+
+  // Execute mounting after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderHeader);
+  } else {
+    renderHeader();
+  }
 })();
+```eof
+
+---
+
+### How to test this:
+1. Copy the code block above into your web server's **`components/header.js`** file.
+2. In your HTML pages, ensure you include:
+   
+```html
+   <script src="/components/header.js"></script>
