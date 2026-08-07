@@ -1,5 +1,5 @@
 (function() {
-  // 1. Inject mandatory CSS & FontAwesome dependencies if missing
+  // 1. Inject mandatory CSS & FontAwesome dependencies if missing in the host page
   const head = document.head;
 
   if (!document.querySelector('link[href*="font-awesome"]')) {
@@ -15,29 +15,46 @@
     head.appendChild(tw);
   }
 
-  // Inject CSS rules required for mega dropdowns and mobile drawer across ALL pages
+  // Standalone CSS fallback so dropdowns work reliably on any page regardless of CSS loading order
   const styleTag = document.createElement('style');
   styleTag.id = 'wealthlanding-header-styles';
   styleTag.textContent = `
-    .nav-mega-menu {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
-      pointer-events: none;
+    /* Mega Menu Dropdown Core Styling */
+    .wl-nav-mega {
+      position: absolute !important;
+      top: 100% !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(10px) !important;
+      width: 900px !important;
+      max-width: 92vw !important;
+      background-color: #ffffff !important;
+      border-radius: 1rem !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
+      z-index: 9999 !important;
     }
-    .nav-group:hover .nav-mega-menu,
-    .nav-group:focus-within .nav-mega-menu,
-    .nav-mega-menu.js-visible {
+
+    /* Hover & Active Display Rules */
+    .wl-nav-group:hover .wl-nav-mega,
+    .wl-nav-group:focus-within .wl-nav-mega,
+    .wl-nav-mega.js-visible {
       opacity: 1 !important;
       visibility: visible !important;
-      transform: translateY(0) !important;
+      transform: translateX(-50%) translateY(0) !important;
       pointer-events: auto !important;
+    }
+
+    /* Ensure text styling inside mega menu */
+    .wl-nav-mega h3, .wl-nav-mega h5, .wl-nav-mega p, .wl-nav-mega a, .wl-nav-mega span, .wl-nav-mega li {
+      font-family: Inter, system-ui, -apple-system, sans-serif !important;
     }
   `;
   head.appendChild(styleTag);
 
-  /* STREAMING_CHUNK:Building complete header and mobile menu HTML template... */
   const headerHTML = `
     <header class="sticky top-0 z-50 bg-[#0a1128] border-b border-slate-800 transition-all duration-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,7 +65,7 @@
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 via-emerald-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
                         <i class="fa-solid fa-chart-line text-lg"></i>
                     </div>
-                    <div>
+                    <div class="text-left">
                         <span class="text-xl font-extrabold tracking-tight text-white group-hover:text-emerald-400 transition">Wealth<span class="text-emerald-400">Landing</span></span>
                         <span class="block text-[10px] font-semibold tracking-wider text-slate-400 uppercase -mt-1">Lifetime Education</span>
                     </div>
@@ -58,13 +75,13 @@
                 <nav class="hidden lg:flex items-center gap-1">
                     
                     <!-- MENU 1: Life Stages -->
-                    <div class="relative nav-group py-6">
+                    <div class="relative wl-nav-group py-6">
                         <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
                             <span>Life Stages</span>
                             <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
 
-                        <div class="nav-mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
                             <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
                                 <div>
                                     <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHERE AM I?</div>
@@ -118,12 +135,12 @@
                     </div>
 
                     <!-- MENU 2: Goals & Decisions -->
-                    <div class="relative nav-group py-6">
+                    <div class="relative wl-nav-group py-6">
                         <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
                             <span>Goals & Decisions</span>
                             <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
-                        <div class="nav-mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
                             <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
                                 <div>
                                     <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">WHAT DO I WANT TO DO?</div>
@@ -154,12 +171,12 @@
                     </div>
 
                     <!-- MENU 3: Retirement -->
-                    <div class="relative nav-group py-6">
+                    <div class="relative wl-nav-group py-6">
                         <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
                             <span>Retirement</span>
                             <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
-                        <div class="nav-mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
                             <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
                                 <div>
                                     <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">RETIREMENT HUB</div>
@@ -187,19 +204,19 @@
                     </div>
 
                     <!-- MENU 4: Tools -->
-                    <div class="relative nav-group py-6">
+                    <div class="relative wl-nav-group py-6">
                         <a href="/tools.html" class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition">
                             <span>Tools</span>
                         </a>
                     </div>
 
                     <!-- MENU 5: Learn -->
-                    <div class="relative nav-group py-6">
+                    <div class="relative wl-nav-group py-6">
                         <button class="flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-slate-100 hover:text-emerald-400 rounded-lg hover:bg-slate-800/60 transition focus:outline-none">
                             <span>Learn</span>
                             <i class="fa-solid fa-caret-down text-xs text-slate-400 group-hover:text-emerald-400 transition-transform duration-200"></i>
                         </button>
-                        <div class="nav-mega-menu absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-12 z-50 text-left">
+                        <div class="wl-nav-mega overflow-hidden grid grid-cols-12 text-left">
                             <div class="col-span-4 bg-[#f2f7f4] p-6 flex flex-col justify-between border-r border-slate-200/80">
                                 <div>
                                     <div class="text-[11px] font-extrabold tracking-widest text-[#16a34a] uppercase mb-2">LEARNING LIBRARY</div>
@@ -290,12 +307,11 @@
     </div>
   `;
 
-  /* STREAMING_CHUNK:Attaching header markup and event listeners... */
   const target = document.getElementById('global-header-target');
   if (target) {
     target.innerHTML = headerHTML;
 
-    // Mobile Drawer Event Handlers
+    // Mobile Drawer Handlers
     const mobileBtn = document.getElementById('globalMobileMenuBtn');
     const closeBtn = document.getElementById('closeGlobalMobileDrawerBtn');
     const drawer = document.getElementById('globalMobileDrawer');
@@ -312,15 +328,15 @@
       });
     }
 
-    // Touch/Mobile Tap Toggle support for nav dropdowns
-    document.querySelectorAll('.nav-group > button').forEach(function(btn) {
+    // Touch/Click Toggle Support for Dropdowns
+    document.querySelectorAll('.wl-nav-group > button').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         if (window.innerWidth <= 1024 || ('ontouchstart' in window)) {
           e.preventDefault();
           const currentMenu = this.nextElementSibling;
           const isVisible = currentMenu ? currentMenu.classList.contains('js-visible') : false;
 
-          document.querySelectorAll('.nav-mega-menu').forEach(function(menu) {
+          document.querySelectorAll('.wl-nav-mega').forEach(function(menu) {
             menu.classList.remove('js-visible');
           });
 
@@ -331,14 +347,13 @@
       });
     });
 
-    // Close open dropdowns when clicking outside
+    // Close Dropdown Menu on Outside Click
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-group')) {
-        document.querySelectorAll('.nav-mega-menu').forEach(function(menu) {
+      if (!e.target.closest('.wl-nav-group')) {
+        document.querySelectorAll('.wl-nav-mega').forEach(function(menu) {
           menu.classList.remove('js-visible');
         });
       }
     });
   }
 })();
-```eof
