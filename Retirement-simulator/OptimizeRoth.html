@@ -231,6 +231,146 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
+    /* Expandable Assumptions Panel Styling */
+    details.assumptions-card-drawer {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 1.25rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 20px -5px rgba(15,23,42,0.06);
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    details.assumptions-card-drawer summary.assumptions-drawer-summary {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    details.assumptions-card-drawer summary.assumptions-drawer-summary::-webkit-details-marker { display: none; }
+
+    details.assumptions-card-drawer[open] summary.assumptions-drawer-summary {
+      background: #ffffff;
+      border-bottom-color: #e2e8f0;
+    }
+
+    details.assumptions-card-drawer summary.assumptions-drawer-summary .assumptions-summary-title h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 850;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .assumptions-subtitle {
+      display: block;
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+    }
+
+    .assumptions-drawer-body {
+      padding: 1.5rem;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .assumptions-actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .assumptions-group-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #2563eb;
+      margin-top: 0.5rem;
+    }
+
+    .assumptions-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    @media(max-width: 1200px){ .assumptions-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media(max-width: 650px){ .assumptions-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 480px){ .assumptions-grid { grid-template-columns: 1fr; } }
+
+    .assumptions-field {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.85rem;
+      padding: 0.75rem 0.9rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .assumptions-field:focus-within {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+      background: #fff;
+    }
+    .assumptions-field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #64748b;
+      margin-bottom: 0.35rem;
+    }
+    .assumptions-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .assumptions-field input, .assumptions-field select {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      padding: 0;
+      outline: none;
+    }
+    .assumptions-unit {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .switch-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .switch-field label {
+      margin-bottom: 0 !important;
+    }
+    .switch-field input[type="checkbox"] {
+      width: auto !important;
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+
     .overview-grid {
       display: grid;
       grid-template-columns: 21rem minmax(0, 1fr);
@@ -707,7 +847,224 @@
       </div>
     </div>
 
-    
+    <!-- PLANNING ASSUMPTIONS & ECONOMIC DRIVERS PANEL (EXPANDABLE - HIDDEN BY DEFAULT) -->
+    <details class="assumptions-card-drawer" id="macroAssumptionsPanel">
+      <summary class="assumptions-drawer-summary">
+        <div class="assumptions-summary-title">
+          <h3>⚙️ All Model Assumptions & Macro Controls</h3>
+          <span class="assumptions-subtitle">Expand to customize market returns, inflation rates, healthcare costs, tax limits, housing debt, and family assumptions.</span>
+        </div>
+        <div>
+          <span class="pill-badge" style="background: #eff6ff; color: #1d4ed8; font-weight: 800;">Click to Expand Controls ▼</span>
+        </div>
+      </summary>
+
+      <div class="assumptions-drawer-body">
+        <div class="assumptions-actions-bar">
+          <span style="font-size: 0.78rem; color: #64748b;">Adjusting any value recalculates all strategies, charts, and Monte Carlo tests in real time.</span>
+          <button type="button" onclick="resetMacroAssumptions()" style="background: transparent; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.35rem 0.65rem; font-size: 0.75rem; font-weight: 700; color: #475569; cursor: pointer;">Reset All Defaults</button>
+        </div>
+
+        <!-- Section 1: Economic & Portfolio Growth -->
+        <div class="assumptions-group-title">📈 Economic & Portfolio Growth Assumptions</div>
+        <div class="assumptions-grid">
+          <div class="assumptions-field">
+            <label for="inflation">General Inflation</label>
+            <div class="assumptions-input-wrap">
+              <input id="inflation" type="number" step="0.1" value="3.0">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="preRetireReturnPct">Pre-Retirement Growth</label>
+            <div class="assumptions-input-wrap">
+              <input id="preRetireReturnPct" type="number" step="0.1" value="7.0">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="postRetireReturnPct">Post-Retirement Growth</label>
+            <div class="assumptions-input-wrap">
+              <input id="postRetireReturnPct" type="number" step="0.1" value="5.0">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="wageGrowthPct">Salary Escalation</label>
+            <div class="assumptions-input-wrap">
+              <input id="wageGrowthPct" type="number" step="0.1" value="2.0">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="medicalInflationPct">Health / LTC Inflation</label>
+            <div class="assumptions-input-wrap">
+              <input id="medicalInflationPct" type="number" step="0.1" value="4.5">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="cashYieldPct">Cash Reserve Yield</label>
+            <div class="assumptions-input-wrap">
+              <input id="cashYieldPct" type="number" step="0.1" value="2.0">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Healthcare & Long-Term Care -->
+        <div class="assumptions-group-title">🏥 Healthcare, Medicare & Long-Term Care</div>
+        <div class="assumptions-grid">
+          <div class="assumptions-field">
+            <label for="ltcAnnualCost">Annual Nursing / LTC Cost</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="ltcAnnualCost" type="number" value="60000">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="ltcStartAge">LTC Care Start Age</label>
+            <div class="assumptions-input-wrap">
+              <input id="ltcStartAge" type="number" value="80">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="ltcEndAge">LTC Care End Age</label>
+            <div class="assumptions-input-wrap">
+              <input id="ltcEndAge" type="number" value="85">
+            </div>
+          </div>
+
+          <div class="assumptions-field switch-field">
+            <label for="preserveAca">Preserve ACA Subsidies</label>
+            <input id="preserveAca" type="checkbox" checked>
+          </div>
+
+          <div class="assumptions-field switch-field">
+            <label for="avoidIrmaa">Avoid IRMAA Surcharges</label>
+            <input id="avoidIrmaa" type="checkbox" checked>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="bracketTarget">Top Federal Bracket Cap</label>
+            <select id="bracketTarget">
+              <option value="12">12%</option>
+              <option value="22">22%</option>
+              <option value="24" selected>24%</option>
+              <option value="32">32%</option>
+              <option value="35">35%</option>
+              <option value="none">No bracket cap</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Section 3: Housing, Education, Tax & Living Spending -->
+        <div class="assumptions-group-title">🏡 Housing, Education, State Tax & Pre-Retirement Spending</div>
+        <div class="assumptions-grid">
+          <div class="assumptions-field">
+            <label for="mortgageAnnual">Annual Mortgage Payment</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="mortgageAnnual" type="number" value="24000">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="mortgageEndAge">Mortgage Payoff Age</label>
+            <div class="assumptions-input-wrap">
+              <input id="mortgageEndAge" type="number" value="65">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="collegeCostPerChild">College Cost / Child</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="collegeCostPerChild" type="number" value="150000">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="childCount">Number of Children</label>
+            <div class="assumptions-input-wrap">
+              <input id="childCount" type="number" value="2">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="preRetirementSpend">Pre-Retirement Spending</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="preRetirementSpend" type="number" value="140000">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="stateTaxRate">State Tax Rate</label>
+            <div class="assumptions-input-wrap">
+              <input id="stateTaxRate" type="number" step="0.01" value="5.75">
+              <span class="assumptions-unit">%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Supplemental Income & Roth Contributions -->
+        <div class="assumptions-group-title">💼 Supplemental Work & Roth Savings Contributions</div>
+        <div class="assumptions-grid">
+          <div class="assumptions-field switch-field">
+            <label for="partTimeEnabled">Enable Part-Time Work</label>
+            <input id="partTimeEnabled" type="checkbox">
+          </div>
+
+          <div class="assumptions-field">
+            <label for="partTimeIncome">Part-Time Income</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="partTimeIncome" type="number" value="0">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="partTimeStartAge">Part-Time Start Age</label>
+            <div class="assumptions-input-wrap">
+              <input id="partTimeStartAge" type="number" value="61">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="partTimeEndAge">Part-Time End Age</label>
+            <div class="assumptions-input-wrap">
+              <input id="partTimeEndAge" type="number" value="65">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="annualBackdoorPerAdult">Backdoor Roth / Adult</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="annualBackdoorPerAdult" type="number" value="0">
+            </div>
+          </div>
+
+          <div class="assumptions-field">
+            <label for="annualMegaBackdoor">Mega Backdoor Roth</label>
+            <div class="assumptions-input-wrap">
+              <span class="assumptions-unit">$</span>
+              <input id="annualMegaBackdoor" type="number" value="0">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </details>
+
     <section class="frontier-shell" aria-labelledby="financialDecisionTitle">
       <div class="frontier-head">
         <div>
@@ -892,17 +1249,7 @@
       </div>
 
       <div class="wizard-card">
-        <div class="step-title">Step 3 · Investment Return & Inflation</div>
-        <div class="input-grid">
-          <div class="field"><label>Pre-Retirement Return Rate %</label><input id="preRetireReturnPct" type="number" step="0.1" value="7.0"></div>
-          <div class="field"><label>Post-Retirement Return Rate %</label><input id="postRetireReturnPct" type="number" step="0.1" value="5.0"></div>
-          <div class="field"><label>General Inflation %</label><input id="inflation" type="number" step="0.1" value="3.0"></div>
-          <div class="field"><label>Cash Interest Yield %</label><input id="cashYieldPct" type="number" step="0.1" value="2.0"></div>
-        </div>
-      </div>
-
-      <div class="wizard-card">
-        <div class="step-title">Step 4 · Primary Goal</div>
+        <div class="step-title">Step 3 · Primary Goal</div>
         <div class="strategy-grid">
           <button class="goal-btn active" id="btn-goal-maxroth" onclick="setObjectiveEnum('max_roth', this)">
             Maximize Roth Inheritance
@@ -916,7 +1263,7 @@
       </div>
 
       <div class="wizard-card">
-        <div class="step-title">Step 5 · Strategy</div>
+        <div class="step-title">Step 4 · Strategy</div>
         <div class="strategy-grid step4">
           <button class="strategy-btn active" id="btn-strat-us" onclick="setStrategyPreset('us', this)">
             🇺🇸 Stay in Current State
@@ -944,7 +1291,7 @@
         <div class="drawer-content">
           
           <div class="lock-notice" id="lockNoticeText">
-            ℹ Preset active: Standard preset rules are currently handling return rates, state taxes, healthcare, and contributions. Switch Step 5 to <b>Advanced Custom</b> to override.
+            ℹ Preset active: Standard preset rules are currently handling return rates, state taxes, healthcare, and contributions. Switch Step 4 to <b>Advanced Custom</b> to override.
           </div>
 
           <details class="cascading-subdrawer" open>
@@ -1139,6 +1486,34 @@
     function n(id){return Number((document.getElementById(id)||{}).value||0)}
     function b(id){return !!((document.getElementById(id)||{}).checked)}
     function v(id,d=''){return (document.getElementById(id)||{}).value||d}
+
+    function resetMacroAssumptions() {
+      if(document.getElementById('inflation')) document.getElementById('inflation').value = "3.0";
+      if(document.getElementById('preRetireReturnPct')) document.getElementById('preRetireReturnPct').value = "7.0";
+      if(document.getElementById('postRetireReturnPct')) document.getElementById('postRetireReturnPct').value = "5.0";
+      if(document.getElementById('wageGrowthPct')) document.getElementById('wageGrowthPct').value = "2.0";
+      if(document.getElementById('medicalInflationPct')) document.getElementById('medicalInflationPct').value = "4.5";
+      if(document.getElementById('cashYieldPct')) document.getElementById('cashYieldPct').value = "2.0";
+      if(document.getElementById('ltcAnnualCost')) document.getElementById('ltcAnnualCost').value = "60000";
+      if(document.getElementById('ltcStartAge')) document.getElementById('ltcStartAge').value = "80";
+      if(document.getElementById('ltcEndAge')) document.getElementById('ltcEndAge').value = "85";
+      if(document.getElementById('mortgageAnnual')) document.getElementById('mortgageAnnual').value = "24000";
+      if(document.getElementById('mortgageEndAge')) document.getElementById('mortgageEndAge').value = "65";
+      if(document.getElementById('collegeCostPerChild')) document.getElementById('collegeCostPerChild').value = "150000";
+      if(document.getElementById('childCount')) document.getElementById('childCount').value = "2";
+      if(document.getElementById('preRetirementSpend')) document.getElementById('preRetirementSpend').value = "140000";
+      if(document.getElementById('stateTaxRate')) document.getElementById('stateTaxRate').value = "5.75";
+      if(document.getElementById('partTimeEnabled')) document.getElementById('partTimeEnabled').checked = false;
+      if(document.getElementById('partTimeIncome')) document.getElementById('partTimeIncome').value = "0";
+      if(document.getElementById('partTimeStartAge')) document.getElementById('partTimeStartAge').value = "61";
+      if(document.getElementById('partTimeEndAge')) document.getElementById('partTimeEndAge').value = "65";
+      if(document.getElementById('annualBackdoorPerAdult')) document.getElementById('annualBackdoorPerAdult').value = "0";
+      if(document.getElementById('annualMegaBackdoor')) document.getElementById('annualMegaBackdoor').value = "0";
+      if(document.getElementById('preserveAca')) document.getElementById('preserveAca').checked = true;
+      if(document.getElementById('avoidIrmaa')) document.getElementById('avoidIrmaa').checked = true;
+      if(document.getElementById('bracketTarget')) document.getElementById('bracketTarget').value = "24";
+      render();
+    }
 
     function taxOrd(x){let rem=Math.max(0,x),tax=0,lo=0;for(const br of FED){let amt=Math.min(rem,br.u-lo);if(amt<=0)break;tax+=amt*br.r;rem-=amt;lo=br.u}return tax}
     function bracket(x){for(const br of FED){if(x<=br.u)return Math.round(br.r*100)+'%'}return'37%'}
@@ -1457,6 +1832,8 @@
         moveTaxFreeAge: moveTaxFreeAgeVal,
         preReturnPct: preReturn,
         postReturnPct: postReturn,
+        wageGrowthPct: n('wageGrowthPct')/100,
+        medicalInflationPct: n('medicalInflationPct')/100,
         preserveAca: presAca,
         avoidIrmaa: avIrmaa,
         cur: n('currentAge'),
@@ -1504,7 +1881,7 @@
         let rate= age < i.ret ? i.preReturnPct : i.postReturnPct;
         if(opt.returnOverride !== undefined) rate = opt.returnOverride;
 
-        let w2=ret?0:i.w2*Math.pow(1.02,y);
+        let w2=ret?0:i.w2*Math.pow(1 + i.wageGrowthPct, y);
         let taxW2=Math.max(0,w2-49000);
         let i1099=(i.ptOn && age>=i.ptS && age<=i.ptE) ? i.pt : 0;
         let cashInt=cash*i.cashYield;
@@ -1541,7 +1918,7 @@
 
         let ltcSpend = 0;
         if ((i.strategyPreset === 'custom' || opt.enableLtc) && age >= i.ltcS && age <= i.ltcE) {
-          ltcSpend = i.ltcCost * Math.pow(1 + i.infl, y);
+          ltcSpend = i.ltcCost * Math.pow(1 + i.medicalInflationPct, y);
         }
 
         let mortgageSpend = 0;
@@ -1574,7 +1951,7 @@
         let tx=rowTax(base,conv,rmd,gain,iRow,stOn);
         let irm = (age>=65 && !isOverseas && (i.strategyPreset === 'us' || i.avoidIrmaa)) ? {annual: (tx.magi > 218000 ? 1500 : 0)} : {annual:0};
 
-        let baseMedicare = (age >= 65 && !isOverseas) ? 6000 * Math.pow(1 + i.infl, y) : 0;
+        let baseMedicare = (age >= 65 && !isOverseas) ? 6000 * Math.pow(1 + i.medicalInflationPct, y) : 0;
 
         let totalMedical = baseMedicare + irm.annual + ltcSpend;
         let spend = livingSpend + collegeSpend + totalMedical + mortgageSpend;
@@ -1933,8 +2310,6 @@
       let i = inputs();
       let results = [];
 
-      // Use a deterministic pseudo-random seed so Monte Carlo runs remain completely 
-      // consistent and stable when toggling between Future and Today's Dollars.
       let seed = 42;
       function pseudoRandom() {
         let x = Math.sin(seed++) * 10000;
@@ -2065,9 +2440,6 @@
       let noConvLifetimeTax = dispNoConvRows.reduce((s,r)=>s+r.totalTax,0);
       let currentLifetimeTax = dispRows.reduce((s,r)=>s+r.totalTax,0);
 
-      // Economic tax comparison: taxes already paid plus estimated tax still embedded
-      // in the terminal pretax balance. This avoids falsely showing $0 simply because
-      // the no-conversion case defers tax beyond the modeled period.
       const selectedBracket = Number(v('bracketTarget','24')) / 100;
       const terminalPretaxTaxRate = Math.min(0.37, Math.max(0.12, Number.isFinite(selectedBracket) ? selectedBracket : 0.24));
       const currentEmbeddedPretaxTax = term.pretax * terminalPretaxTaxRate;
@@ -2173,7 +2545,6 @@
         { label: 'State Income Tax', data: dispRows.map(r => r.state), backgroundColor: '#02b17d' }
       ];
 
-      // Add Mortgage if in custom mode
       if (i.strategyPreset === 'custom') {
         expenseDatasets.splice(2, 0, { label: 'Mortgage', data: dispRows.map(r => r.mortgageSpend), backgroundColor: '#64748b' });
       }
@@ -2236,6 +2607,7 @@
     loadBlueprintDecisionContext();
     recommendedFrontierStrategy=chooseRecommendedStrategy();
     selectedFrontierStrategy=recommendedFrontierStrategy;
+    document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input', render));
     document.querySelectorAll('input,select').forEach(el=>el.addEventListener('change', render));
     render();
   </script>
