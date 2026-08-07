@@ -257,7 +257,7 @@ body{background:var(--color-background-secondary);color:var(--color-text-primary
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-
+<div id="global-header-target"></div>
 <!-- PASSCODE PROTECTION OVERLAY -->
 <div id="passcode-overlay">
   <div class="lock-card" id="lock-card">
@@ -1474,5 +1474,6 @@ try {
   document.body.innerHTML += `<div style="color:red; padding: 20px; font-family: sans-serif;">Global Error: ${globalErr.message}</div>`;
 }
 </script>
+  <script src="/components/header.js"></script>
 </body>
 </html>
