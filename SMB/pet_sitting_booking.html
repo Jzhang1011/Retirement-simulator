@@ -109,10 +109,170 @@
                 <div class="rate-price">$85</div>
             </div>
 
-            <div class="discount-callout">
-                <strong>Loyal Client Discount:</strong> Enter your pet's name in the booking form to receive your custom family discount! Payments are accepted directly via Zelle, Venmo, or Cash upon service.
-            </div>
-        </div>
+            <!-- Price Estimator Styles -->
+<style>
+    .calculator-container {
+        background: #f4f8fa;
+        padding: 25px;
+        border-radius: 8px;
+        border: 1px solid #cce0eb;
+        margin-top: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .calculator-container h3 {
+        margin-top: 0;
+        color: #0b4b7c;
+        border-bottom: 2px solid #cce0eb;
+        padding-bottom: 10px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    .form-group select, 
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+    }
+    .calc-btn {
+        width: 100%;
+        background-color: #00a86b;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .calc-btn:hover {
+        background-color: #008f5a;
+    }
+    .result-box {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border: 2px dashed #00a86b;
+        border-radius: 4px;
+        text-align: center;
+        display: none; /* Hidden until calculated */
+    }
+    .result-box h4 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+    }
+    .total-price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0b4b7c;
+    }
+    .discount-msg {
+        color: #00a86b;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+</style>
+
+<!-- Price Estimator HTML -->
+<div class="calculator-container">
+    <h3>Estimate Your Total</h3>
+    
+    <div class="form-group">
+        <label for="serviceType">Select Service:</label>
+        <select id="serviceType">
+            <option value="25">Standard Drop-In Visit ($25/day)</option>
+            <option value="40">Extended Visit / Dog Walk ($40/day)</option>
+            <option value="85">Overnight House Sitting ($85/day)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="numDays">Number of Days / Visits:</label>
+        <input type="number" id="numDays" min="1" value="1">
+    </div>
+
+    <div class="form-group">
+        <label for="petName">Pet's Name (For Loyal Client Discount):</label>
+        <input type="text" id="petName" placeholder="e.g., Bella, Max">
+    </div>
+
+    <button class="calc-btn" onclick="calculateTotal()">Calculate Estimate</button>
+
+    <div id="resultBox" class="result-box">
+        <h4>Estimated Payout:</h4>
+        <div id="totalPrice" class="total-price">$0.00</div>
+        <div id="discountMsg" class="discount-msg"></div>
+    </div>
+</div>
+
+<!-- Price Estimator JavaScript -->
+<script>
+    // --- CONFIGURE YOUR DISCOUNTS HERE ---
+    // Make sure pet names are all lowercase here so the search is case-insensitive.
+    // Use decimals for percentages (e.g., 0.10 = 10% off, 0.20 = 20% off)
+    const petDiscounts = {
+        "bella": 0.10,
+        "max": 0.15,
+        "charlie": 0.10,
+        "luna": 0.20
+    };
+
+    function calculateTotal() {
+        // 1. Get the values from the form
+        const dailyRate = parseFloat(document.getElementById("serviceType").value);
+        const days = parseInt(document.getElementById("numDays").value);
+        let petNameInput = document.getElementById("petName").value.trim().toLowerCase();
+        
+        // Ensure days is a valid number, default to 1 if blank/zero
+        const validDays = (isNaN(days) || days < 1) ? 1 : days;
+
+        // 2. Calculate Base Price
+        let baseTotal = dailyRate * validDays;
+        let finalTotal = baseTotal;
+        let discountApplied = 0;
+        let discountText = "";
+
+        // 3. Check for Discount
+        if (petNameInput !== "" && petDiscounts.hasOwnProperty(petNameInput)) {
+            const discountPercentage = petDiscounts[petNameInput];
+            discountApplied = baseTotal * discountPercentage;
+            finalTotal = baseTotal - discountApplied;
+            
+            // Format percentage for display (e.g., 0.10 -> 10%)
+            const displayPercent = (discountPercentage * 100).toFixed(0);
+            discountText = `Loyal client recognized! ${displayPercent}% discount applied for ${petNameInput.charAt(0).toUpperCase() + petNameInput.slice(1)}.`;
+        } else if (petNameInput !== "") {
+            // If they entered a name but it's not in the system
+            discountText = "Pet name not found in discount database. Standard rates apply.";
+        }
+
+        // 4. Update the Webpage
+        document.getElementById("totalPrice").innerText = "$" + finalTotal.toFixed(2);
+        
+        const msgElement = document.getElementById("discountMsg");
+        msgElement.innerText = discountText;
+        
+        // Change text color to red if name not found, green if found
+        if(discountText.includes("not found")) {
+             msgElement.style.color = "#d9534f"; // Red
+        } else {
+             msgElement.style.color = "#00a86b"; // Green
+        }
+
+        // Make the result box visible
+        document.getElementById("resultBox").style.display = "block";
+    }
+</script>
 
         <!-- Right Column: Calendly Embed -->
         <div class="booking-container">
