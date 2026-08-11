@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusted Local Pet Care & Family Ski Gear</title>
+    <style>
+        /* CSS Variables for Brand Colors */
+        :root {
+            --pet-green: #2d6a4f;
+            --pet-green-hover: #1b4332;
+            --ski-blue: #1d3557;
+            --ski-blue-hover: #0f1c2e;
+            --text-dark: #2b2d42;
+            --text-light: #6c757d;
+            --bg-offwhite: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #e9ecef;
+        }
+
+        /* Base & Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-offwhite);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background-color: var(--pet-green);
+            color: var(--white);
+            border: 2px solid var(--pet-green);
+        }
+        .btn-primary:hover {
+            background-color: var(--pet-green-hover);
+            border-color: var(--pet-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--ski-blue);
+            border: 2px solid var(--ski-blue);
+        }
+        .btn-secondary:hover {
+            background-color: var(--ski-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 53, 87, 0.2);
+        }
+        .btn-text {
+            color: var(--ski-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid transparent;
+        }
+        .btn-text:hover {
+            border-bottom-color: var(--ski-blue);
+        }
+
+        /* Layout Utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .section {
+            padding: 80px 0;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-link.primary {
+            color: var(--pet-green);
+        }
+        .nav-link:hover {
+            color: var(--pet-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--white);
+            padding: 60px 0 80px;
+        }
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+        .hero-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .hero-img {
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+        }
+        /* Placeholders using Unsplash */
+        .img-pet { background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=80'); }
+        .img-ski { background-image: url('https://images.unsplash.com/photo-1605540436563-5bca919ae766?auto=format&fit=crop&w=1000&q=80'); }
+
+        /* Trust Section (Pet Care Anchor) */
+        .trust-section {
+            background-color: var(--bg-offwhite);
+            text-align: center;
+        }
+        .trust-stars {
+            color: #eab308;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .badge-card {
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: 12px;
+            width: 260px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        .badge-title {
+            font-size: 1rem;
+            color: var(--pet-green);
+            margin-bottom: 0;
+        }
+
+        /* Meet Your Sitter (The Bridge) */
+        .sitter-section {
+            background-color: var(--white);
+        }
+        .sitter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .sitter-img {
+            border-radius: 16px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+        .sitter-content h2 {
+            font-size: 2.5rem;
+        }
+
+        /* Ski Shop Section */
+        .ski-section {
+            background-color: var(--bg-offwhite);
+        }
+        .ski-header {
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        .ski-header h2 {
+            color: var(--ski-blue);
+            font-size: 2.5rem;
+        }
+        .family-benefits {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .benefit-item {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .benefit-item::before {
+            content: '✓';
+            color: var(--ski-blue);
+        }
+        
+        /* Inventory Cards */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+        .inventory-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .inventory-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+        .inventory-img-container {
+            height: 200px;
+            background-color: #f1f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .inventory-img-container img {
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .inventory-details {
+            padding: 24px;
+        }
+        .inventory-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .inventory-specs {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .inventory-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        /* Cross-Sell Section */
+        .cross-sell {
+            background-color: var(--white);
+        }
+        .cross-sell-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .cross-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        .cross-card {
+            background: var(--bg-offwhite);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .cross-card h3 {
+            margin-bottom: 16px;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background-color: var(--pet-green);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+        .final-cta h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+        .final-cta p {
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .final-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn-white {
+            background-color: var(--white);
+            color: var(--pet-green);
+            border: 2px solid var(--white);
+        }
+        .btn-white:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+        .btn-outline-white {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .btn-outline-white:hover {
+            background-color: var(--white);
+            color: var(--pet-green);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* In a real build, add a hamburger menu toggle here */
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+            }
+            .hero-images {
+                grid-template-columns: 1fr;
+                grid-template-rows: 250px 250px;
+                height: auto;
+            }
+            .sitter-grid, .cross-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            .badge-card {
+                width: 100%;
+                max-width: 320px;
+            }
+            .final-actions {
+                flex-direction: column;
+                padding: 0 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Local Pet & Gear</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#pet-care" class="nav-link primary">Pet Care</a>
+                <a href="#ski-shop" class="nav-link">Ski Shop</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+                <a href="#pet-care" class="btn btn-primary" style="margin-left: 16px;">BOOK PET CARE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="section hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">LOCAL CARE. LOCAL GEAR.</h1>
+                <p class="hero-subtitle">Trusted local pet care for your four-legged family members — plus quality used ski gear for your next adventure.</p>
+                <div class="hero-actions">
+                    <a href="#pet-care" class="btn btn-primary">BOOK PET CARE</a>
+                    <a href="#ski-shop" class="btn btn-secondary">SHOP SKI GEAR</a>
+                </div>
+            </div>
+            <div class="hero-images">
+                <div class="hero-img img-pet" aria-label="Happy dog in a home environment"></div>
+                <div class="hero-img img-ski" aria-label="Family skiing together"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pet Care Anchor Section -->
+    <section id="pet-care" class="section trust-section">
+        <div class="container">
+            <h2 style="text-transform: uppercase; letter-spacing: 1px;">Trusted by Local Families</h2>
+            <div class="trust-stars">★★★★★</div>
+            <p><strong>[INSERT 5-STAR REVIEW RATING] Local Rating</strong></p>
+            <p style="max-width: 600px; margin: 0 auto;">Professional, personal pet care from a local family you can trust.</p>
+            
+            <div class="trust-badges">
+                <div class="badge-card">
+                    <div class="badge-icon">✓</div>
+                    <h3 class="badge-title">VERIFIED REVIEWS</h3>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🛡️</div>
+                    <h3 class="badge-title">INSURED & BONDED</h3>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">📍</div>
+                    <h3 class="badge-title">LOCAL & PERSONAL</h3>
+                </div>
+            </div>
+            
+            <a href="#" class="btn btn-primary">BOOK A PET SITTER</a>
+        </div>
+    </section>
+
+    <!-- Meet Your Sitter (The Bridge) -->
+    <section class="section sitter-section">
+        <div class="container sitter-grid">
+            <div class="sitter-image-wrapper">
+                <!-- Placeholder for authentic family/sitter photo -->
+                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80" alt="Local pet sitter smiling" class="sitter-img">
+            </div>
+            <div class="sitter-content">
+                <h2>MEET YOUR SITTER</h2>
+                <p>We're a local family who understands how important your pets are. When you book with us, you're not getting a random contractor from an app; you're getting dedicated, personal care from neighbors who genuinely love animals.</p>
+                <p>Beyond our passion for pets, our family spends a lot of time outdoors, especially skiing. Over the years, we've accumulated quality gear that our kids eventually outgrow. That's why we started passing our meticulously maintained equipment along to other local families.</p>
+                <p>The same family you trust with your pets is the family behind the ski gear.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ski Shop Section -->
+    <section id="ski-shop" class="section ski-section">
+        <div class="container">
+            <div class="ski-header">
+                <h2>GENTLY USED SKI GEAR</h2>
+                <p style="font-size: 1.1rem; color: var(--text-dark); font-weight: 600;">Quality gear our family has outgrown — ready for its next adventure.</p>
+                <p>Our family skis, and as our kids grow, we occasionally have quality equipment available for other local families. We carefully select and inspect the gear before passing it along.</p>
+            </div>
+            
+            <div class="family-benefits">
+                <span class="benefit-item">Quality used equipment</span>
+                <span class="benefit-item">Carefully inspected</span>
+                <span class="benefit-item">Local pickup</span>
+                <span class="benefit-item">Family-owned</span>
+                <span class="benefit-item">Great value</span>
+            </div>
+
+            <div class="inventory-grid">
+                <!-- Inventory Item 1 -->
+                <div class="inventory-card">
+                    <div class="inventory-img-container">
+                        <!-- Placeholder for ski equipment -->
+                        <img src="https://images.unsplash.com/photo-1559144490-8328294fc438?auto=format&fit=crop&w=400&q=80" alt="Volkl RTM 84 Skis">
+                    </div>
+                    <div class="inventory-details">
+                        <h3 class="inventory-title">Volkl RTM 84</h3>
+                        <div class="inventory-specs">
+                            Size: 177 cm<br>
+                            Condition: 9/10
+                        </div>
+                        <div class="inventory-price">SALE PRICE: $250</div>
+                        <a href="#" class="btn-text">VIEW DETAILS →</a>
+                    </div>
+                </div>
+
+                <!-- Inventory Item 2 -->
+                <div class="inventory-card">
+                    <div class="inventory-img-container">
+                        <img src="https://images.unsplash.com/photo-1559144490-8328294fc438?auto=format&fit=crop&w=400&q=80" alt="Salomon QST 92 Skis">
+                    </div>
+                    <div class="inventory-details">
+                        <h3 class="inventory-title">Salomon QST 92</h3>
+                        <div class="inventory-specs">
+                            Size: 161 cm<br>
+                            Condition: 8.5/10
+                        </div>
+                        <div class="inventory-price">SALE PRICE: $220</div>
+                        <a href="#" class="btn-text">VIEW DETAILS →</a>
+                    </div>
+                </div>
+
+                <!-- Inventory Item 3 -->
+                <div class="inventory-card">
+                    <div class="inventory-img-container">
+                        <img src="https://images.unsplash.com/photo-1559144490-8328294fc438?auto=format&fit=crop&w=400&q=80" alt="Atomic Bent Chetler Mini">
+                    </div>
+                    <div class="inventory-details">
+                        <h3 class="inventory-title">Atomic Bent Chetler Mini</h3>
+                        <div class="inventory-specs">
+                            Size: 133 cm<br>
+                            Condition: Good (Kids)
+                        </div>
+                        <div class="inventory-price">SALE PRICE: $150</div>
+                        <a href="#" class="btn-text">VIEW DETAILS →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="btn btn-secondary">VIEW ALL SKI GEAR</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cross-Sell Section -->
+    <section class="section cross-sell">
+        <div class="container">
+            <div class="cross-sell-header">
+                <h2 style="text-transform: uppercase; font-size: 1.5rem; letter-spacing: 1px;">Planning Your Next Adventure?</h2>
+            </div>
+            <div class="cross-grid">
+                <div class="cross-card">
+                    <h3 style="color: var(--pet-green);">NEED PET CARE?</h3>
+                    <p>Going away? We'll take care of the four-legged members of your family while you're gone in the comfort of your own home.</p>
+                    <a href="#pet-care" class="btn-text" style="color: var(--pet-green);">BOOK PET CARE →</a>
+                </div>
+                <div class="cross-card">
+                    <h3 style="color: var(--ski-blue);">NEED SKI GEAR?</h3>
+                    <p>Looking for quality used equipment for your next ski trip? Browse the outgrown gear we're passing along to the community.</p>
+                    <a href="#ski-shop" class="btn-text">SHOP SKI GEAR →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>LOCAL FAMILY. TRUSTED SERVICE.</h2>
+            <p>Whether you're looking for someone you can trust with your pets or quality ski gear for your family, we're here to help.</p>
+            <div class="final-actions">
+                <a href="#pet-care" class="btn btn-white">BOOK PET CARE</a>
+                <a href="#ski-shop" class="btn btn-outline-white">SHOP SKI GEAR</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Local Pet & Gear. Trusted in McLean, VA and surrounding areas.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
