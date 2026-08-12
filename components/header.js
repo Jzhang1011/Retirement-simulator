@@ -477,7 +477,7 @@
                     <div>
                       <div class="wl-mega-col-title">EXPLORE</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/Retirement-simulator/Odyssey.html">Retirement Odyssey</a></li>
+                        <li><a href="/Retirement-simulator/odyssey-exploration.html">Retirement Odyssey</a></li>
                         <li><a href="/Retirement-simulator/retirement_profiles.html">Retirement Profiles</a></li>
                         <li><a href="/Retirement-simulator/UScitymatcher.html">Explore U.S. locations</a></li>
                         <li><a href="/Retirement-simulator/RetiringOverseas.html">Explore living overseas</a></li>
