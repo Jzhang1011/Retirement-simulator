@@ -43,141 +43,7 @@
             font-family: var(--font-serif);
         }
 
-        /* STREAMING_CHUNK:Styling navigation header and dropdowns... */
-        .global-header {
-            background-color: #0B132B; 
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.85rem 2.25rem;
-            border-bottom: 1px solid #1E293B;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative; 
-            z-index: 1001;      
-        }
-
-        .top-nav-links {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center;
-            gap: 1.25rem;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .top-nav-links a {
-            color: #94A3B8;
-            text-decoration: none;
-            font-size: 0.95rem; 
-            font-weight: 500;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .top-nav-links a:hover, .top-nav-links a.active {
-            color: white;
-        }
-
-        .logo {
-            font-size: 1.45rem; 
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            letter-spacing: -0.04em;
-        }
-
-        .logo span {
-            color: #02B17D; 
-        }
-
-        .search-container {
-            position: relative;
-            max-width: 400px; 
-            width: 100%;
-        }
-
-        .search-input {
-            width: 100%;
-            background-color: #1E293B;
-            border: 1px solid #334155;
-            color: white;
-            padding: 0.65rem 1.25rem 0.65rem 3rem; 
-            border-radius: 8px;
-            font-size: 0.9rem; 
-        }
-
-        .mega-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;                     
-            transform: translateX(-50%) translateY(12px); 
-            width: 95vw;                   
-            max-width: 1240px; 
-            background: white;
-            border: 1px solid var(--border); 
-            border-radius: 1rem;
-            box-shadow: 0 22px 30px -5px rgba(0, 0, 0, 0.16), 0 12px 12px -5px rgba(0, 0, 0, 0.05);
-            padding: 3.25rem; 
-            display: grid !important;      
-            grid-template-columns: 1.1fr 2.9fr; 
-            gap: 3.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
-            z-index: 2000; 
-            box-sizing: border-box;
-        }
-
-        .dropdown-trigger:hover .mega-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .dropdown-trigger {
-            position: static;
-        }
-
-        .links-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem 1.75rem; 
-        }
-
-        .dropdown-column h4 {
-            color: var(--navy); 
-            font-size: 1.215rem; 
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 1.15rem;
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-        }
-
-        .dropdown-column ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem; 
-        }
-
-        .dropdown-column ul a {
-            color: var(--muted) !important; 
-            font-size: 0.95rem; 
-            font-weight: 500;
-            padding: 0;
-        }
-
-        .dropdown-column ul a:hover {
-            color: #02B17D !important; 
-        }
-
+       
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -230,86 +96,8 @@
   <script src="retirement-os.js"></script>
 </head>
 <body class="antialiased min-h-screen pb-16">
-
-  <!-- STREAMING_CHUNK:Rendering global header navigation... -->
-  <header class="global-header no-print">
-    <a href="/" class="logo">Wealth<span>Landing</span></a>
-    
-    <nav aria-label="Global Main Directory">
-      <ul class="top-nav-links">
-        
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Overview <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Overview</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">
-                  Your primary workspace baseline dashboard. Track targets, access planning workflows, and monitor active signals.
-                </p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>🚀 Start Here</h4>
-                <ul>
-                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
-                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>🌟 Popular Journeys</h4>
-                <ul>
-                  <li><a href="Odyssey.html">Retirement Odyssey Hub</a></li>
-                  <li><a href="retirement_preference_discovery.html">Preference Discovery</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="dropdown-trigger">
-          <a href="#" class="active font-bold text-white">Design Your Life <span class="text-[12px] opacity-70">▼</span></a>
-          <div class="mega-dropdown">
-            <div class="flex flex-col justify-between pr-6 border-r border-slate-100 text-left">
-              <div class="space-y-3">
-                <h2 class="text-3xl font-black tracking-tight text-slate-900">Design Your Life</h2>
-                <p class="text-slate-500 text-sm leading-relaxed font-medium">Map your life transition and location arbitrage.</p>
-              </div>
-            </div>
-            <div class="links-matrix text-left">
-              <div class="dropdown-column">
-                <h4>🗺️ Retirement Planning</h4>
-                <ul>
-                  <li><a href="Odyssey.html">Odyssey Experience</a></li>
-                  <li><a href="retirement_preference_discovery.html">Preference Discovery</a></li>
-                  <li><a href="financial-feasibility-audit.html">Feasibility Engine</a></li>
-                  <li><a href="building-your-retirement.html">Retirement Builder</a></li>
-                </ul>
-              </div>
-              <div class="dropdown-column">
-                <h4>✈️ Location & Healthcare</h4>
-                <ul>
-                  <li><a href="UScitymatcher.html">US Location Planning</a></li>
-                  <li><a href="RetiringOverseas.html">International Location Planning</a></li>
-                  <li><a href="healthcare_us_strategy.html">Healthcare Strategy Planning</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-      </ul>
-    </nav>
-    
-    <div class="search-container">
-      <form action="https://www.google.com/search" method="get" target="_blank">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10">🔍</span>
-        <input type="hidden" name="sitesearch" value="wealthlanding.com">
-        <input type="search" name="q" class="search-input" placeholder="Search systems, tools..." aria-label="Search WealthLanding">
-      </form>
-    </div>
-  </header>
+<div id="global-header-target"></div>
+ 
 
   <!-- STREAMING_CHUNK:Rendering page hero and committed path bar... -->
   <main class="max-w-[1450px] mx-auto px-4 md:px-12 py-8 space-y-8 no-print">
@@ -1710,6 +1498,7 @@
 <script>
 window.addEventListener('DOMContentLoaded',function(){if(window.RetirementOS){RetirementOS.syncLegacy();}});
 </script>
+     <script src="/components/header.js"></script> 
 </body>
 </html>
 ```eofs
