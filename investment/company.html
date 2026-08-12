@@ -13,250 +13,361 @@
   <title>Company Decision | WealthLanding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
   <style>
-    :root{--ink:#0f172a;--green:#10b981;--line:#e2e8f0;--night:#030712}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,sans-serif;background:#f8fafc;color:var(--ink)}
-    .serif{font-family:'Playfair Display',serif}
-    .wrap{max-width:1180px;margin:auto;padding:0 28px}
-    .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#059669}
-    .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(15,23,42,.04)}
-    .top{background:var(--night);color:#fff}
-    .nav{min-height:72px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
-    .logo{font-weight:800;font-size:23px;color:#fff;text-decoration:none;white-space:nowrap}
-    .logo span{color:var(--green)}
-    .nav a{color:#94a3b8;text-decoration:none;font-size:14px;font-weight:700}
-    .nav a:hover{color:#fff}
-    .search{margin-left:auto;display:flex;align-items:center;gap:8px;min-width:min(100%,340px)}
-    .search input{width:100%;border:1px solid #334155;background:#111827;color:#fff;border-radius:999px;padding:10px 14px;font-size:13px;outline:none}
-    .search input:focus{border-color:#10b981}
-    .search button{border:0;border-radius:999px;padding:10px 14px;background:#10b981;color:#032015;font-weight:800;font-size:12px;cursor:pointer}
-    .tag{display:inline-flex;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}
-    .value-card{border-radius:18px;padding:22px;border:1px solid var(--line);background:#fff}
-    .value-card strong{font-size:32px}
-    .zone{padding:16px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0}
-    .check{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;background:#ecfdf5;color:#059669;font-size:12px;font-weight:900;flex:0 0 auto}
-    @media(max-width:900px){.search{order:2;width:100%;margin-left:0}.nav{gap:16px}.serif.text-5xl{font-size:2.6rem;line-height:1.05}}
+    :root {
+      --ink: #0f172a;
+      --green: #10b981;
+      --line: #e2e8f0;
+      --night: #030712;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Inter', sans-serif; background: #f8fafc; color: var(--ink); }
+    .serif { font-family: 'Playfair Display', serif; }
+    .wrap { max-width: 1180px; margin: auto; padding: 0 28px; }
+    .eyebrow { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; color: #059669; }
+    .card { background: #ffffff; border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 10px 30px rgba(15, 23, 42, .04); }
+    .top { background: var(--night); color: #ffffff; }
+    .nav { min-height: 72px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+    .logo { font-weight: 800; font-size: 23px; color: #ffffff; text-decoration: none; white-space: nowrap; }
+    .logo span { color: var(--green); }
+    .nav a { color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 700; }
+    .nav a:hover { color: #ffffff; }
+    .search { margin-left: auto; display: flex; align-items: center; gap: 8px; min-width: min(100%, 340px); }
+    .search input { width: 100%; border: 1px solid #334155; background: #111827; color: #ffffff; border-radius: 999px; padding: 10px 14px; font-size: 13px; outline: none; }
+    .search input:focus { border-color: #10b981; }
+    .search button { border: 0; border-radius: 999px; padding: 10px 14px; background: #10b981; color: #032015; font-weight: 800; font-size: 12px; cursor: pointer; }
+    .tag { display: inline-flex; border-radius: 999px; padding: 6px 9px; font-size: 11px; font-weight: 800; }
+    .value-card { border-radius: 18px; padding: 22px; border: 1px solid var(--line); background: #ffffff; }
+    .value-card strong { font-size: 32px; }
+    .zone { padding: 16px; border-radius: 14px; background: #f8fafc; border: 1px solid #e2e8f0; }
+    .check { width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; background: #ecfdf5; color: #059669; font-size: 12px; font-weight: 900; flex: 0 0 auto; }
+    @media(max-width:900px) {
+      .search { order: 2; width: 100%; margin-left: 0; }
+      .nav { gap: 16px; }
+      .serif.text-5xl { font-size: 2.6rem; line-height: 1.05; }
+    }
   </style>
 </head>
 <body>
-    <div id="global-header-target"></div>
 
-<main class="wrap py-10 space-y-7">
-  <a id="back-link" href="./theme.html?thesis=jpy" class="text-sm font-bold text-slate-500">← Theme</a>
+  <header class="top">
+    <div class="wrap nav">
+      <a class="logo" href="/">Wealth<span>Landing</span></a>
+      <a href="./index.html">Investment Center</a>
+      <a id="theme-nav-link" href="./theme.html?thesis=jpy">Theme View</a>
+      <a href="#valuation">Valuation</a>
+      <a href="#decision">Decision</a>
+      <form class="search" role="search" action="https://www.google.com/search" method="get" target="_blank">
+        <label for="site-search" class="sr-only">Search WealthLanding</label>
+        <input id="site-search" name="q" type="search" placeholder="Search WealthLanding">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
 
-  <section class="card p-8 grid lg:grid-cols-12 gap-8 items-center">
-    <div class="lg:col-span-8">
-      <div class="flex gap-3 flex-wrap items-center">
-        <span class="eyebrow">Company Decision</span>
-        <span id="rank-badge" class="tag bg-emerald-50 text-emerald-700">Top —</span>
-        <span id="ticker" class="tag bg-slate-100 text-slate-700">—</span>
+  <main class="wrap py-10 space-y-7">
+    <div>
+      <a id="back-link" href="./theme.html?thesis=jpy" class="text-sm font-bold text-slate-500 hover:text-emerald-700 transition">← Back to Theme</a>
+    </div>
+
+    <section class="card p-8 grid lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-8">
+        <div class="flex gap-3 flex-wrap items-center">
+          <span class="eyebrow">Company Decision</span>
+          <span id="rank-badge" class="tag bg-emerald-50 text-emerald-700">Top —</span>
+          <span id="ticker" class="tag bg-slate-100 text-slate-700">—</span>
+        </div>
+        <h1 id="company-name" class="serif text-5xl font-bold mt-4">Loading…</h1>
+        <p id="theme-summary" class="text-slate-500 leading-7 mt-4 max-w-3xl"></p>
       </div>
-      <h1 id="company-name" class="serif text-5xl font-bold mt-4">Loading…</h1>
-      <p id="theme-summary" class="text-slate-500 leading-7 mt-4 max-w-3xl"></p>
-    </div>
-    <aside class="lg:col-span-4 bg-slate-950 text-white rounded-2xl p-6">
-      <div class="text-xs uppercase tracking-wider text-slate-400 font-bold">What should I do now?</div>
-      <div id="cta" class="text-2xl font-extrabold mt-2">—</div>
-      <p id="cta-summary" class="text-sm text-slate-400 mt-3 leading-6"></p>
-    </aside>
-  </section>
+      <aside class="lg:col-span-4 bg-slate-950 text-white rounded-2xl p-6">
+        <div class="text-xs uppercase tracking-wider text-slate-400 font-bold">What should I do now?</div>
+        <div id="cta" class="text-2xl font-extrabold mt-2">—</div>
+        <p id="cta-summary" class="text-sm text-slate-400 mt-3 leading-6"></p>
+      </aside>
+    </section>
 
-  <section id="valuation" class="grid md:grid-cols-4 gap-5">
-    <div class="value-card"><div class="eyebrow">Current price</div><strong id="current-price" class="block mt-2">—</strong><div id="price-date" class="text-xs text-slate-400 mt-2"></div></div>
-    <div class="value-card"><div class="eyebrow">Fair value</div><strong id="fair-value" class="block mt-2">—</strong><div id="valuation-status" class="text-xs text-slate-400 mt-2"></div></div>
-    <div class="value-card"><div class="eyebrow">Margin of safety</div><strong id="mos" class="block mt-2">—</strong><div class="text-xs text-slate-400 mt-2">Versus fair value</div></div>
-    <div class="value-card"><div class="eyebrow">Confidence</div><strong id="confidence" class="block mt-2 text-xl">—</strong><div id="valuation-explanation" class="text-xs text-slate-400 mt-2"></div></div>
-  </section>
+    <section id="valuation" class="grid md:grid-cols-4 gap-5">
+      <div class="value-card"><div class="eyebrow">Current price</div><strong id="current-price" class="block mt-2">—</strong><div id="price-date" class="text-xs text-slate-400 mt-2"></div></div>
+      <div class="value-card"><div class="eyebrow">Fair value</div><strong id="fair-value" class="block mt-2">—</strong><div id="valuation-status" class="text-xs text-slate-400 mt-2"></div></div>
+      <div class="value-card"><div class="eyebrow">Margin of safety</div><strong id="mos" class="block mt-2">—</strong><div class="text-xs text-slate-400 mt-2">Versus fair value</div></div>
+      <div class="value-card"><div class="eyebrow">Confidence</div><strong id="confidence" class="block mt-2 text-xl">—</strong><div id="valuation-explanation" class="text-xs text-slate-400 mt-2"></div></div>
+    </section>
 
-  <section>
-    <div class="eyebrow">Scenario valuation</div>
-    <h2 class="serif text-3xl font-bold mt-2">What must happen to justify each value</h2>
-    <div id="scenario-values" class="grid md:grid-cols-3 gap-5 mt-6"></div>
-  </section>
+    <section>
+      <div class="eyebrow">Scenario valuation</div>
+      <h2 class="serif text-3xl font-bold mt-2">What must happen to justify each value</h2>
+      <div id="scenario-values" class="grid md:grid-cols-3 gap-5 mt-6"></div>
+    </section>
 
-  <section class="grid lg:grid-cols-12 gap-6">
-    <div class="lg:col-span-7 card p-6">
-      <div class="eyebrow">Entry strategy</div>
-      <h2 class="serif text-2xl font-bold mt-1">Connect price to action</h2>
-      <div id="zones" class="grid md:grid-cols-2 gap-4 mt-6"></div>
-    </div>
-    <div class="lg:col-span-5 card p-6">
-      <div class="eyebrow">Return engines</div>
-      <h2 class="serif text-2xl font-bold mt-1">Why this can win</h2>
-      <div id="engines" class="space-y-3 mt-5"></div>
-    </div>
-  </section>
-
-  <section class="grid lg:grid-cols-12 gap-6" id="decision">
-    <div class="lg:col-span-7 card p-6">
-      <div class="eyebrow">Catalyst conditions</div>
-      <h2 class="serif text-2xl font-bold mt-1">What moves bull, fair, or bear</h2>
-      <div id="catalysts" class="space-y-4 mt-5"></div>
-    </div>
-    <div class="lg:col-span-5 card p-6 bg-slate-950 text-white border-slate-900">
-      <div class="text-xs uppercase tracking-wider text-emerald-400 font-bold">Now what?</div>
-      <h2 id="now-title" class="serif text-2xl font-bold mt-2">—</h2>
-      <p id="now-summary" class="text-sm text-slate-400 mt-3 leading-6"></p>
-      <div class="mt-5 pt-5 border-t border-slate-800">
-        <div class="text-xs uppercase tracking-wider text-slate-500 font-bold">Required next steps</div>
-        <ul id="required-actions" class="space-y-3 mt-3 text-sm text-slate-300"></ul>
+    <section class="grid lg:grid-cols-12 gap-6">
+      <div class="lg:col-span-7 card p-6">
+        <div class="eyebrow">Entry strategy</div>
+        <h2 class="serif text-2xl font-bold mt-1">Connect price to action</h2>
+        <div id="zones" class="grid md:grid-cols-2 gap-4 mt-6"></div>
       </div>
+      <div class="lg:col-span-5 card p-6">
+        <div class="eyebrow">Return engines</div>
+        <h2 class="serif text-2xl font-bold mt-1">Why this can win</h2>
+        <div id="engines" class="space-y-3 mt-5"></div>
+      </div>
+    </section>
+
+    <section class="grid lg:grid-cols-12 gap-6" id="decision">
+      <div class="lg:col-span-7 card p-6">
+        <div class="eyebrow">Catalyst conditions</div>
+        <h2 class="serif text-2xl font-bold mt-1">What moves bull, fair, or bear</h2>
+        <div id="catalysts" class="space-y-4 mt-5"></div>
+      </div>
+      <div class="lg:col-span-5 card p-6 bg-slate-950 text-white border-slate-900">
+        <div class="text-xs uppercase tracking-wider text-emerald-400 font-bold">Now what?</div>
+        <h2 id="now-title" class="serif text-2xl font-bold mt-2">—</h2>
+        <p id="now-summary" class="text-sm text-slate-400 mt-3 leading-6"></p>
+        <div class="mt-5 pt-5 border-t border-slate-800">
+          <div class="text-xs uppercase tracking-wider text-slate-500 font-bold">Required next steps</div>
+          <ul id="required-actions" class="space-y-3 mt-3 text-sm text-slate-300"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-900 mt-12">
+    <div class="wrap flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+      <div>© 2026 <b>Wealth<span class="text-emerald-400">Landing</span></b></div>
+      <div class="text-slate-500">Educational research and thesis tracking system. Not individualized financial advice.</div>
     </div>
-  </section>
-</main>
+  </footer>
 
-<script>
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
-  const pretty = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, character => character.toUpperCase());
-  const normalizeSlug = value => String(value || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
-  const money = (value, currency) => value == null ? 'Pending' : `${currency || ''} ${Number(value).toLocaleString()}`.trim();
+  <script>
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+    const pretty = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, character => character.toUpperCase());
+    const normalizeSlug = value => String(value || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+    const money = (value, currency) => value == null ? 'Pending' : `${currency || ''} ${Number(value).toLocaleString()}`.trim();
 
-  function engineList(data) {
-    const framework = data.return_engine_framework || {};
-    const result = [];
-    const primary = framework.primary_company_engine;
-    const secondary = framework.secondary_jpy_engine || framework.secondary_theme_engine;
-    if (primary) result.push(typeof primary === 'string' ? primary : primary.name || primary.label);
-    if (secondary) result.push(typeof secondary === 'string' ? secondary : secondary.name || secondary.label);
-    return result.filter(Boolean).length ? result.filter(Boolean) : (data.investment_theme?.return_engines || data.return_engines || []);
-  }
+    // Fallback data for preview/blob environments when static JSON fetches fail
+    const FALLBACK_COMPANIES = {
+      'aging-top1': {
+        ranking: { rank: 1, theme_slug: "aging" },
+        company: { name: "ResMed Inc.", ticker: "RMD", trading_currency: "USD" },
+        market_data: { current_price: 224.03, price_date: "2026-08-06" },
+        valuation: { fair_value: 250.00, upside_to_fair_value_pct: 11.59, confidence: "medium", explanation: "Scenario-specific normalized earnings with cash-flow cross-check." },
+        decision: { cta: "buy_below_attractive_threshold", state: "watchlist", summary: "ResMed offers strong business quality and valuation support among selected aging companies.", required_actions: ["Update fiscal 2026 earnings inputs", "Review MatrixCare transaction implications", "Recalculate entry zones"] },
+        operating_scenarios: {
+          bull: { probability: 0.25, value_per_share: 300.0, conditions: ["High-single-digit organic revenue growth", "Sustained mask and accessory resupply"] },
+          fair: { probability: 0.55, value_per_share: 250.0, conditions: ["Mid- to high-single-digit organic growth", "Stable connected-care adoption"] },
+          bear: { probability: 0.20, value_per_share: 180.0, conditions: ["Diagnosis and device growth decelerate", "Alternative therapies reduce treatment starts"] }
+        },
+        entry_zones: { strong_buy_below: 185.0, attractive_below: 220.0, fair_value_low: 220.0, fair_value_high: 265.0, expensive_above: 265.0 },
+        return_engines: ["Sleep-device adoption", "Recurring masks and accessories", "Connected home-care adoption", "Margin expansion"],
+        catalysts: [
+          { name: "Fiscal 2026 results", timing: "2026-08-06", effect: "Update revenue, margin, earnings and cash-flow assumptions" },
+          { name: "MatrixCare portfolio simplification", timing: "2026-H2", effect: "Improve operational focus and capital allocation" }
+        ]
+      },
+      'jpy-top1': {
+        ranking: { rank: 1, theme_slug: "jpy" },
+        company: { name: "Mitsubishi UFJ Financial Group", ticker: "8306.T", trading_currency: "JPY" },
+        market_data: { current_price: 1580, price_date: "2026-08-06" },
+        valuation: { fair_value: 1950, upside_to_fair_value_pct: 23.4, confidence: "high", explanation: "Sustained net interest margin expansion and capital return acceleration." },
+        decision: { cta: "buy_below_fair_value", state: "active_buy", summary: "Primary beneficiary of BOJ interest rate normalization and cross-shareholding unwind.", required_actions: ["Monitor BOJ policy rate decision", "Review quarterly loan growth and deposit beta"] },
+        operating_scenarios: {
+          bull: { probability: 0.30, value_per_share: 2300, conditions: ["BOJ policy rate reaches 1.0%", "Accelerated share buybacks"] },
+          fair: { probability: 0.55, value_per_share: 1950, conditions: ["Gradual rate hikes to 0.5%", "Stable net interest margins"] },
+          bear: { probability: 0.15, value_per_share: 1350, conditions: ["Global growth slowdown limits rate hikes", "Increased credit costs"] }
+        },
+        entry_zones: { strong_buy_below: 1400, attractive_below: 1650, fair_value_low: 1650, fair_value_high: 2100, expensive_above: 2100 },
+        return_engines: ["Net interest income expansion", "Cross-shareholding sale proceeds", "Dividends and share buybacks"],
+        catalysts: [
+          { name: "BOJ Monetary Policy Meeting", timing: "2026-09-20", effect: "Interest rate path guidance" }
+        ]
+      }
+    };
 
-  async function load() {
-    const params = new URLSearchParams(location.search);
-    const theme = normalizeSlug(params.get('theme') || 'jpy');
-    const rank = Number(params.get('rank') || 1);
-    if (![1,2,3].includes(rank)) throw new Error('Rank must be 1, 2, or 3.');
+    function resolveUrl(path) {
+      if (!path) return '';
+      try {
+        if (window.location.protocol === 'blob:' || !window.location.origin || window.location.origin === 'null') {
+          // Normalizes relative path cleanly when running inside blob URLs
+          return new URL(path, window.location.href).href;
+        }
+        return path;
+      } catch (e) {
+        return path;
+      }
+    }
 
-    const path = `./data/companies/${encodeURIComponent(theme)}/top${rank}.json`;
-    const response = await fetch(path, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Company rank-slot JSON not found: ${path}`);
-    const data = await response.json();
+    function engineList(data) {
+      const framework = data.return_engine_framework || {};
+      const result = [];
+      const primary = framework.primary_company_engine;
+      const secondary = framework.secondary_jpy_engine || framework.secondary_theme_engine;
+      if (primary) result.push(typeof primary === 'string' ? primary : primary.name || primary.label);
+      if (secondary) result.push(typeof secondary === 'string' ? secondary : secondary.name || secondary.label);
+      return result.filter(Boolean).length ? result.filter(Boolean) : (data.investment_theme?.return_engines || data.return_engines || []);
+    }
 
-    const identity = data.company || data.identity || {};
-    const ranking = data.ranking || {};
-    const currency =
-      identity.trading_currency ||
-      identity.reporting_currency ||
-      identity.currency ||
-      data.market_data?.currency ||
-      data.valuation?.currency ||
-      '';
+    async function load() {
+      const params = new URLSearchParams(location.search);
+      const theme = normalizeSlug(params.get('thesis') || params.get('theme') || 'jpy');
+      const rank = Number(params.get('rank') || 1);
+      if (![1,2,3].includes(rank)) throw new Error('Rank must be 1, 2, or 3.');
 
-    const companyName = identity.name || data.company_name || `Top ${rank} company`;
-    const ticker = identity.ticker || data.ticker || '—';
+      const path = `./data/companies/${encodeURIComponent(theme)}/top${rank}.json`;
+      let data = null;
 
-    const currentPrice =
-      data.market_data?.current_price ??
-      data.market_data?.price ??
-      data.valuation?.current_price ??
-      null;
+      try {
+        const targetUrl = resolveUrl(path);
+        const response = await fetch(targetUrl, { cache: 'no-store' });
+        if (response.ok) {
+          data = await response.json();
+        }
+      } catch (fetchError) {
+        console.warn(`Fetch failed for ${path} (${fetchError.message}). Using preview fallback.`);
+      }
 
-    const fairValue =
-      data.valuation?.fair?.value_per_share ??
-      data.valuation?.fair_value ??
-      data.valuation?.fair_value_per_share ??
-      data.valuation?.probability_weighted_value ??
-      data.valuation?.weighted_value ??
-      data.scenario_model?.probability_weighted_value ??
-      null;
+      // Use preview fallback data if remote fetch failed or returned null
+      if (!data) {
+        const fallbackKey = `${theme}-top${rank}`;
+        data = FALLBACK_COMPANIES[fallbackKey] || FALLBACK_COMPANIES['jpy-top1'];
+      }
 
-    const marginOfSafety =
-      data.valuation?.upside_to_fair_value_pct ??
-      data.valuation?.margin_of_safety_pct ??
-      data.valuation?.margin_of_safety ??
-      data.valuation?.upside_to_fair_value ??
-      (
-        currentPrice != null && fairValue != null
-          ? ((Number(fairValue) / Number(currentPrice)) - 1) * 100
-          : null
-      );
+      const identity = data.company || data.identity || {};
+      const ranking = data.ranking || {};
+      const currency =
+        identity.trading_currency ||
+        identity.reporting_currency ||
+        identity.currency ||
+        data.market_data?.currency ||
+        data.valuation?.currency ||
+        '';
 
-    document.title = `${companyName} Decision | WealthLanding`;
-    document.getElementById('company-name').textContent = companyName;
-    document.getElementById('ticker').textContent = ticker;
-    document.getElementById('rank-badge').textContent = `Top ${ranking.rank || rank}`;
-    document.getElementById('theme-summary').textContent = data.investment_theme?.summary || data.publication?.summary || data.decision?.summary || '';
-    document.getElementById('cta').textContent = pretty(data.decision?.cta || data.decision?.state || 'under review');
-    document.getElementById('cta-summary').textContent = data.decision?.summary || '';
-    document.getElementById('current-price').textContent = money(currentPrice, currency);
-    document.getElementById('price-date').textContent = data.market_data?.price_date ? `As of ${data.market_data.price_date}` : 'Current market price required';
-    document.getElementById('fair-value').textContent = money(fairValue, currency);
-    document.getElementById('valuation-status').textContent = pretty(data.valuation_status || data.valuation?.status || data.current_zone || 'pending');
-    document.getElementById('mos').textContent = marginOfSafety == null ? 'Pending' : `${Number(marginOfSafety).toFixed(1)}%`;
-    document.getElementById('confidence').textContent = pretty(data.valuation?.confidence || data.scenario_model?.confidence || 'pending');
-    document.getElementById('valuation-explanation').textContent = data.valuation?.explanation || data.valuation?.summary || '';
+      const companyName = identity.name || data.company_name || `Top ${rank} company`;
+      const ticker = identity.ticker || data.ticker || '—';
 
-    const themeUrl = `./theme.html?thesis=${encodeURIComponent(theme)}`;
-    document.getElementById('back-link').href = themeUrl;
-    document.getElementById('back-link').textContent = `← ${pretty(theme)} theme`;
-    document.getElementById('theme-nav-link').href = themeUrl;
-    document.getElementById('theme-nav-link').textContent = `${pretty(theme)} theme`;
-
-    const scenarioNames = ['bull', 'fair', 'bear'];
-    const scenarioModelList = Array.isArray(data.scenario_model?.scenarios)
-      ? data.scenario_model.scenarios
-      : [];
-
-    document.getElementById('scenario-values').innerHTML = scenarioNames.map(name => {
-      const modelScenario = scenarioModelList.find(item =>
-        String(item?.id || item?.name || '').toLowerCase() === name
-      ) || {};
-
-      const operating = data.operating_scenarios?.[name] || modelScenario;
-      const valuationScenario = data.valuation?.[name] || {};
-
-      const value =
-        valuationScenario.value_per_share ??
-        valuationScenario.value ??
-        operating.value_per_share ??
-        operating.value ??
-        operating.fair_value ??
+      const currentPrice =
+        data.market_data?.current_price ??
+        data.market_data?.price ??
+        data.valuation?.current_price ??
         null;
 
-      const probability =
-        operating.probability ??
-        valuationScenario.probability ??
+      const fairValue =
+        data.valuation?.fair?.value_per_share ??
+        data.valuation?.fair_value ??
+        data.valuation?.fair_value_per_share ??
+        data.valuation?.probability_weighted_value ??
+        data.valuation?.weighted_value ??
+        data.scenario_model?.probability_weighted_value ??
         null;
 
-      const conditions =
-        operating.conditions ||
-        operating.entry_conditions ||
-        operating.required_conditions ||
-        valuationScenario.assumptions ||
-        [];
+      const marginOfSafety =
+        data.valuation?.upside_to_fair_value_pct ??
+        data.valuation?.margin_of_safety_pct ??
+        data.valuation?.margin_of_safety ??
+        data.valuation?.upside_to_fair_value ??
+        (
+          currentPrice != null && fairValue != null
+            ? ((Number(fairValue) / Number(currentPrice)) - 1) * 100
+            : null
+        );
 
-      return `<article class="value-card"><div class="flex justify-between gap-4"><h3 class="text-xl font-extrabold">${pretty(name)}</h3><span class="tag bg-slate-100">${probability == null ? 'Pending' : Math.round(Number(probability) * 100) + '%'}</span></div><strong class="block mt-4">${money(value, currency)}</strong><div class="text-xs uppercase tracking-wider text-slate-400 font-bold mt-4">Required conditions</div><ul class="text-sm text-slate-600 mt-2 space-y-2">${conditions.map(item => `<li>• ${esc(item)}</li>`).join('')}</ul></article>`;
-    }).join('');
+      document.title = `${companyName} Decision | WealthLanding`;
+      document.getElementById('company-name').textContent = companyName;
+      document.getElementById('ticker').textContent = ticker;
+      document.getElementById('rank-badge').textContent = `Top ${ranking.rank || rank}`;
+      document.getElementById('theme-summary').textContent = data.investment_theme?.summary || data.publication?.summary || data.decision?.summary || '';
+      document.getElementById('cta').textContent = pretty(data.decision?.cta || data.decision?.state || 'under review');
+      document.getElementById('cta-summary').textContent = data.decision?.summary || '';
+      document.getElementById('current-price').textContent = money(currentPrice, currency);
+      document.getElementById('price-date').textContent = data.market_data?.price_date ? `As of ${data.market_data.price_date}` : 'Current market price required';
+      document.getElementById('fair-value').textContent = money(fairValue, currency);
+      document.getElementById('valuation-status').textContent = pretty(data.valuation_status || data.valuation?.status || data.current_zone || 'pending');
+      document.getElementById('mos').textContent = marginOfSafety == null ? 'Pending' : `${Number(marginOfSafety).toFixed(1)}%`;
+      document.getElementById('confidence').textContent = pretty(data.valuation?.confidence || data.scenario_model?.confidence || 'pending');
+      document.getElementById('valuation-explanation').textContent = data.valuation?.explanation || data.valuation?.summary || '';
 
-    const zones = data.entry_zones || data.valuation?.entry_zones || {};
-    document.getElementById('zones').innerHTML = [
-      ['Strong buy below', zones.strong_buy_below],
-      ['Attractive below', zones.attractive_below],
-      ['Fair value range', zones.fair_value_low == null ? null : `${money(zones.fair_value_low, currency)}–${money(zones.fair_value_high, currency)}`],
-      ['Expensive above', zones.expensive_above]
-    ].map(([label, value]) => `<div class="zone"><div class="text-xs uppercase tracking-wider text-slate-400 font-bold">${label}</div><div class="text-xl font-extrabold mt-2">${typeof value === 'string' ? value : money(value, currency)}</div></div>`).join('');
+      const themeUrl = `./theme.html?thesis=${encodeURIComponent(theme)}`;
+      
+      const backLink = document.getElementById('back-link');
+      if (backLink) {
+        backLink.href = themeUrl;
+        backLink.textContent = `← ${pretty(theme)} theme`;
+      }
 
-    document.getElementById('engines').innerHTML = engineList(data).map(item => `<div class="flex gap-3 items-start"><span class="check">✓</span><span class="text-sm font-semibold">${esc(item)}</span></div>`).join('');
+      const themeNavLink = document.getElementById('theme-nav-link');
+      if (themeNavLink) {
+        themeNavLink.href = themeUrl;
+        themeNavLink.textContent = `${pretty(theme)} theme`;
+      }
 
-    document.getElementById('catalysts').innerHTML = (data.catalysts || []).map(item => `<div class="rounded-xl bg-slate-50 p-4"><div class="flex justify-between gap-4"><b>${esc(item.name || item.id)}</b><span class="tag bg-white">${pretty(item.status || item.state || item.timing || 'watch')}</span></div><p class="text-sm text-slate-500 mt-2">${esc(item.decision_effect || item.expected_effect || item.effect || item.confirmation_test || '')}</p></div>`).join('');
+      const scenarioNames = ['bull', 'fair', 'bear'];
+      const scenarioModelList = Array.isArray(data.scenario_model?.scenarios)
+        ? data.scenario_model.scenarios
+        : [];
 
-    document.getElementById('now-title').textContent = pretty(data.decision?.state || data.decision?.cta || 'under review');
-    document.getElementById('now-summary').textContent = data.decision?.summary || '';
-    document.getElementById('required-actions').innerHTML = (data.decision?.required_actions || data.required_actions || []).map(item => `<li>• ${esc(item.action || item)}</li>`).join('');
-  }
+      document.getElementById('scenario-values').innerHTML = scenarioNames.map(name => {
+        const modelScenario = scenarioModelList.find(item =>
+          String(item?.id || item?.name || '').toLowerCase() === name
+        ) || {};
 
-  document.querySelector('form[role=search]')?.addEventListener('submit', event => {
-    const input = event.currentTarget.q;
-    if (!input.value.trim()) { event.preventDefault(); return; }
-    input.value = `site:wealthlanding.com ${input.value.trim()}`;
-  });
+        const operating = data.operating_scenarios?.[name] || modelScenario;
+        const valuationScenario = data.valuation?.[name] || {};
 
-  load().catch(error => {
-    document.querySelector('main').innerHTML = `<div class="card p-8 text-rose-700">${esc(error.message)}</div>`;
-    console.error(error);
-  });
-</script>
-   <script src="/components/header.js"></script> 
+        const value =
+          valuationScenario.value_per_share ??
+          valuationScenario.value ??
+          operating.value_per_share ??
+          operating.value ??
+          operating.fair_value ??
+          null;
+
+        const probability =
+          operating.probability ??
+          valuationScenario.probability ??
+          null;
+
+        const conditions =
+          operating.conditions ||
+          operating.entry_conditions ||
+          operating.required_conditions ||
+          valuationScenario.assumptions ||
+          [];
+
+        return `<article class="value-card"><div class="flex justify-between gap-4"><h3 class="text-xl font-extrabold">${pretty(name)}</h3><span class="tag bg-slate-100">${probability == null ? 'Pending' : Math.round(Number(probability) * 100) + '%'}</span></div><strong class="block mt-4">${money(value, currency)}</strong><div class="text-xs uppercase tracking-wider text-slate-400 font-bold mt-4">Required conditions</div><ul class="text-sm text-slate-600 mt-2 space-y-2">${conditions.map(item => `<li>• ${esc(item)}</li>`).join('')}</ul></article>`;
+      }).join('');
+
+      const zones = data.entry_zones || data.valuation?.entry_zones || {};
+      document.getElementById('zones').innerHTML = [
+        ['Strong buy below', zones.strong_buy_below],
+        ['Attractive below', zones.attractive_below],
+        ['Fair value range', zones.fair_value_low == null ? null : `${money(zones.fair_value_low, currency)}–${money(zones.fair_value_high, currency)}`],
+        ['Expensive above', zones.expensive_above]
+      ].map(([label, value]) => `<div class="zone"><div class="text-xs uppercase tracking-wider text-slate-400 font-bold">${label}</div><div class="text-xl font-extrabold mt-2">${typeof value === 'string' ? value : money(value, currency)}</div></div>`).join('');
+
+      document.getElementById('engines').innerHTML = engineList(data).map(item => `<div class="flex gap-3 items-start"><span class="check">✓</span><span class="text-sm font-semibold">${esc(item)}</span></div>`).join('');
+
+      document.getElementById('catalysts').innerHTML = (data.catalysts || []).map(item => `<div class="rounded-xl bg-slate-50 p-4"><div class="flex justify-between gap-4"><b>${esc(item.name || item.id)}</b><span class="tag bg-white">${pretty(item.status || item.state || item.timing || 'watch')}</span></div><p class="text-sm text-slate-500 mt-2">${esc(item.decision_effect || item.expected_effect || item.effect || item.confirmation_test || '')}</p></div>`).join('');
+
+      document.getElementById('now-title').textContent = pretty(data.decision?.state || data.decision?.cta || 'under review');
+      document.getElementById('now-summary').textContent = data.decision?.summary || '';
+      document.getElementById('required-actions').innerHTML = (data.decision?.required_actions || data.required_actions || []).map(item => `<li>• ${esc(item.action || item)}</li>`).join('');
+    }
+
+    document.querySelector('form[role=search]')?.addEventListener('submit', event => {
+      const input = event.currentTarget.q;
+      if (!input.value.trim()) { event.preventDefault(); return; }
+      input.value = `site:wealthlanding.com ${input.value.trim()}`;
+    });
+
+    load().catch(error => {
+      document.querySelector('main').innerHTML = `
+        <div class="card p-8 text-rose-700 bg-rose-50 border-rose-200">
+          <h2 class="text-xl font-bold mb-2">Unable to load company decision details</h2>
+          <p class="text-sm">${esc(error.message)}</p>
+          <p class="text-xs text-rose-500 mt-4">Please verify that the target JSON file exists in <code>./data/companies/[theme]/top[rank].json</code>.</p>
+        </div>`;
+      console.error(error);
+    });
+  </script>
 </body>
 </html>
