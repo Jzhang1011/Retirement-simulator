@@ -284,7 +284,7 @@
         "company_packet_required": true,
         "rank_slot": "top1",
         "company_json_path": "/investment/data/companies/aging/top1.json",
-        "detail_url": "/investment/company.html?theme=aging&rank=1"
+        "detail_url": "/investment/company.html?thesis=aging&rank=1"
       }
     },
     {
@@ -313,7 +313,7 @@
         "company_packet_required": true,
         "rank_slot": "top2",
         "company_json_path": "/investment/data/companies/aging/top2.json",
-        "detail_url": "/investment/company.html?theme=aging&rank=2"
+        "detail_url": "/investment/company.html?thesis=aging&rank=2"
       }
     },
     {
@@ -342,7 +342,7 @@
         "company_packet_required": true,
         "rank_slot": "top3",
         "company_json_path": "/investment/data/companies/aging/top3.json",
-        "detail_url": "/investment/company.html?theme=aging&rank=3"
+        "detail_url": "/investment/company.html?thesis=aging&rank=3"
       }
     },
     {
@@ -403,7 +403,7 @@
       "ticker": "RMD",
       "selection_reason": "Best combination of aging-in-place exposure, recurring consumables, digital connectivity, margin expansion, cash generation and valuation support.",
       "company_json_path": "/investment/data/companies/aging/top1.json",
-      "detail_url": "/investment/company.html?theme=aging&rank=1",
+      "detail_url": "/investment/company.html?thesis=aging&rank=1",
       "analysis_status": "complete"
     },
     {
@@ -414,7 +414,7 @@
       "ticker": "SYK",
       "selection_reason": "High-quality exposure to mobility, orthopedic procedures, robotics and hospital productivity, offset by premium valuation.",
       "company_json_path": "/investment/data/companies/aging/top2.json",
-      "detail_url": "/investment/company.html?theme=aging&rank=2",
+      "detail_url": "/investment/company.html?thesis=aging&rank=2",
       "analysis_status": "complete"
     },
     {
@@ -425,7 +425,7 @@
       "ticker": "WELL",
       "selection_reason": "Most direct demographic exposure and strong operating momentum, but current valuation embeds aggressive execution assumptions.",
       "company_json_path": "/investment/data/companies/aging/top3.json",
-      "detail_url": "/investment/company.html?theme=aging&rank=3",
+      "detail_url": "/investment/company.html?thesis=aging&rank=3",
       "analysis_status": "complete"
     }
   ],
