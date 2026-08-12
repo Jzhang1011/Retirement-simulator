@@ -43,7 +43,7 @@
     <div id="global-header-target"></div>
 
 <main class="wrap py-10 space-y-7">
-  <a id="back-link" href="./theme.html?theme=jpy" class="text-sm font-bold text-slate-500">← Theme</a>
+  <a id="back-link" href="./theme.html?thesis=jpy" class="text-sm font-bold text-slate-500">← Theme</a>
 
   <section class="card p-8 grid lg:grid-cols-12 gap-8 items-center">
     <div class="lg:col-span-8">
@@ -187,7 +187,7 @@
     document.getElementById('confidence').textContent = pretty(data.valuation?.confidence || data.scenario_model?.confidence || 'pending');
     document.getElementById('valuation-explanation').textContent = data.valuation?.explanation || data.valuation?.summary || '';
 
-    const themeUrl = `./theme.html?theme=${encodeURIComponent(theme)}`;
+    const themeUrl = `./theme.html?thesis=${encodeURIComponent(theme)}`;
     document.getElementById('back-link').href = themeUrl;
     document.getElementById('back-link').textContent = `← ${pretty(theme)} theme`;
     document.getElementById('theme-nav-link').href = themeUrl;
