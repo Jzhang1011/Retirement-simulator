@@ -1,0 +1,231 @@
+{
+  "schema_version": "4.2",
+  "review_id": "WM-2026-08-11",
+  "ranking": {
+    "theme_slug": "waste",
+    "rank": 1,
+    "slot": "top1",
+    "selected_company_slug": "wm",
+    "previous_company_slug": null,
+    "comparison_status": "initial_baseline",
+    "selected_at": "2026-08-11"
+  },
+  "company": {
+    "id": "WM",
+    "name": "Waste Management, Inc.",
+    "slug": "wm",
+    "ticker": "WM",
+    "exchange": "NYSE",
+    "reporting_currency": "USD",
+    "trading_currency": "USD",
+    "theme_dependencies": [
+      "waste"
+    ]
+  },
+  "review": {
+    "date": "2026-08-11",
+    "previous_review_id": null
+  },
+  "market_data": {
+    "current_price": 226.6,
+    "price_date": "2026-08-10",
+    "price_timestamp": "2026-08-11T08:19:00-04:00",
+    "price_source": "MarketWatch delayed quote page; prior regular-session close used",
+    "share_basis": "local_share"
+  },
+  "investment_thesis": {
+    "summary": "WM combines the strongest integrated collection and disposal network in the current waste ranking with favorable price-cost economics, healthcare integration and sustainability-project growth, but the current share price already discounts much of that durability.",
+    "return_engines": [
+      "Collection-and-disposal price-cost and route-density economics",
+      "Healthcare Solutions integration and cross-network synergies",
+      "Recycling automation and renewable-natural-gas project ramp"
+    ],
+    "market_implied_assumptions": [
+      "2026 free cash flow remains near the $3.75 billion to $3.85 billion guidance range.",
+      "Core pricing continues to offset cost inflation and conventional volume softness.",
+      "Healthcare integration and sustainability projects contribute incremental EBITDA without materially increasing capital risk.",
+      "A mid-20s free-cash-flow multiple remains justified by network quality and defensive demand."
+    ],
+    "why_price_may_differ_from_value": [
+      "The market assigns a premium to WM's disposal network, route density, free-cash-flow durability and low business cyclicality.",
+      "Lower conventional volume expectations limit near-term upside despite strong margins.",
+      "Healthcare, recycling and RNG growth are increasingly capitalized into the current price."
+    ]
+  },
+  "operating_scenarios": {
+    "bull": {
+      "probability": 0.25,
+      "conditions": [
+        "Collection volumes normalize.",
+        "Price-cost spread remains positive.",
+        "Healthcare integration and sustainability projects outperform.",
+        "2026 free cash flow reaches approximately $4.05 billion."
+      ],
+      "financial_assumptions": {
+        "2026_free_cash_flow_usd_billion": 4.05,
+        "diluted_shares_million": 402.4,
+        "free_cash_flow_per_share": 10.06,
+        "equity_fcf_multiple": 28.0
+      },
+      "failure_conditions": [
+        "Sustained volume deterioration",
+        "Project delays or weak healthcare synergies",
+        "Free cash flow remains below the current guidance range"
+      ]
+    },
+    "fair": {
+      "probability": 0.6,
+      "conditions": [
+        "2026 free cash flow reaches the $3.80 billion guidance midpoint.",
+        "Lower volumes are offset by pricing and productivity.",
+        "Adjusted operating EBITDA remains within management guidance."
+      ],
+      "financial_assumptions": {
+        "2026_free_cash_flow_usd_billion": 3.8,
+        "diluted_shares_million": 402.4,
+        "free_cash_flow_per_share": 9.44,
+        "equity_fcf_multiple": 25.0
+      },
+      "failure_conditions": [
+        "Price-cost spread weakens materially",
+        "Free cash flow falls below guidance",
+        "Healthcare or sustainability investments fail to earn expected returns"
+      ]
+    },
+    "bear": {
+      "probability": 0.15,
+      "conditions": [
+        "Collection-volume weakness persists.",
+        "Integration and project execution disappoint.",
+        "2026 normalized free cash flow falls to approximately $3.30 billion."
+      ],
+      "financial_assumptions": {
+        "2026_free_cash_flow_usd_billion": 3.3,
+        "diluted_shares_million": 402.4,
+        "free_cash_flow_per_share": 8.2,
+        "equity_fcf_multiple": 20.0
+      },
+      "failure_conditions": [
+        "Volumes recover and free cash flow remains near or above current guidance",
+        "Healthcare and sustainability assets outperform"
+      ]
+    }
+  },
+  "valuation": {
+    "bull": {
+      "value_per_share": 282,
+      "method": "2026 free cash flow per diluted share multiplied by a 28.0x equity FCF multiple",
+      "assumptions": [
+        "$4.05 billion 2026 free cash flow",
+        "402.4 million diluted shares",
+        "$10.06 free cash flow per share",
+        "28.0x equity FCF multiple"
+      ]
+    },
+    "fair": {
+      "value_per_share": 236,
+      "method": "2026 free cash flow per diluted share multiplied by a 25.0x equity FCF multiple",
+      "assumptions": [
+        "$3.80 billion 2026 free cash flow",
+        "402.4 million diluted shares",
+        "$9.44 free cash flow per share",
+        "25.0x equity FCF multiple"
+      ]
+    },
+    "bear": {
+      "value_per_share": 164,
+      "method": "2026 normalized free cash flow per diluted share multiplied by a 20.0x equity FCF multiple",
+      "assumptions": [
+        "$3.30 billion normalized free cash flow",
+        "402.4 million diluted shares",
+        "$8.20 free cash flow per share",
+        "20.0x equity FCF multiple"
+      ]
+    },
+    "probability_weighted_value": 236.7,
+    "net_cash_per_share": null,
+    "upside_to_fair_value_pct": 4.15,
+    "downside_to_bear_value_pct": -27.63,
+    "confidence": "medium",
+    "explanation": "The valuation uses equity free cash flow directly, so net cash is not separately added. WM is a net-debt company. The scenario multiple range reflects the durability of the integrated network, uncertainty around volume normalization and the execution risk of healthcare and sustainability growth investments."
+  },
+  "entry_zones": {
+    "strong_buy_below": 178,
+    "attractive_below": 222,
+    "fair_value_low": 222,
+    "fair_value_high": 245,
+    "expensive_above": 245
+  },
+  "valuation_status": "fair",
+  "current_zone": "fair",
+  "catalysts": [
+    {
+      "name": "Collection-volume normalization",
+      "timing": "2026 H2",
+      "scenario_impact": "Supports fair-to-bull transition if pricing remains intact."
+    },
+    {
+      "name": "Healthcare Solutions synergy capture",
+      "timing": "2026 H2",
+      "scenario_impact": "Supports margin and free-cash-flow upside."
+    },
+    {
+      "name": "Recycling and RNG project ramp",
+      "timing": "2026 H2",
+      "scenario_impact": "Supports incremental EBITDA independent of conventional collection volumes."
+    }
+  ],
+  "risks": [
+    "Persistent collection-volume weakness",
+    "Price-cost spread deterioration",
+    "Healthcare integration misses",
+    "Recycling or RNG project returns below plan",
+    "Environmental, permitting and landfill-capacity costs",
+    "Higher capital intensity or acquisition leverage"
+  ],
+  "invalidation_conditions": [
+    "Sustained collection and disposal volume contraction without corresponding margin resilience",
+    "Free cash flow falls materially below current guidance",
+    "Price fails to recover cost inflation",
+    "Healthcare or sustainability investments produce structurally inadequate returns"
+  ],
+  "decision": {
+    "state": "watchlist",
+    "cta": "monitor_for_attractive_entry",
+    "summary": "WM is the highest-ranked waste company but trades inside its modeled fair-value range at $226.60 versus $236 fair value; wait for a sub-$222 attractive entry or evidence that free cash flow is moving sustainably above current guidance.",
+    "next_catalyst": "Volume normalization plus continued healthcare and sustainability-project execution",
+    "next_decision_date": "2026-08-18",
+    "required_actions": [
+      "Refresh market price and recalculate valuation zones.",
+      "Track collection and disposal volume excluding non-recurring comparisons.",
+      "Track Healthcare Solutions synergy capture.",
+      "Track free cash flow against the $3.75 billion to $3.85 billion guidance range."
+    ]
+  },
+  "sources": [
+    {
+      "title": "WM Announces Second Quarter 2026 Earnings",
+      "publisher": "WM",
+      "date": "2026-07-28",
+      "url": "https://mediaroom.wm.com/2026-07-28-WM-Announces-Second-Quarter-2026-Earnings"
+    },
+    {
+      "title": "WM Stock Price",
+      "publisher": "MarketWatch",
+      "date": "2026-08-11",
+      "url": "https://www.marketwatch.com/investing/stock/wm"
+    }
+  ],
+  "output": {
+    "live_json_path": "/investment/data/companies/waste/top1.json",
+    "detail_url": "/investment/company.html?theme=waste&rank=1"
+  },
+  "publication": {
+    "status": "draft"
+  },
+  "approval": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  }
+}
