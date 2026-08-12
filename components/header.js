@@ -583,11 +583,6 @@
 
           <!-- Right Action CTA -->
           <div>
-            <a href="/#life-stages-explorer" class="wl-action-btn">
-              <i class="fa-solid fa-compass"></i>
-              <span>Find Your Path</span>
-            </a>
-            
             <button id="wlMobileMenuBtn" class="wl-mobile-toggle" aria-label="Open Mobile Menu">
               <i class="fa-solid fa-bars"></i>
             </button>
@@ -630,11 +625,6 @@
           </div>
         </div>
 
-        <div style="padding-top:1.5rem; border-top:1px solid #f1f5f9;">
-          <a href="/#life-stages-explorer" style="display:block; width:100%; padding:0.75rem; text-align:center; font-size:0.875rem; font-weight:700; color:#fff; background:#059669; border-radius:0.75rem; text-decoration:none;">
-            Find Your Financial Path
-          </a>
-        </div>
       </div>
     </div>
   `;
