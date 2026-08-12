@@ -521,14 +521,15 @@
                             Real estate vs. index funds
                           </a>
                         </li>
-                        <li><a href="/tools.html">Market and Investment</a></li>
+                        <li><a href="/investment/index.html" class="wl-mega-card">Market and Investment</a></li>
                       </ul>
                       <div class="wl-mega-col-title" style="margin-top:1.25rem;">RETIREMENT TOOLS</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/simulator.html">Roth strategy</a></li>
+                        <li><a href="/Retirement-simulator/OptimizeRoth.html">Roth strategy</a></li>
                         <li><a href="/Retirement-simulator/UScitymatcher.html">U.S. City Matcher</a></li>
                         <li><a href="/Retirement-simulator/RetiringOverseas.html">Retiring Overseas</a></li>
-                        <li><a href="/simulator.html">Healthcare strategy</a></li>
+                        <li><a href="/Retirement-simulator/healthcare_us_strategy.html">US healthcare strategy</a></li>
+                        <li><a href="/Retirement-simulator/healthcare_international_comparison.html">International healthcare strategy</a></li>
                       </ul>
                     </div>
                     <div>
