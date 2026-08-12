@@ -370,6 +370,20 @@
       invalidated:'bg-rose-50 text-rose-700'
     }[status] || 'bg-slate-100 text-slate-700');
 
+    function toAbsoluteUrl(path) {
+      if (!path) return path;
+      if (path.startsWith('http://') || path.startsWith('https://')) return path;
+
+      const isBlob = window.location.protocol === 'blob:' || window.location.href.startsWith('blob:');
+      const base = isBlob ? window.location.origin : window.location.href;
+
+      try {
+        return new URL(path, base).href;
+      } catch (e) {
+        return path;
+      }
+    }
+
     function resolveDataPath(path) {
       if (!path) return null;
 
@@ -378,14 +392,16 @@
         path.startsWith('https://') ||
         path.startsWith('/')
       ) {
-        return path;
+        return toAbsoluteUrl(path);
       }
 
-      return `./data/${path.replace(/^\.?\/?(data\/)?/, '')}`;
+      const relativePath = `./data/${path.replace(/^\.?\/?(data\/)?/, '')}`;
+      return toAbsoluteUrl(relativePath);
     }
 
     async function getJSON(path) {
-      const response = await fetch(path, { cache:'no-store' });
+      const url = toAbsoluteUrl(path);
+      const response = await fetch(url, { cache:'no-store' });
 
       if (!response.ok) {
         throw new Error(`${path}: ${response.status}`);
@@ -477,8 +493,10 @@
 
     function companyFairValue(company) {
       return (
+        company?.valuation?.fair?.value_per_share ??
         company?.valuation?.fair_value ??
         company?.valuation?.fair_value_per_share ??
+        company?.valuation?.probability_weighted_value ??
         company?.valuation?.scenario_values?.fair ??
         company?.scenario_valuation?.fair_value ??
         null
@@ -487,6 +505,8 @@
 
     function companyCurrency(company) {
       return (
+        company?.company?.trading_currency ??
+        company?.company?.reporting_currency ??
         company?.company?.currency ??
         company?.market_data?.currency ??
         company?.valuation?.currency ??
@@ -661,6 +681,8 @@
           company?.valuation?.status ||
           'under review';
 
+        const currencyPrefix = currency ? `${esc(currency)} ` : '';
+
         return `
           <article class="card p-7 flex flex-col">
             <div class="flex justify-between gap-4">
@@ -694,7 +716,7 @@
                   ${
                     price == null
                       ? 'Pending'
-                      : `${esc(currency)} ${esc(price)}`
+                      : `${currencyPrefix}${esc(price)}`
                   }
                 </div>
               </div>
@@ -708,7 +730,7 @@
                   ${
                     fairValue == null
                       ? 'Pending'
-                      : `${esc(currency)} ${esc(fairValue)}`
+                      : `${currencyPrefix}${esc(fairValue)}`
                   }
                 </div>
               </div>
