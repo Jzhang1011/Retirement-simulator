@@ -159,6 +159,7 @@
       border:1px solid #1e293b;
       border-radius:18px;
       padding:20px;
+      min-width:0;
     }
 
     .metric b{
@@ -238,7 +239,7 @@
           </span>
           <b
             id="latest-action"
-            class="block mt-3 text-base md:text-lg leading-snug font-semibold"
+            class="block mt-2 text-sm sm:text-base md:text-lg leading-tight font-semibold text-emerald-400 break-words max-w-full"
           >
             Loading…
           </b>
@@ -348,6 +349,21 @@
       String(value ?? '')
         .replace(/[_-]+/g, ' ')
         .replace(/\b\w/g, character => character.toUpperCase());
+
+    const formatAction = value => {
+      if (!value) return 'No reviews';
+
+      const actionMap = {
+        buy_below_attractive_threshold: 'Buy Below Attractive Threshold',
+        buy_below_entry_zone: 'Buy Below Entry Zone',
+        watch_for_catalyst: 'Watch for Catalyst',
+        hold_and_monitor: 'Hold & Monitor',
+        await_earnings_results: 'Await Earnings Results',
+        fair_value: 'Fair Value Zone'
+      };
+
+      return actionMap[value] || pretty(value);
+    };
 
     const dateLabel = value => {
       if (!value) return '—';
@@ -582,7 +598,7 @@
 
             <div class="mt-5">
               <span class="pill ${statusColor(theme?.status)}">
-                ${esc(pretty(theme?.status || 'under review'))}
+                ${esc(formatAction(theme?.status || 'under review'))}
               </span>
 
               <span class="text-xs font-bold text-slate-400 ml-2">
@@ -702,7 +718,7 @@
               </div>
 
               <span class="pill bg-slate-100 text-slate-700 h-fit">
-                ${esc(pretty(state))}
+                ${esc(formatAction(state))}
               </span>
             </div>
 
@@ -803,12 +819,14 @@
           )
         )[0];
 
-        document.getElementById('latest-action').textContent =
+        const rawAction =
           latestCompany?.company?.decision?.cta ||
           latestCompany?.company?.decision?.state ||
           latestTheme?.decision?.cta ||
-          latestTheme?.decision?.state ||
-          'No reviews';
+          latestTheme?.decision?.state;
+
+        document.getElementById('latest-action').textContent =
+          formatAction(rawAction);
 
         renderThemes(themes);
         renderCompanies(companies);
