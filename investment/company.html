@@ -51,20 +51,7 @@
 </head>
 <body>
 
-  <header class="top">
-    <div class="wrap nav">
-      <a class="logo" href="/">Wealth<span>Landing</span></a>
-      <a href="./index.html">Investment Center</a>
-      <a id="theme-nav-link" href="./theme.html?thesis=jpy">Theme View</a>
-      <a href="#valuation">Valuation</a>
-      <a href="#decision">Decision</a>
-      <form class="search" role="search" action="https://www.google.com/search" method="get" target="_blank">
-        <label for="site-search" class="sr-only">Search WealthLanding</label>
-        <input id="site-search" name="q" type="search" placeholder="Search WealthLanding">
-        <button type="submit">Search</button>
-      </form>
-    </div>
-  </header>
+    <div id="global-header-target"></div>
 
   <main class="wrap py-10 space-y-7">
     <div>
@@ -369,5 +356,6 @@
       console.error(error);
     });
   </script>
+     <script src="/components/header.js"></script> 
 </body>
 </html>
