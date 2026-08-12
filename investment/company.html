@@ -43,7 +43,7 @@
     <div id="global-header-target"></div>
 
 <main class="wrap py-10 space-y-7">
-  <a id="back-link" href="./theme.html?thesis=jpy" class="text-sm font-bold text-slate-500">← Theme</a>
+  <a id="back-link" href="./theme.html?theme=jpy" class="text-sm font-bold text-slate-500">← Theme</a>
 
   <section class="card p-8 grid lg:grid-cols-12 gap-8 items-center">
     <div class="lg:col-span-8">
@@ -53,7 +53,7 @@
         <span id="ticker" class="tag bg-slate-100 text-slate-700">—</span>
       </div>
       <h1 id="company-name" class="serif text-5xl font-bold mt-4">Loading…</h1>
-      <p id="thesis-summary" class="text-slate-500 leading-7 mt-4 max-w-3xl"></p>
+      <p id="theme-summary" class="text-slate-500 leading-7 mt-4 max-w-3xl"></p>
     </div>
     <aside class="lg:col-span-4 bg-slate-950 text-white rounded-2xl p-6">
       <div class="text-xs uppercase tracking-wider text-slate-400 font-bold">What should I do now?</div>
@@ -119,7 +119,7 @@
     const secondary = framework.secondary_jpy_engine || framework.secondary_theme_engine;
     if (primary) result.push(typeof primary === 'string' ? primary : primary.name || primary.label);
     if (secondary) result.push(typeof secondary === 'string' ? secondary : secondary.name || secondary.label);
-    return result.filter(Boolean).length ? result.filter(Boolean) : (data.investment_thesis?.return_engines || data.return_engines || []);
+    return result.filter(Boolean).length ? result.filter(Boolean) : (data.investment_theme?.return_engines || data.return_engines || []);
   }
 
   async function load() {
@@ -176,7 +176,7 @@
     document.getElementById('company-name').textContent = companyName;
     document.getElementById('ticker').textContent = ticker;
     document.getElementById('rank-badge').textContent = `Top ${ranking.rank || rank}`;
-    document.getElementById('thesis-summary').textContent = data.investment_thesis?.summary || data.publication?.summary || data.decision?.summary || '';
+    document.getElementById('theme-summary').textContent = data.investment_theme?.summary || data.publication?.summary || data.decision?.summary || '';
     document.getElementById('cta').textContent = pretty(data.decision?.cta || data.decision?.state || 'under review');
     document.getElementById('cta-summary').textContent = data.decision?.summary || '';
     document.getElementById('current-price').textContent = money(currentPrice, currency);
@@ -187,7 +187,7 @@
     document.getElementById('confidence').textContent = pretty(data.valuation?.confidence || data.scenario_model?.confidence || 'pending');
     document.getElementById('valuation-explanation').textContent = data.valuation?.explanation || data.valuation?.summary || '';
 
-    const themeUrl = `./theme.html?thesis=${encodeURIComponent(theme)}`;
+    const themeUrl = `./theme.html?theme=${encodeURIComponent(theme)}`;
     document.getElementById('back-link').href = themeUrl;
     document.getElementById('back-link').textContent = `← ${pretty(theme)} theme`;
     document.getElementById('theme-nav-link').href = themeUrl;
