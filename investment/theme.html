@@ -259,7 +259,7 @@
         selection_reason: item.company_review?.reason || item.next_action || '',
         analysis_status: item.company_review?.status || 'pending',
         company_json_path: `./data/companies/${slug}/top${index + 1}.json`,
-        detail_url: `./company.html?theme=${slug}&rank=${index + 1}`
+        detail_url: `./company.html?thesis=${slug}&rank=${index + 1}`
       }));
   }
 
@@ -295,7 +295,7 @@
     const engines = company?.investment_thesis?.return_engines || company?.return_engines || [];
     const primaryEngine = engineName(engineFramework.primary_company_engine) || engineName(engines[0]) || '';
     const themeEngine = engineName(engineFramework.secondary_jpy_engine) || engineName(engineFramework.secondary_theme_engine) || engineName(engines[1]) || '';
-    const detailUrl = entry.detail_url || `./company.html?theme=${encodeURIComponent(slug)}&rank=${encodeURIComponent(entry.rank)}`;
+    const detailUrl = entry.detail_url || `./company.html?thesis=${encodeURIComponent(slug)}&rank=${encodeURIComponent(entry.rank)}`;
 
     if (!company) {
       return `<article class="card p-6 flex flex-col justify-between">
