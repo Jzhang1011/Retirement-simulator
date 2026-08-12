@@ -178,29 +178,8 @@
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="logo" href="/">Wealth<span>Landing</span></a>
+  <div id="global-header-target"></div>
 
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="/">Overview</a>
-        <a href="/investment/index.html" class="active">Investing</a>
-        <a href="/RetirementHub.html">Retirement</a>
-        <a href="#">Knowledge</a>
-      </nav>
-
-      <form
-        class="search"
-        action="https://www.google.com/search"
-        method="get"
-        target="_blank"
-        role="search"
-      >
-        <label class="sr-only" for="wlq">Search WealthLanding</label>
-        <input id="wlq" name="q" placeholder="Search WealthLanding…">
-      </form>
-    </div>
-  </header>
 
   <section class="bg-slate-950 text-white py-20">
     <div class="wrap grid lg:grid-cols-12 gap-10 items-center">
@@ -884,5 +863,6 @@
 
     load();
   </script>
+   <script src="/components/header.js"></script> 
 </body>
 </html>
