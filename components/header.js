@@ -569,9 +569,9 @@
                       </ul>
                     </div>
                     <div>
-                      <div class="wl-mega-col-title">MODELS</div>
+                      <div class="wl-mega-col-title">CASE STUDIES</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/investment/real_estate_vs_stocks_model.html">Real Estate vs Stocks</a></li>
+                        <li><a href="/Retirement-simulator/Topic/Assets_lifestyle/Happy_retirement.html">Happy Retirement</a></li>
                         <li><a href="/simulator.html">Tax & Roth Simulator</a></li>
                       </ul>
                     </div>
