@@ -73,54 +73,7 @@
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
 
  <div id="global-header-target"></div>
-    <!-- Mobile Menu Drawer -->
-    <div id="mobileMenu" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm lg:hidden">
-        <div class="fixed right-0 top-0 bottom-0 w-5/6 max-w-sm bg-white p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
-            <div>
-                <div class="flex items-center justify-between mb-8">
-                    <span class="text-lg font-bold text-slate-900">WealthLanding Navigation</span>
-                    <button id="closeMobileMenuBtn" class="p-2 text-slate-500 hover:text-slate-900">
-                        <i class="fa-solid fa-xmark text-xl"></i>
-                    </button>
-                </div>
-                
-                <div class="space-y-5 text-left">
-                    <div>
-                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Life Stages</div>
-                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
-                            <a href="#life-stages-explorer" onclick="selectStageTab('early'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🌱 Starting Out (18-25)</a>
-                            <a href="#life-stages-explorer" onclick="selectStageTab('building'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🚀 Building & Growing (25-40)</a>
-                            <a href="#life-stages-explorer" onclick="selectStageTab('peak'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🛡️ Family & Peak (40-55)</a>
-                            <a href="#life-stages-explorer" onclick="selectStageTab('retire'); document.getElementById('mobileMenu').classList.add('hidden');" class="block font-semibold text-slate-700 py-1">🏖️ Pre-Retirement (55+)</a>
-                        </div>
-                    </div>
 
-                    <div>
-                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Goals & Decisions</div>
-                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
-                            <a href="tools.html" class="block font-semibold text-slate-700 py-1">Manage Spending & Debt</a>
-                            <a href="real_estate_vs_stocks_model.html" target="_blank" class="block font-semibold text-slate-700 py-1">Real Estate vs Index Funds</a>
-                            <a href="simulator.html" target="_blank" class="block font-semibold text-slate-700 py-1">Retirement & Tax Planning</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="font-bold text-xs text-emerald-700 uppercase tracking-wider mb-2">Tools & Research</div>
-                        <div class="space-y-1.5 pl-2 border-l-2 border-slate-100 text-xs">
-                            <a href="tools.html" class="block font-semibold text-slate-700 py-1">Interactive Tools Hub</a>
-                            <a href="theme.html?thesis=jpy" target="_blank" class="block font-semibold text-slate-700 py-1">Investment Research & Theses</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-6 border-t border-slate-100">
-                <button onclick="openPathfinderModal(); document.getElementById('mobileMenu').classList.add('hidden');" class="w-full py-3 text-center text-sm font-bold text-white bg-brand-600 rounded-xl shadow-md">
-                    Find Your Financial Path
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- HERO SECTION -->
     <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-white via-emerald-50/30 to-slate-50">
@@ -602,13 +555,7 @@
             }, 100);
         }
 
-        // Mobile Menu Toggles
-        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.remove('hidden');
-        });
-        document.getElementById('closeMobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.add('hidden');
-        });
+     
 
         // Initial Load
         window.onload = function() {
