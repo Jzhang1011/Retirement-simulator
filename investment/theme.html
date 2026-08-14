@@ -159,20 +159,6 @@
 </footer>
 
 <script>
-  // Inside your existing async function load() { ... }
-
-// --- ADD THIS PORTION RIGHT AFTER FETCHING THE THEME DATA ---
-const videoSection = document.getElementById('video-section');
-const videoFrame = document.getElementById('video-frame');
-const videoTitle = document.getElementById('video-title');
-
-if (theme.video && theme.video.embed_url) {
-  videoFrame.src = theme.video.embed_url;
-  videoTitle.textContent = theme.video.title || 'Theme Overview Video';
-  videoSection.classList.remove('hidden'); // Show video card
-} else {
-  videoSection.classList.add('hidden'); // Hide card if no video exists
-}
   const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const pretty = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, character => character.toUpperCase());
   
@@ -292,13 +278,8 @@ if (theme.video && theme.video.embed_url) {
     const companyName = identity.name || company?.company_name || entry.company_name || `Top ${entry.rank}`;
     const ticker = identity.ticker || company?.ticker || entry.ticker || '';
     
-    // Multi-schema Currency Resolution
     const currency = identity.reporting_currency || identity.trading_currency || identity.currency || company?.company?.currency || company?.market_data?.currency || '';
-    
-    // Multi-schema Price Resolution
     const currentPrice = company?.market_data?.current_price ?? company?.market_data?.price ?? null;
-    
-    // Multi-schema Fair Value Resolution
     const fairValue = valuation.fair?.value_per_share 
       ?? valuation.fair_value 
       ?? valuation.probability_weighted_value 
@@ -375,12 +356,12 @@ if (theme.video && theme.video.embed_url) {
 
     const results = await Promise.all(entries.map(async entry => {
       const rank = Number(entry.rank);
-     const candidates = [
-  `./data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
-  `./data/companies/top${rank}.json`,
-  entry.company_json_path ? entry.company_json_path.replace(/^\/(investment\/)?/, './') : null,
-  entry.company_json_path
-].filter(Boolean);
+      const candidates = [
+        `./data/companies/${encodeURIComponent(slug)}/top${rank}.json`,
+        `./data/companies/top${rank}.json`,
+        entry.company_json_path ? entry.company_json_path.replace(/^\/(investment\/)?/, './') : null,
+        entry.company_json_path
+      ].filter(Boolean);
 
       for (const path of [...new Set(candidates)]) {
         try { 
@@ -398,10 +379,7 @@ if (theme.video && theme.video.embed_url) {
     const rawParam = new URLSearchParams(location.search).get('thesis');
     const slug = normalizeSlug(rawParam || 'jpy');
     
-    // Comprehensive candidate paths across root and relative folder structures
     const candidatePaths = [
-      `./data/themes/${encodeURIComponent(slug)}.json`,
-      `./data/themes/${encodeURIComponent(slug)}.json`,
       `./data/themes/${encodeURIComponent(slug)}.json`,
       `./data/${encodeURIComponent(slug)}.json`,
       `./${encodeURIComponent(slug)}.json`
@@ -427,6 +405,20 @@ if (theme.video && theme.video.embed_url) {
       theme = FALLBACK_JPY_THEME;
     }
 
+    // --- HANDLE VIDEO SECTION HERE INSIDE LOAD ---
+    const videoSection = document.getElementById('video-section');
+    const videoFrame = document.getElementById('video-frame');
+    const videoTitle = document.getElementById('video-title');
+
+    if (theme.video && theme.video.embed_url) {
+      videoFrame.src = theme.video.embed_url;
+      videoTitle.textContent = theme.video.title || 'Theme Overview Video';
+      videoSection.classList.remove('hidden');
+    } else {
+      videoSection.classList.add('hidden');
+    }
+
+    // Populate main sections
     document.title = `${theme.thesis?.name || pretty(slug)} | WealthLanding`;
     document.getElementById('title').textContent = theme.thesis?.name || pretty(slug);
     document.getElementById('status').textContent = pretty(theme.status || 'under review');
@@ -515,6 +507,7 @@ if (theme.video && theme.video.embed_url) {
 
   function loadWithFallback() {
     const theme = FALLBACK_JPY_THEME;
+    document.getElementById('video-section')?.classList.add('hidden');
     document.getElementById('title').textContent = theme.thesis.name;
     document.getElementById('status').textContent = pretty(theme.status);
     document.getElementById('summary').textContent = theme.publication.summary;
