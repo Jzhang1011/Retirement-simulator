@@ -55,6 +55,21 @@
   <div id="global-header-target"></div>
 
 <main class="wrap py-10 space-y-7">
+  <!-- Video Section (Hidden by default until loaded) -->
+<section id="video-section" class="card p-6 hidden">
+  <div class="eyebrow">Featured Video</div>
+  <h2 id="video-title" class="serif text-2xl font-bold mt-1 mb-4"></h2>
+  
+  <!-- Responsive Video Wrapper -->
+  <div class="relative w-full overflow-hidden rounded-xl bg-black" style="padding-top: 56.25%;">
+    <iframe 
+      id="video-frame"
+      class="absolute top-0 left-0 w-full h-full border-0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
   <div>
     <a href="./index.html" class="text-sm font-bold text-slate-500 hover:text-emerald-700 transition">
       ← Investment Decision Center
@@ -144,6 +159,20 @@
 </footer>
 
 <script>
+  // Inside your existing async function load() { ... }
+
+// --- ADD THIS PORTION RIGHT AFTER FETCHING THE THEME DATA ---
+const videoSection = document.getElementById('video-section');
+const videoFrame = document.getElementById('video-frame');
+const videoTitle = document.getElementById('video-title');
+
+if (theme.video && theme.video.embed_url) {
+  videoFrame.src = theme.video.embed_url;
+  videoTitle.textContent = theme.video.title || 'Theme Overview Video';
+  videoSection.classList.remove('hidden'); // Show video card
+} else {
+  videoSection.classList.add('hidden'); // Hide card if no video exists
+}
   const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const pretty = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ').replace(/\b\w/g, character => character.toUpperCase());
   
