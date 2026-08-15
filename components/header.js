@@ -366,7 +366,7 @@
                       <ul class="wl-mega-list">
                         <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">18–25 · Build foundation</li>
                         <li><a href="/curriculum/early-career-playbook.html">Budget & cash flow</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html">Credit & debt</a></li>
+                        <li><a href="/curriculum/early-career-playbook.html"> & debt</a></li>
                         <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
                       </ul>
                       <div class="wl-mega-col-title" style="margin-top:1.25rem;">FAMILY TO FREEDOM</div>
@@ -385,7 +385,7 @@
                       <ul class="wl-mega-list">
                         <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">25–40 · Turn income into assets</li>
                         <li>
-                          <a href="/tools.html" class="wl-mega-card">
+                          <a href="/spending/credit_card.html" class="wl-mega-card">
                             Credit Card Rewards Optimizer
                           </a>
                         </li>
@@ -513,7 +513,7 @@
                       <div class="wl-mega-col-title">FEATURED</div>
                       <ul class="wl-mega-list">
                         <li>
-                          <a href="/tools.html" class="wl-mega-card">
+                          <a href="/spending/credit_card.html" class="wl-mega-card">
                             Credit Card Rewards Optimizer
                           </a>
                         </li>
