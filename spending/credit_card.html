@@ -99,6 +99,66 @@
   </div>
 </section>
 
+<!-- SPENDING SIMULATOR -->
+<section class="py-14 md:py-16 bg-white border-y border-slate-200/80">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold mb-3">
+        <i class="fa-solid fa-sliders"></i><span>SPENDING SIMULATOR</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">See What Your Real Cash Back Would Be</h2>
+      <p class="text-slate-600 text-sm">Slide your estimated monthly spend in each category — see your spending mix, and how much you'd earn under three scenarios.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- SLIDERS (~1/3 width) -->
+      <div class="lg:col-span-1 bg-slate-50 rounded-2xl border border-slate-200 p-6 self-start">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-slate-800 text-sm">Monthly Spend</h3>
+          <span class="text-xs font-mono font-bold text-slate-500" id="sim-total">$0/mo</span>
+        </div>
+        <div class="space-y-4" id="sim-sliders"></div>
+      </div>
+
+      <!-- CHARTS (~2/3 width, stacked) -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+          <h3 class="font-bold text-slate-800 text-sm mb-3">Your Spending Mix</h3>
+          <div style="position:relative; height:280px; width:100%;" id="pie-container">
+            <canvas id="sim-pie"></canvas>
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
+          <h3 class="font-bold text-slate-800 text-sm mb-1">Cash Back: Three Scenarios</h3>
+          <p class="text-[11px] text-slate-500 mb-3">Total monthly cash back under each approach to using your cards.</p>
+          <div style="position:relative; height:280px; width:100%;" id="bar-container">
+            <canvas id="sim-bar"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+      <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
+        <div class="text-[11px] font-bold uppercase tracking-wide text-emerald-700 mb-1">Best Card, Any (Optimal)</div>
+        <div class="text-2xl font-extrabold text-slate-900" id="stat-any">$0<span class="text-sm font-semibold text-slate-500">/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1">Using the single best card per category, regardless of what's in your wallet</div>
+      </div>
+      <div class="rounded-xl border border-blue-200 bg-blue-50 p-5">
+        <div class="text-[11px] font-bold uppercase tracking-wide text-blue-700 mb-1">Best Card, Your Wallet</div>
+        <div class="text-2xl font-extrabold text-slate-900" id="stat-wallet">$0<span class="text-sm font-semibold text-slate-500">/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1" id="stat-wallet-note">Add cards to your wallet above to see this</div>
+      </div>
+      <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+        <div class="text-[11px] font-bold uppercase tracking-wide text-amber-700 mb-1">Single Card For Everything</div>
+        <div class="text-2xl font-extrabold text-slate-900" id="stat-single">$0<span class="text-sm font-semibold text-slate-500">/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1" id="stat-single-note">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SPENDING CATEGORIES -->
 <section class="py-14 md:py-16 bg-slate-50">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,6 +269,7 @@
 /* ============================= DATA ============================= */
 const CARDS = {
   csp:   { name:"Chase Sapphire Preferred", issuer:"Chase", fee:"$95/yr", color:"#1F4E8C", ptCurrency:"ur" },
+  csr:   { name:"Chase Sapphire Reserve", issuer:"Chase", fee:"$795/yr", color:"#0B2942", ptCurrency:"ur" },
   bcp:   { name:"Amex Blue Cash Preferred", issuer:"American Express", fee:"$95/yr ($0 intro yr 1)", color:"#2E77BB" },
   bce:   { name:"Amex Blue Cash Everyday", issuer:"American Express", fee:"$0", color:"#6FA8D8" },
   gold:  { name:"Amex Gold", issuer:"American Express", fee:"$325/yr", color:"#C9A227", ptCurrency:"mr" },
@@ -237,9 +298,13 @@ const POINT_VALUES = {
 };
 
 function effVal(entry){
+  if(!entry || !entry.card) return 0;
   const card = CARDS[entry.card];
-  if(card.ptCurrency) return entry.num * POINT_VALUES[card.ptCurrency].transfer;
-  return entry.num;
+  if(!card) return entry.num || 0;
+  if(card.ptCurrency && POINT_VALUES[card.ptCurrency]){
+    return (entry.num || 0) * POINT_VALUES[card.ptCurrency].transfer;
+  }
+  return entry.num || 0;
 }
 
 const CATEGORIES = [
@@ -266,6 +331,7 @@ const CATEGORIES = [
       { card:"gold", rate:"4x", num:4, cap:"worldwide, first $50,000/yr, then 1x" },
       { card:"savor", rate:"3%", num:3, cap:"uncapped" },
       { card:"csp", rate:"3x", num:3, cap:"uncapped" },
+      { card:"csr", rate:"3x", num:3, cap:"worldwide, incl. eligible delivery, uncapped" },
       { card:"strata", rate:"3x", num:3, cap:"uncapped" },
       { card:"ritz", rate:"3x", num:3, cap:"uncapped" },
       { card:"costco", rate:"3%", num:3, cap:"restaurants & eligible travel incl. Costco Travel" },
@@ -300,6 +366,7 @@ const CATEGORIES = [
     entries:[
       { card:"strata", rate:"10x", num:10, cap:"hotels, car rentals & attractions via Citi Travel" },
       { card:"vx", rate:"10x", num:10, cap:"hotels & rental cars via Capital One Travel" },
+      { card:"csr", rate:"8x", num:8, cap:"all Chase Travel purchases, incl. The Edit" },
       { card:"csp", rate:"5x", num:5, cap:"Chase Travel, Lyft, eligible Peloton" },
       { card:"plat", rate:"5x", num:5, cap:"flights direct/Amex Travel (cap $500k/yr) & prepaid hotels via Amex Travel" },
       { card:"vx", rate:"5x", num:5, cap:"flights & vacation rentals via Capital One Travel" },
@@ -316,6 +383,7 @@ const CATEGORIES = [
     note:"For travel booked outside the issuer's own portal.",
     entries:[
       { card:"aspire", rate:"7x", num:7, cap:"flights direct with airline; also car rentals booked direct" },
+      { card:"csr", rate:"4x", num:4, cap:"flights & hotels booked direct with the airline/hotel" },
       { card:"strata", rate:"3x", num:3, cap:"air travel & hotels, booked direct" },
       { card:"costco", rate:"3%", num:3, cap:"restaurants & eligible travel worldwide incl. Costco Travel" },
       { card:"csp", rate:"2x", num:2, cap:"all other travel" },
@@ -410,6 +478,7 @@ const CATEGORIES = [
       { card:"cfu", rate:"1.5%", num:1.5, cap:"flat, unlimited" },
       { card:"aspire", rate:"3x", num:3, cap:"flat, all other purchases" },
       { card:"csp", rate:"1x", num:1, cap:"flat" },
+      { card:"csr", rate:"1x", num:1, cap:"flat" },
       { card:"gold", rate:"1x", num:1, cap:"flat" },
       { card:"plat", rate:"1x", num:1, cap:"flat" },
       { card:"strata", rate:"1x", num:1, cap:"flat" },
@@ -530,6 +599,21 @@ const SCENARIOS = [
       { card:"wfac", level:"limited", label:"$600/claim ×2, up to $1,200/yr, $25 deductible", detail:"Secondary coverage — your other insurance (if any) must pay first" },
     ]
   },
+  { key:"airport-lounge", icon:"🛋️", name:"Airport Lounge Access", sub:"branded lounge networks + Priority Pass",
+    note:"Three issuers now run their own lounge networks in addition to Priority Pass. Coverage is airport-specific — check whether your home airport is actually on the list before counting on this as a benefit.",
+    entries:[
+      { card:"plat", level:"best", label:"Centurion Lounge Network — self + up to 2 guests free",
+        detail:"US: Atlanta (ATL), Charlotte (CLT), Dallas–Fort Worth (DFW), Denver (DEN), Fort Lauderdale (FLL), Houston (IAH), Las Vegas (LAS, plus the smaller Sidecar), Los Angeles (LAX), Miami (MIA), New York (JFK & LGA), Philadelphia (PHL), Phoenix (PHX), San Francisco (SFO), Seattle (SEA), Washington D.C. (DCA), Salt Lake City (SLC). International: Hong Kong (HKG), London Heathrow (LHR), Mumbai (BOM), Buenos Aires (EZE), and others. Opening later in 2026: Newark (EWR), Amsterdam (AMS). Also includes Priority Pass Select (restaurant-only in the US since 2023) and limited annual Delta Sky Club visits when flying Delta." },
+      { card:"vx", level:"best", label:"Capital One Lounge/Landing — self + 2 guests free",
+        detail:"Full lounges: Dallas–Fort Worth (DFW), Denver (DEN), Washington Dulles (IAD), Las Vegas (LAS), New York JFK (JFK). Landings — reservation-only dining, not open lounge seating: Washington National (DCA), New York LaGuardia (LGA). Charlotte (CLT) confirmed next, no opening date yet. Also includes Priority Pass Select (1,300+ lounges worldwide). Bringing guests now costs $25–$45/guest unless you spend $75k+/yr." },
+      { card:"csr", level:"best", label:"Chase Sapphire Lounge by The Club + Priority Pass Select",
+        detail:"Open now: Boston (BOS), Dallas–Fort Worth (DFW), Las Vegas (LAS), New York JFK (JFK), Phoenix (PHX), Philadelphia (PHL), San Diego (SAN). Closed: Hong Kong (HKG, closed Jan 2026), Austin Sapphire Terrace (closed 2025). Coming: LaGuardia (LGA), Los Angeles (LAX), Miami (MIA). Also includes Priority Pass Select (1,300+ lounges) and Air Canada Maple Leaf Lounges with an eligible Star Alliance boarding pass — this is the only branded network of the three that a Priority Pass membership from any other card can also unlock." },
+      { card:"aspire", level:"none", label:"Not included", detail:"Aspire is a Hilton-loyalty card, not a lounge-access card — no Priority Pass, no branded lounge network." },
+      { card:"gold", level:"none", label:"Not included", detail:"Amex Gold does not carry Centurion Lounge or Priority Pass access — that's reserved for Platinum and above." },
+      { card:"csp", level:"none", label:"Not included", detail:"Lounge access is a Reserve-tier benefit; the no-annual-fee-adjacent Preferred doesn't include it." },
+      { card:"strata", level:"none", label:"Not included" },
+    ]
+  },
 ];
 
 const LEVEL_STYLE = {
@@ -556,6 +640,7 @@ const addedList = document.getElementById('wallet-added-list');
 const walletCount = document.getElementById('wallet-count');
 
 function renderCardPicker(){
+  if(!cardPicker) return;
   cardPicker.innerHTML = '<option value="">Choose a card to add…</option>';
   Object.entries(CARDS).filter(([id]) => !wallet.has(id)).forEach(([id, c]) => {
     const opt = document.createElement('option');
@@ -563,10 +648,11 @@ function renderCardPicker(){
     opt.textContent = `${c.name} — ${c.fee}${c.legacy ? ' (legacy)' : ''}`;
     cardPicker.appendChild(opt);
   });
-  addCardBtn.disabled = cardPicker.options.length <= 1;
+  if(addCardBtn) addCardBtn.disabled = cardPicker.options.length <= 1;
 }
 
 function renderAddedList(){
+  if(!addedList) return;
   addedList.innerHTML = '';
   [...wallet].forEach(id => {
     const c = CARDS[id];
@@ -582,9 +668,11 @@ function renderAddedList(){
     row.querySelector('.remove-btn').addEventListener('click', () => toggleCard(id, false));
     addedList.appendChild(row);
   });
-  walletCount.textContent = wallet.size === 0
-    ? 'No cards selected yet — add the ones you carry below.'
-    : `${wallet.size} card${wallet.size===1?'':'s'} in your wallet.`;
+  if(walletCount){
+    walletCount.textContent = wallet.size === 0
+      ? 'No cards selected yet — add the ones you carry below.'
+      : `${wallet.size} card${wallet.size===1?'':'s'} in your wallet.`;
+  }
 }
 
 function renderWalletGrid(){ renderCardPicker(); renderAddedList(); }
@@ -595,41 +683,47 @@ function toggleCard(id, isOwned){
   renderWalletGrid();
   renderTileDots();
   if(currentDetailKey) showDetail(currentDetailKey);
+  if(typeof updateSimulator === 'function') updateSimulator();
 }
 
-addCardBtn.addEventListener('click', () => { const id = cardPicker.value; if(id) toggleCard(id, true); });
-cardPicker.addEventListener('change', () => { addCardBtn.disabled = !cardPicker.value; });
-document.getElementById('wallet-all').addEventListener('click', () => {
+if(addCardBtn) addCardBtn.addEventListener('click', () => { const id = cardPicker.value; if(id) toggleCard(id, true); });
+if(cardPicker) cardPicker.addEventListener('change', () => { addCardBtn.disabled = !cardPicker.value; });
+document.getElementById('wallet-all')?.addEventListener('click', () => {
   wallet = new Set(Object.keys(CARDS)); saveWallet(); renderWalletGrid(); renderTileDots();
   if(currentDetailKey) showDetail(currentDetailKey);
+  if(typeof updateSimulator === 'function') updateSimulator();
 });
-document.getElementById('wallet-clear').addEventListener('click', () => {
+document.getElementById('wallet-clear')?.addEventListener('click', () => {
   wallet = new Set(); saveWallet(); renderWalletGrid(); renderTileDots();
   if(currentDetailKey) showDetail(currentDetailKey);
+  if(typeof updateSimulator === 'function') updateSimulator();
 });
 renderWalletGrid();
 
 /* ============================= CATEGORY TILES ============================= */
 const grid = document.getElementById('cat-grid');
-CATEGORIES.forEach(cat => {
-  const tile = document.createElement('button');
-  tile.className = 'cat-tile relative text-left bg-white border border-slate-200/80 rounded-xl p-3.5 hover:border-brand-400 hover:shadow-md transition shadow-sm';
-  tile.dataset.key = cat.key;
-  tile.innerHTML = `
-    <span class="own-dot absolute top-3 right-3 border border-slate-200"></span>
-    <span class="text-xl block mb-1.5">${cat.icon}</span>
-    <span class="cat-name block font-bold text-[13px] text-slate-800 leading-tight">${cat.name}</span>
-    <span class="block text-[11px] text-slate-400 mt-0.5">${cat.sub}</span>
-  `;
-  tile.addEventListener('click', () => showDetail(cat.key));
-  grid.appendChild(tile);
-});
+if(grid){
+  CATEGORIES.forEach(cat => {
+    const tile = document.createElement('button');
+    tile.className = 'cat-tile relative text-left bg-white border border-slate-200/80 rounded-xl p-3.5 hover:border-brand-400 hover:shadow-md transition shadow-sm';
+    tile.dataset.key = cat.key;
+    tile.innerHTML = `
+      <span class="own-dot absolute top-3 right-3 border border-slate-200"></span>
+      <span class="text-xl block mb-1.5">${cat.icon || '💳'}</span>
+      <span class="cat-name block font-bold text-[13px] text-slate-800 leading-tight">${cat.name}</span>
+      <span class="block text-[11px] text-slate-400 mt-0.5">${cat.sub}</span>
+    `;
+    tile.addEventListener('click', () => showDetail(cat.key));
+    grid.appendChild(tile);
+  });
+}
 
 function renderTileDots(){
   CATEGORIES.forEach(cat => {
     const tile = document.querySelector(`.cat-tile[data-key="${cat.key}"]`);
     if(!tile) return;
     const dot = tile.querySelector('.own-dot');
+    if(!dot) return;
     const sorted = [...cat.entries].sort((a,b) => effVal(b) - effVal(a));
     const ownedEntries = sorted.filter(e => wallet.has(e.card));
     dot.style.background = 'transparent';
@@ -662,93 +756,102 @@ function showDetail(key){
   if(tile) tile.classList.add('active');
   activeTile = tile;
 
-  detailTitle.textContent = `${cat.icon}  ${cat.name}`;
-  detailNote.textContent = cat.note || '';
+  if(detailTitle) detailTitle.textContent = `${cat.icon || '💳'}  ${cat.name}`;
+  if(detailNote) detailNote.textContent = cat.note || '';
 
   const sorted = [...cat.entries].sort((a,b) => effVal(b) - effVal(a));
   const ownedEntries = sorted.filter(e => wallet.has(e.card));
 
-  if(wallet.size === 0){
-    walletSummary.className = 'rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-xs text-slate-600 leading-relaxed';
-    walletSummary.textContent = "Add the cards you carry above to see how your wallet stacks up against the overall best.";
-  } else if(ownedEntries.length === 0){
-    walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
-    const top = CARDS[sorted[0].card];
-    walletSummary.innerHTML = `None of your cards earn a bonus here — you're stuck at their base rate. Overall best is <strong>${top.name}</strong> at <strong>${sorted[0].rate}</strong>.`;
-  } else if(ownedEntries[0].card === sorted[0].card){
-    walletSummary.className = 'rounded-xl border border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
-    const top = CARDS[sorted[0].card];
-    walletSummary.innerHTML = `You're already using the right card: <strong>${top.name}</strong> at <strong>${sorted[0].rate}</strong> is both your best option and the overall best.`;
-  } else {
-    walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
-    const mine = CARDS[ownedEntries[0].card];
-    const top = CARDS[sorted[0].card];
-    const rank = sorted.findIndex(e => e.card === ownedEntries[0].card) + 1;
-    walletSummary.innerHTML = `Your best option is <strong>${mine.name}</strong> at <strong>${ownedEntries[0].rate}</strong> (ranked #${rank} overall). The overall best is <strong>${top.name}</strong> at <strong>${sorted[0].rate}</strong> — not currently in your wallet.`;
+  if(walletSummary){
+    if(wallet.size === 0){
+      walletSummary.className = 'rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-xs text-slate-600 leading-relaxed';
+      walletSummary.textContent = "Add the cards you carry above to see how your wallet stacks up against the overall best.";
+    } else if(ownedEntries.length === 0){
+      walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
+      const top = CARDS[sorted[0].card];
+      walletSummary.innerHTML = `None of your cards earn a bonus here — you're stuck at their base rate. Overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
+    } else if(ownedEntries[0].card === sorted[0].card){
+      walletSummary.className = 'rounded-xl border border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
+      const top = CARDS[sorted[0].card];
+      walletSummary.innerHTML = `You're already using the right card: <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong> is both your best option and the overall best.`;
+    } else {
+      walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
+      const mine = CARDS[ownedEntries[0].card];
+      const top = CARDS[sorted[0].card];
+      const rank = sorted.findIndex(e => e.card === ownedEntries[0].card) + 1;
+      walletSummary.innerHTML = `Your best option is <strong>${mine ? mine.name : 'Unknown'}</strong> at <strong>${ownedEntries[0].rate}</strong> (ranked #${rank} overall). The overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong> — not currently in your wallet.`;
+    }
   }
 
-  rankList.innerHTML = '';
-  sorted.forEach((e, i) => {
-    const card = CARDS[e.card];
-    const owned = wallet.has(e.card);
-    const li = document.createElement('li');
-    li.className = `px-6 py-4 flex items-center gap-4 ${wallet.size > 0 && !owned ? 'opacity-40' : ''}`;
+  if(rankList){
+    rankList.innerHTML = '';
+    sorted.forEach((e, i) => {
+      const card = CARDS[e.card];
+      if(!card) return;
+      const owned = wallet.has(e.card);
+      const li = document.createElement('li');
+      li.className = `px-6 py-4 flex items-center gap-4 ${wallet.size > 0 && !owned ? 'opacity-40' : ''}`;
 
-    let valueBlock = `<div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div><div class="text-[10px] text-slate-400">${e.cap}</div>`;
-    if(card.ptCurrency){
-      const pv = POINT_VALUES[card.ptCurrency];
-      const transferPct = (e.num * pv.transfer).toFixed(1);
-      const cashOutPct = (e.num * pv.cashOut).toFixed(1);
-      valueBlock = `
-        <div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div>
-        <div class="text-[10px] text-slate-400">${e.cap}</div>
-        <div class="text-[11px] font-mono font-semibold text-amber-700 mt-0.5">≈${transferPct}% fair value <span class="text-slate-400 font-normal">(${cashOutPct}% cash-out)</span></div>
-      `;
-    }
+      let valueBlock = `<div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div><div class="text-[10px] text-slate-400">${e.cap}</div>`;
+      if(card.ptCurrency && POINT_VALUES[card.ptCurrency]){
+        const pv = POINT_VALUES[card.ptCurrency];
+        const transferPct = (e.num * pv.transfer).toFixed(1);
+        const cashOutPct = (e.num * pv.cashOut).toFixed(1);
+        valueBlock = `
+          <div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div>
+          <div class="text-[10px] text-slate-400">${e.cap}</div>
+          <div class="text-[11px] font-mono font-semibold text-amber-700 mt-0.5">≈${transferPct}% fair value <span class="text-slate-400 font-normal">(${cashOutPct}% cash-out)</span></div>
+        `;
+      }
 
-    li.innerHTML = `
-      <span class="text-xs font-mono ${i===0 ? 'text-emerald-600 font-bold' : 'text-slate-400'} w-6">${String(i+1).padStart(2,'0')}</span>
-      <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${card.color}"></span>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="font-bold text-sm text-slate-800">${card.name}</span>
-          ${i === 0 ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5">Top pick</span>' : ''}
-          ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
-          ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
+      li.innerHTML = `
+        <span class="text-xs font-mono ${i===0 ? 'text-emerald-600 font-bold' : 'text-slate-400'} w-6">${String(i+1).padStart(2,'0')}</span>
+        <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${card.color}"></span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-sm text-slate-800">${card.name}</span>
+            ${i === 0 ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5">Top pick</span>' : ''}
+            ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
+            ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
+          </div>
+          <div class="text-[11px] text-slate-500 mt-0.5">${card.issuer} · ${card.fee}${card.ptCurrency && POINT_VALUES[card.ptCurrency] ? ' · earns ' + POINT_VALUES[card.ptCurrency].name : ''}</div>
         </div>
-        <div class="text-[11px] text-slate-500 mt-0.5">${card.issuer} · ${card.fee}${card.ptCurrency ? ' · earns ' + POINT_VALUES[card.ptCurrency].name : ''}</div>
-      </div>
-      <div class="text-right flex-shrink-0">${valueBlock}</div>
-    `;
-    rankList.appendChild(li);
-  });
+        <div class="text-right flex-shrink-0">${valueBlock}</div>
+      `;
+      rankList.appendChild(li);
+    });
+  }
 
-  detailFoot.textContent = "Rate shown is the headline rate before any spending cap is reached. * = requires meeting a condition (activation, top-category selection, or a specific booking channel). For point/mile-earning cards, \"fair value\" assumes a well-executed transfer redemption; \"cash-out\" is the guaranteed value with no optimization.";
+  if(detailFoot) detailFoot.textContent = "Rate shown is the headline rate before any spending cap is reached. * = requires meeting a condition (activation, top-category selection, or a specific booking channel). For point/mile-earning cards, \"fair value\" assumes a well-executed transfer redemption; \"cash-out\" is the guaranteed value with no optimization.";
 
-  detail.classList.remove('hidden');
-  detail.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(detail){
+    detail.classList.remove('hidden');
+    detail.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
 }
 
-document.getElementById('close-detail').addEventListener('click', () => {
-  detail.classList.add('hidden');
+document.getElementById('close-detail')?.addEventListener('click', () => {
+  if(detail) detail.classList.add('hidden');
   if(activeTile) activeTile.classList.remove('active');
   currentDetailKey = null;
 });
 
 /* ============================= SCENARIO TILES ============================= */
 const scenarioGrid = document.getElementById('scenario-grid');
-SCENARIOS.forEach(sc => {
-  const tile = document.createElement('button');
-  tile.className = 'cat-tile relative text-left bg-white border border-slate-200/80 rounded-xl p-3.5 hover:border-amber-400 hover:shadow-md transition shadow-sm';
-  tile.dataset.key = sc.key;
-  tile.innerHTML = `
-    <span class="text-xl block mb-1.5">${sc.icon}</span>
-    <span class="cat-name block font-bold text-[13px] text-slate-800 leading-tight">${sc.name}</span>
-    <span class="block text-[11px] text-slate-400 mt-0.5">${sc.sub}</span>
-  `;
-  tile.addEventListener('click', () => showScenario(sc.key));
-  scenarioGrid.appendChild(tile);
-});
+if(scenarioGrid){
+  SCENARIOS.forEach(sc => {
+    const tile = document.createElement('button');
+    tile.className = 'cat-tile relative text-left bg-white border border-slate-200/80 rounded-xl p-3.5 hover:border-amber-400 hover:shadow-md transition shadow-sm';
+    tile.dataset.key = sc.key;
+    tile.innerHTML = `
+      <span class="text-xl block mb-1.5">${sc.icon || '🛡️'}</span>
+      <span class="cat-name block font-bold text-[13px] text-slate-800 leading-tight">${sc.name}</span>
+      <span class="block text-[11px] text-slate-400 mt-0.5">${sc.sub}</span>
+    `;
+    tile.addEventListener('click', () => showScenario(sc.key));
+    scenarioGrid.appendChild(tile);
+  });
+}
 
 const scenarioDetail = document.getElementById('scenario-detail');
 const scenarioList = document.getElementById('scenario-list');
@@ -765,104 +868,539 @@ function showScenario(key){
   if(tile) tile.classList.add('active');
   activeScenarioTile = tile;
 
-  scenarioTitle.textContent = `${sc.icon}  ${sc.name}`;
-  scenarioNote.textContent = sc.note || '';
+  if(scenarioTitle) scenarioTitle.textContent = `${sc.icon || '🛡️'}  ${sc.name}`;
+  if(scenarioNote) scenarioNote.textContent = sc.note || '';
 
   const sorted = [...sc.entries].sort((a,b) => LEVEL_RANK[a.level] - LEVEL_RANK[b.level]);
-  scenarioList.innerHTML = '';
-  sorted.forEach(e => {
-    const card = CARDS[e.card];
-    const owned = wallet.has(e.card);
-    const style = LEVEL_STYLE[e.level];
-    const li = document.createElement('li');
-    li.className = `px-6 py-4 flex items-center gap-4 ${e.level === 'none' ? 'opacity-60' : ''}`;
-    li.innerHTML = `
-      <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${card.color}"></span>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="font-bold text-sm text-slate-800">${card.name}</span>
-          <span class="text-[9px] font-bold uppercase tracking-wide rounded px-1.5 py-0.5 border ${style.badge}">${style.label}</span>
-          ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
-          ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
+  if(scenarioList){
+    scenarioList.innerHTML = '';
+    sorted.forEach(e => {
+      const card = CARDS[e.card];
+      if(!card) return;
+      const owned = wallet.has(e.card);
+      const style = LEVEL_STYLE[e.level] || LEVEL_STYLE.none;
+      const li = document.createElement('li');
+      li.className = `px-6 py-4 flex items-center gap-4 ${e.level === 'none' ? 'opacity-60' : ''}`;
+      li.innerHTML = `
+        <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${card.color}"></span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-sm text-slate-800">${card.name}</span>
+            <span class="text-[9px] font-bold uppercase tracking-wide rounded px-1.5 py-0.5 border ${style.badge}">${style.label}</span>
+            ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
+            ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
+          </div>
+          <div class="text-[12px] text-slate-600 mt-1">${e.label}</div>
+          ${e.detail ? `<div class="text-[11px] text-slate-400 mt-1">${e.detail}</div>` : ''}
+          <div class="text-[11px] text-slate-400 mt-1">${card.issuer} · ${card.fee}</div>
         </div>
-        <div class="text-[12px] text-slate-600 mt-1">${e.label}</div>
-        ${e.detail ? `<div class="text-[11px] text-slate-400 mt-1">${e.detail}</div>` : ''}
-        <div class="text-[11px] text-slate-400 mt-1">${card.issuer} · ${card.fee}</div>
-      </div>
-    `;
-    scenarioList.appendChild(li);
-  });
+      `;
+      scenarioList.appendChild(li);
+    });
+  }
 
-  scenarioDetail.classList.remove('hidden');
-  scenarioDetail.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if(scenarioDetail){
+    scenarioDetail.classList.remove('hidden');
+    scenarioDetail.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
 }
 
-document.getElementById('close-scenario').addEventListener('click', () => {
-  scenarioDetail.classList.add('hidden');
+document.getElementById('close-scenario')?.addEventListener('click', () => {
+  if(scenarioDetail) scenarioDetail.classList.add('hidden');
   if(activeScenarioTile) activeScenarioTile.classList.remove('active');
 });
 
-/* ============================= SEARCH (categories + scenarios) ============================= */
+/* ============================= SEARCH ============================= */
 const searchInput = document.getElementById('search');
 const resultCount = document.getElementById('result-count');
 const emptyState = document.getElementById('empty-state');
 const scenarioEmpty = document.getElementById('scenario-empty');
 
-searchInput.addEventListener('input', () => {
-  const q = searchInput.value.trim().toLowerCase();
-  let visible = 0;
+if(searchInput){
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let visible = 0;
 
-  document.querySelectorAll('#cat-grid .cat-tile').forEach(tile => {
-    const cat = CATEGORIES.find(c => c.key === tile.dataset.key);
-    const cardNames = cat.entries.map(e => CARDS[e.card].name.toLowerCase()).join(' ');
-    const haystack = `${cat.name} ${cat.sub} ${cardNames}`.toLowerCase();
-    const match = q === '' || haystack.includes(q);
-    tile.classList.toggle('hidden', !match);
-    if(match) visible++;
+    document.querySelectorAll('#cat-grid .cat-tile').forEach(tile => {
+      const cat = CATEGORIES.find(c => c.key === tile.dataset.key);
+      if(!cat) return;
+      const cardNames = cat.entries.map(e => CARDS[e.card] ? CARDS[e.card].name.toLowerCase() : '').join(' ');
+      const haystack = `${cat.name} ${cat.sub} ${cardNames}`.toLowerCase();
+      const match = q === '' || haystack.includes(q);
+      tile.classList.toggle('hidden', !match);
+      if(match) visible++;
+    });
+
+    let scenarioVisible = 0;
+    document.querySelectorAll('#scenario-grid .cat-tile').forEach(tile => {
+      const sc = SCENARIOS.find(s => s.key === tile.dataset.key);
+      if(!sc) return;
+      const cardNames = sc.entries.map(e => CARDS[e.card] ? CARDS[e.card].name.toLowerCase() : '').join(' ');
+      const haystack = `${sc.name} ${sc.sub} ${cardNames}`.toLowerCase();
+      const match = q === '' || haystack.includes(q);
+      tile.classList.toggle('hidden', !match);
+      if(match) scenarioVisible++;
+    });
+
+    if(resultCount) resultCount.textContent = q ? `${visible + scenarioVisible} match${(visible+scenarioVisible)===1?'':'es'}` : '';
+    if(emptyState) emptyState.classList.toggle('hidden', visible !== 0 || q === '');
+    if(scenarioEmpty) scenarioEmpty.classList.toggle('hidden', scenarioVisible !== 0 || q === '');
   });
-
-  let scenarioVisible = 0;
-  document.querySelectorAll('#scenario-grid .cat-tile').forEach(tile => {
-    const sc = SCENARIOS.find(s => s.key === tile.dataset.key);
-    const cardNames = sc.entries.map(e => CARDS[e.card].name.toLowerCase()).join(' ');
-    const haystack = `${sc.name} ${sc.sub} ${cardNames}`.toLowerCase();
-    const match = q === '' || haystack.includes(q);
-    tile.classList.toggle('hidden', !match);
-    if(match) scenarioVisible++;
-  });
-
-  resultCount.textContent = q ? `${visible + scenarioVisible} match${(visible+scenarioVisible)===1?'':'es'}` : '';
-  emptyState.classList.toggle('hidden', visible !== 0 || q === '');
-  scenarioEmpty.classList.toggle('hidden', scenarioVisible !== 0 || q === '');
-});
+}
 
 /* ============================= POINT VALUE GUIDE ============================= */
 const valueGuide = document.getElementById('value-guide');
-Object.values(POINT_VALUES).forEach(pv => {
-  const el = document.createElement('div');
-  el.className = 'bg-white rounded-xl border border-slate-200/80 shadow-sm px-4 py-3.5';
-  el.innerHTML = `
-    <div class="font-bold text-sm text-slate-800 mb-2">${pv.name}</div>
-    <div class="flex items-center justify-between text-xs font-mono">
-      <span class="text-slate-500">Cash-out: ${pv.cashOut.toFixed(2)}¢</span>
-      <span class="text-amber-700 font-semibold">Fair value: ${pv.transfer.toFixed(2)}¢</span>
-    </div>
-  `;
-  valueGuide.appendChild(el);
-});
+if(valueGuide){
+  Object.values(POINT_VALUES).forEach(pv => {
+    const el = document.createElement('div');
+    el.className = 'bg-white rounded-xl border border-slate-200/80 shadow-sm px-4 py-3.5';
+    el.innerHTML = `
+      <div class="font-bold text-sm text-slate-800 mb-2">${pv.name}</div>
+      <div class="flex items-center justify-between text-xs font-mono">
+        <span class="text-slate-500">Cash-out: ${pv.cashOut.toFixed(2)}¢</span>
+        <span class="text-amber-700 font-semibold">Fair value: ${pv.transfer.toFixed(2)}¢</span>
+      </div>
+    `;
+    valueGuide.appendChild(el);
+  });
+}
 
-/* ============================= FULL CATALOG (wallet-key) ============================= */
+/* ============================= FULL CATALOG ============================= */
 const walletKey = document.getElementById('wallet-key');
-Object.entries(CARDS).forEach(([id, c]) => {
-  const el = document.createElement('div');
-  el.className = 'flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-slate-200/80 bg-white shadow-sm';
-  el.innerHTML = `
-    <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
-    <span class="flex-1 min-w-0 text-xs font-semibold text-slate-700 truncate">${c.name}${c.legacy ? ' <span class="ml-1 text-[9px] font-bold text-red-500 border border-red-300 rounded px-1 py-0.5">LEGACY</span>' : ''}</span>
-    <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">${c.fee}</span>
-  `;
-  walletKey.appendChild(el);
-});
+if(walletKey){
+  Object.entries(CARDS).forEach(([id, c]) => {
+    const el = document.createElement('div');
+    el.className = 'flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-slate-200/80 bg-white shadow-sm';
+    el.innerHTML = `
+      <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
+      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-700 truncate">${c.name}${c.legacy ? ' <span class="ml-1 text-[9px] font-bold text-red-500 border border-red-300 rounded px-1 py-0.5">LEGACY</span>' : ''}</span>
+      <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">${c.fee}</span>
+    `;
+    walletKey.appendChild(el);
+  });
+}
+
+/* ============================= SPENDING SIMULATOR ============================= */
+const SIM_KEYS = ["groceries","dining","gas","travel-portal","streaming","drugstore","online-shopping","transit","entertainment","everything-else"];
+const SIM_DEFAULTS = { groceries:500, dining:300, gas:150, "travel-portal":200, streaming:40, drugstore:50, "online-shopping":150, transit:60, entertainment:80, "everything-else":400 };
+const SIM_KEY = 'wl_card_router_spend';
+
+let spendState = {};
+try{
+  const saved = JSON.parse(localStorage.getItem(SIM_KEY) || 'null');
+  spendState = saved && typeof saved === 'object' ? { ...SIM_DEFAULTS, ...saved } : { ...SIM_DEFAULTS };
+}catch(e){ spendState = { ...SIM_DEFAULTS }; }
+
+function saveSpend(){ try{ localStorage.setItem(SIM_KEY, JSON.stringify(spendState)); }catch(e){} }
+
+const simSliders = document.getElementById('sim-sliders');
+const simTotal = document.getElementById('sim-total');
+const statAny = document.getElementById('stat-any');
+const statWallet = document.getElementById('stat-wallet');
+const statWalletNote = document.getElementById('stat-wallet-note');
+const statSingle = document.getElementById('stat-single');
+const statSingleNote = document.getElementById('stat-single-note');
+
+/* Build slider rows once */
+if(simSliders){
+  SIM_KEYS.forEach(key => {
+    const cat = CATEGORIES.find(c => c.key === key);
+    if(!cat) return;
+    const row = document.createElement('div');
+    row.innerHTML = `
+      <div class="flex items-center justify-between mb-1">
+        <label class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">${cat.icon || '💳'} ${cat.name}</label>
+        <span class="text-xs font-mono font-bold text-slate-600" id="sim-val-${key}">$${spendState[key] || 0}/mo</span>
+      </div>
+      <input type="range" min="0" max="2000" step="10" value="${spendState[key] || 0}" id="sim-slider-${key}"
+        class="w-full h-1.5 rounded-full bg-slate-200 accent-brand-600 cursor-pointer">
+    `;
+    simSliders.appendChild(row);
+    row.querySelector(`#sim-slider-${key}`).addEventListener('input', (e) => {
+      spendState[key] = parseInt(e.target.value, 10) || 0;
+      const label = document.getElementById(`sim-val-${key}`);
+      if(label) label.textContent = `$${spendState[key]}/mo`;
+      saveSpend();
+      updateSimulator();
+    });
+  });
+}
+
+function cardRateInCategory(cardId, catKey){
+  const cat = CATEGORIES.find(c => c.key === catKey);
+  if(!cat) return 0;
+  let entry = cat.entries.filter(e => e.card === cardId).sort((a,b) => effVal(b) - effVal(a))[0];
+  if(!entry){
+    const elseCat = CATEGORIES.find(c => c.key === 'everything-else');
+    if(elseCat) entry = elseCat.entries.find(e => e.card === cardId);
+  }
+  return entry ? effVal(entry) : 0;
+}
+
+function computeSimulator(){
+  let totalAny = 0, totalWallet = 0;
+  const perCat = [];
+
+  SIM_KEYS.forEach(key => {
+    const cat = CATEGORIES.find(c => c.key === key);
+    if(!cat) return;
+    const spend = spendState[key] || 0;
+    const sorted = [...cat.entries].sort((a,b) => effVal(b) - effVal(a));
+    const bestAnyVal = sorted.length > 0 ? effVal(sorted[0]) : 0;
+
+    let bestWalletVal = 0;
+    const ownedSorted = sorted.filter(e => wallet.has(e.card));
+    if(ownedSorted.length > 0){
+      bestWalletVal = effVal(ownedSorted[0]);
+    } else if(wallet.size > 0){
+      const elseCat = CATEGORIES.find(c => c.key === 'everything-else');
+      if(elseCat){
+        const ownedElse = elseCat.entries.filter(e => wallet.has(e.card)).sort((a,b) => effVal(b) - effVal(a));
+        if(ownedElse.length > 0) bestWalletVal = effVal(ownedElse[0]);
+      }
+    }
+
+    totalAny += (spend * bestAnyVal) / 100;
+    totalWallet += (spend * bestWalletVal) / 100;
+    perCat.push({ key, name: cat.name, icon: cat.icon || '💳', spend, bestAnyVal, bestWalletVal });
+  });
+
+  const candidates = wallet.size > 0 ? [...wallet] : Object.keys(CARDS);
+  let bestSingle = { cardId: candidates[0] || 'dc', total: -1 };
+  candidates.forEach(cardId => {
+    let total = 0;
+    SIM_KEYS.forEach(key => { total += ((spendState[key] || 0) * cardRateInCategory(cardId, key)) / 100; });
+    if(total > bestSingle.total) bestSingle = { cardId, total };
+  });
+
+  perCat.forEach(row => { row.singleVal = cardRateInCategory(bestSingle.cardId, row.key); });
+
+  return { totalAny, totalWallet, bestSingle, perCat };
+}
+
+/* ============================= NATIVE CANVAS FALLBACKS ============================= */
+function renderNativePie(canvas, perCat) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const width = rect.width || 300;
+  const height = 280;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, width, height);
+
+  const activeCategories = perCat.filter(c => c.spend > 0);
+  const totalSpend = activeCategories.reduce((sum, c) => sum + c.spend, 0);
+
+  if (totalSpend === 0) {
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 13px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Adjust spend sliders to see your mix', width / 2, height / 2);
+    return;
+  }
+
+  const colors = ['#16a34a','#0ea5e9','#f59e0b','#a855f7','#ef4444','#14b8a6','#6366f1','#ec4899','#84cc16','#64748b'];
+  const centerX = width > 380 ? width * 0.35 : width / 2;
+  const centerY = height / 2 - 10;
+  const outerRadius = Math.min(centerX, centerY) - 15;
+  const innerRadius = outerRadius * 0.58;
+
+  let startAngle = -Math.PI / 2;
+
+  activeCategories.forEach((cat, i) => {
+    const sliceAngle = (cat.spend / totalSpend) * Math.PI * 2;
+    const endAngle = startAngle + sliceAngle;
+    const color = colors[i % colors.length];
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
+    ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    startAngle = endAngle;
+  });
+
+  // Center total
+  ctx.fillStyle = '#0f172a';
+  ctx.font = 'bold 15px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('$' + totalSpend.toLocaleString(), centerX, centerY - 6);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '500 10px Inter, sans-serif';
+  ctx.fillText('TOTAL/MO', centerX, centerY + 12);
+
+  // Legend
+  if (width > 380) {
+    const legendX = width * 0.62;
+    let legendY = 18;
+    activeCategories.slice(0, 8).forEach((cat, i) => {
+      const color = colors[i % colors.length];
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(legendX, legendY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#334155';
+      ctx.font = '500 11px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      const labelText = `${cat.icon} ${cat.name}: $${cat.spend}`;
+      ctx.fillText(labelText.length > 22 ? labelText.substring(0,20)+'…' : labelText, legendX + 12, legendY);
+      legendY += 24;
+    });
+  }
+}
+
+function renderNativeBar(canvas, totalAny, totalWallet, bestSingle) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const width = rect.width || 300;
+  const height = 280;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, width, height);
+
+  const singleCard = CARDS[bestSingle.cardId];
+  const singleName = singleCard ? singleCard.name : 'Single Card';
+
+  const bars = [
+    { label: 'Best, Any', fullLabel: 'Best card, any', val: totalAny, color: '#16a34a' },
+    { label: 'Best, Wallet', fullLabel: 'Best, your wallet', val: totalWallet, color: '#0ea5e9' },
+    { label: 'Single Card', fullLabel: singleName, val: bestSingle.total || 0, color: '#f59e0b' }
+  ];
+
+  const maxVal = Math.max(...bars.map(b => b.val), 10);
+  const topPadding = 35;
+  const bottomPadding = 50;
+  const leftPadding = 45;
+  const rightPadding = 20;
+  const chartHeight = height - topPadding - bottomPadding;
+  const chartWidth = width - leftPadding - rightPadding;
+
+  const steps = 4;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  ctx.font = '500 10px Inter, sans-serif';
+
+  for (let i = 0; i <= steps; i++) {
+    const yVal = (maxVal / steps) * i;
+    const yPos = topPadding + chartHeight - (chartHeight / steps) * i;
+
+    ctx.strokeStyle = '#f1f5f9';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(leftPadding, yPos);
+    ctx.lineTo(width - rightPadding, yPos);
+    ctx.stroke();
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('$' + Math.round(yVal), leftPadding - 6, yPos);
+  }
+
+  const barGroupWidth = chartWidth / bars.length;
+  const barWidth = Math.min(barGroupWidth * 0.5, 60);
+
+  bars.forEach((b, i) => {
+    const barX = leftPadding + i * barGroupWidth + (barGroupWidth - barWidth) / 2;
+    const barH = (b.val / maxVal) * chartHeight;
+    const barY = topPadding + chartHeight - barH;
+
+    ctx.fillStyle = b.color;
+    ctx.beginPath();
+    const r = Math.min(6, barH / 2);
+    if (ctx.roundRect) {
+      ctx.roundRect(barX, barY, barWidth, barH, [r, r, 0, 0]);
+    } else {
+      ctx.rect(barX, barY, barWidth, barH);
+    }
+    ctx.fill();
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 12px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('$' + b.val.toFixed(2), barX + barWidth / 2, barY - 4);
+
+    ctx.fillStyle = '#475569';
+    ctx.font = '600 11px Inter, sans-serif';
+    ctx.textBaseline = 'top';
+    ctx.fillText(b.label, barX + barWidth / 2, topPadding + chartHeight + 8);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 9px Inter, sans-serif';
+    const truncatedSub = b.fullLabel.length > 20 ? b.fullLabel.substring(0, 18) + '…' : b.fullLabel;
+    ctx.fillText(truncatedSub, barX + barWidth / 2, topPadding + chartHeight + 22);
+  });
+}
+
+/* ============================= CHART UPDATES ============================= */
+function updateCharts(perCat, totalAny, totalWallet, bestSingle){
+  const pieCanvas = document.getElementById('sim-pie');
+  const barCanvas = document.getElementById('sim-bar');
+
+  // If Chart.js is loaded and working, use Chart.js
+  if (typeof window.Chart === 'function') {
+    try {
+      const singleCard = CARDS[bestSingle.cardId];
+      const singleName = singleCard ? singleCard.name : 'Single Card';
+
+      /* 1. Pie Chart */
+      if (pieCanvas) {
+        const pieLabels = perCat.map(r => `${r.icon} ${r.name}`);
+        const pieData = perCat.map(r => r.spend);
+        const existingPie = window.Chart.getChart ? window.Chart.getChart(pieCanvas) : null;
+
+        if (existingPie) {
+          existingPie.data.labels = pieLabels;
+          existingPie.data.datasets[0].data = pieData;
+          existingPie.update();
+        } else {
+          new window.Chart(pieCanvas, {
+            type: 'doughnut',
+            data: {
+              labels: pieLabels,
+              datasets: [{
+                data: pieData,
+                backgroundColor: ['#16a34a','#0ea5e9','#f59e0b','#a855f7','#ef4444','#14b8a6','#6366f1','#ec4899','#84cc16','#64748b'],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 10 }, boxWidth: 10, padding: 8 } },
+                tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: $${ctx.raw}/mo` } }
+              },
+              cutout: '55%'
+            }
+          });
+        }
+      }
+
+      /* 2. Bar Chart */
+      if (barCanvas) {
+        const barLabels = ['Best card, any', 'Best card, your wallet', ['Single card:', singleName]];
+        const barData = [totalAny.toFixed(2), totalWallet.toFixed(2), (bestSingle.total || 0).toFixed(2)];
+        const barColors = ['#16a34a', '#0ea5e9', '#f59e0b'];
+        const existingBar = window.Chart.getChart ? window.Chart.getChart(barCanvas) : null;
+
+        if (existingBar) {
+          existingBar.data.labels = barLabels;
+          existingBar.data.datasets[0].data = barData;
+          existingBar.update();
+        } else {
+          new window.Chart(barCanvas, {
+            type: 'bar',
+            data: {
+              labels: barLabels,
+              datasets: [{
+                label: 'Monthly cash back',
+                data: barData,
+                backgroundColor: barColors,
+                borderRadius: 6
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { callback: v => '$' + v, font: { family: 'Inter', size: 10 } },
+                  grid: { color: '#f1f5f9' }
+                },
+                x: {
+                  ticks: { font: { family: 'Inter', size: 10 } },
+                  grid: { display: false }
+                }
+              },
+              plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: (ctx) => ` Cash Back: $${ctx.raw}/mo` } }
+              }
+            }
+          });
+        }
+      }
+      return; // Chart.js render succeeded
+    } catch (err) {
+      console.warn('Chart.js render error, falling back to Native Canvas:', err);
+    }
+  }
+
+  // Fallback to Native HTML5 Canvas rendering
+  if (pieCanvas) renderNativePie(pieCanvas, perCat);
+  if (barCanvas) renderNativeBar(barCanvas, totalAny, totalWallet, bestSingle);
+}
+
+function updateSimulator(){
+  const totalSpend = SIM_KEYS.reduce((sum, k) => sum + (spendState[k] || 0), 0);
+  if(simTotal) simTotal.textContent = `$${totalSpend.toLocaleString()}/mo total`;
+
+  const { totalAny, totalWallet, bestSingle, perCat } = computeSimulator();
+
+  if(statAny) statAny.innerHTML = `$${totalAny.toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
+
+  if(statWallet && statWalletNote){
+    if(wallet.size === 0){
+      statWallet.innerHTML = `$0<span class="text-sm font-semibold text-slate-500">/mo</span>`;
+      statWalletNote.textContent = 'Add cards to your wallet above to see this';
+    } else {
+      statWallet.innerHTML = `$${totalWallet.toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
+      const gap = totalAny - totalWallet;
+      statWalletNote.textContent = gap > 0.5
+        ? `Leaving ~$${gap.toFixed(0)}/mo on the table vs. the overall optimal mix`
+        : `You're capturing the full optimal amount with your current wallet`;
+    }
+  }
+
+  const singleCard = CARDS[bestSingle.cardId];
+  if(statSingle && statSingleNote){
+    statSingle.innerHTML = `$${(bestSingle.total || 0).toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
+    statSingleNote.innerHTML = singleCard 
+      ? `<strong class="text-slate-700">${singleCard.name}</strong>${wallet.size===0 ? ' (best of the full catalog)' : ' (best in your wallet)'}`
+      : '—';
+  }
+
+  updateCharts(perCat, totalAny, totalWallet, bestSingle);
+}
+
+// Ensure execution on load, DOMContentLoaded, and window resize
+window.addEventListener('DOMContentLoaded', updateSimulator);
+window.addEventListener('load', updateSimulator);
+window.addEventListener('resize', updateSimulator);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  updateSimulator();
+}
 </script>
     <script src="/components/header.js"></script> 
 </body>
