@@ -417,7 +417,7 @@
                       <ul class="wl-mega-list">
                         <li><a href="/tools.html">Manage my spending</a></li>
                         <li><a href="/tools.html#debt">Pay off debt</a></li>
-                        <li><a href="/tools.html">Optimize rewards</a></li>
+                        <li><a href="/spending/credit_card.html">Optimize rewards</a></li>
                       </ul>
                     </div>
                     <div>
