@@ -1,0 +1,220 @@
+{
+  "schema_version": "4.2",
+  "review_id": "jpy-2026-08-19",
+  "thesis": {
+    "id": "jpy-001",
+    "name": "JPY Structural Recovery & Double-Dip Strategy",
+    "slug": "jpy",
+    "category": "macro-currency",
+    "horizon": "5-15 years"
+  },
+  "video": {
+    "embed_url": "https://www.youtube.com/embed/jpy-overview",
+    "title": "JPY Structural Recovery & Double-Dip Strategy Overview"
+  },
+  "review": {
+    "date": "2026-08-19",
+    "period_start": "2026-08-12",
+    "period_end": "2026-08-19",
+    "cadence": "weekly",
+    "previous_review_id": "jpy-2026-08-12"
+  },
+  "status": "strengthening",
+  "thesis_health": {
+    "current": 88,
+    "previous": 84,
+    "change": 4,
+    "trend": "improving",
+    "reason_code": "STRUCTURAL_DEMAND_CONFIRMED",
+    "reason": "BOJ policy rate reaching 1.00% alongside massive financial earnings beats validates domestic NIM expansion."
+  },
+  "material_change": true,
+  "scenario_model": {
+    "current_scenario": "bull",
+    "confidence": 0.80,
+    "scenarios": [
+      {
+        "id": "bull",
+        "probability": 0.80,
+        "description": "BOJ terminal rate normalizes between 1.50% to 2.00%. TSE corporate governance reforms drive unprecedented share buybacks. Megabanks see multi-year NIM expansion.",
+        "entry_conditions": ["BOJ rate > 0.75%", "TSE structural reforms intact"],
+        "exit_conditions": ["BOJ cuts rates below 0.50%"]
+      },
+      {
+        "id": "fair",
+        "probability": 0.15,
+        "description": "BOJ pauses tightening at 1.00%. Governance reforms progress slowly, limiting ROE expansion purely to domestic financials without broad Topix lift.",
+        "entry_conditions": ["BOJ pauses at 1.00%", "Macro softening"],
+        "exit_conditions": ["Severe domestic recession"]
+      },
+      {
+        "id": "bear",
+        "probability": 0.05,
+        "description": "Global recession forces BOJ to revert to zero bound. Domestic inflation collapses, and corporate governance reforms are abandoned.",
+        "entry_conditions": ["Global recession", "JPY safe-haven surge under 120/USD"],
+        "exit_conditions": ["Economic stabilization"]
+      }
+    ]
+  },
+  "decision": {
+    "state": "active_buy",
+    "previous_state": "monitor",
+    "changed": true,
+    "summary": "Deploy capital into Tier-1 Japanese financials and select high-IP compounders capturing NIM expansion and cross-shareholding unwinds.",
+    "cta": "buy_below_attractive_threshold",
+    "reason_codes": ["STRUCTURAL_DEMAND_CONFIRMED", "VALUATION_DISPERSION"],
+    "required_actions": [
+      "Initiate or add to MUFG and Tokio Marine below attractive thresholds.",
+      "Monitor Nintendo holiday volume guidance for capital return triggers."
+    ]
+  },
+  "developments": [
+    {
+      "id": "jpy-D1",
+      "date": "2026-07-31",
+      "title": "Bank of Japan Reaches 1.00% Policy Rate",
+      "fact": "BOJ raises policy rate to 1.00% and executes $85B FX intervention, though JPY hovers around 159/USD.",
+      "assumption_ids": ["jpy-A1", "jpy-A4"],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "high",
+      "interpretation": "Confirms structural end to ZIRP, establishing a durable yield floor for domestic financials.",
+      "source_ids": ["SRC-TRADINGECONOMICS-2026", "SRC-MORGANSTANLEY-2026"]
+    },
+    {
+      "id": "jpy-D2",
+      "date": "2026-06-18",
+      "title": "MUFG Posts 39.67% EPS Beat on Expanding Lending Margins",
+      "fact": "MUFG reported Q1 2026 EPS of ¥54.28 vs consensus ¥38.87, driven by BOJ normalization and widened spreads.",
+      "assumption_ids": ["jpy-A1", "jpy-A6"],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "high",
+      "interpretation": "Direct empirical evidence that domestic banking profit pools are rapidly compounding from rate hikes.",
+      "source_ids": ["SRC-ENABLX-2026"]
+    }
+  ],
+  "scorecard": [
+    {
+      "assumption_id": "jpy-A1",
+      "name": "BOJ Monetary Policy Normalization",
+      "score": 5,
+      "previous_score": 4,
+      "change": 1,
+      "trend": "improving",
+      "assessment": "Policy rate formally reached 1.00%, immediately transmitting to megabank bottom lines."
+    },
+    {
+      "assumption_id": "jpy-A2",
+      "name": "Corporate Governance & TSE Reform",
+      "score": 4,
+      "previous_score": 4,
+      "change": 0,
+      "trend": "improving",
+      "assessment": "Aggressive unwinding of cross-shareholdings by Tier-1 institutions confirms compliance."
+    }
+  ],
+  "assumptions_changed": ["jpy-A1"],
+  "catalysts": [
+    {
+      "name": "BOJ September Monetary Policy Meeting",
+      "assumption_ids": ["jpy-A1"],
+      "state": "pending",
+      "expected_date": "2026-09-18",
+      "confirmation_test": "Forward guidance affirming terminal rate above 1.00%.",
+      "failure_test": "Guidance signaling an indefinite pause or cut."
+    }
+  ],
+  "opportunities": [
+    {
+      "rank": 1,
+      "opportunity_id": "jpy-OP-1",
+      "group": "domestic-financials",
+      "name": "Mitsubishi UFJ Financial Group",
+      "ticker": "8306.T",
+      "asset_type": "company",
+      "independent_return_engines": ["NIM expansion", "Domestic loan repricing", "Global wholesale"],
+      "catalyst": "Q2 Earnings confirming sequential margin expansion",
+      "valuation_status": "moderately_undervalued",
+      "main_risk": "BOJ rate normalization pause",
+      "next_action": "Buy below attractive zone",
+      "company_review": {
+        "status": "selected",
+        "company_slug": "mufg",
+        "reason": "Direct operational beneficiary of the BOJ's historic departure from ZIRP with proven EPS acceleration.",
+        "priority": "P0",
+        "trigger_rules": ["rank_top_3", "valuation_required"],
+        "company_packet_required": true,
+        "rank_slot": "top1",
+        "company_json_path": "/investment/data/companies/jpy/top1.json",
+        "detail_url": "/investment/company.html?thesis=jpy&rank=1"
+      }
+    }
+  ],
+  "ranked_company_reviews": [
+    {
+      "rank": 1,
+      "slot": "top1",
+      "company_name": "Mitsubishi UFJ Financial Group",
+      "company_slug": "mufg",
+      "ticker": "8306.T",
+      "selection_reason": "High-conviction rationale based on Q1 39% EPS beat directly tied to NIM expansion.",
+      "company_json_path": "/investment/data/companies/jpy/top1.json",
+      "detail_url": "/investment/company.html?thesis=jpy&rank=1",
+      "analysis_status": "complete"
+    },
+    {
+      "rank": 2,
+      "slot": "top2",
+      "company_name": "Tokio Marine Holdings",
+      "company_slug": "tokio-marine",
+      "ticker": "8766.T",
+      "selection_reason": "Aggressive cross-shareholding unwind and highly profitable specialty insurance pool.",
+      "company_json_path": "/investment/data/companies/jpy/top2.json",
+      "detail_url": "/investment/company.html?thesis=jpy&rank=2",
+      "analysis_status": "complete"
+    },
+    {
+      "rank": 3,
+      "slot": "top3",
+      "company_name": "Nintendo",
+      "company_slug": "nintendo",
+      "ticker": "7974.T",
+      "selection_reason": "Global cash generation via 90% YoY digital growth and massive balance sheet awaiting TSE-mandated distribution.",
+      "company_json_path": "/investment/data/companies/jpy/top3.json",
+      "detail_url": "/investment/company.html?thesis=jpy&rank=3",
+      "analysis_status": "complete"
+    }
+  ],
+  "risks": [
+    {
+      "name": "US Economic Resilience blocking JPY recovery",
+      "trigger": "Fed Funds rate remains structurally elevated",
+      "assumption_ids": ["jpy-A4"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-TRADINGECONOMICS-2026",
+      "name": "Trading Economics Japan Interest Rate",
+      "date": "2026-08-18",
+      "type": "authoritative_demographic_source"
+    },
+    {
+      "id": "SRC-ENABLX-2026",
+      "name": "MUFG Q1 2026 Earnings Release",
+      "date": "2026-06-18",
+      "type": "company_primary_source"
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "headline": "BOJ Rate Hikes Ignite Japanese Megabank Earnings Outperformance",
+    "summary": "With the BOJ policy rate reaching 1.00%, domestic financials are posting massive earnings beats. Simultaneously, structural governance reforms are unlocking trapped capital across Japan's industrial base.",
+    "page_url": "/investment/theme.html?theme=jpy",
+    "show_on_homepage": true,
+    "featured": true,
+    "generated_by": "WealthLanding AI Engine",
+    "generated_at": "2026-08-19T10:49:51Z"
+  }
+}
