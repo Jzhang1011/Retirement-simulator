@@ -1,244 +1,66 @@
 {
-  "schema_version": "4.2",
-  "review_id": "MUFG-2026-08-05",
-  "ranking": {
-    "theme_slug": "jpy",
-    "rank": 1,
-    "slot": "top1",
-    "selected_company_slug": "mitsubishi-ufj-financial-group",
-    "previous_company_slug": null,
-    "comparison_status": "initial_baseline",
-    "selected_at": "2026-08-05"
-  },
+  "schema_version": "2.0",
+  "company_id": "JPY-001-TOP1",
+  "review_id": "JPY-001-2026-08-19",
   "company": {
-    "id": "JP3902900004",
     "name": "Mitsubishi UFJ Financial Group",
-    "slug": "mitsubishi-ufj-financial-group",
-    "ticker": "8306",
-    "exchange": "Tokyo Stock Exchange Prime",
-    "reporting_currency": "JPY",
-    "trading_currency": "JPY",
-    "theme_dependencies": [
-      "jpy"
+    "ticker": "8306.T",
+    "asset_type": "company",
+    "sector": "Financials"
+  },
+  "rank": 1,
+  "status": "selected",
+  "conviction": "high",
+  "thesis_alignment": 94,
+  "investment_case": {
+    "primary_driver": "Japanese monetary normalization",
+    "secondary_drivers": [
+      "Domestic NIM expansion",
+      "Corporate borrowing growth",
+      "Capital returns",
+      "Global financial earnings"
     ]
   },
-  "review": {
-    "date": "2026-08-05",
-    "previous_review_id": null
-  },
-  "market_data": {
-    "current_price": 3541,
-    "price_date": "2026-08-05",
-    "price_timestamp": "2026-08-05T15:30:00+09:00",
-    "price_source": "Stock Analysis delayed Tokyo quote",
-    "share_basis": "local_share"
-  },
-  "investment_thesis": {
-    "summary": "MUFG is a direct beneficiary of orderly yen-rate normalization, supported by loan and fee growth, Morgan Stanley and overseas earnings, and capital returns, but the current valuation discounts much of the improvement.",
-    "return_engines": [
-      "Higher domestic net-interest income from yen-rate normalization",
-      "Loan balance and fee-income growth",
-      "Morgan Stanley and other equity-method earnings",
-      "Overseas commercial banking",
-      "Repurchases and dividends"
-    ],
-    "market_implied_assumptions": [
-      "Sustainable EPS of approximately 235 yen at a 15 times multiple",
-      "Normalization continues without material deposit or credit deterioration",
-      "ROE remains structurally above the historical regime",
-      "Capital distributions continue without regulatory constraint"
-    ],
-    "why_price_may_differ_from_value": [
-      "Investors are capitalizing additional BOJ normalization before it occurs",
-      "The market may assign a premium to higher sustainable ROE",
-      "Fee and Morgan Stanley earnings may justify a higher multiple",
-      "First-quarter annualization may overstate normalized earnings"
-    ]
-  },
-  "operating_scenarios": {
-    "bull": {
-      "probability": 0.3,
-      "conditions": [
-        "Net income reaches or exceeds 2.9 trillion yen",
-        "ROE remains above 14 percent",
-        "Credit costs remain contained",
-        "Deposit repricing does not offset rate benefits"
-      ],
-      "financial_assumptions": {
-        "normalized_eps_jpy": 260,
-        "valuation_multiple": 17,
-        "normalized_net_income_jpy_trillion": 2.9
-      },
-      "failure_conditions": [
-        "Credit costs rise materially",
-        "Deposit beta accelerates",
-        "Morgan Stanley or overseas earnings weaken"
-      ]
+  "latest_evidence": [
+    {
+      "metric": "Q1 FY2027 net income",
+      "value": "¥809.4B",
+      "change": "+48% YoY"
     },
-    "fair": {
-      "probability": 0.5,
-      "conditions": [
-        "Net income remains near the 2.7 trillion yen target",
-        "ROE remains between 12 and 14 percent",
-        "Loan and fee growth offset normalizing credit costs"
-      ],
-      "financial_assumptions": {
-        "normalized_eps_jpy": 240,
-        "valuation_multiple": 15,
-        "normalized_net_income_jpy_trillion": 2.7
-      },
-      "failure_conditions": [
-        "Normalized EPS falls below 220 yen",
-        "ROE falls below 11 percent"
-      ]
+    {
+      "metric": "Domestic loan spread",
+      "value": "1.15%",
+      "change": "Up from 0.95%"
     },
-    "bear": {
-      "probability": 0.2,
-      "conditions": [
-        "Deposit competition offsets rate benefits",
-        "Credit costs increase",
-        "Rate or JGB volatility pressures capital",
-        "Overseas earnings weaken"
-      ],
-      "financial_assumptions": {
-        "normalized_eps_jpy": 200,
-        "valuation_multiple": 12,
-        "normalized_net_income_jpy_trillion": 2.2
-      },
-      "failure_conditions": [
-        "Credit and funding conditions stabilize",
-        "EPS remains above 230 yen"
-      ]
+    {
+      "metric": "Forward P/E",
+      "value": "13.7x"
+    },
+    {
+      "metric": "Dividend yield",
+      "value": "2.77%"
     }
-  },
-  "valuation": {
-    "bull": {
-      "value_per_share": 4400,
-      "method": "Normalized earnings multiple",
-      "assumptions": [
-        "Approximately 260 yen normalized EPS",
-        "17 times earnings multiple",
-        "Sustained ROE above 14 percent"
-      ]
-    },
-    "fair": {
-      "value_per_share": 3600,
-      "method": "Normalized earnings multiple",
-      "assumptions": [
-        "Approximately 240 yen normalized EPS",
-        "15 times earnings multiple",
-        "Net income near the 2.7 trillion yen target"
-      ]
-    },
-    "bear": {
-      "value_per_share": 2400,
-      "method": "Normalized earnings multiple",
-      "assumptions": [
-        "Approximately 200 yen normalized EPS",
-        "12 times earnings multiple",
-        "Higher deposit and credit costs"
-      ]
-    },
-    "probability_weighted_value": 3525,
-    "net_cash_per_share": null,
-    "upside_to_fair_value_pct": 1.7,
-    "downside_to_bear_value_pct": 32.2,
-    "confidence": "medium",
-    "explanation": "The modeled scenario average is 3600 yen. A 75 yen execution and model-risk reserve produces an adopted probability-weighted value of 3525 yen. Net cash is not applicable for a deposit-taking financial institution."
-  },
-  "entry_zones": {
-    "strong_buy_below": 2650,
-    "attractive_below": 3100,
-    "fair_value_low": 3100,
-    "fair_value_high": 3900,
-    "expensive_above": 3900
-  },
-  "valuation_status": "fair",
-  "current_zone": "fair_value",
+  ],
   "catalysts": [
-    {
-      "name": "Second-quarter FY2026 results",
-      "timing": "2026-11",
-      "expected_effect": "Confirm normalized earnings, deposit beta, credit costs, and full-year target progress."
-    },
-    {
-      "name": "Further BOJ normalization",
-      "timing": "2026-09 onward",
-      "expected_effect": "Potentially increase domestic net-interest income if deposit and credit conditions remain stable."
-    },
-    {
-      "name": "Additional shareholder returns",
-      "timing": "2026-2027",
-      "expected_effect": "Increase per-share value and demonstrate capital discipline."
-    }
+    "September BOJ rate hike",
+    "Further domestic loan repricing",
+    "Higher Japanese deposit and loan spreads",
+    "Additional shareholder returns"
   ],
   "risks": [
-    {
-      "name": "Deposit repricing",
-      "impact": "Deposit costs could offset higher asset yields."
-    },
-    {
-      "name": "Credit deterioration",
-      "impact": "Higher provisions could reverse normalization-driven earnings."
-    },
-    {
-      "name": "JGB and market volatility",
-      "impact": "Securities losses or capital pressure could reduce returns."
-    },
-    {
-      "name": "Overseas and Morgan Stanley weakness",
-      "impact": "Diversified earnings engines could become correlated during a global downturn."
-    }
+    "Rapid BOJ tightening",
+    "JGB portfolio losses",
+    "Credit deterioration",
+    "Global financial-market stress"
   ],
   "invalidation_conditions": [
-    "Normalized ROE falls below 10 percent",
-    "Deposit costs consistently exceed incremental asset-yield benefits",
-    "Credit costs rise materially above the fair scenario",
-    "Regulatory capital requirements prevent expected shareholder returns",
-    "Normalized EPS falls below 200 yen without a credible recovery path"
+    "Domestic loan spread reverses materially",
+    "BOJ normalization is abandoned",
+    "Credit costs rise sharply",
+    "Capital returns materially deteriorate"
   ],
   "decision": {
-    "state": "watchlist",
-    "cta": "hold_or_watch",
-    "summary": "The operating thesis is supported, but the current price is close to fair value and offers insufficient compensation for bear-case downside.",
-    "next_catalyst": "Second-quarter FY2026 results",
-    "next_decision_date": "2026-11-16",
-    "required_actions": [
-      "Recalculate normalized EPS after half-year results.",
-      "Review deposit beta and credit costs.",
-      "Update entry zones for any material price or policy change."
-    ]
-  },
-  "sources": [
-    {
-      "publisher": "Mitsubishi UFJ Financial Group",
-      "title": "Financial Highlights for First Quarter FY2026",
-      "date": "2026-08-03",
-      "citation": ":contentReference[oaicite:27]{index=27}"
-    },
-    {
-      "publisher": "Mitsubishi UFJ Financial Group",
-      "title": "Investor Relations and First Quarter Materials",
-      "date": "2026-08-03",
-      "citation": ":contentReference[oaicite:28]{index=28}"
-    },
-    {
-      "publisher": "Stock Analysis",
-      "title": "MUFG Tokyo market price",
-      "date": "2026-08-05",
-      "citation": ":contentReference[oaicite:29]{index=29}"
-    }
-  ],
-  "output": {
-    "live_json_path": "/investment/data/companies/jpy/top1.json",
-    "detail_url": "/investment/company.html?theme=jpy&rank=1"
-  },
-  "publication": {
-    "status": "draft"
-  },
-  "approval": {
-    "status": "pending",
-    "approved_by": null,
-    "approved_at": null
+    "action": "accumulate_on_pullbacks",
+    "time_horizon": "12–24 months"
   }
 }
