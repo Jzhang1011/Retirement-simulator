@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- NEW FEATURE (Aug 21): html2canvas for digital wallpaper export -->
+<!-- NEW FEATURE (Aug 21): html2canvas library for the digital wallpaper export -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
@@ -43,40 +43,31 @@
   .cat-tile.active .cat-name{ color:#166534; }
   .own-dot{ width:9px; height:9px; border-radius:50%; }
 
-  /* ========================================================
-     UPDATED PRINT CSS: Safely toggles display states
-     ======================================================== */
+  /* NEW FEATURE (Aug 21): Specific print classes to prevent Tailwind collisions */
   @media print {
-    /* When printing stickers, hide all other direct children of the body */
     body.print-stickers > *:not(#print-stickers) { display: none !important; }
-    
-    /* Force the stickers container to show up, overriding Tailwind's 'hidden' class */
     body.print-stickers #print-stickers { 
       display: block !important; 
       width: 100%;
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
     
-    /* When printing the reference card, hide all other direct children */
     body.print-reference > *:not(#print-reference) { display: none !important; }
-    
-    /* Force the reference card to show up with exact physical dimensions */
     body.print-reference #print-reference { 
       display: block !important; 
       width: 3.375in; height: 2.125in; padding: 0.125in;
       border: 1px dashed #94a3b8; 
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
-    
-    /* Sets physical printer margins */
     @page { margin: 0.5in; }
   }
 </style>
-
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
 <div id="global-header-target"></div>
-
+  
+ <div id="global-header-target"></div>
+  
 <!-- HERO -->
 <section class="relative pt-12 pb-14 md:pt-16 md:pb-16 overflow-hidden bg-gradient-to-b from-white via-emerald-50/30 to-slate-50">
   <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-[100px] rounded-full pointer-events-none"></div>
@@ -263,6 +254,7 @@
 <section class="py-14 bg-slate-50">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-8">
+      
       <!-- NEW FEATURE (Aug 21): Added Settings trigger button -->
       <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-2 flex items-center justify-center gap-3">
         Point &amp; Mile Values Used
@@ -621,9 +613,9 @@ const SCENARIOS = [
       { card:"dc", level:"best", label:"+24 months" },
       { card:"savor", level:"best", label:"+24 months" },
       { card:"ritz", level:"strong", label:"+12 months, warranties ≤3 yrs" },
-      { card:"plat", level:"strong", label:"+12 months, warranties ≤5 yrs, cap 10k/50k" },
-      { card:"gold", level:"strong", label:"+12 months, cap 10k/50k" },
-      { card:"aspire", level:"strong", label:"+12 months, cap 10k/50k" },
+      { card:"plat", level:"strong", label:"+12 months, warranties ≤5 yrs, cap $10k/$50k" },
+      { card:"gold", level:"strong", label:"+12 months, cap $10k/$50k" },
+      { card:"aspire", level:"strong", label:"+12 months, cap $10k/$50k" },
       { card:"bcp", level:"strong", label:"+12 months, warranties ≤5 yrs" },
       { card:"vx", level:"strong", label:"+12 months, warranties ≤3 yrs" },
       { card:"cfu", level:"strong", label:"+12 months, warranties ≤3 yrs" },
@@ -664,8 +656,7 @@ function renderCardPicker(){
   Object.entries(CARDS).filter(([id]) => !wallet.has(id)).forEach(([id, c]) => {
     const opt = document.createElement('option');
     opt.value = id;
-    // Properly formatted template literal using backticks and ${}
-    opt.textContent = `${c.name} — c.fee{c.legacy ? ' (legacy)' : ''}`;
+    opt.textContent = `${c.name} — ${c.fee}${c.legacy ? ' (legacy)' : ''}`;
     cardPicker.appendChild(opt);
   });
   if(addCardBtn) addCardBtn.disabled = cardPicker.options.length <= 1;
@@ -679,28 +670,23 @@ function renderAddedList(){
     if(!c) return;
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2.5 px-3 py-2 rounded-lg border border-emerald-200 bg-emerald-50/60';
-    
-    // Properly formatted template literal for the injected HTML
     row.innerHTML = `
       <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
-      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-800 truncate">c.name{c.legacy ? ' <span class="ml-1 text-[9px] font-bold text-red-500 border border-red-300 rounded px-1 py-0.5">LEGACY</span>' : ''}</span>
+      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-800 truncate">${c.name}${c.legacy ? ' <span class="ml-1 text-[9px] font-bold text-red-500 border border-red-300 rounded px-1 py-0.5">LEGACY</span>' : ''}</span>
       <span class="text-[10px] text-slate-500 font-medium whitespace-nowrap hidden sm:inline">${c.fee}</span>
       <button class="remove-btn text-red-400 hover:text-red-600 text-sm px-1" data-id="${id}" title="Remove">✕</button>
     `;
-    
     row.querySelector('.remove-btn').addEventListener('click', () => toggleCard(id, false));
     addedList.appendChild(row);
   });
-  
   if(walletCount){
     walletCount.textContent = wallet.size === 0
       ? 'No cards selected yet — add the ones you carry below.'
-      : `wallet.sizecard{wallet.size===1?'':'s'} in your wallet.`;
+      : `${wallet.size} card${wallet.size===1?'':'s'} in your wallet.`;
   }
 }
 
 function renderWalletGrid(){ renderCardPicker(); renderAddedList(); }
-
 
 function toggleCard(id, isOwned){
   if(isOwned) wallet.add(id); else wallet.delete(id);
@@ -793,17 +779,17 @@ function showDetail(key){
     } else if(ownedEntries.length === 0){
       walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const top = CARDS[sorted[0].card];
-      walletSummary.innerHTML = `None of your cards earn a bonus here. Overall best is <strong>top?top.name:'Unknown'</strong>at<strong>{sorted[0].rate}</strong>.`;
+      walletSummary.innerHTML = `None of your cards earn a bonus here. Overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     } else if(ownedEntries[0].card === sorted[0].card){
       walletSummary.className = 'rounded-xl border border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const top = CARDS[sorted[0].card];
-      walletSummary.innerHTML = `You're already using the right card: <strong>top?top.name:'Unknown'</strong>at<strong>{sorted[0].rate}</strong>.`;
+      walletSummary.innerHTML = `You're already using the right card: <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     } else {
       walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const mine = CARDS[ownedEntries[0].card];
       const top = CARDS[sorted[0].card];
       const rank = sorted.findIndex(e => e.card === ownedEntries[0].card) + 1;
-      walletSummary.innerHTML = `Your best option is <strong>mine?mine.name:'Unknown'</strong>at<strong>{ownedEntries[0].rate}</strong> (ranked #rank).Theoverallbestis<strong>{top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
+      walletSummary.innerHTML = `Your best option is <strong>${mine ? mine.name : 'Unknown'}</strong> at <strong>${ownedEntries[0].rate}</strong> (ranked #${rank}). The overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     }
   }
 
@@ -816,7 +802,7 @@ function showDetail(key){
       const li = document.createElement('li');
       li.className = `px-6 py-4 flex items-center gap-4 ${wallet.size > 0 && !owned ? 'opacity-40' : ''}`;
 
-      let valueBlock = `<div class="font-mono font-bold text-slate-900 text-lg">e.rate</div><divclass="text-[10px]text-slate-400">{e.cap}</div>`;
+      let valueBlock = `<div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div><div class="text-[10px] text-slate-400">${e.cap}</div>`;
       if(card.ptCurrency && POINT_VALUES[card.ptCurrency]){
         const pv = POINT_VALUES[card.ptCurrency];
         const transferPct = (e.num * pv.transfer).toFixed(1);
@@ -828,7 +814,7 @@ function showDetail(key){
       }
 
       li.innerHTML = `
-        <span class="text-xs font-mono i===0?'text-emerald-600font-bold':'text-slate-400'w-6">{String(i+1).padStart(2,'0')}</span>
+        <span class="text-xs font-mono ${i===0 ? 'text-emerald-600 font-bold' : 'text-slate-400'} w-6">${String(i+1).padStart(2,'0')}</span>
         <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${card.color}"></span>
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 flex-wrap">
@@ -901,7 +887,7 @@ function showScenario(key){
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 flex-wrap">
             <span class="font-bold text-sm text-slate-800">${card.name}</span>
-            <span class="text-[9px] font-bold uppercase tracking-wide rounded px-1.5 py-0.5 border style.badge">{style.label}</span>
+            <span class="text-[9px] font-bold uppercase tracking-wide rounded px-1.5 py-0.5 border ${style.badge}">${style.label}</span>
             ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
           </div>
           <div class="text-[12px] text-slate-600 mt-1">${e.label}</div>
@@ -954,7 +940,7 @@ function openValuationModal() {
           <div class="text-[11px] text-slate-400">Cash-out floor: ${pv.cashOut.toFixed(2)}¢</div>
         </div>
         <div class="flex items-center gap-1.5 w-24">
-          <input type="number" id="val-input-key"step="0.05"min="{pv.cashOut}" value="${pv.transfer.toFixed(2)}" 
+          <input type="number" id="val-input-${key}" step="0.05" min="${pv.cashOut}" value="${pv.transfer.toFixed(2)}" 
             class="w-full rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm font-mono font-bold text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500/40 text-right">
           <span class="text-slate-500 text-sm font-bold pl-0.5">¢</span>
         </div>
@@ -1041,9 +1027,9 @@ if(simSliders){
     row.innerHTML = `
       <div class="flex items-center justify-between mb-1">
         <label class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">${cat.icon || '💳'} ${cat.name}</label>
-        <span class="text-xs font-mono font-bold text-slate-600" id="sim-val-key">${spendState[key] || 0}/mo</span>
+        <span class="text-xs font-mono font-bold text-slate-600" id="sim-val-${key}">$${spendState[key] || 0}/mo</span>
       </div>
-      <input type="range" min="0" max="2000" step="10" value="spendState[key]||0"id="sim-slider-{key}"
+      <input type="range" min="0" max="2000" step="10" value="${spendState[key] || 0}" id="sim-slider-${key}"
         class="w-full h-1.5 rounded-full bg-slate-200 accent-brand-600 cursor-pointer">
     `;
     simSliders.appendChild(row);
@@ -1301,7 +1287,7 @@ function generateReferenceCard() {
       list.innerHTML += `
         <div class="flex justify-between border-b border-slate-200 pb-[1px]">
           <span class="font-bold pr-1 truncate">${cat.icon} ${simpleName}</span>
-          <span class="text-right whitespace-nowrap text-slate-700">bestCard.name<spanclass="font-boldtext-blackml-0.5">{owned[0].rate}</span></span>
+          <span class="text-right whitespace-nowrap text-slate-700">${bestCard.name} <span class="font-bold text-black ml-0.5">${owned[0].rate}</span></span>
         </div>
       `;
     }
@@ -1314,13 +1300,13 @@ function generateReferenceCard() {
 document.getElementById('export-wallpaper')?.addEventListener('click', generateWallpaper);
 document.getElementById('export-stickers')?.addEventListener('click', generateStickers);
 document.getElementById('export-reference')?.addEventListener('click', generateReferenceCard);
-/* Clean up print classes after the print dialog closes */
+
+/* NEW FEATURE (Aug 21): Clean up print classes after the print dialog closes */
 window.addEventListener('afterprint', () => {
   document.body.classList.remove('print-stickers', 'print-reference');
 });
 
-
 </script>
+<script src="/components/header.js"></script> 
 </body>
 </html>
-
