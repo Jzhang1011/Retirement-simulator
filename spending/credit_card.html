@@ -16,6 +16,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- NEW FEATURE (Aug 21): html2canvas for digital wallpaper export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <script>
   tailwind.config = {
     theme: {
@@ -38,6 +42,27 @@
   .cat-tile.active{ border-color:#16a34a; background-color:#f0fdf4; }
   .cat-tile.active .cat-name{ color:#166534; }
   .own-dot{ width:9px; height:9px; border-radius:50%; }
+
+  /* NEW FEATURE (Aug 21): Print layout styling for Physical Stickers and Reference Cards */
+  @media print {
+    body * { visibility: hidden; }
+    
+    body.print-stickers #print-stickers, body.print-stickers #print-stickers * { visibility: visible; }
+    body.print-stickers #print-stickers { 
+      position: absolute; left: 0; top: 0; width: 100%;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    
+    body.print-reference #print-reference, body.print-reference #print-reference * { visibility: visible; }
+    body.print-reference #print-reference { 
+      position: absolute; left: 0; top: 0; 
+      width: 3.375in; height: 2.125in; padding: 0.125in;
+      border: 1px dashed #94a3b8; 
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    
+    @page { margin: 0.5in; }
+  }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
@@ -55,16 +80,6 @@
       Which Card Should<br class="hidden sm:inline">
       <span class="bg-gradient-to-r from-brand-700 via-brand-600 to-emerald-500 bg-clip-text text-transparent">You Use For That?</span>
     </h1>
-   <!-- <p class="text-base text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto">
-      Search a spending category, see every card ranked by real value — cash back and points side by side —
-      and check the built-in protections that sometimes matter more than the rate itself.
-    </p>
-    <div class="max-w-xl mx-auto flex items-center gap-2 bg-white rounded-xl border border-slate-200 shadow-sm px-4 py-3">
-      <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm"></i>
-      <input type="text" id="search" placeholder="Search a category — groceries, gas, streaming, dining…"
-        class="flex-1 outline-none text-sm text-slate-800 placeholder:text-slate-400" autocomplete="off">
-      <span class="text-[11px] font-semibold text-slate-400" id="result-count"></span>
-    </div> -->
   </div>
 </section>
 
@@ -72,14 +87,34 @@
 <section class="py-10 bg-white border-y border-slate-200/80">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
-      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
-        <div>
+      
+      <!-- NEW FEATURE (Aug 21): Added Export Toolkit UI to the Wallet Setup Header -->
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+        <div class="max-w-xl">
           <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
             <i class="fa-solid fa-wallet text-brand-600 text-base"></i> Your Wallet
           </h3>
-          <p class="text-xs text-slate-500 mt-0.5" id="wallet-count">No cards selected yet — add the ones you carry below.</p>
+          <p class="text-xs text-slate-500 mt-1" id="wallet-count">No cards selected yet — add the ones you carry below.</p>
+          
+          <div class="mt-3 flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-lg p-3 shadow-sm">
+            <i class="fa-solid fa-mobile-screen-button text-blue-500 mt-0.5"></i>
+            <p class="text-[11px] text-blue-800 leading-relaxed">
+              <strong>Save your strategy.</strong> Build your wallet below, then export a cheat sheet. It groups your best cards by category so you never have to guess which one to use at checkout again.
+            </p>
+          </div>
         </div>
-        <div class="flex gap-2">
+        
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <button id="export-wallpaper" class="px-3 py-1.5 rounded-lg border border-brand-300 bg-brand-50 text-xs font-bold text-brand-700 hover:bg-brand-100 hover:border-brand-400 transition shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-download"></i> Get Wallpaper
+          </button>
+          <button id="export-reference" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-slate-400 transition shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-address-card"></i> Print Wallet Card
+          </button>
+          <button id="export-stickers" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-bold text-slate-700 hover:border-slate-400 transition shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-tag"></i> Print Stickers
+          </button>
+          <div class="w-full h-0 sm:hidden"></div>
           <button id="wallet-all" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 hover:border-brand-500 hover:text-brand-700 transition">Select all</button>
           <button id="wallet-clear" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-600 hover:border-red-400 hover:text-red-600 transition">Clear</button>
         </div>
@@ -111,7 +146,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- SLIDERS (~1/3 width) -->
       <div class="lg:col-span-1 bg-slate-50 rounded-2xl border border-slate-200 p-6 self-start">
         <div class="flex items-center justify-between mb-4">
           <h3 class="font-bold text-slate-800 text-sm">Monthly Spend</h3>
@@ -120,7 +154,6 @@
         <div class="space-y-4" id="sim-sliders"></div>
       </div>
 
-      <!-- CHARTS (~2/3 width, stacked) -->
       <div class="lg:col-span-2 space-y-6">
         <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
           <h3 class="font-bold text-slate-800 text-sm mb-3">Your Spending Mix</h3>
@@ -138,7 +171,6 @@
       </div>
     </div>
 
-    <!-- STAT CARDS -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
       <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
         <div class="text-[11px] font-bold uppercase tracking-wide text-emerald-700 mb-1">Best Card, Any (Optimal)</div>
@@ -175,9 +207,6 @@
       <span class="flex items-center gap-1.5"><span class="own-dot border border-red-400" style="background:transparent;opacity:.6"></span> no card in your wallet for this</span>
     </div>
 
-    <div id="empty-state" class="hidden text-center text-sm text-slate-400 font-medium mt-10">No category matches that search.</div>
-
-    <!-- CATEGORY DETAIL PANEL -->
     <div id="detail" class="hidden mt-8 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       <div class="p-6 border-b border-slate-200 flex items-start justify-between gap-4 flex-wrap">
         <div>
@@ -203,14 +232,11 @@
         <i class="fa-solid fa-shield-halved"></i><span>SITUATIONAL COVERAGE</span>
       </div>
       <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">Beyond Cash Back</h2>
-      <p class="text-slate-600 text-sm">Sometimes the card with the lower rate is the right one to reach for — because of what happens <em>after</em> you pay. Tap a situation to see which cards actually cover it.</p>
+      <p class="text-slate-600 text-sm">Sometimes the card with the lower rate is the right one to reach for — because of what happens <em>after</em> you pay.</p>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-4" id="scenario-grid"></div>
 
-    <div id="scenario-empty" class="hidden text-center text-sm text-slate-400 font-medium mt-10">No situation matches that search.</div>
-
-    <!-- SCENARIO DETAIL PANEL -->
     <div id="scenario-detail" class="hidden mt-8 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       <div class="p-6 border-b border-slate-200 flex items-start justify-between gap-4 flex-wrap">
         <div>
@@ -220,10 +246,6 @@
         <button id="close-scenario" class="text-xs font-bold text-slate-500 hover:text-slate-800 border border-slate-200 rounded-lg px-3 py-1.5 transition">Close ✕</button>
       </div>
       <ul class="divide-y divide-slate-100" id="scenario-list"></ul>
-      <div class="px-6 py-4 text-[11px] text-slate-400 leading-relaxed bg-slate-50 border-t border-slate-100">
-        Benefits sourced from issuer Guides to Benefits and verified third-party coverage reviews as of August 2026 — terms change, and
-        benefit levels vary by exact card product. Always confirm current coverage with your issuer before relying on it for a real claim.
-      </div>
     </div>
   </div>
 </section>
@@ -232,16 +254,17 @@
 <section class="py-14 bg-slate-50">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-8">
-      <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-2">Point &amp; Mile Values Used</h2>
-      <p class="text-slate-600 text-sm">Cards that earn transferable points/miles are ranked by fair transfer value — here's what that assumes.</p>
+      <!-- NEW FEATURE (Aug 21): Added Settings trigger button -->
+      <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-2 flex items-center justify-center gap-3">
+        Point &amp; Mile Values Used
+        <button id="edit-vals-btn" class="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-brand-600 hover:border-brand-500 hover:bg-brand-50 transition shadow-sm">
+          <i class="fa-solid fa-sliders"></i> Edit
+        </button>
+      </h2>
+      <p class="text-slate-600 text-sm">Cards that earn transferable points/miles are ranked by fair transfer value.</p>
     </div>
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="value-guide"></div>
-    <p class="text-xs text-slate-500 leading-relaxed mt-6 max-w-3xl mx-auto text-center">
-      "Fair value" is what this page ranks point-earning cards by — a realistic result if you transfer to an airline or hotel partner
-      and book a solid redemption. "Direct cash-out" is what you're guaranteed with zero extra effort. For Marriott and Hilton there's
-      no real cash-out option, so that figure reflects a poor-value merchandise redemption instead. Sourced from issuer redemption pages
-      and industry valuation guides as of August 2026.
-    </p>
   </div>
 </section>
 
@@ -254,23 +277,66 @@
 </section>
 
 <footer class="py-8 bg-slate-50 border-t border-slate-200">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-[11px] text-slate-500 leading-relaxed">
-    Rates reflect published issuer terms as of August 2026 and are shown for personal reference only — always confirm current terms,
-    caps, and eligible merchants with the issuer before relying on them. Rewards depend on merchant category coding, which issuers,
-    not this page, control. Cards that earn transferable points or miles (Chase Ultimate Rewards, Amex Membership Rewards, Citi
-    ThankYou, Capital One Miles, Marriott Bonvoy, Hilton Honors) are ranked here by fair transfer value, with direct cash-out value
-    shown alongside. Citi Custom Cash and The Ritz-Carlton Card are marked "legacy": both are closed to new public applications but
-    still shown here for existing holders. The Costco Anywhere Visa requires an active paid Costco membership and pays rewards as an
-    annual certificate, not real-time cash back.
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-[11px] text-slate-500 leading-relaxed text-center">
+    Rates reflect published issuer terms as of August 2026 and are shown for personal reference only.
   </div>
 </footer>
 
+
+<!-- ============================= NEW FEATURES (Aug 21): HIDDEN CONTAINERS FOR MODALS AND EXPORTS ============================= -->
+
+<!-- SETTINGS MODAL -->
+<div id="valuation-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
+    <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+      <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
+        <i class="fa-solid fa-sliders text-brand-600"></i> Customize Point Values
+      </h3>
+      <button id="close-modal-btn" class="text-slate-400 hover:text-slate-700 transition">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-5" id="valuation-inputs"></div>
+    <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex gap-3">
+      <button id="reset-vals-btn" class="px-4 py-2 rounded-lg border border-slate-300 text-sm font-bold text-slate-700 hover:bg-slate-100 transition w-1/3">Reset</button>
+      <button id="save-vals-btn" class="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm font-bold hover:bg-brand-700 shadow-md shadow-brand-600/20 transition flex-1">Save & Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN WALLPAPER CANVAS -->
+<div class="absolute overflow-hidden w-0 h-0 pointer-events-none">
+  <div id="wallpaper-container" class="w-[1080px] h-[1920px] bg-slate-50 flex flex-col pt-32 px-20 pb-20 font-sans">
+    <div class="text-center mb-16">
+      <h2 class="text-6xl font-extrabold text-slate-900 tracking-tight mb-4">My Optimal Wallet</h2>
+      <p class="text-3xl text-brand-600 font-semibold tracking-wide">WealthLanding</p>
+    </div>
+    <div id="wallpaper-list" class="flex flex-col gap-6 flex-1"></div>
+    <div class="text-center text-slate-400 text-3xl font-medium mt-auto">
+      Updated <span id="wallpaper-date"></span>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN STICKER CANVAS -->
+<div id="print-stickers" class="hidden font-sans text-black bg-white">
+  <div class="text-xs font-bold mb-4 ml-1">WealthLanding Wallet Labels (Cut on dotted lines)</div>
+  <div id="sticker-list" class="flex flex-wrap gap-4 items-start"></div>
+</div>
+
+<!-- HIDDEN REFERENCE CARD CANVAS -->
+<div id="print-reference" class="hidden text-black bg-white font-sans overflow-hidden box-border">
+  <div class="text-center font-extrabold text-[10px] mb-1.5 pb-0.5 border-b-2 border-black uppercase tracking-wider">
+    Wallet Strategy
+  </div>
+  <div id="reference-list" class="grid grid-cols-2 gap-x-4 gap-y-1 text-[8px] leading-[1.15]"></div>
+</div>
+
+<!-- ============================= JAVASCRIPT ============================= -->
 <script>
 /* ============================= DATA ============================= */
 const CARDS = {
   csp:   { name:"Chase Sapphire Preferred", issuer:"Chase", fee:"$95/yr", color:"#1F4E8C", ptCurrency:"ur" },
   csr:   { name:"Chase Sapphire Reserve", issuer:"Chase", fee:"$795/yr", color:"#0B2942", ptCurrency:"ur" },
-  bcp:   { name:"Amex Blue Cash Preferred", issuer:"American Express", fee:"$95/yr ($0 intro yr 1)", color:"#2E77BB" },
+  bcp:   { name:"Amex Blue Cash Preferred", issuer:"American Express", fee:"$95/yr", color:"#2E77BB" },
   bce:   { name:"Amex Blue Cash Everyday", issuer:"American Express", fee:"$0", color:"#6FA8D8" },
   gold:  { name:"Amex Gold", issuer:"American Express", fee:"$325/yr", color:"#C9A227", ptCurrency:"mr" },
   plat:  { name:"Amex Platinum", issuer:"American Express", fee:"$895/yr", color:"#7C7F85", ptCurrency:"mr" },
@@ -278,7 +344,7 @@ const CARDS = {
   dc:    { name:"Citi Double Cash", issuer:"Citi", fee:"$0", color:"#C8102E" },
   cc:    { name:"Citi Custom Cash", issuer:"Citi", fee:"$0", color:"#1B7F79", legacy:true },
   strata:{ name:"Citi Strata Premier", issuer:"Citi", fee:"$95/yr", color:"#5C4B99", ptCurrency:"ty" },
-  costco:{ name:"Costco Anywhere Visa by Citi", issuer:"Citi", fee:"$0 (paid Costco membership required)", color:"#1E7A46" },
+  costco:{ name:"Costco Anywhere Visa by Citi", issuer:"Citi", fee:"$0", color:"#1E7A46" },
   disc:  { name:"Discover it Cash Back", issuer:"Discover", fee:"$0", color:"#FF6000" },
   savor: { name:"Capital One Savor", issuer:"Capital One", fee:"$0", color:"#A41E22" },
   vx:    { name:"Capital One Venture X", issuer:"Capital One", fee:"$395/yr", color:"#1C1C1E", ptCurrency:"c1" },
@@ -288,7 +354,8 @@ const CARDS = {
   wfac:  { name:"Wells Fargo Active Cash", issuer:"Wells Fargo", fee:"$0", color:"#C8A24A" },
 };
 
-const POINT_VALUES = {
+/* NEW FEATURE (Aug 21): Dynamic Point Value loading via localStorage */
+const DEFAULT_POINT_VALUES = {
   ur:       { name:"Chase Ultimate Rewards",   cashOut:1.00, transfer:2.05 },
   mr:       { name:"Amex Membership Rewards",  cashOut:0.60, transfer:2.00 },
   ty:       { name:"Citi ThankYou Points",     cashOut:1.00, transfer:1.90 },
@@ -296,6 +363,27 @@ const POINT_VALUES = {
   marriott: { name:"Marriott Bonvoy Points",   cashOut:0.30, transfer:0.75 },
   hilton:   { name:"Hilton Honors Points",     cashOut:0.30, transfer:0.50 },
 };
+
+const VAL_KEY = 'wl_card_router_values';
+let POINT_VALUES = {};
+
+try {
+  const savedVals = JSON.parse(localStorage.getItem(VAL_KEY));
+  POINT_VALUES = JSON.parse(JSON.stringify(DEFAULT_POINT_VALUES)); 
+  if (savedVals) {
+    Object.keys(savedVals).forEach(key => {
+      if (POINT_VALUES[key]) POINT_VALUES[key].transfer = savedVals[key];
+    });
+  }
+} catch(e) { 
+  POINT_VALUES = JSON.parse(JSON.stringify(DEFAULT_POINT_VALUES)); 
+}
+
+function savePointValues() {
+  const toSave = {};
+  Object.keys(POINT_VALUES).forEach(key => toSave[key] = POINT_VALUES[key].transfer);
+  try { localStorage.setItem(VAL_KEY, JSON.stringify(toSave)); } catch(e) {}
+}
 
 function effVal(entry){
   if(!entry || !entry.card) return 0;
@@ -309,7 +397,6 @@ function effVal(entry){
 
 const CATEGORIES = [
   { key:"groceries", icon:"🛒", name:"Groceries", sub:"supermarkets",
-    note:"Warehouse clubs (Costco, Sam's Club) and superstores (Walmart, Target) usually don't code as supermarkets — they'll fall back to the base rate.",
     entries:[
       { card:"bcp", rate:"6%", num:6, cap:"first $6,000/yr, then 1%" },
       { card:"gold", rate:"4x", num:4, cap:"first $25,000/yr, then 1x" },
@@ -325,7 +412,6 @@ const CATEGORIES = [
     ]
   },
   { key:"dining", icon:"🍽️", name:"Dining", sub:"restaurants & takeout",
-    note:"\"Restaurants\" typically includes takeout, delivery apps, and bars — check your issuer's exact definition.",
     entries:[
       { card:"aspire", rate:"7x", num:7, cap:"U.S. restaurants, uncapped" },
       { card:"gold", rate:"4x", num:4, cap:"worldwide, first $50,000/yr, then 1x" },
@@ -345,7 +431,6 @@ const CATEGORIES = [
     ]
   },
   { key:"gas", icon:"⛽", name:"Gas & EV Charging", sub:"fuel & charging",
-    note:"Truck stops, marinas, and home heating/propane usually don't qualify as \"gas stations.\"",
     entries:[
       { card:"costco", rate:"5%", num:5, cap:"Costco gas stations only" },
       { card:"costco", rate:"4%", num:4, cap:"other gas/EV, first $7,000/yr combined, then 1%" },
@@ -362,7 +447,6 @@ const CATEGORIES = [
     ]
   },
   { key:"travel-portal", icon:"🧳", name:"Travel (via portal)", sub:"booked through issuer's travel site",
-    note:"Highest rates on Chase Travel / Amex Travel / Capital One Travel usually require booking on the issuer's own portal, not directly with the airline or hotel.",
     entries:[
       { card:"strata", rate:"10x", num:10, cap:"hotels, car rentals & attractions via Citi Travel" },
       { card:"vx", rate:"10x", num:10, cap:"hotels & rental cars via Capital One Travel" },
@@ -380,7 +464,6 @@ const CATEGORIES = [
     ]
   },
   { key:"travel-other", icon:"✈️", name:"Travel (direct-booked)", sub:"airfare, hotels booked directly",
-    note:"For travel booked outside the issuer's own portal.",
     entries:[
       { card:"aspire", rate:"7x", num:7, cap:"flights direct with airline; also car rentals booked direct" },
       { card:"csr", rate:"4x", num:4, cap:"flights & hotels booked direct with the airline/hotel" },
@@ -396,7 +479,6 @@ const CATEGORIES = [
     ]
   },
   { key:"vacation-rentals", icon:"🏖️", name:"Vacation Rentals", sub:"Airbnb, Vrbo & similar",
-    note:"Defined by named platforms — a rental booked elsewhere may fall into a broader travel category instead.",
     entries:[
       { card:"csp", rate:"3x", num:3, cap:"Airbnb, Vrbo, HomeAway, Plum Guide, Vacasa, Homestay.com" },
       { card:"savor", rate:"5%", num:5, cap:"only when booked via Capital One Travel" },
@@ -404,14 +486,12 @@ const CATEGORIES = [
     ]
   },
   { key:"hotel-loyalty", icon:"🏨", name:"Hotel Loyalty Stays", sub:"Marriott / Hilton portfolio, booked direct",
-    note:"These rates apply to direct stays at the named hotel portfolio — not bookings through a third-party site or a general travel portal.",
     entries:[
       { card:"aspire", rate:"14x", num:14, cap:"Hilton portfolio hotels & resorts" },
       { card:"ritz", rate:"6x", num:6, cap:"Marriott Bonvoy portfolio properties" },
     ]
   },
   { key:"streaming", icon:"📺", name:"Streaming Services", sub:"Netflix, Spotify, Disney+, etc.",
-    note:"Issuers maintain their own eligible-service lists and update them periodically.",
     entries:[
       { card:"bcp", rate:"6%", num:6, cap:"select U.S. streaming, uncapped" },
       { card:"csp", rate:"3x", num:3, cap:"select streaming services" },
@@ -421,7 +501,7 @@ const CATEGORIES = [
       { card:"wfac", rate:"2%", num:2, cap:"uncapped" },
     ]
   },
-  { key:"drugstore", icon:"💊", name:"Drugstores", sub:"pharmacies", note:"",
+  { key:"drugstore", icon:"💊", name:"Drugstores", sub:"pharmacies",
     entries:[
       { card:"cfu", rate:"3%", num:3, cap:"uncapped" },
       { card:"cff", rate:"3%", num:3, cap:"uncapped" },
@@ -431,7 +511,6 @@ const CATEGORIES = [
     ]
   },
   { key:"online-shopping", icon:"🛍️", name:"Online Shopping", sub:"U.S. online retail",
-    note:"\"Online retail\" is Amex's own merchant-code category — most online purchases from U.S. retailers qualify, but marketplaces reselling through a physical-store code sometimes don't.",
     entries:[
       { card:"bce", rate:"3%", num:3, cap:"first $6,000/yr, then 1%" },
       { card:"cc", rate:"5%*", num:2.9, cap:"only if online shopping is your top category, up to $500/mo" },
@@ -441,7 +520,7 @@ const CATEGORIES = [
       { card:"cfu", rate:"1.5%", num:1.5, cap:"uncapped" },
     ]
   },
-  { key:"transit", icon:"🚆", name:"Transit & Rideshare", sub:"trains, tolls, parking, Lyft/Uber", note:"",
+  { key:"transit", icon:"🚆", name:"Transit & Rideshare", sub:"trains, tolls, parking, Lyft/Uber",
     entries:[
       { card:"csp", rate:"5x", num:5, cap:"Lyft specifically, through Sept 2027" },
       { card:"bcp", rate:"3%", num:3, cap:"transit, uncapped" },
@@ -451,7 +530,7 @@ const CATEGORIES = [
       { card:"wfac", rate:"2%", num:2, cap:"uncapped" },
     ]
   },
-  { key:"entertainment", icon:"🎟️", name:"Entertainment", sub:"tickets, streaming bundles, events", note:"",
+  { key:"entertainment", icon:"🎟️", name:"Entertainment", sub:"tickets, streaming bundles, events",
     entries:[
       { card:"savor", rate:"8%", num:8, cap:"Capital One Entertainment purchases only" },
       { card:"vx", rate:"5x", num:5, cap:"Capital One Entertainment purchases only" },
@@ -462,14 +541,12 @@ const CATEGORIES = [
     ]
   },
   { key:"rotating", icon:"🔄", name:"Rotating Categories", sub:"quarterly bonus categories",
-    note:"Requires quarterly activation. Q3 2026: gas/EV charging + transit for both cards; Discover adds flights and drugstores, Chase Freedom Flex adds live entertainment.",
     entries:[
       { card:"disc", rate:"5%", num:5, cap:"up to $1,500/quarter combined, activation required" },
       { card:"cff", rate:"5%", num:5, cap:"up to $1,500/quarter combined, activation required" },
     ]
   },
   { key:"everything-else", icon:"＋", name:"Everything Else", sub:"no bonus category applies",
-    note:"Your fallback rate — what you earn on rent, utilities, insurance, or anything that doesn't code into a bonus category.",
     entries:[
       { card:"dc", rate:"2%", num:2, cap:"1% when you buy, 1% when you pay" },
       { card:"wfac", rate:"2%", num:2, cap:"flat, unlimited" },
@@ -493,37 +570,34 @@ const CATEGORIES = [
   },
 ];
 
-/* ============================= SCENARIOS (Beyond Cash Back) ============================= */
 const SCENARIOS = [
   { key:"flight-delay", icon:"✈️", name:"Flight Delayed 6+ Hours", sub:"trip delay reimbursement",
-    note:"Trigger time matters as much as the dollar amount — some cards need 12 hours before they pay out.",
     entries:[
       { card:"ritz", level:"best", label:"$500/ticket after 6 hrs", detail:"Primary; extends to family members traveling separately" },
       { card:"plat", level:"strong", label:"$500 after 6 hrs" },
       { card:"vx", level:"strong", label:"$500/ticket after 6 hrs" },
       { card:"costco", level:"strong", label:"$500/person/trip after 6 hrs" },
-      { card:"csp", level:"limited", label:"$500/person — but only after 12 hrs or overnight", detail:"Same payout as the 6-hr cards, but you wait twice as long to qualify" },
-      { card:"strata", level:"limited", label:"Covered automatically, exact caps not published", detail:"Contact Citi for specific reimbursement limits" },
+      { card:"csp", level:"limited", label:"$500/person — but only after 12 hrs or overnight" },
+      { card:"strata", level:"limited", label:"Covered automatically, exact caps not published" },
     ]
   },
-  { key:"trip-cancelled", icon:"🚫", name:"Trip Cancelled or Cut Short", sub:"trip cancellation & interruption", note:"",
+  { key:"trip-cancelled", icon:"🚫", name:"Trip Cancelled or Cut Short", sub:"trip cancellation & interruption",
     entries:[
       { card:"ritz", level:"best", label:"$10,000/person, $20,000/trip" },
       { card:"csp", level:"best", label:"$10,000/person, $20,000/trip" },
       { card:"plat", level:"strong", label:"$10,000/trip" },
       { card:"costco", level:"strong", label:"$5,000/trip" },
-      { card:"vx", level:"limited", label:"$2,000/person", detail:"Notably lower cap than the Chase and Amex options" },
-      { card:"strata", level:"limited", label:"Common-carrier tickets only", detail:"Hotels, tours, and non-refundable land costs aren't covered" },
-      { card:"savor", level:"limited", label:"Illness or carrier insolvency only", detail:"No weather or general cancellation coverage" },
+      { card:"vx", level:"limited", label:"$2,000/person" },
+      { card:"strata", level:"limited", label:"Common-carrier tickets only" },
+      { card:"savor", level:"limited", label:"Illness or carrier insolvency only" },
     ]
   },
   { key:"rental-car", icon:"🚗", name:"Renting a Car", sub:"collision damage waiver",
-    note:"\"Primary\" means you never have to involve your personal auto insurer — file directly with the card issuer. \"Secondary\" only kicks in after your own policy pays first.",
     entries:[
       { card:"ritz", level:"best", label:"Primary · $75,000, US & abroad" },
       { card:"vx", level:"best", label:"Primary · $75,000, up to 31 days" },
       { card:"csp", level:"strong", label:"Primary · $60,000" },
-      { card:"plat", level:"limited", label:"Secondary in US · Primary abroad", detail:"Pay $19.95–$24.95/rental to upgrade to primary domestically" },
+      { card:"plat", level:"limited", label:"Secondary in US · Primary abroad" },
       { card:"strata", level:"limited", label:"Secondary in US · Primary abroad" },
       { card:"costco", level:"limited", label:"Secondary in US ($50,000) · Primary abroad" },
       { card:"savor", level:"limited", label:"Secondary" },
@@ -532,20 +606,10 @@ const SCENARIOS = [
       { card:"wfac", level:"limited", label:"Secondary" },
     ]
   },
-  { key:"luggage", icon:"🧳", name:"Luggage Lost or Delayed", sub:"baggage delay & lost luggage",
-    note:"Several premium cards only cover luggage that's lost for good — not the more common case of a delayed bag.",
+  { key:"electronics-warranty", icon:"📺", name:"Buying Expensive Electronics", sub:"extended warranty",
     entries:[
-      { card:"csp", level:"best", label:"Delay: $100/day ×5 · Loss: $3,000" },
-      { card:"ritz", level:"best", label:"Delay: $100/day ×5 · Loss: $3,000" },
-      { card:"vx", level:"limited", label:"Loss only: $3,000", detail:"No baggage delay coverage — confirmed gap" },
-      { card:"plat", level:"limited", label:"Loss only", detail:"No baggage delay coverage — confirmed gap" },
-      { card:"strata", level:"limited", label:"Loss only", detail:"No baggage delay coverage — confirmed gap" },
-    ]
-  },
-  { key:"electronics-warranty", icon:"📺", name:"Buying Expensive Electronics", sub:"extended warranty", note:"",
-    entries:[
-      { card:"strata", level:"best", label:"+24 months, warranties ≤5 yrs", detail:"Best extended warranty of any card researched" },
-      { card:"dc", level:"best", label:"+24 months", detail:"Surprising for a no-fee card — added back in Nov 2024" },
+      { card:"strata", level:"best", label:"+24 months, warranties ≤5 yrs" },
+      { card:"dc", level:"best", label:"+24 months" },
       { card:"savor", level:"best", label:"+24 months" },
       { card:"ritz", level:"strong", label:"+12 months, warranties ≤3 yrs" },
       { card:"plat", level:"strong", label:"+12 months, warranties ≤5 yrs, cap $10k/$50k" },
@@ -558,60 +622,6 @@ const SCENARIOS = [
       { card:"bce", level:"none", label:"Not included" },
       { card:"wfac", level:"none", label:"Not included" },
       { card:"disc", level:"none", label:"Not included" },
-    ]
-  },
-  { key:"purchase-damaged", icon:"📦", name:"Item Stolen or Damaged After Purchase", sub:"purchase protection", note:"",
-    entries:[
-      { card:"plat", level:"best", label:"$10,000/claim, $50,000/yr, 90 days" },
-      { card:"ritz", level:"best", label:"$10,000/claim, $50,000/yr, 120 days", detail:"Longest coverage window of any card here" },
-      { card:"vx", level:"strong", label:"$10,000/claim, $50,000/yr, 90 days" },
-      { card:"strata", level:"strong", label:"$10,000/claim, $50,000/yr, 90 days" },
-      { card:"gold", level:"strong", label:"Covered, Amex standard terms" },
-      { card:"aspire", level:"strong", label:"Covered, Amex standard terms" },
-      { card:"bcp", level:"strong", label:"Covered, 90 days" },
-      { card:"bce", level:"strong", label:"Covered, 90 days" },
-      { card:"costco", level:"strong", label:"Covered via Citi/Virginia Surety" },
-      { card:"savor", level:"limited", label:"$10,000/claim, $25,000/yr", detail:"Lower annual cap than Venture X" },
-      { card:"csp", level:"limited", label:"$500/item, $50,000/yr, 120 days", detail:"Much lower per-item cap than the premium cards" },
-      { card:"cfu", level:"limited", label:"$500/item, 120 days" },
-      { card:"cff", level:"limited", label:"$500/item, 120 days" },
-      { card:"dc", level:"none", label:"Not included" },
-      { card:"wfac", level:"none", label:"Not included" },
-      { card:"disc", level:"none", label:"Not included" },
-    ]
-  },
-  { key:"return-refused", icon:"↩️", name:"Store Won't Accept Your Return", sub:"return protection",
-    note:"This benefit has quietly disappeared from most cards industry-wide — only a few issuers still offer it.",
-    entries:[
-      { card:"ritz", level:"best", label:"$500/item, $1,000/yr, 90 days" },
-      { card:"bcp", level:"strong", label:"$300/item, $1,000/yr, 90 days" },
-      { card:"vx", level:"strong", label:"$300/item, $1,000/yr, 90 days" },
-      { card:"bce", level:"none", label:"Not included" },
-      { card:"savor", level:"none", label:"Not included" },
-    ]
-  },
-  { key:"phone-cracked", icon:"📱", name:"Phone Cracked or Stolen", sub:"cell phone protection",
-    note:"Pay your monthly wireless bill with the card to activate — coverage applies to the billing cycle before the incident.",
-    entries:[
-      { card:"vx", level:"best", label:"$800/claim ×2, up to $1,600/yr, $50 deductible" },
-      { card:"aspire", level:"best", label:"$800/claim ×2, $50 deductible" },
-      { card:"cff", level:"strong", label:"$800/claim ×2, capped $1,000/yr total, $50 deductible", detail:"⚠️ Benefit ends September 20, 2026 — move your wireless bill off this card before then" },
-      { card:"wfac", level:"limited", label:"$600/claim ×2, up to $1,200/yr, $25 deductible", detail:"Secondary coverage — your other insurance (if any) must pay first" },
-    ]
-  },
-  { key:"airport-lounge", icon:"🛋️", name:"Airport Lounge Access", sub:"branded lounge networks + Priority Pass",
-    note:"Three issuers now run their own lounge networks in addition to Priority Pass. Coverage is airport-specific — check whether your home airport is actually on the list before counting on this as a benefit.",
-    entries:[
-      { card:"plat", level:"best", label:"Centurion Lounge Network — self + up to 2 guests free",
-        detail:"US: Atlanta (ATL), Charlotte (CLT), Dallas–Fort Worth (DFW), Denver (DEN), Fort Lauderdale (FLL), Houston (IAH), Las Vegas (LAS, plus the smaller Sidecar), Los Angeles (LAX), Miami (MIA), New York (JFK & LGA), Philadelphia (PHL), Phoenix (PHX), San Francisco (SFO), Seattle (SEA), Washington D.C. (DCA), Salt Lake City (SLC). International: Hong Kong (HKG), London Heathrow (LHR), Mumbai (BOM), Buenos Aires (EZE), and others. Opening later in 2026: Newark (EWR), Amsterdam (AMS). Also includes Priority Pass Select (restaurant-only in the US since 2023) and limited annual Delta Sky Club visits when flying Delta." },
-      { card:"vx", level:"best", label:"Capital One Lounge/Landing — self + 2 guests free",
-        detail:"Full lounges: Dallas–Fort Worth (DFW), Denver (DEN), Washington Dulles (IAD), Las Vegas (LAS), New York JFK (JFK). Landings — reservation-only dining, not open lounge seating: Washington National (DCA), New York LaGuardia (LGA). Charlotte (CLT) confirmed next, no opening date yet. Also includes Priority Pass Select (1,300+ lounges worldwide). Bringing guests now costs $25–$45/guest unless you spend $75k+/yr." },
-      { card:"csr", level:"best", label:"Chase Sapphire Lounge by The Club + Priority Pass Select",
-        detail:"Open now: Boston (BOS), Dallas–Fort Worth (DFW), Las Vegas (LAS), New York JFK (JFK), Phoenix (PHX), Philadelphia (PHL), San Diego (SAN). Closed: Hong Kong (HKG, closed Jan 2026), Austin Sapphire Terrace (closed 2025). Coming: LaGuardia (LGA), Los Angeles (LAX), Miami (MIA). Also includes Priority Pass Select (1,300+ lounges) and Air Canada Maple Leaf Lounges with an eligible Star Alliance boarding pass — this is the only branded network of the three that a Priority Pass membership from any other card can also unlock." },
-      { card:"aspire", level:"none", label:"Not included", detail:"Aspire is a Hilton-loyalty card, not a lounge-access card — no Priority Pass, no branded lounge network." },
-      { card:"gold", level:"none", label:"Not included", detail:"Amex Gold does not carry Centurion Lounge or Priority Pass access — that's reserved for Platinum and above." },
-      { card:"csp", level:"none", label:"Not included", detail:"Lounge access is a Reserve-tier benefit; the no-annual-fee-adjacent Preferred doesn't include it." },
-      { card:"strata", level:"none", label:"Not included" },
     ]
   },
 ];
@@ -741,7 +751,6 @@ const detail = document.getElementById('detail');
 const rankList = document.getElementById('rank-list');
 const detailTitle = document.getElementById('detail-title');
 const detailNote = document.getElementById('detail-note');
-const detailFoot = document.getElementById('detail-foot');
 const walletSummary = document.getElementById('wallet-summary');
 let activeTile = null;
 let currentDetailKey = null;
@@ -769,17 +778,17 @@ function showDetail(key){
     } else if(ownedEntries.length === 0){
       walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const top = CARDS[sorted[0].card];
-      walletSummary.innerHTML = `None of your cards earn a bonus here — you're stuck at their base rate. Overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
+      walletSummary.innerHTML = `None of your cards earn a bonus here. Overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     } else if(ownedEntries[0].card === sorted[0].card){
       walletSummary.className = 'rounded-xl border border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const top = CARDS[sorted[0].card];
-      walletSummary.innerHTML = `You're already using the right card: <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong> is both your best option and the overall best.`;
+      walletSummary.innerHTML = `You're already using the right card: <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     } else {
       walletSummary.className = 'rounded-xl border border-dashed border-red-300 bg-red-50 px-4 py-3 text-xs text-slate-700 leading-relaxed';
       const mine = CARDS[ownedEntries[0].card];
       const top = CARDS[sorted[0].card];
       const rank = sorted.findIndex(e => e.card === ownedEntries[0].card) + 1;
-      walletSummary.innerHTML = `Your best option is <strong>${mine ? mine.name : 'Unknown'}</strong> at <strong>${ownedEntries[0].rate}</strong> (ranked #${rank} overall). The overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong> — not currently in your wallet.`;
+      walletSummary.innerHTML = `Your best option is <strong>${mine ? mine.name : 'Unknown'}</strong> at <strong>${ownedEntries[0].rate}</strong> (ranked #${rank}). The overall best is <strong>${top ? top.name : 'Unknown'}</strong> at <strong>${sorted[0].rate}</strong>.`;
     }
   }
 
@@ -796,11 +805,10 @@ function showDetail(key){
       if(card.ptCurrency && POINT_VALUES[card.ptCurrency]){
         const pv = POINT_VALUES[card.ptCurrency];
         const transferPct = (e.num * pv.transfer).toFixed(1);
-        const cashOutPct = (e.num * pv.cashOut).toFixed(1);
         valueBlock = `
           <div class="font-mono font-bold text-slate-900 text-lg">${e.rate}</div>
           <div class="text-[10px] text-slate-400">${e.cap}</div>
-          <div class="text-[11px] font-mono font-semibold text-amber-700 mt-0.5">≈${transferPct}% fair value <span class="text-slate-400 font-normal">(${cashOutPct}% cash-out)</span></div>
+          <div class="text-[11px] font-mono font-semibold text-amber-700 mt-0.5">≈${transferPct}% fair value</div>
         `;
       }
 
@@ -811,18 +819,14 @@ function showDetail(key){
           <div class="flex items-center gap-2 flex-wrap">
             <span class="font-bold text-sm text-slate-800">${card.name}</span>
             ${i === 0 ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-1.5 py-0.5">Top pick</span>' : ''}
-            ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
             ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
           </div>
-          <div class="text-[11px] text-slate-500 mt-0.5">${card.issuer} · ${card.fee}${card.ptCurrency && POINT_VALUES[card.ptCurrency] ? ' · earns ' + POINT_VALUES[card.ptCurrency].name : ''}</div>
         </div>
         <div class="text-right flex-shrink-0">${valueBlock}</div>
       `;
       rankList.appendChild(li);
     });
   }
-
-  if(detailFoot) detailFoot.textContent = "Rate shown is the headline rate before any spending cap is reached. * = requires meeting a condition (activation, top-category selection, or a specific booking channel). For point/mile-earning cards, \"fair value\" assumes a well-executed transfer redemption; \"cash-out\" is the guaranteed value with no optimization.";
 
   if(detail){
     detail.classList.remove('hidden');
@@ -856,8 +860,6 @@ if(scenarioGrid){
 const scenarioDetail = document.getElementById('scenario-detail');
 const scenarioList = document.getElementById('scenario-list');
 const scenarioTitle = document.getElementById('scenario-title');
-const scenarioNote = document.getElementById('scenario-note');
-let activeScenarioTile = null;
 
 function showScenario(key){
   const sc = SCENARIOS.find(s => s.key === key);
@@ -866,10 +868,8 @@ function showScenario(key){
   document.querySelectorAll('#scenario-grid .cat-tile').forEach(t => t.classList.remove('active'));
   const tile = document.querySelector(`#scenario-grid .cat-tile[data-key="${key}"]`);
   if(tile) tile.classList.add('active');
-  activeScenarioTile = tile;
 
   if(scenarioTitle) scenarioTitle.textContent = `${sc.icon || '🛡️'}  ${sc.name}`;
-  if(scenarioNote) scenarioNote.textContent = sc.note || '';
 
   const sorted = [...sc.entries].sort((a,b) => LEVEL_RANK[a.level] - LEVEL_RANK[b.level]);
   if(scenarioList){
@@ -887,83 +887,101 @@ function showScenario(key){
           <div class="flex items-center gap-2 flex-wrap">
             <span class="font-bold text-sm text-slate-800">${card.name}</span>
             <span class="text-[9px] font-bold uppercase tracking-wide rounded px-1.5 py-0.5 border ${style.badge}">${style.label}</span>
-            ${card.legacy ? '<span class="text-[9px] font-bold uppercase tracking-wide text-red-500 border border-red-300 rounded px-1.5 py-0.5">Legacy</span>' : ''}
             ${owned ? '<span class="text-[9px] font-bold uppercase tracking-wide text-emerald-700 border border-emerald-300 rounded px-1.5 py-0.5">In wallet</span>' : ''}
           </div>
           <div class="text-[12px] text-slate-600 mt-1">${e.label}</div>
-          ${e.detail ? `<div class="text-[11px] text-slate-400 mt-1">${e.detail}</div>` : ''}
-          <div class="text-[11px] text-slate-400 mt-1">${card.issuer} · ${card.fee}</div>
         </div>
       `;
       scenarioList.appendChild(li);
     });
   }
-
-  if(scenarioDetail){
-    scenarioDetail.classList.remove('hidden');
-    scenarioDetail.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
+  if(scenarioDetail) scenarioDetail.classList.remove('hidden');
 }
 
 document.getElementById('close-scenario')?.addEventListener('click', () => {
   if(scenarioDetail) scenarioDetail.classList.add('hidden');
-  if(activeScenarioTile) activeScenarioTile.classList.remove('active');
 });
 
-/* ============================= SEARCH ============================= */
-const searchInput = document.getElementById('search');
-const resultCount = document.getElementById('result-count');
-const emptyState = document.getElementById('empty-state');
-const scenarioEmpty = document.getElementById('scenario-empty');
-
-if(searchInput){
-  searchInput.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    let visible = 0;
-
-    document.querySelectorAll('#cat-grid .cat-tile').forEach(tile => {
-      const cat = CATEGORIES.find(c => c.key === tile.dataset.key);
-      if(!cat) return;
-      const cardNames = cat.entries.map(e => CARDS[e.card] ? CARDS[e.card].name.toLowerCase() : '').join(' ');
-      const haystack = `${cat.name} ${cat.sub} ${cardNames}`.toLowerCase();
-      const match = q === '' || haystack.includes(q);
-      tile.classList.toggle('hidden', !match);
-      if(match) visible++;
-    });
-
-    let scenarioVisible = 0;
-    document.querySelectorAll('#scenario-grid .cat-tile').forEach(tile => {
-      const sc = SCENARIOS.find(s => s.key === tile.dataset.key);
-      if(!sc) return;
-      const cardNames = sc.entries.map(e => CARDS[e.card] ? CARDS[e.card].name.toLowerCase() : '').join(' ');
-      const haystack = `${sc.name} ${sc.sub} ${cardNames}`.toLowerCase();
-      const match = q === '' || haystack.includes(q);
-      tile.classList.toggle('hidden', !match);
-      if(match) scenarioVisible++;
-    });
-
-    if(resultCount) resultCount.textContent = q ? `${visible + scenarioVisible} match${(visible+scenarioVisible)===1?'':'es'}` : '';
-    if(emptyState) emptyState.classList.toggle('hidden', visible !== 0 || q === '');
-    if(scenarioEmpty) scenarioEmpty.classList.toggle('hidden', scenarioVisible !== 0 || q === '');
-  });
-}
-
-/* ============================= POINT VALUE GUIDE ============================= */
-const valueGuide = document.getElementById('value-guide');
-if(valueGuide){
-  Object.values(POINT_VALUES).forEach(pv => {
-    const el = document.createElement('div');
-    el.className = 'bg-white rounded-xl border border-slate-200/80 shadow-sm px-4 py-3.5';
-    el.innerHTML = `
-      <div class="font-bold text-sm text-slate-800 mb-2">${pv.name}</div>
-      <div class="flex items-center justify-between text-xs font-mono">
-        <span class="text-slate-500">Cash-out: ${pv.cashOut.toFixed(2)}¢</span>
-        <span class="text-amber-700 font-semibold">Fair value: ${pv.transfer.toFixed(2)}¢</span>
+/* ============================= NEW FEATURE (Aug 21): POINT VALUE UI LOGIC ============================= */
+function renderValueGuide() {
+  const valueGuide = document.getElementById('value-guide');
+  if (!valueGuide) return;
+  
+  valueGuide.innerHTML = '';
+  Object.entries(POINT_VALUES).forEach(([key, pv]) => {
+    const isCustom = pv.transfer !== DEFAULT_POINT_VALUES[key].transfer;
+    valueGuide.innerHTML += `
+      <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm px-4 py-3.5 relative group">
+        ${isCustom ? '<span class="absolute top-3 right-3 w-2 h-2 rounded-full bg-brand-500" title="Customized Value"></span>' : ''}
+        <div class="font-bold text-sm text-slate-800 mb-2">${pv.name}</div>
+        <div class="flex items-center justify-between text-xs font-mono">
+          <span class="text-slate-500">Cash: ${pv.cashOut.toFixed(2)}¢</span>
+          <span class="text-brand-700 font-bold">Transfer: ${pv.transfer.toFixed(2)}¢</span>
+        </div>
       </div>
     `;
-    valueGuide.appendChild(el);
   });
 }
+renderValueGuide(); // Initial load
+
+const valModal = document.getElementById('valuation-modal');
+const valInputs = document.getElementById('valuation-inputs');
+
+function openValuationModal() {
+  if (!valInputs) return;
+  valInputs.innerHTML = '<p class="text-xs text-slate-500 mb-2">Set your expected transfer value (in cents per point). Cash-out baselines cannot be edited.</p>';
+  
+  Object.entries(POINT_VALUES).forEach(([key, pv]) => {
+    valInputs.innerHTML += `
+      <div class="flex items-center justify-between">
+        <div class="flex-1">
+          <div class="text-sm font-bold text-slate-800">${pv.name}</div>
+          <div class="text-[11px] text-slate-400">Cash-out floor: ${pv.cashOut.toFixed(2)}¢</div>
+        </div>
+        <div class="flex items-center gap-1.5 w-24">
+          <input type="number" id="val-input-${key}" step="0.05" min="${pv.cashOut}" value="${pv.transfer.toFixed(2)}" 
+            class="w-full rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm font-mono font-bold text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500/40 text-right">
+          <span class="text-slate-500 text-sm font-bold pl-0.5">¢</span>
+        </div>
+      </div>
+    `;
+  });
+  valModal.classList.remove('hidden');
+}
+
+function closeValuationModal() { valModal.classList.add('hidden'); }
+
+function applyValuations() {
+  Object.keys(POINT_VALUES).forEach(key => {
+    const input = document.getElementById(`val-input-${key}`);
+    if (input) {
+      const parsed = parseFloat(input.value);
+      POINT_VALUES[key].transfer = Math.max(parsed || POINT_VALUES[key].cashOut, POINT_VALUES[key].cashOut);
+    }
+  });
+  savePointValues();
+  closeValuationModal();
+  renderTileDots();
+  if (currentDetailKey) showDetail(currentDetailKey);
+  updateSimulator();
+  renderValueGuide(); 
+}
+
+function resetValuations() {
+  POINT_VALUES = JSON.parse(JSON.stringify(DEFAULT_POINT_VALUES));
+  savePointValues();
+  closeValuationModal();
+  renderTileDots();
+  if (currentDetailKey) showDetail(currentDetailKey);
+  updateSimulator();
+  renderValueGuide();
+}
+
+document.getElementById('edit-vals-btn')?.addEventListener('click', openValuationModal);
+document.getElementById('close-modal-btn')?.addEventListener('click', closeValuationModal);
+document.getElementById('save-vals-btn')?.addEventListener('click', applyValuations);
+document.getElementById('reset-vals-btn')?.addEventListener('click', resetValuations);
+
 
 /* ============================= FULL CATALOG ============================= */
 const walletKey = document.getElementById('wallet-key');
@@ -973,7 +991,7 @@ if(walletKey){
     el.className = 'flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-slate-200/80 bg-white shadow-sm';
     el.innerHTML = `
       <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
-      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-700 truncate">${c.name}${c.legacy ? ' <span class="ml-1 text-[9px] font-bold text-red-500 border border-red-300 rounded px-1 py-0.5">LEGACY</span>' : ''}</span>
+      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-700 truncate">${c.name}</span>
       <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">${c.fee}</span>
     `;
     walletKey.appendChild(el);
@@ -999,9 +1017,7 @@ const statAny = document.getElementById('stat-any');
 const statWallet = document.getElementById('stat-wallet');
 const statWalletNote = document.getElementById('stat-wallet-note');
 const statSingle = document.getElementById('stat-single');
-const statSingleNote = document.getElementById('stat-single-note');
 
-/* Build slider rows once */
 if(simSliders){
   SIM_KEYS.forEach(key => {
     const cat = CATEGORIES.find(c => c.key === key);
@@ -1073,293 +1089,64 @@ function computeSimulator(){
     if(total > bestSingle.total) bestSingle = { cardId, total };
   });
 
-  perCat.forEach(row => { row.singleVal = cardRateInCategory(bestSingle.cardId, row.key); });
-
   return { totalAny, totalWallet, bestSingle, perCat };
 }
 
-/* ============================= NATIVE CANVAS FALLBACKS ============================= */
 function renderNativePie(canvas, perCat) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-
   const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.parentElement.getBoundingClientRect();
-  const width = rect.width || 300;
-  const height = 280;
-
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  canvas.style.width = width + 'px';
-  canvas.style.height = height + 'px';
-
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, width, height);
-
-  const activeCategories = perCat.filter(c => c.spend > 0);
-  const totalSpend = activeCategories.reduce((sum, c) => sum + c.spend, 0);
-
-  if (totalSpend === 0) {
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '500 13px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Adjust spend sliders to see your mix', width / 2, height / 2);
+  const width = canvas.parentElement.getBoundingClientRect().width || 300;
+  canvas.width = width * dpr; canvas.height = 280 * dpr;
+  canvas.style.width = width + 'px'; canvas.style.height = '280px';
+  ctx.scale(dpr, dpr); ctx.clearRect(0, 0, width, 280);
+  
+  const active = perCat.filter(c => c.spend > 0);
+  const total = active.reduce((s, c) => s + c.spend, 0);
+  
+  if(total === 0){
+    ctx.fillStyle = '#94a3b8'; ctx.textAlign = 'center'; ctx.font = '13px sans-serif';
+    ctx.fillText('Adjust spend sliders', width/2, 140);
     return;
   }
-
+  
   const colors = ['#16a34a','#0ea5e9','#f59e0b','#a855f7','#ef4444','#14b8a6','#6366f1','#ec4899','#84cc16','#64748b'];
-  const centerX = width > 380 ? width * 0.35 : width / 2;
-  const centerY = height / 2 - 10;
-  const outerRadius = Math.min(centerX, centerY) - 15;
-  const innerRadius = outerRadius * 0.58;
-
-  let startAngle = -Math.PI / 2;
-
-  activeCategories.forEach((cat, i) => {
-    const sliceAngle = (cat.spend / totalSpend) * Math.PI * 2;
-    const endAngle = startAngle + sliceAngle;
-    const color = colors[i % colors.length];
-
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle);
-    ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
-    ctx.closePath();
-    ctx.fillStyle = color;
-    ctx.fill();
-
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    startAngle = endAngle;
+  const cx = width > 380 ? width*0.35 : width/2;
+  let start = -Math.PI/2;
+  
+  active.forEach((cat, i) => {
+    const slice = (cat.spend/total)*Math.PI*2;
+    ctx.beginPath(); ctx.arc(cx, 130, Math.min(cx,130)-15, start, start+slice);
+    ctx.arc(cx, 130, (Math.min(cx,130)-15)*0.58, start+slice, start, true);
+    ctx.fillStyle = colors[i%colors.length]; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    start += slice;
   });
-
-  // Center total
-  ctx.fillStyle = '#0f172a';
-  ctx.font = 'bold 15px Inter, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('$' + totalSpend.toLocaleString(), centerX, centerY - 6);
-
-  ctx.fillStyle = '#64748b';
-  ctx.font = '500 10px Inter, sans-serif';
-  ctx.fillText('TOTAL/MO', centerX, centerY + 12);
-
-  // Legend
-  if (width > 380) {
-    const legendX = width * 0.62;
-    let legendY = 18;
-    activeCategories.slice(0, 8).forEach((cat, i) => {
-      const color = colors[i % colors.length];
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(legendX, legendY, 5, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#334155';
-      ctx.font = '500 11px Inter, sans-serif';
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-      const labelText = `${cat.icon} ${cat.name}: $${cat.spend}`;
-      ctx.fillText(labelText.length > 22 ? labelText.substring(0,20)+'…' : labelText, legendX + 12, legendY);
-      legendY += 24;
-    });
-  }
+  
+  ctx.fillStyle = '#0f172a'; ctx.font = 'bold 15px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('$'+total, cx, 126);
 }
 
-function renderNativeBar(canvas, totalAny, totalWallet, bestSingle) {
+function renderNativeBar(canvas, any, wall, single) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-
   const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.parentElement.getBoundingClientRect();
-  const width = rect.width || 300;
-  const height = 280;
-
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  canvas.style.width = width + 'px';
-  canvas.style.height = height + 'px';
-
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, width, height);
-
-  const singleCard = CARDS[bestSingle.cardId];
-  const singleName = singleCard ? singleCard.name : 'Single Card';
-
-  const bars = [
-    { label: 'Best, Any', fullLabel: 'Best card, any', val: totalAny, color: '#16a34a' },
-    { label: 'Best, Wallet', fullLabel: 'Best, your wallet', val: totalWallet, color: '#0ea5e9' },
-    { label: 'Single Card', fullLabel: singleName, val: bestSingle.total || 0, color: '#f59e0b' }
-  ];
-
-  const maxVal = Math.max(...bars.map(b => b.val), 10);
-  const topPadding = 35;
-  const bottomPadding = 50;
-  const leftPadding = 45;
-  const rightPadding = 20;
-  const chartHeight = height - topPadding - bottomPadding;
-  const chartWidth = width - leftPadding - rightPadding;
-
-  const steps = 4;
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'middle';
-  ctx.font = '500 10px Inter, sans-serif';
-
-  for (let i = 0; i <= steps; i++) {
-    const yVal = (maxVal / steps) * i;
-    const yPos = topPadding + chartHeight - (chartHeight / steps) * i;
-
-    ctx.strokeStyle = '#f1f5f9';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(leftPadding, yPos);
-    ctx.lineTo(width - rightPadding, yPos);
-    ctx.stroke();
-
-    ctx.fillStyle = '#94a3b8';
-    ctx.fillText('$' + Math.round(yVal), leftPadding - 6, yPos);
-  }
-
-  const barGroupWidth = chartWidth / bars.length;
-  const barWidth = Math.min(barGroupWidth * 0.5, 60);
-
+  const width = canvas.parentElement.getBoundingClientRect().width || 300;
+  canvas.width = width * dpr; canvas.height = 280 * dpr;
+  canvas.style.width = width + 'px'; canvas.style.height = '280px';
+  ctx.scale(dpr, dpr); ctx.clearRect(0, 0, width, 280);
+  
+  const bars = [ {l:'Any', v:any, c:'#16a34a'}, {l:'Wallet', v:wall, c:'#0ea5e9'}, {l:'Single', v:single.total||0, c:'#f59e0b'} ];
+  const max = Math.max(...bars.map(b=>b.v), 10);
+  
   bars.forEach((b, i) => {
-    const barX = leftPadding + i * barGroupWidth + (barGroupWidth - barWidth) / 2;
-    const barH = (b.val / maxVal) * chartHeight;
-    const barY = topPadding + chartHeight - barH;
-
-    ctx.fillStyle = b.color;
-    ctx.beginPath();
-    const r = Math.min(6, barH / 2);
-    if (ctx.roundRect) {
-      ctx.roundRect(barX, barY, barWidth, barH, [r, r, 0, 0]);
-    } else {
-      ctx.rect(barX, barY, barWidth, barH);
-    }
-    ctx.fill();
-
-    ctx.fillStyle = '#0f172a';
-    ctx.font = 'bold 12px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'bottom';
-    ctx.fillText('$' + b.val.toFixed(2), barX + barWidth / 2, barY - 4);
-
-    ctx.fillStyle = '#475569';
-    ctx.font = '600 11px Inter, sans-serif';
-    ctx.textBaseline = 'top';
-    ctx.fillText(b.label, barX + barWidth / 2, topPadding + chartHeight + 8);
-
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '500 9px Inter, sans-serif';
-    const truncatedSub = b.fullLabel.length > 20 ? b.fullLabel.substring(0, 18) + '…' : b.fullLabel;
-    ctx.fillText(truncatedSub, barX + barWidth / 2, topPadding + chartHeight + 22);
+    const barX = 45 + i*(width-65)/3 + ((width-65)/3 - 40)/2;
+    const barH = (b.v/max)*195;
+    ctx.fillStyle = b.c; ctx.fillRect(barX, 230-barH, 40, barH);
+    ctx.fillStyle = '#0f172a'; ctx.textAlign = 'center'; ctx.font = '11px sans-serif'; ctx.fillText('$'+b.v.toFixed(0), barX+20, 230-barH-5);
+    ctx.fillText(b.l, barX+20, 245);
   });
-}
-
-/* ============================= CHART UPDATES ============================= */
-function updateCharts(perCat, totalAny, totalWallet, bestSingle){
-  const pieCanvas = document.getElementById('sim-pie');
-  const barCanvas = document.getElementById('sim-bar');
-
-  // If Chart.js is loaded and working, use Chart.js
-  if (typeof window.Chart === 'function') {
-    try {
-      const singleCard = CARDS[bestSingle.cardId];
-      const singleName = singleCard ? singleCard.name : 'Single Card';
-
-      /* 1. Pie Chart */
-      if (pieCanvas) {
-        const pieLabels = perCat.map(r => `${r.icon} ${r.name}`);
-        const pieData = perCat.map(r => r.spend);
-        const existingPie = window.Chart.getChart ? window.Chart.getChart(pieCanvas) : null;
-
-        if (existingPie) {
-          existingPie.data.labels = pieLabels;
-          existingPie.data.datasets[0].data = pieData;
-          existingPie.update();
-        } else {
-          new window.Chart(pieCanvas, {
-            type: 'doughnut',
-            data: {
-              labels: pieLabels,
-              datasets: [{
-                data: pieData,
-                backgroundColor: ['#16a34a','#0ea5e9','#f59e0b','#a855f7','#ef4444','#14b8a6','#6366f1','#ec4899','#84cc16','#64748b'],
-                borderWidth: 2,
-                borderColor: '#ffffff'
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 10 }, boxWidth: 10, padding: 8 } },
-                tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: $${ctx.raw}/mo` } }
-              },
-              cutout: '55%'
-            }
-          });
-        }
-      }
-
-      /* 2. Bar Chart */
-      if (barCanvas) {
-        const barLabels = ['Best card, any', 'Best card, your wallet', ['Single card:', singleName]];
-        const barData = [totalAny.toFixed(2), totalWallet.toFixed(2), (bestSingle.total || 0).toFixed(2)];
-        const barColors = ['#16a34a', '#0ea5e9', '#f59e0b'];
-        const existingBar = window.Chart.getChart ? window.Chart.getChart(barCanvas) : null;
-
-        if (existingBar) {
-          existingBar.data.labels = barLabels;
-          existingBar.data.datasets[0].data = barData;
-          existingBar.update();
-        } else {
-          new window.Chart(barCanvas, {
-            type: 'bar',
-            data: {
-              labels: barLabels,
-              datasets: [{
-                label: 'Monthly cash back',
-                data: barData,
-                backgroundColor: barColors,
-                borderRadius: 6
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  ticks: { callback: v => '$' + v, font: { family: 'Inter', size: 10 } },
-                  grid: { color: '#f1f5f9' }
-                },
-                x: {
-                  ticks: { font: { family: 'Inter', size: 10 } },
-                  grid: { display: false }
-                }
-              },
-              plugins: {
-                legend: { display: false },
-                tooltip: { callbacks: { label: (ctx) => ` Cash Back: $${ctx.raw}/mo` } }
-              }
-            }
-          });
-        }
-      }
-      return; // Chart.js render succeeded
-    } catch (err) {
-      console.warn('Chart.js render error, falling back to Native Canvas:', err);
-    }
-  }
-
-  // Fallback to Native HTML5 Canvas rendering
-  if (pieCanvas) renderNativePie(pieCanvas, perCat);
-  if (barCanvas) renderNativeBar(barCanvas, totalAny, totalWallet, bestSingle);
 }
 
 function updateSimulator(){
@@ -1367,41 +1154,152 @@ function updateSimulator(){
   if(simTotal) simTotal.textContent = `$${totalSpend.toLocaleString()}/mo total`;
 
   const { totalAny, totalWallet, bestSingle, perCat } = computeSimulator();
-
   if(statAny) statAny.innerHTML = `$${totalAny.toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
+  if(statWallet) statWallet.innerHTML = `$${totalWallet.toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
 
-  if(statWallet && statWalletNote){
-    if(wallet.size === 0){
-      statWallet.innerHTML = `$0<span class="text-sm font-semibold text-slate-500">/mo</span>`;
-      statWalletNote.textContent = 'Add cards to your wallet above to see this';
-    } else {
-      statWallet.innerHTML = `$${totalWallet.toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
-      const gap = totalAny - totalWallet;
-      statWalletNote.textContent = gap > 0.5
-        ? `Leaving ~$${gap.toFixed(0)}/mo on the table vs. the overall optimal mix`
-        : `You're capturing the full optimal amount with your current wallet`;
-    }
-  }
-
-  const singleCard = CARDS[bestSingle.cardId];
-  if(statSingle && statSingleNote){
-    statSingle.innerHTML = `$${(bestSingle.total || 0).toFixed(0)}<span class="text-sm font-semibold text-slate-500">/mo</span>`;
-    statSingleNote.innerHTML = singleCard 
-      ? `<strong class="text-slate-700">${singleCard.name}</strong>${wallet.size===0 ? ' (best of the full catalog)' : ' (best in your wallet)'}`
-      : '—';
-  }
-
-  updateCharts(perCat, totalAny, totalWallet, bestSingle);
+  renderNativePie(document.getElementById('sim-pie'), perCat);
+  renderNativeBar(document.getElementById('sim-bar'), totalAny, totalWallet, bestSingle);
 }
 
-// Ensure execution on load, DOMContentLoaded, and window resize
 window.addEventListener('DOMContentLoaded', updateSimulator);
-window.addEventListener('load', updateSimulator);
 window.addEventListener('resize', updateSimulator);
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  updateSimulator();
+
+
+/* ============================= NEW FEATURE (Aug 21): EXPORT SCRIPTS ============================= */
+
+// 1. Digital Wallpaper (Lock Screen)
+async function generateWallpaper() {
+  if (wallet.size === 0) { alert("Please add cards to your wallet first to generate your cheat sheet!"); return; }
+
+  const list = document.getElementById('wallpaper-list');
+  list.innerHTML = '';
+  const cardWins = {};
+  
+  CATEGORIES.forEach(cat => {
+    const owned = [...cat.entries].filter(e => wallet.has(e.card)).sort((a, b) => effVal(b) - effVal(a));
+    if (owned.length > 0) {
+      const cardId = owned[0].card;
+      if (!cardWins[cardId]) cardWins[cardId] = { card: CARDS[cardId], wins: [] };
+      cardWins[cardId].wins.push({ icon: cat.icon, name: cat.name, rate: owned[0].rate });
+    }
+  });
+
+  Object.values(cardWins).forEach(group => {
+    const rateGroups = {};
+    group.wins.forEach(w => {
+      if (!rateGroups[w.rate]) rateGroups[w.rate] = [];
+      const simpleName = w.name.split(' (')[0]; 
+      const displayString = `${w.icon} ${simpleName}`;
+      if (!rateGroups[w.rate].includes(displayString)) rateGroups[w.rate].push(displayString);
+    });
+
+    const catPills = Object.entries(rateGroups).map(([rate, items]) => `
+      <span class="inline-flex items-center bg-slate-50 border border-slate-200 text-slate-700 px-5 py-3 rounded-2xl text-3xl font-medium shadow-sm leading-tight">
+        <span>${items.join(' <span class="text-slate-300 mx-2">|</span> ')}</span> 
+        <span class="text-brand-600 font-extrabold ml-4">${rate}</span>
+      </span>
+    `).join('');
+
+    list.innerHTML += `
+      <div class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-200">
+        <div class="text-5xl font-extrabold text-slate-900 mb-6 flex items-center gap-4">
+          <span class="w-8 h-8 rounded-md block" style="background:${group.card.color}"></span>
+          ${group.card.name}
+        </div>
+        <div class="flex flex-wrap gap-4">
+          ${catPills}
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById('wallpaper-date').textContent = new Date().toLocaleDateString();
+
+  const container = document.getElementById('wallpaper-container');
+  const btn = document.getElementById('export-wallpaper');
+  const originalText = btn.innerHTML;
+  
+  try {
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...'; btn.disabled = true;
+    const canvas = await html2canvas(container, { scale: 1, backgroundColor: '#f8fafc' });
+    const link = document.createElement('a'); link.download = 'WealthLanding-Wallet.png'; link.href = canvas.toDataURL('image/png'); link.click();
+  } catch (error) {
+    console.error("Error generating wallpaper:", error); alert("Something went wrong generating your image.");
+  } finally {
+    btn.innerHTML = originalText; btn.disabled = false;
+  }
 }
+
+// 2. Physical Card Stickers (Cuttable Labels)
+function generateStickers() {
+  if (wallet.size === 0) { alert("Please add cards to your wallet first to generate stickers!"); return; }
+
+  const list = document.getElementById('sticker-list');
+  list.innerHTML = '';
+  const cardWins = {};
+  
+  CATEGORIES.forEach(cat => {
+    const owned = [...cat.entries].filter(e => wallet.has(e.card)).sort((a, b) => effVal(b) - effVal(a));
+    if (owned.length > 0) {
+      const cardId = owned[0].card;
+      if (!cardWins[cardId]) cardWins[cardId] = { card: CARDS[cardId], wins: [] };
+      cardWins[cardId].wins.push({ icon: cat.icon, name: cat.name, rate: owned[0].rate });
+    }
+  });
+
+  Object.values(cardWins).forEach(group => {
+    const lines = group.wins.map(w => {
+      const simpleName = w.name.split(' (')[0];
+      return `<span class="whitespace-nowrap font-medium">${w.icon} ${simpleName} ${w.rate}</span>`;
+    }).join('<span class="mx-1 text-slate-300">|</span>');
+
+    list.innerHTML += `
+      <div style="width: 2.25in; min-height: 0.5in;" class="border border-dashed border-slate-400 p-1 bg-white text-[8px] leading-tight">
+        <div class="font-extrabold text-[9px] mb-0.5 border-b border-slate-200 pb-0.5 uppercase tracking-tight text-slate-800">
+          ${group.card.name}
+        </div>
+        <div class="flex flex-wrap text-slate-700 leading-[1.3] mt-0.5">
+          ${lines}
+        </div>
+      </div>
+    `;
+  });
+
+  document.body.classList.remove('print-reference'); document.body.classList.add('print-stickers');
+  setTimeout(() => { window.print(); }, 100);
+}
+
+// 3. Physical Wallet Reference Card
+function generateReferenceCard() {
+  if (wallet.size === 0) { alert("Please add cards to your wallet first!"); return; }
+
+  const list = document.getElementById('reference-list');
+  list.innerHTML = '';
+  
+  CATEGORIES.forEach(cat => {
+    const owned = [...cat.entries].filter(e => wallet.has(e.card)).sort((a, b) => effVal(b) - effVal(a));
+      
+    if (owned.length > 0) {
+      const bestCard = CARDS[owned[0].card];
+      const simpleName = cat.name.split(' (')[0];
+      
+      list.innerHTML += `
+        <div class="flex justify-between border-b border-slate-200 pb-[1px]">
+          <span class="font-bold pr-1 truncate">${cat.icon} ${simpleName}</span>
+          <span class="text-right whitespace-nowrap text-slate-700">${bestCard.name} <span class="font-bold text-black ml-0.5">${owned[0].rate}</span></span>
+        </div>
+      `;
+    }
+  });
+
+  document.body.classList.remove('print-stickers'); document.body.classList.add('print-reference');
+  setTimeout(() => { window.print(); }, 100);
+}
+
+document.getElementById('export-wallpaper')?.addEventListener('click', generateWallpaper);
+document.getElementById('export-stickers')?.addEventListener('click', generateStickers);
+document.getElementById('export-reference')?.addEventListener('click', generateReferenceCard);
+
 </script>
-    <script src="/components/header.js"></script> 
 </body>
 </html>
