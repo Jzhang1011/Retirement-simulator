@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Starting Line — WealthLanding</title>
+  
+  <style>
+    /* WEALTHLANDING DESIGN SYSTEM VARIABLES */
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --emerald: #02B17D;
+      --emerald-light: #ecfdf5;
+      --navy: #0B132B;
+      --blue: #2563eb;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TYPOGRAPHY & LAYOUT UTILITIES */
+    .wl-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .wl-section {
+      padding: 5rem 0;
+    }
+
+    .wl-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* BOTTOM TWO-COLUMN LAYOUT */
+    .article-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+    @media (min-width: 960px) {
+      .article-container { grid-template-columns: 2.2fr 1fr; }
+    }
+
+    /* CUSTOM INPUT STYLING FOR DIAGNOSTIC */
+    .diagnostic-radio:checked + label {
+      background-color: var(--emerald);
+      color: white;
+      border-color: var(--emerald);
+    }
+    .diagnostic-radio:checked + label .sub-text {
+      color: rgba(255,255,255,0.8);
+    }
+  </style>
+
+  <!-- Tailwind via CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: { 900: '#0f172a', 800: '#1e293b', 600: '#475569', 400: '#94a3b8', 200: '#e2e8f0', 50: '#f8fafc' },
+            emerald: { 900: '#064e3b', 700: '#047857', 600: '#059669', 500: '#10b981', 100: '#d1fae5', 50: '#ecfdf5', DEFAULT: '#02B17D' },
+            navy: '#0B132B'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <header class="wl-container pt-16 pb-8 md:pt-24 md:pb-12 text-left">
+    <span class="wl-label text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded border border-emerald-100">Financial Starting Line</span>
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mt-6 mb-6 leading-tight max-w-4xl">
+      Your Money Just Became Your Responsibility.
+    </h1>
+    <p class="text-xl md:text-2xl text-slate-600 leading-relaxed font-normal mb-8 max-w-3xl">
+      Your first paycheck. Your first apartment. Your first credit card. Your first investment. Nobody hands you a manual when these decisions become yours.
+    </p>
+    <p class="text-lg text-slate-800 font-medium max-w-3xl">
+      WealthLanding helps you understand what matters before a financial decision becomes an expensive mistake.
+    </p>
+    <div class="mt-8 border-t border-slate-200 pt-4 flex items-center gap-3">
+      <span class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Financial Independence Guide</span>
+      <span class="text-slate-300">•</span>
+      <span class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Built for Your First Real Money Decisions</span>
+    </div>
+  </header>
+
+  <!-- SECTION 2: FOUR FINANCIAL REALITIES -->
+  <section id="pathways" class="wl-container wl-section border-t border-slate-200">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">Four Things Change When You Become Financially Independent.</h2>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        At first, personal finance does not arrive as a single problem called "money." It arrives as a paycheck that looks smaller than your salary. A rent payment that consumes more than expected. A credit card that feels like extra money. A friend telling you they just doubled their money on a stock.
+      </p>
+      <p class="text-lg text-slate-900 font-medium mt-4">
+        The goal is not to master everything. It is to understand the decision in front of you.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      
+      <!-- Pathway 1: EARN -->
+      <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:border-blue-200 transition-all duration-300">
+        <span class="wl-label text-blue-600 mb-2 block">01 / EARN</span>
+        <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Decoding Your Income</h3>
+        <p class="text-slate-600 mb-6">Your salary is not your paycheck. Understand where your money goes before it hits your bank account, and learn how to negotiate for more.</p>
+        <div class="space-y-4 mb-8">
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">"First Real Paycheck" Literacy</h4>
+            <p class="text-sm text-slate-500">Decoding pay stubs, taxes withheld, what a W-4 actually does, and the gap between gross and take-home pay.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Career & Income-Growth</h4>
+            <p class="text-sm text-slate-500">Salary negotiation for your first job, evaluating total comp (not just salary), and building side income.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Benefits Explained</h4>
+            <p class="text-sm text-slate-500">401(k) matches, HSAs, and what you are actually signing up for.</p>
+          </div>
+        </div>
+        <a href="#" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1">Understand My Income <span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+      <!-- Pathway 2: LIVE -->
+      <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:border-emerald-300 transition-all duration-300">
+        <span class="wl-label text-emerald-600 mb-2 block">02 / LIVE</span>
+        <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">Surviving Everyday Costs</h3>
+        <p class="text-slate-600 mb-6">Rent, food, and friends. The real challenge is making your actual income work in your actual life, without the pressure of perfect budgeting.</p>
+        <div class="space-y-4 mb-8">
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Irregular Income Budgeting</h4>
+            <p class="text-sm text-slate-500">Adapting 50/30/20 frameworks for reality when income is unstable (gig work, hourly) or barely covers rent.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Renting & Housing Decisions</h4>
+            <p class="text-sm text-slate-500">First apartment costs, roommate dynamics, leases, and the rent-vs-live-with-parents calculus.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Money Psychology</h4>
+            <p class="text-sm text-slate-500">Handling lifestyle inflation, social media spending pressure, and the dynamics of splitting costs.</p>
+          </div>
+        </div>
+        <a href="#" class="text-emerald-600 font-bold hover:text-emerald-800 transition-colors flex items-center gap-1">Build My Money System <span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+      <!-- Pathway 3: PROTECT -->
+      <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:border-amber-300 transition-all duration-300 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-2 h-full bg-amber-400 opacity-20 group-hover:opacity-100 transition-opacity"></div>
+        <span class="wl-label text-amber-700 mb-2 block flex items-center gap-2">03 / PROTECT <span class="w-2 h-2 rounded-full bg-amber-500"></span></span>
+        <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">Defend Your Financial Life</h3>
+        <p class="text-slate-600 mb-6">Avoid common traps that drain your money before you even realize it, and build a buffer for when things inevitably go wrong.</p>
+        <div class="space-y-4 mb-8">
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Building a Safety Net</h4>
+            <p class="text-sm text-slate-500">Why an emergency fund matters when you lack parental support, and how to build one on a small income.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Avoiding Predatory Products</h4>
+            <p class="text-sm text-slate-500">The hidden dangers of Buy Now Pay Later (BNPL), payday loans, overdraft fees, and subscription creep.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Financial Independence</h4>
+            <p class="text-sm text-slate-500">Drawing boundaries and transitioning away from reliance on family support.</p>
+          </div>
+        </div>
+        <a href="#" class="text-amber-700 font-bold hover:text-amber-900 transition-colors flex items-center gap-1">Protect My Money <span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+      <!-- Pathway 4: BORROW & BUILD -->
+      <div class="group bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:border-blue-300 transition-all duration-300">
+        <span class="wl-label text-blue-600 mb-2 block">04 / BORROW & BUILD</span>
+        <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">Leverage Time & Credit</h3>
+        <p class="text-slate-600 mb-6">Credit and investing are both games of time. Learn how to use debt as a tool, not a trap, and start compounding your wealth early.</p>
+        <div class="space-y-4 mb-8">
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Credit & Borrowing Basics</h4>
+            <p class="text-sm text-slate-500">Building a score from scratch, and avoiding the trap of credit card debt and minimum payments.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Student Loans</h4>
+            <p class="text-sm text-slate-500">Repayment strategies, forgiveness eligibility, and when to pay extra vs. invest instead.</p>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Investing Demystified</h4>
+            <p class="text-sm text-slate-500">Index funds vs. speculation, Roth IRAs, and avoiding meme-stock/crypto FOMO traps.</p>
+          </div>
+        </div>
+        <a href="#" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1">Start Compounding <span aria-hidden="true">&rarr;</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: INTERACTIVE DECISION TOOLS -->
+  <section class="wl-container wl-section">
+    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 md:p-12">
+      <div class="mb-10 text-center md:text-left">
+        <span class="wl-label text-slate-500">Interactive Money Labs</span>
+        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2 mb-4 tracking-tight">Don't Just Read About Money.<br class="hidden md:block"> Test the Decision.</h2>
+        <p class="text-slate-600 text-lg max-w-2xl">
+          Financial advice becomes more useful when you can see how the numbers change your own situation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Tool 1 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Paycheck Lab</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">Where Did My Paycheck Go?</h3>
+            <p class="text-sm text-slate-600 mb-4">Enter your salary or hourly income and see the difference between what you earn and what actually reaches your bank account.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Salary</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">State</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Pay Frequency</span>
+            </div>
+            <div class="text-xs font-mono text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-100 mb-6">
+              Gross Pay &rarr; Taxes &rarr; Benefits &rarr; Take-Home Pay
+            </div>
+          </div>
+          <button class="w-full bg-white border border-emerald-500 text-emerald-700 font-bold py-2.5 rounded-lg hover:bg-emerald-50 transition-colors text-sm">Decode My Paycheck &rarr;</button>
+        </div>
+
+        <!-- Tool 2 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Debt Lab</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">The Minimum Payment Trap</h3>
+            <p class="text-sm text-slate-600 mb-4">A $3,000 balance and a small monthly minimum may look manageable. See how interest changes the real cost.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Balance</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">APR</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Monthly Payment</span>
+            </div>
+            <div class="text-xs font-mono text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-100 mb-6 flex flex-col gap-1">
+              <span>&bull; Debt-Free Date</span>
+              <span>&bull; Total Interest</span>
+              <span>&bull; Interest Saved by Paying More</span>
+            </div>
+          </div>
+          <button class="w-full bg-white border border-amber-500 text-amber-700 font-bold py-2.5 rounded-lg hover:bg-amber-50 transition-colors text-sm">Test My Debt &rarr;</button>
+        </div>
+
+        <!-- Tool 3 -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">Life Decision Lab</span>
+            <h3 class="text-xl font-bold text-slate-900 mt-2 mb-3">Can I Afford to Move Out?</h3>
+            <p class="text-sm text-slate-600 mb-4">Compare what happens to your money if you live alone, get roommates, or stay with family temporarily.</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Income</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Rent</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded">Location</span>
+            </div>
+            <div class="text-xs font-mono text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-100 mb-6 flex flex-col gap-1">
+              <span>&bull; Monthly Breathing Room</span>
+              <span>&bull; Savings Potential</span>
+              <span>&bull; Housing Cost as % of Income</span>
+            </div>
+          </div>
+          <button class="w-full bg-white border border-blue-500 text-blue-700 font-bold py-2.5 rounded-lg hover:bg-blue-50 transition-colors text-sm">Run the Numbers &rarr;</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: REALITY CHECK -->
+  <section class="wl-container pb-12">
+    <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-8 md:p-12 shadow-sm text-center md:text-left">
+      <h3 class="text-2xl font-black tracking-tight mb-4 text-emerald-900">The Financial Independence Reality Check</h3>
+      <p class="text-lg text-slate-800 font-medium mb-4 max-w-4xl leading-relaxed">
+        You do not need to become an expert in taxes, credit, investing, insurance, and retirement before you turn 25. But you do need to understand one thing: <span class="font-black underline decoration-emerald-300 decoration-4 underline-offset-4">Every financial decision is connected.</span>
+      </p>
+      <ul class="text-slate-700 space-y-2 mb-6 max-w-3xl mx-auto md:mx-0 text-base">
+        <li>&bull; A higher rent changes how much you can save.</li>
+        <li>&bull; A credit card balance changes how much interest you pay.</li>
+        <li>&bull; A good employer match can be worth more than a slightly higher salary.</li>
+        <li>&bull; Starting to invest early can matter more than waiting until you feel "rich enough."</li>
+      </ul>
+      <p class="text-slate-900 font-bold text-lg">
+        The goal is not perfection. It is making the next decision with more information than you had before.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: WHAT WOULD YOU DO? -->
+  <section class="wl-container wl-section border-t border-slate-200">
+    <div class="mb-10">
+      <span class="wl-label text-slate-500">Real Life. Real Tradeoffs.</span>
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2 mb-4 tracking-tight">What Would You Do?</h2>
+      <p class="text-slate-600 text-lg max-w-2xl">
+        There is rarely one perfect financial answer. But there are better questions to ask before you make the decision.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Scenario 1 -->
+      <div class="border border-slate-200 rounded-xl p-6 bg-white flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 mb-4">01</div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">You just got your first job.<br>You earn $65,000.<br>Your employer offers a 401(k) match.<br>You also have $8,000 in student loans.</p>
+          <p class="font-bold text-slate-900 mb-6">What should happen to your first extra $500?</p>
+        </div>
+        <a href="#" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">Explore the Tradeoffs &rarr;</a>
+      </div>
+
+      <!-- Scenario 2 -->
+      <div class="border border-slate-200 rounded-xl p-6 bg-white flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 mb-4">02</div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">Your friends are moving into a luxury apartment.<br>Your share of the rent would be $2,000 per month.<br>You could live with roommates elsewhere for $1,200.</p>
+          <p class="font-bold text-slate-900 mb-6">How much is independence costing you?</p>
+        </div>
+        <a href="#" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">Run the Comparison &rarr;</a>
+      </div>
+
+      <!-- Scenario 3 -->
+      <div class="border border-slate-200 rounded-xl p-6 bg-white flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 mb-4">03</div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">You have a $4,000 credit card balance.<br>The minimum payment feels manageable right now.</p>
+          <p class="font-bold text-slate-900 mb-6">But how long will the debt actually follow you?</p>
+        </div>
+        <a href="#" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">See the Interest &rarr;</a>
+      </div>
+
+      <!-- Scenario 4 -->
+      <div class="border border-slate-200 rounded-xl p-6 bg-white flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 mb-4">04</div>
+          <p class="text-sm text-slate-700 leading-relaxed mb-4">You have your first $1,000 saved.<br>Should you keep it in cash, pay down debt, invest it, or open a Roth IRA?</p>
+          <p class="font-bold text-slate-900 mb-6">Where does your first dollar go?</p>
+        </div>
+        <a href="#" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">Find Your Next Move &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7 & 8: ARTICLE CONTAINER (Sidebar + Deep Dives) -->
+  <div class="wl-container wl-section border-t border-slate-200">
+    <div class="article-container">
+      
+      <!-- LEFT COLUMN: Deep Dives -->
+      <div class="text-left order-2 md:order-1">
+        <h3 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900 mb-8">Start With What Matters to You.</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-blue-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">01. Borrowing</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-blue-600 transition-colors">Credit & Borrowing Basics</h4>
+            <p class="text-sm text-slate-500 mt-2">Building credit from scratch, understanding scores, and avoiding the trap of minimum payments.</p>
+          </a>
+
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-emerald-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">02. Income</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-emerald-600 transition-colors">"First Real Paycheck" Literacy</h4>
+            <p class="text-sm text-slate-500 mt-2">Understanding pay stubs, taxes withheld, W-4s, benefits, and the gap between gross and take-home pay.</p>
+          </a>
+
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-amber-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">03. Spending</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-amber-600 transition-colors">Budgeting for Irregular Income</h4>
+            <p class="text-sm text-slate-500 mt-2">Adapting 50/30/20 frameworks for reality when income is unstable, hourly, or barely covers rent.</p>
+          </a>
+
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-purple-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-purple-600 tracking-wider">04. Housing</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-purple-600 transition-colors">Renting & Housing Decisions</h4>
+            <p class="text-sm text-slate-500 mt-2">First apartment costs, roommate dynamics, leases, and the math behind living with parents to save.</p>
+          </a>
+
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-rose-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-rose-600 tracking-wider">05. Wealth</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-rose-600 transition-colors">Investing Demystified</h4>
+            <p class="text-sm text-slate-500 mt-2">Index funds vs. speculation, Roth IRAs, and avoiding meme-stock and crypto FOMO traps.</p>
+          </a>
+
+          <a href="#" class="block bg-slate-50 border border-slate-200/60 rounded-xl p-6 hover:border-indigo-500/40 transition-all group">
+            <span class="text-[10px] font-extrabold uppercase text-indigo-600 tracking-wider">06. Education</span>
+            <h4 class="text-lg font-bold text-slate-900 mt-2 group-hover:text-indigo-600 transition-colors">Student Loans Specifically</h4>
+            <p class="text-sm text-slate-500 mt-2">Repayment strategies, forgiveness eligibility, and deciding when to pay extra vs. invest.</p>
+          </a>
+
+        </div>
+      </div>
+  <!-- SECTION 8: THE 10 ESSENTIAL GUIDES -->
+  <section class="wl-container wl-section border-t border-slate-200">
+    <div class="text-left mb-10">
+      <h3 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900 mb-2">The 10 Essential Guides for Your 20s.</h3>
+      <p class="text-slate-600 text-lg">Dive deeper into the specific financial challenges and decisions you are facing right now.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-black shrink-0">1</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Credit & Borrowing Basics</h4>
+          <p class="text-sm text-slate-500 mt-1">This is often your first real financial identity. Build credit from scratch, understand scores, and avoid the trap of credit card debt and minimum payments.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-black shrink-0">2</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">"First Real Paycheck" Literacy</h4>
+          <p class="text-sm text-slate-500 mt-1">Most people never get taught this. Understand pay stubs, taxes withheld, W-4s, benefits enrollment, and the gap between gross and take-home pay.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-black shrink-0">3</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Budgeting for Irregular Income</h4>
+          <p class="text-sm text-slate-500 mt-1">Not generic advice—how to budget when income is unstable (gig work, hourly) or barely covers rent. Adapting frameworks for reality, not aspiration.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center font-black shrink-0">4</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-purple-600 transition-colors">Renting & Housing Decisions</h4>
+          <p class="text-sm text-slate-500 mt-1">First apartment costs (deposits, credit checks, co-signers), roommate financial dynamics, leases, and the rent-vs-live-with-parents calculus.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-black shrink-0">5</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-rose-600 transition-colors">Investing Demystified</h4>
+          <p class="text-sm text-slate-500 mt-1">The difference between investing and speculation. Index funds vs. stock picking, Roth IRAs, and avoiding meme-stock and crypto FOMO traps.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-black shrink-0">6</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">Navigating Student Loans</h4>
+          <p class="text-sm text-slate-500 mt-1">Big enough to be its own category. Repayment strategies, income-driven plans, forgiveness program eligibility, and whether to pay extra vs. invest.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center font-black shrink-0">7</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-red-600 transition-colors">Avoiding Predatory Products</h4>
+          <p class="text-sm text-slate-500 mt-1">Spotting the products marketed aggressively at young adults: BNPL (Buy Now Pay Later) traps, payday loans, subscription creep, and overdraft fees.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center font-black shrink-0">8</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Career & Income-Growth</h4>
+          <p class="text-sm text-slate-500 mt-1">Your income is your biggest financial lever. Salary negotiation for a first job, understanding total comp, and side income/freelancing basics.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-black shrink-0">9</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">The Financial Safety Net</h4>
+          <p class="text-sm text-slate-500 mt-1">Why an emergency fund matters when you have no safety net from parents (or do not want to rely on it), and how to build one on a small income.</p>
+        </div>
+      </a>
+
+      <a href="#" class="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow group flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-black shrink-0">10</div>
+        <div>
+          <h4 class="text-lg font-bold text-slate-900 group-hover:text-slate-600 transition-colors">Money Psychology & Pressure</h4>
+          <p class="text-sm text-slate-500 mt-1">Lifestyle inflation, social media spending pressure, splitting costs with friends, and handling the emotional realities of financial independence.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</body>
+</html>
