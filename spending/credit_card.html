@@ -16,8 +16,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- NEW FEATURE (Aug 21): html2canvas library for the digital wallpaper export -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
@@ -43,7 +41,6 @@
   .cat-tile.active .cat-name{ color:#166534; }
   .own-dot{ width:9px; height:9px; border-radius:50%; }
 
-  /* NEW FEATURE (Aug 21): Specific print classes to prevent Tailwind collisions */
   @media print {
     body.print-stickers > *:not(#print-stickers) { display: none !important; }
     body.print-stickers #print-stickers { 
@@ -65,9 +62,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
 <div id="global-header-target"></div>
-  
- <div id="global-header-target"></div>
-  
+
 <!-- HERO -->
 <section class="relative pt-12 pb-14 md:pt-16 md:pb-16 overflow-hidden bg-gradient-to-b from-white via-emerald-50/30 to-slate-50">
   <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-[100px] rounded-full pointer-events-none"></div>
@@ -88,7 +83,6 @@
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6">
       
-      <!-- NEW FEATURE (Aug 21): Added Export Toolkit UI to the Wallet Setup Header -->
       <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
         <div class="max-w-xl">
           <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
@@ -134,8 +128,24 @@
   </div>
 </section>
 
+<!-- NEW FEATURE (Aug 23): COLLAPSIBLE BREAKEVEN CALCULATOR -->
+<details class="group bg-slate-50 border-b border-slate-200/80 transition-colors [&::-webkit-details-marker]:hidden">
+  <summary class="cursor-pointer max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 font-extrabold text-lg text-slate-900 list-none flex items-center justify-between focus:outline-none">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-scale-balanced text-brand-600 w-5"></i> Annual Fee Breakeven Calculator
+    </div>
+    <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+  </summary>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <p class="text-slate-500 text-sm mb-6 ml-8 max-w-2xl">Toggle the statement credits you organically use to see the true holding cost of your premium cards.</p>
+    <div id="breakeven-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-8">
+      <!-- JavaScript injects the breakdown cards here -->
+    </div>
+  </div>
+</details>
+
 <!-- SPENDING SIMULATOR -->
-<section class="py-14 md:py-16 bg-white border-y border-slate-200/80">
+<section class="py-14 md:py-16 bg-white border-b border-slate-200/80">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-10">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold mb-3">
@@ -191,8 +201,24 @@
   </div>
 </section>
 
+<!-- NEW FEATURE (Aug 23): NEXT BEST CARD RECOMMENDER -->
+<details class="group bg-slate-50 border-b border-slate-200/80 transition-colors [&::-webkit-details-marker]:hidden">
+  <summary class="cursor-pointer max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 font-extrabold text-lg text-slate-900 list-none flex items-center justify-between focus:outline-none">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-arrow-trend-up text-brand-600 w-5"></i> Next Best Card Recommender
+    </div>
+    <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+  </summary>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <p class="text-slate-500 text-sm mb-6 ml-8 max-w-2xl">Based on your spending simulator inputs, these cards would add the most incremental value to your current wallet strategy.</p>
+    <div id="next-best-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-8">
+      <!-- JavaScript injects recommendations here -->
+    </div>
+  </div>
+</details>
+
 <!-- SPENDING CATEGORIES -->
-<section class="py-14 md:py-16 bg-slate-50">
+<section class="py-14 md:py-16 bg-white border-b border-slate-200/80">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-10">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">Spending Categories</h2>
@@ -207,25 +233,25 @@
       <span class="flex items-center gap-1.5"><span class="own-dot border border-red-400" style="background:transparent;opacity:.6"></span> no card in your wallet for this</span>
     </div>
 
-    <div id="detail" class="hidden mt-8 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-      <div class="p-6 border-b border-slate-200 flex items-start justify-between gap-4 flex-wrap">
+    <div id="detail" class="hidden mt-8 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-slate-200 flex items-start justify-between gap-4 flex-wrap bg-white">
         <div>
           <h3 class="text-xl font-extrabold text-slate-900" id="detail-title">—</h3>
           <p class="text-xs text-slate-500 mt-1 max-w-xl" id="detail-note"></p>
         </div>
         <button id="close-detail" class="text-xs font-bold text-slate-500 hover:text-slate-800 border border-slate-200 rounded-lg px-3 py-1.5 transition">Close ✕</button>
       </div>
-      <div class="px-6 pt-4" id="wallet-summary-wrap">
+      <div class="px-6 pt-4 bg-white" id="wallet-summary-wrap">
         <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-xs text-slate-600 leading-relaxed" id="wallet-summary"></div>
       </div>
-      <ul class="divide-y divide-slate-100 mt-2" id="rank-list"></ul>
+      <ul class="divide-y divide-slate-100 mt-2 bg-white" id="rank-list"></ul>
       <div class="px-6 py-4 text-[11px] text-slate-400 leading-relaxed bg-slate-50 border-t border-slate-100" id="detail-foot"></div>
     </div>
   </div>
 </section>
 
 <!-- BEYOND CASH BACK -->
-<section class="py-14 md:py-16 bg-white border-y border-slate-200/80">
+<section class="py-14 md:py-16 bg-slate-50 border-b border-slate-200/80">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-10">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold mb-3">
@@ -251,11 +277,9 @@
 </section>
 
 <!-- POINT VALUE GUIDE -->
-<section class="py-14 bg-slate-50">
+<section class="py-14 bg-white">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-8">
-      
-      <!-- NEW FEATURE (Aug 21): Added Settings trigger button -->
       <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-2 flex items-center justify-center gap-3">
         Point &amp; Mile Values Used
         <button id="edit-vals-btn" class="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-brand-600 hover:border-brand-500 hover:bg-brand-50 transition shadow-sm">
@@ -269,14 +293,6 @@
   </div>
 </section>
 
-<!-- WALLET REFERENCE -->
-<section class="py-14 bg-white">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-6 text-center">The Full Card Catalog</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2" id="wallet-key"></div>
-  </div>
-</section>
-
 <footer class="py-8 bg-slate-50 border-t border-slate-200">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-[11px] text-slate-500 leading-relaxed text-center">
     Rates reflect published issuer terms as of August 2026 and are shown for personal reference only.
@@ -284,7 +300,7 @@
 </footer>
 
 
-<!-- ============================= NEW FEATURES (Aug 21): HIDDEN CONTAINERS FOR MODALS AND EXPORTS ============================= -->
+<!-- ============================= HIDDEN CONTAINERS FOR MODALS AND EXPORTS ============================= -->
 
 <!-- SETTINGS MODAL -->
 <div id="valuation-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -317,13 +333,11 @@
   </div>
 </div>
 
-<!-- HIDDEN STICKER CANVAS -->
 <div id="print-stickers" class="hidden font-sans text-black bg-white">
   <div class="text-xs font-bold mb-4 ml-1">WealthLanding Wallet Labels (Cut on dotted lines)</div>
   <div id="sticker-list" class="flex flex-wrap gap-4 items-start"></div>
 </div>
 
-<!-- HIDDEN REFERENCE CARD CANVAS -->
 <div id="print-reference" class="hidden text-black bg-white font-sans overflow-hidden box-border">
   <div class="text-center font-extrabold text-[10px] mb-1.5 pb-0.5 border-b-2 border-black uppercase tracking-wider">
     Wallet Strategy
@@ -334,28 +348,32 @@
 <!-- ============================= JAVASCRIPT ============================= -->
 <script>
 /* ============================= DATA ============================= */
+// NEW FEATURE (Aug 23): Added Strata Elite, World of Hyatt, United Explorer, and Delta Gold
 const CARDS = {
-  csp:   { name:"Chase Sapphire Preferred", issuer:"Chase", fee:"$95/yr", color:"#1F4E8C", ptCurrency:"ur" },
-  csr:   { name:"Chase Sapphire Reserve", issuer:"Chase", fee:"$795/yr", color:"#0B2942", ptCurrency:"ur" },
-  bcp:   { name:"Amex Blue Cash Preferred", issuer:"American Express", fee:"$95/yr", color:"#2E77BB" },
-  bce:   { name:"Amex Blue Cash Everyday", issuer:"American Express", fee:"$0", color:"#6FA8D8" },
-  gold:  { name:"Amex Gold", issuer:"American Express", fee:"$325/yr", color:"#C9A227", ptCurrency:"mr" },
-  plat:  { name:"Amex Platinum", issuer:"American Express", fee:"$895/yr", color:"#7C7F85", ptCurrency:"mr" },
-  aspire:{ name:"Hilton Honors Amex Aspire", issuer:"American Express", fee:"$550/yr", color:"#7A2E3B", ptCurrency:"hilton" },
-  dc:    { name:"Citi Double Cash", issuer:"Citi", fee:"$0", color:"#C8102E" },
-  cc:    { name:"Citi Custom Cash", issuer:"Citi", fee:"$0", color:"#1B7F79", legacy:true },
-  strata:{ name:"Citi Strata Premier", issuer:"Citi", fee:"$95/yr", color:"#5C4B99", ptCurrency:"ty" },
-  costco:{ name:"Costco Anywhere Visa by Citi", issuer:"Citi", fee:"$0", color:"#1E7A46" },
-  disc:  { name:"Discover it Cash Back", issuer:"Discover", fee:"$0", color:"#FF6000" },
-  savor: { name:"Capital One Savor", issuer:"Capital One", fee:"$0", color:"#A41E22" },
-  vx:    { name:"Capital One Venture X", issuer:"Capital One", fee:"$395/yr", color:"#1C1C1E", ptCurrency:"c1" },
-  cfu:   { name:"Chase Freedom Unlimited", issuer:"Chase", fee:"$0", color:"#4F9FE0" },
-  cff:   { name:"Chase Freedom Flex", issuer:"Chase", fee:"$0", color:"#2E86AB" },
-  ritz:  { name:"The Ritz-Carlton Card", issuer:"Chase", fee:"$450/yr", color:"#8A6D3B", legacy:true, ptCurrency:"marriott" },
-  wfac:  { name:"Wells Fargo Active Cash", issuer:"Wells Fargo", fee:"$0", color:"#C8A24A" },
+  csp:   { name:"Chase Sapphire Preferred", issuer:"Chase", fee:"$95/yr", color:"#1F4E8C", ptCurrency:"ur", feeNum: 95, credits: [{name:"Chase Travel Hotel Credit", amount: 50}] },
+  csr:   { name:"Chase Sapphire Reserve", issuer:"Chase", fee:"$795/yr", color:"#0B2942", ptCurrency:"ur", feeNum: 795, credits: [{name:"Annual Travel Credit", amount: 300}] },
+  bcp:   { name:"Amex Blue Cash Preferred", issuer:"American Express", fee:"$95/yr", color:"#2E77BB", feeNum: 95, credits: [{name:"Disney Bundle Credit", amount: 84}] },
+  bce:   { name:"Amex Blue Cash Everyday", issuer:"American Express", fee:"$0", color:"#6FA8D8", feeNum: 0 },
+  gold:  { name:"Amex Gold", issuer:"American Express", fee:"$325/yr", color:"#C9A227", ptCurrency:"mr", feeNum: 325, credits: [{name:"Dining Credit", amount: 120}, {name:"Uber Cash", amount: 120}, {name:"Resy Credit", amount: 100}] },
+  plat:  { name:"Amex Platinum", issuer:"American Express", fee:"$895/yr", color:"#7C7F85", ptCurrency:"mr", feeNum: 895, credits: [{name:"Airline Fee Credit", amount: 200}, {name:"Uber Cash", amount: 200}, {name:"Hotel Credit", amount: 200}, {name:"Saks Credit", amount: 100}, {name:"Digital Entertainment", amount: 240}] },
+  aspire:{ name:"Hilton Honors Amex Aspire", issuer:"American Express", fee:"$550/yr", color:"#7A2E3B", ptCurrency:"hilton", feeNum: 550, credits: [{name:"Hilton Resort Credit", amount: 400}, {name:"Airline Fee Credit", amount: 200}] },
+  dc:    { name:"Citi Double Cash", issuer:"Citi", fee:"$0", color:"#C8102E", feeNum: 0 },
+  cc:    { name:"Citi Custom Cash", issuer:"Citi", fee:"$0", color:"#1B7F79", legacy:true, feeNum: 0 },
+  strata:{ name:"Citi Strata Premier", issuer:"Citi", fee:"$95/yr", color:"#5C4B99", ptCurrency:"ty", feeNum: 95, credits: [{name:"Annual Hotel Benefit", amount: 100}] },
+  costco:{ name:"Costco Anywhere Visa by Citi", issuer:"Citi", fee:"$0", color:"#1E7A46", feeNum: 0 },
+  disc:  { name:"Discover it Cash Back", issuer:"Discover", fee:"$0", color:"#FF6000", feeNum: 0 },
+  savor: { name:"Capital One Savor", issuer:"Capital One", fee:"$0", color:"#A41E22", feeNum: 0 },
+  vx:    { name:"Capital One Venture X", issuer:"Capital One", fee:"$395/yr", color:"#1C1C1E", ptCurrency:"c1", feeNum: 395, credits: [{name:"Capital One Travel Credit", amount: 300}, {name:"10k Anniversary Miles", amount: 100}] },
+  cfu:   { name:"Chase Freedom Unlimited", issuer:"Chase", fee:"$0", color:"#4F9FE0", feeNum: 0 },
+  cff:   { name:"Chase Freedom Flex", issuer:"Chase", fee:"$0", color:"#2E86AB", feeNum: 0 },
+  ritz:  { name:"The Ritz-Carlton Card", issuer:"Chase", fee:"$450/yr", color:"#8A6D3B", legacy:true, ptCurrency:"marriott", feeNum: 450, credits: [{name:"Airline Incidental Credit", amount: 300}, {name:"85k Free Night Award", amount: 250}] },
+  wfac:  { name:"Wells Fargo Active Cash", issuer:"Wells Fargo", fee:"$0", color:"#C8A24A", feeNum: 0 },
+  hyatt: { name:"World of Hyatt Credit Card", issuer:"Chase", fee:"$95/yr", color:"#213E3B", ptCurrency:"hyatt", feeNum: 95, credits: [{name:"Annual Free Night (Cat 1-4)", amount: 150}] },
+  united:{ name:"United Explorer Card", issuer:"Chase", fee:"$150/yr", color:"#13377A", ptCurrency:"united", feeNum: 150, credits: [{name:"United Travel Credit", amount: 100}, {name:"Rideshare Credit", amount: 60}] },
+  strata_elite: { name:"Citi Strata Elite", issuer:"Citi", fee:"$595/yr", color:"#192336", ptCurrency:"ty", feeNum: 595, credits: [{name:"Hotel Credit", amount: 300}, {name:"Splurge Credit", amount: 200}, {name:"Blacklane Credit", amount: 100}] },
+  delta_gold: { name:"Delta SkyMiles Gold", issuer:"American Express", fee:"$150/yr", color:"#9C7C38", ptCurrency:"delta", feeNum: 150, credits: [{name:"Delta Stays Credit", amount: 100}] }
 };
 
-/* NEW FEATURE (Aug 21): Dynamic Point Value loading via localStorage */
 const DEFAULT_POINT_VALUES = {
   ur:       { name:"Chase Ultimate Rewards",   cashOut:1.00, transfer:2.05 },
   mr:       { name:"Amex Membership Rewards",  cashOut:0.60, transfer:2.00 },
@@ -363,6 +381,9 @@ const DEFAULT_POINT_VALUES = {
   c1:       { name:"Capital One Miles",        cashOut:1.00, transfer:1.85 },
   marriott: { name:"Marriott Bonvoy Points",   cashOut:0.30, transfer:0.75 },
   hilton:   { name:"Hilton Honors Points",     cashOut:0.30, transfer:0.50 },
+  hyatt:    { name:"World of Hyatt Points",    cashOut:0.50, transfer:1.70 },
+  united:   { name:"United MileagePlus Miles", cashOut:1.00, transfer:1.20 },
+  delta:    { name:"Delta SkyMiles",           cashOut:1.00, transfer:1.10 }
 };
 
 const VAL_KEY = 'wl_card_router_values';
@@ -403,8 +424,10 @@ const CATEGORIES = [
       { card:"gold", rate:"4x", num:4, cap:"first $25,000/yr, then 1x" },
       { card:"savor", rate:"3%", num:3, cap:"excludes superstores/club stores" },
       { card:"strata", rate:"3x", num:3, cap:"uncapped" },
+      { card:"strata_elite", rate:"3x", num:3, cap:"uncapped" },
       { card:"bce", rate:"3%", num:3, cap:"first $6,000/yr, then 1%" },
       { card:"cc", rate:"5%*", num:2.9, cap:"only if groceries is your top category that cycle, up to $500/mo" },
+      { card:"delta_gold", rate:"2x", num:2, cap:"uncapped" },
       { card:"dc", rate:"2%", num:2, cap:"uncapped, everywhere" },
       { card:"wfac", rate:"2%", num:2, cap:"uncapped, everywhere" },
       { card:"vx", rate:"2x", num:2, cap:"flat base rate" },
@@ -420,10 +443,14 @@ const CATEGORIES = [
       { card:"csp", rate:"3x", num:3, cap:"uncapped" },
       { card:"csr", rate:"3x", num:3, cap:"worldwide, incl. eligible delivery, uncapped" },
       { card:"strata", rate:"3x", num:3, cap:"uncapped" },
+      { card:"strata_elite", rate:"3x", num:3, cap:"uncapped (6x on weekends)" },
       { card:"ritz", rate:"3x", num:3, cap:"uncapped" },
       { card:"costco", rate:"3%", num:3, cap:"restaurants & eligible travel incl. Costco Travel" },
       { card:"cfu", rate:"3%", num:3, cap:"uncapped" },
       { card:"cff", rate:"3%", num:3, cap:"uncapped" },
+      { card:"hyatt", rate:"2x", num:2, cap:"uncapped" },
+      { card:"united", rate:"2x", num:2, cap:"uncapped" },
+      { card:"delta_gold", rate:"2x", num:2, cap:"uncapped" },
       { card:"cc", rate:"5%*", num:2.9, cap:"only if dining is your top category that cycle, up to $500/mo" },
       { card:"dc", rate:"2%", num:2, cap:"uncapped" },
       { card:"wfac", rate:"2%", num:2, cap:"uncapped" },
@@ -438,6 +465,7 @@ const CATEGORIES = [
       { card:"bcp", rate:"3%", num:3, cap:"uncapped" },
       { card:"csp", rate:"3x", num:3, cap:"uncapped" },
       { card:"strata", rate:"3x", num:3, cap:"gas & EV charging, uncapped" },
+      { card:"strata_elite", rate:"3x", num:3, cap:"gas & EV charging, uncapped" },
       { card:"bce", rate:"3%", num:3, cap:"first $6,000/yr, then 1%" },
       { card:"disc", rate:"5%*", num:2.9, cap:"only if active this quarter, up to $1,500/qtr combined" },
       { card:"cff", rate:"5%*", num:2.9, cap:"only if active this quarter, up to $1,500/qtr combined" },
@@ -449,9 +477,11 @@ const CATEGORIES = [
   },
   { key:"travel-portal", icon:"🧳", name:"Travel (via portal)", sub:"booked through issuer's travel site",
     entries:[
+      { card:"strata_elite", rate:"10x", num:10, cap:"hotels, car rentals via Citi Travel" },
       { card:"strata", rate:"10x", num:10, cap:"hotels, car rentals & attractions via Citi Travel" },
       { card:"vx", rate:"10x", num:10, cap:"hotels & rental cars via Capital One Travel" },
       { card:"csr", rate:"8x", num:8, cap:"all Chase Travel purchases, incl. The Edit" },
+      { card:"strata_elite", rate:"6x", num:6, cap:"flights via Citi Travel" },
       { card:"csp", rate:"5x", num:5, cap:"Chase Travel, Lyft, eligible Peloton" },
       { card:"plat", rate:"5x", num:5, cap:"flights direct/Amex Travel (cap $500k/yr) & prepaid hotels via Amex Travel" },
       { card:"vx", rate:"5x", num:5, cap:"flights & vacation rentals via Capital One Travel" },
@@ -470,6 +500,8 @@ const CATEGORIES = [
       { card:"csr", rate:"4x", num:4, cap:"flights & hotels booked direct with the airline/hotel" },
       { card:"strata", rate:"3x", num:3, cap:"air travel & hotels, booked direct" },
       { card:"costco", rate:"3%", num:3, cap:"restaurants & eligible travel worldwide incl. Costco Travel" },
+      { card:"united", rate:"2x", num:2, cap:"United purchases & hotels" },
+      { card:"delta_gold", rate:"2x", num:2, cap:"Delta purchases" },
       { card:"csp", rate:"2x", num:2, cap:"all other travel" },
       { card:"ritz", rate:"2x", num:2, cap:"flat base rate (3x on airfare & car rentals specifically)" },
       { card:"vx", rate:"2x", num:2, cap:"flat base rate" },
@@ -486,10 +518,11 @@ const CATEGORIES = [
       { card:"dc", rate:"2%", num:2, cap:"uncapped" },
     ]
   },
-  { key:"hotel-loyalty", icon:"🏨", name:"Hotel Loyalty Stays", sub:"Marriott / Hilton portfolio, booked direct",
+  { key:"hotel-loyalty", icon:"🏨", name:"Hotel Loyalty Stays", sub:"Direct portfolio bookings",
     entries:[
       { card:"aspire", rate:"14x", num:14, cap:"Hilton portfolio hotels & resorts" },
       { card:"ritz", rate:"6x", num:6, cap:"Marriott Bonvoy portfolio properties" },
+      { card:"hyatt", rate:"4x", num:4, cap:"Hyatt hotels & resorts" }
     ]
   },
   { key:"streaming", icon:"📺", name:"Streaming Services", sub:"Netflix, Spotify, Disney+, etc.",
@@ -525,6 +558,8 @@ const CATEGORIES = [
     entries:[
       { card:"csp", rate:"5x", num:5, cap:"Lyft specifically, through Sept 2027" },
       { card:"bcp", rate:"3%", num:3, cap:"transit, uncapped" },
+      { card:"hyatt", rate:"2x", num:2, cap:"uncapped transit & commute" },
+      { card:"strata_elite", rate:"3x", num:3, cap:"transit, uncapped" },
       { card:"disc", rate:"5%*", num:2.9, cap:"only if active this quarter, up to $1,500/qtr combined" },
       { card:"cff", rate:"5%*", num:2.9, cap:"only if active this quarter, up to $1,500/qtr combined" },
       { card:"dc", rate:"2%", num:2, cap:"uncapped" },
@@ -541,12 +576,6 @@ const CATEGORIES = [
       { card:"wfac", rate:"2%", num:2, cap:"uncapped" },
     ]
   },
-  { key:"rotating", icon:"🔄", name:"Rotating Categories", sub:"quarterly bonus categories",
-    entries:[
-      { card:"disc", rate:"5%", num:5, cap:"up to $1,500/quarter combined, activation required" },
-      { card:"cff", rate:"5%", num:5, cap:"up to $1,500/quarter combined, activation required" },
-    ]
-  },
   { key:"everything-else", icon:"＋", name:"Everything Else", sub:"no bonus category applies",
     entries:[
       { card:"dc", rate:"2%", num:2, cap:"1% when you buy, 1% when you pay" },
@@ -560,12 +589,16 @@ const CATEGORIES = [
       { card:"gold", rate:"1x", num:1, cap:"flat" },
       { card:"plat", rate:"1x", num:1, cap:"flat" },
       { card:"strata", rate:"1x", num:1, cap:"flat" },
+      { card:"strata_elite", rate:"1x", num:1, cap:"flat" },
+      { card:"hyatt", rate:"1x", num:1, cap:"flat" },
+      { card:"united", rate:"1x", num:1, cap:"flat" },
+      { card:"delta_gold", rate:"1x", num:1, cap:"flat" },
       { card:"bcp", rate:"1%", num:1, cap:"flat" },
       { card:"bce", rate:"1%", num:1, cap:"flat" },
       { card:"savor", rate:"1%", num:1, cap:"flat" },
       { card:"disc", rate:"1%", num:1, cap:"flat" },
       { card:"cff", rate:"1%", num:1, cap:"flat" },
-      { card:"costco", rate:"1%", num:1, cap:"flat elsewhere; 2% at Costco & Costco.com" },
+      { card:"costco", rate:"1%", num:1, cap:"flat elsewhere; 2% at Costco" },
       { card:"cc", rate:"1%", num:1, cap:"flat, outside your chosen top category" },
     ]
   },
@@ -582,47 +615,13 @@ const SCENARIOS = [
       { card:"strata", level:"limited", label:"Covered automatically, exact caps not published" },
     ]
   },
-  { key:"trip-cancelled", icon:"🚫", name:"Trip Cancelled or Cut Short", sub:"trip cancellation & interruption",
+  { key:"airport-lounge", icon:"🛋️", name:"Airport Lounge Access", sub:"branded lounge networks + Priority Pass",
     entries:[
-      { card:"ritz", level:"best", label:"$10,000/person, $20,000/trip" },
-      { card:"csp", level:"best", label:"$10,000/person, $20,000/trip" },
-      { card:"plat", level:"strong", label:"$10,000/trip" },
-      { card:"costco", level:"strong", label:"$5,000/trip" },
-      { card:"vx", level:"limited", label:"$2,000/person" },
-      { card:"strata", level:"limited", label:"Common-carrier tickets only" },
-      { card:"savor", level:"limited", label:"Illness or carrier insolvency only" },
-    ]
-  },
-  { key:"rental-car", icon:"🚗", name:"Renting a Car", sub:"collision damage waiver",
-    entries:[
-      { card:"ritz", level:"best", label:"Primary · $75,000, US & abroad" },
-      { card:"vx", level:"best", label:"Primary · $75,000, up to 31 days" },
-      { card:"csp", level:"strong", label:"Primary · $60,000" },
-      { card:"plat", level:"limited", label:"Secondary in US · Primary abroad" },
-      { card:"strata", level:"limited", label:"Secondary in US · Primary abroad" },
-      { card:"costco", level:"limited", label:"Secondary in US ($50,000) · Primary abroad" },
-      { card:"savor", level:"limited", label:"Secondary" },
-      { card:"cfu", level:"limited", label:"Secondary" },
-      { card:"cff", level:"limited", label:"Secondary" },
-      { card:"wfac", level:"limited", label:"Secondary" },
-    ]
-  },
-  { key:"electronics-warranty", icon:"📺", name:"Buying Expensive Electronics", sub:"extended warranty",
-    entries:[
-      { card:"strata", level:"best", label:"+24 months, warranties ≤5 yrs" },
-      { card:"dc", level:"best", label:"+24 months" },
-      { card:"savor", level:"best", label:"+24 months" },
-      { card:"ritz", level:"strong", label:"+12 months, warranties ≤3 yrs" },
-      { card:"plat", level:"strong", label:"+12 months, warranties ≤5 yrs, cap $10k/$50k" },
-      { card:"gold", level:"strong", label:"+12 months, cap $10k/$50k" },
-      { card:"aspire", level:"strong", label:"+12 months, cap $10k/$50k" },
-      { card:"bcp", level:"strong", label:"+12 months, warranties ≤5 yrs" },
-      { card:"vx", level:"strong", label:"+12 months, warranties ≤3 yrs" },
-      { card:"cfu", level:"strong", label:"+12 months, warranties ≤3 yrs" },
-      { card:"cff", level:"strong", label:"+12 months, warranties ≤3 yrs" },
-      { card:"bce", level:"none", label:"Not included" },
-      { card:"wfac", level:"none", label:"Not included" },
-      { card:"disc", level:"none", label:"Not included" },
+      { card:"plat", level:"best", label:"Centurion Lounge Network & Priority Pass Select" },
+      { card:"vx", level:"best", label:"Capital One Lounge & Priority Pass Select" },
+      { card:"csr", level:"best", label:"Chase Sapphire Lounge & Priority Pass Select" },
+      { card:"strata_elite", level:"strong", label:"Priority Pass Select & Admirals Club access" },
+      { card:"united", level:"limited", label:"2 United Club one-time passes annually" }
     ]
   },
 ];
@@ -635,7 +634,7 @@ const LEVEL_STYLE = {
 };
 const LEVEL_RANK = { best:0, strong:1, limited:2, none:3 };
 
-/* ============================= WALLET STATE ============================= */
+/* ============================= STATE MANAGEMENT ============================= */
 const WALLET_KEY = 'wl_card_router_wallet';
 let wallet = new Set();
 try{
@@ -643,6 +642,31 @@ try{
   wallet = new Set(saved.filter(id => CARDS[id]));
 }catch(e){ wallet = new Set(); }
 function saveWallet(){ try{ localStorage.setItem(WALLET_KEY, JSON.stringify([...wallet])); }catch(e){} }
+
+// NEW FEATURE (Aug 23): Credit Toggles State Management
+const CREDIT_TOGGLE_KEY = 'wl_card_router_credits';
+let creditToggles = {};
+
+try {
+  const saved = JSON.parse(localStorage.getItem(CREDIT_TOGGLE_KEY));
+  if (saved) creditToggles = saved;
+} catch(e) { creditToggles = {}; }
+
+function saveCreditToggles() {
+  try { localStorage.setItem(CREDIT_TOGGLE_KEY, JSON.stringify(creditToggles)); } catch(e) {}
+}
+
+function isCreditActive(cardId, creditName) {
+  const key = `${cardId}_${creditName}`;
+  return creditToggles[key] !== false; // Defaults to true
+}
+
+function toggleCredit(cardId, creditName, state) {
+  const key = `${cardId}_${creditName}`;
+  creditToggles[key] = state;
+  saveCreditToggles();
+  renderBreakeven(); 
+}
 
 /* ============================= WALLET UI ============================= */
 const cardPicker = document.getElementById('card-picker');
@@ -686,7 +710,11 @@ function renderAddedList(){
   }
 }
 
-function renderWalletGrid(){ renderCardPicker(); renderAddedList(); }
+function renderWalletGrid(){ 
+  renderCardPicker(); 
+  renderAddedList(); 
+  renderBreakeven(); // Refreshes the new Annual Fee Calculator
+}
 
 function toggleCard(id, isOwned){
   if(isOwned) wallet.add(id); else wallet.delete(id);
@@ -711,6 +739,88 @@ document.getElementById('wallet-clear')?.addEventListener('click', () => {
 });
 renderWalletGrid();
 
+/* ============================= BREAKEVEN CALCULATOR UI ============================= */
+function renderBreakeven() {
+  const grid = document.getElementById('breakeven-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  
+  let hasFeeCards = false;
+
+  [...wallet].forEach(id => {
+    const c = CARDS[id];
+    if (c && c.feeNum && c.feeNum > 0) {
+      hasFeeCards = true;
+      let totalCredits = 0;
+      let creditRows = '';
+
+      if (c.credits && c.credits.length > 0) {
+        c.credits.forEach((cred, index) => {
+          const active = isCreditActive(id, cred.name);
+          if (active) totalCredits += cred.amount;
+          
+          const toggleId = `toggle-${id}-${index}`;
+          creditRows += `
+            <label for="${toggleId}" class="flex justify-between items-center text-xs py-2 border-b border-slate-100 last:border-0 cursor-pointer group">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" id="${toggleId}" ${active ? 'checked' : ''} 
+                       class="credit-toggle rounded accent-brand-600 w-3.5 h-3.5 cursor-pointer"
+                       data-card="${id}" data-credit="${cred.name}">
+                <span class="text-slate-600 group-hover:text-slate-900 transition ${active ? '' : 'line-through opacity-40'}">${cred.name}</span>
+              </div>
+              <span class="font-mono font-medium ${active ? 'text-emerald-600' : 'text-slate-400 line-through opacity-40'}">+$${cred.amount}</span>
+            </label>`;
+        });
+      } else {
+        creditRows = `<div class="text-xs text-slate-400 italic py-2">No standard statement credits apply.</div>`;
+      }
+
+      const netCost = c.feeNum - totalCredits;
+      const isProfit = netCost <= 0;
+      const netLabel = isProfit ? `Effective Value` : `Effective Cost`;
+      const netColor = isProfit ? `text-emerald-700 bg-emerald-50 border-emerald-200` : `text-amber-800 bg-amber-50 border-amber-200`;
+      
+      grid.innerHTML += `
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col">
+          <div class="px-4 py-3 bg-white border-b border-slate-200 flex items-center gap-3">
+            <span class="w-3 h-3 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
+            <div class="font-bold text-sm text-slate-800 truncate">${c.name}</div>
+          </div>
+          
+          <div class="p-4 flex-1">
+            <div class="flex justify-between items-center text-sm font-bold text-slate-900 mb-2">
+              <span>Annual Fee</span>
+              <span class="font-mono text-red-600">-$${c.feeNum}</span>
+            </div>
+            <div class="pt-1 mb-2">
+              ${creditRows}
+            </div>
+          </div>
+          
+          <div class="px-4 py-3 border-t flex justify-between items-center ${netColor} transition-colors duration-300">
+            <span class="text-xs font-bold uppercase tracking-wide">${netLabel}</span>
+            <span class="font-mono font-extrabold text-lg">$${Math.abs(netCost)}</span>
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  if (!hasFeeCards) {
+    grid.innerHTML = `
+      <div class="col-span-full text-center py-8 bg-white rounded-xl border border-dashed border-slate-300">
+        <p class="text-sm font-medium text-slate-500">Add cards with annual fees to your wallet above to see their true holding cost.</p>
+      </div>
+    `;
+  }
+
+  document.querySelectorAll('.credit-toggle').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      toggleCredit(e.target.dataset.card, e.target.dataset.credit, e.target.checked);
+    });
+  });
+}
+
 /* ============================= CATEGORY TILES ============================= */
 const grid = document.getElementById('cat-grid');
 if(grid){
@@ -722,7 +832,6 @@ if(grid){
       <span class="own-dot absolute top-3 right-3 border border-slate-200"></span>
       <span class="text-xl block mb-1.5">${cat.icon || '💳'}</span>
       <span class="cat-name block font-bold text-[13px] text-slate-800 leading-tight">${cat.name}</span>
-      <span class="block text-[11px] text-slate-400 mt-0.5">${cat.sub}</span>
     `;
     tile.addEventListener('click', () => showDetail(cat.key));
     grid.appendChild(tile);
@@ -903,7 +1012,7 @@ document.getElementById('close-scenario')?.addEventListener('click', () => {
   if(scenarioDetail) scenarioDetail.classList.add('hidden');
 });
 
-/* ============================= NEW FEATURE (Aug 21): POINT VALUE UI LOGIC ============================= */
+/* ============================= POINT VALUE UI LOGIC ============================= */
 function renderValueGuide() {
   const valueGuide = document.getElementById('value-guide');
   if (!valueGuide) return;
@@ -923,7 +1032,7 @@ function renderValueGuide() {
     `;
   });
 }
-renderValueGuide(); // Initial load
+renderValueGuide();
 
 const valModal = document.getElementById('valuation-modal');
 const valInputs = document.getElementById('valuation-inputs');
@@ -984,21 +1093,6 @@ document.getElementById('save-vals-btn')?.addEventListener('click', applyValuati
 document.getElementById('reset-vals-btn')?.addEventListener('click', resetValuations);
 
 
-/* ============================= FULL CATALOG ============================= */
-const walletKey = document.getElementById('wallet-key');
-if(walletKey){
-  Object.entries(CARDS).forEach(([id, c]) => {
-    const el = document.createElement('div');
-    el.className = 'flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-slate-200/80 bg-white shadow-sm';
-    el.innerHTML = `
-      <span class="w-2.5 h-2.5 rounded-sm flex-shrink-0" style="background:${c.color}"></span>
-      <span class="flex-1 min-w-0 text-xs font-semibold text-slate-700 truncate">${c.name}</span>
-      <span class="text-[10px] text-slate-400 font-mono whitespace-nowrap">${c.fee}</span>
-    `;
-    walletKey.appendChild(el);
-  });
-}
-
 /* ============================= SPENDING SIMULATOR ============================= */
 const SIM_KEYS = ["groceries","dining","gas","travel-portal","streaming","drugstore","online-shopping","transit","entertainment","everything-else"];
 const SIM_DEFAULTS = { groceries:500, dining:300, gas:150, "travel-portal":200, streaming:40, drugstore:50, "online-shopping":150, transit:60, entertainment:80, "everything-else":400 };
@@ -1016,7 +1110,6 @@ const simSliders = document.getElementById('sim-sliders');
 const simTotal = document.getElementById('sim-total');
 const statAny = document.getElementById('stat-any');
 const statWallet = document.getElementById('stat-wallet');
-const statWalletNote = document.getElementById('stat-wallet-note');
 const statSingle = document.getElementById('stat-single');
 
 if(simSliders){
@@ -1093,6 +1186,97 @@ function computeSimulator(){
   return { totalAny, totalWallet, bestSingle, perCat };
 }
 
+/* ============================= NEW FEATURE (Aug 23): NEXT BEST CARD RECOMMENDER UI ============================= */
+function renderNextBestCard() {
+  const container = document.getElementById('next-best-grid');
+  if(!container) return;
+
+  if(wallet.size === 0) {
+    container.innerHTML = '<div class="col-span-full text-center py-8 bg-white rounded-xl border border-dashed border-slate-300 text-sm font-medium text-slate-500">Add cards to your wallet first to see recommendations.</div>';
+    return;
+  }
+
+  let recommendations = [];
+  let currentWalletMonthly = 0;
+  let currentBestRates = {};
+
+  SIM_KEYS.forEach(key => {
+    const cat = CATEGORIES.find(c => c.key === key);
+    let bestWalletVal = 0;
+    if(cat) {
+      const sorted = [...cat.entries].filter(e => wallet.has(e.card)).sort((a,b) => effVal(b) - effVal(a));
+      if(sorted.length > 0) bestWalletVal = effVal(sorted[0]);
+    }
+    if(bestWalletVal === 0) {
+      const elseCat = CATEGORIES.find(c => c.key === 'everything-else');
+      if(elseCat) {
+         const ownedElse = elseCat.entries.filter(e => wallet.has(e.card)).sort((a,b) => effVal(b) - effVal(a));
+         if(ownedElse.length > 0) bestWalletVal = effVal(ownedElse[0]);
+      }
+    }
+    currentBestRates[key] = bestWalletVal;
+    currentWalletMonthly += ( (spendState[key] || 0) * bestWalletVal ) / 100;
+  });
+
+  Object.keys(CARDS).forEach(cardId => {
+    if(wallet.has(cardId)) return;
+    
+    let newMonthly = 0;
+    let upgradeReasons = [];
+    
+    SIM_KEYS.forEach(key => {
+      let candidateVal = cardRateInCategory(cardId, key);
+      let currentVal = currentBestRates[key] || 0;
+      
+      if(candidateVal > currentVal) {
+        newMonthly += ( (spendState[key] || 0) * candidateVal ) / 100;
+        let gain = ( (spendState[key] || 0) * (candidateVal - currentVal) ) / 100;
+        if(gain > 1) {
+           const cat = CATEGORIES.find(c => c.key === key);
+           upgradeReasons.push(`${cat.icon} +$${gain.toFixed(0)}/mo in ${cat.name}`);
+        }
+      } else {
+        newMonthly += ( (spendState[key] || 0) * currentVal ) / 100;
+      }
+    });
+    
+    let incremental = newMonthly - currentWalletMonthly;
+    if(incremental > 0.5) { 
+      recommendations.push({ cardId, card: CARDS[cardId], incremental, reasons: upgradeReasons });
+    }
+  });
+
+  recommendations.sort((a,b) => b.incremental - a.incremental);
+  const topRecs = recommendations.slice(0, 3);
+  
+  container.innerHTML = '';
+  if(topRecs.length === 0) {
+    container.innerHTML = '<div class="col-span-full text-center py-8 bg-white rounded-xl border border-dashed border-slate-300 text-sm font-medium text-slate-500">Your current wallet perfectly maximizes your entered spending profile!</div>';
+    return;
+  }
+
+  topRecs.forEach((rec) => {
+     container.innerHTML += `
+       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+         <div class="p-4 border-b border-slate-100 flex items-start justify-between gap-2">
+            <div>
+              <div class="font-bold text-sm text-slate-800">${rec.card.name}</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">${rec.card.fee}</div>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <div class="text-[10px] font-bold uppercase tracking-wide text-brand-700 mb-0.5">Value Add</div>
+              <div class="font-mono font-extrabold text-lg text-emerald-600">+$${rec.incremental.toFixed(0)}<span class="text-[10px] font-normal text-slate-500">/mo</span></div>
+            </div>
+         </div>
+         <div class="p-4 bg-slate-50 flex-1 text-xs text-slate-600 space-y-1.5">
+            <div class="font-semibold text-slate-700 mb-2">Top upgrades to your strategy:</div>
+            ${rec.reasons.slice(0,3).map(r => `<div>${r}</div>`).join('')}
+         </div>
+       </div>
+     `;
+  });
+}
+
 function renderNativePie(canvas, perCat) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -1160,15 +1344,14 @@ function updateSimulator(){
 
   renderNativePie(document.getElementById('sim-pie'), perCat);
   renderNativeBar(document.getElementById('sim-bar'), totalAny, totalWallet, bestSingle);
+  renderNextBestCard(); // Refreshes the Recommender module
 }
 
 window.addEventListener('DOMContentLoaded', updateSimulator);
 window.addEventListener('resize', updateSimulator);
 
 
-/* ============================= NEW FEATURE (Aug 21): EXPORT SCRIPTS ============================= */
-
-// 1. Digital Wallpaper (Lock Screen)
+/* ============================= EXPORT SCRIPTS ============================= */
 async function generateWallpaper() {
   if (wallet.size === 0) { alert("Please add cards to your wallet first to generate your cheat sheet!"); return; }
 
@@ -1231,7 +1414,6 @@ async function generateWallpaper() {
   }
 }
 
-// 2. Physical Card Stickers (Cuttable Labels)
 function generateStickers() {
   if (wallet.size === 0) { alert("Please add cards to your wallet first to generate stickers!"); return; }
 
@@ -1270,7 +1452,6 @@ function generateStickers() {
   setTimeout(() => { window.print(); }, 100);
 }
 
-// 3. Physical Wallet Reference Card
 function generateReferenceCard() {
   if (wallet.size === 0) { alert("Please add cards to your wallet first!"); return; }
 
@@ -1301,12 +1482,11 @@ document.getElementById('export-wallpaper')?.addEventListener('click', generateW
 document.getElementById('export-stickers')?.addEventListener('click', generateStickers);
 document.getElementById('export-reference')?.addEventListener('click', generateReferenceCard);
 
-/* NEW FEATURE (Aug 21): Clean up print classes after the print dialog closes */
 window.addEventListener('afterprint', () => {
   document.body.classList.remove('print-stickers', 'print-reference');
 });
 
 </script>
-<script src="/components/header.js"></script> 
+     <script src="/components/header.js"></script> 
 </body>
 </html>
