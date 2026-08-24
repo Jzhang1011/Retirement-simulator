@@ -570,9 +570,10 @@
                       </ul>
                     </div>
                     <div>
-                      <div class="wl-mega-col-title">CASE STUDIES</div>
+                      <div class="wl-mega-col-title"> <a href="https:/blogs/blog_hub.html">CASE STUDIES</a>
+</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/Retirement-simulator/Topic/Assets_lifestyle/Happy_retirement.html">Happy Retirement</a></li>
+                        <li><a href="/blogs/Happy_retirement.html">Happy Retirement</a></li>
                         <li><a href="/simulator.html">Tax & Roth Simulator</a></li>
                       </ul>
                     </div>
