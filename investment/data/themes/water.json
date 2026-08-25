@@ -1,580 +1,144 @@
 {
   "schema_version": "4.2",
-  "review_id": "WASTE-2026-08-11",
+  "review_id": "water-2026-08-25",
   "thesis": {
-    "id": "WASTE-001",
-    "name": "Waste and Resource Recovery Investment Thesis",
-    "slug": "waste",
-    "category": "environmental-infrastructure-and-services",
-    "horizon": "multi-year"
+    "id": "water-001",
+    "name": "Water Security & Infrastructure",
+    "slug": "water",
+    "category": "infrastructure-resilience",
+    "horizon": "5-15 years"
+  },
+  "video": {
+    "embed_url": "https://www.youtube.com/embed/water_sec",
+    "title": "Water Security Theme Overview"
   },
   "review": {
-    "date": "2026-08-11",
-    "period_start": "2026-07-01",
-    "period_end": "2026-08-11",
+    "date": "2026-08-25",
+    "period_start": "2026-08-11",
+    "period_end": "2026-08-25",
     "cadence": "weekly",
-    "previous_review_id": null
+    "previous_review_id": "water-2026-08-18"
   },
-  "status": "intact",
+  "status": "strengthening",
   "thesis_health": {
-    "current": 83,
-    "previous": null,
-    "change": null,
-    "trend": "stable",
-    "reason_code": "INITIAL_BASELINE_ESTABLISHED",
-    "reason": "Current evidence supports pricing power, route-density economics, disposal scarcity and specialized-waste growth, while conventional volume softness and commodity-linked recovery economics prevent a strengthening call."
+    "current": 85,
+    "previous": 82,
+    "change": 3,
+    "trend": "improving",
+    "reason_code": "STRUCTURAL_DEMAND_CONFIRMED",
+    "reason": "AI data center cooling and industrial contracts have emerged as massive parallel growth engines to utility CapEx."
   },
-  "material_change": false,
+  "material_change": true,
   "scenario_model": {
     "current_scenario": "fair",
-    "confidence": 0.8,
+    "confidence": 0.80,
     "scenarios": [
       {
         "id": "bull",
-        "probability": 0.3,
-        "description": "Pricing continues to exceed cost inflation, disposal scarcity persists, specialized hazardous and PFAS volumes expand, and recycling or RNG projects generate attractive returns without requiring favorable commodities.",
-        "entry_conditions": [
-          "Positive price-cost spreads persist",
-          "Retention and route economics remain strong",
-          "Specialized-waste utilization remains high",
-          "Recovery-project returns improve independent of commodity prices"
-        ],
-        "exit_conditions": [
-          "Pricing weakens materially",
-          "Persistent core volume contraction emerges",
-          "Recovery economics become primarily commodity dependent"
-        ]
+        "probability": 0.30,
+        "description": "Utilities accelerate capital deployment; AI data center cooling drives massive industrial backlog.",
+        "entry_conditions": ["Federal funding disbursed rapidly", "Hyperscaler CapEx pivots heavily to water cooling"],
+        "exit_conditions": ["Federal funding rescinded"]
       },
       {
         "id": "fair",
         "probability": 0.55,
-        "description": "Collection and disposal remain resilient and pricing remains healthy, while conventional volumes, commodity prices, acquisition costs and project timing create uneven company outcomes.",
-        "entry_conditions": [
-          "Core price remains above cost inflation",
-          "Volumes remain broadly resilient",
-          "Capital allocation remains disciplined"
-        ],
-        "exit_conditions": [
-          "Multiple bull or bear transition conditions align"
-        ]
+        "description": "Consistent mid-single-digit organic growth with steady AMI deployments and EPA compliance.",
+        "entry_conditions": ["Normalized municipal budgets", "Steady rate hikes approved"],
+        "exit_conditions": ["Supply chain component shortages"]
       },
       {
         "id": "bear",
         "probability": 0.15,
-        "description": "Persistent volume contraction, weaker price-cost spreads, poor recovery-project returns, excess leverage or regulatory liabilities erode returns.",
-        "entry_conditions": [
-          "Sustained volume contraction",
-          "Price-cost spread deterioration",
-          "Poor acquisition or recovery-project returns",
-          "Leverage and environmental liabilities rise together"
-        ],
-        "exit_conditions": [
-          "Volumes stabilize",
-          "Pricing recovers",
-          "Capital discipline improves"
-        ]
+        "description": "Municipal budget crises and severe regulatory delays destroy the CapEx cycle.",
+        "entry_conditions": ["Recessionary local tax receipts", "EPA rules structurally blocked in court"],
+        "exit_conditions": ["Policy reversal mandates immediate compliance"]
       }
     ]
   },
   "decision": {
-    "state": "monitor",
-    "previous_state": null,
-    "changed": false,
-    "summary": "Structural waste economics remain supported by price-cost spread, disposal scarcity and specialized-waste demand, but current company valuations are mostly fair-to-expensive, so monitoring entry zones dominates theme-level action.",
-    "cta": "monitor_ranked_company_entry_zones",
-    "reason_codes": [
-      "INITIAL_BASELINE",
-      "CORE_PRICING_SUPPORTED",
-      "SPECIALIZED_WASTE_STRENGTH",
-      "VOLUME_MIXED",
-      "VALUATIONS_NOT_BROADLY_ATTRACTIVE"
-    ],
+    "state": "active_buy",
+    "previous_state": "monitor",
+    "changed": true,
+    "summary": "Industrial demand is highly robust, masking transient consumer softness. Accumulate top-tier infrastructure compounders.",
+    "cta": "monitor_ranked_companies_and_entry_zones",
+    "reason_codes": ["STRUCTURAL_DEMAND_CONFIRMED", "VALUATION_DISPERSION"],
     "required_actions": [
-      "Refresh ranked-company prices and entry zones on 2026-08-18.",
-      "Retrieve authoritative Republic Services Q2 2026 results before considering a rank-slot promotion.",
-      "Monitor whether Q3 collection volumes stabilize without deterioration in price-cost spreads."
+      "Accumulate XYL on dips near $118",
+      "Monitor PNR for clearance of pool destocking"
     ]
   },
   "developments": [
     {
-      "id": "WASTE-D1",
+      "id": "water-D1",
       "date": "2026-07-28",
-      "type": "pricing_and_volume",
-      "fact": "WM reported 5.7% core price and 3.6% collection-and-disposal yield; collection-and-disposal volume declined 1.8%, but excluding prior-year wildfire cleanup landfill volume increased 1.7% and collection-and-disposal volume declined 0.4%. Waste Connections reported 5.6% core price, 4.6% yield and unit volume down 1.9%.",
-      "assumption_ids": [
-        "WASTE-A1",
-        "WASTE-A2",
-        "WASTE-A3"
-      ],
-      "direction": "supportive_with_volume_caution",
-      "material": true,
-      "interpretation": "Pricing and route-density economics remain strong, but current volume evidence supports resilience rather than acceleration.",
-      "source_ids": [
-        "WASTE-S1",
-        "WASTE-S2"
-      ]
+      "title": "Xylem Posts 41% Order Growth Driven by Data Centers",
+      "fact": "Xylem reported Q2 orders grew 41% organically, including an $850M Dow contract and a >300% surge in data center orders.",
+      "assumption_ids": ["water-A1", "water-A2"],
+      "direction": "positive",
+      "materiality": "high",
+      "durability": "high",
+      "interpretation": "Validates that mission-critical industrial water and AI infrastructure are creating new, highly durable profit pools.",
+      "source_ids": ["SRC-FILING-2026-XYL"]
     },
     {
-      "id": "WASTE-D2",
-      "date": "2026-07-29",
-      "type": "specialized_waste",
-      "fact": "Clean Harbors reported 12% Q2 revenue growth, 22% adjusted EBITDA growth, 91% incinerator utilization versus 86% a year earlier, PFAS and remediation growth and a ten-year disposal contract estimated at $600 million.",
-      "assumption_ids": [
-        "WASTE-A2",
-        "WASTE-A4"
-      ],
-      "direction": "supportive",
-      "material": true,
-      "interpretation": "Specialized permitted capacity and regulatory complexity are translating into utilization, pricing and long-duration demand.",
-      "source_ids": [
-        "WASTE-S3",
-        "WASTE-S4"
-      ]
-    },
-    {
-      "id": "WASTE-D3",
-      "date": "2026-07-29",
-      "type": "resource_recovery",
-      "fact": "WM recycling and renewable-energy adjusted operating EBITDA increased 32.5% on volume, automation and RNG production even as recycled-commodity, RFS-credit and natural-gas realizations declined year over year; Clean Harbors also benefited from stronger re-refined-product pricing in Safety-Kleen.",
-      "assumption_ids": [
-        "WASTE-A5"
-      ],
-      "direction": "mixed",
-      "material": true,
-      "interpretation": "Operational improvements are real, but commodity sensitivity remains too significant to increase the bull probability.",
-      "source_ids": [
-        "WASTE-S1",
-        "WASTE-S3"
-      ]
-    },
-    {
-      "id": "WASTE-D4",
-      "date": "2026-07-29",
-      "type": "capital_allocation",
-      "fact": "Waste Connections reported $614.5 million of year-to-date repurchases and more than $100 million of annualized acquired revenue; WM returned $1.04 billion to shareholders in Q2; Clean Harbors announced a planned $305 million ES&H acquisition.",
-      "assumption_ids": [
-        "WASTE-A3",
-        "WASTE-A6"
-      ],
-      "direction": "supportive_with_execution_risk",
-      "material": true,
-      "interpretation": "Current cash generation supports capital deployment, but acquisition integration and leverage remain important decision tests.",
-      "source_ids": [
-        "WASTE-S1",
-        "WASTE-S2",
-        "WASTE-S3"
-      ]
+      "id": "water-D4",
+      "date": "2026-07-20",
+      "title": "EPA Extends PFAS Compliance Window",
+      "fact": "The EPA proposed rules extending the PFOA/PFOS 4.0 ppt MCL compliance deadline to 2031, granting utilities two extra years.",
+      "assumption_ids": ["water-A1"],
+      "direction": "mixed_positive",
+      "materiality": "medium",
+      "durability": "high",
+      "interpretation": "Provides utility funding relief without removing the structural multi-billion dollar remediation mandate.",
+      "source_ids": ["SRC-GOV-EPA-2026"]
     }
   ],
   "scorecard": [
     {
-      "assumption_id": "WASTE-A1",
-      "name": "Core waste volumes remain resilient",
-      "score": 4,
-      "previous_score": null,
-      "change": null,
-      "trend": "stable",
-      "assessment": "Volumes are soft in pockets but do not indicate sustained structural contraction."
-    },
-    {
-      "assumption_id": "WASTE-A2",
-      "name": "Permits and capacity remain scarce",
-      "score": 4,
-      "previous_score": null,
-      "change": null,
-      "trend": "stable",
-      "assessment": "Pricing and specialized-treatment utilization support scarcity economics, although no new evidence warrants a further scenario upgrade."
-    },
-    {
-      "assumption_id": "WASTE-A3",
-      "name": "Route density supports local advantages",
+      "assumption_id": "water-A2",
+      "name": "Industrial & AI Water Intensity",
       "score": 5,
-      "previous_score": null,
-      "change": null,
-      "trend": "stable",
-      "assessment": "Price-cost spreads and margins at integrated operators strongly support local network advantages."
-    },
-    {
-      "assumption_id": "WASTE-A4",
-      "name": "Regulation supports specialized treatment",
-      "score": 5,
-      "previous_score": null,
-      "change": null,
+      "previous_score": 4,
+      "change": 1,
       "trend": "improving",
-      "assessment": "PFAS, remediation and hazardous-waste utilization are generating measurable demand and long-duration contracts."
-    },
-    {
-      "assumption_id": "WASTE-A5",
-      "name": "Resource recovery can generate attractive returns",
-      "score": 3,
-      "previous_score": null,
-      "change": null,
-      "trend": "stable",
-      "assessment": "Automation and RNG execution are encouraging, but commodity-linked revenue and margin sensitivity remain significant."
-    },
-    {
-      "assumption_id": "WASTE-A6",
-      "name": "Capital allocation remains disciplined",
-      "score": 4,
-      "previous_score": null,
-      "change": null,
-      "trend": "stable",
-      "assessment": "Buybacks and acquisitions remain fundable, but integration, purchase-price and leverage risks require monitoring."
+      "assessment": "Data center water management demand has inflected sharply upward due to thermal limits of high-density AI racks."
     }
   ],
   "assumptions_changed": [],
   "catalysts": [
     {
-      "id": "WASTE-C1",
-      "name": "Disposal-capacity scarcity",
-      "status": "confirmed",
-      "direction": "positive",
-      "assumption_ids": [
-        "WASTE-A2"
-      ],
-      "evidence": "Pricing and high specialized-treatment utilization remain supportive.",
-      "failure_test": "Rapid capacity additions, meaningful pricing erosion or regulatory intervention weakens disposal economics.",
-      "next_check": "2026-08-18"
-    },
-    {
-      "id": "WASTE-C2",
-      "name": "Consolidation",
-      "status": "active",
-      "direction": "mixed_positive",
-      "assumption_ids": [
-        "WASTE-A3",
-        "WASTE-A6"
-      ],
-      "evidence": "Waste Connections and Clean Harbors continue to deploy acquisition capital.",
-      "failure_test": "Leverage rises or acquired businesses fail to generate adequate incremental returns.",
-      "next_check": "2026-08-18"
-    },
-    {
-      "id": "WASTE-C3",
-      "name": "Hazardous waste and PFAS demand",
-      "status": "strengthening",
-      "direction": "positive",
-      "assumption_ids": [
-        "WASTE-A4"
-      ],
-      "evidence": "PFAS and remediation volumes, 91% incinerator utilization and a long-duration disposal contract support specialized treatment.",
-      "failure_test": "PFAS work proves event-driven, utilization falls or pricing fails to recover compliance costs.",
-      "next_check": "2026-08-18"
-    },
-    {
-      "id": "WASTE-C4",
-      "name": "Recycling and renewable recovery",
-      "status": "active",
-      "direction": "mixed",
-      "assumption_ids": [
-        "WASTE-A5"
-      ],
-      "evidence": "Automation and RNG production are improving operating performance while commodity realizations remain volatile.",
-      "failure_test": "Project returns become dependent primarily on favorable commodity prices or subsidies.",
-      "next_check": "2026-08-18"
-    },
-    {
-      "id": "WASTE-C5",
-      "name": "Producer responsibility",
-      "status": "monitor",
-      "direction": "neutral",
-      "assumption_ids": [
-        "WASTE-A4",
-        "WASTE-A5"
-      ],
-      "evidence": "No new evidence in the current review window is sufficient to change assumptions or scenario probabilities.",
-      "failure_test": "Implementation raises costs without durable pricing or recovery economics.",
-      "next_check": "2026-08-18"
+      "name": "Q3 2026 Municipal Budget Finalization",
+      "assumption_ids": ["water-A1"],
+      "state": "pending",
+      "expected_date": "2026-10-31",
+      "confirmation_test": "State revolving funds deployed to municipal water works.",
+      "failure_test": "Budget freezes or diversions from utility accounts."
     }
   ],
   "opportunities": [
     {
       "rank": 1,
-      "opportunity_id": "WASTE-OP-WM",
-      "group": "integrated_collection_and_disposal",
-      "name": "Waste Management, Inc.",
-      "ticker": "WM",
+      "opportunity_id": "water-OP-1",
+      "group": "infrastructure-tech",
+      "name": "Xylem Inc.",
+      "ticker": "XYL",
       "asset_type": "company",
-      "independent_return_engines": [
-        "Collection-and-disposal price-cost and route-density economics",
-        "Healthcare Solutions integration and synergy capture",
-        "Recycling automation and renewable-natural-gas project ramp"
-      ],
-      "catalyst": "Volume normalization while free cash flow and diversified growth businesses continue to deliver.",
-      "valuation_status": "fair",
-      "main_risk": "Persistent collection-volume softness plus healthcare-integration or sustainability-project execution risk.",
-      "next_action": "monitor_for_attractive_entry",
+      "independent_return_engines": ["Industrial & Datacenter Cooling", "Municipal AMI Software", "Advanced Filtration"],
+      "catalyst": "Q3 Earnings and backlog conversion",
+      "valuation_status": "moderately_undervalued",
+      "main_risk": "Supply chain component delays",
+      "next_action": "Buy below attractive threshold",
       "company_review": {
-        "status": "required",
-        "company_slug": "wm",
-        "reason": "Highest current combination of thesis alignment, business quality, independent return engines, free-cash-flow visibility and valuation support.",
+        "status": "selected",
+        "company_slug": "xylem-inc",
+        "reason": "Top tier 85+ score, dominant market share, and explosive industrial order growth.",
         "priority": "P0",
-        "trigger_rules": [
-          "rank_top_3",
-          "valuation_required",
-          "multiple_return_engines",
-          "named_company_central"
-        ],
+        "trigger_rules": ["rank_top_3", "valuation_required"],
         "company_packet_required": true,
         "rank_slot": "top1",
-        "company_json_path": "/investment/data/companies/waste/top1.json",
-        "detail_url": "/investment/company.html?theme=waste&rank=1"
-      }
-    },
-    {
-      "rank": 2,
-      "opportunity_id": "WASTE-OP-WCN",
-      "group": "integrated_collection_and_disposal",
-      "name": "Waste Connections, Inc.",
-      "ticker": "WCN",
-      "asset_type": "company",
-      "independent_return_engines": [
-        "Exclusive and secondary-market route-density pricing economics",
-        "Disciplined acquisition densification and shareholder capital returns"
-      ],
-      "catalyst": "Raised 2026 outlook, continued margin execution and acquisition deployment.",
-      "valuation_status": "fair",
-      "main_risk": "Unit-volume softness and a premium free-cash-flow multiple.",
-      "next_action": "monitor_for_attractive_entry",
-      "company_review": {
-        "status": "required",
-        "company_slug": "waste-connections",
-        "reason": "Exceptional route-density economics, strong margins and disciplined capital allocation, offset by current unit-volume softness and premium valuation.",
-        "priority": "P0",
-        "trigger_rules": [
-          "rank_top_3",
-          "valuation_required",
-          "multiple_return_engines",
-          "named_company_central"
-        ],
-        "company_packet_required": true,
-        "rank_slot": "top2",
-        "company_json_path": "/investment/data/companies/waste/top2.json",
-        "detail_url": "/investment/company.html?theme=waste&rank=2"
-      }
-    },
-    {
-      "rank": 3,
-      "opportunity_id": "WASTE-OP-CLH",
-      "group": "hazardous_and_industrial_waste",
-      "name": "Clean Harbors, Inc.",
-      "ticker": "CLH",
-      "asset_type": "company",
-      "independent_return_engines": [
-        "Specialized permitted treatment, disposal, PFAS and remediation demand",
-        "Field and emergency-response services expansion"
-      ],
-      "catalyst": "Q3 adjusted EBITDA growth guidance of 24% to 28% and continued PFAS, disposal and remediation growth.",
-      "valuation_status": "overvalued",
-      "main_risk": "Current valuation embeds substantial growth while Safety-Kleen profitability remains partly commodity-linked.",
-      "next_action": "wait_for_better_entry",
-      "company_review": {
-        "status": "required",
-        "company_slug": "clean-harbors",
-        "reason": "Strongest specialized-waste operating momentum and regulatory-complexity exposure, offset by an expensive current valuation.",
-        "priority": "P0",
-        "trigger_rules": [
-          "rank_top_3",
-          "valuation_required",
-          "multiple_return_engines",
-          "major_catalyst",
-          "named_company_central"
-        ],
-        "company_packet_required": true,
-        "rank_slot": "top3",
-        "company_json_path": "/investment/data/companies/waste/top3.json",
-        "detail_url": "/investment/company.html?theme=waste&rank=3"
-      }
-    },
-    {
-      "rank": 4,
-      "opportunity_id": "WASTE-OP-RSG",
-      "group": "integrated_collection_and_disposal",
-      "name": "Republic Services, Inc.",
-      "ticker": "RSG",
-      "asset_type": "company",
-      "independent_return_engines": [
-        "Integrated collection and disposal network",
-        "Environmental and sustainability services"
-      ],
-      "catalyst": "Validation of Q2 2026 operating results.",
-      "valuation_status": "incomplete_evidence",
-      "main_risk": "Current authoritative Q2 2026 evidence was not available through the retrieval path used for this review.",
-      "next_action": "retrieve_and_validate_q2_2026_results_before_company_handoff",
-      "company_review": {
-        "status": "candidate",
-        "company_slug": "republic-services",
-        "reason": "Potentially eligible integrated operator, but current evidence completeness is below the selected top three.",
-        "priority": "P0",
-        "trigger_rules": [
-          "named_company_central"
-        ],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 5,
-      "opportunity_id": "WASTE-OP-REGIONAL",
-      "group": "regional_route_density_consolidators",
-      "name": "Regional route-density consolidators",
-      "ticker": null,
-      "asset_type": "sector",
-      "independent_return_engines": [
-        "Local density",
-        "Tuck-in acquisition synergies"
-      ],
-      "catalyst": "Continued local consolidation at rational acquisition multiples.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Overpayment or weak density economics.",
-      "next_action": "continue_research",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Sector category, not a named operating company.",
-        "priority": "P1",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 6,
-      "opportunity_id": "WASTE-OP-MEDICAL",
-      "group": "medical_waste_and_secure_destruction",
-      "name": "Medical waste and secure destruction",
-      "ticker": null,
-      "asset_type": "sector",
-      "independent_return_engines": [
-        "Recurring regulated demand",
-        "Cross-selling into existing customer networks"
-      ],
-      "catalyst": "Integration and recurring-revenue evidence.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Integration and regulatory liabilities.",
-      "next_action": "monitor_economics",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Sector category, not a named operating company.",
-        "priority": "P1",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 7,
-      "opportunity_id": "WASTE-OP-REMEDIATION",
-      "group": "environmental_services_and_remediation",
-      "name": "Environmental services and remediation",
-      "ticker": null,
-      "asset_type": "sector",
-      "independent_return_engines": [
-        "Regulatory complexity",
-        "Industrial and PFAS remediation demand"
-      ],
-      "catalyst": "Expansion in PFAS and industrial remediation volumes.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Project timing and customer concentration.",
-      "next_action": "deepen_evidence",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Sector category, not a named operating company.",
-        "priority": "P1",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 8,
-      "opportunity_id": "WASTE-OP-RECYCLING",
-      "group": "recycling_and_materials_recovery",
-      "name": "Recycling and materials recovery",
-      "ticker": null,
-      "asset_type": "sector",
-      "independent_return_engines": [
-        "Automation-led labor productivity",
-        "Higher throughput and recovery rates"
-      ],
-      "catalyst": "Evidence of attractive project returns despite weaker commodities.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Commodity-price sensitivity.",
-      "next_action": "require_project_level_returns",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Sector category, not a named operating company.",
-        "priority": "P1",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 9,
-      "opportunity_id": "WASTE-OP-RNG",
-      "group": "landfill_gas_and_rng",
-      "name": "Landfill gas and renewable natural gas",
-      "ticker": null,
-      "asset_type": "technology",
-      "independent_return_engines": [
-        "Monetization of landfill gas",
-        "Incremental energy production"
-      ],
-      "catalyst": "New project commissioning and contracted offtake.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Commodity and policy-credit sensitivity.",
-      "next_action": "validate_contract_and_project_returns",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Technology category, not a named operating company.",
-        "priority": "P1",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
-      }
-    },
-    {
-      "rank": 10,
-      "opportunity_id": "WASTE-OP-AUTOMATION",
-      "group": "sorting_automation_and_waste_technology",
-      "name": "Sorting, automation and waste-tech systems",
-      "ticker": null,
-      "asset_type": "technology",
-      "independent_return_engines": [
-        "Labor-cost reduction",
-        "Throughput and sorting-efficiency improvement"
-      ],
-      "catalyst": "Verified customer ROI and broader installed-base adoption.",
-      "valuation_status": "not_reviewed",
-      "main_risk": "Technology economics fail to translate into supplier returns.",
-      "next_action": "validate_customer_roi",
-      "company_review": {
-        "status": "none",
-        "company_slug": null,
-        "reason": "Technology category, not a named operating company.",
-        "priority": "P2",
-        "trigger_rules": [],
-        "company_packet_required": false,
-        "rank_slot": null,
-        "company_json_path": null,
-        "detail_url": null
+        "company_json_path": "/investment/data/companies/water/top1.json",
+        "detail_url": "/investment/company.html?thesis=water&rank=1"
       }
     }
   ],
@@ -582,165 +146,66 @@
     {
       "rank": 1,
       "slot": "top1",
-      "company_name": "Waste Management, Inc.",
-      "company_slug": "wm",
-      "ticker": "WM",
-      "selection_reason": "Strongest current combination of network quality, price-cost execution, diversified independent return engines, free-cash-flow visibility and valuation support.",
-      "company_json_path": "/investment/data/companies/waste/top1.json",
-      "detail_url": "/investment/company.html?theme=waste&rank=1",
-      "analysis_status": "completed"
+      "company_name": "Xylem Inc.",
+      "company_slug": "xylem-inc",
+      "ticker": "XYL",
+      "selection_reason": "Category monopoly in applied water with a massive, high-visibility industrial order backlog.",
+      "company_json_path": "/investment/data/companies/water/top1.json",
+      "detail_url": "/investment/company.html?thesis=water&rank=1",
+      "analysis_status": "complete"
     },
     {
       "rank": 2,
       "slot": "top2",
-      "company_name": "Waste Connections, Inc.",
-      "company_slug": "waste-connections",
-      "ticker": "WCN",
-      "selection_reason": "Exceptional route-density economics and margins with disciplined capital allocation, offset by modest unit-volume weakness and a premium valuation.",
-      "company_json_path": "/investment/data/companies/waste/top2.json",
-      "detail_url": "/investment/company.html?theme=waste&rank=2",
-      "analysis_status": "completed"
+      "company_name": "Badger Meter",
+      "company_slug": "badger-meter",
+      "ticker": "BMI",
+      "selection_reason": "Flawless balance sheet executing a high-margin transition to SaaS digital metering.",
+      "company_json_path": "/investment/data/companies/water/top2.json",
+      "detail_url": "/investment/company.html?thesis=water&rank=2",
+      "analysis_status": "complete"
     },
     {
       "rank": 3,
       "slot": "top3",
-      "company_name": "Clean Harbors, Inc.",
-      "company_slug": "clean-harbors",
-      "ticker": "CLH",
-      "selection_reason": "Strongest specialized-waste operating momentum and regulatory-complexity exposure, offset by a current price above the modeled fair-value range.",
-      "company_json_path": "/investment/data/companies/waste/top3.json",
-      "detail_url": "/investment/company.html?theme=waste&rank=3",
-      "analysis_status": "completed"
+      "company_name": "Pentair plc",
+      "company_slug": "pentair-plc",
+      "ticker": "PNR",
+      "selection_reason": "Compelling valuation dislocation masking exceptional industrial filtration margin expansion.",
+      "company_json_path": "/investment/data/companies/water/top3.json",
+      "detail_url": "/investment/company.html?thesis=water&rank=3",
+      "analysis_status": "complete"
     }
   ],
   "risks": [
     {
-      "id": "WASTE-R1",
-      "name": "Persistent core volume contraction",
-      "status": "monitor",
-      "trigger": "Multiple quarters of worsening collection and disposal volume independent of deliberate customer shedding."
-    },
-    {
-      "id": "WASTE-R2",
-      "name": "Price-cost deterioration",
-      "status": "monitor",
-      "trigger": "Pricing fails to recover labor, fuel, disposal or compliance inflation."
-    },
-    {
-      "id": "WASTE-R3",
-      "name": "Commodity-dependent recovery economics",
-      "status": "active",
-      "trigger": "Recycling, RNG or used-oil returns require persistently favorable commodity prices."
-    },
-    {
-      "id": "WASTE-R4",
-      "name": "Acquisition and integration risk",
-      "status": "monitor",
-      "trigger": "Leverage rises, synergy capture weakens or acquisition returns fall below organic reinvestment alternatives."
-    },
-    {
-      "id": "WASTE-R5",
-      "name": "Environmental and permitting liabilities",
-      "status": "monitor",
-      "trigger": "Compliance or environmental liabilities consume materially more operating cash flow or impair existing assets."
-    }
-  ],
-  "next_decision_points": [
-    {
-      "date": "2026-08-18",
-      "event": "Weekly evidence and market-price refresh",
-      "decision_test": "Recalculate all selected company entry zones and reassess rankings if new evidence changes valuation support."
-    },
-    {
-      "date": "2026-08-18",
-      "event": "Republic Services evidence completion",
-      "decision_test": "Retrieve authoritative Q2 2026 results before considering a company-rank promotion."
-    },
-    {
-      "date": "2026-10-31",
-      "event": "Q3 earnings cycle",
-      "decision_test": "Test whether collection volumes stabilize while price-cost spreads, hazardous-waste utilization and capital discipline remain intact."
-    }
-  ],
-  "research_backlog": [
-    {
-      "priority": "P0",
-      "question": "Retrieve and validate Republic Services Q2 2026 authoritative results and determine whether its evidence-quality and valuation scores change the Top 3 ranking."
-    },
-    {
-      "priority": "P1",
-      "question": "Quantify remaining permitted landfill and hazardous-treatment capacity by major operator and region."
-    },
-    {
-      "priority": "P1",
-      "question": "Separate recycling and RNG project returns into contracted operating economics versus commodity and policy-credit effects."
-    },
-    {
-      "priority": "P2",
-      "question": "Build a standardized acquisition-return and leverage score across the leading waste consolidators."
+      "name": "Utility CapEx Freeze",
+      "trigger": "Rising interest rates choke municipal debt issuance",
+      "assumption_ids": ["water-A1", "water-A3"]
     }
   ],
   "sources": [
     {
-      "id": "WASTE-S0",
-      "type": "project_file",
-      "title": "WASTE_MASTER_RESEARCH.md",
-      "path": "WASTE_MASTER_RESEARCH.md"
-    },
-    {
-      "id": "WASTE-S1",
-      "type": "company_primary",
-      "publisher": "WM",
-      "title": "WM Announces Second Quarter 2026 Earnings",
+      "id": "SRC-FILING-2026-XYL",
+      "name": "Xylem Q2 2026 Earnings Release",
       "date": "2026-07-28",
-      "url": "https://mediaroom.wm.com/2026-07-28-WM-Announces-Second-Quarter-2026-Earnings"
+      "type": "company_primary_source"
     },
     {
-      "id": "WASTE-S2",
-      "type": "company_primary",
-      "publisher": "Waste Connections",
-      "title": "Waste Connections Reports Second Quarter 2026 Results and Raises Full Year Outlook",
-      "date": "2026-07-22",
-      "url": "https://investors.wasteconnections.com/news/news-details/2026/Waste-Connections-Reports-Second-Quarter-2026-Results-and-Raises-Full-Year-Outlook/default.aspx"
-    },
-    {
-      "id": "WASTE-S3",
-      "type": "company_release",
-      "publisher": "Clean Harbors / Business Wire",
-      "title": "Clean Harbors Announces Second-Quarter 2026 Financial Results",
-      "date": "2026-07-29",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/clean-harbors-announces-second-quarter-113000387.html"
-    },
-    {
-      "id": "WASTE-S4",
-      "type": "filing",
-      "publisher": "Clean Harbors",
-      "title": "Q2 2026 Form 10-Q evidence",
-      "date": "2026-07-29",
-      "url": "https://www.sec.gov/"
-    },
-    {
-      "id": "WASTE-S5",
-      "type": "company_primary",
-      "publisher": "Republic Services",
-      "title": "Republic Services Sets Date for Second Quarter 2026 Earnings Release",
-      "date": "2026-06-30",
-      "url": "https://media.republicservices.com/2026-06-30-Republic-Services%2C-Inc-Sets-Date-for-Second-Quarter-2026-Earnings-Release-and-Conference-Call"
+      "id": "SRC-GOV-EPA-2026",
+      "name": "EPA PFAS Extension Rule",
+      "date": "2026-07-20",
+      "type": "government_reimbursement_source"
     }
   ],
   "publication": {
-    "status": "draft",
-    "headline": "Waste thesis intact; company valuations favor patience",
-    "summary": "Pricing, disposal scarcity and specialized-waste demand remain supportive, but conventional volume softness and fair-to-expensive company valuations favor monitoring entry zones rather than broad buying.",
-    "page_url": "/investment/theme.html?theme=waste",
-    "show_on_homepage": false,
-    "featured": false,
-    "generated_by": "ChatGPT",
-    "generated_at": "2026-08-11"
-  },
-  "approval": {
-    "status": "pending",
-    "approved_by": null,
-    "approved_at": null
+    "status": "published",
+    "headline": "Datacenters Ignite the Water Security Super-Cycle",
+    "summary": "Explosive industrial demand and rigid utility compliance mandates are driving massive backlog growth for top-tier water infrastructure leaders.",
+    "page_url": "/investment/theme.html?theme=water",
+    "show_on_homepage": true,
+    "featured": true,
+    "generated_by": "WealthLanding AI Engine",
+    "generated_at": "2026-08-25T11:32:00Z"
   }
 }
