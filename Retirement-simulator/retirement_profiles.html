@@ -30,189 +30,13 @@
             font-family: 'Playfair Display', Georgia, serif;
         }
 
-        /* Global dark navigation header */
-        .global-header {
-            background-color: #030712; 
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.85rem 2.25rem;
-            border-bottom: 1px solid #1f2937;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative; 
-            z-index: 1001;      
-        }
-
-        .top-nav-links {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center;
-            gap: 1.25rem;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .top-nav-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .top-nav-links a:hover, .top-nav-links a.active {
-            color: white;
-        }
-
-        .logo {
-            font-size: 1.45rem;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-            letter-spacing: -0.04em;
-        }
-
-        .logo span {
-            color: #10b981; 
-        }
-
-        .dropdown-trigger {
-            position: static;
-        }
-
-        .mega-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;                     
-            transform: translateX(-50%) translateY(12px); 
-            width: 95vw;                   
-            max-width: 1380px; 
-            background: white;
-            color: #0f172a;
-            border: 1px solid #e2e8f0; 
-            border-radius: 1.15rem;
-            box-shadow: 0 25px 35px -5px rgba(0,0,0,0.18), 0 12px 20px -5px rgba(0,0,0,0.06);
-            padding: 2.7rem; 
-            display: grid !important;      
-            grid-template-columns: 1.05fr 2.95fr; 
-            gap: 3rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
-            z-index: 3000; 
-            box-sizing: border-box;
-        }
-
-        .mega-dropdown::before {
-            content: "";
-            position: absolute;
-            left: 0; right: 0; top: -22px; height: 22px;
-        }
-
-        .dropdown-trigger:hover .mega-dropdown,
-        .dropdown-trigger:focus-within .mega-dropdown,
-        .mega-dropdown.js-visible {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateX(-50%) translateY(0) !important;
-        }
-
-        .mega-intro {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-right: 2rem;
-            border-right: 1px solid #eef2f7;
-            text-align: left;
-        }
-
-        .mega-intro h2 { font-size: 2rem; line-height: 1.1; margin: 0 0 .8rem; color: #0f172a; }
-        .mega-intro p { color: #64748b; font-size: .9rem; line-height: 1.6; margin: 0; }
-        .mega-intro a { color: #0f172a; font-weight: 800; text-decoration: none; font-size: .9rem; }
-        .mega-intro a:hover { color: #2563eb; }
-        .mega-intro small { display: block; color: #94a3b8; margin-top: .35rem; line-height: 1.45; }
-
-        .links-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: left; }
-        .dropdown-column h4 { color: #0f172a; font-size: 1rem; margin: 0 0 .9rem; font-weight: 800; }
-        .dropdown-column ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .72rem; }
-        .dropdown-column a { color: #64748b !important; text-decoration: none; font-size: .88rem; font-weight: 550; }
-        .dropdown-column a:hover { color: #10b981 !important; }
-
-        .search-container { position: relative; width: 240px; flex: 0 0 240px; }
-        .search-container form { margin: 0; }
-        .search-container .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; }
-        .search-input { width: 100%; background: #1e293b; border: 1px solid #334155; color: #fff; padding: .65rem .9rem .65rem 2.35rem; border-radius: .55rem; font-size: .86rem; box-sizing: border-box; }
-        .search-input::placeholder { color: #94a3b8; }
+       
     </style>
 </head>
 <body class="bg-slate-50/50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
-
-    <header class="global-header">
-        <a href="/" class="logo">Wealth<span>Landing</span></a>
-        <nav aria-label="Global Main Directory">
-            <ul class="top-nav-links">
-                <li class="dropdown-trigger">
-                    <a href="#">Overview <span>▼</span></a>
-                    <div class="mega-dropdown">
-                        <div class="mega-intro">
-                            <div>
-                                <h2>Overview</h2>
-                                <p>Your WealthLanding starting point for guided planning, saved progress, and active financial journeys.</p>
-                            </div>
-                            <div>
-                                <a href="Retirement_Gateway.html">Start Retirement Journey →</a>
-                                <small>Begin with the story-led retirement gateway.</small>
-                            </div>
-                        </div>
-                        <div class="links-matrix">
-                            <div class="dropdown-column">
-                                <h4>🚀 Start Here</h4>
-                                <ul>
-                                    <li><a href="Retirement_Gateway.html">Retirement Gateway</a></li>
-                                    <li><a href="Retirement_Onboarding.html">Build My Profile</a></li>
-                                    <li><a href="Retirement_Forecast.html">My Retirement Forecast</a></li>
-                                    <li><a href="/">Personal Dashboard</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>🌟 Popular Journeys</h4>
-                                <ul>
-                                    <li><a href="#">Build My First Million</a></li>
-                                    <li><a href="#">Early Retirement Strategy</a></li>
-                                    <li><a href="#">Family Legacy Structures</a></li>
-                                    <li><a href="odyssey-exploration.html">Retirement Odyssey</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>⏱ Resume Planning</h4>
-                                <ul>
-                                    <li><a href="Retirement_Forecast.html">Resume Forecast</a></li>
-                                    <li><a href="OptimizeRoth.html">Resume Strategy Engine</a></li>
-                                    <li><a href="transition_workspace.html">Resume Transition Plan</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="dropdown-trigger"><a href="#">Build Wealth <span>▼</span></a></li>
-                <li class="dropdown-trigger"><a href="#">Grow Wealth <span>▼</span></a></li>
-                <li class="dropdown-trigger"><a href="#">Protect Wealth <span>▼</span></a></li>
-                <li class="dropdown-trigger"><a href="#" class="active">Design Your Life <span>▼</span></a></li>
-                <li class="dropdown-trigger"><a href="#">Legacy <span>▼</span></a></li>
-                <li class="dropdown-trigger"><a href="#">Knowledge <span>▼</span></a></li>
-            </ul>
-        </nav>
-        <div class="search-container">
-            <form action="https://www.google.com/search" method="get" target="_blank">
-                <span class="search-icon">⌕</span>
-                <input type="hidden" name="sitesearch" value="wealthlanding.com">
-                <input type="search" name="q" class="search-input" placeholder="Search WealthLanding" aria-label="Search WealthLanding">
-            </form>
-        </div>
+  <div id="global-header-target"></div>
+    
+                          
     </header>
 
     <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 space-y-6 mt-4">
@@ -1121,5 +945,6 @@
             });
         };
     </script>
+       <script src="/components/header.js"></script> 
 </body>
 </html>
