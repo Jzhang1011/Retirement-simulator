@@ -610,7 +610,7 @@
             <div>
               <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Life Stages</div>
               <div style="padding-left:0.5rem; border-left:2px solid #f1f5f9; display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
-                <a href="/curriculum/early-career-playbook.html" style="color:#334155; font-weight:600; text-decoration:none;">🌱 Starting Out (18-25)</a>
+                <a href="/life_stage/18_25.html" style="color:#334155; font-weight:600; text-decoration:none;">🌱 Starting Out (18-25)</a>
                 <a href="/curriculum/home-affordability-guide.html" style="color:#334155; font-weight:600; text-decoration:none;">🚀 Building & Growing (25-40)</a>
                 <a href="/curriculum/tax-efficient-portfolio.html" style="color:#334155; font-weight:600; text-decoration:none;">🛡️ Family & Peak (40-55)</a>
                 <a href="/Retirement-simulator/Retirement_Gateway.html" style="color:#334155; font-weight:600; text-decoration:none;">🏖️ Pre-Retirement (55+)</a>
