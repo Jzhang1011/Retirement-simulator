@@ -470,7 +470,7 @@
                             My Retirement Blueprint
                           </a>
                         </li>
-                        <li><a href="/Retirement-simulator/Topic/Assets_lifestyle/Happy_retirement.html">Retirement stories</a></li>
+                        <li><a href="/blogs/happy_retirement.html">Retirement stories</a></li>
                         <li><a href="/Retirement-simulator/building-your-retirement.html">Retirement guides</a></li>
                       </ul>
                     </div>
@@ -570,10 +570,10 @@
                       </ul>
                     </div>
                     <div>
-                      <div class="wl-mega-col-title"> <a href="https:/blogs/blog_hub.html">CASE STUDIES</a>
+                      <div class="wl-mega-col-title"> <a href="https:/blogs/blog_hub.html">Blogs and Articles</a>
 </div>
                       <ul class="wl-mega-list">
-                        <li><a href="/blogs/Happy_retirement.html">Happy Retirement</a></li>
+                        <li><a href="/blogs/happy_retirement.html">Happy Retirement</a></li>
                         <li><a href="/simulator.html">Tax & Roth Simulator</a></li>
                       </ul>
                     </div>
