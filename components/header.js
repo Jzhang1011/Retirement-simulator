@@ -364,7 +364,7 @@
                     <div>
                       <div class="wl-mega-col-title">STARTING OUT</div>
                       <ul class="wl-mega-list">
-                        <li style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">18–25 · Build foundation</li>
+                        <li><a href="/life_stage/18_25.html" style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">18–25 · Build foundation</a></li>
                         <li><a href="/curriculum/early-career-playbook.html">Budget & cash flow</a></li>
                         <li><a href="/curriculum/early-career-playbook.html"> & debt</a></li>
                         <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
