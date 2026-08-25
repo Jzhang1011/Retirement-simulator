@@ -24,16 +24,8 @@
   </style>
 </head>
 <body>
-<header class="header">
-  <a href="/" class="logo">Wealth<span>Landing</span></a>
-  <nav class="nav" aria-label="Main navigation">
-    <a href="retirement_builder_v2.html">My Blueprint</a>
-    <a href="RetiringOverseas.html">Location</a>
-    <a href="#" class="active">Healthcare</a>
-    <a href="OptimizeRoth.html">Financial Strategy</a>
-  </nav>
-  <form action="https://www.google.com/search" method="get" target="_blank"><input type="hidden" name="sitesearch" value="wealthlanding.com"><input class="search" type="search" name="q" aria-label="Search WealthLanding" placeholder="Search WealthLanding"></form>
-</header>
+    <div id="global-header-target"></div>
+
 
 <main class="max-w-[1380px] mx-auto px-4 md:px-10 py-8 space-y-6">
   <section class="card p-6 md:p-8">
@@ -150,5 +142,6 @@ function saveStrategy(continueFinancial){const r=state.recommendation;const p=st
 function showToast(t,m){document.getElementById('toastTitle').textContent=t;document.getElementById('toastText').textContent=m;const el=document.getElementById('toast');el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),3500)}
 window.addEventListener('load',load);
 </script>
+     <script src="/components/header.js"></script> 
 </body>
 </html>
