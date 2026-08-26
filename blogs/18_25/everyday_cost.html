@@ -235,24 +235,35 @@
       <!-- VIDEO CONTAINER (Hidden by default) -->
       <div id="video-container" class="media-container">
         <div class="video-wrapper">
-          <p class="text-sm font-bold text-slate-400">YouTube iFrame Mount Point</p>
+          <iframe 
+      class="w-full h-full aspect-video" 
+      src="https://www.youtube.com/embed/EN2GkmA_2U4?si=NXZO9qO8Oje2gDZ2" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+    </iframe>
+
         </div>
       </div>
 
-      <!-- AUDIO CONTAINER (Hidden by default) -->
-      <div id="audio-container" class="media-container bg-slate-50 border border-slate-200">
-        <div class="audio-wrapper">
-          <div class="flex items-center gap-4">
-            <button class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">▶</button>
-            <div>
-              <p class="font-bold text-slate-900 m-0">Surviving Everyday Costs</p>
-              <p class="text-sm text-slate-500 m-0">WealthLanding Podcast • 12:45</p>
-            </div>
-          </div>
-          <!-- Audio progress bar stub -->
-          <div class="w-full bg-slate-200 h-2 rounded-full mt-2"><div class="bg-blue-600 w-1/3 h-full rounded-full"></div></div>
-        </div>
-      </div>
+<!-- AUDIO CONTAINER (Hidden by default) -->
+<div id="audio-container" class="media-container">
+  <div class="audio-wrapper w-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+    
+    <!-- PASTE YOUR PODCAST HOST IFRAME HERE -->
+    <iframe 
+        src="https://podcasters.spotify.com/pod/show/YOUR_SHOW/embed/episodes/YOUR_EPISODE" 
+        height="102px" 
+        width="100%" 
+        frameborder="0" 
+        scrolling="no">
+    </iframe>
+
+  </div>
+</div>
+
+
 
       <header class="mb-10">
         <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-2.5 py-1 rounded">Budgeting Frameworks</span>
@@ -411,3 +422,4 @@
    <script src="/components/header.js"></script> 
 </body>
 </html>
+
