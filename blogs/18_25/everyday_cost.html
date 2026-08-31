@@ -343,7 +343,7 @@ Social media creates artificial FOMO (Fear Of Missing Out) that can drain your b
 Normalize opting out: It is entirely acceptable to say, "That restaurant is a bit out of my budget this week, can we grab coffee or do something cheaper instead?" Good friends will pivot.
 The awkward group dinner: If you are on a tight budget, bring cash. Throwing down a $20 bill for your burger and tip is much easier than trying to Venmo request everyone later while asking the waiter to split a check six ways.
 </p>
-      <div class="strategy-reveal">
+        <div class="strategy-reveal">
         <h3>The Bottom Line</h3>
         <p class="text-slate-700 mb-0">
           Perfection is the enemy of progress when it comes to daily budgeting. You will overspend on a weekend. You will underestimate a utility bill. The goal isn't to create a flawless spreadsheet, but to build resilient habits that keep you moving forward even when reality doesn't match the plan.
@@ -352,9 +352,6 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
     </article>
 
     <!-- RIGHT SIDEBAR -->
-    <aside class="space-y-6">
-      
-      <!-- RIGHT SIDEBAR -->
     <aside class="space-y-6">
       
       <!-- TIER 1 GEO-MODULAR PROFILE SNAPSHOT -->
@@ -375,103 +372,22 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
           </select>
         </div>
 
-    </aside>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // --- Multi-modal toggle states logic ---
-      const btnRead = document.getElementById('btn-read');
-      const btnWatch = document.getElementById('btn-watch');
-      const btnListen = document.getElementById('btn-listen');
-      const videoContainer = document.getElementById('video-container');
-      const audioContainer = document.getElementById('audio-container');
-
-      if (btnRead && btnWatch && btnListen && videoContainer && audioContainer) {
-        btnRead.addEventListener('click', function() {
-          this.classList.add('active');
-          btnWatch.classList.remove('active');
-          btnListen.classList.remove('active');
+        <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs text-left border-b border-slate-900 pb-4">
+          <div class="text-slate-400">Monthly Take-Home:</div>
+          <div class="text-right font-bold text-slate-200">Varies</div>
           
-          videoContainer.classList.remove('active');
-          audioContainer.classList.remove('active');
-        });
-
-        btnWatch.addEventListener('click', function() {
-          this.classList.add('active');
-          btnRead.classList.remove('active');
-          btnListen.classList.remove('active');
+          <div id="rent-label" class="text-slate-400 transition-opacity duration-300">Avg Austin 1BR Rent:</div>
+          <div id="rent-value" class="text-right font-bold text-slate-200 transition-opacity duration-300">$1,650</div>
           
-          videoContainer.classList.add('active');
-          audioContainer.classList.remove('active');
-        });
-
-        btnListen.addEventListener('click', function() {
-          this.classList.add('active');
-          btnRead.classList.remove('active');
-          btnWatch.classList.remove('active');
-          
-          audioContainer.classList.add('active');
-          videoContainer.classList.remove('active');
-        });
-      }
-
-      // --- Handle Local Profile Dynamic Data Updates ---
-      const citySelect = document.getElementById("city-selector");
-      const rentLabel = document.getElementById("rent-label");
-      const rentValue = document.getElementById("rent-value");
-      const bufferValue = document.getElementById("buffer-value");
-      const recalcBtn = document.getElementById("recalc-btn");
-
-      if (citySelect && rentLabel && rentValue && bufferValue && recalcBtn) {
-        // Dictionary of 5 tier cities + National Average
-        const locationData = {
-          "ny": { label: "Avg NY 1BR Rent:", rent: "$3,500", buffer: "$5,000 (1 Month)" },
-          "bos": { label: "Avg Boston 1BR Rent:", rent: "$2,900", buffer: "$4,200 (1 Month)" },
-          "chi": { label: "Avg Chicago 1BR Rent:", rent: "$2,200", buffer: "$3,400 (1 Month)" },
-          "aus": { label: "Avg Austin 1BR Rent:", rent: "$1,650", buffer: "$2,600 (1 Month)" },
-          "okc": { label: "Avg OKC 1BR Rent:", rent: "$1,000", buffer: "$1,800 (1 Month)" },
-          "nat": { label: "National Avg 1BR Rent:", rent: "$1,500", buffer: "$2,500 (1 Month)" }
-        };
-
-        // Listen for dropdown changes
-        citySelect.addEventListener("change", (e) => {
-          const data = locationData[e.target.value];
-          if (data) {
-            // Quick fade effect for better UX
-            [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = '0.5');
-            
-            setTimeout(() => {
-              rentLabel.textContent = data.label;
-              rentValue.textContent = data.rent;
-              bufferValue.textContent = data.buffer;
-              
-              [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = '1');
-            }, 150);
-          }
-        });
-
-        // Recalculate button interactions
-        recalcBtn.addEventListener("click", () => {
-          recalcBtn.textContent = "Recalculating...";
-          recalcBtn.classList.add("bg-blue-400");
-          recalcBtn.classList.remove("bg-blue-600");
-          
-          setTimeout(() => {
-            recalcBtn.textContent = "Baseline Updated ✓";
-            recalcBtn.classList.remove("bg-blue-400");
-            recalcBtn.classList.add("bg-emerald-500");
-            
-            setTimeout(() => {
-              recalcBtn.textContent = "Recalculate Baseline";
-              recalcBtn.classList.remove("bg-emerald-500");
-              recalcBtn.classList.add("bg-blue-600");
-            }, 2000);
-          }, 800);
-        });
-      }
-    });
-  </script>
+          <div class="text-slate-400">Target Cash Buffer:</div>
+          <div id="buffer-value" class="text-right font-bold text-emerald-400 transition-opacity duration-300">$2,600 (1 Month)</div>
+        </div>
+        <div class="space-y-3 pt-2">
+          <button id="recalc-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-lg text-xs transition-all duration-300 shadow-lg tracking-wide uppercase">
+            Recalculate Baseline
+          </button>
+        </div>
+      </div>
 
       <!-- SIDEBAR PRIMARY OFFER: MONETIZATION LAYER[cite: 4] -->
       <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-left relative overflow-hidden">
