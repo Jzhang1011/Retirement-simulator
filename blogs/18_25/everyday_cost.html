@@ -1,494 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9JMJJ5CJR4');
-  </script>
+---
+layout: post
+title: "Surviving Everyday Costs — WealthLanding"
+---
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surviving Everyday Costs — WealthLanding</title>
+<!-- LEFT SIDE CONTENT COLUMN -->
+<article class="story-content text-left">
   
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --border: #e2e8f0;
-      --text: #0f172a;
-      --muted: #64748b;
-      --royal: #2563eb;
-      --emerald: #02B17D;
-      --navy: #0B132B;
-    }
-    
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      background: #ffffff;
-      color: #0F172A;
-    }
-
-    /* LAYOUT BOUNDS GRID */
-    .article-container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-    }
-
-    @media (min-width: 960px) {
-      .article-container { grid-template-columns: 2.2fr 1fr; }
-    }
-
-    /* TYPOGRAPHY MATRIX */
-    .story-content p {
-      font-size: 1.15rem;
-      line-height: 1.85;
-      color: #334155;
-      margin-bottom: 1.75rem;
-    }
-
-    .story-content h2 {
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: #0f172a;
-      margin-top: 3rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .story-content h3 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    .story-content ul {
-      margin-bottom: 2rem;
-      padding-left: 1.5rem;
-    }
-
-    .story-content li {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: #334155;
-      margin-bottom: 0.5rem;
-      list-style-type: disc;
-    }
-
-    /* MULTI-MODAL STICKY TOGGLE */
-    .sticky-toggle {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0;
-      z-index: 50;
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .toggle-btn {
-      padding: 0.5rem 1rem;
-      border-radius: 99px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .toggle-btn.active {
-      background: var(--royal);
-      color: white;
-      border-color: var(--royal);
-    }
-
-    /* MEDIA CONTAINERS */
-    .media-container {
-      display: none; /* Hidden by default */
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    
-    .media-container.active {
-      display: block;
-    }
-
-    .video-wrapper {
-      aspect-ratio: 16/9;
-      width: 100%;
-      background: #1e293b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-    }
-
-    .audio-wrapper {
-      width: 100%;
-      padding: 2rem;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    /* INTERACTIVE FLASHCARD */
-    .flashcard-container {
-      perspective: 1000px;
-      width: 100%;
-      max-width: 500px;
-      margin: 2rem auto;
-      height: 200px;
-    }
-
-    .flashcard {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-      cursor: pointer;
-    }
-
-    .flashcard.is-flipped {
-      transform: rotateY(180deg);
-    }
-
-    .card-face {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      border-radius: 12px;
-      border: 2px solid var(--border);
-      background: white;
-      text-align: center;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-back {
-      transform: rotateY(180deg);
-      background: #eff6ff;
-      border-color: var(--royal);
-    }
-
-    /* Strategy section */
-    .strategy-reveal {
-      background: #F8FAFC;
-      border-left: 6px solid #2563eb;
-      border-radius: 12px;
-      padding: 28px;
-      margin: 40px 0;
-    }
-
-    .strategy-reveal h3 {
-      margin-top: 0;
-      font-size: 24px;
-      font-weight: 800;
-      color: #0F172A;
-      margin-bottom: 1rem;
-    }
-  </style>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-
- <div id="global-header-target"></div>
-
-  <!-- STICKY MEDIA TOGGLE -->
-  <div class="sticky-toggle justify-center shadow-sm">
-    <button class="toggle-btn active" id="btn-read">📖 Read Article</button>
-    <button class="toggle-btn" id="btn-watch">📺 Watch Summary</button>
-    <button class="toggle-btn" id="btn-listen">🎧 Listen to Deep Dive (12:45)</button>
-  </div>
-
-  <!-- MAIN CONTAINER BLOCKS -->
-  <div class="article-container">
-    
-    <!-- LEFT SIDE CONTENT COLUMN -->
-    <article class="story-content text-left">
-      
-      <!-- VIDEO CONTAINER (Hidden by default) -->
-      <div id="video-container" class="media-container">
-        <div class="video-wrapper">
-          <iframe 
-      class="w-full h-full aspect-video" 
-      src="https://www.youtube.com/embed/EN2GkmA_2U4?si=NXZO9qO8Oje2gDZ2" 
-      title="YouTube video player" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      allowfullscreen>
-    </iframe>
-
-        </div>
-      </div>
-
-<!-- AUDIO CONTAINER (Hidden by default) -->
-<div id="audio-container" class="media-container">
-  <div class="audio-wrapper w-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
-    
-    <!-- PASTE YOUR PODCAST HOST IFRAME HERE -->
-    <iframe 
-        src="https://open.spotify.com/embed/playlist/7Hwh0hzmQ7OHKaF5cA7an8?utm_source=generator&si=0943823872074828" 
-      
-        height="102px" 
-        width="100%" 
+  <!-- VIDEO CONTAINER (Hidden by default) -->
+  <div id="video-container" class="media-container">
+    <div class="video-wrapper">
+      <iframe 
+        class="w-full h-full aspect-video" 
+        src="https://www.youtube.com/embed/EN2GkmA_2U4?si=NXZO9qO8Oje2gDZ2" 
+        title="YouTube video player" 
         frameborder="0" 
-        scrolling="no">
-    </iframe>
-
-  </div>
-</div>
-
-
-
-      <header class="mb-10">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-2.5 py-1 rounded">Budgeting Frameworks</span>
-        <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 mt-4 mb-4 leading-tight">
-          Surviving Everyday Costs
-        </h1>
-        <p class="text-slate-400 text-sm">WealthLanding Early Career Guide • August 2026</p>
-      </header>
-
-      <p class="text-xl text-slate-600 !leading-relaxed font-normal mb-6">
-        Rent, food, and friends. The real challenge is making your actual income work in your actual life, without the pressure of perfect budgeting.
-      </p>
-
-      <p>
-        Personal finance advice loves a neat spreadsheet. It assumes your paycheck arrives like clockwork, your rent is exactly 30% of your income, and you never have to navigate the social awkwardness of splitting a $150 dinner bill when you only ordered an appetizer[cite: 3]. 
-      </p>
-
-      <h2>Part 1: Irregular Income Budgeting</h2>
-      
-      <h3>The Limits of 50/30/20</h3>
-      <p>
-        You’ve probably heard of the 50/30/20 rule: 50% for needs, 30% for wants, 20% for savings. It's a great baseline—if you have a predictable, salaried income that easily covers your rent. But what happens when you work gig economy jobs, hourly shifts with fluctuating schedules, or have a base salary so low that "needs" take up 85% of your paycheck?[cite: 3]
-      </p>
-      
-      <!-- INLINE ACTIVE RECALL FLASHCARD -->
-      <div class="flashcard-container" onclick="this.querySelector('.flashcard').classList.toggle('is-flipped')">
-        <div class="flashcard">
-          <div class="card-face">
-            <span class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-2">Active Recall</span>
-            <h4 class="text-lg font-bold text-slate-800">What are the "Four Walls" of a survival budget?</h4>
-            <p class="text-xs text-slate-400 mt-4">Tap to reveal answer</p>
-          </div>
-          <div class="card-face card-back">
-            <h4 class="text-lg font-bold text-slate-800 mb-2">The Four Walls</h4>
-            <p class="text-sm text-slate-600">Housing, Utilities, Basic Food, and Transportation. Fund these before worrying about percentages.</p>
-          </div>
-        </div>
-      </div>
-
-      <p>
-        When your income is unstable or barely covers the basics, percentages break down. Instead of forcing a rigid framework, adapt it for survival mode:
-      </p>
-      <ul>
-        <li><strong>Fund the "Four Walls" First:</strong> Before worrying about percentages, identify the absolute minimum cost of your housing, essential food, basic utilities, and transportation to work. This is your baseline survival number[cite: 3].</li>
-        <li><strong>Calculate Your "Average Low" Income:</strong> If your income fluctuates, don't budget based on your best month. Look at your last six months and base your primary budget on the lowest-earning month[cite: 3].</li>
-        <li><strong>Build a Buffer, Not Just an Emergency Fund:</strong> Before aiming for a 3-to-6-month emergency fund, aim for a 1-month "checking account buffer."[cite: 3] The goal is simply to have enough cash rolling over each month so that a delayed client payment or a light shift week doesn't trigger an overdraft fee.</li>
-      </ul>
-
-      <h2>Part 2: Renting & Housing Decisions</h2>
-      <p>
-        Signing your first lease feels like independence, but the sticker shock of moving extends far beyond the monthly rent.
-      </p>
-
-      <div class="strategy-reveal">
-        <h3>The "Live at Home vs. Move Out" Calculus</h3>
-        <p class="text-slate-700 mb-0">
-          Living with your parents is a massive financial cheat code, but it often comes at a social or emotional cost. If you have this option, don't just stay home passively. Treat it as a temporary launchpad: charge yourself "fake rent" every month and push it straight into a high-yield savings account[cite: 3].
-        </p>
-      </div>
-      <h2> Navigating Roommate Dynamics</h2>
-<p>Roommates are the most effective way to lower your housing costs, but they are also a primary source of early-career financial stress. Protect yourself upfront:
-Get on the lease: Never move in as an "off-the-books" subtenant if you can help it. If things go wrong, you want the legal protection of a formal lease agreement.
-Decide how to split the space: Equal rent only makes sense if the bedrooms are equal. If someone gets the master bedroom with an en-suite bath, they should pay a higher percentage of the total rent.
-Centralize the bills: Use apps to automatically track and split shared expenses like Wi-Fi and electricity, rather than relying on a complex web of "I'll get you back next month" promises.
-         </p>
-    
-
-     <h2>Part 3:  Money Psychology</h2>
-    
-<h3>Lifestyle Inflation and the Social Media Trap</h3>
- <p>Lifestyle inflation—the tendency to spend more as you earn more—is natural. The problem today is that you aren't just comparing your lifestyle to your neighbors; you're comparing it to an algorithmic feed of influencers, travel vloggers, and friends living their highlight reels.
-Social media creates artificial FOMO (Fear Of Missing Out) that can drain your budget. Combat this by implementing a "24-hour rule" for non-essential purchases and muting accounts that consistently trigger a desire to spend money you don't have.
- </p>
-<h3>The Dynamics of Splitting Costs</h3>
-<p>One of the hardest parts of your twenties is navigating friendships when everyone earns completely different amounts of money.
-Normalize opting out: It is entirely acceptable to say, "That restaurant is a bit out of my budget this week, can we grab coffee or do something cheaper instead?" Good friends will pivot.
-The awkward group dinner: If you are on a tight budget, bring cash. Throwing down a $20 bill for your burger and tip is much easier than trying to Venmo request everyone later while asking the waiter to split a check six ways.
-</p>
-        <div class="strategy-reveal">
-        <h3>The Bottom Line</h3>
-        <p class="text-slate-700 mb-0">
-          Perfection is the enemy of progress when it comes to daily budgeting. You will overspend on a weekend. You will underestimate a utility bill. The goal isn't to create a flawless spreadsheet, but to build resilient habits that keep you moving forward even when reality doesn't match the plan.
-        </p>
-      </div>
-    </article>
-
-    <!-- RIGHT SIDEBAR -->
-    <aside class="space-y-6">
-      
-      <!-- TIER 1 GEO-MODULAR PROFILE SNAPSHOT -->
-      <div class="bg-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-5">
-        <div class="border-b border-slate-800 pb-4 text-left flex justify-between items-start">
-          <div>
-            <span class="text-[10px] uppercase tracking-widest font-extrabold text-blue-400 block">Your Local Profile</span>
-            <h3 class="text-xl font-black mt-1 text-slate-100 tracking-tight">Budget Baseline</h3>
-          </div>
-          <!-- Modular Geo-Selector -->
-          <select id="city-selector" class="bg-slate-900 border border-slate-700 text-xs rounded px-2 py-1 text-slate-300 focus:outline-none focus:border-blue-500 cursor-pointer">
-            <option value="ny">New York, NY (Tier 1)</option>
-            <option value="bos">Boston, MA (Tier 2)</option>
-            <option value="chi">Chicago, IL (Tier 3)</option>
-            <option value="aus" selected>Austin, TX (Tier 4)</option>
-            <option value="okc">Oklahoma City, OK (Tier 5)</option>
-            <option value="nat">National Avg</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs text-left border-b border-slate-900 pb-4">
-          <div class="text-slate-400">Monthly Take-Home:</div>
-          <div class="text-right font-bold text-slate-200">Varies</div>
-          
-          <div id="rent-label" class="text-slate-400 transition-opacity duration-300">Avg Austin 1BR Rent:</div>
-          <div id="rent-value" class="text-right font-bold text-slate-200 transition-opacity duration-300">$1,650</div>
-          
-          <div class="text-slate-400">Target Cash Buffer:</div>
-          <div id="buffer-value" class="text-right font-bold text-emerald-400 transition-opacity duration-300">$2,600 (1 Month)</div>
-        </div>
-        <div class="space-y-3 pt-2">
-          <button id="recalc-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-lg text-xs transition-all duration-300 shadow-lg tracking-wide uppercase">
-            Recalculate Baseline
-          </button>
-        </div>
-      </div>
-
-      <!-- SIDEBAR PRIMARY OFFER: MONETIZATION LAYER[cite: 4] -->
-      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-left relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-emerald-200 text-emerald-800 text-[9px] font-bold uppercase px-2 py-1 rounded-bl-lg">Partner</div>
-        <h4 class="text-sm font-bold text-slate-900 mb-2 mt-2">Best accounts for a starter buffer[cite: 4]</h4>
-        <p class="text-xs text-slate-600 mb-4">Stash your 1-month buffer in a High-Yield Savings Account to earn 4.5%+ APY while keeping it liquid.</p>
-        <button class="w-full bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg">Compare Top HYSA Accounts</button>
-      </div>
-
-      <!-- PROGRESSION ROUTING: NEXT TOPICS[cite: 4] -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-5 text-left">
-        <span class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block mb-3">What To Learn Next</span>
-        <ul class="space-y-3">
-          <li>
-            <a href="#" class="group block">
-              <h4 class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">First Lease Negotiation[cite: 4]</h4>
-              <p class="text-xs text-slate-500 mt-1 line-clamp-1">How to read the fine print before signing.</p>
-            </a>
-          </li>
-          <li class="pt-3 border-t border-slate-100">
-            <a href="#" class="group block">
-              <h4 class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Gig Economy Taxes[cite: 4]</h4>
-             <p class="text-xs text-slate-500 mt-1 line-clamp-1">Handling irregular income during tax season.</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-    </aside>
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
-    <script>
-    // Simple script to handle multi-modal toggle states
-    document.getElementById('btn-read').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-watch').classList.remove('active');
-      document.getElementById('btn-listen').classList.remove('active');
+  <!-- AUDIO CONTAINER (Hidden by default) -->
+  <div id="audio-container" class="media-container">
+    <div class="audio-wrapper w-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+      <iframe 
+          src="https://open.spotify.com/embed/playlist/7Hwh0hzmQ7OHKaF5cA7an8?utm_source=generator&si=0943823872074828" 
+          height="102px" 
+          width="100%" 
+          frameborder="0" 
+          scrolling="no">
+      </iframe>
+    </div>
+  </div>
+
+  <header class="mb-10">
+    <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-2.5 py-1 rounded">Budgeting Frameworks</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 mt-4 mb-4 leading-tight">
+      Surviving Everyday Costs
+    </h1>
+    <p class="text-slate-400 text-sm">WealthLanding Early Career Guide • August 2026</p>
+  </header>
+
+  <p class="text-xl text-slate-600 !leading-relaxed font-normal mb-6">
+    Rent, food, and friends. The real challenge is making your actual income work in your actual life, without the pressure of perfect budgeting.
+  </p>
+
+  <p>
+    Personal finance advice loves a neat spreadsheet. It assumes your paycheck arrives like clockwork, your rent is exactly 30% of your income, and you never have to navigate the social awkwardness of splitting a $150 dinner bill when you only ordered an appetizer. 
+  </p>
+
+  <h2>Part 1: Irregular Income Budgeting</h2>
+  
+  <h3>The Limits of 50/30/20</h3>
+  <p>
+    You’ve probably heard of the 50/30/20 rule: 50% for needs, 30% for wants, 20% for savings. It's a great baseline—if you have a predictable, salaried income that easily covers your rent. But what happens when you work gig economy jobs, hourly shifts with fluctuating schedules, or have a base salary so low that "needs" take up 85% of your paycheck?
+  </p>
+  
+  <!-- INLINE ACTIVE RECALL FLASHCARD -->
+  <div class="flashcard-container" onclick="this.querySelector('.flashcard').classList.toggle('is-flipped')">
+    <div class="flashcard">
+      <div class="card-face">
+        <span class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-2">Active Recall</span>
+        <h4 class="text-lg font-bold text-slate-800">What are the "Four Walls" of a survival budget?</h4>
+        <p class="text-xs text-slate-400 mt-4">Tap to reveal answer</p>
+      </div>
+      <div class="card-face card-back">
+        <h4 class="text-lg font-bold text-slate-800 mb-2">The Four Walls</h4>
+        <p class="text-sm text-slate-600">Housing, Utilities, Basic Food, and Transportation. Fund these before worrying about percentages.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>
+    When your income is unstable or barely covers the basics, percentages break down. Instead of forcing a rigid framework, adapt it for survival mode:
+  </p>
+  <ul>
+    <li><strong>Fund the "Four Walls" First:</strong> Before worrying about percentages, identify the absolute minimum cost of your housing, essential food, basic utilities, and transportation to work. This is your baseline survival number.</li>
+    <li><strong>Calculate Your "Average Low" Income:</strong> If your income fluctuates, don't budget based on your best month. Look at your last six months and base your primary budget on the lowest-earning month.</li>
+    <li><strong>Build a Buffer, Not Just an Emergency Fund:</strong> Before aiming for a 3-to-6-month emergency fund, aim for a 1-month "checking account buffer." The goal is simply to have enough cash rolling over each month so that a delayed client payment or a light shift week doesn't trigger an overdraft fee.</li>
+  </ul>
+
+  <h2>Part 2: Renting & Housing Decisions</h2>
+  <p>
+    Signing your first lease feels like independence, but the sticker shock of moving extends far beyond the monthly rent.
+  </p>
+
+  <div class="strategy-reveal">
+    <h3>The "Live at Home vs. Move Out" Calculus</h3>
+    <p class="text-slate-700 mb-0">
+      Living with your parents is a massive financial cheat code, but it often comes at a social or emotional cost. If you have this option, don't just stay home passively. Treat it as a temporary launchpad: charge yourself "fake rent" every month and push it straight into a high-yield savings account.
+    </p>
+  </div>
+
+  <h2>Navigating Roommate Dynamics</h2>
+  <p>
+    Roommates are the most effective way to lower your housing costs, but they are also a primary source of early-career financial stress. Protect yourself upfront:
+    Get on the lease: Never move in as an "off-the-books" subtenant if you can help it. If things go wrong, you want the legal protection of a formal lease agreement.
+    Decide how to split the space: Equal rent only makes sense if the bedrooms are equal. If someone gets the master bedroom with an en-suite bath, they should pay a higher percentage of the total rent.
+    Centralize the bills: Use apps to automatically track and split shared expenses like Wi-Fi and electricity, rather than relying on a complex web of "I'll get you back next month" promises.
+  </p>
+
+  <h2>Part 3: Money Psychology</h2>
+    
+  <h3>Lifestyle Inflation and the Social Media Trap</h3>
+  <p>
+    Lifestyle inflation—the tendency to spend more as you earn more—is natural. The problem today is that you aren't just comparing your lifestyle to your neighbors; you're comparing it to an algorithmic feed of influencers, travel vloggers, and friends living their highlight reels.
+    Social media creates artificial FOMO (Fear Of Missing Out) that can drain your budget. Combat this by implementing a "24-hour rule" for non-essential purchases and muting accounts that consistently trigger a desire to spend money you don't have.
+  </p>
+
+  <h3>The Dynamics of Splitting Costs</h3>
+  <p>
+    One of the hardest parts of your twenties is navigating friendships when everyone earns completely different amounts of money.
+    Normalize opting out: It is entirely acceptable to say, "That restaurant is a bit out of my budget this week, can we grab coffee or do something cheaper instead?" Good friends will pivot.
+    The awkward group dinner: If you are on a tight budget, bring cash. Throwing down a $20 bill for your burger and tip is much easier than trying to Venmo request everyone later while asking the waiter to split a check six ways.
+  </p>
+
+  <div class="strategy-reveal">
+    <h3>The Bottom Line</h3>
+    <p class="text-slate-700 mb-0">
+      Perfection is the enemy of progress when it comes to daily budgeting. You will overspend on a weekend. You will underestimate a utility bill. The goal isn't to create a flawless spreadsheet, but to build resilient habits that keep you moving forward even when reality doesn't match the plan.
+    </p>
+  </div>
+</article>
+
+<!-- RIGHT SIDEBAR -->
+<aside class="space-y-6">
+  
+  <!-- TIER 1 GEO-MODULAR PROFILE SNAPSHOT -->
+  <div class="bg-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-5">
+    <div class="border-b border-slate-800 pb-4 text-left flex justify-between items-start">
+      <div>
+        <span class="text-[10px] uppercase tracking-widest font-extrabold text-blue-400 block">Your Local Profile</span>
+        <h3 class="text-xl font-black mt-1 text-slate-100 tracking-tight">Budget Baseline</h3>
+      </div>
+      <!-- Modular Geo-Selector -->
+      <select id="city-selector" class="bg-slate-900 border border-slate-700 text-xs rounded px-2 py-1 text-slate-300 focus:outline-none focus:border-blue-500 cursor-pointer">
+        <option value="ny">New York, NY (Tier 1)</option>
+        <option value="bos">Boston, MA (Tier 2)</option>
+        <option value="chi">Chicago, IL (Tier 3)</option>
+        <option value="aus" selected>Austin, TX (Tier 4)</option>
+        <option value="okc">Oklahoma City, OK (Tier 5)</option>
+        <option value="nat">National Avg</option>
+      </select>
+    </div>
+
+    <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs text-left border-b border-slate-900 pb-4">
+      <div class="text-slate-400">Monthly Take-Home:</div>
+      <div class="text-right font-bold text-slate-200">Varies</div>
       
-      document.getElementById('video-container').classList.remove('active');
-      document.getElementById('audio-container').classList.remove('active');
-    });
- 
-    document.getElementById('btn-watch').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-read').classList.remove('active');
-      document.getElementById('btn-listen').classList.remove('active');
+      <div id="rent-label" class="text-slate-400 transition-opacity duration-300">Avg Austin 1BR Rent:</div>
+      <div id="rent-value" class="text-right font-bold text-slate-200 transition-opacity duration-300">$1,650</div>
       
-      document.getElementById('video-container').classList.add('active');
-      document.getElementById('audio-container').classList.remove('active');
-    });
- 
-    document.getElementById('btn-listen').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-read').classList.remove('active');
-      document.getElementById('btn-watch').classList.remove('active');
-      
-      document.getElementById('audio-container').classList.add('active');
-      document.getElementById('video-container').classList.remove('active');
-    });
- 
-    // ---- Geo Cost Calculator ----
-    const citySelect = document.getElementById("city-selector");
-    const rentLabel = document.getElementById("rent-label");
-    const rentValue = document.getElementById("rent-value");
-    const bufferValue = document.getElementById("buffer-value");
-    const recalcBtn = document.getElementById("recalc-btn");
- 
-    if (citySelect && rentLabel && rentValue && bufferValue && recalcBtn) {
-      // Updated 2026 Dictionary of 5 tier cities + National Average
-      // Buffer = Rent + Estimated Essential Living Costs (Food, Utilities, Transit)
-      const locationData = {
-        "ny": { label: "Avg NY 1BR Rent:", rent: "$3,800", buffer: "$5,200 (1 Month)" }, // Tier 1: $1400 living costs
-        "bos": { label: "Avg Boston 1BR Rent:", rent: "$2,850", buffer: "$4,150 (1 Month)" }, // Tier 2: $1300 living costs
-        "chi": { label: "Avg Chicago 1BR Rent:", rent: "$2,200", buffer: "$3,300 (1 Month)" }, // Tier 3: $1100 living costs
-        "aus": { label: "Avg Austin 1BR Rent:", rent: "$1,650", buffer: "$2,600 (1 Month)" }, // Tier 4: $950 living costs
-        "okc": { label: "Avg OKC 1BR Rent:", rent: "$1,000", buffer: "$1,800 (1 Month)" }, // Tier 5: $800 living costs
-        "nat": { label: "National Avg 1BR Rent:", rent: "$1,530", buffer: "$2,480 (1 Month)" } // Nat Avg: $950 living costs
-      };
- 
-      function updateBaseline() {
-        const data = locationData[citySelect.value];
-        if (!data) return;
- 
-        // Brief fade for a bit of visual feedback on refresh
-        [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = "0.3");
- 
-        setTimeout(() => {
-          rentLabel.textContent = data.label;
-          rentValue.textContent = data.rent;
-          bufferValue.textContent = data.buffer;
-          [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = "1");
-        }, 150);
-      }
- 
-      // Recalculate as soon as a new city is picked
-      citySelect.addEventListener("change", updateBaseline);
-      // Also allow the explicit button to trigger it
-      recalcBtn.addEventListener("click", updateBaseline);
+      <div class="text-slate-400">Target Cash Buffer:</div>
+      <div id="buffer-value" class="text-right font-bold text-emerald-400 transition-opacity duration-300">$2,600 (1 Month)</div>
+    </div>
+    <div class="space-y-3 pt-2">
+      <button id="recalc-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-lg text-xs transition-all duration-300 shadow-lg tracking-wide uppercase">
+        Recalculate Baseline
+      </button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR PRIMARY OFFER: MONETIZATION LAYER -->
+  <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-left relative overflow-hidden">
+    <div class="absolute top-0 right-0 bg-emerald-200 text-emerald-800 text-[9px] font-bold uppercase px-2 py-1 rounded-bl-lg">Partner</div>
+    <h4 class="text-sm font-bold text-slate-900 mb-2 mt-2">Best accounts for a starter buffer</h4>
+    <p class="text-xs text-slate-600 mb-4">Stash your 1-month buffer in a High-Yield Savings Account to earn 4.5%+ APY while keeping it liquid.</p>
+    <button class="w-full bg-slate-900 text-white text-xs font-bold py-2.5 rounded-lg">Compare Top HYSA Accounts</button>
+  </div>
+
+  <!-- PROGRESSION ROUTING: NEXT TOPICS -->
+  <div class="bg-white border border-slate-200 rounded-2xl p-5 text-left">
+    <span class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block mb-3">What To Learn Next</span>
+    <ul class="space-y-3">
+      <li>
+        <a href="#" class="group block">
+          <h4 class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">First Lease Negotiation</h4>
+          <p class="text-xs text-slate-500 mt-1 line-clamp-1">How to read the fine print before signing.</p>
+        </a>
+      </li>
+      <li class="pt-3 border-t border-slate-100">
+        <a href="#" class="group block">
+          <h4 class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Gig Economy Taxes</h4>
+          <p class="text-xs text-slate-500 mt-1 line-clamp-1">Handling irregular income during tax season.</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<script>
+  // ---- Geo Cost Calculator ----
+  const citySelect = document.getElementById("city-selector");
+  const rentLabel = document.getElementById("rent-label");
+  const rentValue = document.getElementById("rent-value");
+  const bufferValue = document.getElementById("buffer-value");
+  const recalcBtn = document.getElementById("recalc-btn");
+
+  if (citySelect && rentLabel && rentValue && bufferValue && recalcBtn) {
+    // Updated 2026 Dictionary of 5 tier cities + National Average
+    // Buffer = Rent + Estimated Essential Living Costs (Food, Utilities, Transit)
+    const locationData = {
+      "ny": { label: "Avg NY 1BR Rent:", rent: "$3,800", buffer: "$5,200 (1 Month)" }, // Tier 1: $1400 living costs
+      "bos": { label: "Avg Boston 1BR Rent:", rent: "$2,850", buffer: "$4,150 (1 Month)" }, // Tier 2: $1300 living costs
+      "chi": { label: "Avg Chicago 1BR Rent:", rent: "$2,200", buffer: "$3,300 (1 Month)" }, // Tier 3: $1100 living costs
+      "aus": { label: "Avg Austin 1BR Rent:", rent: "$1,650", buffer: "$2,600 (1 Month)" }, // Tier 4: $950 living costs
+      "okc": { label: "Avg OKC 1BR Rent:", rent: "$1,000", buffer: "$1,800 (1 Month)" }, // Tier 5: $800 living costs
+      "nat": { label: "National Avg 1BR Rent:", rent: "$1,530", buffer: "$2,480 (1 Month)" } // Nat Avg: $950 living costs
+    };
+
+    function updateBaseline() {
+      const data = locationData[citySelect.value];
+      if (!data) return;
+
+      // Brief fade for a bit of visual feedback on refresh
+      [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = "0.3");
+
+      setTimeout(() => {
+        rentLabel.textContent = data.label;
+        rentValue.textContent = data.rent;
+        bufferValue.textContent = data.buffer;
+        [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = "1");
+      }, 150);
     }
-  </script>
-   <script src="/components/header.js"></script> 
-</body>
-</html>
 
+    // Recalculate as soon as a new city is picked
+    citySelect.addEventListener("change", updateBaseline);
+    // Also allow the explicit button to trigger it
+    recalcBtn.addEventListener("click", updateBaseline);
+  }
+</script>
