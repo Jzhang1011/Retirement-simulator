@@ -410,7 +410,7 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
           <li class="pt-3 border-t border-slate-100">
             <a href="#" class="group block">
               <h4 class="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Gig Economy Taxes[cite: 4]</h4>
-              <p class="text-xs text-slate-500 mt-1 line-clamp-1">Handling irregular income during tax season.</p>
+             <p class="text-xs text-slate-500 mt-1 line-clamp-1">Handling irregular income during tax season.</p>
             </a>
           </li>
         </ul>
@@ -420,34 +420,46 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
   </div>
 
   <script>
-    // Simple script to handle multi-modal toggle states
-    document.getElementById('btn-read').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-watch').classList.remove('active');
-      document.getElementById('btn-listen').classList.remove('active');
-      
-      document.getElementById('video-container').classList.remove('active');
-      document.getElementById('audio-container').classList.remove('active');
-    });
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- Multi-modal toggle states logic ---
+      const btnRead = document.getElementById('btn-read');
+      const btnWatch = document.getElementById('btn-watch');
+      const btnListen = document.getElementById('btn-listen');
+      const videoContainer = document.getElementById('video-container');
+      const audioContainer = document.getElementById('audio-container');
 
-    document.getElementById('btn-watch').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-read').classList.remove('active');
-      document.getElementById('btn-listen').classList.remove('active');
-      
-      document.getElementById('video-container').classList.add('active');
-      document.getElementById('audio-container').classList.remove('active');
-    });
+      if (btnRead && btnWatch && btnListen && videoContainer && audioContainer) {
+        btnRead.addEventListener('click', function() {
+          this.classList.add('active');
+          btnWatch.classList.remove('active');
+          btnListen.classList.remove('active');
+          videoContainer.classList.remove('active');
+          audioContainer.classList.remove('active');
+        });
 
-    document.getElementById('btn-listen').addEventListener('click', function() {
-      this.classList.add('active');
-      document.getElementById('btn-read').classList.remove('active');
-      document.getElementById('btn-watch').classList.remove('active');
-      
-      document.getElementById('audio-container').classList.add('active');
-      document.getElementById('video-container').classList.remove('active');
+        btnWatch.addEventListener('click', function() {
+          this.classList.add('active');
+          btnRead.classList.remove('active');
+          btnListen.classList.remove('active');
+          videoContainer.classList.add('active');
+          audioContainer.classList.remove('active');
+        });
 
-       const recalcBtn = document.getElementById("recalc-btn");
+        btnListen.addEventListener('click', function() {
+          this.classList.add('active');
+          btnRead.classList.remove('active');
+          btnWatch.classList.remove('active');
+          audioContainer.classList.add('active');
+          videoContainer.classList.remove('active');
+        });
+      }
+
+      // --- Handle Local Profile Dynamic Data Updates ---
+      const citySelect = document.getElementById("city-selector");
+      const rentLabel = document.getElementById("rent-label");
+      const rentValue = document.getElementById("rent-value");
+      const bufferValue = document.getElementById("buffer-value");
+      const recalcBtn = document.getElementById("recalc-btn");
 
       if (citySelect && rentLabel && rentValue && bufferValue && recalcBtn) {
         // Updated 2026 Dictionary of 5 tier cities + National Average
@@ -463,6 +475,40 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
 
         // Listen for dropdown changes
         citySelect.addEventListener("change", (e) => {
+          const data = locationData[e.target.value];
+          if (data) {
+            // Quick fade effect for better UX
+            [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = '0.5');
+            
+            setTimeout(() => {
+              rentLabel.textContent = data.label;
+              rentValue.textContent = data.rent;
+              bufferValue.textContent = data.buffer;
+              
+              [rentLabel, rentValue, bufferValue].forEach(el => el.style.opacity = '1');
+            }, 150);
+          }
+        });
+
+        // Recalculate button interactions
+        recalcBtn.addEventListener("click", () => {
+          recalcBtn.textContent = "Recalculating...";
+          recalcBtn.classList.add("bg-blue-400");
+          recalcBtn.classList.remove("bg-blue-600");
+          
+          setTimeout(() => {
+            recalcBtn.textContent = "Baseline Updated ✓";
+            recalcBtn.classList.remove("bg-blue-400");
+            recalcBtn.classList.add("bg-emerald-500");
+            
+            setTimeout(() => {
+              recalcBtn.textContent = "Recalculate Baseline";
+              recalcBtn.classList.remove("bg-emerald-500");
+              recalcBtn.classList.add("bg-blue-600");
+            }, 2000);
+          }, 800);
+        });
+      }
     });
   </script>
    <script src="/components/header.js"></script> 
