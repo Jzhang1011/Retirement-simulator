@@ -446,6 +446,23 @@ The awkward group dinner: If you are on a tight budget, bring cash. Throwing dow
       
       document.getElementById('audio-container').classList.add('active');
       document.getElementById('video-container').classList.remove('active');
+
+       const recalcBtn = document.getElementById("recalc-btn");
+
+      if (citySelect && rentLabel && rentValue && bufferValue && recalcBtn) {
+        // Updated 2026 Dictionary of 5 tier cities + National Average
+        // Buffer = Rent + Estimated Essential Living Costs (Food, Utilities, Transit)
+        const locationData = {
+          "ny": { label: "Avg NY 1BR Rent:", rent: "$3,800", buffer: "$5,200 (1 Month)" }, // Tier 1: $1400 living costs
+          "bos": { label: "Avg Boston 1BR Rent:", rent: "$2,850", buffer: "$4,150 (1 Month)" }, // Tier 2: $1300 living costs
+          "chi": { label: "Avg Chicago 1BR Rent:", rent: "$2,200", buffer: "$3,300 (1 Month)" }, // Tier 3: $1100 living costs
+          "aus": { label: "Avg Austin 1BR Rent:", rent: "$1,650", buffer: "$2,600 (1 Month)" }, // Tier 4: $950 living costs
+          "okc": { label: "Avg OKC 1BR Rent:", rent: "$1,000", buffer: "$1,800 (1 Month)" }, // Tier 5: $800 living costs
+          "nat": { label: "National Avg 1BR Rent:", rent: "$1,530", buffer: "$2,480 (1 Month)" } // Nat Avg: $950 living costs
+        };
+
+        // Listen for dropdown changes
+        citySelect.addEventListener("change", (e) => {
     });
   </script>
    <script src="/components/header.js"></script> 
