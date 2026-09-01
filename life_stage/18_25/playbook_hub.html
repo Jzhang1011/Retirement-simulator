@@ -43,25 +43,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- HEADER -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="hub.html" class="flex items-center cursor-pointer">
-                    <i class="fa-solid fa-leaf text-brand-500 text-2xl mr-2"></i>
-                    <span class="font-bold text-xl text-navy-900 tracking-tight">WealthLanding</span>
-                </a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-500 hover:text-navy-900 font-medium">Life Stages</a>
-                    <a href="tools.html" class="text-gray-500 hover:text-navy-900 font-medium">Tools</a>
-                    <a href="#" class="text-brand-600 font-semibold border-b-2 border-brand-500 pb-1">Early Career (18-25)</a>
-                </nav>
-                <div>
-                    <button class="bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">Sign In</button>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div id="global-header-target"></div>
 
     <main class="flex-grow flex flex-col w-full">
         <!-- HERO -->
@@ -267,5 +249,8 @@
             document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
         }
     </script>
+    
+   <script src="/components/header.js"></script> 
+
 </body>
 </html>
