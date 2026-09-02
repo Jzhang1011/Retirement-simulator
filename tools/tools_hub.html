@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JMJJ5CJR4"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -75,34 +76,12 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- HEADER -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="hub.html" class="flex items-center cursor-pointer">
-                    <i class="fa-solid fa-leaf text-brand-500 text-2xl mr-2"></i>
-                    <span class="font-bold text-xl text-navy-900 tracking-tight">WealthLanding</span>
-                </a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="hub.html" class="text-gray-500 hover:text-navy-900 font-medium">Life Stages</a>
-                    <a href="tools.html" class="text-brand-600 font-semibold border-b-2 border-brand-500 pb-1">Tools</a>
-                    <a href="hub.html" class="text-gray-500 hover:text-navy-900 font-medium">Early Career (18-25)</a>
-                </nav>
-                <div>
-                    <button class="bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">Sign In</button>
-                </div>
-            </div>
-        </div>
-    </header>
+     <div id="global-header-target"></div>
+
 
     <main class="flex-grow flex flex-col relative w-full py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             
-            <!-- Breadcrumb -->
-            <nav class="text-sm text-gray-500 mb-8 font-medium">
-                <a href="hub.html" class="hover:text-brand-600 transition-colors">Home</a> <span class="mx-2">/</span>
-                <span class="text-navy-900">Calculators & Tools</span>
-            </nav>
 
             <div class="text-center mb-12">
                 <h1 class="text-4xl md:text-5xl font-bold text-navy-900 mb-4">Find the Right Calculator</h1>
@@ -263,6 +242,16 @@
             });
         });
     </script>
+    <!-- ... rest of your webpage content ... -->
+    <wealthlanding-footer></wealthlanding-footer>
     
+   <!-- ConvertKit Script -->
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+
+    <!-- MODULAR FOOTER -->
+    
+    <script src="/components/footer.js"></script>
+
+    <script src="/components/header.js"></script> 
 </body>
 </html>
