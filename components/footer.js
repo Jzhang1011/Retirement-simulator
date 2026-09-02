@@ -23,7 +23,7 @@ class WealthLandingFooter extends HTMLElement {
                         <div>
                             <h4 class="text-white font-bold mb-4">Resources</h4>
                             <ul class="space-y-2 text-sm">
-                                <li><a href="tools.html" class="hover:text-brand-400 transition-colors">Calculators</a></li>
+                                <li><a href="/tools/tools_hub.html" class="hover:text-brand-400 transition-colors">Calculators</a></li>
                                 <li><a href="#" class="hover:text-brand-400 transition-colors">Blog</a></li>
                                 <li><a href="#" class="hover:text-brand-400 transition-colors">Advisors</a></li>
                                 <li><a href="#" class="hover:text-brand-400 transition-colors">Methodology</a></li>
