@@ -502,7 +502,7 @@
                       <p class="wl-mega-desc">Use a calculator, comparison model or optimizer when you already know which question you want to test.</p>
                     </div>
                     <div style="padding-top:1rem; border-top:1px solid #cbd5e1;">
-                      <a href="/tools.html" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">
+                      <a href="/tools/tools_hub.html" style="font-size:0.75rem; font-weight:700; color:#0f172a; text-decoration:none;">
                         Explore all tools &rarr;
                         <span class="wl-pill-badge">REBUILD HUB</span>
                       </a>
