@@ -365,9 +365,9 @@
                       <div class="wl-mega-col-title">STARTING OUT</div>
                       <ul class="wl-mega-list">
                         <li><a href="/life_stage/18_25.html" style="color:#94a3b8; font-weight:600; font-size:0.75rem; margin-bottom:0.25rem;">18–25 · Build foundation</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html">Budget & cash flow</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html"> & debt</a></li>
-                        <li><a href="/curriculum/early-career-playbook.html">Start investing</a></li>
+                        <li><a href="/life_stage/18_25/step_1.html">Budget & cash flow</a></li>
+                        <li><a href="/life_stage/18_25/step_2.html"> Debt</a></li>
+                        <li><a href="/life_stage/18_25/step_4.html">Start investing</a></li>
                       </ul>
                       <div class="wl-mega-col-title" style="margin-top:1.25rem;">FAMILY TO FREEDOM</div>
                       <ul class="wl-mega-list">
@@ -416,7 +416,7 @@
                       <div class="wl-mega-col-title">MANAGE MONEY</div>
                       <ul class="wl-mega-list">
                         <li><a href="/blogs/18_25/everyday_cost.html">Manage my spending</a></li>
-                        <li><a href="/life_stage/18_25/step_2_kill_debt.html">Pay off debt</a></li>
+                        <li><a href="/life_stage/18_25/step_2.html">Pay off debt</a></li>
                         <li><a href="/spending/credit_card.html">Optimize rewards</a></li>
                       </ul>
                     </div>
