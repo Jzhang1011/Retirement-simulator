@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 1 Action Sheet: The Foundation Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .worksheet-container { max-width: 800px; margin: 2rem auto; background: white; padding: 3rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 0.5rem; }
+        .fill-blank { border: none; border-bottom: 2px solid #cbd5e1; background: transparent; padding: 0.25rem 0.5rem; width: 150px; font-weight: 600; color: #1e293b; transition: border-color 0.2s; }
+        .fill-blank:focus { outline: none; border-bottom-color: #22c55e; }
+        
+        /* Print Optimization */
+        @media print {
+            body { background-color: white; margin: 0; padding: 0; }
+            .worksheet-container { box-shadow: none; margin: 0; padding: 0; max-width: 100%; border-radius: 0; }
+            .no-print { display: none !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+    
+    <!-- Web Action Bar (Hidden on Print) -->
+    <div class="no-print bg-navy-900 bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
+        <div><i class="fa-solid fa-leaf text-brand-500 text-green-500 mr-2"></i> <strong>WealthLanding</strong> Action Sheets</div>
+        <button onclick="window.print()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-bold transition-colors">
+            <i class="fa-solid fa-print mr-2"></i> Print / Save PDF
+        </button>
+    </div>
+
+    <main class="worksheet-container relative">
+        <!-- Header -->
+        <header class="border-b-4 border-green-500 pb-6 mb-8 flex justify-between items-end">
+            <div>
+                <div class="text-green-600 font-bold tracking-wider uppercase text-sm mb-1">Step 1 of 5</div>
+                <h1 class="text-4xl font-bold text-slate-900">The Foundation Builder</h1>
+            </div>
+            <div class="text-right text-sm text-slate-500">
+                Date: <input type="text" class="fill-blank" style="width: 120px;" placeholder="MM/DD/YYYY">
+            </div>
+        </header>
+
+        <p class="text-lg text-slate-600 mb-10"><strong>Goal:</strong> Calculate your baseline 50/30/20 budget and secure your first $1,000 starter emergency fund.</p>
+
+        <!-- Part 1: The Math -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center"><i class="fa-solid fa-calculator text-slate-400 mr-3"></i> Part 1: The 50/30/20 Math</h2>
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-6">
+                <label class="text-lg font-semibold block mb-2">My Monthly Take-Home Pay (After Taxes):</label>
+                <div class="flex items-center text-2xl font-bold text-green-600">
+                    $<input type="number" id="takehome" class="fill-blank text-2xl ml-2 w-48" placeholder="0.00" oninput="calcBudget()">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border-t-4 border-slate-700 pt-4 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">50% Needs Limit</h3>
+                    <p class="text-sm text-slate-500 mb-4">Rent, groceries, utilities, minimum debt payments.</p>
+                    <div class="text-xl font-bold">$<span id="needs-calc">0.00</span></div>
+                </div>
+                <div class="border-t-4 border-blue-500 pt-4 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">30% Wants Limit</h3>
+                    <p class="text-sm text-slate-500 mb-4">Dining out, entertainment, hobbies, travel.</p>
+                    <div class="text-xl font-bold">$<span id="wants-calc">0.00</span></div>
+                </div>
+                <div class="border-t-4 border-green-500 pt-4 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">20% Savings/Debt Target</h3>
+                    <p class="text-sm text-slate-500 mb-4">Emergency fund, extra debt payoff, investments.</p>
+                    <div class="text-xl font-bold">$<span id="savings-calc">0.00</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: The $1k Sprint -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center"><i class="fa-solid fa-bolt text-yellow-500 mr-3"></i> Part 2: The $1k Sprint Checklist</h2>
+            <p class="mb-4 text-slate-600">Check these off as you build your starter emergency fund.</p>
+            
+            <div class="space-y-4">
+                <label class="flex items-start p-4 bg-white border-2 border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input type="checkbox" class="w-6 h-6 mt-0.5 text-green-500 rounded focus:ring-green-500 cursor-pointer">
+                    <span class="ml-4">
+                        <strong class="block text-slate-900">Opened a High-Yield Savings Account (HYSA)</strong>
+                        <span class="text-sm text-slate-500">I used a bank like Ally, Marcus, or SoFi to keep this money separate from checking.</span>
+                    </span>
+                </label>
+                
+                <label class="flex items-start p-4 bg-white border-2 border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input type="checkbox" class="w-6 h-6 mt-0.5 text-green-500 rounded focus:ring-green-500 cursor-pointer">
+                    <span class="ml-4">
+                        <strong class="block text-slate-900">Subscription Audit Completed</strong>
+                        <span class="text-sm text-slate-500">I canceled at least 1 unused subscription and redirected that cash to my HYSA.</span>
+                    </span>
+                </label>
+
+                <label class="flex items-start p-4 bg-white border-2 border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input type="checkbox" class="w-6 h-6 mt-0.5 text-green-500 rounded focus:ring-green-500 cursor-pointer">
+                    <span class="ml-4">
+                        <strong class="block text-slate-900">The Found Money Rule</strong>
+                        <span class="text-sm text-slate-500">I deposited any unexpected cash (tax refund, birthday money, sold items) directly into the fund.</span>
+                    </span>
+                </label>
+                
+                <div class="mt-8 p-6 bg-green-50 border-2 border-green-200 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-green-800 mb-2">My Target Date to hit $1,000:</h3>
+                    <input type="text" class="fill-blank text-center text-xl" style="width: 200px;" placeholder="MM/DD/YYYY">
+                </div>
+            </div>
+        </section>
+        
+        <footer class="mt-12 pt-6 border-t border-slate-200 text-center text-sm text-slate-400">
+            The 20s Money Playbook &copy; WealthLanding
+        </footer>
+    </main>
+
+    <script>
+        function calcBudget() {
+            const val = parseFloat(document.getElementById('takehome').value) || 0;
+            const format = (num) => num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('needs-calc').innerText = format(val * 0.50);
+            document.getElementById('wants-calc').innerText = format(val * 0.30);
+            document.getElementById('savings-calc').innerText = format(val * 0.20);
+        }
+    </script>
+</body>
+</html>
