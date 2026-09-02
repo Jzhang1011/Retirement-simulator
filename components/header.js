@@ -415,8 +415,8 @@
                     <div>
                       <div class="wl-mega-col-title">MANAGE MONEY</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/tools.html">Manage my spending</a></li>
-                        <li><a href="/tools.html#debt">Pay off debt</a></li>
+                        <li><a href="/blogs/18_25/everyday_cost.html">Manage my spending</a></li>
+                        <li><a href="/life_stage/18_25/step_2_kill_debt.html">Pay off debt</a></li>
                         <li><a href="/spending/credit_card.html">Optimize rewards</a></li>
                       </ul>
                     </div>
@@ -536,8 +536,8 @@
                     <div>
                       <div class="wl-mega-col-title">MONEY & INVESTING</div>
                       <ul class="wl-mega-list">
-                        <li><a href="/tools.html#debt">Debt payoff</a></li>
-                        <li><a href="/tools.html#compound">Compound growth</a></li>
+                        <li><a href="/life_stage/18_25/debt_payoff_calculator.html">Debt payoff</a></li>
+                        <li><a href="/life_stage/18_25/compound_interest_calculator.html">Compound growth</a></li>
                         <li><a href="/curriculum/home-affordability-guide.html">Home affordability</a></li>
                         <li><a href="/tools.html">Investment tools</a></li>
                       </ul>
