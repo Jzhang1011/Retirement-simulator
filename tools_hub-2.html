@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculators & Tools | WealthLanding</title>
+    <meta name="description" content="Free financial calculators to help you plan your debt payoff, track compound interest, and model your retirement.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        navy: { 800: '#1e293b', 900: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; }
+        
+        .tool-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .tool-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            border-color: #cbd5e1;
+        }
+        .tool-icon-wrapper {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Filter hiding utility */
+        .tool-card.hidden-tool {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        /* Filter Pills */
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-btn.active {
+            background-color: #1e293b; /* Navy 800 */
+            color: white;
+            border-color: #1e293b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="hub.html" class="flex items-center cursor-pointer">
+                    <i class="fa-solid fa-leaf text-brand-500 text-2xl mr-2"></i>
+                    <span class="font-bold text-xl text-navy-900 tracking-tight">WealthLanding</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="hub.html" class="text-gray-500 hover:text-navy-900 font-medium">Life Stages</a>
+                    <a href="tools.html" class="text-brand-600 font-semibold border-b-2 border-brand-500 pb-1">Tools</a>
+                    <a href="hub.html" class="text-gray-500 hover:text-navy-900 font-medium">Early Career (18-25)</a>
+                </nav>
+                <div>
+                    <button class="bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col relative w-full py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            
+            <!-- Breadcrumb -->
+            <nav class="text-sm text-gray-500 mb-8 font-medium">
+                <a href="hub.html" class="hover:text-brand-600 transition-colors">Home</a> <span class="mx-2">/</span>
+                <span class="text-navy-900">Calculators & Tools</span>
+            </nav>
+
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-navy-900 mb-4">Find the Right Calculator</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Stop guessing. Use our interactive tools to run your own numbers, optimize your strategy, and build your wealth roadmap.</p>
+            </div>
+
+            <!-- FILTER BAR -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none" data-filter="all">All Tools</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none" data-filter="debt">Debt</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none" data-filter="investing">Investing</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none" data-filter="budgeting">Budgeting</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 focus:outline-none" data-filter="retirement">Retirement</button>
+            </div>
+
+            <!-- DYNAMIC TOOL GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative" id="tool-grid">
+                
+                <!-- Debt Payoff -->
+                <a href="calc-debt.html" class="tool-card p-6 group" data-category="debt">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-red-100 text-red-600 group-hover:bg-red-500 group-hover:text-white transition-colors m-0">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Debt</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 mb-2 group-hover:text-brand-600 transition-colors">Debt Payoff Calculator</h3>
+                    <p class="text-gray-600 text-sm flex-grow mb-6">Compare the Snowball and Avalanche methods mathematically to see which path gets you debt-free faster.</p>
+                    <div class="text-brand-600 font-semibold text-sm flex items-center mt-auto">
+                        Launch Tool <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </a>
+
+                <!-- Compound Interest -->
+                <a href="calc-compound.html" class="tool-card p-6 group" data-category="investing">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-blue-100 text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors m-0">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Investing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-900 mb-2 group-hover:text-brand-600 transition-colors">Compound Interest</h3>
+                    <p class="text-gray-600 text-sm flex-grow mb-6">Model how your early investments multiply over decades. See the visual breakdown of principal vs. interest.</p>
+                    <div class="text-brand-600 font-semibold text-sm flex items-center mt-auto">
+                        Launch Tool <i class="fa-solid fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </a>
+                
+                <!-- Auto Savings Goal / Burn Rate -->
+                <div class="tool-card p-6 border-dashed border-2 border-gray-300 bg-gray-50/50 opacity-80" data-category="budgeting">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-gray-200 text-gray-500 m-0">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Budgeting</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">Burn Rate Calculator</h3>
+                    <p class="text-gray-500 text-sm flex-grow mb-6">Calculate your exact 3-to-6-month emergency fund target based on your localized essential living expenses.</p>
+                    <div class="text-gray-400 font-semibold text-sm flex items-center mt-auto">
+                        Coming Soon
+                    </div>
+                </div>
+
+                <!-- Retirement Gap -->
+                <div class="tool-card p-6 border-dashed border-2 border-gray-300 bg-gray-50/50 opacity-80" data-category="retirement">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-gray-200 text-gray-500 m-0">
+                            <i class="fa-solid fa-umbrella-beach"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Retirement</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">The Retirement Gap</h3>
+                    <p class="text-gray-500 text-sm flex-grow mb-6">Input your current age and savings to see exactly how much you need to invest monthly to retire by 65.</p>
+                    <div class="text-gray-400 font-semibold text-sm flex items-center mt-auto">
+                        In Development
+                    </div>
+                </div>
+
+                <!-- FIRE Calculator -->
+                <div class="tool-card p-6 border-dashed border-2 border-gray-300 bg-gray-50/50 opacity-80" data-category="retirement">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-gray-200 text-gray-500 m-0">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Retirement</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">F.I.R.E. Tracker</h3>
+                    <p class="text-gray-500 text-sm flex-grow mb-6">Financial Independence, Retire Early. Calculate the specific net worth number required to step away from mandatory work.</p>
+                    <div class="text-gray-400 font-semibold text-sm flex items-center mt-auto">
+                        In Development
+                    </div>
+                </div>
+                
+                <!-- 401k Optimizer -->
+                <div class="tool-card p-6 border-dashed border-2 border-gray-300 bg-gray-50/50 opacity-80" data-category="investing">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="tool-icon-wrapper bg-gray-200 text-gray-500 m-0">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-1 rounded">Investing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">401(k) Match Optimizer</h3>
+                    <p class="text-gray-500 text-sm flex-grow mb-6">See the true mathematical value of your employer match and how to allocate your paycheck to capture every free dollar.</p>
+                    <div class="text-gray-400 font-semibold text-sm flex items-center mt-auto">
+                        In Development
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODULAR FOOTER -->
+    <wealthlanding-footer></wealthlanding-footer>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+    <script src="footer.js"></script>
+
+    <!-- FILTERING SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 1. Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // 2. Add active class to clicked button
+                    btn.classList.add('active');
+
+                    // 3. Get the filter category
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // 4. Show/Hide cards based on filter
+                    toolCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || filterValue === cardCategory) {
+                            // Show card
+                            card.classList.remove('hidden-tool');
+                            // Ensure layout behaves cleanly
+                            setTimeout(() => {
+                                card.style.position = 'relative';
+                            }, 50); 
+                        } else {
+                            // Hide card
+                            card.classList.add('hidden-tool');
+                            // Let the transition finish before removing it from document flow
+                            setTimeout(() => {
+                                if(card.classList.contains('hidden-tool')) {
+                                   card.style.position = 'absolute'; 
+                                }
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
