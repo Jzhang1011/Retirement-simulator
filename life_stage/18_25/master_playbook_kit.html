@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 20s Money Playbook - Master Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        navy: { 900: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #1e293b; }
+        .page { max-width: 800px; margin: 2rem auto; background: white; padding: 4rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 0.5rem; }
+        
+        .fill-blank { border: none; border-bottom: 2px solid #cbd5e1; background: transparent; padding: 0.25rem 0.5rem; font-weight: 600; color: #1e293b; transition: border-color 0.2s; }
+        .fill-blank:focus { outline: none; border-bottom-color: #22c55e; }
+        textarea.fill-blank { resize: none; overflow: hidden; line-height: 1.5; background-image: linear-gradient(transparent, transparent calc(1.5em - 2px), #cbd5e1 0px); background-size: 100% 1.5em; border-bottom: none; }
+        
+        .progress-block { width: 40px; height: 40px; border: 2px solid #cbd5e1; border-radius: 4px; display: inline-block; }
+
+        /* Print Optimization Rules */
+        @media print {
+            body { background-color: white; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .page { box-shadow: none; margin: 0; padding: 2rem; max-width: 100%; border-radius: 0; page-break-after: always; break-after: page; }
+            .no-print { display: none !important; }
+            /* Ensure the cover page takes full height */
+            .cover-page { height: 95vh; display: flex; flex-direction: column; justify-content: center; }
+            /* Hide the last page break */
+            .page:last-child { page-break-after: auto; break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Web Action Bar (Hidden on Print) -->
+    <div class="no-print bg-navy-900 text-white p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
+        <div><i class="fa-solid fa-leaf text-brand-500 mr-2"></i> <strong>WealthLanding</strong> Master Kit</div>
+        <button onclick="window.print()" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded font-bold transition-colors shadow-lg">
+            <i class="fa-solid fa-file-pdf mr-2"></i> Generate PDF
+        </button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- COVER PAGE                                 -->
+    <!-- ========================================== -->
+    <div class="page cover-page text-center border-t-8 border-brand-500">
+        <div class="mb-12">
+            <i class="fa-solid fa-leaf text-brand-500 text-6xl mb-4"></i>
+            <h2 class="text-2xl font-bold text-navy-900 tracking-widest uppercase">WealthLanding</h2>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-extrabold text-navy-900 mb-6 leading-tight">The 20s Money<br>Playbook</h1>
+        <p class="text-2xl text-slate-500 mb-16">The Master Action Kit</p>
+        
+        <div class="max-w-md mx-auto bg-slate-50 border border-slate-200 p-8 rounded-xl text-left">
+            <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2">This workbook belongs to:</h3>
+            <input type="text" class="fill-blank w-full text-xl" placeholder="Your Name">
+            <h3 class="font-bold text-slate-800 mt-6 mb-4 border-b border-slate-200 pb-2">Start Date:</h3>
+            <input type="text" class="fill-blank w-full text-xl" placeholder="MM/DD/YYYY">
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP 1                                     -->
+    <!-- ========================================== -->
+    <div class="page">
+        <header class="border-b-4 border-brand-500 pb-6 mb-8">
+            <div class="text-brand-600 font-bold tracking-wider uppercase text-sm mb-1">Step 1 of 5</div>
+            <h1 class="text-4xl font-bold text-navy-900">The Foundation Builder</h1>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-navy-900 mb-6"><i class="fa-solid fa-calculator text-slate-400 mr-3"></i> Part 1: The 50/30/20 Math</h2>
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-6">
+                <label class="text-lg font-semibold block mb-2">My Monthly Take-Home Pay (After Taxes):</label>
+                <div class="flex items-center text-2xl font-bold text-brand-600">
+                    $<input type="text" class="fill-blank text-2xl ml-2 w-48" placeholder="0.00">
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="border-t-4 border-slate-700 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">50% Needs</h3>
+                    <div class="text-xl font-bold mt-4">$<input type="text" class="fill-blank w-full" placeholder="0.00"></div>
+                </div>
+                <div class="border-t-4 border-blue-500 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">30% Wants</h3>
+                    <div class="text-xl font-bold mt-4">$<input type="text" class="fill-blank w-full" placeholder="0.00"></div>
+                </div>
+                <div class="border-t-4 border-brand-500 bg-slate-50 p-4">
+                    <h3 class="font-bold text-lg mb-1">20% Savings</h3>
+                    <div class="text-xl font-bold mt-4">$<input type="text" class="fill-blank w-full" placeholder="0.00"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-navy-900 mb-6"><i class="fa-solid fa-bolt text-yellow-500 mr-3"></i> Part 2: The $1k Sprint Checklist</h2>
+            <div class="space-y-4">
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Opened a High-Yield Savings Account (HYSA)</strong>
+                        <span class="text-sm text-slate-500">I used an online bank to keep this money separate from checking.</span>
+                    </span>
+                </label>
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Subscription Audit Completed</strong>
+                        <span class="text-sm text-slate-500">I canceled at least 1 unused subscription and redirected that cash.</span>
+                    </span>
+                </label>
+                <div class="mt-8 p-6 bg-brand-50 border-2 border-brand-200 rounded-xl text-center">
+                    <h3 class="text-xl font-bold text-brand-900 mb-2">My Target Date to hit $1,000:</h3>
+                    <input type="text" class="fill-blank text-center text-xl w-48" placeholder="MM/DD/YYYY">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP 2                                     -->
+    <!-- ========================================== -->
+    <div class="page">
+        <header class="border-b-4 border-brand-500 pb-6 mb-8">
+            <div class="text-brand-600 font-bold tracking-wider uppercase text-sm mb-1">Step 2 of 5</div>
+            <h1 class="text-4xl font-bold text-navy-900">The Debt Destroyer Matrix</h1>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-list-ol text-slate-400 mr-3"></i> 1. The Debt Inventory</h2>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-100 border-b-2 border-slate-300">
+                        <th class="p-3 font-semibold text-slate-700 w-2/5">Creditor Name</th>
+                        <th class="p-3 font-semibold text-slate-700 w-1/5 text-right">Balance</th>
+                        <th class="p-3 font-semibold text-slate-700 w-1/5 text-right">Rate (%)</th>
+                        <th class="p-3 font-semibold text-slate-700 w-1/5 text-right">Min Pay</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-slate-200">
+                        <td class="p-2"><input type="text" class="fill-blank w-full"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                    </tr>
+                    <tr class="border-b border-slate-200">
+                        <td class="p-2"><input type="text" class="fill-blank w-full"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                    </tr>
+                    <tr class="border-b border-slate-200">
+                        <td class="p-2"><input type="text" class="fill-blank w-full"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                        <td class="p-2"><input type="text" class="fill-blank w-full text-right"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-chess-knight text-slate-400 mr-3"></i> 2. Choose Your Strategy</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="border-2 border-slate-200 p-4 rounded-lg flex items-start">
+                    <div class="w-5 h-5 rounded-full border-2 border-slate-400 mt-1 mr-3 flex-shrink-0"></div>
+                    <div>
+                        <span class="font-bold text-navy-900 block">The Debt Snowball</span>
+                        <span class="text-sm text-slate-500">Attack lowest balance first.</span>
+                    </div>
+                </div>
+                <div class="border-2 border-slate-200 p-4 rounded-lg flex items-start">
+                    <div class="w-5 h-5 rounded-full border-2 border-slate-400 mt-1 mr-3 flex-shrink-0"></div>
+                    <div>
+                        <span class="font-bold text-navy-900 block">The Debt Avalanche</span>
+                        <span class="text-sm text-slate-500">Attack highest interest first.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-red-50 p-6 rounded-xl border border-red-100">
+            <h2 class="text-xl font-bold text-red-900 mb-4">My Commitment</h2>
+            <p class="text-lg leading-relaxed">
+                My Target Debt for this month is <input type="text" class="fill-blank border-red-300 w-48">. <br><br>
+                I am paying the minimums on everything else, and applying $<input type="text" class="fill-blank border-red-300 w-24 text-center"> EXTRA toward this target debt each month.
+            </p>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP 3                                     -->
+    <!-- ========================================== -->
+    <div class="page">
+        <header class="border-b-4 border-brand-500 pb-6 mb-8">
+            <div class="text-brand-600 font-bold tracking-wider uppercase text-sm mb-1">Step 3 of 5</div>
+            <h1 class="text-4xl font-bold text-navy-900">The Autopilot Savings System</h1>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-fire text-slate-400 mr-3"></i> 1. Calculate Your "Burn Rate"</h2>
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                    <span class="font-medium text-slate-700">Rent / Mortgage:</span>
+                    <span>$<input type="text" class="fill-blank w-32 text-right"></span>
+                </div>
+                <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                    <span class="font-medium text-slate-700">Basic Groceries:</span>
+                    <span>$<input type="text" class="fill-blank w-32 text-right"></span>
+                </div>
+                <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                    <span class="font-medium text-slate-700">Utilities / Insurance:</span>
+                    <span>$<input type="text" class="fill-blank w-32 text-right"></span>
+                </div>
+                <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                    <span class="font-medium text-slate-700">Debt Minimums:</span>
+                    <span>$<input type="text" class="fill-blank w-32 text-right"></span>
+                </div>
+                <div class="flex justify-between items-center pt-2">
+                    <span class="font-bold text-lg text-navy-900">Total Monthly Burn:</span>
+                    <span>$<input type="text" class="fill-blank w-32 text-right font-bold text-xl"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-bullseye text-slate-400 mr-3"></i> 2. Your Safety Net Goal</h2>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-200 text-center">
+                    <h3 class="text-yellow-800 font-bold uppercase text-sm mb-2">Target (3 Months)</h3>
+                    <div class="text-2xl font-bold text-yellow-900 mb-2">$<input type="text" class="fill-blank border-yellow-300 w-32 text-center bg-transparent"></div>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl border border-green-200 text-center">
+                    <h3 class="text-green-800 font-bold uppercase text-sm mb-2">Target (6 Months)</h3>
+                    <div class="text-2xl font-bold text-green-900 mb-2">$<input type="text" class="fill-blank border-green-300 w-32 text-center bg-transparent"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-robot text-blue-500 mr-3"></i> 3. The Automation Checklist</h2>
+            <div class="space-y-4">
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5 flex-shrink-0"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Configured the "Pay Yourself First" Transfer</strong>
+                        <span class="text-sm text-slate-500">I scheduled an automatic transfer of $<input type="text" class="fill-blank w-20 text-center"> to my HYSA on every payday.</span>
+                    </span>
+                </label>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP 4                                     -->
+    <!-- ========================================== -->
+    <div class="page">
+        <header class="border-b-4 border-brand-500 pb-6 mb-8">
+            <div class="text-brand-600 font-bold tracking-wider uppercase text-sm mb-1">Step 4 of 5</div>
+            <h1 class="text-4xl font-bold text-navy-900">First Investment Checklist</h1>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-building text-slate-400 mr-3"></i> 1. The 401(k) Match Finder</h2>
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <p class="mb-4 text-lg">My employer matches <input type="text" class="fill-blank w-16 text-center"> % of my contributions.</p>
+                <p class="mb-4 text-lg">I am contributing <input type="text" class="fill-blank w-16 text-center"> % of my salary to secure the free money.</p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-piggy-bank text-purple-500 mr-3"></i> 2. Roth IRA Setup</h2>
+            <div class="space-y-4">
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5 flex-shrink-0"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Brokerage Chosen</strong>
+                        <span class="text-sm text-slate-500 block mb-2">I opened an account at a low-fee brokerage.</span>
+                        <span class="text-sm font-semibold">My brokerage: <input type="text" class="fill-blank w-48"></span>
+                    </span>
+                </label>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-triangle-exclamation text-red-500 mr-3"></i> 3. The "Don't Leave It In Cash" Check</h2>
+            <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                <p class="text-red-900 mb-4">Moving money into a Roth IRA is only step one. The money sits in cash until you instruct the brokerage to buy investments.</p>
+                <label class="flex items-start bg-white p-4 rounded border border-red-100">
+                    <div class="w-6 h-6 border-2 border-red-400 rounded mt-0.5 flex-shrink-0"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">I Bought The Fund</strong>
+                        <span class="text-sm text-slate-500 block mb-2">I used the cash to buy an Index Fund or Target Date Fund.</span>
+                        <span class="text-sm font-semibold">Ticker purchased: <input type="text" class="fill-blank w-32 uppercase tracking-widest text-center"></span>
+                    </span>
+                </label>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- STEP 5                                     -->
+    <!-- ========================================== -->
+    <div class="page">
+        <header class="border-b-4 border-brand-500 pb-6 mb-8">
+            <div class="text-brand-600 font-bold tracking-wider uppercase text-sm mb-1">Step 5 of 5</div>
+            <h1 class="text-4xl font-bold text-navy-900">The Income & Armor Audit</h1>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-briefcase text-slate-400 mr-3"></i> 1. The "Brag Document" Outline</h2>
+            <p class="mb-4 text-sm text-slate-500">Document your specific value for your next salary negotiation.</p>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-bold text-brand-700 mb-2">A. How I made the company money (or hit KPI goals):</h3>
+                    <textarea class="fill-blank w-full" rows="2"></textarea>
+                </div>
+                <div>
+                    <h3 class="font-bold text-blue-700 mb-2">B. How I saved the company money or time:</h3>
+                    <textarea class="fill-blank w-full" rows="2"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-layer-group text-slate-400 mr-3"></i> 2. Skill Stacking</h2>
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <p class="mb-4 leading-loose">
+                    My primary career skill is: <input type="text" class="fill-blank w-48 text-center"><br>
+                    An adjacent skill I can learn in 6 months to multiply my value is: <input type="text" class="fill-blank w-64 text-center">
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold text-navy-900 mb-4"><i class="fa-solid fa-shield-halved text-slate-700 mr-3"></i> 3. The Armor Checklist</h2>
+            <div class="space-y-4">
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5 flex-shrink-0"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Renter's Insurance Active</strong>
+                        <span class="text-sm text-slate-500">I have a policy to cover theft, fire, or apartment damage.</span>
+                    </span>
+                </label>
+                <label class="flex items-start p-4 border-2 border-slate-200 rounded-lg">
+                    <div class="w-6 h-6 border-2 border-slate-400 rounded mt-0.5 flex-shrink-0"></div>
+                    <span class="ml-4">
+                        <strong class="block text-navy-900">Disability Insurance Verified</strong>
+                        <span class="text-sm text-slate-500">I checked my HR benefits for Short/Long Term Disability coverage.</span>
+                    </span>
+                </label>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
