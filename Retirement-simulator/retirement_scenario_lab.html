@@ -55,16 +55,8 @@
   </style>
 </head>
 <body>
+ <div id="global-header-target"></div>
 
-<header class="global-header">
-  <a href="/" class="logo">Wealth<span>Landing</span></a>
-  <nav class="nav-links" aria-label="Retirement tools">
-    <a href="retirement_builder_OS_v2.html">Builder</a>
-    <a href="financial_strategy_engine_decision_lab.html">Financial Decision Lab</a>
-    <a href="#" style="color:white">Advanced Scenario Lab</a>
-  </nav>
-  <div class="badge badge-green">Advanced users</div>
-</header>
 
 <main class="shell">
   <section class="mb-5 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
@@ -843,5 +835,15 @@
   
   document.querySelectorAll('.chart-wrap').forEach(el => resizeObserver.observe(el));
 </script>
+  <!-- ... rest of your webpage content ... -->
+    <wealthlanding-footer></wealthlanding-footer>
+    
+   <!-- ConvertKit Script -->
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+
+    <!-- MODULAR FOOTER -->
+    
+    <script src="/components/footer.js"></script>
+   <script src="/components/header.js"></script> 
 </body>
 </html>
