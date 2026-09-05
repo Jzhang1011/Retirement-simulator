@@ -35,13 +35,13 @@
     /* ... [Rest of your <style> block omitted for brevity, but keep it all here!] ... */
   </style>
 
-  <!-- THIS LINE WAS MISSING. It must come before your config -->
+  <!-- THIS LINE MUST COME FIRST -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Add raw tags to prevent Liquid build errors -->
+  {% raw %}
   <script>
     tailwind.config = {
-      // SAFELIST forces Tailwind to always generate these classes, 
-      // even if they are only used inside external JS files like footer.js
       safelist: [
         'bg-navy-900',
         'text-slate-300',
@@ -63,7 +63,7 @@
             },
             navy: {
               800: '#1e293b',
-              900: '#0f172a' // This matches the class bg-navy-900 in your footer
+              900: '#0f172a'
             },
             slate: {
               300: '#cbd5e1',
@@ -76,6 +76,7 @@
       }
     }
   </script>
+  {% endraw %}
 </head>
 <body>
 
