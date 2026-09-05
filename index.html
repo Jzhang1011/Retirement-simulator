@@ -20,9 +20,9 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script>
+  <script>
         tailwind.config = {
-            safelist: ['bg-navy-900'], // This forces Tailwind to generate the class for the footer
+            safelist: ['bg-navy-900'],
             theme: {
                 extend: {
                     fontFamily: {
@@ -31,16 +31,25 @@
                     colors: {
                         brand: {
                             50: '#f0fdf4',
-                            // ... rest of your brand colors
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a', // This is the main button background
+                            700: '#15803d', // This is the hover state
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
                         },
-                        navy: { // Note: I nested this like your working page for consistency
+                        navy: {
                             800: '#1e293b',
                             900: '#0f172a'
                         },
-                        slate: { // Grouped slate as well
+                        slate: {
                             300: '#cbd5e1',
                             400: '#94a3b8',
-                            900: '#0f172a' // Assuming this is your intended slate dark
+                            900: '#0f172a'
                         }
                     }
                 }
