@@ -570,7 +570,7 @@
                       </ul>
                     </div>
                     <div>
-                      <div class="wl-mega-col-title"> <a href="https:/blogs/blog_hub.html">Blogs and Articles</a>
+                      <div class="wl-mega-col-title"> <a href="/blogs/blog_hub.html">Blogs and Articles</a>
 </div>
                       <ul class="wl-mega-list">
                       <li><a href="/blogs/18_25.html">Early Years</a></li>
