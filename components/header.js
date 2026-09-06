@@ -619,9 +619,19 @@
             </div>
 
             <div>
-              <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Goals & Tools</div>
+              <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Tools</div>
               <div style="padding-left:0.5rem; border-left:2px solid #f1f5f9; display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
-                <a href="/tools.html" style="color:#334155; font-weight:600; text-decoration:none;">Tools & Calculators</a>
+                <a href="/tools/tools_hub.html" style="color:#334155; font-weight:600; text-decoration:none;">Tools & Calculators</a>
+                <a href="/investment/index.html" style="color:#334155; font-weight:600; text-decoration:none;">Investment OS</a>
+                <a href="/Retirement-simulator/Retirement_Gateway.html" style="color:#334155; font-weight:600; text-decoration:none;">Retirement Gateway</a>
+                <a href="/Retirement-simulator/overseas_retirement_hub.html" style="color:#334155; font-weight:600; text-decoration:none;">Overseas retirement locations</a>
+              </div>
+            </div>
+
+               <div>
+              <div style="font-weight:800; font-size:0.75rem; color:#047857; text-transform:uppercase; margin-bottom:0.5rem;">Learn</div>
+              <div style="padding-left:0.5rem; border-left:2px solid #f1f5f9; display:flex; flex-direction:column; gap:0.35rem; font-size:0.8rem;">
+                <a href="/blogs/blog_hub.html" style="color:#334155; font-weight:600; text-decoration:none;">Blog hub</a>
                 <a href="/investment/real_estate_vs_stocks_model.html" style="color:#334155; font-weight:600; text-decoration:none;">Real Estate vs Stocks</a>
                 <a href="/Retirement-simulator/Retirement_Gateway.html" style="color:#334155; font-weight:600; text-decoration:none;">Retirement Gateway</a>
               </div>
